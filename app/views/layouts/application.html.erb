@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vanilla Application</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield(:javascript_includes) %>
+
+  <%= @web_analytics_tracker.html_safe %>
+
+</head>
+<body>
+    <div id="primary-navbar" class="navbar navbar-static-top">
+        <div class="navbar-inner">
+           <a class="brand" href="#">Vanilla Application</a>
+           <ul class="nav pull-right">
+             <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
+           </ul>
+        </div>
+    </div>
+<%= yield %>
+
+</body>
+</html>

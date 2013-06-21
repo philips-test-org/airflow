@@ -1,0 +1,7 @@
+<% if @exams.size > 0 %>
+  <%= harbinger_table_for @exams, :class => "table table-striped" do |ht| %>
+    <% ht.column("Patient ID") {|e| e.patientMrn.mrn if e.patientMrn } %>
+  <% end %>
+<% else %>
+ No exams.
+<% end %>
