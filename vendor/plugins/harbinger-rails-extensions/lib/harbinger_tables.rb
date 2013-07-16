@@ -24,13 +24,13 @@ module HarbingerRailsExtensions
       end
 
       def footerize(collection=nil)
-        return(content_tag(:td) { "&nbsp;" }) if self.footer_proc.nil?
+        return(content_tag(:td) { "" }) if self.footer_proc.nil?
         summary = self.footer_options.delete(:summary)
         foot_opts = {:class => "footer"}.merge!(self.footer_options)
         if summary
           content_tag(:td, foot_opts) { self.footer_proc.call(collection.inject(0.0) {|total,item| total += coerce_string(self.evaluate(item)); total }) }
         else
-          content_tag(:td, foot_opts) { self.footer_proc.call(collection).html_safe }
+          content_tag(:td, foot_opts) { val = self.footer_proc.call(collection); val ? val.html_safe : val }
         end
       end
 
@@ -84,10 +84,12 @@ module HarbingerRailsExtensions
 
     def to_s
       res = single_row_for_section("thead", :name)
-      res << make_proc_footers if @has_proc_footers
-      res << make_total_footers if @has_total_footers
+      foots = "<tfoot>"
+      foots << make_proc_footers if @has_proc_footers
+      foots << make_total_footers if @has_total_footers
+      foots << "</tfoot>"
       tbl_tag_opts = @table_options.dup
-      content_tag(:table, tbl_tag_opts) { res + create_rows.html_safe }
+      content_tag(:table, tbl_tag_opts) { res + create_rows.html_safe + foots.html_safe }
     end
 
     protected
@@ -103,13 +105,13 @@ module HarbingerRailsExtensions
     end
 
     def make_footers
-      content_tag(:tfoot) do
-        content_tag(:tr) do
-          @columns.inject("") do |accum, col|
-            accum + (yield col).html_safe
-          end
+      final_out = content_tag(:tr) do
+        out = @columns.inject("") do |accum, col|
+          accum + (yield col)
         end
+        return out ? out.html_safe : ""
       end
+      return final_out.html_safe
     end
 
     def make_proc_footers

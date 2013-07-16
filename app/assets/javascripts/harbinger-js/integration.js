@@ -6,10 +6,7 @@
     ig.imageViewer = {};
 
     ig.imageViewer.url = {
-	iframeContainer: function() {
-            if ($('#image-viewer-url-frame').size() == 0) { $('body').append('<div id="image-viewer-url-frame" style="display: none;"></div>'); }
-            return $("#image-viewer-url-frame");
-          },
+	iframeContainer: function() { if ($('#image-viewer-url-frame').size() == 0) { $('body').append('<div id="image-viewer-url-frame" style="display: none;"></div>'); } },
 	viewFuns: {
 	    iframe: function(url) { ig.imageViewer.url.iframeContainer().html('<iframe src="' + url + '"></iframe>'); },
 	    window: function(url) { window.open(url); }
@@ -39,9 +36,14 @@
     ig.setup = function(definition) {
 	if ($.type(definition) == "string") { definition = $.parseJSON(definition); }
 	if (definition.type == "imageViewer") {
-	    if (definition.iclass == "thick") { console.log("Thick definitions are currently unsupported. Please use asic directly"); }
+	    if (definition.iclass == "thick") { throw("Thick definitions are currently unsupported. Please use asic directly"); }
 	    else if (definition.iclass == "url") { return ig.imageViewer.url.create(definition); }
 	}
+    };
+
+    ig.view = function(definition,exam,displayFun) {
+	var integration = ig.setup(definition);
+	integration.view(exam,displayFun);
     };
 
 })(jQuery)
