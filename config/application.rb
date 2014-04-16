@@ -8,7 +8,7 @@ end
 require File.expand_path('../boot', __FILE__)
 
 if ENV['DEV_MODE'] == "on" then
-  require File.join(File.dirname(__FILE__),'..','sdk','harbinger-sdk-1.2.4-standalone.jar')
+  require File.join(File.dirname(__FILE__),'..','sdk','harbinger-sdk-1.3.5-standalone.jar')
 end
 
 require 'rails/all'
