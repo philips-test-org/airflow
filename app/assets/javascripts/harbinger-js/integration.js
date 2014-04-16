@@ -25,6 +25,9 @@
 
 		url: function(exam) {
 		    var url = this.definition.url + "?";
+		    if (!(definition.static_parameters == undefined)) {
+			$.each(definition.static_parameters,function(iparam,value) { url += iparam + "=" + value + "&"; });
+		    }
 		    $.each(definition.parameters,function(iparam,exam_attribute) { url += iparam + "=" + exam[exam_attribute] + "&"; });
 		    return url.replace(/&$/,"");
 		}

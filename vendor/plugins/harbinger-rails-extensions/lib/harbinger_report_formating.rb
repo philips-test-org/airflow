@@ -1,6 +1,10 @@
 module HarbingerRailsExtensions
   module Helpers
     def format_report(text)
+      if text.nil?
+        return ""
+      end
+
       ["indication","comparison","technique"].each do |kword|
         text.gsub!(/#{kword}\:/i) {|match| content_tag(:span, match, :class => "report-heading") }
       end

@@ -171,8 +171,7 @@ module HarbingerRailsExtensions
       even = true
       res = @collection.inject("") do |accum, item|
         cls_val = even ? "even" : "odd"
-        (item.respond_to?(:id) and item != nil) ? row_id = item.id : row_id = ""
-        val = accum + content_tag(:tr, :row_id => row_id, :class => cls_val) { td_around_col_with(:td, :evaluate, item).html_safe }
+        val = accum + content_tag(:tr, :class => cls_val) { td_around_col_with(:td, :evaluate, item).html_safe }
         even = !even
         val
       end
