@@ -8,7 +8,7 @@ class DemoController < ApplicationController
 
     if params[:accession]
       @exams = search_by_accession(params[:accession])
-      log_hippa_view(@exams)
+      log_hipaa_view(@exams)
       @acc_search = params[:accession]
     end
   end
