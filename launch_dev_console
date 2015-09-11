@@ -1,3 +1,2 @@
 DEV_MODE="on" jruby -J-XX:MaxPermSize=256m \
--J-Dharbinger.sso.url=http://graylab1.radiology.umm.edu:8088/openam \
 -S rails console
