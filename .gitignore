@@ -10,6 +10,5 @@
 .\#*
 *.swp
 app/views/overread/_version.html.erb
-Gemfile.lock
 public/assets/
 target/
