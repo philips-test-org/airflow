@@ -12,3 +12,4 @@
 app/views/overread/_version.html.erb
 public/assets/
 target/
+sdk/*
