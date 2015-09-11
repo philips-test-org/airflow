@@ -4,6 +4,7 @@ VanillaApplication::Application.routes.draw do
   get 'about' => 'main#about'
   get 'help' => 'main#help'
   get 'admin' => 'admin#index'
+  get 'unauthorized' => 'unauthorized#index'
 
   # Vanilla of regular route:
   #   match 'products/:id' => 'catalog#view'
