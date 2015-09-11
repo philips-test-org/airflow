@@ -12,7 +12,7 @@ $(function(){
     $.harbingerjs.amqp.setup({url: harbingerjsCometdURL});
 
     $.harbingerjs.amqp.addListener(function(message, payload){
-      var count = parseInt($("#rad-report-count"));
+      var count = parseInt($("#rad-report-count").text());
       $("#rad-report-count").text(count + 1);
       console.log(payload);
       console.log('Got a new rad_report notification: ' + message);
