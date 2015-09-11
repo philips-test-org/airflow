@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
     authenticate()
   end
 
+  def admin_authentication
+    authenticate_and_authorize(["ai-staff","it-staff"])
+  end
+
   def log_hipaa_view(objects,options={})
     if objects.size > 0
       options.reverse_merge!({

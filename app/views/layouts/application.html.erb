@@ -11,14 +11,22 @@
 
 </head>
 <body>
-    <div id="primary-navbar" class="navbar navbar-static-top">
-        <div class="navbar-inner">
-           <a class="brand" href="#">Vanilla Application</a>
-           <ul class="nav pull-right">
-             <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
-           </ul>
-        </div>
+  <!-- Start Navbar -->
+  <div id="primary-navbar" class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" id="app-name" href="">Vanilla Application</a>
+      </div>
+      <ul class="nav navbar-nav pull-right">
+        <li><%= global_navigation_link "About", :controller => :main,  :action => :about %></li>
+        <li><%= global_navigation_link "Help", :controller => :main,  :action => :help %></li>
+        <% any_authorized(["ai-staff", "it-staff"]) do %>
+          <li><%= global_navigation_link "Admin", :controller => :admin, :action => :index %></li>
+        <% end %>
+        <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
+      </ul>
     </div>
+  </div>
 <%= yield %>
 
 </body>

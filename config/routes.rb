@@ -2,6 +2,8 @@ VanillaApplication::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
   get 'about' => 'main#about'
+  get 'help' => 'main#help'
+  get 'admin' => 'admin#index'
 
   # Vanilla of regular route:
   #   match 'products/:id' => 'catalog#view'

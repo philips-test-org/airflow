@@ -9,6 +9,9 @@ class MainController < ApplicationController
     @exams = query.order(".radExamTime.endExam desc").list()
   end
 
+  def help
+  end
+
   def about
   end
 
