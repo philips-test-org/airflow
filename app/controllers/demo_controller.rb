@@ -3,7 +3,10 @@ class DemoController < ApplicationController
   before_filter :get_entity_manager
   after_filter :close_entity_manager
 
-  def index
+  def real_time
+  end
+
+  def accession_search
     @exams = []
 
     if params[:accession]
@@ -11,9 +14,6 @@ class DemoController < ApplicationController
       log_hipaa_view(@exams)
       @acc_search = params[:accession]
     end
-  end
-
-  def search
   end
 
   private
