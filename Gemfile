@@ -12,6 +12,7 @@ gem 'harbinger-rails-extensions', '>=0.0.12', source: 'http://gem.analytical.inf
 
 
 group :development, :test do
+  gem 'pry'
   gem 'rspec'
   gem 'warbler', '=1.3.5'
 end
