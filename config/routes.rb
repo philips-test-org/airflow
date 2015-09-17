@@ -5,8 +5,10 @@ VanillaApplication::Application.routes.draw do
   get 'help' => 'main#help'
   get 'admin' => 'admin#index'
   get 'unauthorized' => 'unauthorized#index'
+
   get 'demo/real-time' => 'demo#real_time'
   get 'demo/accession-search' => 'demo#accession_search'
+  get 'demo/exams-by-site' => 'demo#exams_by_site'
 
   # Vanilla of regular route:
   #   match 'products/:id' => 'catalog#view'

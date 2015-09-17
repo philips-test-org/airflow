@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_employee
+    @employee ||= Employee.withUserName(session[:username], @entity_manager)
+  end
+
   def general_authentication
     authenticate()
   end
