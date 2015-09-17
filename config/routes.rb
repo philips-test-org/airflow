@@ -10,6 +10,9 @@ VanillaApplication::Application.routes.draw do
   get 'demo/accession-search' => 'demo#accession_search'
   get 'demo/exams-by-site' => 'demo#exams_by_site'
 
+  get 'demo/bookmarks' => 'demo#show_bookmarks'
+  get 'demo/create_bookmark' => 'demo#create_bookmark'
+
   # Vanilla of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

@@ -1,9 +1,27 @@
 class DemoController < ApplicationController
   before_filter :general_authentication
   before_filter :get_entity_manager
+  before_filter :get_employee
   after_filter :close_entity_manager
 
   def real_time
+  end
+
+  def show_bookmarks
+    @bookmarks = get_bookmarks
+    log_hipaa_view(@bookmarks.map{|b| b.rad_exam})
+  end
+
+  def create_bookmark
+    @bookmark = DemoBookmark.new({:identifier => params[:identifier], :rad_exam_id => params[:rad_exam_id]})
+
+    if @bookmark.save
+      flash[:notice] = "Review saved."
+    else
+      flash[:error] = "There was an issue saving your review: #{@bookmark.errors.full_messages.join(" ")}"
+    end
+
+    redirect_to action: :show_bookmarks
   end
 
   def accession_search
@@ -27,9 +45,13 @@ class DemoController < ApplicationController
   end
 
   private
+  def get_bookmarks
+    DemoBookmark.where(:identifier => @employee.username)
+  end
+
   def search_by_accession(accession)
     query = Java::HarbingerSdkData::RadExam.createQuery(@em)
-    query.where(query.equal(".accession", query.literal(accession))).list.to_a
+    query.where(query.ilike(".accession", "%#{accession}%")).list.to_a
   end
 
   def search_by_site(site_id)

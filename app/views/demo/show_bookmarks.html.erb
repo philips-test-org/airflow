@@ -1,0 +1,14 @@
+<h1> My Bookmarks </h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Procedure</th>
+    <th>Bookmarked On</th>
+  <tr>
+<% @bookmarks.each do |bookmark| %>
+  <tr>
+    <td><%= bookmark.rad_exam.procedure.description %></td>
+    <td><%= bookmark.created_at.strftime("%Y-%m-%d") %></td>
+  <tr>
+<% end %>
+</table>
