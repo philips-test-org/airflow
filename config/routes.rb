@@ -11,6 +11,7 @@ VanillaApplication::Application.routes.draw do
   get 'demo/exams-by-site' => 'demo#exams_by_site'
 
   get 'demo/bookmarks' => 'demo#show_bookmarks'
+  #TODO - should be post
   get 'demo/create_bookmark' => 'demo#create_bookmark'
 
   # Vanilla of regular route:
