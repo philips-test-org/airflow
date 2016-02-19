@@ -7,6 +7,11 @@ class DemoController < ApplicationController
   def real_time
   end
 
+  def get_exams
+    exams = Java::HarbingerSdkData::RadExam.allWithLimit(100, @entity_manager)
+    render json: exams.to_a
+  end
+
   def show_bookmarks
     @bookmarks = get_bookmarks
     log_hipaa_view(@bookmarks.map{|b| b.rad_exam})

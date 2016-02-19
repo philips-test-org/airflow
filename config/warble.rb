@@ -1,6 +1,7 @@
 Warbler::Config.new do |config|
-  config.jar_name = "vanilla-app"
+  app_name = File.read(File.join(File.dirname(__FILE__),"application.name")).strip
+  config.jar_name = app_name
   config.webxml.jruby.min.runtimes = 2
   config.webxml.jruby.max.runtimes = 10
-  config.java_libs += FileList["sdk/*standalone.jar"]
+  config.includes = FileList["init.rb"]
 end

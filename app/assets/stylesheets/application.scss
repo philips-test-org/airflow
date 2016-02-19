@@ -1,0 +1,35 @@
+/*
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.data { display: none; }
+
+/* Don't show the note row by default */
+.note-row { display: none; }
+/* Make the rows show a pointer hand instead of an arrow cursor */
+.data-row { cursor: pointer; }
+/* Striped the table taking into account the extra row */
+.data-row:nth-child(4n+1) { background-color: #f9f9f9; }
+
+/* Stripe the notes */
+.notes .note:nth-child(odd) { background-color: #f9f9f9; }
+/* Some notes styling */
+.notes .note { border: 1px solid #ddd; border-radius: 5px; padding: 5px; margin-bottom: 8px; }
+.notes .note h4 { font-size: 12px; font-weight: bold; }
+
+/* Increase the visibility of badges with a number > 0 */
+.badge.highlight { background-color: #6F256F; }
+
+#notifier {
+  position: fixed;
+  right: 20px;
+  bottom: 15px;
+  width: 200px;
+  z-index: 1000;
+}

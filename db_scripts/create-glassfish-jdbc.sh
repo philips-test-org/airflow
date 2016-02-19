@@ -2,7 +2,7 @@
 
 DB=harbinger
 DB_USER=vanilla
-DB_PASSWORD=r3sr3v13w!!
+DB_PASSWORD=2893ourj8923urjl
 DB_HOST=localhost
 JDBC_POOL=vanillaPOOL
 JDBC_RESOURCE=jdbc/vanilla

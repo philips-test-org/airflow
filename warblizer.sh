@@ -1,37 +1,33 @@
 #!/bin/bash
 
-if [ ! -e sdk/*standalone.jar ]
+CWD=`pwd`
+APPNAME=`cat config/application.name`
+VERSION=`git describe --always`
+WARFILE="$APPNAME.war.$VERSION"
+PACKAGEDIR="$APPNAME-$VERSION"
+
+if [ ! -e $WARFILE ]
 then
-  echo "Warblizer: must have sdk first"
+  echo "Packager: $WARFILE not present."
+  read -p "Would you like to build now? (yN)  "
+  [[ $REPLY = [yY] ]] && ./warblizer.sh || echo "Packager: $WARFILE will not built"
+fi
+if [ ! -e $WARFILE ]
+then
+  echo "Packager: $WARFILE not present, exiting"
   exit 2
 fi
 
-APPNAME=`cat config/application.name`
+if [ -e $PACKAGEDIR ]
+then
+  echo "Packager: Please remove or rename $PACKAGEDIR"
+  exit 2
+fi
 
-# Standard file changes
-echo "Warblizer: Creating version page"
-git describe --always > app/views/main/_version.html.erb
-
-# Warbalizing with changed files
-
-echo "Warblizer: Bundling"
-WARRING="warbilizing" RAILS_ENV=production jruby -S bundle install --path=target
-
-echo "Warblizer: Pre Cleaning Assets"
-WARRING="warbilizing" RAILS_ENV=production jruby -S bundle exec rake assets:clean
-
-echo "Warblizer: Precompiling Assets (this takes a while)"
-WARRING="warbilizing" RAILS_RELATIVE_URL_ROOT="/$APPNAME" RAILS_ENV=production jruby -S bundle exec rake assets:precompile
-
-echo "Warblizer: Building War File"
-WARRING="warbilizing" RAILS_ENV=production jruby -S bundle exec warble war
-
-echo "Warblizer: Post Cleaning Assets"
-WARRING="warbilizing" RAILS_ENV=production jruby -S bundle exec rake assets:clean
-
-echo "Warblizer: Changing permissions and war file name"
-chmod +r "$APPNAME.war"
-mv -v "$APPNAME.war" "$APPNAME.war.`git describe --always`"
-
-# Resetting standard files
-git checkout app/views/main/_version.html.erb
+mkdir -v $PACKAGEDIR
+cp -Rv db_scripts $PACKAGEDIR
+cp -v CHANGELOG.md $PACKAGEDIR
+cp -v $WARFILE $PACKAGEDIR
+zip -rq $PACKAGEDIR.zip $PACKAGEDIR
+rm -rf $PACKAGEDIR
+echo "Packager: Created $PACKAGEDIR.zip"

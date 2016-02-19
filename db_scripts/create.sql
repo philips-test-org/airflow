@@ -1,4 +1,4 @@
-create user vanilla password 'r3sr3v13w!!';
+create user vanilla password '2893ourj8923urjl';
 create schema AUTHORIZATION vanilla;
 revoke all on all tables in schema public from vanilla;
 grant usage on schema public to vanilla;

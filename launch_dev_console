@@ -1,2 +1,1 @@
-DEV_MODE="on" jruby -J-XX:MaxPermSize=256m \
--S rails console
+DEV_MODE="on" JRUBY_OPTS="-J-XX:MaxPermSize=256m" rails console
