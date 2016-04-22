@@ -15,8 +15,7 @@ gem 'font-awesome-sass'
 gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyrhino'
-gem 'harbinger-rails-extensions', '~> 0.0.16', source: 'http://gem.analytical.info:9292'
-
+gem 'harbinger-rails-extensions', '~> 0.0.19', source: 'http://gem.analytical.info:9292'
 
 group :development, :test do
 end

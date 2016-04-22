@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'unauthorized' => "unauthorized#index"
-  root :to => "demo#accession_search"
-
+  get 'main' => "main#index"
+  get 'about' => "main#about"
+  get 'help' => "main#help"
+  root :to => redirect('main')
 end

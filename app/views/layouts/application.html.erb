@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vanilla Application</title>
+  <title>Starter App</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= harbingerjs_setup() %>
   <%= javascript_include_tag "application" %>
@@ -14,7 +14,7 @@
   <div id="primary-navbar" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" id="app-name" href="<%= root_url %>">Vanilla Application</a>
+        <a class="navbar-brand" id="app-name" href="<%= root_url %>">Starter App</a>
 
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -29,6 +29,8 @@
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse">
         <ul class="nav navbar-nav pull-right">
+          <li><%= link_to "Help", url_for(:controller => :main, :action => :help) %></li>
+          <li><%= link_to "About", url_for(:controller => :main, :action => :about) %></li>
 	  <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
         </ul>
       </div>

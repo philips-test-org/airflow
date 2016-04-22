@@ -1,1 +1,1 @@
-#Vanilla Changelog
+#Starter App

@@ -1,11 +1,11 @@
 #!/bin/bash
 
 DB=harbinger
-DB_USER=vanilla
+DB_USER=starterapp
 DB_PASSWORD=2893ourj8923urjl
 DB_HOST=localhost
-JDBC_POOL=vanillaPOOL
-JDBC_RESOURCE=jdbc/vanilla
+JDBC_POOL=starterappPOOL
+JDBC_RESOURCE=jdbc/starterapp
 
 cd /servers/glassfish/glassfish3/glassfish/bin
 ./asadmin login
