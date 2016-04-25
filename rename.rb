@@ -6,6 +6,12 @@ if ARGV.length != 1
   exit
 end
 
+unless ARGV[0].match(/^[a-zA-Z\d\s]*$/)
+  puts "\nThe rename script only works with alphanumeric names. \n\n Example:  ruby rename.rb 'New Name'\n\n"
+
+  exit
+end
+
 match = File.read("config/application.rb").match(/module (\w*)/)
 current_name = match[1] if match
 
@@ -40,13 +46,15 @@ changes = [
 changes.each do |name_change|
   name_change[:file_names].each do |file_name|
     text = File.read(file_name)
+    formatted_old_name = name_change[:manipulation].call(current_name)
+    formatted_new_name = name_change[:manipulation].call(new_name)
 
-    if text.match(/#{name_change[:manipulation].call(current_name)}/)
-      puts "Changing the name in #{file_name}"
+    if text.match(/#{formatted_old_name}/)
+      puts "Changing #{formatted_old_name} to #{formatted_new_name} in #{file_name}"
 
-      File.write(file_name, text.gsub(/#{name_change[:manipulation].call(current_name)}/, name_change[:manipulation].call(new_name)))
+      File.write(file_name, text.gsub(/#{formatted_old_name}/, formatted_new_name))
     else
-      puts "Unable to find the app name in #{file_name}"
+      puts "Unable to find #{formatted_old_name} in #{file_name}"
     end
   end
 end
