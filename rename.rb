@@ -19,12 +19,12 @@ new_name = [ARGV[0]] if new_name.length == 0
 
 changes = [
   {
-    file_names: ['app/controllers/application_controller.rb'],
+    file_names: ['app/controllers/application_controller.rb', 'config/application.name'],
     manipulation: lambda { |arr| arr.map(&:downcase).join("-") },
   },
   {
 
-    file_names: ['db_scripts/create-glassfish-jdbc.sh', 'db_scripts/create.sql', 'db_scripts/install.sh', 'db_scripts/schema.sql', 'config/initializers/session_store.rb', 'config/database.yml', 'config/application.name'],
+    file_names: ['db_scripts/create-glassfish-jdbc.sh', 'db_scripts/create.sql', 'db_scripts/install.sh', 'db_scripts/schema.sql', 'config/initializers/session_store.rb', 'config/database.yml'],
     manipulation: lambda {|arr| arr.map(&:downcase).join("") }
   },
   {
