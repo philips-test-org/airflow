@@ -11,7 +11,7 @@ gem 'autoprefixer-rails','6.0.3'
 
 # Assets
 gem 'sass-rails', '~> 5.0'
-gem 'font-awesome-sass'
+gem 'font-awesome-sass','~>4.7.0'
 gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyrhino'

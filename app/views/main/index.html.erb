@@ -1,0 +1,56 @@
+<div id="workspace" class="vertical-timeline">
+
+
+  <div id="board-headings">
+    <h1 class="queue">Queue</h1>
+
+    <table id="time-headings">
+      <tbody>
+	<tr class="heading">
+	  <td></td>
+	  <% @resources.keys.each do |r| %>
+	  <td><h1><%= r.name.blank? ? r.resource : r.name %></h1></td>
+	  <% end %>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div id="queue">
+    <% @resources[@resources.keys.first].each do |exam| %>
+    <%= render partial: "main/card", locals: {exam: exam, top: false} %>
+    <% end %>
+  </div>
+
+
+  <div id="board">
+
+    <table id="time-grid">
+      <tbody>
+	<div id="right-now"></div>
+
+	<tr>
+	  <td>
+	    <% (0..23).to_a.each do |h| %>
+	    <div class="hour"><%= h >= 10 ? h : "0#{h}" %>:00</div>
+	    <% end %>
+	  </td>
+	  <% @resources.keys.each do |r| %>
+	  <td>
+	    <div class="markers">
+	      <% (0..47).to_a.each do |i| %>
+	      <div class="row-marker"></div>
+	      <% end %>
+	    </div>
+	    <% @resources[r].each do |exam| %>
+	    <%= render partial: "main/card", locals: {exam: exam, top: true} %>
+	    <% end %>
+	  </td>
+	  <% end %>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
-  jndi: jdbc/starterapp
+  jndi: jdbc/harbinger
 
 production:
   adapter: postgresql
-  jndi: jdbc/starterapp
+  jndi: jdbc/harbinger
