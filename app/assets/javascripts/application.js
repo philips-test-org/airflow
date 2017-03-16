@@ -51,7 +51,9 @@ setupCardDragging();
 
 $(document).ready(function() {
     $("#board").scroll(function(e) {
-	$("#time-headings").offset({left: -1*this.scrollLeft+301});
+	var scroll = this.scrollLeft;
+	$("#time-headings").offset({left: -1*scroll+50});
+	$("#vertical-time-headings").css({left: scroll});
     });
 
     var now = new Date;

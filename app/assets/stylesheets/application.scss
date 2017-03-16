@@ -86,7 +86,7 @@ $card-color: #fff;
 
     #right-now {
 	position: absolute;
-	left: 51px;
+	left: 50px;
 	height: 2px;
 	background-color: $dark-alert-red;
 	border-top: 1px solid $alert-red;
@@ -94,7 +94,44 @@ $card-color: #fff;
 	display: none;
     }
 
+    #white-spacer {
+	position: fixed;
+	left: 0px;
+	top: 61px;
+	width: 51px;
+	border-bottom: unquote($border-unit) solid $grid-color;
+	border-right: unquote($border-unit) solid $grid-color;
+	height: 33px;
+	background-color: #fff;
+	z-index: 106;
+    }
+
+    #vertical-time-headings {
+	position: absolute;
+	left: 0;
+	background-color: #fff;
+	z-index: 106;
+	border-right: unquote($border-unit) solid $grid-color;
+    }
+
+
+    .hour {
+	text-align: right;
+	vertical-align: top;
+	height: unquote($hour-unit);
+	width: 50px;
+	border-bottom: unquote($border-unit) solid $grid-color;
+	padding-right: 5px;
+    }
+
+    .hour:last-child {
+	border-bottom: unquote($border-unit) solid $grid-color !important;
+    }
+
     #time-grid {
+	position: absolute;
+	left: 50px;
+
 	tbody {
 
 	    td {
@@ -106,17 +143,6 @@ $card-color: #fff;
 		border-left: unquote($border-unit) solid $grid-color;
 	    }
 
-	    td .hour {
-		text-align: right;
-		vertical-align: top;
-		height: unquote($hour-unit);
-		width: 50px;
-		border-bottom: unquote($border-unit) solid $grid-color;
-		padding-right: 5px;
-	    }
-	    td .hour:last-child {
-		border-bottom: unquote($border-unit) solid $grid-color !important;
-	    }
 
 	    td .markers .row-marker {
 		width: unquote($col-unit);
@@ -134,8 +160,8 @@ $card-color: #fff;
     }
 
     #time-headings {
-	position: fixed;
-	left: 301px;
+	position: absolute;
+	left: 0px;
 	z-index: 104;
 
 	tr.heading td {
@@ -154,45 +180,20 @@ $card-color: #fff;
 
     #board-headings {
 	position: fixed;
+	left: 0;
 	top: 61px;
 	z-index: 105;
 	/*background-color: #fff;*/
 	border-bottom: 1px solid #eee;
 
 
-	h1.queue {
-	    /*border-top: unquote($border-unit) solid $grid-color;
-	border-bottom: unquote($border-unit) solid $grid-color;*/
-	    position: absolute;
-	    border-bottom: unquote($border-unit) solid $grid-color !important;
-	    border-right: unquote($border-unit) solid $grid-color !important;
-	    text-align: center;
-	    font-size: 20px; font-weight: normal;
-	    width: 251px;/*unquote($col-unit);*/
-	    padding: 4px 5px;
-	    margin: 0;
-	    background-color: #fff;
-	    z-index: 106;
-	}
-
-    }
-
-    #queue {
-	position: absolute;
-	left: 0px;
-	width: unquote($col-width + $unit);
-	top: 91px;
-	bottom: 0;
-	overflow-y: auto;
-	padding-top: 10px;
-	z-index: 104;
     }
 
     #board {
 	position: absolute;
-	left: 250px;
+	left: 0;
 	right: 0;
-	top: 91px;
+	top: 94px;
 	bottom: 0;
 	overflow-y: auto;
 	overflow-x: auto;
@@ -231,18 +232,12 @@ Shared Styles
     cursor: pointer;
 
     .left-tab {
-	width: 20px;
+	width: 8px;
 	color: #fff;
 	padding: 5px 2px;
 	display: table-cell;
     }
-    .horizontal {
-	position: relative;
-	height: 100%;
-	.left-tab {
-	    height: 198px;
-	}
-    }
+
     .left-tab.release {	background-color: $release-color; }
     .left-tab.feature {	background-color: $feature-color; }
     .left-tab.bug {	background-color: $bug-color; }
@@ -277,6 +272,7 @@ Shared Styles
 	padding: 0px 10px 5px;
 	text-align: right;
 	color: #757575;
+	.consent, .paperwork { display: inline; }
     }
 
 
@@ -319,180 +315,4 @@ Shared Styles
 }
 .dot-red {
     background-color: $alert-red;
-}
-
-
-/*********************************************
-Relative Board Styles
-**********************************************/
-#relative-board {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 61px;
-    bottom: 0;
-    overflow-y: auto;
-    overflow-x: auto;
-    /*padding: 5px;*/
-}
-
-#board .resource-row:first-child {
-    /*border-top: unquote($border-unit) solid $grid-color;*/
-}
-.resource-row:nth-child(2n) {
-    background-color: #eee;
-}
-.resource-row {
-    border-bottom: unquote($border-unit) solid $grid-color;
-    position: relative;
-    padding: 5px 0 5px 50px;
-    height: 210px;
-    white-space: nowrap;
-    h1 {
-	font-size: 22px;
-	font-weight: normal;
-	position: absolute;
-	left: -77px;
-	top: 68px;
-	z-index: 102;
-	text-align: center;
-	width: 210px;
-	-webkit-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-	-ms-transform: rotate(-90deg);
-	-o-transform: rotate(-90deg);
-	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-    }
-}
-
-
-
-/****************************************************/
-/* Horizontal
-/****************************************************/
-
-.horizontal-timeline {
-
-    #right-now {
-	position: absolute;
-	top: 32px;
-	bottom: 1px;
-	width: 2px;
-	background-color: $dark-alert-red;
-	border-left: 1px solid $alert-red;
-	border-right: 1px solid $alert-red;
-	/*display: none;*/
-    }
-
-    #board {
-	position: absolute;
-	left: 0px;
-	right: 0;
-	top: 281px;
-	bottom: 0;
-	overflow-y: auto;
-	overflow-x: auto;
-    /*padding: 5px;*/
-    }
-
-    #time-grid {
-	tbody {
-	    td.heading {
-		height: 220px;
-	    }
-
-	    h1 {
-		font-size: 20px;
-		font-weight: normal;
-		margin: 0 -30px;
-		padding: 0;
-	    }
-
-	    td.grid {
-		min-width: 4801px;
-	    }
-
-	    td {
-		position: relative;
-		vertical-align: middle;
-		border: unquote($border-unit) solid $grid-color;
-	    }
-/*	    td:first-child {
-		border-left: unquote($border-unit) solid $grid-color;
-	    }
-*/
-	    td .hour {
-		float: left;
-		text-align: left;
-		vertical-align: middle;
-		width: unquote($hour-unit);
-		height: 30px;
-		line-height: 30px;
-		border-right: unquote($border-unit) solid $grid-color;
-		padding-left: 5px;
-	    }
-/*	    td .hour:last-child {
-		border-bottom: unquote($border-unit) solid $grid-color !important;
-	    }
-*/
-	    td .markers .col-marker {
-		float: left;
-		height: 220px;
-		width: unquote($half-unit);
-		border-right: unquote($border-unit) solid $grid-color;
-	    }
-	    td .hour:first-child, td .markers .row-marker:first-child {
-	    /*border-top: unquote($border-unit) solid $grid-color !important;*/
-	    }
-	    td .markers .col-marker:nth-child(2n-1) {
-		border-right: unquote($border-unit) dashed $grid-color !important;
-	    }
-
-	}
-
-	.notecard {
-	    position: absolute;
-	    top: 10px;
-	}
-
-    }
-
-    #queue {
-	position: absolute;
-	left: 0px;
-	right: 0px;
-	top: 61px;
-	height: 220px;
-	overflow-x: auto;
-	padding-left: 50px;
-	z-index: 104;
-
-	h1 {
-	    font-size: 20px;
-	    font-weight: normal;
-	    margin: 0;
-	    padding: 0;
-	    position: absolute;
-	    left: -89px;
-	    top: 89px;
-	    border-bottom: unquote($border-unit) solid $grid-color;
-	    border-top: unquote($border-unit) solid $grid-color;
-	    height: 42px;
-	    width: 220px;
-	    text-align: center;
-	    vertical-align: middle;
-	    line-height: 40px;
-	}
-
-	.scaled-queue {
-	    width: 4801px;
-	}
-	.notecard {
-	    float: left;
-	    margin-right: 10px;
-	    margin-top: 10px;
-	}
-    }
-
-
 }
