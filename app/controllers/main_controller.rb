@@ -7,10 +7,6 @@ class MainController < ApplicationController
     test_exams
   end
 
-  def horizontal
-    test_exams
-  end
-
   def exam
     render text: params.to_s
   end

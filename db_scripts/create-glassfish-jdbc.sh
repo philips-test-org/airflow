@@ -1,11 +1,11 @@
 #!/bin/bash
 
 DB=harbinger
-DB_USER=starterapp
+DB_USER=airflow
 DB_PASSWORD=2893ourj8923urjl
 DB_HOST=localhost
-JDBC_POOL=starterappPOOL
-JDBC_RESOURCE=jdbc/starterapp
+JDBC_POOL=airflowPOOL
+JDBC_RESOURCE=jdbc/airflow
 
 cd /servers/glassfish/glassfish3/glassfish/bin
 ./asadmin login

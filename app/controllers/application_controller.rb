@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def log_hipaa_view(objects,options={})
     if objects.size > 0
       options.reverse_merge!({
-          :app_name => "starter-app",
+          :app_name => "airflow",
           :request_info => request.original_fullpath,
           :requesting_ip => request.remote_ip,
           :table_name => objects.first.class.table_name,

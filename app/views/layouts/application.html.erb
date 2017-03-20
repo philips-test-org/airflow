@@ -22,9 +22,7 @@
         <a class="navbar-brand" id="app-name" href="<%= url_for :controller => :main, :action => :index %>">Airflow</a>
       </div>
       <ul class="nav navbar-nav pull-right">
-	<li><%= link_to("Vertical: Scaled Time", controller: :main, action: :index) %></li>
-	<li><%= link_to("Horizontal: Scaled Time", controller: :main, action: :horizontal) %></li>
-	<li><%= link_to("Horizontal: Relative Time", controller: :relative, action: :index) %></li>
+	<li><%= link_to("Guide", controller: :main, action: :index) %></li>
         <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
       </ul>
       </div>
