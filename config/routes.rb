@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'main' => "main#index"
   get 'horizontal' => "main#horizontal"
   get 'exam' => "main#exam"
+  get 'exams' => "main#exams"
   get 'relative' => "relative#index"
   get 'about' => "main#about"
   get 'help' => "main#help"

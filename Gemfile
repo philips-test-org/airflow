@@ -16,8 +16,10 @@ gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyrhino'
 gem 'harbinger-rails-extensions', '~> 0.0.19', source: 'http://gem.analytical.info:9292'
+gem 'momentjs-rails', '>= 2.8.1'
 
 group :development, :test do
+  gem "pry"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

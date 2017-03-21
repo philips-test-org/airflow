@@ -1,4 +1,10 @@
+<% content_for(:javascript_includes, javascript_include_tag("pages/guide")) %>
+<div class="data hide" id="resource-groupings-json"><%= JSON.dump(@groupings["IR 1"]) %></div>
 <div id="workspace" class="vertical-timeline">
+  <%= image_tag("ajax-loader.gif") %>
+</div>
+
+<script class="handlebars-template" id="t-calendar" type="text/x-handlebars-template">
 
 
   <div id="board-headings">
@@ -9,9 +15,9 @@
       <tbody>
 	<tr class="heading">
 	  <td></td>
-	  <% @resources.keys.each do |r| %>
-	  <td><h1><%= r.name.blank? ? r.resource : r.name %></h1></td>
-	  <% end %>
+	  {{#each resources}}
+	  {{> resourceHeading}}
+	  {{/each}}
 	</tr>
       </tbody>
     </table>
@@ -24,9 +30,9 @@
       <tbody>
 	<tr>
 	  <td>
-	    <% (0..23).to_a.each do |h| %>
-	    <div class="hour"><%= h >= 10 ? h : "0#{h}" %>:00</div>
-	    <% end %>
+	    {{#each hours}}
+	    {{> hour}}
+	    {{/each}}
 	  </td>
 	</tr>
       </tbody>
@@ -37,21 +43,59 @@
 	<div id="right-now"></div>
 
 	<tr>
-	  <% @resources.keys.each do |r| %>
-	  <td>
-	    <div class="markers">
-	      <% (0..47).to_a.each do |i| %>
-	      <div class="row-marker"></div>
-	      <% end %>
-	    </div>
-	    <% @resources[r].each do |exam| %>
-	    <%= render partial: "main/card", locals: {exam: exam, top: true} %>
-	    <% end %>
-	  </td>
-	  <% end %>
+	  {{#each resources}}
+	  {{> resourceColumn resource=this hours=../hours}}
+	  {{/each}}
 	</tr>
       </tbody>
     </table>
   </div>
 
-</div>
+</script>
+
+<script class="handlebars-template" id="t-resource-heading" type="text/x-handlebars-template">
+  <td><h1>{{name}}</h1></td>
+</script>
+
+<script class="handlebars-template" id="t-hour" type="text/x-handlebars-template">
+  <div class="hour">{{format_hour this}}</div>
+</script>
+
+<script class="handlebars-template" id="t-resource-column" type="text/x-handlebars-template">
+  <td>
+    <div class="markers">
+      {{#each hours}}
+      <div class="row-marker"></div>
+      <div class="row-marker"></div>
+      {{/each}}
+    </div>
+    {{#each (exams_from_resource this)}}
+    {{> card this}}
+    {{/each}}
+  </td>
+</script>
+
+<script class="handlebars-template" id="t-card" type="text/x-handlebars-template">
+  <div class="notecard scaled" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
+    <div class="left-tab" style="background-color: {{exam_color this}};">
+    </div>
+
+    <div class="right-tab">
+      <div class="heading">
+	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
+      </div>
+
+      <div class="body">
+	<div class="procedure">{{this.procedure.description}}</div>
+      </div>
+
+      <div class="footer">
+	<div class="consent"><i class="fa fa-handshake-o"></i></div>
+	<div class="paperwork"><i class="fa fa-file-text"></i></div>
+      </div>
+    </div>
+
+    <div class="hide data" data-exam-id="{{this.id}}"></div>
+
+  </div>
+</script>
