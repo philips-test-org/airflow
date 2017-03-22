@@ -26,6 +26,21 @@ Handlebars.registerHelper('format_hour',function(hour) {
     }
 });
 
+Handlebars.registerHelper('format_date',function(date) {
+    return date;
+});
+
+Handlebars.registerHelper('format_timestamp',function(epoch) {
+    if (epoch) {
+	return moment(epoch).format('MMMM Do YYYY, HH:mm');
+    }
+});
+
+Handlebars.registerHelper('avatar',function(employee_id, placeholder) {
+    var url = $.harbingerjs.core.url('/avatar?id=' + employee_id);
+    return new Handlebars.SafeString('<img class="avatar" src="' + url + '" onerror="this.onerror=null; this.src=\'' + placeholder + '\';"/>');
+});
+
 Handlebars.registerHelper('exam_color',function(exam) {
     var color = "#f5f52b";
     if (exam.rad_exam_detail.delay_reason_id) {
@@ -44,16 +59,6 @@ Handlebars.registerHelper('exam_color',function(exam) {
     return color;
 });
 
-
-/* General Helpers */
-Handlebars.registerHelper('multiply',function(a,b) {
-    return a * b;
-});
-
-Handlebars.registerHelper('call',function(arguments) {
-    return arguments[0].apply(arguments.slice(1,arguments.length));
-});
-
 Handlebars.registerHelper('exams_from_resource',function(resource) {
     return application.data.masterExams.filter(function(exam) { return exam.resource_id == resource.id; });
 });
@@ -66,6 +71,15 @@ Handlebars.registerHelper('exam_height',function(exam) {
 Handlebars.registerHelper('exam_top',function(exam) {
     var t = moment(application.data.examStartTime(exam));
     return Math.round((t.hour() * 60 * 60 + t.minute() * 60 + t.seconds()) * application.templates.pixels_per_second) + "px";
+});
+
+/* General Helpers */
+Handlebars.registerHelper('multiply',function(a,b) {
+    return a * b;
+});
+
+Handlebars.registerHelper('call',function(arguments) {
+    return arguments[0].apply(arguments.slice(1,arguments.length));
 });
 
 Handlebars.registerHelper('times', function(n, block) {

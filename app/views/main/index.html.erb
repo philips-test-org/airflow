@@ -90,7 +90,7 @@
       </div>
 
       <div class="footer">
-	<div class="consent"><i class="fa fa-handshake-o"></i></div>
+	<div class="consent complete"><i class="fa fa-handshake-o"></i></div>
 	<div class="paperwork"><i class="fa fa-file-text"></i></div>
       </div>
     </div>
@@ -98,4 +98,121 @@
     <div class="hide data" data-exam-id="{{this.id}}"></div>
 
   </div>
+</script>
+
+<script class="handlebars-template" id="t-modal-card" type="text/x-handlebars-template">
+  <div class="left-stripe" style="background-color: {{exam_color this}};"></div>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="status-toggles">
+      <div class="status-toggle margin-right">
+	<label><i class="fa fa-handshake-o"></i>Consent</label>
+	<input type="checkbox" checked data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+      </div>
+      <div class="status-toggle">
+	<label><i class="fa fa-file-text"></i>Paperwork</label>
+	<input type="checkbox" data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+      </div>
+    </div>
+    <h4 class="modal-title">Accession: {{accession}}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+	<div class="col-xs-6">
+	  {{> demographicsTable}}
+	</div>
+	<div class="col-xs-6">
+	  {{> commentsInterface}}
+	</div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-modal-card-loading" type="text/x-handlebars-template">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">Loading...</h4>
+  </div>
+  <div class="modal-body">
+    <%= image_tag("ajax-loader.gif") %>
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-demographics-table" type="text/x-handlebars-template">
+  <table class="table table-bordered table-striped">
+    <tbody>
+      {{> demographicsTableRow key="Patient Name" value=(format_name patient_mrn.patient.name)}}
+      {{> demographicsTableRow key="Patient MRN" value=patient_mrn.mrn}}
+      {{> demographicsTableRow key="Patient DOB" value=(format_date patient_mrn.patient.birthdate)}}
+      {{> demographicsTableRow key="Procedure" value=procedure.description}}
+      {{> demographicsTableRow key="Appointment" value=(format_timestamp rad_exam_time.appointment)}}
+      {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam_time.begin_exam)}}
+      {{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam_time.end_exam)}}
+    </tbody>
+  </table>
+</script>
+
+<script class="handlebars-template" id="t-demographics-table-row" type="text/x-handlebars-template">
+  <tr>
+    <th>{{key}}</th>
+    <td>{{value}}</td>
+  </tr>
+</script>
+
+
+<script class="handlebars-template" id="t-comments-interface" type="text/x-handlebars-template">
+  <div class="comments">
+    {{#each comments}}
+    {{> comment}}
+    {{/each}}
+  </div>
+  <hr />
+  {{> commentForm}}
+</script>
+
+<script class="handlebars-template" id="t-comment" type="text/x-handlebars-template">
+  <div class="comment">
+    <div class="avatar">
+      <!-- should be the employee associated with the action -->
+      {{avatar employee_id "<%= image_url('placeholder.png') %>"}}
+    </div>
+    <div class="body">
+      <div class="heading">
+	<!-- should be the employee associated with the action -->
+	<strong>{{employee.name}}</strong> commented on <span class="time short">{{format_timestamp created_at}}</span>
+      </div>
+      <div class="content">
+	{{comment}}
+      </div>
+    </div>
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-comment-form" type="text/x-handlebars-template">
+  <form id="comment-form">
+    <div class="comment">
+      <div class="avatar">
+	{{avatar <%= @employee.getId %> "<%= image_url('placeholder.png') %>"}}
+      </div>
+      <div class="body">
+	<div class="heading form">
+	  Add comment to the exam:
+	</div>
+	<div class="content">
+	  <textarea name="comments" class="form-control comment-box" autofocus></textarea>
+	  <input type="hidden" name="exam_id" value="{{id}}" />
+	</div>
+
+	<div class="footer">
+	  <div class="pull-right">
+	    <button class="btn btn-default add-comment">Add Comment</button>
+	  </div>
+	  <div style="clear: both;"></div>
+	</div>
+
+      </div>
+    </div>
+  </form>
 </script>

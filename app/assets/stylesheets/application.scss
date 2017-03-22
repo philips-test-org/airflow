@@ -1,6 +1,7 @@
 /*
  *= require bootstrap_and_overrides
- *= reflect_actions
+ *= require bootstrap-toggle.min.css
+ *= require comments
  *= require_self
  */
 
@@ -16,6 +17,8 @@ $dark-alert-red: #A40008;
 $very-dark-alert-red: #750006;
 $alert-text-color: #fff;
 $complete-green: #279A2F;
+
+.margin-right { margin-right: 10px; }
 
 #primary-navbar { margin-bottom: 0px; }
 
@@ -214,13 +217,6 @@ $card-color: #fff;
 Shared Styles
 ************************************************/
 
-.notecard.relative {
-    display: inline-block;
-    position: relative;
-    margin-right: 10px;
-    white-space: normal;
-}
-
 .notecard {
     border: 1px solid #c3c3c3;
     border-radius: 3px;
@@ -272,6 +268,7 @@ Shared Styles
 	padding: 0px 10px 5px;
 	text-align: right;
 	color: #757575;
+	.consent.complete, .paperwork.complete { color: #5d97c0; }
 	.consent, .paperwork { display: inline; }
     }
 
@@ -315,4 +312,35 @@ Shared Styles
 }
 .dot-red {
     background-color: $alert-red;
+}
+
+/* Modal Card */
+.modal-wide {
+    width: 95%;
+}
+
+#exam-modal .modal-content {
+    padding-left: 14px;
+    border-radius: 0;
+    .left-stripe {
+	background-color: #aaa;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 13px;
+	bottom: 0;
+    }
+}
+
+.status-toggles {
+    float: right;
+    margin-right: 10px;
+
+    .status-toggle {
+	display: inline;
+	i { margin-right: 5px; }
+    }
+
+    .status-toggle.complete { color: #ccc; }
+    .status-toggle.incomplete { color: #ccc; }
 }
