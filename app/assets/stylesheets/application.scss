@@ -226,6 +226,13 @@ Shared Styles
     width: unquote($card-unit);
     margin-bottom: 5px;
     cursor: pointer;
+    /* Disable Text Selection as it interfere's with Dragging */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     .left-tab {
 	width: 8px;

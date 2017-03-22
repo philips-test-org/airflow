@@ -18,15 +18,17 @@ function setupCardDragging() {
     var mousedown = false;
     var dragging = false;
     var drag_element = null;
+    var downtime = null;
 
     $(document).on("mousedown",".notecard",function(e) {
 	mousedown = true;
 	dragging = false;
 	drag_element = this;
+	downtime = new Date().getTime();
     });
 
     $(document).on("mousemove",".notecard",function(e) {
-	if (mousedown) {
+	if (mousedown && downtime != null && (new Date().getTime() - downtime) > 200) {
 	    dragging = true;
 	    $(drag_element).addClass("drag-rotate");
 	}

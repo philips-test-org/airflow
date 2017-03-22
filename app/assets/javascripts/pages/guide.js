@@ -17,9 +17,9 @@ application.calendar = {
 	$("#right-now").css({width: $("#time-grid").width()});
 	$("#board").scrollTo({top: ($("#right-now").position().top - ($("#board").height()/2)), left: 0},500);
 
-	$(".notecard").hover(
-	    function(e) { console.log('hover in',this); $(this).css({'z-index': 200}); },
-	    function(e) { console.log('hover out',this); $(this).css({'z-index': 101}); });
+	// $(".notecard").hover(
+	//     function(e) { console.log('hover in',this); $(this).css({'z-index': 200}); },
+	//     function(e) { console.log('hover out',this); $(this).css({'z-index': 101}); });
 
     }
 }
