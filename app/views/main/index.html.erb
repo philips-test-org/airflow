@@ -76,7 +76,7 @@
 </script>
 
 <script class="handlebars-template" id="t-card" type="text/x-handlebars-template">
-  <div class="notecard scaled" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
+  <div class="notecard scaled {{#if this.onhold}}highlight{{/if}}" id="card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
     <div class="left-tab" style="background-color: {{exam_color this}};">
     </div>
 
@@ -90,8 +90,9 @@
       </div>
 
       <div class="footer">
-	<div class="consent complete"><i class="fa fa-handshake-o"></i></div>
-	<div class="paperwork"><i class="fa fa-file-text"></i></div>
+	{{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
+	{{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+	{{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
       </div>
     </div>
 
@@ -101,17 +102,26 @@
 </script>
 
 <script class="handlebars-template" id="t-modal-card" type="text/x-handlebars-template">
+  <div class="hide data">{{this.id}}</div>
   <div class="left-stripe" style="background-color: {{exam_color this}};"></div>
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <div class="status-toggles">
       <div class="status-toggle margin-right">
+	<label><i class="fa fa-bed"></i>On Hold</label>
+	<input type="checkbox" name="onhold" {{check_test this.onhold}} data-size="mini" data-on="On Hold" data-off="Active" data-toggle="toggle" data-width="105">
+      </div>
+      <div class="status-toggle margin-right">
+	<label><i class="fa fa-bed"></i>Anesthesia</label>
+	<input type="checkbox" name="anesthesia" {{check_test this.anesthesia}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+      </div>
+      <div class="status-toggle margin-right">
 	<label><i class="fa fa-handshake-o"></i>Consent</label>
-	<input type="checkbox" checked data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="consent" {{check_test this.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle">
 	<label><i class="fa fa-file-text"></i>Paperwork</label>
-	<input type="checkbox" data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="paperwork" {{check_test this.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
     </div>
     <h4 class="modal-title">Accession: {{accession}}</h4>

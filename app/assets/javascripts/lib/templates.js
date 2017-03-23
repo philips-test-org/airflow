@@ -42,8 +42,10 @@ Handlebars.registerHelper('avatar',function(employee_id, placeholder) {
 });
 
 Handlebars.registerHelper('exam_color',function(exam) {
-    var color = "#f5f52b";
-    if (exam.rad_exam_detail.delay_reason_id) {
+    var color = "#ddd";
+    if (exam.onhold == true) {
+	color = "#f5f52b"
+    } else if (exam.rad_exam_detail.delay_reason_id) {
 	color = "#ff8800";
     } else if (!(exam.rad_exam_time.begin_exam && exam.rad_exam_time.appointment)) {
 	color = "#57dee8";
@@ -71,6 +73,18 @@ Handlebars.registerHelper('exam_height',function(exam) {
 Handlebars.registerHelper('exam_top',function(exam) {
     var t = moment(application.data.examStartTime(exam));
     return Math.round((t.hour() * 60 * 60 + t.minute() * 60 + t.seconds()) * application.templates.pixels_per_second) + "px";
+});
+
+Handlebars.registerHelper('check_test',function(val) {
+    if (val == true) {
+	return "checked";
+    }
+});
+
+Handlebars.registerHelper('block_test',function(val, block) {
+    if (val == true) {
+	return block.fn(val);
+    }
 });
 
 /* General Helpers */

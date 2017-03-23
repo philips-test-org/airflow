@@ -275,8 +275,10 @@ Shared Styles
 	padding: 0px 10px 5px;
 	text-align: right;
 	color: #757575;
-	.consent.complete, .paperwork.complete { color: #5d97c0; }
-	.consent, .paperwork { display: inline; }
+	.status-indicator {
+	    color: #53a790;
+	    display: inline;
+	}
     }
 
 
@@ -293,6 +295,11 @@ Shared Styles
     }
 
     img.avatar { width: 18px; height: 18px; }
+}
+
+.notecard.highlight {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 25px rgba(245, 245, 43, 0.8);
+    .left-pane { background-color: #f5f52b !important; }
 }
 
 .left-tab i.late {

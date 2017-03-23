@@ -38,16 +38,19 @@ function setupCardDragging() {
 	if (dragging) { // It's a drag
 	    $(drag_element).removeClass("drag-rotate");
 	} else { // It's a click
-	    $.ajax($.harbingerjs.core.url("/exam"),
-		   {data: {id: $(this).find(".data").data("exam-id")},
-		    error: function() { if (console != undefined) { console.log('error in exam modal content retrieval',arguments); } },
-		    beforeSend: function() {
-			$("#exam-modal .modal-content").html(application.templates.modalCardLoading());
-		    },
-		    success: function(exam) {
-			$("#exam-modal .modal-content").html(application.templates.modalCard(exam));
-			$("#exam-modal [data-toggle='toggle']").bootstrapToggle();
-		    }});
+	    // $.ajax($.harbingerjs.core.url("/exam"),
+	    // 	   {data: {id: $(this).find(".data").data("exam-id")},
+	    // 	    error: function() { if (console != undefined) { console.log('error in exam modal content retrieval',arguments); } },
+	    // 	    beforeSend: function() {
+	    // 		$("#exam-modal .modal-content").html(application.templates.modalCardLoading());
+	    // 	    },
+	    // 	    success: function(exam) {
+	    // 		$("#exam-modal .modal-content").html(application.templates.modalCard(exam));
+	    // 		$("#exam-modal [data-toggle='toggle']").bootstrapToggle();
+	    // 	    }});
+	    var exam = application.data.findExam($(this).find(".data").data("exam-id"));
+	    $("#exam-modal .modal-content").html(application.templates.modalCard(exam));
+	    $("#exam-modal [data-toggle='toggle']").bootstrapToggle();
 	    $("#exam-modal").modal('show');
 	}
 	mousedown = false;

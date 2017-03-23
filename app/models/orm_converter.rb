@@ -24,6 +24,7 @@ module OrmConverter
                         comment: "This is a test comment from a test user. It is entirely fake and generated for every exam I click"}]
     hash[:paperwork] = true
     hash[:consent] = false
+    hash[:anesthesia] = true
     hash
   end
 
@@ -40,6 +41,11 @@ module OrmConverter
       hash = get_data(tree,exam,{})
       hash[:paperwork] = true
       hash[:consent] = false
+      hash[:anesthesia] = true
+      hash[:comments] = [{employee_id: 1,
+                          employee: {name: "Bill Everyman"},
+                          created_at: Time.now.to_i*1000,
+                          comment: "This is a test comment from a test user. It is entirely fake and generated for every exam I click"}]
       list << hash
       list
     end
