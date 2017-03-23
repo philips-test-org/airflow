@@ -29,6 +29,10 @@ application.calendar = {
 	    application.calendar.redrawCard(exam);
 	});
 
+	application.data.hook("modal-update",function(exam) {
+	    application.modal.redrawStatus(exam);
+	});
+
     },
     findCard: function(exam) {
 	return $("#card-" + exam.id);
@@ -73,6 +77,6 @@ $(document).ready(function() {
 
     $("#exam-modal").on("change",".status-toggle input",function(e) {
 	var exam_id = $(this).parents(".modal-content").find(".data").text();
-	application.data.update_attribute(exam_id,$(this).attr('name'),this.checked);
+	application.data.update_attribute(exam_id,$(this).attr('name'),this.checked,["modal-update"]);
     });
 });

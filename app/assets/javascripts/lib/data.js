@@ -6,7 +6,8 @@ application.data = {
     masterExams: [],
     examHash: {},
     resources: [],
-    event_table: {"exam-update": []},
+    event_table: {"exam-update": [],
+		  "modal-update": []},
     buildCalendar: function(exams) {
 	application.data.exams = exams;
 	application.data.resources = $.parseJSON($("#resource-groupings-json").text());
@@ -35,28 +36,32 @@ application.data = {
     },
 
     /* Setters */
-    update_attribute: function(id,attr,value) {
+    update_attribute: function(id,attr,value,events) {
 	application.data.update(id,function(exam) {
 	    application.data.pathSet(exam,attr,value);
 	    return exam;
-	});
+	},events);
     },
 
-    update: function(id,fun) {
+    update: function(id,fun,events) {
+	if (events == undefined) { events = []; }
+	else if ($.type(events) != "array") { throw("Event list must be an array of strings"); }
 	var exam = application.data.findExam(id);
 	exam = fun(exam);
+	//Fire Default Event
 	application.data.dispatch("exam-update",exam);
+	$.each(events,function(i,etype) { application.data.dispatch(etype,exam); });
 	return exam;
     },
 
-    addComment: function(id,comment) {
+    addComment: function(id,comment,events) {
 	application.data.update(id,function(exam) {
 	    if (exam.comments == null || exam.comments == undefined) {
 		exam.comments = []
 	    }
 	    exam.comments.push(comment);
 	    return exam;
-	});
+	},events);
     },
 
     pathSet: function(obj,path,val) {

@@ -103,7 +103,7 @@
 
 <script class="handlebars-template" id="t-modal-card" type="text/x-handlebars-template">
   <div class="hide data">{{this.id}}</div>
-  <div class="left-stripe" style="background-color: {{exam_color this}};"></div>
+  {{> modalCardStatus}}
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <div class="status-toggles">
@@ -138,6 +138,10 @@
       </div>
     </div>
   </div>
+</script>
+
+<script class="handlebars-template" id="t-modal-card-status" type="text/x-handlebars-template">
+  <div class="left-stripe" style="background-color: {{exam_color this}};"></div>
 </script>
 
 <script class="handlebars-template" id="t-modal-card-loading" type="text/x-handlebars-template">

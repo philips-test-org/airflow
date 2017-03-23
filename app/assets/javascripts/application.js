@@ -12,6 +12,7 @@
 //= require lib/handlebars-v4.0.4.js
 //= require lib/data
 //= require lib/templates
+//= require lib/modal
 
 
 function setupCardDragging() {
@@ -49,9 +50,7 @@ function setupCardDragging() {
 	    // 		$("#exam-modal [data-toggle='toggle']").bootstrapToggle();
 	    // 	    }});
 	    var exam = application.data.findExam($(this).find(".data").data("exam-id"));
-	    $("#exam-modal .modal-content").html(application.templates.modalCard(exam));
-	    $("#exam-modal [data-toggle='toggle']").bootstrapToggle();
-	    $("#exam-modal").modal('show');
+	    application.modal.open(exam);
 	}
 	mousedown = false;
 	dragging = false;
