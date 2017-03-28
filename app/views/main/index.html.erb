@@ -1,8 +1,17 @@
 <% content_for(:javascript_includes, javascript_include_tag("pages/guide")) %>
 <div class="data hide" id="resource-groupings-json"><%= JSON.dump(@groupings["IR 1"]) %></div>
+<div id="view-controls">
+  <!--<button class="btn btn-default" id="time-button">Now <span class="caret"></span></button>
+  <button class="btn btn-default pull-right" id="time-button">IR Group 1 <span class="caret"></span></button>-->
+</div>
 <div id="workspace" class="vertical-timeline">
   <%= image_tag("ajax-loader.gif") %>
 </div>
+
+<!-- Major/Page Templates -->
+<script class="handlebars-template" id="t-workspace-loading" type="text/x-handlebars-template">
+  <%= image_tag("ajax-loader.gif") %>
+</script>
 
 <script class="handlebars-template" id="t-calendar" type="text/x-handlebars-template">
 
@@ -53,6 +62,24 @@
 
 </script>
 
+<script class="handlebars-template" id="t-overview" type="text/x-handlebars-template">
+  <div class="overview">
+    {{#each resources}}
+    {{> resourceRow}}
+    {{/each}}
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-resource-row" type="text/x-handlebars-template">
+  <div class="resource-row">
+    <h1>{{name}}</h1>
+    {{#each (exams_from_resource this)}}
+    {{> fixedCard this}}
+    {{/each}}
+  </div>
+</script>
+
+<!-- Shared Templates -->
 <script class="handlebars-template" id="t-resource-heading" type="text/x-handlebars-template">
   <td><h1>{{name}}</h1></td>
 </script>
@@ -70,35 +97,44 @@
       {{/each}}
     </div>
     {{#each (exams_from_resource this)}}
-    {{> card this}}
+    {{> scaledCard this}}
     {{/each}}
   </td>
 </script>
 
-<script class="handlebars-template" id="t-card" type="text/x-handlebars-template">
-  <div class="notecard scaled {{#if this.onhold}}highlight{{/if}}" id="card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
-    <div class="left-tab" style="background-color: {{exam_color this}};">
-    </div>
-
-    <div class="right-tab">
-      <div class="heading">
-	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
-      </div>
-
-      <div class="body">
-	<div class="procedure">{{this.procedure.description}}</div>
-      </div>
-
-      <div class="footer">
-	{{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
-	{{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
-	{{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
-      </div>
-    </div>
-
-    <div class="hide data" data-exam-id="{{this.id}}"></div>
-
+<script class="handlebars-template" id="t-scaled-card" type="text/x-handlebars-template">
+  <div class="notecard scaled {{#if this.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
+    {{> innerCard this}}
   </div>
+</script>
+
+<script class="handlebars-template" id="t-fixed-card" type="text/x-handlebars-template">
+  <div class="notecard overview {{#if this.onhold}}highlight{{/if}}" id="fixed-card-{{this.id}}">
+    {{> innerCard this}}
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-inner-card" type="text/x-handlebars-template">
+  <div class="left-tab" style="background-color: {{exam_color this}};">
+  </div>
+
+  <div class="right-tab">
+    <div class="heading">
+      <div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
+    </div>
+
+    <div class="body">
+      <div class="procedure">{{this.procedure.description}}</div>
+    </div>
+
+    <div class="footer">
+      {{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
+      {{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+      {{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
+    </div>
+  </div>
+
+  <div class="hide data" data-exam-id="{{this.id}}"></div>
 </script>
 
 <script class="handlebars-template" id="t-modal-card" type="text/x-handlebars-template">

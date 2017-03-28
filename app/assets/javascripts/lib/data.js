@@ -6,9 +6,9 @@ application.data = {
     masterExams: [],
     examHash: {},
     resources: [],
-    event_table: {"exam-update": [],
-		  "modal-update": []},
-    buildCalendar: function(exams) {
+    event_table: {"exam-update": {},
+		  "modal-update": {}},
+    formatExams: function(exams) {
 	application.data.exams = exams;
 	application.data.resources = $.parseJSON($("#resource-groupings-json").text());
 	var masterExamIds = [];
@@ -21,16 +21,19 @@ application.data = {
 		masterExamIds.push(exam_group_ident);
 	    }
 	}
-	application.calendar.setup();
     },
 
     /* Event Dispatching */
-    hook: function(type,fun) {
-	return application.data.event_table[type].push(fun);
+    hook: function(type,name,fun) {
+	return application.data.event_table[type][name] = fun;
+    },
+
+    unhook: function(type,name) {
+	return delete application.data.event_table[type][name];
     },
 
     dispatch: function(type,obj) {
-	$.each(application.data.event_table[type],function(i,fun) {
+	$.each(application.data.event_table[type],function(name,fun) {
 	    fun(obj)
 	});
     },

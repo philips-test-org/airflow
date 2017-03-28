@@ -85,6 +85,16 @@ $half-unit: $half + $unit;
 $grid-color: #b3b3b3;
 $card-color: #fff;
 
+#view-controls {
+    height: 49px;
+    padding: 8px 10px;
+    background-color: #eee;
+    position: relative;
+    line-height: 33px;
+    vertical-align: middle;
+    border-bottom: unquote($border-unit) solid $grid-color;
+}
+
 .vertical-timeline {
 
     #right-now {
@@ -100,7 +110,7 @@ $card-color: #fff;
     #white-spacer {
 	position: fixed;
 	left: 0px;
-	top: 61px;
+	top: 111px;
 	width: 51px;
 	border-bottom: unquote($border-unit) solid $grid-color;
 	border-right: unquote($border-unit) solid $grid-color;
@@ -171,7 +181,6 @@ $card-color: #fff;
 	    text-align: center;
 	    border-right: unquote($border-unit) solid $grid-color;
 	    border-bottom: unquote($border-unit) solid $grid-color;
-	    border-top: 0;
 
 	    h1 {
 		font-size: 20px; font-weight: normal; margin: 5px;
@@ -184,7 +193,7 @@ $card-color: #fff;
     #board-headings {
 	position: fixed;
 	left: 0;
-	top: 61px;
+	top: 111px;
 	z-index: 105;
 	/*background-color: #fff;*/
 	border-bottom: 1px solid #eee;
@@ -196,7 +205,7 @@ $card-color: #fff;
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: 94px;
+	top: 145px;
 	bottom: 0;
 	overflow-y: auto;
 	overflow-x: auto;
@@ -211,6 +220,51 @@ $card-color: #fff;
 	/*top: 100px;*/
     }
 
+}
+
+/***********************************************
+Overview
+************************************************/
+.resource-row:first-child {
+    /*border-top: unquote($border-unit) solid $grid-color;*/
+}
+
+.resource-row:nth-child(2n) {
+    background-color: #fafafa;
+}
+
+.resource-row {
+    border-bottom: unquote($border-unit) solid $grid-color;
+    position: relative;
+    padding: 5px 0 5px 50px;
+    height: 140px;
+    /*height: 210px;*/
+    white-space: nowrap;
+
+    h1 {
+	font-size: 16px;
+	font-weight: normal;
+	position: absolute;
+	left: -84px;
+	top: 41px;
+	z-index: 102;
+	text-align: center;
+	width: 210px;
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    }
+}
+
+.notecard.overview {
+    position: relative;
+    margin-right: 10px;
+    white-space: normal;
+    width: 190px;
+    height: 130px;
+    float: left;
 }
 
 /***********************************************

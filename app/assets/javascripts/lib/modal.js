@@ -15,3 +15,9 @@ application.modal = {
 	$("#exam-modal .modal-content .left-stripe").replaceWith(application.templates.modalCardStatus(exam));
     }
 };
+
+$(document).ready(function(e) {
+    application.data.hook("modal-update","modal-redraw",function(exam) {
+	application.modal.redrawStatus(exam);
+    });
+});

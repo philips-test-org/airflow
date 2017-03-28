@@ -25,27 +25,55 @@ application.calendar = {
 	//     function(e) { console.log('hover in',this); $(this).css({'z-index': 200}); },
 	//     function(e) { console.log('hover out',this); $(this).css({'z-index': 101}); });
 
-	application.data.hook("exam-update",function(exam) {
+	application.data.hook("exam-update","card-redraw",function(exam) {
 	    application.calendar.redrawCard(exam);
 	});
 
-	application.data.hook("modal-update",function(exam) {
-	    application.modal.redrawStatus(exam);
+    },
+    breakdown: function() {
+	application.data.unhook("exam-update","card-redraw");
+    },
+    findCard: function(exam) {
+	return $("#scaled-card-" + exam.id);
+    },
+    redrawCard: function(exam) {
+	return application.calendar.findCard(exam).replaceWith(application.templates.scaledCard(exam));
+    }
+}
+
+application.overview = {
+    setup: function() {
+	$("#workspace").html(application.templates.overview(application.data));
+
+	application.data.hook("exam-update","card-redraw",function(exam) {
+	    application.overview.redrawCard(exam);
 	});
 
     },
+    breakdown: function() {
+	application.data.unhook("exam-update","card-redraw");
+    },
     findCard: function(exam) {
-	return $("#card-" + exam.id);
+	return $("#fixed-card-" + exam.id);
     },
     redrawCard: function(exam) {
-	return application.calendar.findCard(exam).replaceWith(application.templates.card(exam));
+	return application.overview.findCard(exam).replaceWith(application.templates.fixedCard(exam));
     }
 }
 
 $(document).ready(function() {
+    if ($(".active .view-changer").length > 0) {
+	var view = $(".active .view-changer").data("view-type");
+	application.view = application[view];
+    } else {
+	application.view = application.calendar;
+    }
+
+
     $.ajax($.harbingerjs.core.url("exams"),
 	   {success: function(exams) {
-	       application.data.buildCalendar(exams);
+	       application.data.formatExams(exams);
+	       application.view.setup();
 	   }});
 
     $("#exam-modal").on("submit","#comment-form",function(e) {
@@ -78,5 +106,15 @@ $(document).ready(function() {
     $("#exam-modal").on("change",".status-toggle input",function(e) {
 	var exam_id = $(this).parents(".modal-content").find(".data").text();
 	application.data.update_attribute(exam_id,$(this).attr('name'),this.checked,["modal-update"]);
+    });
+
+    $(".view-changer").click(function(e) {
+	e.preventDefault();
+	var view = $(this).data("view-type");
+	application.view.breakdown();
+	application.view = application[view];
+	$(this).parent().siblings().removeClass("active");
+	$(this).parent().addClass("active");
+	application.view.setup();
     });
 });
