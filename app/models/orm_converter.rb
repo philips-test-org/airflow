@@ -68,17 +68,21 @@ module OrmConverter
   end
 
   def self.attributes(obj)
-    obj.class.tableData.keys.delete_if {|k| k =~ /^ref\:/ }.inject({}) do |hash,attr|
-      value = obj.send(attr)
-      klass = value.class
-      if klass == Java::JavaSql::Timestamp
-        hash[attr] = value.getTime
-      elsif klass == Java::JavaSql::Date
-        hash[attr] = value.to_s
-      else
-        hash[attr] = value
+    if obj
+      obj.class.tableData.keys.delete_if {|k| k =~ /^ref\:/ }.inject({}) do |hash,attr|
+        value = obj.send(attr)
+        klass = value.class
+        if klass == Java::JavaSql::Timestamp
+          hash[attr] = value.getTime
+        elsif klass == Java::JavaSql::Date
+          hash[attr] = value.to_s
+        else
+          hash[attr] = value
+        end
+        hash
       end
-      hash
+    else
+      {}
     end
   end
 

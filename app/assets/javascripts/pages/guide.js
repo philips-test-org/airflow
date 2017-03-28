@@ -49,6 +49,13 @@ application.overview = {
 	    application.overview.redrawCard(exam);
 	});
 
+	$("#relative-board .resource-row").width($("#relative-board")[0].scrollWidth);
+
+	$("#workspace #relative-board").scroll(function(e) {
+	    var scroll = this.scrollLeft;
+	    $(this).find(".resource-row>h1").css({left: scroll - 48});
+	});
+
     },
     breakdown: function() {
 	application.data.unhook("exam-update","card-redraw");

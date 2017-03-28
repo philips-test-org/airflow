@@ -225,6 +225,19 @@ $card-color: #fff;
 /***********************************************
 Overview
 ************************************************/
+
+#relative-board {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 110px;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: auto;
+    /*padding: 5px;*/
+
+}
+
 .resource-row:first-child {
     /*border-top: unquote($border-unit) solid $grid-color;*/
 }
@@ -238,18 +251,21 @@ Overview
     position: relative;
     padding: 5px 0 5px 50px;
     height: 140px;
-    /*height: 210px;*/
     white-space: nowrap;
 
     h1 {
+	position: absolute;
+	left: -48px;
+	top: 47px;
+	width: 138px;
+	z-index: 102;
+	padding: 13px 0;
+	margin: 0;
+	border-bottom: unquote($border-unit) solid $grid-color;
+	background-color: #fff;
+	text-align: center;
 	font-size: 16px;
 	font-weight: normal;
-	position: absolute;
-	left: -84px;
-	top: 41px;
-	z-index: 102;
-	text-align: center;
-	width: 210px;
 	-webkit-transform: rotate(-90deg);
 	-moz-transform: rotate(-90deg);
 	-ms-transform: rotate(-90deg);
@@ -260,11 +276,15 @@ Overview
 
 .notecard.overview {
     position: relative;
+    display: inline-block;
     margin-right: 10px;
     white-space: normal;
     width: 190px;
     height: 130px;
-    float: left;
+
+    .left-tab {
+	height: 128px;
+    }
 }
 
 /***********************************************
@@ -276,7 +296,8 @@ Shared Styles
     border-radius: 3px;
     box-shadow: 3px 3px 3px #eee;
     background-color: $card-color;
-    display: table;
+    display: block;
+    overflow: hidden;
     width: unquote($card-unit);
     margin-bottom: 5px;
     cursor: pointer;
@@ -289,10 +310,13 @@ Shared Styles
     user-select: none;
 
     .left-tab {
+	display: block;
+	height: 100%;
 	width: 8px;
+	float: left;
 	color: #fff;
 	padding: 5px 2px;
-	display: table-cell;
+	/*display: table-cell;*/
     }
 
     .left-tab.release {	background-color: $release-color; }
@@ -331,6 +355,7 @@ Shared Styles
 	color: #757575;
 	.status-indicator {
 	    color: #53a790;
+	    background-color: #fff;
 	    display: inline;
 	}
     }
