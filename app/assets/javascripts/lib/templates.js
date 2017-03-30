@@ -70,6 +70,12 @@ Handlebars.registerHelper('exam_height',function(exam) {
     return Math.round(seconds * application.templates.pixels_per_second) + "px";
 });
 
+Handlebars.registerHelper('short_exam',function(exam) {
+    var seconds = ((application.data.examStopTime(exam) - application.data.examStartTime(exam)) / 1000);
+    return (Math.round(seconds * application.templates.pixels_per_second) <= 50);
+});
+
+
 Handlebars.registerHelper('exam_top',function(exam) {
     var t = moment(application.data.examStartTime(exam));
     return Math.round((t.hour() * 60 * 60 + t.minute() * 60 + t.seconds()) * application.templates.pixels_per_second) + "px";

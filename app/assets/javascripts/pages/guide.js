@@ -21,9 +21,39 @@ application.calendar = {
 	$("#right-now").css({width: $("#time-grid").width()});
 	$("#board").scrollTo({top: ($("#right-now").position().top - ($("#board").height()/2)), left: 0},500);
 
-	// $(".notecard").hover(
-	//     function(e) { console.log('hover in',this); $(this).css({'z-index': 200}); },
-	//     function(e) { console.log('hover out',this); $(this).css({'z-index': 101}); });
+	$("#board").on("hover",".notecard",
+	    function(e) { $(this).css({'z-index': 200}); },
+	    function(e) { $(this).css({'z-index': 101}); });
+
+	$(".notecard").draggable({revert: 'invalid',
+				  cursor: 'move',
+				  delay: 200});
+
+	$("#time-grid tr td").droppable({
+	    accepts: ".notecard",
+	    drop: function(e) {
+		var column = $(this);
+		if ($(e.toElement).hasClass("notecard")) {
+		    var notecard = $(e.toElement);
+		} else {
+		    var notecard = $(e.toElement).parents(".notecard");
+		}
+		var id = notecard.find(".data").data("exam-id");
+		var resource_id = column.data("resource-id");
+		var resource = application.data.findResource(resource_id);
+		application.data.update(id,function(exam) {
+		    var ostart = application.data.examStartTime(exam);
+		    var ostop = application.data.examStopTime(exam);
+		    var nstart = application.data.examHeightToStartTime(notecard.position().top,exam);
+		    var nstop =  application.data.examHeightToStopTime(notecard.position().top,exam);
+		    exam.adjusted_start_time = nstart;
+		    exam.adjusted_stop_time = nstop;
+		    exam.adjusted_resource = $.extend({},resource);
+		    notecard.appendTo(column);
+		    return exam;
+		});
+	    }});
+
 
 	application.data.hook("exam-update","card-redraw",function(exam) {
 	    application.calendar.redrawCard(exam);
@@ -37,7 +67,11 @@ application.calendar = {
 	return $("#scaled-card-" + exam.id);
     },
     redrawCard: function(exam) {
-	return application.calendar.findCard(exam).replaceWith(application.templates.scaledCard(exam));
+	var r = application.calendar.findCard(exam).replaceWith(application.templates.scaledCard(exam));
+	application.calendar.findCard(exam).draggable({revert: 'invalid',
+						       cursor: 'move',
+						       delay: 200});
+	return r;
     }
 }
 
@@ -83,6 +117,12 @@ $(document).ready(function() {
 	       application.view.setup();
 	   }});
 
+    $("#workspace").on("click",".notecard",function(e) {
+	var exam = application.data.findExam($(this).find(".data").data("exam-id"));
+	application.modal.open(exam);
+    });
+
+
     $("#exam-modal").on("submit","#comment-form",function(e) {
 	e.preventDefault();
 	var self = $(this);
@@ -112,7 +152,7 @@ $(document).ready(function() {
 
     $("#exam-modal").on("change",".status-toggle input",function(e) {
 	var exam_id = $(this).parents(".modal-content").find(".data").text();
-	application.data.update_attribute(exam_id,$(this).attr('name'),this.checked,["modal-update"]);
+	application.data.update_attribute(exam_id,$(this).attr('name'),this.checked,["modal-update","exam-update"]);
     });
 
     $(".view-changer").click(function(e) {

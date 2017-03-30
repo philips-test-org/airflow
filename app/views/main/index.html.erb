@@ -89,7 +89,7 @@
 </script>
 
 <script class="handlebars-template" id="t-resource-column" type="text/x-handlebars-template">
-  <td>
+  <td data-resource-id="{{id}}">
     <div class="markers">
       {{#each hours}}
       <div class="row-marker"></div>
@@ -127,7 +127,7 @@
       <div class="procedure">{{this.procedure.description}}</div>
     </div>
 
-    <div class="footer">
+    <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
       {{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
       {{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
       {{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}

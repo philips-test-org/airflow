@@ -1,16 +1,21 @@
 if (typeof application == "undefined") { application = {} }
 
 application.data = {
+    startDate: moment().startOf('day').unix()*1000, // This will need to be adjusted by time selector interface
     exams: [],
     hours: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
     masterExams: [],
     examHash: {},
     resources: [],
+    resourceHash: {},
     event_table: {"exam-update": {},
 		  "modal-update": {}},
     formatExams: function(exams) {
 	application.data.exams = exams;
 	application.data.resources = $.parseJSON($("#resource-groupings-json").text());
+	for (var i in application.data.resources) {
+	    application.data.resourceHash[application.data.resources[i].id] = application.data.resources[i];
+	}
 	var masterExamIds = [];
 	for (var i in application.data.exams) {
 	    var exam = exams[i];
@@ -47,13 +52,15 @@ application.data = {
     },
 
     update: function(id,fun,events) {
-	if (events == undefined) { events = []; }
-	else if ($.type(events) != "array") { throw("Event list must be an array of strings"); }
+	if (events != undefined && $.type(events) != "array") { throw("Event list must be an array of strings"); }
 	var exam = application.data.findExam(id);
 	exam = fun(exam);
 	//Fire Default Event
-	application.data.dispatch("exam-update",exam);
-	$.each(events,function(i,etype) { application.data.dispatch(etype,exam); });
+	if (events != undefined) {
+	    $.each(events,function(i,etype) { application.data.dispatch(etype,exam); });
+	} else {
+	    application.data.dispatch("exam-update",exam);
+	}
 	return exam;
     },
 
@@ -87,20 +94,39 @@ application.data = {
     },
 
     examStartTime: function(exam) {
-	if (exam.rad_exam_time.begin_exam) {
+	if (exam.adjusted_start_time) {
+	    return exam.adjusted_start_time;
+	} else if (exam.rad_exam_time.begin_exam) {
 	    return exam.rad_exam_time.begin_exam;
 	} else {
 	    return exam.rad_exam_time.appointment;
 	}
     },
     examStopTime: function(exam) {
-	if (exam.rad_exam_time.end_exam) {
+	if (exam.adjusted_stop_time) {
+	    return exam.adjusted_stop_time;
+	} else if (exam.rad_exam_time.end_exam) {
 	    return exam.rad_exam_time.end_exam;
 	} else {
 	    return appointment.data.examStartTime(exam) + (exam.procedure.scheduled_duration * 60 * 1000);
 	}
     },
+
+    examHeightToStartTime: function(height,exam) {
+	var startTime = application.data.startDate + (height/application.templates.pixels_per_second*1000);
+	return startTime;
+    },
+
+    examHeightToStopTime: function(height,exam) {
+	var duration = application.data.examStopTime(exam) - application.data.examStartTime(exam);
+	return application.data.examHeightToStartTime(height,exam) + duration;
+    },
+
     findExam: function(id) {
 	return application.data.examHash[id];
+    },
+
+    findResource: function(id) {
+	return application.data.resourceHash[id];
     }
 }
