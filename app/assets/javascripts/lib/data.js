@@ -8,11 +8,13 @@ application.data = {
     examHash: {},
     resources: [],
     resourceHash: {},
+    resourceGroups: {},
     event_table: {"exam-update": {},
 		  "modal-update": {}},
     formatExams: function(exams) {
 	application.data.exams = exams;
-	application.data.resources = $.parseJSON($("#resource-groupings-json").text());
+	application.data.resourceGroups = $.parseJSON($("#resource-groupings-json").text());
+	application.data.resources = application.data.resourceGroups[$("#resource-group-buttons button").data("value")];
 	for (var i in application.data.resources) {
 	    application.data.resourceHash[application.data.resources[i].id] = application.data.resources[i];
 	}
@@ -20,7 +22,7 @@ application.data = {
 	for (var i in application.data.exams) {
 	    var exam = exams[i];
 	    application.data.examHash[exam.id] = exam;
-	    var exam_group_ident = exam.patient_mrn_id + exam.resource_id + application.data.examStartTime(exam);
+	    var exam_group_ident = application.data.examGroupIdent(exam);
 	    if (masterExamIds.indexOf(exam_group_ident) == -1) {
 		application.data.masterExams.push(exam);
 		masterExamIds.push(exam_group_ident);
@@ -44,7 +46,7 @@ application.data = {
     },
 
     /* Setters */
-    update_attribute: function(id,attr,value,events) {
+    updateAttribute: function(id,attr,value,events) {
 	application.data.update(id,function(exam) {
 	    application.data.pathSet(exam,attr,value);
 	    return exam;
@@ -53,15 +55,16 @@ application.data = {
 
     update: function(id,fun,events) {
 	if (events != undefined && $.type(events) != "array") { throw("Event list must be an array of strings"); }
-	var exam = application.data.findExam(id);
-	exam = fun(exam);
+	var exams = application.data.findExamWithFellows(id);
+	var exam = exams[0];
+	$.each(exams,function(i,e) { return fun(e); });
 	//Fire Default Event
 	if (events != undefined) {
 	    $.each(events,function(i,etype) { application.data.dispatch(etype,exam); });
 	} else {
 	    application.data.dispatch("exam-update",exam);
 	}
-	return exam;
+	return exams;
     },
 
     addComment: function(id,comment,events) {
@@ -72,6 +75,20 @@ application.data = {
 	    exam.comments.push(comment);
 	    return exam;
 	},events);
+    },
+
+    updateLocation: function(exam_id,resource_id,top) {
+	var resource = application.data.findResource(resource_id);
+	return application.data.update(exam_id,function(exam) {
+	    var ostart = application.data.examStartTime(exam);
+	    var ostop = application.data.examStopTime(exam);
+	    var nstart = application.data.examHeightToStartTime(top,exam);
+	    var nstop =  application.data.examHeightToStopTime(top,exam);
+	    exam.adjusted_start_time = nstart;
+	    exam.adjusted_stop_time = nstop;
+	    exam.adjusted_resource = $.extend({},resource);
+	    return exam;
+	});
     },
 
     pathSet: function(obj,path,val) {
@@ -122,8 +139,33 @@ application.data = {
 	return application.data.examHeightToStartTime(height,exam) + duration;
     },
 
+    resource: function(exam) {
+	if (exam.adjusted_resource != undefined) {
+	    return exam.adjusted_resource;
+	} else {
+	    return exam.resource;
+	}
+    },
+
+    examGroupIdent: function(exam) {
+	return exam.patient_mrn_id + exam.resource_id + application.data.examStartTime(exam);
+    },
+
     findExam: function(id) {
 	return application.data.examHash[id];
+    },
+
+    findExamWithFellows: function(id) {
+	var master = application.data.findExam(id);
+	var egi = application.data.examGroupIdent(master);
+	var exams = [master];
+	for (var i in application.data.exams) {
+	    var exam = application.data.exams[i];
+	    if (egi == application.data.examGroupIdent(exam) && master.id != exam.id) {
+		exams.push(exam);
+	    }
+	}
+	return exams;
     },
 
     findResource: function(id) {

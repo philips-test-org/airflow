@@ -62,7 +62,21 @@ Handlebars.registerHelper('exam_color',function(exam) {
 });
 
 Handlebars.registerHelper('exams_from_resource',function(resource) {
-    return application.data.masterExams.filter(function(exam) { return exam.resource_id == resource.id; });
+    return application.data.masterExams
+	.filter(function(exam) { return application.data.resource(exam).id == resource.id; })
+	.sort(function(a,b) {
+	    if (resource.id == 183) {
+		console.log(a.id,application.data.examStartTime(a),
+			    b.id,application.data.examStartTime(b),
+			    application.data.examStartTime(a) - application.data.examStartTime(b));
+	    }
+	    if (application.data.examStartTime(a) < application.data.examStartTime(b)) {
+		return -1;
+	    } else if (application.data.examStartTime(a) > application.data.examStartTime(b)) {
+		return 1;
+	    } else { return 0; }
+	    //return application.data.examStartTime(a) - application.data.examStartTime(b); });
+	});
 });
 
 Handlebars.registerHelper('exam_height',function(exam) {

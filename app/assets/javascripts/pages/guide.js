@@ -40,18 +40,7 @@ application.calendar = {
 		}
 		var id = notecard.find(".data").data("exam-id");
 		var resource_id = column.data("resource-id");
-		var resource = application.data.findResource(resource_id);
-		application.data.update(id,function(exam) {
-		    var ostart = application.data.examStartTime(exam);
-		    var ostop = application.data.examStopTime(exam);
-		    var nstart = application.data.examHeightToStartTime(notecard.position().top,exam);
-		    var nstop =  application.data.examHeightToStopTime(notecard.position().top,exam);
-		    exam.adjusted_start_time = nstart;
-		    exam.adjusted_stop_time = nstop;
-		    exam.adjusted_resource = $.extend({},resource);
-		    notecard.appendTo(column);
-		    return exam;
-		});
+		application.data.updateLocation(id,resource_id,notecard.position().top);
 	    }});
 
 
@@ -67,11 +56,18 @@ application.calendar = {
 	return $("#scaled-card-" + exam.id);
     },
     redrawCard: function(exam) {
-	var r = application.calendar.findCard(exam).replaceWith(application.templates.scaledCard(exam));
+	var card = application.calendar.findCard(exam);
+	var current_resource_id = card.parents("td").data("resource-id");
+	var exam_resource_id = application.data.resource(exam).id;
+	if (current_resource_id != exam_resource_id) {
+	    card.appendTo($("#time-grid td[data-resource-id='" + exam_resource_id + "']"))
+	    console.log("current and exam are different");
+	}
+	card.replaceWith(application.templates.scaledCard(exam));
 	application.calendar.findCard(exam).draggable({revert: 'invalid',
 						       cursor: 'move',
 						       delay: 200});
-	return r;
+	return card;
     }
 }
 
@@ -112,10 +108,11 @@ $(document).ready(function() {
 
 
     $.ajax($.harbingerjs.core.url("exams"),
-	   {success: function(exams) {
-	       application.data.formatExams(exams);
-	       application.view.setup();
-	   }});
+	   {data: {group: $("").data("value")},
+	    success: function(exams) {
+		application.data.formatExams(exams);
+		application.view.setup();
+	    }});
 
     $("#workspace").on("click",".notecard",function(e) {
 	var exam = application.data.findExam($(this).find(".data").data("exam-id"));
@@ -152,7 +149,7 @@ $(document).ready(function() {
 
     $("#exam-modal").on("change",".status-toggle input",function(e) {
 	var exam_id = $(this).parents(".modal-content").find(".data").text();
-	application.data.update_attribute(exam_id,$(this).attr('name'),this.checked,["modal-update","exam-update"]);
+	application.data.updateAttribute(exam_id,$(this).attr('name'),this.checked,["modal-update","exam-update"]);
     });
 
     $(".view-changer").click(function(e) {
@@ -164,4 +161,8 @@ $(document).ready(function() {
 	$(this).parent().addClass("active");
 	application.view.setup();
     });
+
+    /*$("#view-controls #resource-group-buttons ul li a").click(function(e) {
+	e.preventDefault();
+    });*/
 });
