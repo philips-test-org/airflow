@@ -1,31 +1,42 @@
 if (typeof application == "undefined") { application = {} }
 
 application.data = {
+    // Design Goals:
+    //   -Provide only one source of the object hash that is the exam information
+    //    to prevent needing to change the object in multiple locations or experiencing
+    //    weird side effects when changing it in only one location
+    //   -Provide identifier only data structures for capturing meta information that is
+    //    needed to access exams quickly
+    //   -Provide an update methodology that persists changes to the serverside and rolls back
+    //    user changes on error
     startDate: moment().startOf('day').unix()*1000, // This will need to be adjusted by time selector interface
-    exams: [],
     hours: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-    masterExams: [],
-    examHash: {},
+    masterExams: [], // A copy of all the selected master exam ids only
+    examGroups: {}, // A hash of group ident to list of exam ids
+    examHash: {}, // A hash by exam.id of the exams
     resources: [],
     resourceHash: {},
     resourceGroups: {},
     event_table: {"exam-update": {},
 		  "modal-update": {}},
     formatExams: function(exams) {
-	application.data.exams = exams;
+	// Parse and store resource and resource group information
 	application.data.resourceGroups = $.parseJSON($("#resource-groupings-json").text());
 	application.data.resources = application.data.resourceGroups[$("#resource-group-buttons button").data("value")];
 	for (var i in application.data.resources) {
 	    application.data.resourceHash[application.data.resources[i].id] = application.data.resources[i];
 	}
-	var masterExamIds = [];
-	for (var i in application.data.exams) {
+
+	// store exams, grouping information, and master exam ids
+	for (var i in exams) {
 	    var exam = exams[i];
 	    application.data.examHash[exam.id] = exam;
 	    var exam_group_ident = application.data.examGroupIdent(exam);
-	    if (masterExamIds.indexOf(exam_group_ident) == -1) {
-		application.data.masterExams.push(exam);
-		masterExamIds.push(exam_group_ident);
+	    if (application.data.examGroups[exam_group_ident] == undefined) {
+		application.data.examGroups[exam_group_ident] = [exam.id];
+		application.data.masterExams.push(exam.id);
+	    } else {
+		application.data.examGroups[exam_group_ident].push(exam.id);
 	    }
 	}
     },
@@ -57,6 +68,7 @@ application.data = {
 	if (events != undefined && $.type(events) != "array") { throw("Event list must be an array of strings"); }
 	var exams = application.data.findExamWithFellows(id);
 	var exam = exams[0];
+	debugger
 	$.each(exams,function(i,e) { return fun(e); });
 	//Fire Default Event
 	if (events != undefined) {
@@ -158,14 +170,8 @@ application.data = {
     findExamWithFellows: function(id) {
 	var master = application.data.findExam(id);
 	var egi = application.data.examGroupIdent(master);
-	var exams = [master];
-	for (var i in application.data.exams) {
-	    var exam = application.data.exams[i];
-	    if (egi == application.data.examGroupIdent(exam) && master.id != exam.id) {
-		exams.push(exam);
-	    }
-	}
-	return exams;
+	debugger
+	return $.map(application.data.examGroups[egi],function(eid) { return application.data.examHash[eid]; });
     },
 
     findResource: function(id) {

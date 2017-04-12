@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
-  jndi: jdbc/harbinger
+  jndi: jdbc/airflow
 
 production:
   adapter: postgresql
-  jndi: jdbc/harbinger
+  jndi: jdbc/airflow

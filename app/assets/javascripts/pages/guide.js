@@ -1,6 +1,7 @@
 if (typeof application == "undefined") { application = {} }
 
 application.calendar = {
+
     setup: function() {
 	//build calendar
 	$("#workspace").html(application.templates.calendar(application.data));
@@ -12,23 +13,20 @@ application.calendar = {
 	    $("#vertical-time-headings").css({left: scroll});
 	});
 
-	var now = new Date;
-	var pixes_per_second = 200 / 60 / 60;
-	var distance = Math.round(pixes_per_second * (now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds()));
+	// Set up the now line including redrawing
+	application.calendar.drawNow();
+	setInterval(application.calendar.drawNow, 1 / application.templates.pixels_per_second * 1000);
+	if ($("#right-now").css("display") != "none") {
+	    $("#board").scrollTo({top: ($("#right-now").position().top - ($("#board").height()/2)), left: 0},500);
+	}
 
-	// Set up the "Right Now" line
-	$("#right-now").css({top: 91 + distance}).show();
-	$("#right-now").css({width: $("#time-grid").width()});
-	$("#board").scrollTo({top: ($("#right-now").position().top - ($("#board").height()/2)), left: 0},500);
-
-	$("#board").on("hover",".notecard",
-	    function(e) { $(this).css({'z-index': 200}); },
-	    function(e) { $(this).css({'z-index': 101}); });
-
+	// Setup card events for all cards
+	// this is done per card on redraw in the redrawCard function
 	$(".notecard").draggable({revert: 'invalid',
 				  cursor: 'move',
 				  delay: 200});
 
+	// Setup column events
 	$("#time-grid tr td").droppable({
 	    accepts: ".notecard",
 	    drop: function(e) {
@@ -68,6 +66,17 @@ application.calendar = {
 						       cursor: 'move',
 						       delay: 200});
 	return card;
+    },
+
+    drawNow: function() {
+	var now = new Date;
+	var distance = Math.round(application.templates.pixels_per_second * (now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds()));
+	if (distance > Math.round(application.templates.pixels_per_second * 24 * 60 * 60)) {
+	    $("#right-now").hide();
+	} else {
+	    $("#right-now").css({top: 91 + distance}).show();
+	    $("#right-now").css({width: $("#time-grid").width()});
+	}
     }
 }
 
@@ -99,6 +108,25 @@ application.overview = {
 }
 
 $(document).ready(function() {
+    function drawBoard() {
+	//Fix: This needs to be adjusted to the group name when that backend exists
+	var resources = $.parseJSON($("#resource-groupings-json").text())[$("#resource-group-buttons button").data("value")];
+	var data = $.map(resources,function(r,i) {
+	    return {name: "resource_ids[]",
+		    value: r.id};
+	});
+
+	$.ajax($.harbingerjs.core.url("exams"),
+	       {data: data,
+		beforeSend: function() {
+		    $("#workspace").html(application.templates.workspaceLoading());
+		},
+		success: function(exams) {
+		    application.data.formatExams(exams);
+		    application.view.setup();
+		}});
+    }
+
     if ($(".active .view-changer").length > 0) {
 	var view = $(".active .view-changer").data("view-type");
 	application.view = application[view];
@@ -107,18 +135,12 @@ $(document).ready(function() {
     }
 
 
-    $.ajax($.harbingerjs.core.url("exams"),
-	   {data: {group: $("").data("value")},
-	    success: function(exams) {
-		application.data.formatExams(exams);
-		application.view.setup();
-	    }});
-
     $("#workspace").on("click",".notecard",function(e) {
 	var exam = application.data.findExam($(this).find(".data").data("exam-id"));
 	application.modal.open(exam);
     });
 
+    drawBoard();
 
     $("#exam-modal").on("submit","#comment-form",function(e) {
 	e.preventDefault();
@@ -162,7 +184,13 @@ $(document).ready(function() {
 	application.view.setup();
     });
 
-    /*$("#view-controls #resource-group-buttons ul li a").click(function(e) {
+    $("#view-controls #resource-group-buttons ul li a").click(function(e) {
 	e.preventDefault();
-    });*/
+	var group = $(this).data("value");
+	if (group != $("#resource-group-buttons button").data("value")) {
+	    $("#resource-group-buttons button .group-name").text(group);
+	    $("#resource-group-buttons button").data("value",group);
+	    drawBoard();
+	}
+    });
 });

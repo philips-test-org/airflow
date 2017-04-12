@@ -175,7 +175,7 @@ $card-color: #fff;
 
     #time-headings {
 	position: absolute;
-	left: 0px;
+	left: 50px;
 	z-index: 104;
 
 	tr.heading td {
@@ -219,6 +219,9 @@ $card-color: #fff;
 	z-index: 101;
 	left: unquote($card-left-unit);
 	/*top: 100px;*/
+    }
+    .notecard.scaled:hover {
+	z-index: 102;
     }
 
 }
@@ -330,6 +333,12 @@ Shared Styles
 	display: table-cell;
     }
 
+    .events {
+	position: absolute;
+	right: 5px;
+	top: 2px;
+    }
+
     .heading {
 	padding: 5px 10px;
 	margin: 0;
@@ -379,7 +388,9 @@ Shared Styles
 
 .notecard.highlight {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 25px rgba(245, 245, 43, 0.8);
+    background-color: #f5f52b !important;
     .left-pane { background-color: #f5f52b !important; }
+    .status-indicator { background-color: #f5f52b !important; }
 }
 
 .left-tab i.late {
@@ -441,4 +452,7 @@ Shared Styles
 
 .ui-droppable-hover {
     background-color: #eee;
+}
+
+.ui-draggable-dragging {
 }

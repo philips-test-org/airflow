@@ -63,6 +63,7 @@ Handlebars.registerHelper('exam_color',function(exam) {
 
 Handlebars.registerHelper('exams_from_resource',function(resource) {
     return application.data.masterExams
+	.map(function(id) { return application.data.examHash[id]; })
 	.filter(function(exam) { return application.data.resource(exam).id == resource.id; })
 	.sort(function(a,b) {
 	    if (resource.id == 183) {

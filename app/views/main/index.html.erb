@@ -2,13 +2,15 @@
 <div class="data hide" id="resource-groupings-json"><%= JSON.dump(@groupings) %></div>
 <div id="view-controls">
   <div class="btn-group">
-    <button class="btn btn-default btn-sm" id="time-button">Now <span class="caret"></span></button>
+    <button class="btn btn-default btn-sm" id="time-button">Today <span class="caret"></span></button>
   </div>
   <div class="btn-group pull-right" id="resource-group-buttons">
-    <button class="btn btn-default btn-sm dropdown-toggle" data-value="IR 1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">IR 1 <span class="caret"></span></button>
+    <button class="btn btn-default btn-sm dropdown-toggle" data-value="<%= @groupings.keys.first %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="group-name"><%= @groupings.keys.first %></span>
+      <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <% @groupings.keys.each do |k| %>
-      <li><a data-value="" href="#"><%= k %></a></li>
+      <li><a data-value="<%= k %>" href="#"><%= k %></a></li>
       <% end %>
     </ul>
   </div>
@@ -117,6 +119,8 @@
     </div>
 
     <div class="right-tab">
+      <div class="events" style="{{#if (short_exam this)}}left: 5px; top: 5px;{{/if}}">{{#if this.comments}}<i class="fa fa-paperclip"></i>{{/if}}</div>
+
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
 	<div class="mrn">{{this.patient_mrn.mrn}}</div>
@@ -140,31 +144,29 @@
 
 <script class="handlebars-template" id="t-fixed-card" type="text/x-handlebars-template">
   <div class="notecard overview {{#if this.onhold}}highlight{{/if}}" id="fixed-card-{{this.id}}">
-    {{> innerCard this}}
-  </div>
-</script>
-
-<script class="handlebars-template" id="t-inner-card" type="text/x-handlebars-template">
-  <div class="left-tab" style="background-color: {{exam_color this}};">
-  </div>
-
-  <div class="right-tab">
-    <div class="heading">
-      <div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
+    <div class="left-tab" style="background-color: {{exam_color this}};">
     </div>
 
-    <div class="body">
-      <div class="procedure">{{this.procedure.description}}</div>
+    <div class="right-tab">
+      <div class="events">{{#if this.comments}}<i class="fa fa-paperclip"></i>{{/if}}</div>
+
+      <div class="heading">
+	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
+      </div>
+
+      <div class="body">
+	<div class="procedure">{{this.procedure.description}}</div>
+      </div>
+
+      <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
+	{{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
+	{{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+	{{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
+      </div>
     </div>
 
-    <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
-      {{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
-      {{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
-      {{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
-    </div>
+    <div class="hide data" data-exam-id="{{this.id}}"></div>
   </div>
-
-  <div class="hide data" data-exam-id="{{this.id}}"></div>
 </script>
 
 <script class="handlebars-template" id="t-modal-card" type="text/x-handlebars-template">
