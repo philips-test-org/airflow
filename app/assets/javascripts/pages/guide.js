@@ -48,13 +48,15 @@ $(document).ready(function() {
     });
 
     $(".view-changer").click(function(e) {
-	e.preventDefault();
-	var view = $(this).data("view-type");
-	application.view.breakdown();
-	application.view = application[view];
-	$(this).parent().siblings().removeClass("active");
-	$(this).parent().addClass("active");
-	application.view.setup();
+	if ($(this).data("view-type") != "kiosk") {
+	    e.preventDefault();
+	    var view = $(this).data("view-type");
+	    application.view.breakdown();
+	    application.view = application[view];
+	    $(this).parent().siblings().removeClass("active");
+	    $(this).parent().addClass("active");
+	    application.view.setup();
+	}
     });
 
     $("#view-controls #resource-group-buttons ul li a").click(function(e) {

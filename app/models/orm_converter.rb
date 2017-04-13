@@ -8,26 +8,6 @@ module OrmConverter
      comment: comment}
   end
 
-  # def self.exam_modal(exam)
-  #   tree = {:rad_exam_time => {},
-  #           :rad_exam_personnel => {},
-  #           :rad_exam_detail => {},
-  #           :procedure => {},
-  #           :patient_mrn => {:patient => {}},
-  #           :resource => {:modality => {}},
-  #           :site_class => {:patient_type => {}}
-  #          }
-  #   hash = get_data(tree,exam)
-  #   hash[:comments] = [{employee_id: 1,
-  #                       employee: {name: "Bill Everyman"},
-  #                       created_at: Time.now.to_i*1000,
-  #                       comment: "This is a test comment from a test user. It is entirely fake and generated for every exam I click"}]
-  #   hash[:paperwork] = true
-  #   hash[:consent] = false
-  #   hash[:anesthesia] = true
-  #   hash
-  # end
-
   def self.exams(exams)
     tree = {:rad_exam_time => {},
             :rad_exam_personnel => {},
@@ -40,13 +20,7 @@ module OrmConverter
            }
     exams.inject([]) do |list,exam|
       hash = get_data(tree,exam,{})
-      hash[:paperwork] = true
-      hash[:consent] = false
-      hash[:anesthesia] = true
-      hash[:comments] = [{employee_id: 1,
-                          employee: {name: "Bill Everyman"},
-                          created_at: Time.now.to_i*1000,
-                          comment: "This is a test comment from a test user. It is entirely fake and generated for every exam I click"}]
+      hash.merge!(ExamAdjustment.info_for(exam))
       list << hash
       list
     end
@@ -65,7 +39,7 @@ module OrmConverter
     tree.keys.each do |key|
       if obj
         hash[key] = get_data(tree[key],obj.send(key),hash)
-      end        
+      end
     end
     hash
   end

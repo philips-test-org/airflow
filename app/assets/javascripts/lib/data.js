@@ -14,11 +14,15 @@ application.data = {
     masterExams: [], // A copy of all the selected master exam ids only
     examGroups: {}, // A hash of group ident to list of exam ids
     examHash: {}, // A hash by exam.id of the exams
+    rollbackExamHash: {}, // A hash by exam.id to store pre-commit exam info for rollback
+    rollbackSerial: 1,
     resources: [],
     resourceHash: {},
     resourceGroups: {},
     event_table: {"exam-update": {},
-		  "modal-update": {}},
+		  "modal-update": {},
+		  "exam-commit": {},
+		  "exam-rollback": {}},
     formatExams: function(exams) {
 	// Parse and store resource and resource group information
 	application.data.resourceGroups = $.parseJSON($("#resource-groupings-json").text());
@@ -30,13 +34,13 @@ application.data = {
 	// store exams, grouping information, and master exam ids
 	for (var i in exams) {
 	    var exam = exams[i];
+	    exam.group_ident = application.data.examGroupIdent(exam);
 	    application.data.examHash[exam.id] = exam;
-	    var exam_group_ident = application.data.examGroupIdent(exam);
-	    if (application.data.examGroups[exam_group_ident] == undefined) {
-		application.data.examGroups[exam_group_ident] = [exam.id];
+	    if (application.data.examGroups[exam.group_ident] == undefined) {
+		application.data.examGroups[exam.group_ident] = [exam.id];
 		application.data.masterExams.push(exam.id);
 	    } else {
-		application.data.examGroups[exam_group_ident].push(exam.id);
+		application.data.examGroups[exam.group_ident].push(exam.id);
 	    }
 	}
     },
@@ -50,26 +54,45 @@ application.data = {
 	return delete application.data.event_table[type][name];
     },
 
-    dispatch: function(type,obj) {
+    dispatch: function(type) {
+	var args = Array.prototype.slice.call(arguments).slice(1);
 	$.each(application.data.event_table[type],function(name,fun) {
-	    fun(obj)
+	    fun.apply(this,args);
 	});
     },
 
     /* Setters */
     updateAttribute: function(id,attr,value,events) {
-	application.data.update(id,function(exam) {
+	application.data.update(id,function(exam,rollback_id) {
 	    application.data.pathSet(exam,attr,value);
 	    return exam;
 	},events);
     },
 
+    // There remains a race condition around making a change and having a different
+    // change happen before the error and subsequent rollback of the other change.
+    // I'll need to implement object locking and likely a merge mechanism to fix this
+    // but it's a fairly unlikely scenario so I am pushing it out
     update: function(id,fun,events) {
 	if (events != undefined && $.type(events) != "array") { throw("Event list must be an array of strings"); }
+	//Find all exams associated with the master id given
 	var exams = application.data.findExamWithFellows(id);
-	var exam = exams[0];
-	debugger
-	$.each(exams,function(i,e) { return fun(e); });
+	//Set up a rollback identifier and deep copy the existing exams
+	var rollback_id = application.data.rollbackSerial++;
+	application.data.rollbackExamHash[rollback_id] = $.map(exams,function(e,i) { return $.extend(true,{},e); });
+	$.each(exams,function(i,e) {
+	    // Make a deep copy of the exam so that if the update fails
+	    // the original exam object won't have been changed
+	    // this acts as an error handling rollback as the actual rollbacks
+	    // must be called by the update function as it is the thing that knows
+	    // when a change has been saved to the server
+	    var new_exam = fun($.extend(true,{},e),rollback_id);
+	    application.data.examHash[e.id] = new_exam;
+	});
+
+	//Get the master exam now that it's been cloned and changed
+	var exam = application.data.findExam(id);
+
 	//Fire Default Event
 	if (events != undefined) {
 	    $.each(events,function(i,etype) { application.data.dispatch(etype,exam); });
@@ -79,8 +102,32 @@ application.data = {
 	return exams;
     },
 
+    // Clean rollback information:
+    // This commit message should be in the error callback
+    // for ajax calls to save data
+    commit: function(exam,rollback_id) {
+	console.log('commit',exam,rollback_id);
+	delete application.data.rollbackExamHash[rollback_id];
+	application.data.dispatch("exam-commit",exam);
+    },
+
+    rollback: function(exam,rollback_id,message) {
+	console.log('rollback',exam,rollback_id,application.data.rollbackExamHash[rollback_id]);
+	// Reset exam to rollback values
+	var master = null;
+	$.each(application.data.rollbackExamHash[rollback_id],function(i,e) {
+	    console.log('rollback',exam.id,e.id);
+	    if (e.id == exam.id) { master = e }
+	    application.data.examHash[e.id] = e;
+	});
+	// Clear rollback values
+	delete application.data.rollbackExamHash[rollback_id];
+	console.log("exam-rollback",exam,master);
+	application.data.dispatch("exam-rollback",exam,master);
+    },
+
     addComment: function(id,comment,events) {
-	application.data.update(id,function(exam) {
+	application.data.update(id,function(exam,rollback_id) {
 	    if (exam.comments == null || exam.comments == undefined) {
 		exam.comments = []
 	    }
@@ -91,14 +138,27 @@ application.data = {
 
     updateLocation: function(exam_id,resource_id,top) {
 	var resource = application.data.findResource(resource_id);
-	return application.data.update(exam_id,function(exam) {
+	return application.data.update(exam_id,function(exam,rollback_id) {
+	    var exam = exam;
+	    var rollback_id = rollback_id;
 	    var ostart = application.data.examStartTime(exam);
 	    var ostop = application.data.examStopTime(exam);
 	    var nstart = application.data.examHeightToStartTime(top,exam);
 	    var nstop =  application.data.examHeightToStopTime(top,exam);
-	    exam.adjusted_start_time = nstart;
-	    exam.adjusted_stop_time = nstop;
-	    exam.adjusted_resource = $.extend({},resource);
+	    exam.adjusted.start_time = nstart;
+	    exam.adjusted.stop_time = nstop;
+	    exam.adjusted.resource = $.extend(true,{},resource);
+	    /*$.post($.harbingerjs.core.url("/exam/update/location"),
+		   {data: exam,
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    success: function(response) {
+			application.data.commit(exam,rollback_id);
+		    },
+		    error: function() {*/
+			application.data.rollback(exam,rollback_id,"bad news bears");
+/*		   }
+		  });*/
 	    return exam;
 	});
     },
@@ -123,8 +183,8 @@ application.data = {
     },
 
     examStartTime: function(exam) {
-	if (exam.adjusted_start_time) {
-	    return exam.adjusted_start_time;
+	if (exam.adjusted.start_time) {
+	    return exam.adjusted.start_time;
 	} else if (exam.rad_exam_time.begin_exam) {
 	    return exam.rad_exam_time.begin_exam;
 	} else {
@@ -132,8 +192,8 @@ application.data = {
 	}
     },
     examStopTime: function(exam) {
-	if (exam.adjusted_stop_time) {
-	    return exam.adjusted_stop_time;
+	if (exam.adjusted.stop_time) {
+	    return exam.adjusted.stop_time;
 	} else if (exam.rad_exam_time.end_exam) {
 	    return exam.rad_exam_time.end_exam;
 	} else {
@@ -152,13 +212,16 @@ application.data = {
     },
 
     resource: function(exam) {
-	if (exam.adjusted_resource != undefined) {
-	    return exam.adjusted_resource;
+	if (exam.adjusted.resource != undefined) {
+	    return exam.adjusted.resource;
 	} else {
 	    return exam.resource;
 	}
     },
 
+    // This function shouldn't be called outside of formatExams
+    // which will set a group_ident key on the exam to prevent
+    // the exam group identifier from changing based on user adjustments
     examGroupIdent: function(exam) {
 	return exam.patient_mrn_id + exam.resource_id + application.data.examStartTime(exam);
     },
@@ -169,8 +232,7 @@ application.data = {
 
     findExamWithFellows: function(id) {
 	var master = application.data.findExam(id);
-	var egi = application.data.examGroupIdent(master);
-	debugger
+	var egi = master.group_ident;
 	return $.map(application.data.examGroups[egi],function(eid) { return application.data.examHash[eid]; });
     },
 

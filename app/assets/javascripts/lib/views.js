@@ -62,8 +62,10 @@ application.calendar = {
 	    }});
 
 
-	application.data.hook("exam-update","card-redraw",function(exam) {
-	    application.calendar.redrawCard(exam);
+	application.data.hook("exam-update","card-redraw", application.calendar.redrawCard);
+	application.data.hook("exam-rollback","card-redraw", function(new_exam,rollback_back_exam) {
+	    console.log("Redrawing rolled back card",new_exam,rollback_back_exam);
+	    setTimeout(function() { application.calendar.redrawCard(rollback_back_exam); },1000);
 	});
 
     },
@@ -77,6 +79,7 @@ application.calendar = {
 	var card = application.calendar.findCard(exam);
 	var current_resource_id = card.parents("td").data("resource-id");
 	var exam_resource_id = application.data.resource(exam).id;
+	console.log(current_resource_id,exam_resource_id);
 	if (current_resource_id != exam_resource_id) {
 	    card.appendTo($("#time-grid td[data-resource-id='" + exam_resource_id + "']"))
 	    console.log("current and exam are different");

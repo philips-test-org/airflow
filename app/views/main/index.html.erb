@@ -114,12 +114,12 @@
 </script>
 
 <script class="handlebars-template" id="t-scaled-card" type="text/x-handlebars-template">
-  <div class="notecard scaled {{#if this.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
+  <div class="notecard scaled {{#if this.adjusted.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
     <div class="left-tab" style="background-color: {{exam_color this}};">
     </div>
 
     <div class="right-tab">
-      <div class="events" style="{{#if (short_exam this)}}left: 5px; top: 5px;{{/if}}">{{#if this.comments}}<i class="fa fa-paperclip"></i>{{/if}}</div>
+      <div class="events" style="{{#if (short_exam this)}}left: 5px; top: 5px;{{/if}}">{{#if this.events}}<i class="fa fa-paperclip"></i>{{/if}}</div>
 
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
@@ -132,9 +132,9 @@
       </div>
 
       <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
-	{{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
-	{{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
-	{{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
+	{{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
+	{{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+	{{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
       </div>
     </div>
 
@@ -148,7 +148,7 @@
     </div>
 
     <div class="right-tab">
-      <div class="events">{{#if this.comments}}<i class="fa fa-paperclip"></i>{{/if}}</div>
+      <div class="events">{{#if this.events}}<i class="fa fa-paperclip"></i>{{/if}}</div>
 
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
@@ -159,9 +159,9 @@
       </div>
 
       <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
-	{{#if this.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
-	{{#if this.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
-	{{#if this.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
+	{{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><i class="fa fa-bed"></i></div>{{/if}}
+	{{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+	{{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
       </div>
     </div>
 
@@ -177,19 +177,19 @@
     <div class="status-toggles">
       <div class="status-toggle margin-right">
 	<label><i class="fa fa-bed"></i>On Hold</label>
-	<input type="checkbox" name="onhold" {{check_test this.onhold}} data-size="mini" data-on="On Hold" data-off="Active" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="adjusted.onhold" {{check_test this.adjusted.onhold}} data-size="mini" data-on="On Hold" data-off="Active" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle margin-right">
 	<label><i class="fa fa-bed"></i>Anesthesia</label>
-	<input type="checkbox" name="anesthesia" {{check_test this.anesthesia}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="adjusted.anesthesia" {{check_test this.adjusted.anesthesia}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle margin-right">
 	<label><i class="fa fa-handshake-o"></i>Consent</label>
-	<input type="checkbox" name="consent" {{check_test this.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="adjusted.consent" {{check_test this.adjusted.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle">
 	<label><i class="fa fa-file-text"></i>Paperwork</label>
-	<input type="checkbox" name="paperwork" {{check_test this.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="adjusted.paperwork" {{check_test this.adjusted.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
     </div>
     <h4 class="modal-title">Accession: {{accession}}</h4>
@@ -249,7 +249,7 @@
 
 <script class="handlebars-template" id="t-comments-interface" type="text/x-handlebars-template">
   <div class="comments">
-    {{#each comments}}
+    {{#each events}}
     {{> comment}}
     {{/each}}
   </div>
