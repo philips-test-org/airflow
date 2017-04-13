@@ -6,16 +6,20 @@ class MainController < ApplicationController
   def index
     @employee = Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
     q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
-    q.where(q.in(".resource",["UMIRLAB1","UMIRLAB2","UMIRLAB3","UMIRLAB4","UMIRLAB5","UMIRLAB6","UMIRLAB7","UMRF1","UMRF2","UMRF3"]))
+    q.where(q.in(".resource",["VHC Trauma CT-1", "VHC Trauma CT-2", "VHC Main CT-2", "VHC Main CT-3", "VHO-CT CT-1", "VHO-CT CT-2", "VHO-CT CT-3", "VHS-2 TRAUMA", "VHC Main CT-1"]))
     resources = q.list.to_a
+
+    q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
+    q.where(q.in(".resource",["VHC MR-1", "VHC MR-2", "VHC MR-3","VHO-MR MR-1", "VHO-MR MR-2", "VHO-MR MR-3"]))
+    resources2 = q.list.to_a
+
     # Will become configurable and use ids instead of resource names
-    @groupings = {"IR 1" => OrmConverter.resources(resources)}
+    @groupings = {"CT" => OrmConverter.resources(resources), "MR" => OrmConverter.resources(resources2)}
   end
 
   def exams
-    @irlabids = ["UMIRLAB1","UMIRLAB2","UMIRLAB3","UMIRLAB4","UMIRLAB5","UMIRLAB6","UMIRLAB7","UMRF1","UMRF2","UMRF3"]
     q = Java::HarbingerSdkData::RadExam.createQuery(@entity_manager)
-    q.where([q.in(".resource.resource",@irlabids),
+    q.where([q.in(".resourceId",params[:resource_ids]),
              # q.equal(".resource.modality.modality","CT"),
              q.between(".radExamTime.beginExam",
                        Time.parse("2017-01-19").beginning_of_day,
@@ -26,6 +30,19 @@ class MainController < ApplicationController
 
   def exam
     render :json => OrmConverter.exam_modal(Java::HarbingerSdkData::RadExam.withId(params[:id].to_i,@entity_manager))
+  end
+
+  def kiosk
+    q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
+    q.where(q.in(".resource",["VHC Trauma CT-1", "VHC Trauma CT-2", "VHC Main CT-2", "VHC Main CT-3", "VHO-CT CT-1", "VHO-CT CT-2", "VHO-CT CT-3", "VHS-2 TRAUMA", "VHC Main CT-1"]))
+    resources = q.list.to_a
+
+    q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
+    q.where(q.in(".resource",["VHC MR-1", "VHC MR-2", "VHC MR-3","VHO-MR MR-1", "VHO-MR MR-2", "VHO-MR MR-3"]))
+    resources2 = q.list.to_a
+
+    # Will become configurable and use ids instead of resource names
+    @groupings = {"CT" => OrmConverter.resources(resources), "MR" => OrmConverter.resources(resources2)}
   end
 
   def about

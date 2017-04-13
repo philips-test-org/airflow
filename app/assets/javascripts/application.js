@@ -14,3 +14,4 @@
 //= require lib/templates
 //= require lib/modal
 //= require lib/jquery-ui.min.js
+//= require lib/views

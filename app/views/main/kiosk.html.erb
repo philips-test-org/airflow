@@ -1,0 +1,120 @@
+<% content_for(:javascript_includes, javascript_include_tag("pages/kiosk")) %>
+<div class="data hide" id="resource-groupings-json"><%= JSON.dump(@groupings) %></div>
+<div id="view-controls">
+  <div class="btn-group">
+    <button class="btn btn-default btn-sm" id="time-button">Today <span class="caret"></span></button>
+  </div>
+  <div class="btn-group pull-right" id="resource-group-buttons">
+    <button class="btn btn-default btn-sm dropdown-toggle" data-value="<%= @groupings.keys.first %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="group-name"><%= @groupings.keys.first %></span>
+      <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <% @groupings.keys.each do |k| %>
+      <li><a data-value="<%= k %>" href="#"><%= k %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div id="workspace" class="vertical-timeline">
+  <%= image_tag("ajax-loader.gif") %>
+</div>
+
+<!-- Major/Page Templates -->
+<script class="handlebars-template" id="t-workspace-loading" type="text/x-handlebars-template">
+  <%= image_tag("ajax-loader.gif") %>
+</script>
+
+<script class="handlebars-template" id="t-kiosk" type="text/x-handlebars-template">
+
+
+  <div id="board-headings">
+    <div id="white-spacer">
+    </div>
+
+    <table id="time-headings">
+      <tbody>
+	<tr class="heading">
+	  <td></td>
+	  {{#each resources}}
+	  {{> resourceHeading}}
+	  {{/each}}
+	</tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div id="board">
+
+    <table id="vertical-time-headings">
+      <tbody>
+	<tr>
+	  <td>
+	    {{#each hours}}
+	    {{> hour}}
+	    {{/each}}
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+
+    <table id="time-grid">
+      <tbody>
+	<div id="right-now"></div>
+
+	<tr>
+	  {{#each resources}}
+	  {{> resourceColumn resource=this hours=../hours}}
+	  {{/each}}
+	</tr>
+      </tbody>
+    </table>
+  </div>
+
+</script>
+
+<!-- Shared Templates -->
+<script class="handlebars-template" id="t-resource-heading" type="text/x-handlebars-template">
+  <td><h1>{{name}}</h1></td>
+</script>
+
+<script class="handlebars-template" id="t-hour" type="text/x-handlebars-template">
+  <div class="hour">{{format_hour this}}</div>
+</script>
+
+<script class="handlebars-template" id="t-resource-column" type="text/x-handlebars-template">
+  <td data-resource-id="{{id}}">
+    <div class="markers">
+      {{#each hours}}
+      <div class="row-marker"></div>
+      <div class="row-marker"></div>
+      {{/each}}
+    </div>
+    {{#each (exams_from_resource this)}}
+    {{> scaledCard this}}
+    {{/each}}
+  </td>
+</script>
+
+<script class="handlebars-template" id="t-scaled-card" type="text/x-handlebars-template">
+  <div class="notecard scaled {{#if this.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
+    <div class="left-tab" style="background-color: {{exam_color this}};">
+    </div>
+
+    <div class="right-tab">
+      <div class="events" style="{{#if (short_exam this)}}left: 5px; top: 5px;{{/if}}">{{#if this.comments}}<i class="fa fa-paperclip"></i>{{/if}}</div>
+
+      <div class="heading">
+	<div class="kiosk-number">{{kiosk_number this.id}}</div>
+      </div>
+
+      <div class="body">
+      </div>
+
+      <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
+      </div>
+    </div>
+
+  <div class="hide data" data-exam-id="{{this.id}}"></div>
+  </div>
+</script>

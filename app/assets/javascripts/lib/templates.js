@@ -96,17 +96,35 @@ Handlebars.registerHelper('exam_top',function(exam) {
     return Math.round((t.hour() * 60 * 60 + t.minute() * 60 + t.seconds()) * application.templates.pixels_per_second) + "px";
 });
 
+Handlebars.registerHelper('kiosk_number',function(id) {
+    return String(id).slice(-3);
+});
+
+Handlebars.registerHelper('patient_location',function(exam) {
+    if (exam.site_sublocation != undefined && Object.keys(exam.site_sublocation).length > 0) {
+	if (exam.site_sublocation.site_location.name != undefined && exam.site_sublocation.site_location.name != "") {
+	    var name = exam.site_sublocation.site_location.name;
+	} else {
+	    var name = exam.site_sublocation.site_location.location;
+	}
+	return name + ", Room: " + exam.site_sublocation.room + ", Bed: " + exam.site_sublocation.bed;
+    }
+});
+
+Handlebars.registerHelper('resource_name',function(exam) {
+    if (exam.resource.name != undefined && exam.resource.name != "") {
+	return exam.resource.name;
+    } else {
+	return exam.resource.resource;
+    }
+});
+
 Handlebars.registerHelper('check_test',function(val) {
     if (val == true) {
 	return "checked";
     }
 });
 
-Handlebars.registerHelper('block_test',function(val, block) {
-    if (val == true) {
-	return block.fn(val);
-    }
-});
 
 /* General Helpers */
 Handlebars.registerHelper('multiply',function(a,b) {

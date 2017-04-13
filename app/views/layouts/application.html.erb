@@ -22,8 +22,11 @@
         <a class="navbar-brand" id="app-name" href="<%= url_for :controller => :main, :action => :index %>">Airflow</a>
       </div>
       <ul class="nav navbar-nav pull-right">
+	<% if params[:action].to_sym != :kiosk %>
 	<%= global_view_link("Calendar","calendar", {controller: :main, action: :index, :view => "calendar"}) %>
 	<%= global_view_link("Overview","overview", {controller: :main, action: :index, :view => "overview"}) %>
+	<% end %>
+	<%= global_view_link("Kiosk","kiosk", {controller: :main, action: :kiosk, :view => "kiosk"}) %>
         <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
       </ul>
       </div>

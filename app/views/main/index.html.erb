@@ -228,10 +228,13 @@
       {{> demographicsTableRow key="Patient Name" value=(format_name patient_mrn.patient.name)}}
       {{> demographicsTableRow key="Patient MRN" value=patient_mrn.mrn}}
       {{> demographicsTableRow key="Patient DOB" value=(format_date patient_mrn.patient.birthdate)}}
+      {{> demographicsTableRow key="Patient Location" value=(patient_location this)}}
+      {{> demographicsTableRow key="Resource" value=(resource_name this)}}
       {{> demographicsTableRow key="Procedure" value=procedure.description}}
       {{> demographicsTableRow key="Appointment" value=(format_timestamp rad_exam_time.appointment)}}
       {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam_time.begin_exam)}}
       {{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam_time.end_exam)}}
+      {{> demographicsTableRow key="Kiosk Number" value=(kiosk_number id)}}
     </tbody>
   </table>
 </script>
