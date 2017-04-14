@@ -1,5 +1,31 @@
 if (typeof application == "undefined") { application = {} }
 
+application.mutex = {
+    create: function() {
+	return {
+	    _queue: [],
+	    _running: null,
+	    sync: function(fun) {
+		if (this._queue.length == 0) {
+		    this._running = fun;
+		    this._start(fun);
+		} else {
+		    _queue.push(fun);
+		}
+		return this;
+	    },
+	    _start: function(fun) {
+		fun();
+		return this;
+	    },
+	    _next: function() {
+		if (this._queue.length == 0) { return this; }
+		else { this.start(this._queue.shift()); return this; }
+	    }
+	}
+    }
+};
+
 application.data = {
     // Design Goals:
     //   -Provide only one source of the object hash that is the exam information
@@ -15,7 +41,8 @@ application.data = {
     examGroups: {}, // A hash of group ident to list of exam ids
     examHash: {}, // A hash by exam.id of the exams
     rollbackExamHash: {}, // A hash by exam.id to store pre-commit exam info for rollback
-    rollbackSerial: 1,
+    rollbackMutexes: {}, // A place to store the mutexes by rollbackSerial id
+    //rollbackSerial: 1, // Removed in favor of using the id to sync changes happening to an exam across clients
     resources: [],
     resourceHash: {},
     resourceGroups: {},
@@ -78,16 +105,29 @@ application.data = {
 	//Find all exams associated with the master id given
 	var exams = application.data.findExamWithFellows(id);
 	//Set up a rollback identifier and deep copy the existing exams
-	var rollback_id = application.data.rollbackSerial++;
-	application.data.rollbackExamHash[rollback_id] = $.map(exams,function(e,i) { return $.extend(true,{},e); });
+	var rollback_id = id;
+	var rollback_mutex = application.data.rollbackMutexes[rollback_id] = application.mutex.create();
 	$.each(exams,function(i,e) {
 	    // Make a deep copy of the exam so that if the update fails
 	    // the original exam object won't have been changed
 	    // this acts as an error handling rollback as the actual rollbacks
 	    // must be called by the update function as it is the thing that knows
 	    // when a change has been saved to the server
-	    var new_exam = fun($.extend(true,{},e),rollback_id);
-	    application.data.examHash[e.id] = new_exam;
+	    // Setting of the new exam into the examHash is also handled
+	    // by the updating function otherwise the calls to the mutex
+	    // happen out of order and things get weird
+	    var rollback_copy = $.extend(true,{},e);
+	    if (application.data.rollbackExamHash[rollback_id] == undefined) {
+		application.data.rollbackExamHash[rollback_id] = [];
+	    }
+	    application.data.rollbackExamHash[rollback_id].push(rollback_copy);
+
+	    // Call the update function with the given rollback id which will
+	    // supply the location of the mutex and the rollback information
+	    //console.log(application.data.rollbackExamHash);
+	    //console.log("Before fun run",e.adjusted,rollback_copy.adjusted);
+	    rollback_mutex.sync(function() { fun(e,rollback_id); });
+	    //console.log("After fun run",e.adjusted,rollback_copy.adjusted);
 	});
 
 	//Get the master exam now that it's been cloned and changed
@@ -102,6 +142,17 @@ application.data = {
 	return exams;
     },
 
+    //Unused!
+    // I've decided not to clear the mutexes
+    // There is no major performance/memory problem with keeping them around
+    // but to clear them might introduce strange race conditions especially
+    // when real time messaging gets added to the mix
+    /*clearMutex: function(rollback_id) {
+	if (application.data.rollbackMutexes[rollback_id]._queue.length == 0) {
+	    delete application.data.rollbackMutexes[rollback_id];
+	}
+    }*/
+
     // Clean rollback information:
     // This commit message should be in the error callback
     // for ajax calls to save data
@@ -112,17 +163,17 @@ application.data = {
     },
 
     rollback: function(exam,rollback_id,message) {
-	console.log('rollback',exam,rollback_id,application.data.rollbackExamHash[rollback_id]);
+	//console.log('rollback',exam,rollback_id,application.data.rollbackExamHash[rollback_id]);
 	// Reset exam to rollback values
 	var master = null;
 	$.each(application.data.rollbackExamHash[rollback_id],function(i,e) {
-	    console.log('rollback',exam.id,e.id);
+	    //console.log('rollback',exam.id,e.id);
 	    if (e.id == exam.id) { master = e }
 	    application.data.examHash[e.id] = e;
 	});
 	// Clear rollback values
 	delete application.data.rollbackExamHash[rollback_id];
-	console.log("exam-rollback",exam,master);
+	//console.log("exam-rollback",exam,master);
 	application.data.dispatch("exam-rollback",exam,master);
     },
 
@@ -148,17 +199,19 @@ application.data = {
 	    exam.adjusted.start_time = nstart;
 	    exam.adjusted.stop_time = nstop;
 	    exam.adjusted.resource = $.extend(true,{},resource);
-	    /*$.post($.harbingerjs.core.url("/exam/update/location"),
-		   {data: exam,
+	    application.data.examHash[exam_id] = exam;
+	    $.ajax($.harbingerjs.core.url("/exam/update/location"),
+		   {data: JSON.stringify(exam),
+		    method: 'POST',
 		    contentType: "application/json; charset=utf-8",
 		    dataType: "json",
 		    success: function(response) {
-			application.data.commit(exam,rollback_id);
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
 		    },
-		    error: function() {*/
-			application.data.rollback(exam,rollback_id,"bad news bears");
-/*		   }
-		  });*/
+		    error: function() {
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"bad news bears") });
+		    }
+		   });
 	    return exam;
 	});
     },

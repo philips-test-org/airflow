@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'help' => "main#help"
   get 'cards' => "card_design#index"
   get 'main/:view' => "main#index"
+  post 'exam/update/location' => "exam_update#location"
   post 'comments/create' => "comments#create"
   root :to => redirect('main')
 end
