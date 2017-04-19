@@ -2,8 +2,7 @@ class ExamUpdateController < ApplicationController
   before_filter :authenticate
 
   def location
-    sleep(5)
-    #render :text => "{}"
-    render :status => 500
+    ea = ExamAdjustment.update_location(params)
+    render :json => ea.adjusted_attributes
   end
 end

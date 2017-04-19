@@ -157,7 +157,7 @@ application.data = {
     // This commit message should be in the error callback
     // for ajax calls to save data
     commit: function(exam,rollback_id) {
-	console.log('commit',exam,rollback_id);
+	//console.log('commit',exam,rollback_id);
 	delete application.data.rollbackExamHash[rollback_id];
 	application.data.dispatch("exam-commit",exam);
     },
@@ -188,7 +188,6 @@ application.data = {
     },
 
     updateLocation: function(exam_id,resource_id,top) {
-	var resource = application.data.findResource(resource_id);
 	return application.data.update(exam_id,function(exam,rollback_id) {
 	    var exam = exam;
 	    var rollback_id = rollback_id;
@@ -198,7 +197,7 @@ application.data = {
 	    var nstop =  application.data.examHeightToStopTime(top,exam);
 	    exam.adjusted.start_time = nstart;
 	    exam.adjusted.stop_time = nstop;
-	    exam.adjusted.resource = $.extend(true,{},resource);
+	    exam.adjusted.resource_id = resource_id,
 	    application.data.examHash[exam_id] = exam;
 	    $.ajax($.harbingerjs.core.url("/exam/update/location"),
 		   {data: JSON.stringify(exam),
@@ -215,6 +214,26 @@ application.data = {
 	    return exam;
 	});
     },
+
+    updateAttribute: function(id,attr,value,events) {
+	application.data.update(id,function(exam,rollback_id) {
+	    application.data.pathSet(exam,attr,value);
+	    $.ajax($.harbingerjs.core.url("/exam/update/location"),
+		   {data: JSON.stringify(exam),
+		    method: 'POST',
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    success: function(response) {
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
+		    },
+		    error: function() {
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"bad news bears") });
+		    }
+		   });
+	    return exam;
+	},events);
+    },
+
 
     pathSet: function(obj,path,val) {
 	path_array = path.split(".");
@@ -265,8 +284,8 @@ application.data = {
     },
 
     resource: function(exam) {
-	if (exam.adjusted.resource != undefined) {
-	    return exam.adjusted.resource;
+	if (exam.adjusted.resource_id != undefined) {
+	    return application.data.findResource(exam.adjusted.resource_id);
 	} else {
 	    return exam.resource;
 	}
