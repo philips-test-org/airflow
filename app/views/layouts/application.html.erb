@@ -9,6 +9,13 @@
   <%= csrf_meta_tags %>
   <%= harbingerjs_setup %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_tag do %>
+  if (typeof application == "undefined") { application = {} }
+
+  <% if @employee %>
+  application.employee = <%= OrmConverter.attributes(@employee).to_json.html_safe %>
+  <% end %>
+  <% end %>
   <%= yield(:javascript_includes) %>
 
 </head>

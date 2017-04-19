@@ -49,7 +49,8 @@ application.data = {
     event_table: {"exam-update": {},
 		  "modal-update": {},
 		  "exam-commit": {},
-		  "exam-rollback": {}},
+		  "exam-rollback": {},
+		  "event-submit": {}},
     formatExams: function(exams) {
 	// Parse and store resource and resource group information
 	application.data.resourceGroups = $.parseJSON($("#resource-groupings-json").text());
@@ -89,12 +90,6 @@ application.data = {
     },
 
     /* Setters */
-    updateAttribute: function(id,attr,value,events) {
-	application.data.update(id,function(exam,rollback_id) {
-	    application.data.pathSet(exam,attr,value);
-	    return exam;
-	},events);
-    },
 
     // There remains a race condition around making a change and having a different
     // change happen before the error and subsequent rollback of the other change.
@@ -177,12 +172,12 @@ application.data = {
 	application.data.dispatch("exam-rollback",exam,master);
     },
 
-    addComment: function(id,comment,events) {
+    addEvent: function(id,event,events) {
 	application.data.update(id,function(exam,rollback_id) {
-	    if (exam.comments == null || exam.comments == undefined) {
-		exam.comments = []
+	    if (event.event_type != 'comment') {
+		exam.adjusted[event.event_type] = event.new_state;
 	    }
-	    exam.comments.push(comment);
+	    exam.events.push(event);
 	    return exam;
 	},events);
     },

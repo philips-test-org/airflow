@@ -43,7 +43,7 @@ Handlebars.registerHelper('avatar',function(employee_id, placeholder) {
 
 Handlebars.registerHelper('exam_color',function(exam) {
     var color = "#ddd";
-    if (exam.onhold == true) {
+    if (exam.adjusted.onhold == true) {
 	color = "#f5f52b"
     } else if (exam.rad_exam_detail.delay_reason_id) {
 	color = "#ff8800";
@@ -66,11 +66,6 @@ Handlebars.registerHelper('exams_from_resource',function(resource) {
 	.map(function(id) { return application.data.examHash[id]; })
 	.filter(function(exam) { return application.data.resource(exam).id == resource.id; })
 	.sort(function(a,b) {
-	    if (resource.id == 183) {
-		console.log(a.id,application.data.examStartTime(a),
-			    b.id,application.data.examStartTime(b),
-			    application.data.examStartTime(a) - application.data.examStartTime(b));
-	    }
 	    if (application.data.examStartTime(a) < application.data.examStartTime(b)) {
 		return -1;
 	    } else if (application.data.examStartTime(a) > application.data.examStartTime(b)) {
@@ -116,6 +111,13 @@ Handlebars.registerHelper('resource_name',function(exam) {
 	return exam.resource.name;
     } else {
 	return exam.resource.resource;
+    }
+});
+
+Handlebars.registerHelper('render_event',function(event) {
+    if (event.event_type == 'comment') {
+	return new Handlebars.SafeString(application.templates["event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1)](event));
+    } else {
     }
 });
 

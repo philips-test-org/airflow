@@ -1,12 +1,12 @@
 module OrmConverter
 
 
-  def self.exam_with_comment(employee,comment)
-    {employee_id: employee.getId,
-     employee: {name: employee.name},
-     created_at: Time.now.to_i*1000,
-     comment: comment}
-  end
+  # def self.exam_with_comment(employee,comment)
+  #   {employee_id: employee.getId,
+  #    employee: {name: employee.name},
+  #    created_at: Time.now.to_i*1000,
+  #    comment: comment}
+  # end
 
   def self.exams(exams)
     tree = {:rad_exam_time => {},

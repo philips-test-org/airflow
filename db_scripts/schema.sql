@@ -46,6 +46,7 @@ CREATE TABLE airflow_exam_events (
 	exam_adjustment_id bigint NOT NULL,
 	employee_id bigint NOT NULL,
 	event_type airflow_exam_event_type NOT NULL,
+	new_state text,
 	comments text,
 	created_at timestamp with time zone DEFAULT now() NOT NULL,
 	updated_at timestamp with time zone DEFAULT now() NOT NULL

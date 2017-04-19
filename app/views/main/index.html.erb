@@ -143,7 +143,7 @@
 </script>
 
 <script class="handlebars-template" id="t-fixed-card" type="text/x-handlebars-template">
-  <div class="notecard overview {{#if this.onhold}}highlight{{/if}}" id="fixed-card-{{this.id}}">
+  <div class="notecard overview {{#if this.adjusted.onhold}}highlight{{/if}}" id="fixed-card-{{this.id}}">
     <div class="left-tab" style="background-color: {{exam_color this}};">
     </div>
 
@@ -177,19 +177,19 @@
     <div class="status-toggles">
       <div class="status-toggle margin-right">
 	<label><i class="fa fa-bed"></i>On Hold</label>
-	<input type="checkbox" name="adjusted.onhold" {{check_test this.adjusted.onhold}} data-size="mini" data-on="On Hold" data-off="Active" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="onhold" {{check_test this.adjusted.onhold}} data-size="mini" data-on="On Hold" data-off="Active" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle margin-right">
 	<label><i class="fa fa-bed"></i>Anesthesia</label>
-	<input type="checkbox" name="adjusted.anesthesia" {{check_test this.adjusted.anesthesia}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="anesthesia" {{check_test this.adjusted.anesthesia}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle margin-right">
 	<label><i class="fa fa-handshake-o"></i>Consent</label>
-	<input type="checkbox" name="adjusted.consent" {{check_test this.adjusted.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="consent" {{check_test this.adjusted.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle">
 	<label><i class="fa fa-file-text"></i>Paperwork</label>
-	<input type="checkbox" name="adjusted.paperwork" {{check_test this.adjusted.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+	<input type="checkbox" name="paperwork" {{check_test this.adjusted.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
     </div>
     <h4 class="modal-title">Accession: {{accession}}</h4>
@@ -248,16 +248,20 @@
 
 
 <script class="handlebars-template" id="t-comments-interface" type="text/x-handlebars-template">
-  <div class="comments">
-    {{#each events}}
-    {{> comment}}
-    {{/each}}
-  </div>
+  {{> eventList}}
   <hr />
   {{> commentForm}}
 </script>
 
-<script class="handlebars-template" id="t-comment" type="text/x-handlebars-template">
+<script class="handlebars-template" id="t-event-list" type="text/x-handlebars-template">
+  <div class="events">
+    {{#each events}}
+    {{render_event this}}
+    {{/each}}
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-event-comment" type="text/x-handlebars-template">
   <div class="comment">
     <div class="avatar">
       <!-- should be the employee associated with the action -->
@@ -269,7 +273,7 @@
 	<strong>{{employee.name}}</strong> commented on <span class="time short">{{format_timestamp created_at}}</span>
       </div>
       <div class="content">
-	{{comment}}
+	{{comments}}
       </div>
     </div>
   </div>

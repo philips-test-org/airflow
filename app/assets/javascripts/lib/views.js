@@ -66,7 +66,7 @@ application.calendar = {
 	    application.calendar.redrawCard(exam);
 	});
 	application.data.hook("exam-rollback","card-redraw", function(new_exam,rollback_back_exam) {
-	    console.log("Redrawing rolled back card",new_exam,rollback_back_exam);
+	    //console.log("Redrawing rolled back card",new_exam,rollback_back_exam);
 	    application.calendar.redrawCard(rollback_back_exam);
 	});
 
