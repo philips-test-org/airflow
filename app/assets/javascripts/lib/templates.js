@@ -91,13 +91,17 @@ Handlebars.registerHelper('exam_top',function(exam) {
     return Math.round((t.hour() * 60 * 60 + t.minute() * 60 + t.seconds()) * application.templates.pixels_per_second) + "px";
 });
 
-Handlebars.registerHelper('kiosk_number',function(exam) {
+Handlebars.registerHelper('kiosk_number',function(id) {
+    return String(id).slice(-3)
+});
+
+Handlebars.registerHelper('kiosk_number_html',function(exam) {
     var style = "";
     var height = Number(Handlebars.helpers.exam_height(exam).replace("px",""));
     if (height < 36) {
 	var style = "font-size: " + height / 2 + "px;";
     }
-    var out = '<div class="kiosk-number" style="' + style + ' line-height: ' + height + 'px;">' + String(exam.id).slice(-3) + '</div>';
+    var out = '<div class="kiosk-number" style="' + style + ' line-height: ' + height + 'px;">' + Handlebars.helpers.kiosk_number(exam.id) + '</div>';
     return new Handlebars.SafeString(out);
 });
 
@@ -121,9 +125,59 @@ Handlebars.registerHelper('resource_name',function(exam) {
 });
 
 Handlebars.registerHelper('render_event',function(event) {
+    //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
     if (event.event_type == 'comment') {
-	return new Handlebars.SafeString(application.templates["event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1)](event));
+	return new Handlebars.SafeString(application.templates.eventComment(event));
     } else {
+	return new Handlebars.SafeString(application.templates.eventStateChange(event));
+    }
+});
+
+Handlebars.registerHelper('toggle_icon',function(name) {
+    var icon = "";
+    switch(name) {
+    case "constent":
+	icon = "fa fa-handshake-o";
+	break;
+    case "onhold":
+	icon = "fa fa-hand-paper-o";
+	break;
+    case "anesthesia":
+	icon = "fa fa-bed";
+	break;
+    case "consent":
+	icon = "fa fa-handshake-o";
+	break;
+    case "paperwork":
+	icon = "fa fa-file-text";
+    }
+    return icon;
+});
+
+Handlebars.registerHelper('toggle_label',function(name) {
+    return new Handlebars.SafeString('<strong><i class="' + Handlebars.helpers.toggle_icon(name) + '"></i> ' + name + '</strong>');
+});
+
+Handlebars.registerHelper('toggle_state',function(name,bool) {
+    if (bool && name == "onhold") {
+	var language = "On Hold";
+	var klass = "label-primary";
+    } else if (name == "onhold") {
+	var language = "Active";
+	var klass = "label-default";
+    } else if (bool) {
+	var language = "Complete";
+	var klass = "label-primary";
+    } else {
+	var language = "Incomplete";
+	var klass = "label-default";
+    }
+    return new Handlebars.SafeString('<span class="label ' + klass + '">' + language + '</span>');
+});
+
+Handlebars.registerHelper('has_comments',function(events,block) {
+    if (events.filter(function(event) { return event.event_type == 'comment'; }).length > 0) {
+	return block.fn(events);
     }
 });
 

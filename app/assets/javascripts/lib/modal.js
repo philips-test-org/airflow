@@ -65,7 +65,7 @@ $(document).ready(function(e) {
 	    exam_id: exam_id
 	}
 
-	application.data.addEvent(exam_id,event,["event-submit"])
+	application.data.addEvent(exam_id,event,["event-submit","exam-update"])
 	textarea.val("");
 
 	// $.ajax($.harbingerjs.core.url("/comments/create"),
