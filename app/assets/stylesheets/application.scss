@@ -383,6 +383,16 @@ Shared Styles
 	text-align: center;
     }
 
+    .kiosk-number {
+	font-size: 36px;
+	margin-left: 5px;
+    }
+    .kiosk-number.bottom {
+	position: absolute;
+	line-height: initial !important;
+	bottom: 0px;
+    }
+
     img.avatar { width: 18px; height: 18px; }
 }
 

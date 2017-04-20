@@ -103,15 +103,8 @@
 
     <div class="right-tab">
 
-      <div class="heading">
-	<div class="kiosk-number">{{kiosk_number this.id}}</div>
-      </div>
+      {{kiosk_number this}}
 
-      <div class="body">
-      </div>
-
-      <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
-      </div>
     </div>
 
   <div class="hide data" data-exam-id="{{this.id}}"></div>

@@ -91,8 +91,14 @@ Handlebars.registerHelper('exam_top',function(exam) {
     return Math.round((t.hour() * 60 * 60 + t.minute() * 60 + t.seconds()) * application.templates.pixels_per_second) + "px";
 });
 
-Handlebars.registerHelper('kiosk_number',function(id) {
-    return String(id).slice(-3);
+Handlebars.registerHelper('kiosk_number',function(exam) {
+    var style = "";
+    var height = Number(Handlebars.helpers.exam_height(exam).replace("px",""));
+    if (height < 36) {
+	var style = "font-size: " + height / 2 + "px;";
+    }
+    var out = '<div class="kiosk-number" style="' + style + ' line-height: ' + height + 'px;">' + String(exam.id).slice(-3) + '</div>';
+    return new Handlebars.SafeString(out);
 });
 
 Handlebars.registerHelper('patient_location',function(exam) {

@@ -136,6 +136,7 @@ application.overview = {
 // Kiosk "inherits" from application.calendar and overrides
 // some of its functions
 application.kiosk = $.extend({},application.calendar,{
+    alignmentTimeout: null,
     setup: function() {
 	//build calendar
 	$("#workspace").html(application.templates.kiosk(application.data));
@@ -145,6 +146,17 @@ application.kiosk = $.extend({},application.calendar,{
 	    var scroll = this.scrollLeft;
 	    $("#time-headings").offset({left: -1*scroll+50});
 	    $("#vertical-time-headings").css({left: scroll});
+	    clearTimeout(application.kiosk.alignmentTimeout);
+	    setTimeout(function() {
+		var scroll_top = $("#board").scrollTop();
+		$.each($("#board .notecard"),function(i,e) {
+		    if ((($(e).position().top + $(e).height() / 3) <= scroll_top) && $(e).position().top < scroll_top) {
+			$(e).find(".kiosk-number").addClass("bottom");
+		    } else {
+			$(e).find(".kiosk-number").removeClass("bottom");
+		    }
+		});
+	    },200);
 	});
 
 	// Set up the now line including redrawing
