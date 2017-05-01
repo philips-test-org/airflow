@@ -13,23 +13,25 @@ class ExamAdjustment < ActiveRecord::Base
     end
   end
 
-  def self.update_location(params)
-    adjusted = {
-      "start_time" => params[:adjusted][:start_time],
-      "stop_time" => params[:adjusted][:stop_time],
-      "resource_id" => params[:adjusted][:resource_id]
-    }
-    self.iou(params[:id],adjusted)
+  def self.add_event(params,employee)
+    ea = if params[:adjusted]
+           self.iou(params)
+         else
+           self.ios(params)
+         end
+    ExamEvent.create(params[:event].merge({:id => nil,
+                                           :exam_adjustment_id => ea.id,
+	                                   :employee_id => employee.id}))
   end
 
-  def self.iou(rad_exam_id,adjusted)
-    ea = self.find_by_rad_exam_id(rad_exam_id)
+  def self.iou(params)
+    ea = self.find_by_rad_exam_id(params[:id])
     if ea
-      aa = ea.adjusted_attributes.merge(adjusted)
+      aa = ea.adjusted_attributes.merge(params[:adjusted])
       ea.update_attribute(:adjusted_attributes,aa.to_json)
       ea
     else
-      self.create({:rad_exam_id => rad_exam_id, :adjusted_attributes => adjusted.to_json})
+      self.create({:rad_exam_id => params[:id], :adjusted_attributes => adjusted.to_json})
     end
   end
 

@@ -19,6 +19,9 @@
   <%= image_tag("ajax-loader.gif") %>
 </div>
 
+<div id="notifications">
+</div>
+
 <!-- Major/Page Templates -->
 <script class="handlebars-template" id="t-workspace-loading" type="text/x-handlebars-template">
   <%= image_tag("ajax-loader.gif") %>
@@ -148,7 +151,7 @@
     </div>
 
     <div class="right-tab">
-      <div class="events">{{#has_comments events}}<i class="fa fa-paperclip"></i>{{/#has_comments}}</div>
+      <div class="events">{{#has_comments events}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
 
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
@@ -313,4 +316,10 @@
       </div>
     </div>
   </form>
+</script>
+
+<script class="handlebars-template" id="t-notification" type="text/x-handlebars-template">
+  <div class="notification" id="notification-{{id}}">
+    <strong>{{type}}</strong> - {{message}}
+  </div>
 </script>

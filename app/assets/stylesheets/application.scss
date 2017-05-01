@@ -466,3 +466,18 @@ Shared Styles
 
 .ui-draggable-dragging {
 }
+
+/* Notifications */
+
+#notifications {
+    positions: fixed;
+    bottom: 0;
+    right: 20px;
+    
+    .notification {
+	border: 1px solid $grid-color;
+	box-shadow: 3px 3px 3px #eee;
+	backgroun-color: #fff;
+    }
+}
+

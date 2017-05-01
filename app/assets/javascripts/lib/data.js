@@ -42,7 +42,7 @@ application.data = {
     examHash: {}, // A hash by exam.id of the exams
     rollbackExamHash: {}, // A hash by exam.id to store pre-commit exam info for rollback
     rollbackMutexes: {}, // A place to store the mutexes by rollbackSerial id
-    //rollbackSerial: 1, // Removed in favor of using the id to sync changes happening to an exam across clients
+    eventsSerial: 1, // A serial to help identify uncommitted events
     resources: [],
     resourceHash: {},
     resourceGroups: {},
@@ -175,59 +175,67 @@ application.data = {
     addEvent: function(id,event,events) {
 	application.data.update(id,function(exam,rollback_id) {
 	    if (event.event_type != 'comment') {
-		exam.adjusted[event.event_type] = event.new_state;
+		// Update status type with new state (consent, etc)
+		$.extend(exam.adjusted,event.new_state);
 	    }
+	    console.log(event);
 	    exam.events.push(event);
+	    /*$.ajax($.harbingerjs.core.url("/events/add"),
+		   {data: JSON.stringify(data),
+		    method: 'POST',
+		    contentType: "application/json; charset=utf-8",
+		    dataType: "json",
+		    success: function(response) {
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
+		    },
+		    error: function() {
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"bad news bears") });
+		    }
+		   });*/
 	    return exam;
 	},events);
     },
 
     updateLocation: function(exam_id,resource_id,top) {
-	return application.data.update(exam_id,function(exam,rollback_id) {
-	    var exam = exam;
-	    var rollback_id = rollback_id;
-	    var ostart = application.data.examStartTime(exam);
-	    var ostop = application.data.examStopTime(exam);
-	    var nstart = application.data.examHeightToStartTime(top,exam);
-	    var nstop =  application.data.examHeightToStopTime(top,exam);
-	    exam.adjusted.start_time = nstart;
+	var rollback_id = rollback_id;
+	var ostart = application.data.examStartTime(exam);
+	var ostop = application.data.examStopTime(exam);
+	var nstart = application.data.examHeightToStartTime(top,exam);
+	var nstop =  application.data.examHeightToStopTime(top,exam);
+	    /*exam.adjusted.start_time = nstart;
 	    exam.adjusted.stop_time = nstop;
 	    exam.adjusted.resource_id = resource_id,
-	    application.data.examHash[exam_id] = exam;
-	    $.ajax($.harbingerjs.core.url("/exam/update/location"),
-		   {data: JSON.stringify(exam),
-		    method: 'POST',
-		    contentType: "application/json; charset=utf-8",
-		    dataType: "json",
-		    success: function(response) {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
-		    },
-		    error: function() {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"bad news bears") });
-		    }
-		   });
-	    return exam;
-	});
+	    application.data.examHash[exam_id] = exam;*/
+	var event = {
+	    event_type: 'location_update',
+	    employee: application.employee,
+	    new_state: {
+		start_time: exam.adjusted.start_time,
+		stop_time: exam.adjusted.stop_time,
+		resource_id: exam.adjusted.resource_id
+	    }
+	}
+	return application.data.addEvent(exam_id,event,["exam-update","event-list-redraw"]);
     },
 
-    updateAttribute: function(id,attr,value,events) {
-	application.data.update(id,function(exam,rollback_id) {
-	    application.data.pathSet(exam,attr,value);
-	    $.ajax($.harbingerjs.core.url("/exam/update/location"),
-		   {data: JSON.stringify(exam),
-		    method: 'POST',
-		    contentType: "application/json; charset=utf-8",
-		    dataType: "json",
-		    success: function(response) {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
-		    },
-		    error: function() {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"bad news bears") });
-		    }
-		   });
-	    return exam;
-	},events);
-    },
+    // updateAttribute: function(id,attr,value,events) {
+    // 	application.data.update(id,function(exam,rollback_id) {
+    // 	    application.data.pathSet(exam,attr,value);
+    // 	    $.ajax($.harbingerjs.core.url("/exam/update/location"),
+    // 		   {data: JSON.stringify(exam),
+    // 		    method: 'POST',
+    // 		    contentType: "application/json; charset=utf-8",
+    // 		    dataType: "json",
+    // 		    success: function(response) {
+    // 			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
+    // 		    },
+    // 		    error: function() {
+    // 			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"bad news bears") });
+    // 		    }
+    // 		   });
+    // 	    return exam;
+    // 	},events);
+    // },
 
 
     pathSet: function(obj,path,val) {

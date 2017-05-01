@@ -155,10 +155,16 @@ Handlebars.registerHelper('toggle_icon',function(name) {
 });
 
 Handlebars.registerHelper('toggle_label',function(name) {
-    return new Handlebars.SafeString('<strong><i class="' + Handlebars.helpers.toggle_icon(name) + '"></i> ' + name + '</strong>');
+    if (name == "onhold") {
+	var language = "";
+    } else {
+	var language = name.charAt(0).toUpperCase() + name.slice(1);
+    }
+    return new Handlebars.SafeString('<strong><i class="' + Handlebars.helpers.toggle_icon(name) + '"></i> ' + language + '</strong>');
 });
 
-Handlebars.registerHelper('toggle_state',function(name,bool) {
+Handlebars.registerHelper('toggle_state',function(name,new_state) {
+    var bool = new_state[name];
     if (bool && name == "onhold") {
 	var language = "On Hold";
 	var klass = "label-primary";
