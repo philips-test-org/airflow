@@ -39,13 +39,11 @@ CREATE TABLE airflow_exam_adjustments (
 );
 
 
-CREATE TYPE airflow_exam_event_type AS ENUM ('comment', 'anesthesia', 'paperwork', 'consent', 'hold','move');
-
 CREATE TABLE airflow_exam_events (
        	id bigint DEFAULT nextval('airflow_exam_events_id_seq'::regclass) NOT NULL,
 	exam_adjustment_id bigint NOT NULL,
 	employee_id bigint NOT NULL,
-	event_type airflow_exam_event_type NOT NULL,
+	event_type text NOT NULL,
 	new_state text,
 	comments text,
 	created_at timestamp with time zone DEFAULT now() NOT NULL,

@@ -25,7 +25,7 @@ class MainController < ApplicationController
                        Time.parse("2017-01-19").beginning_of_day,
                        Time.parse("2017-01-19").end_of_day)])
     exams = q.list
-    render :json => OrmConverter.exams(exams)
+    render :json => OrmConverter.exams(exams,@entity_manager)
   end
 
   def exam

@@ -13,7 +13,12 @@ application.modal = {
 
     redrawStatus: function(exam) {
 	$("#exam-modal .modal-content .left-stripe").replaceWith(application.templates.modalCardStatus(exam));
+    },
+
+    checkEvent: function(exam) {
+	return $("#exam-modal .data").text() == String(exam.id);
     }
+
 };
 
 $(document).ready(function(e) {
@@ -22,8 +27,14 @@ $(document).ready(function(e) {
     });
 
     application.data.hook("event-submit","event-list-redraw",function(exam) {
-	if ($("#exam-modal .data").text() == String(exam.id)) {
+	if (application.modal.checkEvent(exam)) {
 	    $("#exam-modal .events").replaceWith(application.templates.eventList(exam));
+	}
+    });
+
+    application.data.hook("exam-rollback","event-list-redraw-rollback",function(exam,rollback_exam) {
+	if (application.modal.checkEvent(rollback_exam)) {
+	    application.modal.redraw(rollback_exam);
 	}
     });
 
@@ -36,15 +47,17 @@ $(document).ready(function(e) {
     $("#exam-modal").on("change",".status-toggle input",function(e) {
 	var exam_id = $(this).parents(".modal-content").find(".data").text();
 	//application.data.updateAttribute(exam_id,$(this).attr('name'),this.checked,["modal-update","exam-update"]);
+	var name = $(this).attr('name');
 	var event = {
 	    id: null, //needs to become an internal id
 	    employee: application.employee,
-	    event_type: $(this).attr('name'),
-	    new_state: this.checked,
+	    event_type: name,
 	    comments: null,
+	    new_state: {},
 	    created_at: moment().unix()*1000,
 	    exam_id: exam_id
 	}
+	event.new_state[name] = this.checked;
 
 	application.data.addEvent(exam_id,event,["event-submit","modal-update","exam-update"])
     });

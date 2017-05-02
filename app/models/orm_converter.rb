@@ -8,7 +8,7 @@ module OrmConverter
   #    comment: comment}
   # end
 
-  def self.exams(exams)
+  def self.exams(exams,em)
     tree = {:rad_exam_time => {},
             :rad_exam_personnel => {},
             :rad_exam_detail => {},
@@ -20,7 +20,7 @@ module OrmConverter
            }
     exams.inject([]) do |list,exam|
       hash = get_data(tree,exam,{})
-      hash.merge!(ExamAdjustment.info_for(exam))
+      hash.merge!(ExamAdjustment.info_for(exam,em))
       list << hash
       list
     end

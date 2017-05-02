@@ -46,6 +46,7 @@ application.data = {
     resources: [],
     resourceHash: {},
     resourceGroups: {},
+    // Master list of all the events and initialization of their objects
     event_table: {"exam-update": {},
 		  "modal-update": {},
 		  "exam-commit": {},
@@ -178,9 +179,12 @@ application.data = {
 		// Update status type with new state (consent, etc)
 		$.extend(exam.adjusted,event.new_state);
 	    }
-	    console.log(event);
 	    exam.events.push(event);
-	    /*$.ajax($.harbingerjs.core.url("/events/add"),
+	    var data = {
+		id: id,
+		event: event
+	    }
+	    $.ajax($.harbingerjs.core.url("/events/add"),
 		   {data: JSON.stringify(data),
 		    method: 'POST',
 		    contentType: "application/json; charset=utf-8",
@@ -189,15 +193,16 @@ application.data = {
 			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
 		    },
 		    error: function() {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"bad news bears") });
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"Failed to save changes. Reverting to previous values.") });
 		    }
-		   });*/
+		   });
 	    return exam;
 	},events);
     },
 
     updateLocation: function(exam_id,resource_id,top) {
-	var rollback_id = rollback_id;
+	// Contains no side effects, those are handled in the addEvent/update functions
+	var exam = application.data.findExam(exam_id);
 	var ostart = application.data.examStartTime(exam);
 	var ostop = application.data.examStopTime(exam);
 	var nstart = application.data.examHeightToStartTime(top,exam);
@@ -210,12 +215,12 @@ application.data = {
 	    event_type: 'location_update',
 	    employee: application.employee,
 	    new_state: {
-		start_time: exam.adjusted.start_time,
-		stop_time: exam.adjusted.stop_time,
-		resource_id: exam.adjusted.resource_id
+		start_time: nstart,
+		stop_time: nstop,
+		resource_id: resource_id
 	    }
 	}
-	return application.data.addEvent(exam_id,event,["exam-update","event-list-redraw"]);
+	return application.data.addEvent(exam_id,event,["exam-update"]);
     },
 
     // updateAttribute: function(id,attr,value,events) {

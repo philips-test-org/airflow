@@ -6,8 +6,7 @@ class EventsController < ApplicationController
 
   def add
     employee = Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
-    binding.pry
-    event = ExamAdjustment.add(params,employee)
+    event = ExamAdjustment.add_event(params,employee)
     render :json => event
   end
 
