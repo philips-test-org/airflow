@@ -5,6 +5,7 @@ class ExamEvent < ActiveRecord::Base
   def expanded_attributes(em)
     attrs = self.attributes.clone
     attrs["employee"] = OrmConverter.attributes(Java::HarbingerSdkData::Employee.withId(attrs["employee_id"],em))
+    attrs["new_state"] = JSON.parse(attrs["new_state"])
     attrs.delete("employee_id")
     attrs
   end

@@ -117,6 +117,9 @@ Handlebars.registerHelper('patient_location',function(exam) {
 });
 
 Handlebars.registerHelper('resource_name',function(exam) {
+    if ($.type(exam) == "number") {
+	exam = {resource: application.data.findResource(exam)};
+    }
     if (exam.resource.name != undefined && exam.resource.name != "") {
 	return exam.resource.name;
     } else {
@@ -128,6 +131,8 @@ Handlebars.registerHelper('render_event',function(event) {
     //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
     if (event.event_type == 'comment') {
 	return new Handlebars.SafeString(application.templates.eventComment(event));
+    } else if (event.event_type == 'location_update') {
+	return new Handlebars.SafeString(application.templates.eventLocationChange(event));
     } else {
 	return new Handlebars.SafeString(application.templates.eventStateChange(event));
     }

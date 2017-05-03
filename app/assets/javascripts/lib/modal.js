@@ -74,6 +74,7 @@ $(document).ready(function(e) {
 	    employee: application.employee,
 	    event_type: 'comment',
 	    comments: textarea.val(),
+	    new_state: {},
 	    created_at: moment().unix()*1000,
 	    exam_id: exam_id
 	}

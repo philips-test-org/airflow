@@ -218,7 +218,9 @@ application.data = {
 		start_time: nstart,
 		stop_time: nstop,
 		resource_id: resource_id
-	    }
+	    },
+	    created_at: moment().unix()*1000,
+	    exam_id: exam_id
 	}
 	return application.data.addEvent(exam_id,event,["exam-update"]);
     },

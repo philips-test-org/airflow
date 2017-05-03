@@ -273,6 +273,15 @@
   </div>
 </script>
 
+<script class="handlebars-template" id="t-event-location-change" type="text/x-handlebars-template">
+  <div class="event">
+    <span class="avatar">{{avatar employee.id "<%= image_url('placeholder.png') %>"}}</span>
+    <span class="body">
+      <strong>{{employee.name}}</strong> moved exam to <strong>{{resource_name new_state.resource_id}}</strong> to <span class="time short"><strong>{{format_timestamp new_state.start_time}}</strong></span> on <span class="time short">{{format_timestamp created_at}}</span>
+    </span>
+  </div>
+</script>
+
 <script class="handlebars-template" id="t-event-comment" type="text/x-handlebars-template">
   <div class="comment">
     <div class="avatar">
