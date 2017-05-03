@@ -18,6 +18,43 @@ $very-dark-alert-red: #750006;
 $alert-text-color: #fff;
 $complete-green: #279A2F;
 
+/* General Color pallete */
+$very-light-gray: #f9f9f9;
+$light-gray: #e8e8e8;
+$neutral-gray: #ccc;
+$dark-gray: #888;
+$very-dark-gray: #666;
+
+$neutral-orange: #f8991d;
+$dark-orange: #cc7504;
+$very-dark-orange: #a15b00;
+$light-orange: #ffb04a;
+$very-light-orange: #ffc273;
+
+$neutral-yellow: #f8c01d;
+$light-yellow: #ffd14a;
+$very-light-yellow: #ffdb73;
+$dark-yellow: #cc9904;
+$very-dark-yellow: #a17800;
+
+$neutral-blue: #2b2ead;
+$light-blue: #484ab6;
+$very-light-blue: #6b6dca;
+$dark-blue: #171a8e;
+$very-dark-blue: #0e1170;
+
+$neutral-sblue: #1b699f;
+$very-light-sblue: #5d97c0;
+$light-sblue: #387aa9;
+$dark-sblue: #0b5183;
+$very-dark-sblue: #063f67;
+
+$alert-red: #c8040e;
+$dark-alert-red: #A40008;
+$very-dark-alert-red: #750006;
+$alert-text-color: #fff;
+
+
 .margin-right { margin-right: 10px; }
 
 #primary-navbar { margin-bottom: 0px; }
@@ -470,14 +507,25 @@ Shared Styles
 /* Notifications */
 
 #notifications {
-    positions: fixed;
-    bottom: 0;
-    right: 20px;
-    
-    .notification {
-	border: 1px solid $grid-color;
-	box-shadow: 3px 3px 3px #eee;
-	backgroun-color: #fff;
-    }
-}
+    position: fixed;
+    bottom: 10px;
+    right: 25px;
+    z-index: 110;
 
+    .notification {
+	border: 1px solid #b3b3b3;
+	/*box-shadow: 5px 5px 5px #eee;*/
+	background-color: #fff;
+	margin-bottom: 20px;
+	padding: 5px 10px;
+	border-left: 4px solid #000;
+	width: 300px;
+
+	strong:first-child {
+	    text-transform: capitalize;
+	}
+    }
+
+    .notification.info { border-left-color: $dark-sblue; }
+    .notification.alert { border-left-color: $dark-alert-red; }
+}

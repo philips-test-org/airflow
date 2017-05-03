@@ -171,6 +171,8 @@ application.data = {
 	delete application.data.rollbackExamHash[rollback_id];
 	//console.log("exam-rollback",exam,master);
 	application.data.dispatch("exam-rollback",exam,master);
+	// Might want to find a better place for this but it's pretty universal right now
+	application.notification.flash({type: 'alert', message: message});
     },
 
     addEvent: function(id,event,events) {
@@ -193,7 +195,7 @@ application.data = {
 			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
 		    },
 		    error: function() {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"Failed to save changes. Reverting to previous values.") });
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"Failed to save changes. Reverted to previous values.") });
 		    }
 		   });
 	    return exam;
