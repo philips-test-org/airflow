@@ -35,17 +35,17 @@ application.data = {
     //    needed to access exams quickly
     //   -Provide an update methodology that persists changes to the serverside and rolls back
     //    user changes on error
-    startDate: moment().startOf('day').unix()*1000, // This will need to be adjusted by time selector interface
+    //startDate: moment().startOf('day').unix()*1000, // This will need to be adjusted by time selector interface
     hours: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-    masterExams: [], // A copy of all the selected master exam ids only
-    examGroups: {}, // A hash of group ident to list of exam ids
-    examHash: {}, // A hash by exam.id of the exams
+    //masterExams: [], // A copy of all the selected master exam ids only
+    //examGroups: {}, // A hash of group ident to list of exam ids
+    //examHash: {}, // A hash by exam.id of the exams
     rollbackExamHash: {}, // A hash by exam.id to store pre-commit exam info for rollback
     rollbackMutexes: {}, // A place to store the mutexes by rollbackSerial id
     eventsSerial: 1, // A serial to help identify uncommitted events
-    resources: [],
-    resourceHash: {},
-    resourceGroups: {},
+    //resources: [],
+    //resourceHash: {},
+    //resourceGroups: {},
     // Master list of all the events and initialization of their objects
     event_table: {"exam-update": {},
 		  "modal-update": {},
@@ -53,6 +53,15 @@ application.data = {
 		  "exam-rollback": {},
 		  "event-submit": {}},
     formatExams: function(exams) {
+	// Clear data
+	application.data.startDate = moment($("#time-button").data("value")).startOf('day').unix()*1000; // This will need to be adjusted by time selector interface
+	application.data.masterExams = []; // A copy of all the selected master exam ids only
+	application.data.examGroups = {}; // A hash of group ident to list of exam ids
+	application.data.examHash = {}; // A hash by exam.id of the exams
+	application.data.resources = [];
+	application.data.resourceHash = {};
+	application.data.resourceGroups = {};
+	
 	// Parse and store resource and resource group information
 	application.data.resourceGroups = $.parseJSON($("#resource-groupings-json").text());
 	application.data.resources = application.data.resourceGroups[$("#resource-group-buttons button").data("value")];

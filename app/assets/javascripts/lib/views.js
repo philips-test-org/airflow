@@ -96,14 +96,16 @@ application.calendar = {
     },
 
     drawNow: function() {
-	var now = new Date;
-	var distance = Math.round(application.templates.pixels_per_second * (now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds()));
-	if (distance > Math.round(application.templates.pixels_per_second * 24 * 60 * 60)) {
-	    $("#right-now").hide();
-	} else {
-	    // subtract 1 from the distance to make up for the 2px line width
-	    $("#right-now").css({top: distance - 1}).show();
-	    $("#right-now").css({width: $("#time-grid").width()});
+	if ($("#time-button").data("value") == undefined || moment($("#time-button").data("value")*1000).format('LL') == moment().format('LL')) {
+	    var now = new Date;
+	    var distance = Math.round(application.templates.pixels_per_second * (now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds()));
+	    if (distance > Math.round(application.templates.pixels_per_second * 24 * 60 * 60)) {
+		$("#right-now").hide();
+	    } else {
+		// subtract 1 from the distance to make up for the 2px line width
+		$("#right-now").css({top: distance - 1}).show();
+		$("#right-now").css({width: $("#time-grid").width()});
+	    }
 	}
     }
 }

@@ -20,18 +20,18 @@ class MainController < ApplicationController
   def exams
     date = Time.at(params[:date].to_i) unless params[:date].blank?
     date ||= Time.now
-    binding.pry
     q = Java::HarbingerSdkData::RadExam.createQuery(@entity_manager)
     q.where([q.in(".resourceId",params[:resource_ids]),
              # q.equal(".resource.modality.modality","CT"),
              q.notEqual(".currentStatus.universalEventType.eventType","cancelled"),
              q.or([q.between(".radExamTime.appointment",
-                             q.date.beginning_of_day,
-                             q.date.end_of_day),
+                             date.beginning_of_day,
+                             date.end_of_day),
                    q.between(".radExamTime.beginExam",
                              date.beginning_of_day,
                              date.end_of_day)])
             ])
+    # Remove me before production
     Rails.logger.debug(q.toSQL)
     exams = q.list
     render :json => OrmConverter.exams(exams,@entity_manager)
