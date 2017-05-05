@@ -1,6 +1,7 @@
 /*
  *= require bootstrap_and_overrides
  *= require bootstrap-toggle.min.css
+ *= require bootstrap-datetimepicker
  *= require comments
  *= require_self
  */
@@ -528,4 +529,46 @@ Shared Styles
 
     .notification.info { border-left-color: $dark-sblue; }
     .notification.alert { border-left-color: $dark-alert-red; }
+    .notification.event {
+	border-left-color: $dark-sblue;
+	position: relative;
+	min-height: 40px;
+	line-height: 40px;
+	width: 650px !important;
+	.event { margin: 0 !important; }
+    }
+}
+
+.divider {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.divider > span {
+  position: relative;
+  display: inline-block;
+  color: $dark-gray;
+  font-style: italic;
+}
+
+.divider > span:before,
+.divider > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9000px;
+  height: 1px;
+  background: $dark-gray;
+}
+
+.divider > span:before {
+  right: 100%;
+  margin-right: 5px;
+}
+
+.divider > span:after {
+  left: 100%;
+  margin-left: 5px;
 }

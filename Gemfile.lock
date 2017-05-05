@@ -52,6 +52,8 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    bootstrap3-datetimepicker-rails (4.14.30)
+      momentjs-rails (>= 2.8.1)
     browser (1.1.0)
     builder (3.2.2)
     bunny (1.7.0)
@@ -165,11 +167,12 @@ DEPENDENCIES
   activerecord-jdbcpostgresql-adapter
   autoprefixer-rails (= 6.0.3)
   bootstrap-sass
+  bootstrap3-datetimepicker-rails (~> 4.14.30)
   font-awesome-sass (~> 4.7.0)
   harbinger-rails-extensions (~> 0.0.19)!
   jquery-rails
   jruby-jars (= 1.7.22)
-  momentjs-rails (>= 2.8.1)
+  momentjs-rails (>= 2.9.0)
   pry
   rails (= 4.2.0)
   sass-rails (~> 5.0)

@@ -281,7 +281,7 @@ application.data = {
 	} else if (exam.rad_exam_time.end_exam) {
 	    return exam.rad_exam_time.end_exam;
 	} else {
-	    return appointment.data.examStartTime(exam) + (exam.procedure.scheduled_duration * 60 * 1000);
+	    return application.data.examStartTime(exam) + (exam.procedure.scheduled_duration * 60 * 1000);
 	}
     },
 

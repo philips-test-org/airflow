@@ -177,6 +177,24 @@
   {{> modalCardStatus}}
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{> statusToggles}}
+    <h4 class="modal-title">Accession: {{accession}}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+	<div class="col-xs-6">
+	  {{> demographicsTable}}
+	</div>
+	<div class="col-xs-6">
+	  {{> commentsInterface}}
+	</div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-status-toggles" type="text/x-handlebars-template">
     <div class="status-toggles">
       <div class="status-toggle margin-right">
 	<label><i class="fa fa-hand-paper-o"></i>On Hold</label>
@@ -195,20 +213,6 @@
 	<input type="checkbox" name="paperwork" {{check_test this.adjusted.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
     </div>
-    <h4 class="modal-title">Accession: {{accession}}</h4>
-  </div>
-  <div class="modal-body">
-    <div class="container-fluid">
-      <div class="row">
-	<div class="col-xs-6">
-	  {{> demographicsTable}}
-	</div>
-	<div class="col-xs-6">
-	  {{> commentsInterface}}
-	</div>
-      </div>
-    </div>
-  </div>
 </script>
 
 <script class="handlebars-template" id="t-modal-card-status" type="text/x-handlebars-template">
@@ -329,6 +333,18 @@
 
 <script class="handlebars-template" id="t-notification" type="text/x-handlebars-template">
   <div class="notification {{type}}" id="notification-{{id}}">
+    {{#if (eq type 'event')}}
+    {{render_event event}}
+    {{else}}
     <strong>{{type}}</strong> - {{message}}
+    {{/if}}
   </div>
+</script>
+
+<script class="handlebars-template" id="t-date-button-popover" type="text/x-handlebars-template">
+  <button id="today-button" class="form-control btn btn-primary">Today</button>
+  <div class="divider">
+    <span>or</span>
+  </div>
+  <div id="view-datepicker"></div>
 </script>

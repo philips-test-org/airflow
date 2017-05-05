@@ -30,4 +30,57 @@ $(document).ready(function() {
 	    application.drawBoard();
 	}
     });
+
+    $("#view-controls #time-button").popover({
+	title: "Select a date to show",
+	content: application.templates.dateButtonPopover({}),
+	html: true,
+	placement: "bottom",
+	container: $("body")
+    });
+
+    $("#time-button").on("inserted.bs.popover",function(e) {
+	$('#view-datepicker').datetimepicker({
+            inline: true,
+	    format: 'LL'
+	});
+	$("#view-datepicker").on("dp.change",function(e) {
+	    $("#time-button").data("value",e.date.unix());
+	    $("#time-button").popover('hide');
+	    application.drawBoard();
+	});
+    });
+
+    //Add a disconnect callback
+    $.harbingerjs.amqp.addCallback('disconnect',function(message) {
+	application.notification.alert({type: "alert", message: "Oh no! We lost the real time data connection."});
+    });
+
+    //Add a connect callback
+    $.harbingerjs.amqp.addCallback('connect',function(message) {
+	application.notification.flash("Connected to real time data.");
+    });
+
+    $.harbingerjs.amqp.setup({url: harbingerjsCometdURL});
+
+    $.harbingerjs.amqp.bind("web-application-messages","airflow.#",
+			    function() {
+				application.notification.flash("Bound to channel")
+			    });
+    $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
+	var tokens = rk.split("."),
+	    event_type = tokens[1],
+	    employee_id = tokens[2],
+	    exam_id = tokens[3],
+	    resource_id = tokens[4];
+	console.log(rk);
+	if (employee_id != application.employee.id) {
+	    application.data.update(exam_id,function(exam,rollback_id) {
+		$.extend(exam.adjusted,payload.adjusted);
+		exam.events = payload.events;
+		return exam;
+	    },["exam-update","modal-update"]);
+	    application.notification.flash({type: 'event', event: (payload.events[payload.events.length-1])});
+	}
+    },"airflow.#","web-application-messages");
 });

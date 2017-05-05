@@ -200,6 +200,10 @@ Handlebars.registerHelper('check_test',function(val) {
 
 
 /* General Helpers */
+Handlebars.registerHelper('eq',function(a,b) {
+    return a == b;
+});
+
 Handlebars.registerHelper('multiply',function(a,b) {
     return a * b;
 });

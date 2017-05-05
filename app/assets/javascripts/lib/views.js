@@ -7,6 +7,8 @@ application.drawBoard = function() {
 	return {name: "resource_ids[]",
 		value: r.id};
     });
+    data.push({name: "date",
+	       value: $("#time-button").data("value")});
 
     $.ajax($.harbingerjs.core.url("exams"),
 	   {data: data,

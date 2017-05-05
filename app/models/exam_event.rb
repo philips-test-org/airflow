@@ -6,6 +6,7 @@ class ExamEvent < ActiveRecord::Base
     attrs = self.attributes.clone
     attrs["employee"] = OrmConverter.attributes(Java::HarbingerSdkData::Employee.withId(attrs["employee_id"],em))
     attrs["new_state"] = JSON.parse(attrs["new_state"])
+    attrs["created_at"] = attrs["created_at"].to_i*1000
     attrs.delete("employee_id")
     attrs
   end
