@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'kiosk' => "main#kiosk", :defaults => {:view => "kiosk"}
   get 'exam' => "main#exam"
   get 'exams' => "main#exams"
+  get 'exam_info' => "main#exam_info"
   get 'avatar' => 'pictures#show'
   get 'about' => "main#about"
   get 'help' => "main#help"

@@ -13,6 +13,9 @@ application.modal = {
 
     redrawStatus: function(exam) {
 	$("#exam-modal .modal-content .left-stripe").replaceWith(application.templates.modalCardStatus(exam));
+	$("#exam-modal .modal-content .status-toggles").replaceWith(application.templates.statusToggles(exam));
+	$("#exam-modal .events").replaceWith(application.templates.eventList(exam));
+	$("#exam-modal [data-toggle='toggle']").bootstrapToggle();
     },
 
     checkEvent: function(exam) {

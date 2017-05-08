@@ -75,17 +75,17 @@ $(document).ready(function() {
 
     $.harbingerjs.amqp.setup({url: harbingerjsCometdURL});
 
-    $.harbingerjs.amqp.bind("web-application-messages","airflow.#",
-			    function() {
-				application.notification.flash("Bound to channel")
-			    });
+    $.harbingerjs.amqp.bind("web-application-messages","airflow.#")
+    $.harbingerjs.amqp.bind("audit","rad_exams.#");
+    $.harbingerjs.amqp.bind("audit","rad_exam_times.#");
+    $.harbingerjs.amqp.bind("audit","rad_exam_personnel.#");
+
     $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
 	var tokens = rk.split("."),
 	    event_type = tokens[1],
 	    employee_id = tokens[2],
 	    exam_id = tokens[3],
 	    resource_id = tokens[4];
-	console.log(rk);
 	if (employee_id != application.employee.id) {
 	    application.data.update(exam_id,function(exam,rollback_id) {
 		$.extend(exam.adjusted,payload.adjusted);
@@ -95,4 +95,21 @@ $(document).ready(function() {
 	    application.notification.flash({type: 'event', event: (payload.events[payload.events.length-1])});
 	}
     },"airflow.#","web-application-messages");
+
+    $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
+	$.ajax($.harbingerjs.core.url("/exam_info"),
+	       {data: {id: rk.split(".")[2]},
+		beforeSend: function() {
+		    //application.notification.flash("sending exam query for: " + rk);
+		},
+		success: function(exams) {
+		    $.each(exams,function(i,e) {
+			application.data.update(e.id,function(exam,rollback_id) {
+			    return e;
+			},["exam-update","modal-update"]);
+		    });
+		    application.notification.flash({type: 'info', message: ("Updated exam " +  exams[0].id)});
+		}});
+    },"#","audit");
+
 });

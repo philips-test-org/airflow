@@ -37,6 +37,23 @@ class MainController < ApplicationController
     render :json => OrmConverter.exams(exams,@entity_manager)
   end
 
+  def exam_info
+    exam = Java::HarbingerSdkData::RadExam.withId(params[:id].to_i,@entity_manager)
+    q = Java::HarbingerSdkData::RadExam.createQuery(@entity_manager)
+    filters = [q.notEqual(".id",exam.getId),
+               q.equal(".patientMrnId",exam.patient_mrn_id),
+               q.equal(".resourceId",exam.resource_id),]
+    if exam.radExamTime and exam.radExamTime.beginExam
+      filters << q.equal(".radExamTime.beginExam",exam.radExamTime.beginExam)
+    else
+      filters << q.equal(".radExamTime.appointment",exam.radExamTime.appointment)
+    end
+    q.where(filters)
+    Rails.logger.debug(q.toSQL)
+    others = q.list().to_a
+    render :json => OrmConverter.exams([exam] + others,@entity_manager)
+  end
+
   def exam
     render :json => OrmConverter.exam_modal(Java::HarbingerSdkData::RadExam.withId(params[:id].to_i,@entity_manager))
   end

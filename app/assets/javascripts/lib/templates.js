@@ -43,7 +43,14 @@ Handlebars.registerHelper('avatar',function(employee_id, placeholder) {
 
 Handlebars.registerHelper('exam_color',function(exam) {
     var color = "#ddd";
-    if (exam.adjusted.onhold == true) {
+    //light blue "#f5f52b"
+    //yellow "#f5f52b"
+    //pink "#ff51eb";
+    //purple "#9315c1";
+    //sea green "#53a790";
+    //dark blue "#398cc4";
+    //grey "a0a0a0#";
+    /*if (exam.adjusted.onhold == true) {
 	color = "#f5f52b"
     } else if (exam.rad_exam_detail.delay_reason_id) {
 	color = "#ff8800";
@@ -57,6 +64,22 @@ Handlebars.registerHelper('exam_color',function(exam) {
 	color = "#53a790";
     } else if (exam.site_class && exam.site_class.patient_type.patient_type == "I") {
 	color = "#398cc4";
+    }*/
+    // On Hold
+    if (exam.adjusted.onhold == true) {
+	color = "#f5f52b"
+    }
+    // Exam has completed
+    else if (exam.rad_exam_time.end_exam != null) {
+	color = "#53a790"; // sea green
+    }
+    // Future appointment, without patient arrived
+    else if (!(exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in)) {
+	color = "#a0a0a0"; // grey
+    }
+    // Patient is checked or signed in
+    else if ((exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in) != null) {
+	color = "#398cc4"; // dark blue
     }
     return color;
 });
