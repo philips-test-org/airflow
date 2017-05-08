@@ -50,12 +50,14 @@ $(document).ready(function() {
 	});
 	$("#view-datepicker").on("dp.change",function(e) {
 	    $("#time-button").data("value",e.date.unix());
+	    $("#time-button").html(e.date.format('dddd, LL') + ' <span class="caret"></span>');
 	    $("#time-button").trigger("click");
 	    application.drawBoard();
 	});
 	$("#today-button").on("click",function(e) {
 	    e.preventDefault();
 	    $("#time-button").data("value",moment().unix());
+	    $("#time-button").html('Today <span class="caret"></span>');
 	    $("#time-button").trigger("click");
 	    application.drawBoard();
 	});
