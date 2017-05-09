@@ -1,0 +1,17 @@
+<div class="config col-xs-12 margin-bottom icon-parent">
+  <h3>
+    <%= title %>
+    <%= render partial: "admin/icons.html.erb" %>
+  </h3>
+  <div class="col-xs-12">
+    <div class="config-param col-md-3 col-xs-12">
+      <div class="form-group">
+        <label for="value"><%#= title %></label>
+        <div class="left">
+          <input name='<%= config_key %>' type='checkbox' <%="checked" if @site_config.get_value(config_key) %> data-toggle='toggle' data-width="75" data-onstyle="success" data-offstyle="danger">
+        </div>
+        <button class="btn btn-primary right update" disabled>Update</button>
+      </div>
+    </div>
+  </div>
+</div>

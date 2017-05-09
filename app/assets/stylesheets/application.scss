@@ -56,7 +56,34 @@ $very-dark-alert-red: #750006;
 $alert-text-color: #fff;
 
 
-.margin-right { margin-right: 10px; }
+/* General helper styles */
+.left { float: left; }
+.right { float: right; }
+.center { text-align: center; }
+.no-border { border: none !important; }
+.pointer { cursor: pointer; }
+
+.margin-top { margin-top: 20px; }
+.margin-top-sm { margin-top: 10px; }
+.margin-top-xs { margin-top: 5px; }
+.margin-top-xxs { margin-top: 2px; }
+
+.margin-bottom { margin-bottom: 20px; }
+.margin-bottom-sm { margin-bottom: 10px; }
+.margin-bottom-xs { margin-bottom: 5px; }
+.margin-bottom-xxs { margin-bottom: 2px; }
+.no-margin-bottom { margin-bottom: 0px; }
+
+.margin-left { margin-left: 20px; }
+.margin-left-sm { margin-left: 10px; }
+.margin-left-xs { margin-left: 5px; }
+.margin-left-xxs { margin-left: 2px; }
+
+.margin-right { margin-right: 20px; }
+.margin-right-sm { margin-right: 10px; }
+.margin-right-xs { margin-right: 5px; }
+.margin-right-xxs { margin-right: 2px; }
+
 
 #primary-navbar { margin-bottom: 0px; }
 
@@ -572,3 +599,52 @@ Shared Styles
   left: 100%;
   margin-left: 5px;
 }
+
+/*admin roles config page styling*/
+table.roles{
+  th, td {
+    width: 33%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  td {
+    height: 1px;
+  }
+}
+
+.connected-sortable {
+  padding: 5px;
+  height: 100%;
+  border: 1px solid #525252;
+  border-radius: 10px;
+  min-height: 100px;
+  list-style-type: none;
+
+  li {
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 5px;
+    margin: 5px;
+    float:left;
+    background-color: $dark-gray;
+  }
+}
+
+.connected-sortable.all-access li { background-color: $light-sblue; }
+.connected-sortable.self-access li { background-color: $dark-orange; }
+
+.update-access {
+  float: right;
+}
+
+.success { color: green; }
+.error { color: $alert-red; }
+
+
+.config{
+  label { display: block; }
+  .left { width: 65%; }
+}
+/*end admin role page styling*/

@@ -1,0 +1,6 @@
+<ul id="<%= parent_key + "_" + access %>" class="connected-sortable <%= access %>">
+  <% items.each do |role| %>
+    <li data-role-id="<%= role %>"><%=role%></li>
+  <% end %>
+  <div style="clear: both"></div>
+</ul>

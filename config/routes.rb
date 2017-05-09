@@ -11,5 +11,9 @@ Rails.application.routes.draw do
   get 'cards' => "card_design#index"
   get 'main/:view' => "main#index"
   post 'events/add' => "events#add"
+
+  get 'admin/site-configuration' => 'admin#site_configuration'
+  put 'admin/save_config' => 'admin#save_config'
+
   root :to => redirect('main')
 end

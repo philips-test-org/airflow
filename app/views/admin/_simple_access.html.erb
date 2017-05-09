@@ -1,0 +1,25 @@
+<div id="<%=key%>" class="access-container col-xs-12" style="margin-bottom: 20px;">
+  <h3>
+    Configure <%= title %>
+    <%= render partial: "admin/icons.html.erb" %>
+    <button class="update-access btn btn-primary update" data-key="<%=key%>" disabled>Update <%= title %></button>
+  </h3>
+  <% if defaults %>
+    <h5><%= "Default Roles: #{defaults.join(", ")}"%> </h5>
+  <% end %>
+  <table class="roles">
+    <tr>
+      <th>User Roles Without Access</th>
+      <th>User Roles With Access</th>
+    </tr>
+    <tr>
+      <td valign="top">
+        <%= render partial: "role_list", locals: { items: @all_clinical_roles - @site_config.get_clinical_roles_for_key(key), parent_key: key, access: "no-access" } %>
+      </td>
+      <td class="should-send" data-key="" valign="top">
+        <%= render partial: "role_list", locals: { items: @site_config.get_clinical_roles_for_key(key), parent_key: key, access: "all-access" } %>
+      </td>
+    </tr>
+  </table>
+</div>
+

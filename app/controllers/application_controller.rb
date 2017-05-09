@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
     authenticate()
   end
 
+  def get_employee
+    @employee ||= Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
+  end
+
+  def is_support
+    authenticate_and_authorize(["it-staff","ai-staff"])
+  end
+
   # Takes a list of ORM objects (rad_exams, or patient_mrns, but NOT rad_exams and patient_mrns)
   # and does the HIPAA auditing.
   def log_hipaa_view(objects,options={})

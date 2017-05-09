@@ -34,6 +34,23 @@
 	<%= global_view_link("Overview","overview", {controller: :main, action: :index, :view => "overview"}) %>
 	<% end %>
 	<%= global_view_link("Kiosk","kiosk", {controller: :main, action: :kiosk, :view => "kiosk"}) %>
+	<% authorized(["support-staff","ai-staff", "it-staff"]) do %>
+        <li class="dropdown">
+          <a href="#" id="global-button-admin" role="button"
+             class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown">Admin <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Admin Manual", SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
+            <li><%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %></li>
+          </ul>
+        </li>
+        <% end %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle <%= "active" if params["controller"] == "main" and ["about", "help"].include? params["action"] %>" data-toggle="dropdown">Help<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to "User Manual", SiteConfiguration.get_value("user_manual"), target: "_blank" %></li>
+            <%= global_navigation_link "About", :controller => :main,  :action => :about %>
+          </ul>
+        </li>
         <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
       </ul>
       </div>
