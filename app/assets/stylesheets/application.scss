@@ -648,3 +648,57 @@ table.roles{
   .left { width: 65%; }
 }
 /*end admin role page styling*/
+
+/* Resource Group Management */
+.resource-group.selected {
+    border-left: 4px solid $neutral-sblue;
+    padding-left: 7px;
+}
+.resource-group {
+    position: relative;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #e9e9e9;
+    margin-bottom: 3px;
+    cursor: pointer;
+
+    .trash {
+	cursor: pointer;
+	margin-right: 8px;
+    }
+    .chev-right {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+    }
+}
+
+#resource-table tbody {
+    tr:hover { background-color: #e0e0e0; }
+    tr:hover td i.fa-plus-circle { display: initial; }
+    tr {
+	cursor: pointer;
+	td {
+	    i.fa-minus-circle {
+		display: none;
+	    }
+	    i.fa-plus-circle {
+		display: none;
+		margin-left: -25px;
+		margin-right: 13px;
+	    }
+	}
+    }
+    tr.selected {
+	td {
+	    i.fa-plus-circle {
+		display: none;
+	    }
+	    i.fa-minus-circle {
+		display: initial;
+		margin-left: -25px;
+		margin-right: 13px;
+	    }
+	}
+    }
+}

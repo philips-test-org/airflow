@@ -223,6 +223,11 @@ Handlebars.registerHelper('check_test',function(val) {
 
 
 /* General Helpers */
+Handlebars.registerHelper('or',function(a,b) {
+    if (a == "" || a == undefined || a == null) return b;
+    else return a;
+});
+
 Handlebars.registerHelper('eq',function(a,b) {
     return a == b;
 });

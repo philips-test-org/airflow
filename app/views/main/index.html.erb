@@ -19,9 +19,6 @@
   <%= image_tag("ajax-loader.gif") %>
 </div>
 
-<div id="notifications">
-</div>
-
 <!-- Major/Page Templates -->
 <script class="handlebars-template" id="t-workspace-loading" type="text/x-handlebars-template">
   <%= image_tag("ajax-loader.gif") %>
@@ -329,16 +326,6 @@
       </div>
     </div>
   </form>
-</script>
-
-<script class="handlebars-template" id="t-notification" type="text/x-handlebars-template">
-  <div class="notification {{type}}" id="notification-{{id}}">
-    {{#if (eq type 'event')}}
-    {{render_event event}}
-    {{else}}
-    <strong>{{type}}</strong> - {{message}}
-    {{/if}}
-  </div>
 </script>
 
 <script class="handlebars-template" id="t-date-button-popover" type="text/x-handlebars-template">

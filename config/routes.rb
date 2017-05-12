@@ -12,6 +12,13 @@ Rails.application.routes.draw do
   get 'main/:view' => "main#index"
   post 'events/add' => "events#add"
 
+  get 'resource_groups' => 'resource_groups#index'
+  get 'resource_groups/search' => 'resource_groups#search'
+  post 'resource_groups/create' => 'resource_groups#create'
+  post 'resource_groups/delete' => 'resource_groups#delete'
+  post 'resource_groups/associate' => 'resource_groups#associate'
+  post 'resource_groups/disassociate' => 'resource_groups#disassociate'
+
   get 'admin/site-configuration' => 'admin#site_configuration'
   put 'admin/save_config' => 'admin#save_config'
 

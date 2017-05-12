@@ -1,0 +1,94 @@
+<%= content_for(:javascript_includes, javascript_include_tag("pages/resource_groups")) %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Manage Resource Groups</h2>
+      <form id="group-form" class="margin-bottom-sm">
+	<div class="input-group">
+	  <input class="form-control" type="text" name="group" placeholder="Create a new group" />
+	  <div class="input-group-btn">
+	    <button class="btn btn-default"><i class="fa fa-plus"></i></button>
+	  </div>
+	</div>
+	<div class="errors"></div>
+      </form>
+      <div id="initial-resource-groups" class="data hide"><%= @resource_groups.to_json %></div>
+      <div id="resource-groups"></div>
+    </div>
+    <div class="col-md-6" id="right-col" style="display: none;">
+      <h2>Associate Resources</h2>
+      <form id="resource-form" class="margin-bottom-sm">
+	<input type="hidden" name="resource_group_id" value="" />
+	<div class="input-group">
+	  <div class="input-group-btn">
+	    <button type="button" id="modality-filter-button" style="margin-right: -2px;" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="filter-name">Any Modality</span> <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#" data-value="">Any Modality</a></li>
+	      <% Java::HarbingerSdkData::Modality.allWithLimit(100,@entity_manager).each do |m| %>
+              <li><a href="#" data-id="<%= m.getId %>"><%= m.modality %></a></li>
+	      <% end %>
+            </ul>
+	  </div>
+	  <input class="form-control" type="text" name="search" placeholder="Search by resource" />
+	  <div class="input-group-btn">
+	    <button class="btn btn-default"><i class="fa fa-search"></i></button>
+	  </div><!-- /btn-group -->
+	</div>
+	<div class="errors"></div>
+      </form>
+      <div id="resources"></div>
+    </div>
+  </div>
+</div>
+
+<script class="handlebars-template" id="t-loading" type="text/x-handlebars-template">
+  <%= image_tag("ajax-loader.gif") %>
+</script>
+
+<script class="handlebars-template" id="t-resource-groups" type="text/x-handlebars-template">
+  {{#each this}}
+  {{> resourceGroup}}
+  {{else}}
+  <div class="well">You have no resource groups. Use the form above to create one.</div>
+  {{/each}}
+</script>
+
+<script class="handlebars-template" id="t-resource-group" type="text/x-handlebars-template">
+  <div class="resource-group {{selected_check this}}" data-id="{{id}}">
+    <span class="trash"><i class="fa fa-trash"></i></span>
+    <span class="name">{{group_name}}</span>
+    <span class="chev-right"><i class="fa fa-chevron-right"></i></span>
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-resource-table" type="text/x-handlebars-template">
+  <table id="resource-table" class="table table-striped">
+    <thead>
+      <tr>
+	<th>Resource</th>
+	<th>Name</th>
+	<th>Modality</th>
+	<th>Site</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this}}
+      {{> resource}}
+      {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<script class="handlebars-template" id="t-resource" type="text/x-handlebars-template">
+  <tr class="{{state}}" data-id="{{id}}">
+    <td><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle"></i>{{resource}}</td>
+    <td>{{name}}</td>
+    <td>{{modality.modality}}</td>
+    <td>{{or site.name site.site}}</td>
+  </tr>
+</script>
+
+<script class="handlebars-template" id="t-form-error" type="text/x-handlebars-template">
+  <div class="margin-top margin-bottom alert alert-danger">{{this}}</div>
+</script>
