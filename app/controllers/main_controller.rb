@@ -5,16 +5,7 @@ class MainController < ApplicationController
 
   def index
     @employee = Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
-    q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
-    q.where(q.in(".resource",["VHC Trauma CT-1", "VHC Trauma CT-2", "VHC Main CT-2", "VHC Main CT-3", "VHO-CT CT-1", "VHO-CT CT-2", "VHO-CT CT-3", "VHS-2 TRAUMA", "VHC Main CT-1"]))
-    resources = q.list.to_a
-
-    q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
-    q.where(q.in(".resource",["VHC MR-1", "VHC MR-2", "VHC MR-3","VHO-MR MR-1", "VHO-MR MR-2", "VHO-MR MR-3"]))
-    resources2 = q.list.to_a
-
-    # Will become configurable and use ids instead of resource names
-    @groupings = {"CT" => OrmConverter.resources(resources), "MR" => OrmConverter.resources(resources2)}
+    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
   end
 
   def exams
@@ -31,8 +22,6 @@ class MainController < ApplicationController
                              date.beginning_of_day,
                              date.end_of_day)])
             ])
-    # Remove me before production
-    Rails.logger.debug(q.toSQL)
     exams = q.list
     render :json => OrmConverter.exams(exams,@entity_manager)
   end
@@ -49,7 +38,6 @@ class MainController < ApplicationController
       filters << q.equal(".radExamTime.appointment",exam.radExamTime.appointment)
     end
     q.where(filters)
-    Rails.logger.debug(q.toSQL)
     others = q.list().to_a
     render :json => OrmConverter.exams([exam] + others,@entity_manager)
   end
@@ -59,16 +47,7 @@ class MainController < ApplicationController
   end
 
   def kiosk
-    q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
-    q.where(q.in(".resource",["VHC Trauma CT-1", "VHC Trauma CT-2", "VHC Main CT-2", "VHC Main CT-3", "VHO-CT CT-1", "VHO-CT CT-2", "VHO-CT CT-3", "VHS-2 TRAUMA", "VHC Main CT-1"]))
-    resources = q.list.to_a
-
-    q = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
-    q.where(q.in(".resource",["VHC MR-1", "VHC MR-2", "VHC MR-3","VHO-MR MR-1", "VHO-MR MR-2", "VHO-MR MR-3"]))
-    resources2 = q.list.to_a
-
-    # Will become configurable and use ids instead of resource names
-    @groupings = {"CT" => OrmConverter.resources(resources), "MR" => OrmConverter.resources(resources2)}
+    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
   end
 
   def about

@@ -3,22 +3,26 @@ if (typeof application == "undefined") { application = {} }
 application.drawBoard = function() {
     //Fix: This needs to be adjusted to the group name when that backend exists
     var resources = $.parseJSON($("#resource-groupings-json").text())[$("#resource-group-buttons button").data("value")];
-    var data = $.map(resources,function(r,i) {
-	return {name: "resource_ids[]",
-		value: r.id};
-    });
-    data.push({name: "date",
-	       value: $("#time-button").data("value")});
+    if (resources == undefined) {
+	$("#workspace").html(application.templates.noResources());
+    } else {
+	var data = $.map(resources,function(r,i) {
+	    return {name: "resource_ids[]",
+		    value: r.id};
+	});
+	data.push({name: "date",
+		   value: $("#time-button").data("value")});
 
-    $.ajax($.harbingerjs.core.url("exams"),
-	   {data: data,
-	    beforeSend: function() {
-		$("#workspace").html(application.templates.workspaceLoading());
-	    },
-	    success: function(exams) {
-		application.data.formatExams(exams);
-		application.view.setup();
-	    }});
+	$.ajax($.harbingerjs.core.url("exams"),
+	       {data: data,
+		beforeSend: function() {
+		    $("#workspace").html(application.templates.workspaceLoading());
+		},
+		success: function(exams) {
+		    application.data.formatExams(exams);
+		    application.view.setup();
+		}});
+    }
 };
 
 
