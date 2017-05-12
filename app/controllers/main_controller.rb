@@ -23,6 +23,7 @@ class MainController < ApplicationController
                              date.end_of_day)])
             ])
     exams = q.list
+    log_hipaa_view(exams)
     render :json => OrmConverter.exams(exams,@entity_manager)
   end
 
@@ -39,6 +40,7 @@ class MainController < ApplicationController
     end
     q.where(filters)
     others = q.list().to_a
+    log_hipaa_view([exam] + others)
     render :json => OrmConverter.exams([exam] + others,@entity_manager)
   end
 
