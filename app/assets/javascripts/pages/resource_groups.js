@@ -55,6 +55,8 @@ $(document).ready(function() {
 		       {method: 'post',
 			data: {id: $(this).data("id")},
 			success: function(resposne) {
+			    if (self.hasClass("selected")) { $("#right-col").hide(); }
+			    data = data.filter(function(group) { return group.id != self.data("id"); });
 			    self.remove();
 			    application.notification.flash({type: 'info', message: 'Deleted resource group'});
 			},
