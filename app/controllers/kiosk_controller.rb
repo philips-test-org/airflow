@@ -1,4 +1,4 @@
-class MainController < ApplicationController
+class KioskController < ApplicationController
   before_filter :get_entity_manager
   before_filter :general_authentication
   after_filter :close_entity_manager
@@ -7,12 +7,11 @@ class MainController < ApplicationController
     @groupings = ResourceGroup.resource_group_hash(@entity_manager)
   end
 
-  def exams
+  def exam_info
     date = Time.at(params[:date].to_i) unless params[:date].blank?
     date ||= Time.now
     q = Java::HarbingerSdkData::RadExam.createQuery(@entity_manager)
     q.where([q.in(".resourceId",params[:resource_ids]),
-             # q.equal(".resource.modality.modality","CT"),
              q.notEqual(".currentStatus.universalEventType.eventType","cancelled"),
              q.or([q.between(".radExamTime.appointment",
                              date.beginning_of_day,

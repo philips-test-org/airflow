@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     if ($(".active .view-changer").length > 0) {
-	var view = $(".active .view-changer").data("view-type");
+	var view =  $(".active .view-changer").data("view-type");
 	application.view = application[view];
     } else {
 	application.view = application.calendar;

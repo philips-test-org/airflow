@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   get 'unauthorized' => "unauthorized#index"
   get 'main' => "main#index", :defaults => {:view => "calendar"}
-  get 'kiosk' => "main#kiosk", :defaults => {:view => "kiosk"}
+  get 'kiosk' => "kiosk#index", :defaults => {:view => "kiosk"}
   get 'exam' => "main#exam"
   get 'exams' => "main#exams"
   get 'exam_info' => "main#exam_info"
+  get 'limited_exam_info' => "kiosk#exam_info"
   get 'avatar' => 'pictures#show'
   get 'about' => "main#about"
   get 'help' => "main#help"

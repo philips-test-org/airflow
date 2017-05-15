@@ -13,7 +13,10 @@ application.drawBoard = function() {
 	data.push({name: "date",
 		   value: $("#time-button").data("value")});
 
-	$.ajax($.harbingerjs.core.url("exams"),
+	if ($(".active .view-changer").data("view-type") == "kiosk") { var url = $.harbingerjs.core.url("limited_exam_info"); }
+	else {  var url = $.harbingerjs.core.url("exams"); }
+
+	$.ajax(url,
 	       {data: data,
 		beforeSend: function() {
 		    $("#workspace").html(application.templates.workspaceLoading());
@@ -172,7 +175,7 @@ application.kiosk = $.extend({},application.calendar,{
 	setInterval(application.kiosk.drawNow, 1 / application.templates.pixels_per_second * 1000);
 
 	application.data.hook("exam-update","card-redraw",function(exam) {
-	    application.calendar.redrawCard(exam);
+	    application.kiosk.redrawCard(exam);
 	});
 
     },

@@ -70,7 +70,7 @@ Handlebars.registerHelper('exam_color',function(exam) {
 	color = "#f5f52b"
     }
     // Cancelled Exam
-    else if (exam.current_status.universal_event_type.event_type == "cancelled") {
+    else if (exam.current_status.universal_event_type && exam.current_status.universal_event_type.event_type == "cancelled") {
 	color = "#c8040e;"
     }
     // Exam has completed
