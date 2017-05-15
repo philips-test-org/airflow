@@ -69,6 +69,10 @@ Handlebars.registerHelper('exam_color',function(exam) {
     if (exam.adjusted.onhold == true) {
 	color = "#f5f52b"
     }
+    // Cancelled Exam
+    else if (exam.current_status.universal_event_type.event_type == "cancelled") {
+	color = "#c8040e;"
+    }
     // Exam has completed
     else if (exam.rad_exam_time.end_exam != null) {
 	color = "#53a790"; // sea green

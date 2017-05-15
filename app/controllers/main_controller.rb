@@ -48,10 +48,6 @@ class MainController < ApplicationController
     render :json => OrmConverter.exam_modal(Java::HarbingerSdkData::RadExam.withId(params[:id].to_i,@entity_manager))
   end
 
-  def kiosk
-    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
-  end
-
   def about
   end
 

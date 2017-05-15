@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def general_authentication
-    authenticate()
+    authenticate_and_authorize(SiteConfiguration.get_clinical_roles_for_key("clinical_roles_auth_list"))
   end
 
   def get_employee
