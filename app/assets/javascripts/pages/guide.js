@@ -122,7 +122,7 @@ $(document).ready(function() {
 		success: function(exams) {
 		    $.each(exams,function(i,e) {
 			if (application.data.resourceHash[e.resource_id] != undefined) {
-			    if (operation == "insert") {
+			    if (application.data.examGroups[application.data.examGroupIdent(e)] == undefined) {
 				application.data.insert(e);
 				application.view.redrawCard(e);
 			    } else {
