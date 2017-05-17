@@ -2,11 +2,11 @@
 </div>
 
 <script class="handlebars-template" id="t-notification" type="text/x-handlebars-template">
-  <div class="notification {{type}}" id="notification-{{id}}">
-    {{#if (eq type 'event')}}
-    {{render_event event}}
+  <div class="{{notification_type type}}" id="notification-{{id}}">
+    {{#if (event_type_check type)}}
+      {{render_event event}}
     {{else}}
-    <strong>{{type}}</strong> - {{message}}
+      <strong>{{type}}</strong> - {{message}}
     {{/if}}
   </div>
 </script>

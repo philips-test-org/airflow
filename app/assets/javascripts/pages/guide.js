@@ -63,13 +63,22 @@ $(document).ready(function() {
 	});
     });
 
+    $("#legend-button").popover({
+	title: "Legend",
+	content: application.templates.legend(application.statuses),
+	html: true,
+	placement: "bottom",
+	container: 'body'
+    });
+
     //Add a disconnect callback
     $.harbingerjs.amqp.addCallback('disconnect',function(message) {
-	application.notification.alert({type: "alert", message: "Oh no! We lost the real time data connection."});
+	application.notification.alert({type: "alert", id: "disconnect", message: "You are no longer receiving real time updates. This likely means you need to log in again. Reload the page to continue."});
     });
 
     //Add a connect callback
     $.harbingerjs.amqp.addCallback('connect',function(message) {
+	$("#notification-disconnect").remove();
 	application.notification.flash("Connected to real time data.");
     });
 
@@ -92,11 +101,19 @@ $(document).ready(function() {
 		exam.events = payload.events;
 		return exam;
 	    },["exam-update","modal-update"]);
-	    application.notification.flash({type: 'event', event: (payload.events[payload.events.length-1])});
+	    var event = payload.events[payload.events.length-1];
+	    if (event.event_type == "comment") {
+		var event_type = "comment";
+	    } else {
+		var event_type = "event";
+	    }
+	    application.notification.flash({type: event_type, event: event});
 	}
     },"airflow.#","web-application-messages");
 
     $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
+	var operation = rk.split(".")[1];
+
 	$.ajax($.harbingerjs.core.url("/exam_info"),
 	       {data: {id: rk.split(".")[2]},
 		beforeSend: function() {
@@ -104,11 +121,19 @@ $(document).ready(function() {
 		},
 		success: function(exams) {
 		    $.each(exams,function(i,e) {
-			application.data.update(e.id,function(exam,rollback_id) {
-			    return e;
-			},["exam-update","modal-update"]);
+			if (application.data.resourceHash[e.resource_id] != undefined) {
+			    if (operation == "insert") {
+				application.data.insert(e);
+				application.view.redrawCard(e);
+			    } else {
+				application.data.update(e.id,function(exam,rollback_id) {
+				    $.extend(exam,e);
+				    return exam;
+				},["exam-update","modal-update"]);
+			    }
+			}
 		    });
-		    application.notification.flash({type: 'info', message: ("Updated exam " +  exams[0].id)});
+		    //application.notification.flash({type: 'info', message: (operation + " exam " +  exams[0].id)});
 		}});
     },"#","audit");
 

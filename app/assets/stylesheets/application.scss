@@ -702,3 +702,21 @@ table.roles{
 	}
     }
 }
+
+#legend {
+  .status {
+    padding: 10px;
+    .color {
+      display: block;
+      width: 20px;
+      height: 20px;
+      float: left;
+      margin-right: 10px;
+    }
+    .name {
+      line-height: 20px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+}

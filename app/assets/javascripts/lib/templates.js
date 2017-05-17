@@ -3,6 +3,34 @@ if (typeof application == "undefined") { application = {} }
 application.templates = {};
 application.partials = {};
 application.templates.pixels_per_second = 200.0 / 60.0 / 60.0;
+application.statuses = {
+    color: function(exam) {
+	var color = "#ddd";
+	for (var i in application.statuses.checks) {
+	    if (application.statuses.checks[i].check(exam)) {
+		color = application.statuses.checks[i].color;
+		break;
+	    }
+	}
+	return color;
+    },
+    checks: [{name: "On Hold",
+	      color: "#f5f52b",
+	      check: function(exam) { return (exam.adjusted.onhold == true); }},
+	     {name: "Cancelled",
+	      color: "#c8040e",
+	      check: function(exam) { return (exam.current_status.universal_event_type && exam.current_status.universal_event_type.event_type == "cancelled"); }},
+	     {name: "Completed",
+	      color: "#398cc4",
+	      check: function(exam) { return (exam.rad_exam_time.end_exam != null); }},
+	     {name: "Future Appointment",
+	      color: "#a0a0a0",
+	      check: function(exam) { return (!(exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in)); }},
+	     {name: "Patient Arrived",
+	      color: "#53a790",
+	      check: function(exam) { return ((exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in) != null); }}
+	    ]
+};
 
 $(document).ready(function() {
     $.each($(".handlebars-template"),function(i,e) {
@@ -42,50 +70,7 @@ Handlebars.registerHelper('avatar',function(employee_id, placeholder) {
 });
 
 Handlebars.registerHelper('exam_color',function(exam) {
-    var color = "#ddd";
-    //light blue "#f5f52b"
-    //yellow "#f5f52b"
-    //pink "#ff51eb";
-    //purple "#9315c1";
-    //sea green "#53a790";
-    //dark blue "#398cc4";
-    //grey "a0a0a0#";
-    /*if (exam.adjusted.onhold == true) {
-	color = "#f5f52b"
-    } else if (exam.rad_exam_detail.delay_reason_id) {
-	color = "#ff8800";
-    } else if (!(exam.rad_exam_time.begin_exam && exam.rad_exam_time.appointment)) {
-	color = "#57dee8";
-    } else if (exam.site_class && exam.site_class.trauma) {
-	color = "#ff51eb";
-    } else if (exam.site_class && exam.site_class.ed) {
-	color = "#9315c1";
-    } else if (exam.site_class && exam.site_class.patient_type && exam.site_class.patient_type.patient_type == "O") {
-	color = "#53a790";
-    } else if (exam.site_class && exam.site_class.patient_type.patient_type == "I") {
-	color = "#398cc4";
-    }*/
-    // On Hold
-    if (exam.adjusted.onhold == true) {
-	color = "#f5f52b"
-    }
-    // Cancelled Exam
-    else if (exam.current_status.universal_event_type && exam.current_status.universal_event_type.event_type == "cancelled") {
-	color = "#c8040e;"
-    }
-    // Exam has completed
-    else if (exam.rad_exam_time.end_exam != null) {
-	color = "#53a790"; // sea green
-    }
-    // Future appointment, without patient arrived
-    else if (!(exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in)) {
-	color = "#a0a0a0"; // grey
-    }
-    // Patient is checked or signed in
-    else if ((exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in) != null) {
-	color = "#398cc4"; // dark blue
-    }
-    return color;
+    return application.statuses.color(exam);
 });
 
 Handlebars.registerHelper('exams_from_resource',function(resource) {
@@ -151,6 +136,19 @@ Handlebars.registerHelper('resource_name',function(exam) {
 	return exam.resource.name;
     } else {
 	return exam.resource.resource;
+    }
+});
+
+Handlebars.registerHelper('event_type_check',function(type) {
+    if (type == "comment" || type == "event") return true;
+    else return false;
+});
+
+Handlebars.registerHelper('notification_type',function(type) {
+    if (type == "comment") {
+	return "comment-notification " + type;
+    } else {
+	return "notification " + type;
     }
 });
 

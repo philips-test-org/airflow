@@ -15,8 +15,13 @@ application.notification = {
 	if ($.type(message) == "string") {
 	    var message = {type: 'info', message: message};
 	}
+
 	if (message.id == undefined) { message.id = application.notification.serial++ }
-	$("#notifications").prepend(application.templates.notification(message));
+
+	// If there is no previous message then draw
+	if ($("#notification-" + message.id).length == 0) {
+	    $("#notifications").prepend(application.templates.notification(message));
+	}
 	return $("#notification-" + message.id);
     }
 };

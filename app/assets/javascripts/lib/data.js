@@ -61,7 +61,7 @@ application.data = {
 	application.data.resources = [];
 	application.data.resourceHash = {};
 	application.data.resourceGroups = {};
-	
+
 	// Parse and store resource and resource group information
 	application.data.resourceGroups = $.parseJSON($("#resource-groupings-json").text());
 	application.data.resources = application.data.resourceGroups[$("#resource-group-buttons button").data("value")];
@@ -72,14 +72,18 @@ application.data = {
 	// store exams, grouping information, and master exam ids
 	for (var i in exams) {
 	    var exam = exams[i];
-	    exam.group_ident = application.data.examGroupIdent(exam);
-	    application.data.examHash[exam.id] = exam;
-	    if (application.data.examGroups[exam.group_ident] == undefined) {
-		application.data.examGroups[exam.group_ident] = [exam.id];
-		application.data.masterExams.push(exam.id);
-	    } else {
-		application.data.examGroups[exam.group_ident].push(exam.id);
-	    }
+	    application.data.insert(exam);
+	}
+    },
+
+    insert: function(exam) {
+	exam.group_ident = application.data.examGroupIdent(exam);
+	application.data.examHash[exam.id] = exam;
+	if (application.data.examGroups[exam.group_ident] == undefined) {
+	    application.data.examGroups[exam.group_ident] = [exam.id];
+	    application.data.masterExams.push(exam.id);
+	} else {
+	    application.data.examGroups[exam.group_ident].push(exam.id);
 	}
     },
 

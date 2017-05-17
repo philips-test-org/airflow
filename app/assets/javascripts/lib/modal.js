@@ -26,7 +26,9 @@ application.modal = {
 
 $(document).ready(function(e) {
     application.data.hook("modal-update","modal-redraw",function(exam) {
-	application.modal.redrawStatus(exam);
+	if (application.modal.checkEvent(exam)) {
+	    application.modal.redrawStatus(exam);
+	}
     });
 
     application.data.hook("event-submit","event-list-redraw",function(exam) {

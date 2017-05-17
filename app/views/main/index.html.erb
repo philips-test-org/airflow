@@ -1,23 +1,5 @@
 <% content_for(:javascript_includes, javascript_include_tag("pages/guide")) %>
-<div class="data hide" id="resource-groupings-json"><%= JSON.dump(@groupings) %></div>
-<div id="view-controls">
-  <div class="btn-group">
-    <button class="btn btn-default btn-sm" id="time-button">Today <span class="caret"></span></button>
-  </div>
-  <div class="btn-group pull-right" id="resource-group-buttons">
-    <button class="btn btn-default btn-sm dropdown-toggle" data-value="<%= @groupings.keys.first %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="group-name"><%= @groupings.keys.first %></span>
-      <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <% @groupings.keys.each do |k| %>
-      <li><a data-value="<%= k %>" href="#"><%= k %></a></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-<div id="workspace" class="vertical-timeline">
-  <%= image_tag("ajax-loader.gif") %>
-</div>
+<%= render partial: "main/board_basics" %>
 
 <!-- Major/Page Templates -->
 <script class="handlebars-template" id="t-workspace-loading" type="text/x-handlebars-template">

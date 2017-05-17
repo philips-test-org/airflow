@@ -88,6 +88,12 @@ application.calendar = {
     },
     redrawCard: function(exam) {
 	var card = application.calendar.findCard(exam);
+	var exam_resource_id = application.data.resource(exam).id;
+
+	if (card.length == 0) {
+	    $("#time-grid td[data-resource-id='" + exam_resource_id + "']").append(application.templates.scaledCard(exam));
+	    var card = application.calendar.findCard(exam);
+	}
 	var current_resource_id = card.parents("td").data("resource-id");
 	var exam_resource_id = application.data.resource(exam).id;
 	//console.log(current_resource_id,exam_resource_id);
