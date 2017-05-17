@@ -146,7 +146,16 @@ application.overview = {
 	return $("#fixed-card-" + exam.id);
     },
     redrawCard: function(exam) {
-	return application.overview.findCard(exam).replaceWith(application.templates.fixedCard(exam));
+	var card = application.overview.findCard(exam);
+	var exam_resource_id = application.data.resource(exam).id;
+
+	if (card.length == 0) {
+	    $(".resource-row[data-id='" + exam_resource_id + "']").append(application.templates.fixedCard(exam));
+	    var card = application.overview.findCard(exam);
+	} else {
+	    card = card.replaceWith(application.templates.fixedCard(exam));
+	}
+	return card;
     }
 }
 

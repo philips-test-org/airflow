@@ -64,7 +64,7 @@
 </script>
 
 <script class="handlebars-template" id="t-resource-row" type="text/x-handlebars-template">
-  <div class="resource-row">
+  <div class="resource-row" data-id="{{id}}">
     <h1>{{name}}</h1>
     {{#each (exams_from_resource this)}}
     {{> fixedCard this}}
