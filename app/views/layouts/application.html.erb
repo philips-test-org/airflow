@@ -39,9 +39,9 @@
           <a href="#" id="global-button-admin" role="button"
              class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown">Admin <span class="caret"></span></a>
           <ul class="dropdown-menu">
-	    <li><%= global_navigation_link "Resource Groups", :controller => :resource_groups, :action => :index %></li>
+	    <%= global_navigation_link "Resource Groups", :controller => :resource_groups, :action => :index %>
             <li><%= link_to "Admin Manual", SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
-            <li><%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %></li>
+            <%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %>
           </ul>
         </li>
         <% end %>

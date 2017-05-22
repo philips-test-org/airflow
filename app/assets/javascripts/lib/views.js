@@ -13,8 +13,8 @@ application.drawBoard = function() {
 	data.push({name: "date",
 		   value: $("#time-button").data("value")});
 
-	if ($(".active .view-changer").data("view-type") == "kiosk") { var url = $.harbingerjs.core.url("limited_exam_info"); }
-	else {  var url = $.harbingerjs.core.url("exams"); }
+	if ($(".active .view-changer").data("view-type") == "kiosk") { var url = $.harbingerjs.core.url("/limited_exam_info"); }
+	else {  var url = $.harbingerjs.core.url("/exams"); }
 
 	$.ajax(url,
 	       {data: data,
@@ -60,13 +60,14 @@ application.calendar = {
 	    accepts: ".notecard",
 	    drop: function(e) {
 		var column = $(this);
-		if ($(e.toElement).hasClass("notecard")) {
-		    var notecard = $(e.toElement);
+		if ($(e.originalEvent.target).hasClass("notecard")) {
+		    var notecard = $(e.originalEvent.target);
 		} else {
-		    var notecard = $(e.toElement).parents(".notecard");
+		    var notecard = $(e.originalEvent.target).parents(".notecard");
 		}
 		var id = notecard.find(".data").data("exam-id");
 		var resource_id = column.data("resource-id");
+
 		application.data.updateLocation(id,resource_id,notecard.position().top);
 	    }});
 

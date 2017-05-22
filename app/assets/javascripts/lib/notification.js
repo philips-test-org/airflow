@@ -4,7 +4,7 @@ application.notification = {
     serial: 1,
     flash: function(message) {
 	var m = application.notification.draw(message);
-	setTimeout(function() { m.fadeOut(400,function() { this.remove() }); },3000);
+	setTimeout(function() { m.fadeOut(400,function() { m.remove() }); },3000);
     },
 
     alert: function(message) {
