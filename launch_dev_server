@@ -1,1 +1,1 @@
-DEV_MODE="on" JRUBY_OPTS="-J-Xmx4096m -J-XX:MaxPermSize=512m -J-Dharbinger.sso.url=http://graylab1.radiology.umm.edu:8088/openam" rails server -p 3001 -b 0.0.0.0
+DEV_MODE="on" JRUBY_OPTS="-J-Xmx4096m -J-XX:MaxPermSize=512m -J-Dharbinger.sso.url=http://sparkqa1.analytical.info:8088/openam" rails server -p 3001 -b 0.0.0.0
