@@ -13,6 +13,15 @@ $(document).ready(function() {
 	}
     });
 
+    $("#legend-button").popover({
+	title: "Legend",
+	content: application.templates.legend(application.statuses),
+	html: true,
+	placement: "bottom",
+	container: 'body'
+    });
+
+
     setInterval(function() {
 	//Fix: This needs to be adjusted to the group name when that backend exists
 	var resources = $.parseJSON($("#resource-groupings-json").text())[$("#resource-group-buttons button").data("value")];
