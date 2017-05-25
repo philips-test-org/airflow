@@ -217,6 +217,8 @@
       {{> demographicsTableRow key="Patient Location" value=(patient_location this)}}
       {{> demographicsTableRow key="Resource" value=(resource_name this)}}
       {{> demographicsTableRow key="Procedure" value=procedure.description}}
+      {{> demographicsTableRow key="Sign In" value=(format_timestamp rad_exam_time.sign_in)}}
+      {{> demographicsTableRow key="Check In" value=(format_timestamp rad_exam_time.check_in)}}
       {{> demographicsTableRow key="Appointment" value=(format_timestamp rad_exam_time.appointment)}}
       {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam_time.begin_exam)}}
       {{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam_time.end_exam)}}

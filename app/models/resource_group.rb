@@ -6,7 +6,7 @@ class ResourceGroup < ActiveRecord::Base
   def self.resource_group_hash(em)
     rgs = self.all.to_a
     rgs.delete_if {|rg| rg.resource_group_mappings.size == 0 }
-    rgs.sort(&:group_name).inject({}) {|hash,rg| hash[rg.group_name] = OrmConverter.resources(rg.resources(em)); hash }
+    rgs.sort {|a,b| a.group_name <=> b.group_name}.inject({}) {|hash,rg| hash[rg.group_name] = OrmConverter.resources(rg.resources(em)); hash }
   end
 
   def resources(em)
