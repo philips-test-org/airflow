@@ -2,14 +2,14 @@
 
 | Bridge Version | Required Data Elements | Context Integration URL |
 |----------------|------------------------|-------------------------|
-| >= 3.7.0 | Core Radiology | N/A |
+| >= 3.6.6 | Core Radiology | N/A |
 
 ## Installation
 
 ```bash
 unzip airflow-VERSION.zip
 cd airflow-VERSION
-cp airflow.war.VERSION /tmp/analytics-core.war
+cp airflow.war.VERSION /tmp/airflow.war
 cd db_scripts
 ./install.sh
 ./create-glassfish-jdbc.sh
