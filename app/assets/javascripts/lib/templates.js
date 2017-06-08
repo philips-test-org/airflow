@@ -76,7 +76,8 @@ Handlebars.registerHelper('exam_color',function(exam) {
 Handlebars.registerHelper('exams_from_resource',function(resource) {
     return application.data.masterExams
 	.map(function(id) { return application.data.examHash[id]; })
-	.filter(function(exam) { return application.data.resource(exam).id == resource.id; })
+	.filter(function(exam) { if (application.data.resource(exam) == undefined) { return false; }
+				 else { return application.data.resource(exam).id == resource.id; } })
 	.sort(function(a,b) {
 	    if (application.data.examStartTime(a) < application.data.examStartTime(b)) {
 		return -1;
