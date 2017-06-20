@@ -68,7 +68,8 @@ $(document).ready(function() {
 	content: application.templates.legend(application.statuses),
 	html: true,
 	placement: "bottom",
-	container: 'body'
+	container: 'body',
+	trigger: 'focus'
     });
 
     //Add a disconnect callback
