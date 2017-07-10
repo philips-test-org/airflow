@@ -91,6 +91,10 @@ Handlebars.registerHelper('exams_from_resource',function(resource) {
 	});
 });
 
+Handlebars.registerHelper('exam_with_fellows',function(exam) {
+    return application.data.findExamWithFellows(exam.id);
+});
+
 Handlebars.registerHelper('exam_height',function(exam) {
     var seconds = ((application.data.examStopTime(exam) - application.data.examStartTime(exam)) / 1000);
     return Math.round(seconds * application.templates.pixels_per_second) + "px";
@@ -236,6 +240,10 @@ Handlebars.registerHelper('or',function(a,b) {
 
 Handlebars.registerHelper('eq',function(a,b) {
     return a == b;
+});
+
+Handlebars.registerHelper('log',function(a) {
+    console.log(a);
 });
 
 Handlebars.registerHelper('multiply',function(a,b) {

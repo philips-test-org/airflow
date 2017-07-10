@@ -1,6 +1,7 @@
 class MainController < ApplicationController
   before_filter :get_entity_manager
   before_filter :general_authentication
+  after_filter :log_usage_data, :except => :exam_info
   after_filter :close_entity_manager
 
   def index
@@ -22,6 +23,7 @@ class MainController < ApplicationController
                              date.beginning_of_day,
                              date.end_of_day)])
             ])
+    q.order(".accession asc")
     exams = q.list
     log_hipaa_view(exams)
     render :json => OrmConverter.exams(exams,@entity_manager)

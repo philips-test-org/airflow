@@ -1,5 +1,6 @@
 class KioskController < ApplicationController
   before_filter :get_entity_manager
+  after_filter :log_usage_data, :except => :exam_info
   after_filter :close_entity_manager
 
   def index

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'avatar' => 'pictures#show'
   get 'about' => "main#about"
   get 'help' => "main#help"
-  get 'cards' => "card_design#index"
+#  get 'cards' => "card_design#index"
   get 'main/:view' => "main#index"
   post 'events/add' => "events#add"
 

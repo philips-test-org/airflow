@@ -516,6 +516,15 @@ Shared Styles
     width: 95%;
 }
 
+#exam-modal {
+    .modal-header {
+	border-bottom: 0;
+    }
+    .nav {
+	padding-left: 14px;
+    }
+}
+
 #exam-modal .modal-content {
     padding-left: 14px;
     border-radius: 0;

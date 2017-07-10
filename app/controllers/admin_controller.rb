@@ -2,6 +2,7 @@ class AdminController < ApplicationController
   before_filter :is_support
   before_filter :get_entity_manager
   before_filter :get_employee
+  after_filter :log_usage_data
   after_filter :close_entity_manager
 
   def site_configuration
