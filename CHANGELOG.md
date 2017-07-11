@@ -1,3 +1,9 @@
+## v1.0.0-rc4 released 2017-06-20
+
+* **improvement:** Added patient type to the cards
+* **improvement:** Moved anesthesia to a "GA" icon and placed in the bottom left of the card
+* **improvement:** Legend is now focus based
+
 
 ## v1.0.0-rc3 released 2017-06-08
 

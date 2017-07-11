@@ -35,7 +35,8 @@ module OrmConverter
       :resource => {:modality => {}},
       :site_class => {:patient_type => {}},
       :current_status => {:universal_event_type => {}},
-      :site_sublocation => {:site_location => {}}
+      :site_sublocation => {:site_location => {}},
+      :order => {}
     }
     exams.inject([]) do |list,exam|
       hash = get_data(tree,exam,{})

@@ -173,7 +173,7 @@
   </div>
     <ul class="nav nav-tabs" role="tablist">
       {{#each (exam_with_fellows this)}}
-      <li role="presentation" class="{{#if (eq ../this.id undefined)}}active{{/if}}"><a href="#exam-content-{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{id}}</a></li>
+      <li role="presentation" class="{{#if (eq ../this.id undefined)}}active{{/if}}"><a href="#exam-content-{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{accession}}</a></li>
       {{/each}}
     </ul>
   <div class="modal-body">
@@ -235,9 +235,13 @@
   <table class="table table-bordered table-striped">
     <tbody>
       <!--{{> demographicsTableRow key="Patient Name" value=(format_name patient_mrn.patient.name)}}-->
+      {{> demographicsTableRow key="Accession" value=accession}}
+      {{> demographicsTableRow key="Order Number" value=order.order_number}}
       {{> demographicsTableRow key="Patient MRN" value=patient_mrn.mrn}}
       {{> demographicsTableRow key="Patient DOB" value=(format_date patient_mrn.patient.birthdate)}}
       {{> demographicsTableRow key="Patient Location" value=(patient_location this)}}
+      {{> demographicsTableRow key="Patient Type" value=site_class.patient_type.patient_type}}
+      {{> demographicsTableRow key="Patient Class" value=(site_class_name site_class)}}
       {{> demographicsTableRow key="Resource" value=(resource_name this)}}
       {{> demographicsTableRow key="Procedure" value=procedure.description}}
       {{> demographicsTableRow key="Sign In" value=(format_timestamp rad_exam_time.sign_in)}}

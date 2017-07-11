@@ -112,7 +112,7 @@ Handlebars.registerHelper('exam_top',function(exam) {
 });
 
 Handlebars.registerHelper('kiosk_number',function(id) {
-    return String(id).slice(-3)
+    return String(id).slice(-4)
 });
 
 Handlebars.registerHelper('kiosk_number_html',function(exam) {
@@ -144,6 +144,16 @@ Handlebars.registerHelper('resource_name',function(exam) {
 	return exam.resource.name;
     } else {
 	return exam.resource.resource;
+    }
+});
+
+Handlebars.registerHelper('site_class_name',function(site_class) {
+    if (site_class == undefined) {
+	return "";
+    } else if (site_class.name != "" && site_class.name != undefined) {
+	return site_class.name;
+    } else {
+	return site_class.site_class;
     }
 });
 
