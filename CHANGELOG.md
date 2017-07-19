@@ -1,3 +1,10 @@
+## v1.0.0-rc5 released 2017-07-19
+
+* **bugfix:** Comments/events should always show up moving forward. Cleared the ambiguity of which exam would be selected for fk reference
+* **improvement:** Made the color bar wider by request of customer
+* **improvement:** Changed comments/events to have the form on top and the events in descending order
+* **bugfix:** Limited usage logging to user driven functions to prevent saturating the bus with meaningless events
+
 ## v1.0.0-rc4 released 2017-06-20
 
 * **improvement:** Added patient type to the cards
