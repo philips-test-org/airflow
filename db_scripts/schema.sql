@@ -40,7 +40,7 @@ CREATE SEQUENCE airflow_site_config_id_seq
 
 CREATE TABLE airflow_exam_adjustments (
        	id bigint DEFAULT nextval('airflow_exam_adjustments_id_seq'::regclass) NOT NULL,
-	rad_exam_id bigint NOT NULL,
+	order_id bigint NOT NULL,
 	adjusted_attributes text NOT NULL DEFAULT '{}',
 	created_at timestamp with time zone DEFAULT now() NOT NULL,
 	updated_at timestamp with time zone DEFAULT now() NOT NULL
@@ -104,7 +104,7 @@ ALTER TABLE airflow_resource_group_mappings
 ALTER TABLE airflow_site_config
       ADD CONSTRAINT airflow_site_config_id_pk PRIMARY KEY (id);
 
-CREATE INDEX airflow_exam_adjustments_rad_exam_id_idx ON airflow_exam_adjustments USING btree (rad_exam_id);
+CREATE INDEX airflow_exam_adjustments_order_id_idx ON airflow_exam_adjustments USING btree (order_id);
 
 CREATE INDEX airflow_exam_events_exam_adjustment_id_idx ON airflow_exam_events USING btree (exam_adjustment_id);
 
