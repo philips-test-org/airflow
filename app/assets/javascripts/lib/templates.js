@@ -162,6 +162,14 @@ Handlebars.registerHelper('event_type_check',function(type) {
     else return false;
 });
 
+Handlebars.registerHelper('chronological_events',function(events) {
+    return events.sort(function(a,b) {
+	if (a.created_at < b.created_at) return 1;
+	else if (b.created_at < a.created_at) return -1;
+	else return 0;
+    });
+});
+
 Handlebars.registerHelper('notification_type',function(type) {
     if (type == "comment") {
 	return "comment-notification " + type;

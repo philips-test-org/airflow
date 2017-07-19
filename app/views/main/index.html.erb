@@ -262,14 +262,14 @@
 
 
 <script class="handlebars-template" id="t-comments-interface" type="text/x-handlebars-template">
-  {{> eventList}}
-  <hr />
   {{> commentForm}}
+  <hr />
+  {{> eventList}}
 </script>
 
 <script class="handlebars-template" id="t-event-list" type="text/x-handlebars-template">
   <div class="events">
-    {{#each events}}
+    {{#each (chronological_events events)}}
     {{render_event this}}
     {{/each}}
   </div>
