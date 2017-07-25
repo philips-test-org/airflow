@@ -13,22 +13,26 @@ class MainController < ApplicationController
     date = Time.at(params[:date].to_i) unless params[:date].blank?
     date ||= Time.now
     q = Java::HarbingerSdkData::Order.createQuery(@entity_manager)
+    q.join(".currentStatus.universalEventType")
     q.where([q.or([q.in(".resourceId",params[:resource_ids]),
                    q.in(".radExams.resourceId",params[:resource_ids])]),
-             # q.equal(".resource.modality.modality","CT"),
-             q.or([q.notEqual(".currentStatus.universalEventType.eventType","cancelled"),
-                   q.notEqual(".radExams.currentStatus.universalEventType.eventType","cancelled")]),
-             q.or([q.or([q.between(".radExams.radExamTime.appointment",
-                                   date.beginning_of_day,
-                                   date.end_of_day),
-                         q.between(".radExams.radExamTime.beginExam",
-                                   date.beginning_of_day,
-                                   date.end_of_day)])]),
-             q.between(".appointment",date.beginning_of_day,date.end_of_day)
+             q.and([q.or([q.notEqual(".currentStatus.universalEventType.eventType","cancelled"),
+                          q.isNull(".currentStatus.universalEventTypeId")
+                         ]),
+                    q.or([q.notEqual(".radExams.currentStatus.universalEventType.eventType","cancelled"),
+                          q.isNull(".radExams.currentStatus.universalEventTypeId")])]),
+             q.or([q.between(".radExams.radExamTime.appointment",
+                             date.beginning_of_day,
+                             date.end_of_day),
+                   q.between(".radExams.radExamTime.beginExam",
+                             date.beginning_of_day,
+                             date.end_of_day),
+                   q.between(".appointment",date.beginning_of_day,date.end_of_day)])
             ])
     q.order(".orderNumber asc")
+    q.criteria.distinct(true)
     orders = q.list
-    log_hipaa_view(exams)
+    log_hipaa_view(orders)
     render :json => OrmConverter.orders(orders,@entity_manager)
   end
 
@@ -45,13 +49,17 @@ class MainController < ApplicationController
     end
     q.where(filters)
     others = q.list().to_a
-    log_hipaa_view([exam] + others)
-    render :json => OrmConverter.exams([exam] + others,@entity_manager)
+    all = [exam] + others
+    all.collect! {|e| e.order }
+    all.uniq!
+    binding.pry
+    log_hipaa_view(all)
+    render :json => OrmConverter.orders(all,@entity_manager)
   end
 
-  def exam
-    render :json => OrmConverter.exam_modal(Java::HarbingerSdkData::RadExam.withId(params[:id].to_i,@entity_manager))
-  end
+  # def exam
+  #   render :json => OrmConverter.exam_modal(Java::HarbingerSdkData::RadExam.withId(params[:id].to_i,@entity_manager))
+  # end
 
   def about
   end

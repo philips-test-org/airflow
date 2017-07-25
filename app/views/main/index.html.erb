@@ -66,7 +66,7 @@
 <script class="handlebars-template" id="t-resource-row" type="text/x-handlebars-template">
   <div class="resource-row" data-id="{{id}}">
     <h1>{{name}}</h1>
-    {{#each (exams_from_resource this)}}
+    {{#each (orders_from_resource this)}}
     {{> fixedCard this}}
     {{/each}}
   </div>
@@ -89,32 +89,32 @@
       <div class="row-marker"></div>
       {{/each}}
     </div>
-    {{#each (exams_from_resource this)}}
+    {{#each (orders_from_resource this)}}
     {{> scaledCard this}}
     {{/each}}
   </td>
 </script>
 
 <script class="handlebars-template" id="t-scaled-card" type="text/x-handlebars-template">
-  <div class="notecard scaled {{#if this.adjusted.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
-    <div class="left-tab" style="background-color: {{exam_color this}};">
+  <div class="notecard scaled {{#if this.adjusted.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{order_height this}}; max-height: {{order_height this}}; top: {{order_top this}};">
+    <div class="left-tab" style="background-color: {{order_color this}};">
     </div>
 
     <div class="right-tab">
-      <div class="events" style="{{#if (short_exam this)}}left: 5px; top: 5px;{{/if}}">{{#has_comments events}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
+      <div class="events" style="{{#if (short_order this)}}left: 5px; top: 5px;{{/if}}">{{#has_comments events}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
 
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
-	<div class="patient-type">{{this.site_class.patient_type.patient_type}}</div>
+	<div class="patient-type">{{exam_then_order this "site_class.patient_type.patient_type"}}</div>
 	<div class="mrn">{{this.patient_mrn.mrn}}</div>
       </div>
 
       <div class="body">
-	<div class="procedure">{{this.procedure.description}}</div>
-	<div class="patient-location">{{this.site_sublocation.site_location.location}}</div>
+	<div class="procedure">{{exam_then_order this "procedure.description"}}</div>
+	<div class="patient-location">{{this.rad_exam.site_sublocation.site_location.location}}</div>
       </div>
 
-      <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
+      <div class="footer" style="{{#if (short_order this)}}padding: 0px 2px;{{/if}}">
 	<div class="left">
 	  {{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><strong>GA</strong></div>{{/if}}
 	</div>
@@ -125,13 +125,13 @@
       </div>
     </div>
 
-  <div class="hide data" data-exam-id="{{this.id}}"></div>
+  <div class="hide data" data-order-id="{{this.id}}"></div>
   </div>
 </script>
 
 <script class="handlebars-template" id="t-fixed-card" type="text/x-handlebars-template">
   <div class="notecard overview {{#if this.adjusted.onhold}}highlight{{/if}}" id="fixed-card-{{this.id}}">
-    <div class="left-tab" style="background-color: {{exam_color this}};">
+    <div class="left-tab" style="background-color: {{order_color this}};">
     </div>
 
     <div class="right-tab">
@@ -139,15 +139,16 @@
 
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
-	<div class="patient-type">{{this.site_class.patient_type.patient_type}}</div>
+	<div class="patient-type">{{exam_then_order this "site_class.patient_type.patient_type"}}</div>
 	<div class="mrn">{{this.patient_mrn.mrn}}</div>
       </div>
 
       <div class="body">
-	<div class="procedure">{{this.procedure.description}}</div>
+	<div class="procedure">{{exam_then_order this "procedure.description"}}</div>
+	<div class="patient-location">{{this.rad_exam.site_sublocation.site_location.location}}</div>
       </div>
 
-      <div class="footer" style="{{#if (short_exam this)}}padding: 0px 2px;{{/if}}">
+      <div class="footer" style="{{#if (short_order this)}}padding: 0px 2px;{{/if}}">
 	<div class="left">
 	  {{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><strong>GA</strong></div>{{/if}}
 	</div>
@@ -158,7 +159,7 @@
       </div>
     </div>
 
-    <div class="hide data" data-exam-id="{{this.id}}"></div>
+    <div class="hide data" data-order-id="{{this.id}}"></div>
   </div>
 </script>
 
@@ -172,8 +173,8 @@
     <h5>Kiosk Number: {{kiosk_number id}}</h5>
   </div>
     <ul class="nav nav-tabs" role="tablist">
-      {{#each (exam_with_fellows this)}}
-      <li role="presentation" class="{{#if (eq ../this.id undefined)}}active{{/if}}"><a href="#exam-content-{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{accession}}</a></li>
+      {{#each (order_with_fellows this)}}
+      <li role="presentation" class="{{#if (eq ../this.id undefined)}}active{{/if}}"><a href="#order-content-{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{order_number}}</a></li>
       {{/each}}
     </ul>
   <div class="modal-body">
@@ -181,8 +182,8 @@
       <div class="row">
 	<div class="col-xs-6">
 	  <div class="tab-content">
-	    {{#each (exam_with_fellows this)}}
-	    <div role="tabpanel" class="tab-pane {{#if (eq ../this.id undefined)}}active{{/if}}" id="exam-content-{{id}}">
+	    {{#each (order_with_fellows this)}}
+	    <div role="tabpanel" class="tab-pane {{#if (eq ../this.id undefined)}}active{{/if}}" id="order-content-{{id}}">
 	      {{> demographicsTable}}
 	    </div>
 	    {{/each}}
@@ -218,7 +219,7 @@
 </script>
 
 <script class="handlebars-template" id="t-modal-card-status" type="text/x-handlebars-template">
-  <div class="left-stripe" style="background-color: {{exam_color this}};"></div>
+  <div class="left-stripe" style="background-color: {{order_color this}};"></div>
 </script>
 
 <script class="handlebars-template" id="t-modal-card-loading" type="text/x-handlebars-template">
@@ -235,20 +236,20 @@
   <table class="table table-bordered table-striped">
     <tbody>
       <!--{{> demographicsTableRow key="Patient Name" value=(format_name patient_mrn.patient.name)}}-->
-      {{> demographicsTableRow key="Accession" value=accession}}
-      {{> demographicsTableRow key="Order Number" value=order.order_number}}
+      {{> demographicsTableRow key="Accession" value=rad_exam.accession}}
+      {{> demographicsTableRow key="Order Number" value=order_number}}
       {{> demographicsTableRow key="Patient MRN" value=patient_mrn.mrn}}
       {{> demographicsTableRow key="Patient DOB" value=(format_date patient_mrn.patient.birthdate)}}
       {{> demographicsTableRow key="Patient Location" value=(patient_location this)}}
-      {{> demographicsTableRow key="Patient Type" value=site_class.patient_type.patient_type}}
-      {{> demographicsTableRow key="Patient Class" value=(site_class_name site_class)}}
+      {{> demographicsTableRow key="Patient Type" value=(exam_then_order this "site_class.patient_type.patient_type")}}
+      {{> demographicsTableRow key="Patient Class" value=(site_class_name (exam_then_order this "site_class"))}}
       {{> demographicsTableRow key="Resource" value=(resource_name this)}}
-      {{> demographicsTableRow key="Procedure" value=procedure.description}}
-      {{> demographicsTableRow key="Sign In" value=(format_timestamp rad_exam_time.sign_in)}}
-      {{> demographicsTableRow key="Check In" value=(format_timestamp rad_exam_time.check_in)}}
-      {{> demographicsTableRow key="Appointment" value=(format_timestamp rad_exam_time.appointment)}}
-      {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam_time.begin_exam)}}
-      <!--{{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam_time.end_exam)}}-->
+      {{> demographicsTableRow key="Procedure" value=(exam_then_order this "procedure.description")}}
+      {{> demographicsTableRow key="Sign In" value=(format_timestamp rad_exam.rad_exam_time.sign_in)}}
+      {{> demographicsTableRow key="Check In" value=(format_timestamp rad_exam.rad_exam_time.check_in)}}
+      {{> demographicsTableRow key="Appointment" value=(format_timestamp (appointment_time this))}}
+      {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam.rad_exam_time.begin_exam)}}
+      {{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam.rad_exam_time.end_exam)}}
     </tbody>
   </table>
 </script>
@@ -288,7 +289,7 @@
   <div class="event">
     <span class="avatar">{{avatar employee.id "<%= image_url('placeholder.png') %>"}}</span>
     <span class="body">
-      <strong>{{employee.name}}</strong> moved exam to <strong>{{resource_name new_state.resource_id}}</strong> to <span class="time short"><strong>{{format_timestamp new_state.start_time}}</strong></span> on <span class="time short">{{format_timestamp created_at}}</span>
+      <strong>{{employee.name}}</strong> moved order to <strong>{{resource_name new_state.resource_id}}</strong> to <span class="time short"><strong>{{format_timestamp new_state.start_time}}</strong></span> on <span class="time short">{{format_timestamp created_at}}</span>
     </span>
   </div>
 </script>
@@ -319,11 +320,11 @@
       </div>
       <div class="body">
 	<div class="heading form">
-	  Add comment to the exam:
+	  Add comment to the order:
 	</div>
 	<div class="content">
 	  <textarea name="comments" class="form-control comment-box" autofocus></textarea>
-	  <input type="hidden" name="exam_id" value="{{id}}" />
+	  <input type="hidden" name="order_id" value="{{id}}" />
 	</div>
 
 	<div class="footer">

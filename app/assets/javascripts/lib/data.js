@@ -41,23 +41,27 @@ application.data = {
     //examGroups: {}, // A hash of group ident to list of exam ids
     //examHash: {}, // A hash by exam.id of the exams
     rollbackExamHash: {}, // A hash by exam.id to store pre-commit exam info for rollback
+    rollbackOrderHash: {}, // A hash by exam.id to store pre-commit exam info for rollback
     rollbackMutexes: {}, // A place to store the mutexes by rollbackSerial id
     eventsSerial: 1, // A serial to help identify uncommitted events
     //resources: [],
     //resourceHash: {},
     //resourceGroups: {},
     // Master list of all the events and initialization of their objects
-    event_table: {"exam-update": {},
+    event_table: {"order-update": {},
 		  "modal-update": {},
-		  "exam-commit": {},
-		  "exam-rollback": {},
+		  "order-commit": {},
+		  "order-rollback": {},
 		  "event-submit": {}},
-    formatExams: function(exams) {
+    formatOrders: function(orders) {
 	// Clear data
 	application.data.startDate = moment($("#time-button").data("value")).startOf('day').unix()*1000; // This will need to be adjusted by time selector interface
-	application.data.masterExams = []; // A copy of all the selected master exam ids only
-	application.data.examGroups = {}; // A hash of group ident to list of exam ids
-	application.data.examHash = {}; // A hash by exam.id of the exams
+	// application.data.masterExams = []; // A copy of all the selected master exam ids only
+	// application.data.examGroups = {}; // A hash of group ident to list of exam ids
+	// application.data.examHash = {}; // A hash by exam.id of the exams
+	application.data.masterOrders = []; // A copy of all the selected master order ids only
+	application.data.orderGroups = {}; // A hash of group ident to list of order ids
+	application.data.orderHash = {}; // A hash by order.id of the orders
 	application.data.resources = [];
 	application.data.resourceHash = {};
 	application.data.resourceGroups = {};
@@ -70,22 +74,34 @@ application.data = {
 	}
 
 	// store exams, grouping information, and master exam ids
-	for (var i in exams) {
-	    var exam = exams[i];
-	    application.data.insert(exam);
+	for (var i in orders) {
+	    var order = orders[i];
+	    application.data.insert(order);
 	}
     },
 
-    insert: function(exam) {
-	exam.group_ident = application.data.examGroupIdent(exam);
-	application.data.examHash[exam.id] = exam;
-	if (application.data.examGroups[exam.group_ident] == undefined) {
-	    application.data.examGroups[exam.group_ident] = [exam.id];
-	    application.data.masterExams.push(exam.id);
+    // insert: function(exam) {
+    // 	exam.group_ident = application.data.examGroupIdent(exam);
+    // 	application.data.examHash[exam.id] = exam;
+    // 	if (application.data.examGroups[exam.group_ident] == undefined) {
+    // 	    application.data.examGroups[exam.group_ident] = [exam.id];
+    // 	    application.data.masterExams.push(exam.id);
+    // 	} else {
+    // 	    application.data.examGroups[exam.group_ident].push(exam.id);
+    // 	}
+    // },
+
+    insert: function(order) {
+	order.group_ident = application.data.orderGroupIdent(order);
+	application.data.orderHash[order.id] = order;
+	if (application.data.orderGroups[order.group_ident] == undefined) {
+	    application.data.orderGroups[order.group_ident] = [order.id];
+	    application.data.masterOrders.push(order.id);
 	} else {
-	    application.data.examGroups[exam.group_ident].push(exam.id);
+	    application.data.orderGroups[order.group_ident].push(order.id);
 	}
     },
+
 
     /* Event Dispatching */
     hook: function(type,name,fun) {
@@ -112,43 +128,43 @@ application.data = {
     update: function(id,fun,events) {
 	if (events != undefined && $.type(events) != "array") { throw("Event list must be an array of strings"); }
 	//Find all exams associated with the master id given
-	var exams = application.data.findExamWithFellows(id);
+	var orders = application.data.findOrderWithFellows(id);
 	//Set up a rollback identifier and deep copy the existing exams
 	var rollback_id = id;
 	var rollback_mutex = application.data.rollbackMutexes[rollback_id] = application.mutex.create();
-	$.each(exams,function(i,e) {
-	    // Make a deep copy of the exam so that if the update fails
-	    // the original exam object won't have been changed
+	$.each(orders,function(i,e) {
+	    // Make a deep copy of the order so that if the update fails
+	    // the original order object won't have been changed
 	    // this acts as an error handling rollback as the actual rollbacks
 	    // must be called by the update function as it is the thing that knows
 	    // when a change has been saved to the server
-	    // Setting of the new exam into the examHash is also handled
+	    // Setting of the new order into the orderHash is also handled
 	    // by the updating function otherwise the calls to the mutex
 	    // happen out of order and things get weird
 	    var rollback_copy = $.extend(true,{},e);
-	    if (application.data.rollbackExamHash[rollback_id] == undefined) {
-		application.data.rollbackExamHash[rollback_id] = [];
+	    if (application.data.rollbackOrderHash[rollback_id] == undefined) {
+		application.data.rollbackOrderHash[rollback_id] = [];
 	    }
-	    application.data.rollbackExamHash[rollback_id].push(rollback_copy);
+	    application.data.rollbackOrderHash[rollback_id].push(rollback_copy);
 
 	    // Call the update function with the given rollback id which will
 	    // supply the location of the mutex and the rollback information
-	    //console.log(application.data.rollbackExamHash);
+	    //console.log(application.data.rollbackOrderHash);
 	    //console.log("Before fun run",e.adjusted,rollback_copy.adjusted);
 	    rollback_mutex.sync(function() { fun(e,rollback_id); });
 	    //console.log("After fun run",e.adjusted,rollback_copy.adjusted);
 	});
 
-	//Get the master exam now that it's been cloned and changed
-	var exam = application.data.findExam(id);
+	//Get the master order now that it's been cloned and changed
+	var order = application.data.findOrder(id);
 
 	//Fire Default Event
 	if (events != undefined) {
-	    $.each(events,function(i,etype) { application.data.dispatch(etype,exam); });
+	    $.each(events,function(i,etype) { application.data.dispatch(etype,order); });
 	} else {
-	    application.data.dispatch("exam-update",exam);
+	    application.data.dispatch("order-update",order);
 	}
-	return exams;
+	return orders;
     },
 
     //Unused!
@@ -165,36 +181,36 @@ application.data = {
     // Clean rollback information:
     // This commit message should be in the error callback
     // for ajax calls to save data
-    commit: function(exam,rollback_id) {
+    commit: function(order,rollback_id) {
 	//console.log('commit',exam,rollback_id);
-	delete application.data.rollbackExamHash[rollback_id];
-	application.data.dispatch("exam-commit",exam);
+	delete application.data.rollbackOrderHash[rollback_id];
+	application.data.dispatch("order-commit",order);
     },
 
-    rollback: function(exam,rollback_id,message) {
-	//console.log('rollback',exam,rollback_id,application.data.rollbackExamHash[rollback_id]);
-	// Reset exam to rollback values
+    rollback: function(order,rollback_id,message) {
+	//console.log('rollback',order,rollback_id,application.data.rollbackOrderHash[rollback_id]);
+	// Reset order to rollback values
 	var master = null;
-	$.each(application.data.rollbackExamHash[rollback_id],function(i,e) {
-	    //console.log('rollback',exam.id,e.id);
-	    if (e.id == exam.id) { master = e }
-	    application.data.examHash[e.id] = e;
+	$.each(application.data.rollbackOrderHash[rollback_id],function(i,e) {
+	    //console.log('rollback',order.id,e.id);
+	    if (e.id == order.id) { master = e }
+	    application.data.orderHash[e.id] = e;
 	});
 	// Clear rollback values
-	delete application.data.rollbackExamHash[rollback_id];
-	//console.log("exam-rollback",exam,master);
-	application.data.dispatch("exam-rollback",exam,master);
+	delete application.data.rollbackOrderHash[rollback_id];
+	//console.log("order-rollback",order,master);
+	application.data.dispatch("order-rollback",order,master);
 	// Might want to find a better place for this but it's pretty universal right now
 	application.notification.flash({type: 'alert', message: message});
     },
 
     addEvent: function(id,event,events) {
-	application.data.update(id,function(exam,rollback_id) {
+	application.data.update(id,function(order,rollback_id) {
 	    if (event.event_type != 'comment') {
 		// Update status type with new state (consent, etc)
-		$.extend(exam.adjusted,event.new_state);
+		$.extend(order.adjusted,event.new_state);
 	    }
-	    exam.events.push(event);
+	    order.events.push(event);
 	    var data = {
 		id: id,
 		event: event
@@ -205,27 +221,27 @@ application.data = {
 		    contentType: "application/json; charset=utf-8",
 		    dataType: "json",
 		    success: function(response) {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(exam,rollback_id); });
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(order,rollback_id); });
 		    },
 		    error: function() {
-			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(exam,rollback_id,"Failed to save changes. Reverted to previous values.") });
+			application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(order,rollback_id,"Failed to save changes. Reverted to previous values.") });
 		    }
 		   });
-	    return exam;
+	    return order;
 	},events);
     },
 
-    updateLocation: function(exam_id,resource_id,top) {
+    updateLocation: function(order_id,resource_id,top) {
 	// Contains no side effects, those are handled in the addEvent/update functions
-	var exam = application.data.findExam(exam_id);
-	var ostart = application.data.examStartTime(exam);
-	var ostop = application.data.examStopTime(exam);
-	var nstart = application.data.examHeightToStartTime(top,exam);
-	var nstop =  application.data.examHeightToStopTime(top,exam);
-	    /*exam.adjusted.start_time = nstart;
-	    exam.adjusted.stop_time = nstop;
-	    exam.adjusted.resource_id = resource_id,
-	    application.data.examHash[exam_id] = exam;*/
+	var order = application.data.findOrder(order_id);
+	var ostart = application.data.orderStartTime(order);
+	var ostop = application.data.orderStopTime(order);
+	var nstart = application.data.orderHeightToStartTime(top,order);
+	var nstop =  application.data.orderHeightToStopTime(top,order);
+	    /*order.adjusted.start_time = nstart;
+	    order.adjusted.stop_time = nstop;
+	    order.adjusted.resource_id = resource_id,
+	    application.data.orderHash[order_id] = order;*/
 	var event = {
 	    event_type: 'location_update',
 	    employee: application.employee,
@@ -235,9 +251,9 @@ application.data = {
 		resource_id: resource_id
 	    },
 	    created_at: moment().unix()*1000,
-	    exam_id: exam_id
+	    order_id: order_id
 	}
-	return application.data.addEvent(exam_id,event,["exam-update"]);
+	return application.data.addEvent(order_id,event,["order-update"]);
     },
 
     // updateAttribute: function(id,attr,value,events) {
@@ -280,57 +296,88 @@ application.data = {
     },
 
     examStartTime: function(exam) {
-	if (exam.adjusted.start_time) {
-	    return exam.adjusted.start_time;
-	} else if (exam.rad_exam_time.begin_exam) {
-	    return exam.rad_exam_time.begin_exam;
-	} else {
-	    return exam.rad_exam_time.appointment;
-	}
+	if (exam.rad_exam_time.begin_exam) {
+    	    return exam.rad_exam_time.begin_exam;
+    	} else {
+    	    return exam.rad_exam_time.appointment;
+    	}
     },
-    examStopTime: function(exam) {
-	if (exam.adjusted.stop_time) {
-	    return exam.adjusted.stop_time;
-	} else if (exam.rad_exam_time.end_exam) {
-	    return exam.rad_exam_time.end_exam;
+
+    orderStartTime: function(order) {
+	if (order.adjusted.start_time) {
+    	    return order.adjusted.start_time;
+	} else if (order.rad_exam) {
+	    return application.data.examStartTime(order.rad_exam)
 	} else {
-	    return application.data.examStartTime(exam) + (exam.procedure.scheduled_duration * 60 * 1000);
+	    return order.appointment;
 	}
     },
 
-    examHeightToStartTime: function(height,exam) {
+    // examStopTime: function(exam) {
+    // 	if (exam.adjusted.stop_time) {
+    // 	    return exam.adjusted.stop_time;
+    // 	} else if (exam.rad_exam_time.end_exam) {
+    // 	    return exam.rad_exam_time.end_exam;
+    // 	} else {
+    // 	    return application.data.examStartTime(exam) + (exam.procedure.scheduled_duration * 60 * 1000);
+    // 	}
+    // },
+
+    orderStopTime: function(order) {
+	if (order.adjusted.stop_time) {
+	    return order.adjusted.stop_time;
+	} else if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
+	    return order.rad_exam.rad_exam_time.end_exam;
+	} else if ($.type(order.appointment_duration) == "number") {
+	    return application.data.orderStartTime(exam) + (order.appointment_duration * 60 * 1000);
+	} else {
+	    return application.data.orderStartTime(exam) + (exam.procedure.scheduled_duration * 60 * 1000);
+	}
+    },
+
+    orderHeightToStartTime: function(height,order) {
 	var startTime = application.data.startDate + (height/application.templates.pixels_per_second*1000);
 	return startTime;
     },
 
-    examHeightToStopTime: function(height,exam) {
-	var duration = application.data.examStopTime(exam) - application.data.examStartTime(exam);
-	return application.data.examHeightToStartTime(height,exam) + duration;
+    orderHeightToStopTime: function(height,order) {
+	var duration = application.data.orderStopTime(order) - application.data.orderStartTime(order);
+	return application.data.orderHeightToStartTime(height,order) + duration;
     },
 
-    resource: function(exam) {
-	if (exam.adjusted.resource_id != undefined) {
-	    return application.data.findResource(exam.adjusted.resource_id);
+    resource: function(order) {
+	if (order.adjusted.resource_id != undefined) {
+	    return application.data.findResource(order.adjusted.resource_id);
+	} else if (order.rad_exam != undefined) {
+	    return order.rad_exam.resource;
 	} else {
-	    return exam.resource;
+	    return order.resource;
 	}
     },
 
-    // This function shouldn't be called outside of formatExams
+    examThenOrder: function(order,path) {
+	if (order.rad_exam != undefined) {
+	    return application.data.pathGet(order.rad_exam,path);
+	} else {
+	    return application.data.pathGet(order,path);
+	}
+    },
+
+    // This function shouldn't be called outside of formatOrders
     // which will set a group_ident key on the exam to prevent
     // the exam group identifier from changing based on user adjustments
-    examGroupIdent: function(exam) {
-	return exam.patient_mrn_id + exam.resource_id + application.data.examStartTime(exam);
+    orderGroupIdent: function(order) {
+	return order.patient_mrn_id + application.data.resource(order).id + application.data.orderStartTime(order);
     },
 
-    findExam: function(id) {
-	return application.data.examHash[id];
+    findOrder: function(id) {
+	return application.data.orderHash[id];
     },
 
-    findExamWithFellows: function(id) {
-	var master = application.data.findExam(id);
+    findOrderWithFellows: function(id) {
+	var master = application.data.findOrder(id);
 	var egi = master.group_ident;
-	return $.map(application.data.examGroups[egi],function(eid) { return application.data.examHash[eid]; });
+	return $.map(application.data.orderGroups[egi],function(eid) { return application.data.orderHash[eid]; });
     },
 
     findResource: function(id) {

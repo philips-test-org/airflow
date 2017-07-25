@@ -21,8 +21,8 @@ application.drawBoard = function() {
 		beforeSend: function() {
 		    $("#workspace").html(application.templates.workspaceLoading());
 		},
-		success: function(exams) {
-		    application.data.formatExams(exams);
+		success: function(orders) {
+		    application.data.formatOrders(orders);
 		    application.view.setup();
 		}});
     }
@@ -65,45 +65,45 @@ application.calendar = {
 		} else {
 		    var notecard = $(e.originalEvent.target).parents(".notecard");
 		}
-		var id = notecard.find(".data").data("exam-id");
+		var id = notecard.find(".data").data("order-id");
 		var resource_id = column.data("resource-id");
 
 		application.data.updateLocation(id,resource_id,notecard.position().top);
 	    }});
 
 
-	application.data.hook("exam-update","card-redraw", function(exam) {
-	    application.calendar.redrawCard(exam);
+	application.data.hook("order-update","card-redraw", function(order) {
+	    application.calendar.redrawCard(order);
 	});
-	application.data.hook("exam-rollback","card-redraw", function(new_exam,rollback_back_exam) {
-	    //console.log("Redrawing rolled back card",new_exam,rollback_back_exam);
-	    application.calendar.redrawCard(rollback_back_exam);
+	application.data.hook("order-rollback","card-redraw", function(new_order,rollback_back_order) {
+	    //console.log("Redrawing rolled back card",new_order,rollback_back_order);
+	    application.calendar.redrawCard(rollback_back_order);
 	});
 
     },
     breakdown: function() {
-	application.data.unhook("exam-update","card-redraw");
+	application.data.unhook("order-update","card-redraw");
     },
-    findCard: function(exam) {
-	return $("#scaled-card-" + exam.id);
+    findCard: function(order) {
+	return $("#scaled-card-" + order.id);
     },
-    redrawCard: function(exam) {
-	var card = application.calendar.findCard(exam);
-	var exam_resource_id = application.data.resource(exam).id;
+    redrawCard: function(order) {
+	var card = application.calendar.findCard(order);
+	var order_resource_id = application.data.resource(order).id;
 
 	if (card.length == 0) {
-	    $("#time-grid td[data-resource-id='" + exam_resource_id + "']").append(application.templates.scaledCard(exam));
-	    var card = application.calendar.findCard(exam);
+	    $("#time-grid td[data-resource-id='" + order_resource_id + "']").append(application.templates.scaledCard(order));
+	    var card = application.calendar.findCard(order);
 	}
 	var current_resource_id = card.parents("td").data("resource-id");
-	var exam_resource_id = application.data.resource(exam).id;
-	//console.log(current_resource_id,exam_resource_id);
-	if (current_resource_id != exam_resource_id) {
-	    card.appendTo($("#time-grid td[data-resource-id='" + exam_resource_id + "']"))
-	    //console.log("current and exam are different");
+	var order_resource_id = application.data.resource(order).id;
+	//console.log(current_resource_id,order_resource_id);
+	if (current_resource_id != order_resource_id) {
+	    card.appendTo($("#time-grid td[data-resource-id='" + order_resource_id + "']"))
+	    //console.log("current and order are different");
 	}
-	card.replaceWith(application.templates.scaledCard(exam));
-	application.calendar.findCard(exam).draggable({revert: 'invalid',
+	card.replaceWith(application.templates.scaledCard(order));
+	application.calendar.findCard(order).draggable({revert: 'invalid',
 						       cursor: 'move',
 						       delay: 200});
 	return card;
@@ -128,8 +128,8 @@ application.overview = {
     setup: function() {
 	$("#workspace").html(application.templates.overview(application.data));
 
-	application.data.hook("exam-update","card-redraw",function(exam) {
-	    application.overview.redrawCard(exam);
+	application.data.hook("order-update","card-redraw",function(order) {
+	    application.overview.redrawCard(order);
 	});
 
 	$("#relative-board .resource-row").width($("#relative-board")[0].scrollWidth);
@@ -141,20 +141,20 @@ application.overview = {
 
     },
     breakdown: function() {
-	application.data.unhook("exam-update","card-redraw");
+	application.data.unhook("order-update","card-redraw");
     },
-    findCard: function(exam) {
-	return $("#fixed-card-" + exam.id);
+    findCard: function(order) {
+	return $("#fixed-card-" + order.id);
     },
-    redrawCard: function(exam) {
-	var card = application.overview.findCard(exam);
-	var exam_resource_id = application.data.resource(exam).id;
+    redrawCard: function(order) {
+	var card = application.overview.findCard(order);
+	var order_resource_id = application.data.resource(order).id;
 
 	if (card.length == 0) {
-	    $(".resource-row[data-id='" + exam_resource_id + "']").append(application.templates.fixedCard(exam));
-	    var card = application.overview.findCard(exam);
+	    $(".resource-row[data-id='" + order_resource_id + "']").append(application.templates.fixedCard(order));
+	    var card = application.overview.findCard(order);
 	} else {
-	    card = card.replaceWith(application.templates.fixedCard(exam));
+	    card = card.replaceWith(application.templates.fixedCard(order));
 	}
 	return card;
     }
@@ -190,20 +190,20 @@ application.kiosk = $.extend({},application.calendar,{
 	application.kiosk.drawNow();
 	setInterval(application.kiosk.drawNow, 1 / application.templates.pixels_per_second * 1000);
 
-	application.data.hook("exam-update","card-redraw",function(exam) {
-	    application.kiosk.redrawCard(exam);
+	application.data.hook("order-update","card-redraw",function(order) {
+	    application.kiosk.redrawCard(order);
 	});
 
     },
 
-    redrawCard: function(exam) {
-	var card = application.calendar.findCard(exam);
+    redrawCard: function(order) {
+	var card = application.calendar.findCard(order);
 	var current_resource_id = card.parents("td").data("resource-id");
-	var exam_resource_id = application.data.resource(exam).id;
-	if (current_resource_id != exam_resource_id) {
-	    card.appendTo($("#time-grid td[data-resource-id='" + exam_resource_id + "']"))
+	var order_resource_id = application.data.resource(order).id;
+	if (current_resource_id != order_resource_id) {
+	    card.appendTo($("#time-grid td[data-resource-id='" + order_resource_id + "']"))
 	}
-	card.replaceWith(application.templates.scaledCard(exam));
+	card.replaceWith(application.templates.scaledCard(order));
 	return card;
     },
 

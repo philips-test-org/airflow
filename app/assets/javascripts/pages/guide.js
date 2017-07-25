@@ -101,7 +101,7 @@ $(document).ready(function() {
 		$.extend(exam.adjusted,payload.adjusted);
 		exam.events = payload.events;
 		return exam;
-	    },["exam-update","modal-update"]);
+	    },["order-update","modal-update"]);
 	    var event = payload.events[payload.events.length-1];
 	    if (event.event_type == "comment") {
 		var event_type = "comment";
@@ -120,17 +120,17 @@ $(document).ready(function() {
 		beforeSend: function() {
 		    //application.notification.flash("sending exam query for: " + rk);
 		},
-		success: function(exams) {
-		    $.each(exams,function(i,e) {
-			if (application.data.resourceHash[e.resource_id] != undefined) {
-			    if (application.data.examGroups[application.data.examGroupIdent(e)] == undefined) {
-				application.data.insert(e);
-				application.view.redrawCard(e);
+		success: function(orders) {
+		    $.each(orders,function(i,o) {
+			if (application.data.resourceHash[application.data.resource(o)] != undefined) {
+			    if (application.data.orderGroups[application.data.orderGroupIdent(o)] == undefined) {
+				application.data.insert(o);
+				application.view.redrawCard(o);
 			    } else {
-				application.data.update(e.id,function(exam,rollback_id) {
-				    $.extend(exam,e);
-				    return exam;
-				},["exam-update","modal-update"]);
+				application.data.update(o.id,function(order,rollback_id) {
+				    $.extend(order,o);
+				    return order;
+				},["order-update","modal-update"]);
 			    }
 			}
 		    });

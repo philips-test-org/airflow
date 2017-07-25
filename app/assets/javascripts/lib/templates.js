@@ -4,10 +4,10 @@ application.templates = {};
 application.partials = {};
 application.templates.pixels_per_second = 200.0 / 60.0 / 60.0;
 application.statuses = {
-    color: function(exam) {
+    color: function(order) {
 	var color = "#ddd";
 	for (var i in application.statuses.checks) {
-	    if (application.statuses.checks[i].check(exam)) {
+	    if (application.statuses.checks[i].check(order)) {
 		color = application.statuses.checks[i].color;
 		break;
 	    }
@@ -16,22 +16,22 @@ application.statuses = {
     },
     checks: [{name: "On Hold",
 	      color: "#f5f52b",
-	      check: function(exam) { return (exam.adjusted.onhold == true); }},
+	      check: function(order) { return (order.adjusted.onhold == true); }},
 	     {name: "Cancelled",
 	      color: "#c8040e",
-	      check: function(exam) { return (exam.current_status.universal_event_type && exam.current_status.universal_event_type.event_type == "cancelled"); }},
+	      check: function(order) { return (order.current_status.universal_event_type && exam.current_status.universal_event_type.event_type == "cancelled"); }},
 	     {name: "Begun",
 	      color: "#704c8f",
-	      check: function(exam) { return (exam.rad_exam_time.begin_exam && exam.rad_exam_time.end_exam == null); }},
+	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
 	     {name: "Completed",
 	      color: "#398cc4",
-	      check: function(exam) { return (exam.rad_exam_time.end_exam != null); }},
+	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
 	     {name: "Future Appointment",
 	      color: "#a0a0a0",
-	      check: function(exam) { return (!(exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in)); }},
+	      check: function(order) { return (order.rad_exam != undefined && !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }},
 	     {name: "Patient Arrived",
 	      color: "#53a790",
-	      check: function(exam) { return ((exam.rad_exam_time.sign_in || exam.rad_exam_time.check_in) != null); }}
+	      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }}
 	    ]
 };
 
@@ -72,42 +72,42 @@ Handlebars.registerHelper('avatar',function(employee_id, placeholder) {
     return new Handlebars.SafeString('<img class="avatar" src="' + url + '" onerror="this.onerror=null; this.src=\'' + placeholder + '\';"/>');
 });
 
-Handlebars.registerHelper('exam_color',function(exam) {
-    return application.statuses.color(exam);
+Handlebars.registerHelper('order_color',function(order) {
+    return application.statuses.color(order);
 });
 
-Handlebars.registerHelper('exams_from_resource',function(resource) {
-    return application.data.masterExams
-	.map(function(id) { return application.data.examHash[id]; })
-	.filter(function(exam) { if (application.data.resource(exam) == undefined) { return false; }
-				 else { return application.data.resource(exam).id == resource.id; } })
+Handlebars.registerHelper('orders_from_resource',function(resource) {
+    return application.data.masterOrders
+	.map(function(id) { return application.data.orderHash[id]; })
+	.filter(function(order) { if (application.data.resource(order) == undefined) { return false; }
+				  else { return application.data.resource(order).id == resource.id; } })
 	.sort(function(a,b) {
-	    if (application.data.examStartTime(a) < application.data.examStartTime(b)) {
+	    if (application.data.orderStartTime(a) < application.data.orderStartTime(b)) {
 		return -1;
-	    } else if (application.data.examStartTime(a) > application.data.examStartTime(b)) {
+	    } else if (application.data.orderStartTime(a) > application.data.orderStartTime(b)) {
 		return 1;
 	    } else { return 0; }
 	    //return application.data.examStartTime(a) - application.data.examStartTime(b); });
 	});
 });
 
-Handlebars.registerHelper('exam_with_fellows',function(exam) {
-    return application.data.findExamWithFellows(exam.id);
+Handlebars.registerHelper('order_with_fellows',function(order) {
+    return application.data.findOrderWithFellows(order.id);
 });
 
-Handlebars.registerHelper('exam_height',function(exam) {
-    var seconds = ((application.data.examStopTime(exam) - application.data.examStartTime(exam)) / 1000);
+Handlebars.registerHelper('order_height',function(order) {
+    var seconds = ((application.data.orderStopTime(order) - application.data.orderStartTime(order)) / 1000);
     return Math.round(seconds * application.templates.pixels_per_second) + "px";
 });
 
-Handlebars.registerHelper('short_exam',function(exam) {
-    var seconds = ((application.data.examStopTime(exam) - application.data.examStartTime(exam)) / 1000);
+Handlebars.registerHelper('short_order',function(order) {
+    var seconds = ((application.data.orderStopTime(order) - application.data.orderStartTime(order)) / 1000);
     return (Math.round(seconds * application.templates.pixels_per_second) <= 50);
 });
 
 
-Handlebars.registerHelper('exam_top',function(exam) {
-    var t = moment(application.data.examStartTime(exam));
+Handlebars.registerHelper('order_top',function(order) {
+    var t = moment(application.data.orderStartTime(order));
     return Math.round((t.hour() * 60 * 60 + t.minute() * 60 + t.seconds()) * application.templates.pixels_per_second) + "px";
 });
 
@@ -115,18 +115,19 @@ Handlebars.registerHelper('kiosk_number',function(id) {
     return String(id).slice(-4)
 });
 
-Handlebars.registerHelper('kiosk_number_html',function(exam) {
+Handlebars.registerHelper('kiosk_number_html',function(order) {
     var style = "";
-    var height = Number(Handlebars.helpers.exam_height(exam).replace("px",""));
+    var height = Number(Handlebars.helpers.order_height(order).replace("px",""));
     if (height < 36) {
 	var style = "font-size: " + height / 2 + "px;";
     }
-    var out = '<div class="kiosk-number" style="' + style + ' line-height: ' + height + 'px;">' + Handlebars.helpers.kiosk_number(exam.id) + '</div>';
+    var out = '<div class="kiosk-number" style="' + style + ' line-height: ' + height + 'px;">' + Handlebars.helpers.kiosk_number(order.id) + '</div>';
     return new Handlebars.SafeString(out);
 });
 
-Handlebars.registerHelper('patient_location',function(exam) {
-    if (exam.site_sublocation != undefined && Object.keys(exam.site_sublocation).length > 0) {
+Handlebars.registerHelper('patient_location',function(order) {
+    var exam = order.rad_exam;
+    if (exam != undefined && exam.site_sublocation != undefined && Object.keys(exam.site_sublocation).length > 0) {
 	if (exam.site_sublocation.site_location.name != undefined && exam.site_sublocation.site_location.name != "") {
 	    var name = exam.site_sublocation.site_location.name;
 	} else {
@@ -136,14 +137,16 @@ Handlebars.registerHelper('patient_location',function(exam) {
     }
 });
 
-Handlebars.registerHelper('resource_name',function(exam) {
-    if ($.type(exam) == "number") {
-	exam = {resource: application.data.findResource(exam)};
-    }
-    if (exam.resource.name != undefined && exam.resource.name != "") {
-	return exam.resource.name;
+Handlebars.registerHelper('resource_name',function(order) {
+    if ($.type(order) == "number") {
+	order = {resource: application.data.findResource(order)};
     } else {
-	return exam.resource.resource;
+	order = application.data.resource(order);
+    }
+    if (order.resource.name != undefined && order.resource.name != "") {
+	return order.resource.name;
+    } else {
+	return order.resource.resource;
     }
 });
 
@@ -155,6 +158,18 @@ Handlebars.registerHelper('site_class_name',function(site_class) {
     } else {
 	return site_class.site_class;
     }
+});
+
+Handlebars.registerHelper('appointment_time',function(order) {
+    if (order.rad_exam != undefined) {
+	return order.rad_exam.appointment;
+    } else {
+	order.appointment
+    }
+});
+
+Handlebars.registerHelper('exam_then_order',function(order,path) {
+    return application.data.examThenOrder(order,path);
 });
 
 Handlebars.registerHelper('event_type_check',function(type) {

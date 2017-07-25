@@ -1,56 +1,56 @@
 if (typeof application == "undefined") { application = {} }
 
 application.modal = {
-    open: function(exam) {
-	application.modal.redraw(exam);
-	$("#exam-modal").modal('show');
+    open: function(order) {
+	application.modal.redraw(order);
+	$("#order-modal").modal('show');
     },
 
-    redraw: function(exam) {
-	$("#exam-modal .modal-content").html(application.templates.modalCard(exam));
-	$("#exam-modal [data-toggle='toggle']").bootstrapToggle();
+    redraw: function(order) {
+	$("#order-modal .modal-content").html(application.templates.modalCard(order));
+	$("#order-modal [data-toggle='toggle']").bootstrapToggle();
     },
 
-    redrawStatus: function(exam) {
-	$("#exam-modal .modal-content .left-stripe").replaceWith(application.templates.modalCardStatus(exam));
-	$("#exam-modal .modal-content .status-toggles").replaceWith(application.templates.statusToggles(exam));
-	$("#exam-modal .events").replaceWith(application.templates.eventList(exam));
-	$("#exam-modal [data-toggle='toggle']").bootstrapToggle();
+    redrawStatus: function(order) {
+	$("#order-modal .modal-content .left-stripe").replaceWith(application.templates.modalCardStatus(order));
+	$("#order-modal .modal-content .status-toggles").replaceWith(application.templates.statusToggles(order));
+	$("#order-modal .events").replaceWith(application.templates.eventList(order));
+	$("#order-modal [data-toggle='toggle']").bootstrapToggle();
     },
 
-    checkEvent: function(exam) {
-	return $("#exam-modal .data").text() == String(exam.id);
+    checkEvent: function(order) {
+	return $("#order-modal .data").text() == String(order.id);
     }
 
 };
 
 $(document).ready(function(e) {
-    application.data.hook("modal-update","modal-redraw",function(exam) {
-	if (application.modal.checkEvent(exam)) {
-	    application.modal.redrawStatus(exam);
+    application.data.hook("modal-update","modal-redraw",function(order) {
+	if (application.modal.checkEvent(order)) {
+	    application.modal.redrawStatus(order);
 	}
     });
 
-    application.data.hook("event-submit","event-list-redraw",function(exam) {
-	if (application.modal.checkEvent(exam)) {
-	    $("#exam-modal .events").replaceWith(application.templates.eventList(exam));
+    application.data.hook("event-submit","event-list-redraw",function(order) {
+	if (application.modal.checkEvent(order)) {
+	    $("#order-modal .events").replaceWith(application.templates.eventList(order));
 	}
     });
 
-    application.data.hook("exam-rollback","event-list-redraw-rollback",function(exam,rollback_exam) {
-	if (application.modal.checkEvent(rollback_exam)) {
-	    application.modal.redraw(rollback_exam);
+    application.data.hook("order-rollback","event-list-redraw-rollback",function(order,rollback_order) {
+	if (application.modal.checkEvent(rollback_order)) {
+	    application.modal.redraw(rollback_order);
 	}
     });
 
     $("#workspace").on("click",".notecard",function(e) {
-	var exam = application.data.findExam($(this).find(".data").data("exam-id"));
-	application.modal.open(exam);
+	var order = application.data.findOrder($(this).find(".data").data("order-id"));
+	application.modal.open(order);
     });
 
 
-    $("#exam-modal").on("change",".status-toggle input",function(e) {
-	var exam_id = $(this).parents(".modal-content").find(".data").text();
+    $("#order-modal").on("change",".status-toggle input",function(e) {
+	var order_id = $(this).parents(".modal-content").find(".data").text();
 	//application.data.updateAttribute(exam_id,$(this).attr('name'),this.checked,["modal-update","exam-update"]);
 	var name = $(this).attr('name');
 	var event = {
@@ -60,19 +60,19 @@ $(document).ready(function(e) {
 	    comments: null,
 	    new_state: {},
 	    created_at: moment().unix()*1000,
-	    exam_id: exam_id
+	    order_id: order_id
 	}
 	event.new_state[name] = this.checked;
 
-	application.data.addEvent(exam_id,event,["event-submit","modal-update","exam-update"])
+	application.data.addEvent(order_id,event,["event-submit","modal-update","order-update"])
     });
 
-    $("#exam-modal").on("submit","#comment-form",function(e) {
+    $("#order-modal").on("submit","#comment-form",function(e) {
 	e.preventDefault();
 	var self = $(this);
 	var button = self.find("button.add-comment");
 	var textarea = self.find("textarea");
-	var exam_id = self.find("input[name='exam_id']").val();
+	var order_id = self.find("input[name='order_id']").val();
 
 	var event = {
 	    id: null, //needs to become an internal id
@@ -81,10 +81,10 @@ $(document).ready(function(e) {
 	    comments: textarea.val(),
 	    new_state: {},
 	    created_at: moment().unix()*1000,
-	    exam_id: exam_id
+	    order_id: order_id
 	}
 
-	application.data.addEvent(exam_id,event,["event-submit","exam-update"])
+	application.data.addEvent(order_id,event,["event-submit","order-update"])
 	textarea.val("");
 
 	// $.ajax($.harbingerjs.core.url("/comments/create"),
