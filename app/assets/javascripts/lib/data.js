@@ -304,7 +304,7 @@ application.data = {
     },
 
     orderStartTime: function(order) {
-	if (order.adjusted.start_time) {
+	if (order.adjusted != undefined && order.adjusted.start_time) {
     	    return order.adjusted.start_time;
 	} else if (order.rad_exam) {
 	    return application.data.examStartTime(order.rad_exam)
@@ -324,7 +324,7 @@ application.data = {
     // },
 
     orderStopTime: function(order) {
-	if (order.adjusted.stop_time) {
+	if (order.adjusted != undefined && order.adjusted.stop_time) {
 	    return order.adjusted.stop_time;
 	} else if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
 	    return order.rad_exam.rad_exam_time.end_exam;
@@ -346,7 +346,7 @@ application.data = {
     },
 
     resource: function(order) {
-	if (order.adjusted.resource_id != undefined) {
+	if (order.adjusted != undefined && order.adjusted.resource_id != undefined) {
 	    return application.data.findResource(order.adjusted.resource_id);
 	} else if (order.rad_exam != undefined) {
 	    return order.rad_exam.resource;

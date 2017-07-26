@@ -82,43 +82,67 @@ module OrmConverter
     end
   end
 
-  def self.limited_exams(exams,em)
+  def self.limited_orders(orders,em)
     tree = {
-      :rad_exam_time => {},
+      :master_order => {},
       :resource => {:modality => {}},
       :procedure => {},
-      :current_status => {:universal_event_type => {}}
+      :current_status => {:universal_event_type => {}},
+      :rad_exams => {
+        :rad_exam_time => {},
+        :procedure => {},
+        :resource => {:modality => {}},
+        :current_status => {:universal_event_type => {}},
+      }
     }
-    exams.inject([]) do |list,exam|
-      hash = get_data(tree,exam,{})
-      hash.merge!(ExamAdjustment.info_for(exam,em))
-      hash.delete("accession")
-      hash["events"] = []
+    orders.inject([]) do |list,order|
+      hash = get_data(tree,order,{})
+      hash.merge!(ExamAdjustment.info_for(order,em))
+      hash["rad_exam"] = hash[:rad_exams][0]
+      hash.delete("order_number")
+      hash["rad_exam"].delete("accession")
       list << hash
       list
     end
   end
 
-  def self.exams(exams,em)
-    tree = {
-      :rad_exam_time => {},
-      :rad_exam_personnel => {},
-      :rad_exam_detail => {},
-      :procedure => {},
-      :patient_mrn => {:patient => {}},
-      :resource => {:modality => {}},
-      :site_class => {:patient_type => {}},
-      :current_status => {:universal_event_type => {}},
-      :site_sublocation => {:site_location => {}},
-      :order => {}
-    }
-    exams.inject([]) do |list,exam|
-      hash = get_data(tree,exam,{})
-      hash.merge!(ExamAdjustment.info_for(exam,em))
-      list << hash
-      list
-    end
-  end
+  # def self.limited_exams(exams,em)
+  #   tree = {
+  #     :rad_exam_time => {},
+  #     :resource => {:modality => {}},
+  #     :procedure => {},
+  #     :current_status => {:universal_event_type => {}}
+  #   }
+  #   exams.inject([]) do |list,exam|
+  #     hash = get_data(tree,exam,{})
+  #     hash.merge!(ExamAdjustment.info_for(exam,em))
+  #     hash.delete("accession")
+  #     hash["events"] = []
+  #     list << hash
+  #     list
+  #   end
+  # end
+
+  # def self.exams(exams,em)
+  #   tree = {
+  #     :rad_exam_time => {},
+  #     :rad_exam_personnel => {},
+  #     :rad_exam_detail => {},
+  #     :procedure => {},
+  #     :patient_mrn => {:patient => {}},
+  #     :resource => {:modality => {}},
+  #     :site_class => {:patient_type => {}},
+  #     :current_status => {:universal_event_type => {}},
+  #     :site_sublocation => {:site_location => {}},
+  #     :order => {}
+  #   }
+  #   exams.inject([]) do |list,exam|
+  #     hash = get_data(tree,exam,{})
+  #     hash.merge!(ExamAdjustment.info_for(exam,em))
+  #     list << hash
+  #     list
+  #   end
+  # end
 
   def self.resources(resources)
     sub_objects = {:modality => {}}

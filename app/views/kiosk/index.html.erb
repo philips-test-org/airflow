@@ -72,15 +72,15 @@
       <div class="row-marker"></div>
       {{/each}}
     </div>
-    {{#each (exams_from_resource this)}}
+    {{#each (orders_from_resource this)}}
     {{> scaledCard this}}
     {{/each}}
   </td>
 </script>
 
 <script class="handlebars-template" id="t-scaled-card" type="text/x-handlebars-template">
-  <div class="notecard scaled {{#if this.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{exam_height this}}; max-height: {{exam_height this}}; top: {{exam_top this}};">
-    <div class="left-tab" style="background-color: {{exam_color this}};">
+  <div class="notecard scaled {{#if this.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{order_height this}}; max-height: {{order_height this}}; top: {{order_top this}};">
+    <div class="left-tab" style="background-color: {{order_color this}};">
     </div>
 
     <div class="right-tab">
@@ -89,6 +89,6 @@
 
     </div>
 
-  <div class="hide data" data-exam-id="{{this.id}}"></div>
+  <div class="hide data" data-order-id="{{this.id}}"></div>
   </div>
 </script>

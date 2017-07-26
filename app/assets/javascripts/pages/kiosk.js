@@ -43,10 +43,10 @@ $(document).ready(function() {
 		    beforeSend: function() {
 			//$("#workspace").html(application.templates.workspaceLoading());
 		    },
-		    success: function(exams) {
-			application.data.formatExams(exams);
-			$.each(application.data.examHash,function(id,exam) {
-			    application.data.dispatch("exam-update",exam);
+		    success: function(orders) {
+			application.data.formatOrders(orders);
+			$.each(application.data.orderHash,function(id,order) {
+			    application.data.dispatch("order-update",order);
 			});
 		    }});
 	}
