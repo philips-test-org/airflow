@@ -19,7 +19,7 @@ application.statuses = {
 	      check: function(order) { return (order.adjusted.onhold == true); }},
 	     {name: "Cancelled",
 	      color: "#c8040e",
-	      check: function(order) { return (order.current_status.universal_event_type && exam.current_status.universal_event_type.event_type == "cancelled"); }},
+	      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
 	     {name: "Begun",
 	      color: "#704c8f",
 	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
@@ -139,14 +139,14 @@ Handlebars.registerHelper('patient_location',function(order) {
 
 Handlebars.registerHelper('resource_name',function(order) {
     if ($.type(order) == "number") {
-	order = {resource: application.data.findResource(order)};
+	var resource = application.data.findResource(order);
     } else {
-	order = application.data.resource(order);
+	var resource = application.data.resource(order);
     }
-    if (order.resource.name != undefined && order.resource.name != "") {
-	return order.resource.name;
+    if (resource.name != undefined && resource.name != "") {
+	return resource.name;
     } else {
-	return order.resource.resource;
+	return resource.resource;
     }
 });
 
@@ -162,9 +162,9 @@ Handlebars.registerHelper('site_class_name',function(site_class) {
 
 Handlebars.registerHelper('appointment_time',function(order) {
     if (order.rad_exam != undefined) {
-	return order.rad_exam.appointment;
+	return order.rad_exam.rad_exam_time.appointment;
     } else {
-	order.appointment
+	return order.appointment
     }
 });
 

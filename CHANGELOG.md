@@ -1,3 +1,18 @@
+## v1.0.0-rc6 released 2017-07-27
+
+* **new:** Moved to order based model, see service notes for migration procedure
+
+### Service Notes
+
+> **Warning**: this update **requires Bridge >= v3.7.1** to be installed, which includes data-model v3.6.1 and data-manager v3.5.0
+
+The following migration keeps all site config and resource group information but will delete all exam adjustment/event information. This is due to the model switch and has been approved by the one affected customer.
+
+```bash
+psql -U airflow harbinger -f db_scripts/migrations/v1.0.0-rc6-order-model.sql
+```
+
+
 ## v1.0.0-rc5 released 2017-07-19
 
 * **bugfix:** Comments/events should always show up moving forward. Cleared the ambiguity of which exam would be selected for fk reference

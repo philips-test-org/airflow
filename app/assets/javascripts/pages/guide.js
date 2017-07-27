@@ -89,18 +89,19 @@ $(document).ready(function() {
     $.harbingerjs.amqp.bind("audit","rad_exams.#");
     $.harbingerjs.amqp.bind("audit","rad_exam_times.#");
     $.harbingerjs.amqp.bind("audit","rad_exam_personnel.#");
+    $.harbingerjs.amqp.bind("audit","orders.#");
 
     $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
 	var tokens = rk.split("."),
 	    event_type = tokens[1],
 	    employee_id = tokens[2],
-	    exam_id = tokens[3],
+	    order_id = tokens[3],
 	    resource_id = tokens[4];
 	if (employee_id != application.employee.id) {
-	    application.data.update(exam_id,function(exam,rollback_id) {
-		$.extend(exam.adjusted,payload.adjusted);
-		exam.events = payload.events;
-		return exam;
+	    application.data.update(order_id,function(order,rollback_id) {
+		$.extend(order.adjusted,payload.adjusted);
+		order.events = payload.events;
+		return order;
 	    },["order-update","modal-update"]);
 	    var event = payload.events[payload.events.length-1];
 	    if (event.event_type == "comment") {
@@ -113,16 +114,19 @@ $(document).ready(function() {
     },"airflow.#","web-application-messages");
 
     $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
-	var operation = rk.split(".")[1];
-
+	var tokens = rk.split("."),
+	    table = tokens[0],
+	    id = tokens[2];
 	$.ajax($.harbingerjs.core.url("/exam_info"),
-	       {data: {id: rk.split(".")[2]},
+	       {data: {id: id,
+		       table: table},
 		beforeSend: function() {
 		    //application.notification.flash("sending exam query for: " + rk);
 		},
 		success: function(orders) {
 		    $.each(orders,function(i,o) {
-			if (application.data.resourceHash[application.data.resource(o)] != undefined) {
+			var r = application.data.resource(o);
+			if (r != undefined && application.data.resourceHash[r.id] != undefined) {
 			    if (application.data.orderGroups[application.data.orderGroupIdent(o)] == undefined) {
 				application.data.insert(o);
 				application.view.redrawCard(o);

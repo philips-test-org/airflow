@@ -154,7 +154,7 @@ module OrmConverter
 
   def self.get_data(tree,obj,acc_hash={})
     if obj.respond_to?(:collect)
-      obj.sort(&:getId).collect {|o| get_data(tree,o,acc_hash) }
+      obj.sort {|a,b| a.getId <=> b.getId }.collect {|o| get_data(tree,o,acc_hash) }
     else
       hash = attributes(obj)
       tree.keys.each do |key|
