@@ -1,3 +1,8 @@
+## v1.0.0-rc8 released 2017-07-28
+
+* **bugfix:** Legend focus in safari wasn't working (delete)
+* **bugfix:** Now expecting appointment_duration to be in seconds (delete)
+
 ## v1.0.0-rc7 released 2017-07-28
 
 * **bugfix:** Fixed legend icons and conformed to names the customer wanted (delete)

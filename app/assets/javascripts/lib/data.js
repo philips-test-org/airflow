@@ -329,7 +329,7 @@ application.data = {
 	} else if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
 	    return order.rad_exam.rad_exam_time.end_exam;
 	} else if ($.type(order.appointment_duration) == "number") {
-	    return application.data.orderStartTime(order) + (order.appointment_duration * 60 * 1000);
+	    return application.data.orderStartTime(order) + (order.appointment_duration * 1000);
 	} else if (order.rad_exam != undefined) {
 	    return application.data.orderStartTime(order) + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
 	} else {
