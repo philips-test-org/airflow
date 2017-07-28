@@ -20,18 +20,18 @@ application.statuses = {
 	     {name: "Cancelled",
 	      color: "#c8040e",
 	      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
-	     {name: "Begun",
+	     {name: "Started",
 	      color: "#704c8f",
 	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
 	     {name: "Completed",
 	      color: "#398cc4",
 	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
-	     {name: "Future Appointment",
-	      color: "#a0a0a0",
-	      check: function(order) { return (order.rad_exam != undefined && !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }},
 	     {name: "Patient Arrived",
 	      color: "#53a790",
-	      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }}
+	      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }},
+	     {name: "Ordered",
+	      color: "#a0a0a0",
+	      check: function(order) { return (order.rad_exam == undefined || !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }}
 	    ]
 };
 

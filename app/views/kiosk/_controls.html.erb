@@ -20,23 +20,3 @@
 <div id="workspace" class="vertical-timeline">
   <%= image_tag("ajax-loader.gif") %>
 </div>
-
-
-<script class="handlebars-template" id="t-legend" type="text/x-handlebars-template">
-  <div id="legend">
-    {{#each checks}}
-    <div class="status">
-      <span class="color" style="background-color: {{this.color}}"></span><span class="name">{{this.name}}</span>
-    </div>
-    {{/each}}
-    <div class="status">
-      <span class="color" style="color: #53a790;"><i class="fa fa-handshake-o"></i></span><span class="name">Consent</span>
-    </div>
-    <div class="status">
-      <span class="color" style="color: #53a790;"><i class="fa fa-hand-paper-o"></i></span><span class="name">Paperwork</span>
-    </div>
-    <div class="status">
-      <span class="color" style="color: #53a790;"><i class="fa fa-bed"></i></span><span class="name">Anesthesia</span>
-    </div>
-  </div>
-</script>

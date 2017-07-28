@@ -1,3 +1,8 @@
+## v1.0.0-rc7 released 2017-07-28
+
+* **bugfix:** Fixed legend icons and conformed to names the customer wanted (delete)
+* **bugfix:** Changed logic on "ordered" coloring to include orders that don't have a rad exam yet
+
 ## v1.0.0-rc6 released 2017-07-27
 
 * **new:** Moved to order based model, see service notes for migration procedure
