@@ -72,6 +72,11 @@ $(document).ready(function() {
 	trigger: 'focus'
     });
 
+    //safari can't seem to handle focus
+    $("#legend-button").click(function(){
+        $("#legend-button").focus();
+    });
+
     //Add a disconnect callback
     $.harbingerjs.amqp.addCallback('disconnect',function(message) {
 	application.notification.alert({type: "alert", id: "disconnect", message: "You are no longer receiving real time updates. This likely means you need to log in again. Reload the page to continue."});

@@ -22,6 +22,10 @@ $(document).ready(function() {
 	trigger: 'focus'
     });
 
+    //safari can't seem to handle focus
+    $("#legend-button").click(function(){
+        $("#legend-button").focus();
+    });
 
     setInterval(function() {
 	//Fix: This needs to be adjusted to the group name when that backend exists
