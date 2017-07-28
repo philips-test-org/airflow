@@ -1,3 +1,7 @@
+## v1.0.0-rc9 released 2017-07-28
+
+* **bugfix:** Style change to prevent blank cards when there is a really long word (delete)
+
 ## v1.0.0-rc8 released 2017-07-28
 
 * **bugfix:** Legend focus in safari wasn't working (delete)
