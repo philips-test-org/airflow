@@ -34,6 +34,7 @@
 	<%= global_view_link("Overview","overview", {controller: :main, action: :index, :view => "overview"}) %>
 	<% end %>
 	<%= global_view_link("Kiosk","kiosk", {controller: :kiosk, action: :index, :view => "kiosk"}) %>
+	<% unless session[:username].blank? %>
 	<% authorized(["support-staff","ai-staff", "it-staff"]) do %>
         <li class="dropdown">
           <a href="#" id="global-button-admin" role="button"
@@ -45,6 +46,7 @@
           </ul>
         </li>
         <% end %>
+	<% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle <%= "active" if params["controller"] == "main" and ["about", "help"].include? params["action"] %>" data-toggle="dropdown">Help<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

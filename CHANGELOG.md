@@ -1,3 +1,7 @@
+## v1.0.0-rc10 released 2017-07-31
+
+* **bugfix:** Fix for error on kiosk when not logged in (delete)
+
 ## v1.0.0-rc9 released 2017-07-28
 
 * **bugfix:** Style change to prevent blank cards when there is a really long word (delete)
