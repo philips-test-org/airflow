@@ -9,7 +9,7 @@ class KioskController < ApplicationController
 
   def exam_info
     date ||= Time.now
-    date = Time.parse("2015-11-27")
+    #date = Time.parse("2015-11-27")
     q = Java::HarbingerSdkData::Order.createQuery(@entity_manager)
     q.join(".currentStatus.universalEventType")
     q.where([q.or([q.in(".resourceId",params[:resource_ids]),
