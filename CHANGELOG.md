@@ -1,3 +1,8 @@
+
+## v1.0.0-rc11 released 2017-07-31
+
+* **bugfix:** Fix for kiosk date (delete)
+
 ## v1.0.0-rc10 released 2017-07-31
 
 * **bugfix:** Fix for error on kiosk when not logged in (delete)
