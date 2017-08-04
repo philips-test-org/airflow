@@ -1,5 +1,5 @@
 
-## v1.0.0-rc11 released 2017-07-31
+## v1.0.0-rc11 released 2017-08-04
 
 * **bugfix:** Fix for kiosk date (delete)
 
