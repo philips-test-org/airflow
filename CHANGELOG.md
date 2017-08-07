@@ -1,4 +1,8 @@
 
+## v1.0.0-rc13 released 2017-08-07
+
+* **bugfix:** Fix for adjustment dates (delete)
+
 ## v1.0.0-rc11 released 2017-08-04
 
 * **bugfix:** Fix for kiosk date (delete)
