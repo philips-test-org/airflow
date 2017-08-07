@@ -55,7 +55,13 @@ application.data = {
 		  "event-submit": {}},
     formatOrders: function(orders) {
 	// Clear data
-	application.data.startDate = moment($("#time-button").data("value")).startOf('day').unix()*1000; // This will need to be adjusted by time selector interface
+	var value = $("#time-button").data("value");
+        if ( typeof value == "undefined"  ){
+            value = moment().unix();
+        }
+
+        application.data.startDate = moment(value * 1000).startOf('day').unix()*1000; // This will need to be adjusted by time selector interface
+
 	// application.data.masterExams = []; // A copy of all the selected master exam ids only
 	// application.data.examGroups = {}; // A hash of group ident to list of exam ids
 	// application.data.examHash = {}; // A hash by exam.id of the exams
