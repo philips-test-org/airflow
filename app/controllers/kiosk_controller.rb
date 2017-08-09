@@ -30,7 +30,6 @@ class KioskController < ApplicationController
     q.order(".orderNumber asc")
     q.criteria.distinct(true)
     orders = q.list
-    log_hipaa_view(orders)
     render :json => OrmConverter.limited_orders(orders,@entity_manager)
   end
 

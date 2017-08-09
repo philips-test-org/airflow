@@ -385,7 +385,11 @@ application.data = {
     findOrderWithFellows: function(id) {
 	var master = application.data.findOrder(id);
 	var egi = master.group_ident;
-	return $.map(application.data.orderGroups[egi],function(eid) { return application.data.orderHash[eid]; });
+	return $.map(application.data.orderGroups[egi],
+		     function(eid) { return application.data.orderHash[eid]; }).sort(function(a,b) {
+			 if (a.order_number < b.order_number) return -1;
+			 else if (a.order_number >= b.order_number) return 1;
+			 else return 0; });
     },
 
     findResource: function(id) {

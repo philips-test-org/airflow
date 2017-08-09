@@ -1,3 +1,8 @@
+## v1.0.0-rc14 released 2017-08-09
+
+* **improvement:** Buffering audit messages and condensing them to put significantly less load on the server (delete)
+* **bugfix:** Kiosk was trying to hipaa log when no phi was being shown and with no on logged in which blew things up (delete)
+* **bugfix:** Makes grouped orders consistent when opening a modal and prevents comments et al from being associated on the wrong order (delete)
 
 ## v1.0.0-rc13 released 2017-08-07
 

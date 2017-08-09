@@ -118,33 +118,6 @@ $(document).ready(function() {
 	}
     },"airflow.#","web-application-messages");
 
-    $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
-	var tokens = rk.split("."),
-	    table = tokens[0],
-	    id = tokens[2];
-	$.ajax($.harbingerjs.core.url("/exam_info"),
-	       {data: {id: id,
-		       table: table},
-		beforeSend: function() {
-		    //application.notification.flash("sending exam query for: " + rk);
-		},
-		success: function(orders) {
-		    $.each(orders,function(i,o) {
-			var r = application.data.resource(o);
-			if (r != undefined && application.data.resourceHash[r.id] != undefined) {
-			    if (application.data.orderGroups[application.data.orderGroupIdent(o)] == undefined) {
-				application.data.insert(o);
-				application.view.redrawCard(o);
-			    } else {
-				application.data.update(o.id,function(order,rollback_id) {
-				    $.extend(order,o);
-				    return order;
-				},["order-update","modal-update"]);
-			    }
-			}
-		    });
-		    //application.notification.flash({type: 'info', message: (operation + " exam " +  exams[0].id)});
-		}});
-    },"#","audit");
+    $.harbingerjs.amqp.addListener(application.auditBuffer.queue);
 
 });
