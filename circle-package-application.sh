@@ -27,6 +27,7 @@ chmod +r "$APPNAME.war"
 mv -v "$APPNAME.war" "$APPNAME.war.`git describe --always`"
 
 mkdir -v $PACKAGEDIR
+cp -Rv db_scripts $PACKAGEDIR
 cp -v CHANGELOG.md $PACKAGEDIR
 cp -v INSTALL.md $PACKAGEDIR
 cp -v $WARFILE $PACKAGEDIR
