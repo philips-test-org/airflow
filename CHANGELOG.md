@@ -1,3 +1,7 @@
+## v1.0.0-rc15 released 2017-08-09
+
+* **bugfix:** Fix for kiosk view when there are orders only (delete)
+
 ## v1.0.0-rc14 released 2017-08-09
 
 * **improvement:** Buffering audit messages and condensing them to put significantly less load on the server (delete)

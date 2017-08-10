@@ -98,9 +98,11 @@ module OrmConverter
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
       hash.merge!(ExamAdjustment.info_for(order,em))
-      hash["rad_exam"] = hash[:rad_exams][0]
+      if hash[:rad_exams] and hash[:rad_exams].size > 0
+        hash[:rad_exams].each {|re| re.delete("accession") }
+        hash[:rad_exam] = hash[:rad_exams][0]
+      end
       hash.delete("order_number")
-      hash["rad_exam"].delete("accession")
       list << hash
       list
     end
