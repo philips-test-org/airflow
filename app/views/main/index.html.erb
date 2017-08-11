@@ -96,7 +96,7 @@
 </script>
 
 <script class="handlebars-template" id="t-scaled-card" type="text/x-handlebars-template">
-  <div class="notecard scaled {{#if this.adjusted.onhold}}highlight{{/if}}" id="scaled-card-{{this.id}}" style="height: {{order_height this}}; max-height: {{order_height this}}; top: {{order_top this}};">
+  <div class="notecard scaled {{order_card_class this}}" id="scaled-card-{{this.id}}" style="height: {{order_height this}}; max-height: {{order_height this}}; top: {{order_top this}};">
     <div class="left-tab" style="background-color: {{order_color this}};">
     </div>
 
@@ -130,7 +130,7 @@
 </script>
 
 <script class="handlebars-template" id="t-fixed-card" type="text/x-handlebars-template">
-  <div class="notecard overview {{#if this.adjusted.onhold}}highlight{{/if}}" id="fixed-card-{{this.id}}">
+  <div class="notecard overview {{order_card_class this}}" id="fixed-card-{{this.id}}">
     <div class="left-tab" style="background-color: {{order_color this}};">
     </div>
 

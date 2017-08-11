@@ -21,6 +21,10 @@ application.drawBoard = function() {
 		beforeSend: function() {
 		    $("#workspace").html(application.templates.workspaceLoading());
 		},
+		error: function() {
+		    if (console != undefined) { console.log("Error getting orders",arguments); }
+		    $("#workspace").html(application.templates.errorLoading());
+		},
 		success: function(orders) {
 		    application.data.formatOrders(orders);
 		    application.view.setup();

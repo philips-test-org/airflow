@@ -487,6 +487,10 @@ Shared Styles
     .status-indicator { background-color: #f5f52b !important; }
 }
 
+.notecard.completed {
+    background-color: #ddd !important;
+}
+
 .left-tab i.late {
     color: $alert-red;
 }

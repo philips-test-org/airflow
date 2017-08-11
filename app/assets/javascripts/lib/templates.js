@@ -4,18 +4,26 @@ application.templates = {};
 application.partials = {};
 application.templates.pixels_per_second = 200.0 / 60.0 / 60.0;
 application.statuses = {
-    color: function(order) {
-	var color = "#ddd";
+    value_check: function(order,type,default_val) {
+	var value = default_val;
 	for (var i in application.statuses.checks) {
 	    if (application.statuses.checks[i].check(order)) {
-		color = application.statuses.checks[i].color;
+		if (application.statuses.checks[i][type] != undefined) value = application.statuses.checks[i][type];
 		break;
 	    }
 	}
-	return color;
+	return value;
+
+    },
+    color: function(order) {
+	return application.statuses.value_check(order,"color","#ddd");
+    },
+    card_class: function(order) {
+	return application.statuses.value_check(order,"card_class","");
     },
     checks: [{name: "On Hold",
 	      color: "#f5f52b",
+	      card_class: "highlight",
 	      check: function(order) { return (order.adjusted.onhold == true); }},
 	     {name: "Cancelled",
 	      color: "#c8040e",
@@ -25,6 +33,7 @@ application.statuses = {
 	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
 	     {name: "Completed",
 	      color: "#398cc4",
+	      card_class: "completed",
 	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
 	     {name: "Patient Arrived",
 	      color: "#53a790",
@@ -74,6 +83,10 @@ Handlebars.registerHelper('avatar',function(employee_id, placeholder) {
 
 Handlebars.registerHelper('order_color',function(order) {
     return application.statuses.color(order);
+});
+
+Handlebars.registerHelper('order_card_class',function(order) {
+    return application.statuses.card_class(order);
 });
 
 Handlebars.registerHelper('orders_from_resource',function(resource) {

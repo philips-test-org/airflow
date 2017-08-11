@@ -1,3 +1,9 @@
+## v1.0.0-rc16 released 2017-08-11
+
+* **bugfix:** Orders/exams that were moved in airflow to a new resource would blow up if the original resource was in the resource group but the new resource was not (delete)
+* **improvement:** Made requested "gray" color change for backgrounds of "completed" cards (delete)
+* **bugfix:** Now communicating when there is a 500 when loading the orders/exams from the server (delete)
+
 ## v1.0.0-rc15 released 2017-08-09
 
 * **bugfix:** Fix for kiosk view when there are orders only (delete)

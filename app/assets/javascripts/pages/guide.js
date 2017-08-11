@@ -108,7 +108,7 @@ $(document).ready(function() {
 		order.events = payload.events;
 		return order;
 	    },["order-update","modal-update"]);
-	    var event = payload.events[payload.events.length-1];
+	    var event = payload.events[0];
 	    if (event.event_type == "comment") {
 		var event_type = "comment";
 	    } else {

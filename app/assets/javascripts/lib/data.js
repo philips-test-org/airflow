@@ -66,6 +66,7 @@ application.data = {
 	// application.data.examGroups = {}; // A hash of group ident to list of exam ids
 	// application.data.examHash = {}; // A hash by exam.id of the exams
 	application.data.masterOrders = []; // A copy of all the selected master order ids only
+	application.data.ignored = []; // A list for orders that have a resource that isn't in the current view
 	application.data.orderGroups = {}; // A hash of group ident to list of order ids
 	application.data.orderHash = {}; // A hash by order.id of the orders
 	application.data.resources = [];
@@ -98,13 +99,17 @@ application.data = {
     // },
 
     insert: function(order) {
-	order.group_ident = application.data.orderGroupIdent(order);
-	application.data.orderHash[order.id] = order;
-	if (application.data.orderGroups[order.group_ident] == undefined) {
-	    application.data.orderGroups[order.group_ident] = [order.id];
-	    application.data.masterOrders.push(order.id);
+	if (application.data.resource(order) != undefined) {
+	    order.group_ident = application.data.orderGroupIdent(order);
+	    application.data.orderHash[order.id] = order;
+	    if (application.data.orderGroups[order.group_ident] == undefined) {
+		application.data.orderGroups[order.group_ident] = [order.id];
+		application.data.masterOrders.push(order.id);
+	    } else {
+		application.data.orderGroups[order.group_ident].push(order.id);
+	    }
 	} else {
-	    application.data.orderGroups[order.group_ident].push(order.id);
+	    application.data.ignored.push(order);
 	}
     },
 
