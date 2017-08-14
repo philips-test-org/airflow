@@ -362,7 +362,7 @@ application.data = {
 	if (order.adjusted != undefined && order.adjusted.resource_id != undefined) {
 	    return application.data.findResource(order.adjusted.resource_id);
 	} else if (order.rad_exam != undefined) {
-	    return order.rad_exam.resource;
+	    return application.data.findResource(order.rad_exam.resource_id);
 	} else {
 	    return order.resource;
 	}

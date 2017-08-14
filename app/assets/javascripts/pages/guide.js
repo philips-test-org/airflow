@@ -118,6 +118,6 @@ $(document).ready(function() {
 	}
     },"airflow.#","web-application-messages");
 
-    $.harbingerjs.amqp.addListener(application.auditBuffer.queue);
+    $.harbingerjs.amqp.addListener(application.auditBuffer.push);
 
 });
