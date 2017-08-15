@@ -66,7 +66,6 @@ application.auditBuffer = application.buffer.create(function(buffer) {
     });
 
     $.each(others,function(i,message) {
-	console.log("Others:", message.table,message.id);
 	if (rad_exams[message.parent_id] != undefined) {
 	    if (message.table == "rad_exam_times") var attr_name = "rad_exam_time";
 	    else var attr_name = message.table;
@@ -83,12 +82,10 @@ application.auditBuffer = application.buffer.create(function(buffer) {
 
     $.each(orders,function(id,message) {
 	var order = message.attrs;
-	console.log("Found order",application.data.findOrder(order.id));
-	console.log("Order Resource",application.data.resource(order));
-	console.log("Order Start Time",application.data.orderStartTime(order));
     	if (application.data.findOrder(order.id) ||
 	    (application.data.resource(order) &&
-	     moment(application.data.orderStartTime(order)).startOf('day').unix()*1000 == application.data.startDate)) {
+	     (application.data.orderStartTime(order) == null ||
+	      moment(application.data.orderStartTime(order)).startOf('day').unix()*1000 == application.data.startDate))) {
 	    $.ajax($.harbingerjs.core.url("/exam_info"),
 		   {data: {id: id,
 			   table: "orders"},

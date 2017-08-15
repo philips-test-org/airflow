@@ -1,3 +1,7 @@
+## v1.0.0-rc17 released 2017-08-15
+
+* **improvement:** Performance improvement to prevent irrelevant audit messages from triggering server requests (delete)
+
 ## v1.0.0-rc16 released 2017-08-11
 
 * **bugfix:** Orders/exams that were moved in airflow to a new resource would blow up if the original resource was in the resource group but the new resource was not (delete)

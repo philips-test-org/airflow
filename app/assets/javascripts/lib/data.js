@@ -307,6 +307,7 @@ application.data = {
     },
 
     examStartTime: function(exam) {
+	if (exam.rad_exam_time == undefined) { return null; }
 	if (exam.rad_exam_time.begin_exam) {
     	    return exam.rad_exam_time.begin_exam;
     	} else {
@@ -400,4 +401,5 @@ application.data = {
     findResource: function(id) {
 	return application.data.resourceHash[id];
     }
+
 }
