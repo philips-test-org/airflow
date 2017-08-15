@@ -63,7 +63,7 @@ module OrmConverter
       :patient_mrn => {:patient => {}},
       :rad_exams => {
         :rad_exam_time => {},
-        :rad_exam_personnel => {},
+        :rad_exam_personnel => {:ordering => {}},
         :rad_exam_detail => {},
         :procedure => {},
         :patient_mrn => {:patient => {}},

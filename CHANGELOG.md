@@ -1,6 +1,7 @@
 ## v1.0.0-rc17 released 2017-08-15
 
 * **improvement:** Performance improvement to prevent irrelevant audit messages from triggering server requests (delete)
+* **improvement:** Added referring physician to the demographic table (delete)
 
 ## v1.0.0-rc16 released 2017-08-11
 

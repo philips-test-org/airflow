@@ -250,6 +250,7 @@
       {{> demographicsTableRow key="Appointment" value=(format_timestamp (appointment_time this))}}
       {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam.rad_exam_time.begin_exam)}}
       {{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam.rad_exam_time.end_exam)}}
+      {{> demographicsTableRow key="Ordering Physician" value=rad_exam.rad_exam_personnel.ordering.name}}
     </tbody>
   </table>
 </script>
