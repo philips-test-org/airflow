@@ -1,3 +1,7 @@
+## v1.0.0-rc18 released 2017-08-16
+
+* **bugfix:** Fix for cancelled messages that don't result in order updates. This may be a case unique to virtual hospital. (delete)
+
 ## v1.0.0-rc17 released 2017-08-15
 
 * **improvement:** Performance improvement to prevent irrelevant audit messages from triggering server requests (delete)
