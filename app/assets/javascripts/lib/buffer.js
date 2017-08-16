@@ -9,6 +9,32 @@ function convertTimeAttrs(attrs) {
     return attrs;
 }
 
+function getOrderInfo(table,id) {
+    $.ajax($.harbingerjs.core.url("/exam_info"),
+	   {data: {id: id,
+		   table: table},
+	    beforeSend: function() {
+		//application.notification.flash("sending exam query for: " + rk);
+	    },
+	    success: function(orders) {
+		$.each(orders,function(i,o) {
+		    var r = application.data.resource(o);
+		    if (r != undefined && application.data.resourceHash[r.id] != undefined) {
+			if (application.data.orderGroups[application.data.orderGroupIdent(o)] == undefined) {
+			    application.data.insert(o);
+			    application.view.redrawCard(o);
+			} else {
+			    application.data.update(o.id,function(order,rollback_id) {
+				$.extend(order,o);
+				return order;
+			    },["order-update","modal-update"]);
+			}
+		    }
+		});
+		//application.notification.flash({type: 'info', message: (operation + " exam " +  exams[0].id)});
+	    }});
+}
+
 application.buffer = {
     create: function(flusher,flush_timeout) {
 	if (flush_timeout == undefined) flush_timeout = 1000;
@@ -76,7 +102,7 @@ application.auditBuffer = application.buffer.create(function(buffer) {
     $.each(rad_exams,function(id,message) {
 	if (orders[message.parent_id] != undefined) {
 	    orders[message.parent_id].attrs["rad_exam"] = message.attrs; // associate with order
-	    //delete rad_exams[id]; // delete from rad exams
+	    delete rad_exams[id]; // delete from rad exams
 	}
     });
 
@@ -86,30 +112,19 @@ application.auditBuffer = application.buffer.create(function(buffer) {
 	    (application.data.resource(order) &&
 	     (application.data.orderStartTime(order) == null ||
 	      moment(application.data.orderStartTime(order)).startOf('day').unix()*1000 == application.data.startDate))) {
-	    $.ajax($.harbingerjs.core.url("/exam_info"),
-		   {data: {id: id,
-			   table: "orders"},
-		    beforeSend: function() {
-			//application.notification.flash("sending exam query for: " + rk);
-		    },
-		    success: function(orders) {
-			$.each(orders,function(i,o) {
-			    var r = application.data.resource(o);
-			    if (r != undefined && application.data.resourceHash[r.id] != undefined) {
-				if (application.data.orderGroups[application.data.orderGroupIdent(o)] == undefined) {
-				    application.data.insert(o);
-				    application.view.redrawCard(o);
-				} else {
-				    application.data.update(o.id,function(order,rollback_id) {
-					$.extend(order,o);
-					return order;
-				    },["order-update","modal-update"]);
-				}
-			    }
-			});
-			//application.notification.flash({type: 'info', message: (operation + " exam " +  exams[0].id)});
-		    }});
+	    getOrderInfo("orders",id);
 	}
     });
+
+    $.each(rad_exams,function(id,message) {
+	var order = {id: message.attrs.order_id, rad_exam: message.attrs};
+	if (application.data.findOrder(order.id) ||
+	    (application.data.resource(order) &&
+	     (application.data.orderStartTime(order) == null ||
+	      moment(application.data.orderStartTime(order)).startOf('day').unix()*1000 == application.data.startDate))) {
+	    getOrderInfo("rad_exams",id);
+	}
+    });
+
 
 });
