@@ -2,7 +2,8 @@ if (typeof application == "undefined") { application = {} }
 
 application.drawBoard = function() {
     //Fix: This needs to be adjusted to the group name when that backend exists
-    var resources = $.parseJSON($("#resource-groupings-json").text())[$("#resource-group-buttons button").data("value")];
+    var resource_group = $("#resource-group-buttons button").data("value");
+    var resources = $.parseJSON($("#resource-groupings-json").text())[resource_group];
     if (resources == undefined) {
 	$("#workspace").html(application.templates.noResources());
     } else {
@@ -12,6 +13,8 @@ application.drawBoard = function() {
 	});
 	data.push({name: "date",
 		   value: $("#time-button").data("value")});
+	data.push({name: "resource_group",
+		   value: resource_group});
 
 	if ($(".active .view-changer").data("view-type") == "kiosk") { var url = $.harbingerjs.core.url("/limited_exam_info"); }
 	else {  var url = $.harbingerjs.core.url("/exams"); }

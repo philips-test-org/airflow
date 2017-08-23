@@ -489,6 +489,9 @@ Shared Styles
 
 .notecard.completed {
     background-color: #ddd !important;
+    .footer .status-indicator {
+	background-color: #ddd !important;
+    }
 }
 
 .left-tab i.late {

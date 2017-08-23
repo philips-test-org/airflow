@@ -19,10 +19,10 @@ class ResourceGroupsController < ApplicationController
     filters << q.not([q.in(".id",rgms)]) if rgms.size > 0
     q.where(filters)
 
-    search_list = q.list.to_a.collect {|r| OrmConverter.attributes(r) }
+    search_list = q.list.to_a.collect {|r| OrmConverter.resource(r) }
     if rgms.size > 0
       q2 = Java::HarbingerSdkData::Resource.createQuery(@entity_manager)
-      selected_list = q2.where(q.in(".id",rgms)).list.to_a.collect {|r| hash = OrmConverter.attributes(r); hash[:state] = "selected"; hash }
+      selected_list = q2.where(q.in(".id",rgms)).list.to_a.collect {|r| hash = OrmConverter.resource(r); hash[:state] = "selected"; hash }
     else
       selected_list = []
     end

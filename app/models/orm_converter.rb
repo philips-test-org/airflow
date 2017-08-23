@@ -146,6 +146,12 @@ module OrmConverter
   #   end
   # end
 
+  def self.resource(resource)
+    sub_objects = {:modality => {},
+                   :site => {}}
+    get_data(sub_objects,resource)
+  end
+
   def self.resources(resources)
     sub_objects = {:modality => {}}
     resources.inject([]) do |list,resource|

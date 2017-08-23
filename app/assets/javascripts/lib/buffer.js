@@ -20,7 +20,7 @@ function getOrderInfo(table,id) {
 		$.each(orders,function(i,o) {
 		    var r = application.data.resource(o);
 		    if (r != undefined && application.data.resourceHash[r.id] != undefined) {
-			if (application.data.orderGroups[application.data.orderGroupIdent(o)] == undefined) {
+			if (application.data.orderHash[o.id] == undefined) {
 			    application.data.insert(o);
 			    application.view.redrawCard(o);
 			} else {

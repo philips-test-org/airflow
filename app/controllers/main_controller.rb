@@ -7,9 +7,14 @@ class MainController < ApplicationController
   def index
     @employee = Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
     @groupings = ResourceGroup.resource_group_hash(@entity_manager)
+    # Reser resource group if the group doesn't exist
+    if session[:resource_group] and @groupings[session[:resource_group]] == nil
+      session[:resource_group] = nil
+    end
   end
 
   def exams
+    session[:resource_group] = params[:resource_group]
     date = Time.at(params[:date].to_i) unless params[:date].blank?
     date ||= Time.now
     q = Java::HarbingerSdkData::Order.createQuery(@entity_manager)

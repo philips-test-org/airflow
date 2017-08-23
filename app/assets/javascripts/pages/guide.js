@@ -79,22 +79,21 @@ $(document).ready(function() {
 
     //Add a disconnect callback
     $.harbingerjs.amqp.addCallback('disconnect',function(message) {
-	application.notification.alert({type: "alert", id: "disconnect", message: "You are no longer receiving real time updates. This likely means you need to log in again. Reload the page to continue."});
+	application.notification.alert({type: "alert", id: "disconnect", message: "You are no longer receiving real time updates. This likely means you need to log in again. Reload if this message persists more than 10 seconds."});
     });
 
     //Add a connect callback
     $.harbingerjs.amqp.addCallback('connect',function(message) {
 	$("#notification-disconnect").remove();
+	$.harbingerjs.amqp.bind("web-application-messages","airflow.#")
+	$.harbingerjs.amqp.bind("audit","rad_exams.#");
+	$.harbingerjs.amqp.bind("audit","rad_exam_times.#");
+	$.harbingerjs.amqp.bind("audit","rad_exam_personnel.#");
+	$.harbingerjs.amqp.bind("audit","orders.#");
 	application.notification.flash("Connected to real time data.");
     });
 
     $.harbingerjs.amqp.setup({url: harbingerjsCometdURL});
-
-    $.harbingerjs.amqp.bind("web-application-messages","airflow.#")
-    $.harbingerjs.amqp.bind("audit","rad_exams.#");
-    $.harbingerjs.amqp.bind("audit","rad_exam_times.#");
-    $.harbingerjs.amqp.bind("audit","rad_exam_personnel.#");
-    $.harbingerjs.amqp.bind("audit","orders.#");
 
     $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
 	var tokens = rk.split("."),

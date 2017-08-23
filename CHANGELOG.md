@@ -1,3 +1,11 @@
+## v1.0.0-rc19 released 2017-08-22
+
+* **bugfix:** Color status now changes as expected on modal
+* **bugfix:** Modality and site columns were empty on the resource groupings page
+* **bugfix:** Exams that begin the previous day now start at midnight when displayed
+* **bugfix:** Icons on completed cards had a white background when they should have had a grey one
+* **improvement:** Now remembering which resource group and view was last shown using session data
+
 ## v1.0.0-rc18 released 2017-08-16
 
 * **bugfix:** Fix for cancelled messages that don't result in order updates. This may be a case unique to virtual hospital. (delete)

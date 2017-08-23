@@ -317,12 +317,14 @@ application.data = {
 
     orderStartTime: function(order) {
 	if (order.adjusted != undefined && order.adjusted.start_time) {
-    	    return order.adjusted.start_time;
+	    var st = order.adjusted.start_time;
 	} else if (order.rad_exam) {
-	    return application.data.examStartTime(order.rad_exam)
+	    var st = application.data.examStartTime(order.rad_exam)
 	} else {
-	    return order.appointment;
+	    var st = order.appointment;
 	}
+	if (st < application.data.startDate) { st = application.data.startDate; }
+	return st;
     },
 
     // examStopTime: function(exam) {
@@ -377,11 +379,19 @@ application.data = {
 	}
     },
 
+    orderGroupStartTime: function(order) {
+	if (order.rad_exam) {
+	    return application.data.examStartTime(order.rad_exam)
+	} else {
+	    return order.appointment;
+	}
+    },
+
     // This function shouldn't be called outside of formatOrders
     // which will set a group_ident key on the exam to prevent
     // the exam group identifier from changing based on user adjustments
     orderGroupIdent: function(order) {
-	return order.patient_mrn_id + application.data.resource(order).id + application.data.orderStartTime(order);
+	return order.patient_mrn_id + application.data.resource(order).id + application.data.orderGroupStartTime(order);
     },
 
     findOrder: function(id) {
