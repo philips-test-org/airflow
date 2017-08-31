@@ -1,3 +1,7 @@
+## v1.0.1-rc2 released 2017-08-31
+
+* **bugfix:** fix move order/exam persistence(delete)
+
 ## v1.0.1-rc1 released 2017-08-31
 
 * **bugfix:** empty appointment durations now behave correctly

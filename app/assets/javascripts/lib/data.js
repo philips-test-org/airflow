@@ -350,7 +350,7 @@ application.data = {
 	}
     },
 
-    /*orderHeightToStartTime: function(height,order) {
+    orderHeightToStartTime: function(height,order) {
 	var startTime = application.data.startDate + (height/application.templates.pixels_per_second*1000);
 	return startTime;
     },
@@ -358,7 +358,7 @@ application.data = {
     orderHeightToStopTime: function(height,order) {
 	var duration = application.data.orderStopTime(order) - application.data.orderStartTime(order);
 	return application.data.orderHeightToStartTime(height,order) + duration;
-    },*/
+    },
 
     resource: function(order) {
 	if (order.adjusted != undefined && order.adjusted.resource_id != undefined) {
