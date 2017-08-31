@@ -139,32 +139,31 @@ application.data = {
     update: function(id,fun,events) {
 	if (events != undefined && $.type(events) != "array") { throw("Event list must be an array of strings"); }
 	//Find all exams associated with the master id given
-	var orders = application.data.findOrderWithFellows(id);
+	var order = application.data.findOrder(id);
 	//Set up a rollback identifier and deep copy the existing exams
 	var rollback_id = id;
 	var rollback_mutex = application.data.rollbackMutexes[rollback_id] = application.mutex.create();
-	$.each(orders,function(i,e) {
-	    // Make a deep copy of the order so that if the update fails
-	    // the original order object won't have been changed
-	    // this acts as an error handling rollback as the actual rollbacks
-	    // must be called by the update function as it is the thing that knows
-	    // when a change has been saved to the server
-	    // Setting of the new order into the orderHash is also handled
-	    // by the updating function otherwise the calls to the mutex
-	    // happen out of order and things get weird
-	    var rollback_copy = $.extend(true,{},e);
-	    if (application.data.rollbackOrderHash[rollback_id] == undefined) {
-		application.data.rollbackOrderHash[rollback_id] = [];
-	    }
-	    application.data.rollbackOrderHash[rollback_id].push(rollback_copy);
 
-	    // Call the update function with the given rollback id which will
-	    // supply the location of the mutex and the rollback information
-	    //console.log(application.data.rollbackOrderHash);
-	    //console.log("Before fun run",e.adjusted,rollback_copy.adjusted);
-	    rollback_mutex.sync(function() { fun(e,rollback_id); });
-	    //console.log("After fun run",e.adjusted,rollback_copy.adjusted);
-	});
+        // Make a deep copy of the order so that if the update fails
+        // the original order object won't have been changed
+        // this acts as an error handling rollback as the actual rollbacks
+        // must be called by the update function as it is the thing that knows
+        // when a change has been saved to the server
+        // Setting of the new order into the orderHash is also handled
+        // by the updating function otherwise the calls to the mutex
+        // happen out of order and things get weird
+        var rollback_copy = $.extend(true,{},order);
+        if (application.data.rollbackOrderHash[rollback_id] == undefined) {
+            application.data.rollbackOrderHash[rollback_id] = [];
+        }
+        application.data.rollbackOrderHash[rollback_id].push(rollback_copy);
+
+        // Call the update function with the given rollback id which will
+        // supply the location of the mutex and the rollback information
+        //console.log(application.data.rollbackOrderHash);
+        //console.log("Before fun run",e.adjusted,rollback_copy.adjusted);
+        rollback_mutex.sync(function() { fun(order,rollback_id); });
+        //console.log("After fun run",e.adjusted,rollback_copy.adjusted);
 
 	//Get the master order now that it's been cloned and changed
 	var order = application.data.findOrder(id);
@@ -223,7 +222,7 @@ application.data = {
 	    }
 	    order.events.push(event);
 	    var data = {
-		id: id,
+		id: order.id,
 		event: event
 	    }
 	    $.ajax($.harbingerjs.core.url("/events/add"),
