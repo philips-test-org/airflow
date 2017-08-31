@@ -108,9 +108,19 @@ Handlebars.registerHelper('order_with_fellows',function(order) {
     return application.data.findOrderWithFellows(order.id);
 });
 
+Handlebars.registerHelper('negative_order_height',function(order) {
+    var seconds = ((application.data.orderStopTime(order) - application.data.orderStartTime(order)) / 1000);
+    return (seconds < 0);
+});
+
 Handlebars.registerHelper('order_height',function(order) {
     var seconds = ((application.data.orderStopTime(order) - application.data.orderStartTime(order)) / 1000);
-    return Math.round(seconds * application.templates.pixels_per_second) + "px";
+    // Default for bad data
+    if (seconds < 0) {
+	return "30px;"
+    } else {
+	return Math.round(seconds * application.templates.pixels_per_second) + "px";
+    }
 });
 
 Handlebars.registerHelper('short_order',function(order) {
@@ -190,12 +200,8 @@ Handlebars.registerHelper('event_type_check',function(type) {
     else return false;
 });
 
-Handlebars.registerHelper('chronological_events',function(events) {
-    return events.sort(function(a,b) {
-	if (a.created_at < b.created_at) return 1;
-	else if (b.created_at < a.created_at) return -1;
-	else return 0;
-    });
+Handlebars.registerHelper('chronological_events',function(order) {
+    return application.data.allEvents(order.id);
 });
 
 Handlebars.registerHelper('notification_type',function(type) {
@@ -265,9 +271,9 @@ Handlebars.registerHelper('toggle_state',function(name,new_state) {
     return new Handlebars.SafeString('<span class="label ' + klass + '">' + language + '</span>');
 });
 
-Handlebars.registerHelper('has_comments',function(events,block) {
-    if (events.filter(function(event) { return event.event_type == 'comment'; }).length > 0) {
-	return block.fn(events);
+Handlebars.registerHelper('has_comments',function(order,block) {
+    if (application.data.allEvents(order.id).filter(function(event) { return event.event_type == 'comment'; }).length > 0) {
+	return block.fn(order);
     }
 });
 

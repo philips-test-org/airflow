@@ -101,7 +101,7 @@
     </div>
 
     <div class="right-tab">
-      <div class="events" style="{{#if (short_order this)}}left: 5px; top: 5px;{{/if}}">{{#has_comments events}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
+      <div class="events" style="{{#if (short_order this)}}left: 5px; top: 5px;{{/if}}">{{#has_comments this}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
 
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
@@ -245,9 +245,11 @@
       {{> demographicsTableRow key="Patient Class" value=(site_class_name (exam_then_order this "site_class"))}}
       {{> demographicsTableRow key="Resource" value=(resource_name this)}}
       {{> demographicsTableRow key="Procedure" value=(exam_then_order this "procedure.description")}}
+      {{> demographicsTableRow key="Default Procedure Duration" value=(exam_then_order this "procedure.scheduled_duration")}}
       {{> demographicsTableRow key="Sign In" value=(format_timestamp rad_exam.rad_exam_time.sign_in)}}
       {{> demographicsTableRow key="Check In" value=(format_timestamp rad_exam.rad_exam_time.check_in)}}
       {{> demographicsTableRow key="Appointment" value=(format_timestamp (appointment_time this))}}
+      {{> demographicsTableRow key="Appointment Duration" value=appointment_duration}}
       {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam.rad_exam_time.begin_exam)}}
       {{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam.rad_exam_time.end_exam)}}
       {{> demographicsTableRow key="Ordering Physician" value=rad_exam.rad_exam_personnel.ordering.name}}
@@ -271,7 +273,7 @@
 
 <script class="handlebars-template" id="t-event-list" type="text/x-handlebars-template">
   <div class="events">
-    {{#each (chronological_events events)}}
+    {{#each (chronological_events this)}}
     {{render_event this}}
     {{/each}}
   </div>

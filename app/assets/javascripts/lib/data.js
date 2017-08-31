@@ -174,7 +174,7 @@ application.data = {
 	} else {
 	    application.data.dispatch("order-update",order);
 	}
-	return orders;
+	return [order];
     },
 
     //Unused!
@@ -350,7 +350,7 @@ application.data = {
 	}
     },
 
-    orderHeightToStartTime: function(height,order) {
+    /*orderHeightToStartTime: function(height,order) {
 	var startTime = application.data.startDate + (height/application.templates.pixels_per_second*1000);
 	return startTime;
     },
@@ -358,7 +358,7 @@ application.data = {
     orderHeightToStopTime: function(height,order) {
 	var duration = application.data.orderStopTime(order) - application.data.orderStartTime(order);
 	return application.data.orderHeightToStartTime(height,order) + duration;
-    },
+    },*/
 
     resource: function(order) {
 	if (order.adjusted != undefined && order.adjusted.resource_id != undefined) {
@@ -409,6 +409,17 @@ application.data = {
 
     findResource: function(id) {
 	return application.data.resourceHash[id];
+    },
+
+    allEvents: function(id) {
+	var orders = application.data.findOrderWithFellows(id);
+	var events = [];
+	$.each(orders,function(i,o) { events = events.concat(o.events); });
+	return events.sort(function(a,b) {
+	    if (a.created_at < b.created_at) return 1;
+	    else if (b.created_at < a.created_at) return -1;
+	    else return 0;
+	});
     }
 
 }
