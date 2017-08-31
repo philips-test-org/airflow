@@ -326,20 +326,24 @@ application.data = {
 	return st;
     },
 
-    // examStopTime: function(exam) {
-    // 	if (exam.adjusted.stop_time) {
-    // 	    return exam.adjusted.stop_time;
-    // 	} else if (exam.rad_exam_time.end_exam) {
-    // 	    return exam.rad_exam_time.end_exam;
-    // 	} else {
-    // 	    return application.data.examStartTime(exam) + (exam.procedure.scheduled_duration * 60 * 1000);
-    // 	}
-    // },
+    unadjustedOrderStartTime: function(order) {
+	if (order.rad_exam) {
+	    return application.data.examStartTime(order.rad_exam)
+	} else {
+	    return order.appointment;
+	}
+    },
 
     orderStopTime: function(order) {
-	if (order.adjusted != undefined && order.adjusted.stop_time) {
-	    return order.adjusted.stop_time;
-	} else if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
+	if (order.adjusted != undefined && order.adjusted.start_time) {
+	    return order.adjusted.start_time + (application.data.unadjustedOrderStopTime(order) - application.data.unadjustedOrderStartTime(order));
+	} else {
+	    return application.data.unadjustedOrderStopTime(order);
+	}
+    },
+
+    unadjustedOrderStopTime: function(order) {
+	if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
 	    return order.rad_exam.rad_exam_time.end_exam;
 	} else if ($.type(order.appointment_duration) == "number") {
 	    return application.data.orderStartTime(order) + (order.appointment_duration * 1000);
@@ -350,7 +354,7 @@ application.data = {
 	}
     },
 
-    /*orderHeightToStartTime: function(height,order) {
+    orderHeightToStartTime: function(height,order) {
 	var startTime = application.data.startDate + (height/application.templates.pixels_per_second*1000);
 	return startTime;
     },
@@ -358,7 +362,7 @@ application.data = {
     orderHeightToStopTime: function(height,order) {
 	var duration = application.data.orderStopTime(order) - application.data.orderStartTime(order);
 	return application.data.orderHeightToStartTime(height,order) + duration;
-    },*/
+    },
 
     resource: function(order) {
 	if (order.adjusted != undefined && order.adjusted.resource_id != undefined) {
@@ -378,19 +382,11 @@ application.data = {
 	}
     },
 
-    orderGroupStartTime: function(order) {
-	if (order.rad_exam) {
-	    return application.data.examStartTime(order.rad_exam)
-	} else {
-	    return order.appointment;
-	}
-    },
-
     // This function shouldn't be called outside of formatOrders
     // which will set a group_ident key on the exam to prevent
     // the exam group identifier from changing based on user adjustments
     orderGroupIdent: function(order) {
-	return order.patient_mrn_id + application.data.resource(order).id + application.data.orderGroupStartTime(order);
+	return order.patient_mrn_id + application.data.resource(order).id + application.data.unadjustedOrderStartTime(order);
     },
 
     findOrder: function(id) {
