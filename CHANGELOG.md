@@ -1,3 +1,9 @@
+## v1.0.1-rc5 released 2017-09-01
+
+* **bugfix:** fixes for stop date after move (delete)
+* **bugfix:** fix for broken overview page (delete)
+* **improvement:** Added visual indicator of bad duration and additional demographics
+
 ## v1.0.1-rc4 released 2017-09-01
 
 * **bugfix:** yet another fix for stop date after move (delete)

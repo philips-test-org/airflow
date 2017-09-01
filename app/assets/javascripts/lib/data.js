@@ -328,22 +328,19 @@ application.data = {
 
     unadjustedOrderStartTime: function(order) {
 	if (order.rad_exam) {
-	    return application.data.examStartTime(order.rad_exam)
+	    var st = application.data.examStartTime(order.rad_exam)
 	} else {
-	    return order.appointment;
+	    var st = order.appointment;
 	}
+	if (st < application.data.startDate) { st = application.data.startDate; }
+	return st;
     },
 
     orderStopTime: function(order) {
 	if (order.adjusted != undefined && order.adjusted.start_time) {
-	    return order.adjusted.start_time + (application.data.unadjustedOrderStopTime(order) - application.data.orderStartTime(order));
-	} else {
-	    return application.data.unadjustedOrderStopTime(order);
-	}
-    },
-
-    unadjustedOrderStopTime: function(order) {
-	if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
+	    //adjusted start time plus the unadjusted duration
+	    return order.adjusted.start_time + application.data.orderDuration(order);
+	} else if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
 	    return order.rad_exam.rad_exam_time.end_exam;
 	} else if ($.type(order.appointment_duration) == "number") {
 	    return application.data.orderStartTime(order) + (order.appointment_duration * 1000);
@@ -352,6 +349,22 @@ application.data = {
 	} else {
 	    return application.data.orderStartTime(order) + (order.procedure.scheduled_duration * 60 * 1000);
 	}
+    },
+
+    unadjustedOrderStopTime: function(order) {
+	if (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam) {
+	    return order.rad_exam.rad_exam_time.end_exam;
+	} else if ($.type(order.appointment_duration) == "number") {
+	    return application.data.unadjustedOrderStartTime(order) + (order.appointment_duration * 1000);
+	} else if (order.rad_exam != undefined) {
+	    return application.data.unadjustedOrderStartTime(order) + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
+	} else {
+	    return application.data.unadjustedOrderStartTime(order) + (order.procedure.scheduled_duration * 60 * 1000);
+	}
+    },
+
+    orderDuration: function(order) {
+	return application.data.unadjustedOrderStopTime(order) - application.data.unadjustedOrderStartTime(order);
     },
 
     orderHeightToStartTime: function(height,order) {

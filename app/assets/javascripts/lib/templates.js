@@ -108,19 +108,56 @@ Handlebars.registerHelper('order_with_fellows',function(order) {
     return application.data.findOrderWithFellows(order.id);
 });
 
-Handlebars.registerHelper('negative_order_height',function(order) {
-    var seconds = ((application.data.orderStopTime(order) - application.data.orderStartTime(order)) / 1000);
-    return (seconds < 0);
+Handlebars.registerHelper('negative_duration',function(order) {
+    return (application.data.orderDuration(order) < 0);
 });
 
 Handlebars.registerHelper('order_height',function(order) {
-    var seconds = ((application.data.orderStopTime(order) - application.data.orderStartTime(order)) / 1000);
+    var seconds = (application.data.orderDuration(order) / 1000);
     // Default for bad data
     if (seconds < 0) {
 	return "30px;"
     } else {
 	return Math.round(seconds * application.templates.pixels_per_second) + "px";
     }
+});
+
+Handlebars.registerHelper('order_duration',function(order) {
+    return application.data.orderDuration(order);
+});
+
+Handlebars.registerHelper('current_duration',function(order) {
+    return Handlebars.helpers.format_duration(application.data.orderDuration(order) / 1000);
+});
+
+Handlebars.registerHelper('format_duration',function(duration) {
+    if ((duration || duration === 0) && ! isNaN(parseInt(duration))) {
+	var duration = parseInt(duration);
+	if (duration >= 0) { var extra = false; } else { var extra = true; }
+	if (extra) { duration = duration * -1 }
+	var seconds = duration % 60;
+	var minutes = (parseInt(duration/60)) % 60;
+	var hours = (parseInt(duration/3600)) % 24;
+	var days = parseInt(duration/3600/24);
+	if (extra) { var sign = "-"; } else { var sign = ""; }
+	if (days > 0) {
+	    var out = sign + days + ' d, ' + hours + ' h';// + minutes + ' min';//, #{seconds} s"
+	} else {
+	    var out = sign + hours + ' h, ' + minutes + ' m';//, #{seconds} s"
+	}
+	if (extra) {
+	    return new Handlebars.SafeString('<span class="alert-red">' + out + '</span>');
+	}
+    } else if (duration) {
+	return duration;
+    } else {
+	return "---";
+    }
+});
+
+Handlebars.registerHelper('default_procedure_duration',function(order) {
+    var duration = 60 * Handlebars.helpers.exam_then_order(order,"procedure.scheduled_duration");
+    return Handlebars.helpers.format_duration(duration);
 });
 
 Handlebars.registerHelper('short_order',function(order) {

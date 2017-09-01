@@ -84,6 +84,7 @@ $alert-text-color: #fff;
 .margin-right-xs { margin-right: 5px; }
 .margin-right-xxs { margin-right: 2px; }
 
+.alert-red { color: $alert-red; }
 
 #primary-navbar { margin-bottom: 0px; }
 
@@ -492,6 +493,11 @@ Shared Styles
     .footer .status-indicator {
 	background-color: #ddd !important;
     }
+}
+
+.notecard.bad-duration {
+    border-color: $alert-red;
+    border-style: dashed;
 }
 
 .left-tab i.late {

@@ -96,7 +96,7 @@
 </script>
 
 <script class="handlebars-template" id="t-scaled-card" type="text/x-handlebars-template">
-  <div class="notecard scaled {{order_card_class this}}" id="scaled-card-{{this.id}}" style="height: {{order_height this}}; max-height: {{order_height this}}; top: {{order_top this}};">
+  <div class="notecard scaled {{order_card_class this}} {{#if (negative_duration this)}}bad-duration{{/if}}" id="scaled-card-{{this.id}}" style="height: {{order_height this}}; max-height: {{order_height this}}; top: {{order_top this}};">
     <div class="left-tab" style="background-color: {{order_color this}};">
     </div>
 
@@ -130,12 +130,12 @@
 </script>
 
 <script class="handlebars-template" id="t-fixed-card" type="text/x-handlebars-template">
-  <div class="notecard overview {{order_card_class this}}" id="fixed-card-{{this.id}}">
+  <div class="notecard overview {{order_card_class this}} {{#if (negative_duration this)}}bad-duration{{/if}}" id="fixed-card-{{this.id}}">
     <div class="left-tab" style="background-color: {{order_color this}};">
     </div>
 
     <div class="right-tab">
-      <div class="events">{{#has_comments events}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
+      <div class="events">{{#has_comments this}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
 
       <div class="heading">
 	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
@@ -245,11 +245,12 @@
       {{> demographicsTableRow key="Patient Class" value=(site_class_name (exam_then_order this "site_class"))}}
       {{> demographicsTableRow key="Resource" value=(resource_name this)}}
       {{> demographicsTableRow key="Procedure" value=(exam_then_order this "procedure.description")}}
-      {{> demographicsTableRow key="Default Procedure Duration" value=(exam_then_order this "procedure.scheduled_duration")}}
+      {{> demographicsTableRow key="Default Procedure Duration" value=(default_procedure_duration this)}}
       {{> demographicsTableRow key="Sign In" value=(format_timestamp rad_exam.rad_exam_time.sign_in)}}
       {{> demographicsTableRow key="Check In" value=(format_timestamp rad_exam.rad_exam_time.check_in)}}
       {{> demographicsTableRow key="Appointment" value=(format_timestamp (appointment_time this))}}
-      {{> demographicsTableRow key="Appointment Duration" value=appointment_duration}}
+      {{> demographicsTableRow key="Appointment Duration" value=(format_duration appointment_duration)}}
+      {{> demographicsTableRow key="Current Duration" value=(current_duration this)}}
       {{> demographicsTableRow key="Begin Exam" value=(format_timestamp rad_exam.rad_exam_time.begin_exam)}}
       {{> demographicsTableRow key="End Exam" value=(format_timestamp rad_exam.rad_exam_time.end_exam)}}
       {{> demographicsTableRow key="Ordering Physician" value=rad_exam.rad_exam_personnel.ordering.name}}
