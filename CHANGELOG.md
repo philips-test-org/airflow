@@ -1,3 +1,7 @@
+## v1.0.1-rc4 released 2017-09-01
+
+* **bugfix:** yet another fix for stop date after move (delete)
+
 ## v1.0.1-rc3 released 2017-08-31
 * **bugfix:** fix for order/exam move no longer using stop time (delete)
 

@@ -336,7 +336,7 @@ application.data = {
 
     orderStopTime: function(order) {
 	if (order.adjusted != undefined && order.adjusted.start_time) {
-	    return order.adjusted.start_time + (application.data.unadjustedOrderStopTime(order) - application.data.unadjustedOrderStartTime(order));
+	    return order.adjusted.start_time + (application.data.unadjustedOrderStopTime(order) - application.data.orderStartTime(order));
 	} else {
 	    return application.data.unadjustedOrderStopTime(order);
 	}
