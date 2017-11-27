@@ -22,27 +22,46 @@ application.statuses = {
 	return application.statuses.value_check(order,"card_class","");
     },
     checks: [{name: "On Hold",
+	      order: 5,
 	      color: "#f5f52b",
 	      card_class: "highlight",
 	      check: function(order) { return (order.adjusted.onhold == true); }},
 	     {name: "Cancelled",
+	      order: 6,
 	      color: "#c8040e",
 	      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
 	     {name: "Started",
+	      order: 3,
 	      color: "#704c8f",
 	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
 	     {name: "Completed",
+	      order: 4,
 	      color: "#398cc4",
 	      card_class: "completed",
 	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
 	     {name: "Patient Arrived",
+	      order: 2,
 	      color: "#53a790",
 	      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }},
 	     {name: "Ordered",
+	      order: 1,
 	      color: "#a0a0a0",
 	      check: function(order) { return (order.rad_exam == undefined || !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }}
 	    ]
 };
+
+// Sort checks by the order; be sure to dup the array as the original order needs to be preserved
+application.statuses.ordered_checks = application.statuses.checks.slice(0,application.statuses.checks.length).sort(function(a,b) {
+    if (a.order > b.order) {
+	return 1;
+    } else if (a.order < b.order) {
+	return -1;
+    } else {
+	return 0;
+    }
+});
+
+
 
 $(document).ready(function() {
     $.each($(".handlebars-template"),function(i,e) {
@@ -270,7 +289,7 @@ Handlebars.registerHelper('toggle_icon',function(name) {
 	icon = "fa fa-hand-paper-o";
 	break;
     case "anesthesia":
-	icon = "fa fa-bed";
+	icon = ""//"fa fa-bed";
 	break;
     case "consent":
 	icon = "fa fa-handshake-o";
