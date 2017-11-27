@@ -130,6 +130,29 @@ application.data = {
 	});
     },
 
+    search: function(term) {
+	var matches = [];
+	$.each(application.data.orderHash, function(k,obj) {
+	    var match = false;
+	    var values = ["patient_mrn.mrn",
+			  "patient_mrn.patient.name",
+			  "rad_exam.accession",
+			  "procedure.description",
+			  "rad_exam.procedure.description",
+			  "procedure.code",
+			  "rad_exam.procedure.code"
+			 ];
+	    for (var i in values) {
+		if (String(application.data.pathGet(obj,values[i])).match(new RegExp(term, 'i'))) {
+		    match = true;
+		    break;
+		}
+	    }
+	    if (match) { matches.push(obj) };
+	});
+	return matches;
+    },
+
     /* Setters */
 
     // There remains a race condition around making a change and having a different
