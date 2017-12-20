@@ -90,47 +90,64 @@ $(document).ready(function() {
 	}
     });
 
-
-    //Add a disconnect callback
-    $.harbingerjs.amqp.addCallback('disconnect',function(message) {
-	application.notification.alert({type: "alert", id: "disconnect", message: "You are no longer receiving real time updates. This likely means you need to log in again. Reload if this message persists more than 10 seconds."});
-    });
-
-    //Add a connect callback
-    $.harbingerjs.amqp.addCallback('connect',function(message) {
-	$("#notification-disconnect").remove();
-	$.harbingerjs.amqp.bind("web-application-messages","airflow.#")
-	$.harbingerjs.amqp.bind("audit","rad_exams.#");
-	$.harbingerjs.amqp.bind("audit","rad_exam_times.#");
-	$.harbingerjs.amqp.bind("audit","rad_exam_personnel.#");
-	$.harbingerjs.amqp.bind("audit","orders.#");
-	application.notification.flash("Connected to real time data.");
-    });
-
-    $.harbingerjs.amqp.setup({url: harbingerjsCometdURL});
-
-    $.harbingerjs.amqp.addListener(function(rk,payload,exchange) {
-	var tokens = rk.split("."),
-	    event_type = tokens[1],
-	    employee_id = tokens[2],
-	    order_id = tokens[3],
-	    resource_id = tokens[4];
-	if (employee_id != application.employee.id) {
-	    application.data.update(order_id,function(order,rollback_id) {
-		$.extend(order.adjusted,payload.adjusted);
-		order.events = payload.events;
-		return order;
-	    },["order-update","modal-update"]);
-	    var event = payload.events[0];
-	    if (event.event_type == "comment") {
-		var event_type = "comment";
-	    } else {
-		var event_type = "event";
-	    }
-	    application.notification.flash({type: event_type, event: event});
-	}
-    },"airflow.#","web-application-messages");
-
-    $.harbingerjs.amqp.addListener(application.auditBuffer.push);
-
+  connectToAPM();
 });
+
+function connectToAPM() {
+  var amqp = new $.amqpListener();
+  amqp.setup({host: "astondev3.analytical.info", port: 4000});
+
+  var joinCallbacks = {
+    newMsg: function(msg) {
+      var routing_key = msg.routing_key;
+      var exchange = msg.exchange;
+      var payload = msg.payload;
+
+      if (exchange === "web-application-messages" &&
+          amqp.matchRoutingKey("airflow.#", routing_key)) {
+        var tokens = routing_key.split("."),
+          event_type = tokens[1],
+          employee_id = tokens[2],
+          order_id = tokens[3],
+          resource_id = tokens[4];
+        if (employee_id != application.employee.id) {
+          application.data.update(order_id,function(order,rollback_id) {
+            $.extend(order.adjusted,payload.adjusted);
+            order.events = payload.events;
+            return order;
+          },["order-update","modal-update"]);
+          var event = payload.events.pop();
+          if (event.event_type == "comment") {
+            var event_type = "comment";
+          } else {
+            var event_type = "event";
+          }
+          application.notification.flash({type: event_type, event: event});
+        }
+      }
+    },
+    joinOk: function() {
+      $("#notification-disconnect").remove();
+      application.notification.flash("Connected to APM.");
+      bindExchanges();
+    },
+    joinError: function(resp) {console.log("Unable to join", resp)},
+    onClose: function() {
+      application.notification.alert({
+        type: "alert",
+        id: "disconnect",
+        message: "You are no longer receiving real time updates. This likely means you need to log in again. Reload if this message persists more than 10 seconds.",
+      });
+    }
+  }
+
+  function bindExchanges() {
+    amqp.bindExchange("web-application-messages","airflow.#");
+    amqp.bindExchange("audit","rad_exams.#");
+    amqp.bindExchange("audit","rad_exam_times.#");
+    amqp.bindExchange("audit","rad_exam_personnel.#");
+    amqp.bindExchange("audit","orders.#")
+  }
+
+  amqp.connectToChannel(joinCallbacks)
+}
