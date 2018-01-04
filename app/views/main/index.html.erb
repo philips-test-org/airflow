@@ -273,10 +273,39 @@
 </script>
 
 <script class="handlebars-template" id="t-event-list" type="text/x-handlebars-template">
-  <div class="events">
-    {{#each (chronological_events this)}}
-    {{render_event this}}
-    {{/each}}
+  <ul class="nav nav-tabs event-nav" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#comment-list" aria-controls="comment-list" role="tab" data-toggle="tab">
+        Comments
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#event-list" aria-controls="event-list" role="tab" data-toggle="tab">
+        Events
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#combined-events-list" aria-controls="combined-events-list" role="tab" data-toggle="tab">
+        All
+      </a>
+    </li>
+  </ul>
+  <div class="events tab-content">
+    <div role="tabpanel" class="tab-pane active" id="comment-list">
+      {{#each (comment_events this)}}
+        {{render_event this}}
+      {{/each}}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="event-list">
+      {{#each (other_events this)}}
+        {{render_event this}}
+      {{/each}}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="combined-events-list">
+      {{#each (chronological_events this)}}
+        {{render_event this}}
+      {{/each}}
+    </div>
   </div>
 </script>
 

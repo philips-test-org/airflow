@@ -260,6 +260,24 @@ Handlebars.registerHelper('chronological_events',function(order) {
     return application.data.allEvents(order.id);
 });
 
+Handlebars.registerHelper('grouped_events',function(order) {
+  var events = application.data.allEvents(order.id);
+  var grouped_events = _.groupBy(events, function(event) {
+    return event.event_type === "comment" ? "comment" : "event"
+  });
+  return grouped_events;
+});
+
+Handlebars.registerHelper('comment_events',function(order) {
+  var comments = Handlebars.helpers.grouped_events(order)["comment"]
+  return comments;
+});
+
+Handlebars.registerHelper('other_events',function(order) {
+  var comments = Handlebars.helpers.grouped_events(order)["event"]
+  return comments;
+});
+
 Handlebars.registerHelper('notification_type',function(type) {
     if (type == "comment") {
 	return "comment-notification " + type;
