@@ -120,6 +120,7 @@
 	</div>
 	<div class="right">
 	  {{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+	  {{#if this.adjusted.ppca_ready}}<div class="status-indicator ppca_ready"><i class="fa fa-medkit"></i></div>{{/if}}
 	  {{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
 	</div>
       </div>
@@ -154,6 +155,7 @@
 	</div>
 	<div class="right">
 	  {{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+	  {{#if this.adjusted.ppca_ready}}<div class="status-indicator ppca_ready"><i class="fa fa-medkit"></i></div>{{/if}}
 	  {{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
 	</div>
       </div>
@@ -210,6 +212,10 @@
       <div class="status-toggle margin-right-sm">
 	<label><i class="fa fa-handshake-o"></i>Consent</label>
 	<input type="checkbox" name="consent" {{check_test this.adjusted.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+      </div>
+      <div class="status-toggle margin-right-sm">
+        <label><i class="fa fa-medkit"></i>PPCA Ready</label>
+        <input type="checkbox" name="ppca_ready" {{check_test this.adjusted.ppca_ready}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
       </div>
       <div class="status-toggle">
 	<label><i class="fa fa-file-text"></i>Paperwork</label>
