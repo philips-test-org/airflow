@@ -292,7 +292,7 @@ Handlebars.registerHelper('toggle_icon',function(name) {
       icon = "fa fa-handshake-o";
       break;
     case "ppca_ready":
-      icon = "fa fa-medkit";
+      icon = "fa fa-thumbs-o-up";
       break;
     case "paperwork":
       icon = "fa fa-file-text";
