@@ -237,12 +237,12 @@ application.data = {
 	application.notification.flash({type: 'alert', message: message});
     },
 
-  addEvent: function(id,event,events) {
+  addEvent: function(id,event,events, callback) {
     application.data.update(id,function(order,rollback_id) {
       // Set the active tab for the event panes to "Comments".
       $(".event-list-nav").removeClass("active");
       $('a[href$="comment-list"]').parent().addClass("active");
-      if (event.event_type != 'comment') {
+      if (event.event_type != "comment" && event.event_type != "rounding-update") {
         // Update status type with new state (consent, etc)
         $.extend(order.adjusted,event.new_state);
       }
@@ -257,14 +257,21 @@ application.data = {
           contentType: "application/json; charset=utf-8",
           dataType: "json",
           success: function(response) {
-            application.data.rollbackMutexes[rollback_id].sync(function() { application.data.commit(order,rollback_id); });
+            application.data.rollbackMutexes[rollback_id].sync(function() {
+              application.data.commit(order,rollback_id);
+            });
+            if (callback) {
+              callback(response);
+            }
           },
           error: function() {
-            application.data.rollbackMutexes[rollback_id].sync(function() { application.data.rollback(order,rollback_id,"Failed to save changes. Reverted to previous values.") });
+            application.data.rollbackMutexes[rollback_id].sync(function() {
+              application.data.rollback(order,rollback_id,"Failed to save changes. Reverted to previous values.")
+            });
           }
         });
-	    return order;
-	  },events);
+      return order;
+    },events);
   },
 
     updateLocation: function(order_id,resource_id,top) {

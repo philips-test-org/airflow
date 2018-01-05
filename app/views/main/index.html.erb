@@ -172,28 +172,29 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     {{> statusToggles}}
     <h4 class="modal-title">{{format_name patient_mrn.patient.name}}</h4>
-    <h5>Kiosk Number: {{kiosk_number id}}</h5>
+    <h5 clas="no-margin">Kiosk Number: {{kiosk_number id}}</h5>
   </div>
-    <ul class="nav nav-tabs" role="tablist">
-      {{#each (order_with_fellows this)}}
-      <li role="presentation" class="{{#if (eq ../this.id undefined)}}active{{/if}}"><a href="#order-content-{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{order_number}}</a></li>
-      {{/each}}
-    </ul>
   <div class="modal-body">
     <div class="container-fluid">
       <div class="row">
-	<div class="col-xs-6">
-	  <div class="tab-content">
-	    {{#each (order_with_fellows this)}}
-	    <div role="tabpanel" class="tab-pane {{#if (eq ../this.id undefined)}}active{{/if}}" id="order-content-{{id}}">
-	      {{> demographicsTable}}
-	    </div>
-	    {{/each}}
-	  </div>
-	</div>
-	<div class="col-xs-6">
-	  {{> commentsInterface}}
-	</div>
+        <div class="col-xs-6">
+          {{> roundingInterface}}
+          <ul class="nav nav-tabs" role="tablist">
+            {{#each (order_with_fellows this)}}
+            <li role="presentation" class="{{#if (eq ../this.id undefined)}}active{{/if}}"><a href="#order-content-{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{order_number}}</a></li>
+            {{/each}}
+          </ul>
+          <div class="tab-content">
+            {{#each (order_with_fellows this)}}
+            <div role="tabpanel" class="tab-pane {{#if (eq ../this.id undefined)}}active{{/if}}" id="order-content-{{id}}">
+              {{> demographicsTable}}
+            </div>
+            {{/each}}
+          </div>
+        </div>
+        <div class="col-xs-6">
+          {{> commentsInterface}}
+	      </div>
       </div>
     </div>
   </div>
@@ -271,6 +272,64 @@
   </tr>
 </script>
 
+<script class="handlebars-template" id="t-rounding-interface" type="text/x-handlebars-template">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-9" >
+          <h5>Rounding</h5>
+        </div>
+        <div class="col-xs-3">
+          <a href="#" class="btn btn-primary edit-rounding pull-right"><i class="fa fa-pencil"></i></a>
+        </div>
+      </div>
+    </div>
+    {{> roundingPanel}}
+  </div>
+</script>
+
+
+<script class="handlebars-template" id="t-rounding-panel" type="text/x-handlebars-template">
+  {{#with (rounding_value this) as |roundingValue|}}
+    <div class="panel-body">
+      <div class="rounding" style="white-space:pre-line">
+        <p class="rounding-text">{{roundingValue.text}}</p>
+      </div>
+
+      <form id="rounding-form" class="hidden">
+        <div class="body">
+          <div class="content">
+            <textarea
+              name="rounding"
+              class="form-control rounding-box"
+              rows="9"
+              disabled
+              autofocus
+              data-saved-value="{{roundingValue.text}}">{{roundingValue.text}}</textarea>
+            <input type="hidden" name="order_id" value="{{roundingValue.id}}" />
+          </div>
+          <div class="footer">
+            <div class="pull-right">
+              <button class="btn btn-warning edit-rounding-cancel hidden">Cancel</button>
+              <button class="btn btn-default save-rounding">Save</button>
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    {{#with author}}
+      <div class="panel-footer rounding-footer">
+        <p class="edited-by">Last edited by: {{roundingValue.author}} on <span class="time short">{{format_timestamp roundingValue.created_at}}</span></p>
+      </div>
+    {{else}}
+    {{/with}}
+  {{/with}}
+</script>
+
+<script class="handlebars-template" id="t-rounding-panel-body" type="text/x-handlebars-template">
+</script>
 
 <script class="handlebars-template" id="t-comments-interface" type="text/x-handlebars-template">
   {{> commentForm}}
@@ -343,6 +402,22 @@
       <div class="heading">
 	<!-- should be the employee associated with the action -->
 	<strong>{{employee.name}}</strong> commented on <span class="time short">{{format_timestamp created_at}}</span>
+      </div>
+      <div class="content">{{comments}}</div>
+    </div>
+  </div>
+</script>
+
+<script class="handlebars-template" id="t-event-rounding-update" type="text/x-handlebars-template">
+  <div class="comment">
+    <div class="avatar">
+      <!-- should be the employee associated with the action -->
+      {{avatar employee.id "<%= image_url('placeholder.png') %>"}}
+    </div>
+    <div class="body">
+      <div class="heading">
+	<!-- should be the employee associated with the action -->
+	<strong>{{employee.name}}</strong> updated rounding on <span class="time short">{{format_timestamp created_at}}</span>
       </div>
       <div class="content">{{comments}}</div>
     </div>
