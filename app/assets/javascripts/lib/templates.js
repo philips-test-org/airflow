@@ -298,33 +298,39 @@ Handlebars.registerHelper('render_event',function(event) {
 });
 
 Handlebars.registerHelper('toggle_icon',function(name) {
-    var icon = "";
-    switch(name) {
-    case "constent":
-	icon = "fa fa-handshake-o";
-	break;
+  var icon = "";
+  switch(name) {
     case "onhold":
-	icon = "fa fa-hand-paper-o";
-	break;
+      icon = "fa fa-hand-paper-o";
+      break;
     case "anesthesia":
-	icon = ""//"fa fa-bed";
-	break;
+      icon = "fa fa-bed";
+      break;
     case "consent":
-	icon = "fa fa-handshake-o";
-	break;
+      icon = "fa fa-handshake-o";
+      break;
+    case "ppca_ready":
+      icon = "fa fa-thumbs-o-up";
+      break;
     case "paperwork":
-	icon = "fa fa-file-text";
-    }
-    return icon;
+      icon = "fa fa-file-text";
+  }
+  return icon;
 });
 
 Handlebars.registerHelper('toggle_label',function(name) {
-    if (name == "onhold") {
-	var language = "";
-    } else {
-	var language = name.charAt(0).toUpperCase() + name.slice(1);
-    }
-    return new Handlebars.SafeString('<strong><i class="' + Handlebars.helpers.toggle_icon(name) + '"></i> ' + language + '</strong>');
+  var language = "";
+  switch (name) {
+    case "onhold":
+      break;
+    case "ppca_ready":
+      language = "PPCA Ready"
+      break;
+    default:
+      language = name.charAt(0).toUpperCase() + name.slice(1);
+  }
+
+  return new Handlebars.SafeString('<strong><i class="' + Handlebars.helpers.toggle_icon(name) + '"></i> ' + language + '</strong>');
 });
 
 Handlebars.registerHelper('toggle_state',function(name,new_state) {
