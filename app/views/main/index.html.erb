@@ -275,39 +275,39 @@
 <script class="handlebars-template" id="t-comments-interface" type="text/x-handlebars-template">
   {{> commentForm}}
   <hr />
-  {{> eventList}}
-</script>
-
-<script class="handlebars-template" id="t-event-list" type="text/x-handlebars-template">
   <ul class="nav nav-tabs event-nav" role="tablist">
-    <li role="presentation" class="active">
+    <li role="presentation" class="event-list-nav active">
       <a href="#comment-list" aria-controls="comment-list" role="tab" data-toggle="tab">
         Comments
       </a>
     </li>
-    <li role="presentation">
+    <li role="presentation" class="event-list-nav">
       <a href="#event-list" aria-controls="event-list" role="tab" data-toggle="tab">
         Events
       </a>
     </li>
-    <li role="presentation">
+    <li role="presentation" class="event-list-nav">
       <a href="#combined-events-list" aria-controls="combined-events-list" role="tab" data-toggle="tab">
         All
       </a>
     </li>
   </ul>
+  {{> eventList}}
+</script>
+
+<script class="handlebars-template" id="t-event-list" type="text/x-handlebars-template">
   <div class="events tab-content">
-    <div role="tabpanel" class="tab-pane active" id="comment-list">
+    <div role="tabpanel" class="event-list-pane tab-pane active" id="comment-list">
       {{#each (comment_events this)}}
         {{render_event this}}
       {{/each}}
     </div>
-    <div role="tabpanel" class="tab-pane" id="event-list">
+    <div role="tabpanel" class="event-list-pane tab-pane" id="event-list">
       {{#each (other_events this)}}
         {{render_event this}}
       {{/each}}
     </div>
-    <div role="tabpanel" class="tab-pane" id="combined-events-list">
+    <div role="tabpanel" class="event-list-pane tab-pane" id="combined-events-list">
       {{#each (chronological_events this)}}
         {{render_event this}}
       {{/each}}
