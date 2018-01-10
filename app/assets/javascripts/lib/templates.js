@@ -263,19 +263,39 @@ Handlebars.registerHelper('chronological_events',function(order) {
 Handlebars.registerHelper('grouped_events',function(order) {
   var events = application.data.allEvents(order.id);
   var grouped_events = _.groupBy(events, function(event) {
-    return event.event_type === "comment" ? "comment" : "event"
+    switch (event.event_type) {
+      case "comment":
+        return "comment";
+      case "rounding-update":
+        return "rounding";
+      default:
+        return "event";
+    }
   });
   return grouped_events;
 });
 
 Handlebars.registerHelper('comment_events',function(order) {
-  var comments = Handlebars.helpers.grouped_events(order)["comment"]
-  return comments;
+  return Handlebars.helpers.grouped_events(order)["comment"];
 });
 
 Handlebars.registerHelper('other_events',function(order) {
-  var comments = Handlebars.helpers.grouped_events(order)["event"]
-  return comments;
+  return Handlebars.helpers.grouped_events(order)["event"];
+});
+
+Handlebars.registerHelper('rounding_value',function(order) {
+  var updates = Handlebars.helpers.grouped_events(order)["rounding"];
+  if (updates) {
+    var most_recent_update = updates[0];
+    var res = $.map(most_recent_update.comments.split("\n"), function(line) {return line.trim()}).join("\n");
+    return {
+      id: order.id,
+      text: res,
+      author: most_recent_update.employee.name,
+      created_at: most_recent_update.created_at,
+    };
+  }
+  return {id: order.id, text: "No rounding notes entered."};
 });
 
 Handlebars.registerHelper('notification_type',function(type) {
@@ -287,14 +307,16 @@ Handlebars.registerHelper('notification_type',function(type) {
 });
 
 Handlebars.registerHelper('render_event',function(event) {
-    //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
-    if (event.event_type == 'comment') {
-	return new Handlebars.SafeString(application.templates.eventComment(event));
-    } else if (event.event_type == 'location_update') {
-	return new Handlebars.SafeString(application.templates.eventLocationChange(event));
-    } else {
-	return new Handlebars.SafeString(application.templates.eventStateChange(event));
-    }
+  //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
+  if (event.event_type == 'comment') {
+    return new Handlebars.SafeString(application.templates.eventComment(event));
+  } else if (event.event_type == 'location_update') {
+    return new Handlebars.SafeString(application.templates.eventLocationChange(event));
+  } else if (event.event_type === "rounding-update") {
+    return new Handlebars.SafeString(application.templates.eventRoundingUpdate(event));
+  } else {
+    return new Handlebars.SafeString(application.templates.eventStateChange(event));
+  }
 });
 
 Handlebars.registerHelper('toggle_icon',function(name) {
