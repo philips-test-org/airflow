@@ -179,7 +179,7 @@
       <div class="row">
         <div class="col-xs-6">
           {{> roundingInterface}}
-          <ul class="nav nav-tabs" role="tablist">
+          <ul class="nav nav-tabs nav-bottom-margin" role="tablist">
             {{#each (order_with_fellows this)}}
             <li role="presentation" class="{{#if (eq ../this.id undefined)}}active{{/if}}"><a href="#order-content-{{id}}" aria-controls="home" role="tab" data-toggle="tab">{{order_number}}</a></li>
             {{/each}}
@@ -334,7 +334,7 @@
 <script class="handlebars-template" id="t-comments-interface" type="text/x-handlebars-template">
   {{> commentForm}}
   <hr />
-  <ul class="nav nav-tabs event-nav" role="tablist">
+  <ul class="nav nav-tabs nav-bottom-margin" role="tablist">
     <li role="presentation" class="event-list-nav active">
       <a href="#comment-list" aria-controls="comment-list" role="tab" data-toggle="tab">
         Comments
