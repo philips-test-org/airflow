@@ -295,7 +295,7 @@ Handlebars.registerHelper('rounding_value',function(order) {
       created_at: most_recent_update.created_at,
     };
   }
-  return {id: order.id, text: "No rounding notes entered."};
+  return {id: order.id, placeholder: "No rounding notes entered.", text: ""};
 });
 
 Handlebars.registerHelper('notification_type',function(type) {

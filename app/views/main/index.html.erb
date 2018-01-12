@@ -293,7 +293,7 @@
   {{#with (rounding_value this) as |roundingValue|}}
     <div class="panel-body">
       <div class="rounding" style="white-space:pre-line">
-        <p class="rounding-text">{{roundingValue.text}}</p>
+        <p class="rounding-text">{{#if roundingValue.text}}{{roundingValue.text}}{{else}}{{roundingValue.placeholder}}{{/if}}</p>
       </div>
 
       <form id="rounding-form" class="hidden">
@@ -305,6 +305,7 @@
               rows="9"
               disabled
               autofocus
+              placeholder="{{roundingValue.placeholder}}"
               data-saved-value="{{roundingValue.text}}">{{roundingValue.text}}</textarea>
             <input type="hidden" name="order_id" value="{{roundingValue.id}}" />
           </div>
