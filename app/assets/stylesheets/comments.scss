@@ -55,12 +55,13 @@
       }
 
       .content {
-	  border: 1px solid #bfccd1;
-	  border-top: 0;
-	  border-bottom-right-radius: 5px;
-	  border-bottom-left-radius: 5px;
-	  padding: 10px;
-          background-color: #fff;
+        background-color: #fff;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top: 0;
+        border: 1px solid #bfccd1;
+        padding: 10px;
+        white-space: pre-line;
       }
   }
 
@@ -166,4 +167,8 @@ form .comment {
 	}
     }
     .padded { padding: 10px; }
+}
+
+.nav-bottom-margin {
+  margin-bottom: 1em;
 }
