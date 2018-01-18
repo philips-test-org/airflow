@@ -116,7 +116,7 @@ function connectToAPM() {
             order.events = payload.events;
             return order;
           },["order-update","modal-update"]);
-          var event = payload.events.pop();
+          var event = payload.events.shift();
           if (event.event_type == "comment") {
             var event_type = "comment";
           } else {
