@@ -95,7 +95,7 @@ $(document).ready(function() {
 
 function connectToAPM() {
   var amqp = new $.amqpListener();
-  amqp.setup({host: "astondev3.analytical.info", port: 4000});
+  amqp.setup({host: document.location.hostname, port: 4000});
 
   var joinCallbacks = {
     newMsg: function(msg) {
