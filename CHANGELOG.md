@@ -1,3 +1,11 @@
+## v1.1.0-rc1 released 2018-01-18
+
+* **bugfix** Fix real-time data issues by replacing CometD
+* **bugfix** Fix newlines not working in comments
+* **improvement** Add PPCA Ready status
+* **improvement** Add rounding block to order modal
+* **improvement** Add tab panel to separate comments and events in the order modal
+
 ## v1.0.1-rc5 released 2017-09-01
 
 * **bugfix:** fixes for stop date after move (delete)
