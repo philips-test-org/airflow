@@ -125,6 +125,8 @@ function connectToAPM() {
           }
           application.notification.flash({type: event_type, event: event});
         }
+      } else if (exchange === "audit") {
+        application.auditBuffer.push(routing_key, msg.payload, msg.exchange);
       }
     },
     joinOk: function() {
