@@ -117,7 +117,10 @@ function connectToAPM() {
             order.events = payload.events;
             return order;
           },["order-update","modal-update"]);
-          var event = payload.events.shift();
+          var events = payload.events;
+          var event = events.sort(function (x, y) {
+            return new Date(y.updated_at) - new Date(x.updated_at);
+          }).shift();
           if (event.event_type == "comment") {
             var event_type = "comment";
           } else {
