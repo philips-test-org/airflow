@@ -1,3 +1,5 @@
+@import "colors";
+
 .event {
   margin-bottom: 10px;
   position: relative;
@@ -5,14 +7,14 @@
   line-height: 40px;
 
   .avatar {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      border-radius: 5px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
   }
 
   .body {
-      margin-left: 50px;
+    margin-left: 50px;
   }
 }
 
@@ -21,55 +23,30 @@
   position: relative;
 
   .avatar {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      border-radius: 5px;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
   }
 
   .body {
-      margin-left: 50px;
+    margin-left: 50px;
 
-      .heading {
-	  background-color: #f2f8fa;
-	  color: #767676;
-	  padding: 8px 10px;
-	  border: 1px solid #bfccd1;
-	  border-top-right-radius: 5px;
-	  border-top-left-radius: 5px;
-      }
+    .heading {
+      background-color: #f2f8fa;
+      color: #767676;
+      padding: 8px 10px;
+      border: 1px solid #bfccd1;
+      border-bottom: 0;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+    }
 
-      .heading:before {
-	  content: " ";
-	  position: absolute;
-	  top: 11px;
-	  left: 35px;
-	  display: block;
-	  width: 0;
-	  height: 0;
-	  pointer-events: none;
-	  border-color: transparent;
-	  border-style: solid solid outset;
-	  border-width: 8px;
-	  border-right-color: #f2f8fa;
-      }
-
-      .content {
-        background-color: #fff;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        border-top: 0;
-        border: 1px solid #bfccd1;
-        padding: 10px;
-        white-space: pre-line;
-      }
-  }
-
-  .body:before {
+    .heading:before {
       content: " ";
       position: absolute;
       top: 11px;
-      left: 34px;
+      left: 35px;
       display: block;
       width: 0;
       height: 0;
@@ -77,7 +54,33 @@
       border-color: transparent;
       border-style: solid solid outset;
       border-width: 8px;
-      border-right-color: #bfccd1;
+      border-right-color: #f2f8fa;
+    }
+
+    .content {
+      background-color: #fff;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-top: 0;
+      border: 1px solid #bfccd1;
+      padding: 10px;
+      white-space: pre-line;
+    }
+  }
+
+  .body:before {
+    content: " ";
+    position: absolute;
+    top: 11px;
+    left: 34px;
+    display: block;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    border-color: transparent;
+    border-style: solid solid outset;
+    border-width: 8px;
+    border-right-color: #bfccd1;
   }
 }
 
@@ -92,10 +95,10 @@ $qc-border: #ebccd1;
 $qc-color: #a94442;
 
 .comment.initial.qc {
-    .body .heading { background-color: $qc-background; border-color: $qc-border; }
-    .body .heading:before { border-right-color: $qc-background; }
-    .body:before { border-right-color: $qc-border; }
-    .body .content { border-color: $qc-border; }
+  .body .heading { background-color: $qc-background; border-color: $qc-border; }
+  .body .heading:before { border-right-color: $qc-background; }
+  .body:before { border-right-color: $qc-border; }
+  .body .content { border-color: $qc-border; }
 }
 
 $request-background: #d9edf7;
@@ -103,10 +106,10 @@ $request-border: #bce8f1;
 $request-color: #31708f;
 
 .comment.initial.request {
-    .body .heading { background-color: $request-background; border-color: $request-border; }
-    .body .heading:before { border-right-color: $request-background; }
-    .body:before { border-right-color: $request-border; }
-    .body .content { border-color: $request-border; }
+  .body .heading { background-color: $request-background; border-color: $request-border; }
+  .body .heading:before { border-right-color: $request-background; }
+  .body:before { border-right-color: $request-border; }
+  .body .content { border-color: $request-border; }
 }
 
 $recognition-background: #dff0d8;
@@ -114,61 +117,61 @@ $recognition-border: #d6e9c6;
 $recognition-color: #3c763d;
 
 .comment.initial.recognition {
-    .body .heading { background-color: $recognition-background; border-color: $recognition-border; }
-    .body .heading:before { border-right-color: $recognition-background; }
-    .body:before { border-right-color: $recognition-border; }
-    .body .content { border-color: $recognition-border; }
+  .body .heading { background-color: $recognition-background; border-color: $recognition-border; }
+  .body .heading:before { border-right-color: $recognition-background; }
+  .body:before { border-right-color: $recognition-border; }
+  .body .content { border-color: $recognition-border; }
 }
 
 form .comment {
-    .body:before { border-right-color: #ddd; }
-    .body {
-	.heading:before { border-right-color: #eee; }
-	.heading {
-	    background-color: #eee;
-	    border-color: #ddd;
-	}
-	.content {
-	    border-color: #ddd;
-	    border-bottom-right-radius: 0px;
-	    border-bottom-left-radius: 0px;
-	    border-bottom: 0;
-	    textarea {
-		height: 100px;
-	    }
-	}
-
-	.footer {
-	    background-color: #eee;
-	    border-color: #ddd;
-	    border-bottom-right-radius: 5px;
-	    border-bottom-left-radius: 5px;
-	    border-width: 1px;
-	    border-style: solid;
-	    padding: 10px;
-	}
+  .body:before { border-right-color: #ddd; }
+  .body {
+    .heading:before { border-right-color: #eee; }
+    .heading {
+      background-color: #eee;
+      border-color: #ddd;
     }
+    .content {
+      border-color: #ddd;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom: 0;
+      textarea {
+        height: 100px;
+      }
+    }
+
+    .footer {
+      background-color: #eee;
+      border-color: #ddd;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border-width: 1px;
+      border-style: solid;
+      padding: 10px;
+    }
+  }
 }
 
 .comment-interface {
-    border: 1px solid #ddd;
-    h1 {
-	margin-top: 0;
-	border-bottom: 1px solid #ddd;
-	font-family: 'Helvetica';
-	padding: 0 10px;
-	height: 60px;
-	line-height: 60px;
-	font-size: 20px;
-	i { margin-right: 5px; }
-	span.label {
-	    float: right;
-	    margin-top: 17px;
-	}
+  border: 1px solid #ddd;
+  h1 {
+    margin-top: 0;
+    border-bottom: 1px solid #ddd;
+    font-family: 'Helvetica';
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    i { margin-right: 5px; }
+    span.label {
+      float: right;
+      margin-top: 17px;
     }
-    .padded { padding: 10px; }
+  }
+  .padded { padding: 10px; }
 }
 
-.nav-bottom-margin {
+.nav.nav-bottom-margin {
   margin-bottom: 1em;
 }
