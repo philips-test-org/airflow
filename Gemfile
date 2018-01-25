@@ -16,7 +16,11 @@ gem 'bootstrap-sass'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyrhino'
 # gem 'harbinger-rails-extensions', '= 0.0.25', source: 'http://gem.analytical.info:9292'
-gem 'harbinger-rails-extensions', path: '~/harbinger-rails-extensions'
+gem 'harbinger-rails-extensions',
+    git: 'git@github.com:analytical-informatics/harbinger-rails-extensions.git',
+    branch: 'philips-blue',
+    submodules: true
+
 
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'

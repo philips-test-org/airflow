@@ -1,5 +1,8 @@
-PATH
-  remote: ../harbinger-rails-extensions
+GIT
+  remote: git@github.com:analytical-informatics/harbinger-rails-extensions.git
+  revision: 9c10c411291404dd719217ea61053d6650f94b59
+  branch: philips-blue
+  submodules: true
   specs:
     harbinger-rails-extensions (0.0.25)
       amq-protocol (= 1.9.2)
