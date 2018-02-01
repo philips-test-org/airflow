@@ -1,16 +1,6 @@
-GIT
-  remote: git@github.com:analytical-informatics/harbinger-rails-extensions.git
-  revision: 9c10c411291404dd719217ea61053d6650f94b59
-  branch: philips-blue
-  submodules: true
-  specs:
-    harbinger-rails-extensions (0.0.25)
-      amq-protocol (= 1.9.2)
-      browser (~> 1.0)
-      bunny (= 1.7.0)
-
 GEM
   remote: https://rubygems.org/
+  remote: http://gem.analytical.info:9292/
   specs:
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
@@ -76,6 +66,10 @@ GEM
       sass (>= 3.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    harbinger-rails-extensions (1.0.0)
+      amq-protocol (= 1.9.2)
+      browser (~> 1.0)
+      bunny (= 1.7.0)
     i18n (0.7.0)
     jdbc-postgres (9.4.1200)
     jquery-rails (4.0.5)
@@ -175,7 +169,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap3-datetimepicker-rails (~> 4.14.30)
   font-awesome-sass (~> 4.7.0)
-  harbinger-rails-extensions!
+  harbinger-rails-extensions (~> 1.0.0)!
   jquery-rails
   jruby-jars (= 1.7.22)
   momentjs-rails (>= 2.9.0)
