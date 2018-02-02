@@ -4,50 +4,49 @@ application.templates = {};
 application.partials = {};
 application.templates.pixels_per_second = 200.0 / 60.0 / 60.0;
 application.statuses = {
-    value_check: function(order,type,default_val) {
-	var value = default_val;
-	for (var i in application.statuses.checks) {
-	    if (application.statuses.checks[i].check(order)) {
-		if (application.statuses.checks[i][type] != undefined) value = application.statuses.checks[i][type];
-		break;
-	    }
-	}
-	return value;
-
-    },
-    color: function(order) {
-	return application.statuses.value_check(order,"color","#ddd");
-    },
-    card_class: function(order) {
-	return application.statuses.value_check(order,"card_class","");
-    },
-    checks: [{name: "On Hold",
-	      order: 5,
-	      color: "#f5f52b",
-	      card_class: "highlight",
-	      check: function(order) { return (order.adjusted.onhold == true); }},
-	     {name: "Cancelled",
-	      order: 6,
-	      color: "#c8040e",
-	      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
-	     {name: "Started",
-	      order: 3,
-	      color: "#704c8f",
-	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
-	     {name: "Completed",
-	      order: 4,
-	      color: "#398cc4",
-	      card_class: "completed",
-	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
-	     {name: "Patient Arrived",
-	      order: 2,
-	      color: "#53a790",
-	      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }},
-	     {name: "Ordered",
-	      order: 1,
-	      color: "#a0a0a0",
-	      check: function(order) { return (order.rad_exam == undefined || !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }}
-	    ]
+  value_check: function(order,type,default_val) {
+    var value = default_val;
+    for (var i in application.statuses.checks) {
+      if (application.statuses.checks[i].check(order)) {
+        if (application.statuses.checks[i][type] != undefined) value = application.statuses.checks[i][type];
+        break;
+      }
+    }
+    return value;
+  },
+  color: function(order) {
+    return application.statuses.value_check(order,"color","#ddd");
+  },
+  card_class: function(order) {
+    return application.statuses.value_check(order,"card_class","");
+  },
+  checks: [{name: "On Hold",
+    order: 5,
+    color: "#f5f52b",
+    card_class: "highlight",
+    check: function(order) { return (order.adjusted.onhold == true); }},
+    {name: "Cancelled",
+      order: 6,
+      color: "#c8040e",
+      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
+    {name: "Started",
+      order: 3,
+      color: "#631d76",
+      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
+    {name: "Completed",
+      order: 4,
+      color: "#005a8b",
+      card_class: "completed",
+      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
+    {name: "Patient Arrived",
+      order: 2,
+      color: "#1e9d8b",
+      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }},
+    {name: "Ordered",
+      order: 1,
+      color: "#888888",
+      check: function(order) { return (order.rad_exam == undefined || !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }}
+  ]
 };
 
 // Sort checks by the order; be sure to dup the array as the original order needs to be preserved
