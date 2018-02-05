@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.10'
 gem 'jquery-rails'
 gem 'jruby-jars', '=1.7.22'
 gem "activerecord-jdbc-adapter", "~> 1.3.8", platform: :jruby
