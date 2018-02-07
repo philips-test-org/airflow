@@ -2,7 +2,7 @@
 
 | Bridge Version | Required Data Elements | Context Integration URL |
 |----------------|------------------------|-------------------------|
-| >= 3.7.1 | Core Radiology | N/A |
+| >= 3.7.3 | Core Radiology | N/A |
 
 ## Installation
 
