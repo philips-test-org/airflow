@@ -128,10 +128,7 @@ application.calendar = {
 		$("#right-now").css({width: $("#time-grid").width()});
 	    }
 	}
-    },
-
-    board: function() { return $("#board"); }
-
+    }
 }
 
 application.overview = {
@@ -167,10 +164,7 @@ application.overview = {
 	    card = card.replaceWith(application.templates.fixedCard(order));
 	}
 	return card;
-    },
-
-    board: function() { return $("#relative-board"); }
-
+    }
 }
 
 // Kiosk "inherits" from application.calendar and overrides

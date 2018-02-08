@@ -77,19 +77,6 @@ $(document).ready(function() {
         $("#legend-button").focus();
     });
 
-    //Handling the search field entirely client-side
-    //See data.js to add additional fields and adjust search logic
-    $("#search-field").on('keyup',function(e) {
-	var orders = application.data.search($("#search-field").val());
-	$(".notecard").addClass("filtered");
-	$.each(orders,function(i,order) { application.view.findCard(order).removeClass('filtered'); });
-	if (orders.length == 1) {
-	    var card = application.view.findCard(orders[0]);
-	    application.view.board().scrollTo({top: card.position().top,
-					       left: (card.parent().position().left)},500);
-	}
-    });
-
   connectToAPM();
 });
 
