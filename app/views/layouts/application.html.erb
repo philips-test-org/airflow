@@ -22,39 +22,42 @@
   <link rel="icon" type="image/png" href="<%= asset_path("favicon-32x32.png") %>" sizes="32x32">
   <link rel="icon" type="image/png" href="<%= asset_path("android-chrome-192x192.png") %>" sizes="192x192">
   <link rel="icon" type="image/png" href="<%= asset_path("favicon-16x16.png") %>" sizes="16x16">
-  <meta name="msapplication-config" content="<%= asset_path("browserconfig.xml") %>" />
-  <link rel="manifest" href="<%= asset_path("ai-favicon-manifest.json") %>">
-  <link rel="mask-icon" href="<%= asset_path("safari-pinned-tab.svg") %>" color="#f58619">
-  <meta name="theme-color" content="#f58619">
+  <link rel="shortcut icon" href="<%= asset_path("favicon.ico") %>" type="image/x-icon" />
+  <meta name="msapplication-config" content="<%= asset_path("browserconfig.xml.erb") %>" />
+  <link rel="manifest" href="<%= asset_path("ai-favicon-manifest.json.erb") %>">
+  <link rel="mask-icon" href="<%= asset_path("safari-pinned-tab.svg") %>" color="#003478">
+  <meta name="theme-color" content="#003478">
 </head>
 <body>
+
   <!-- Start Navbar -->
   <div id="primary-navbar" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
-      <div class="row">
       <div class="navbar-header">
-        <div class="navbar-brand" id="navbar-img"><%= link_to image_tag('ai-small-trans-48.png'), "/" %></div>
-        <a class="navbar-brand" id="app-name" href="<%= url_for :controller => :main, :action => :index %>">Airflow</a>
+        <div class="navbar-brand" id="product-line">
+          <a href="/">Performance<strong>Bridge</strong></a>
+        </div>
+        <a class="navbar-brand" id="app-name" href="<%= url_for :controller => :main, :action => :index %>">| Airflow</a>
       </div>
       <ul class="nav navbar-nav pull-right">
-	<% if params[:action].to_sym != :kiosk %>
-	<%= global_view_link("Calendar","calendar", {controller: :main, action: :index, :view => "calendar"}) %>
-	<%= global_view_link("Overview","overview", {controller: :main, action: :index, :view => "overview"}) %>
-	<% end %>
-	<%= global_view_link("Kiosk","kiosk", {controller: :kiosk, action: :index, :view => "kiosk"}) %>
-	<% unless session[:username].blank? %>
-	<% authorized(["support-staff","ai-staff", "it-staff"]) do %>
-        <li class="dropdown">
-          <a href="#" id="global-button-admin" role="button"
-             class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown">Admin <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-	    <%= global_navigation_link "Resource Groups", :controller => :resource_groups, :action => :index %>
-            <li><%= link_to "Admin Manual", SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
-            <%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %>
-          </ul>
-        </li>
+        <% if params[:action].to_sym != :kiosk %>
+          <%= global_view_link("Calendar","calendar", {controller: :main, action: :index, :view => "calendar"}) %>
+          <%= global_view_link("Overview","overview", {controller: :main, action: :index, :view => "overview"}) %>
         <% end %>
-	<% end %>
+        <%= global_view_link("Kiosk","kiosk", {controller: :kiosk, action: :index, :view => "kiosk"}) %>
+        <% unless session[:username].blank? %>
+          <% authorized(["support-staff","ai-staff", "it-staff"]) do %>
+            <li class="dropdown">
+              <a href="#" id="global-button-admin" role="button"
+                class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown">Admin <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <%= global_navigation_link "Resource Groups", :controller => :resource_groups, :action => :index %>
+                <li><%= link_to "Admin Manual", SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
+                <%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %>
+              </ul>
+            </li>
+          <% end %>
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle <%= "active" if params["controller"] == "main" and ["about", "help"].include? params["action"] %>" data-toggle="dropdown">Help<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -64,7 +67,6 @@
         </li>
         <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
       </ul>
-      </div>
     </div>
   </div>
 

@@ -1,24 +1,9 @@
 # README
 
-This repository serves as a starting point for Rails Apps on the AI Platform.
+Airflow is a practice management tool. It is meant to replace whiteboard workflows in departments. This is where a literal white board and index cards are used to track patients through the process of receiving a procedure or exam. As such this is a tactical application for a department and is primarily used for communication and tracking workflow.
 
-For information on developing on the AI Platform, see the AI [developer documentation](https://developer-docs.analytical.info/).
+The calendar view is built for schedulars and nurses to be able to move exams/cases around and understand their timing.
 
-This repository also includes a renaming helper script to aide in setting the name of your application.
+The overview is built for physicians to get a consolidated view of the current status of cases in a compact space. The goal being to see what's happened/happening while still being able to see when their day will end (last case).
 
-rename.rb usage:
-
-`ruby rename.rb 'New Name'`
-
-The application name is used in the following files
-
-* `app/controllers/application_controller.rb` as 'new-name'
-* `config/application.name` as 'new-name'
-* `db_scripts/create-glassfish-jdbc.sh` as 'newname'
-* `db_scripts/create.sql` as 'newname'
-* `db_scripts/install.sh` as 'newname'
-* `db_scripts/schema.sql` as 'newname'
-* `config/initializers/session_store.rb` as 'newname'
-* `config/database.yml` as 'newname'
-* `config/application.rb` as 'NewName'
-* `app/views/layouts/application.html.erb` as 'New Name'
+The kiosk view is for the patient waiting room and is intended to communicate a simple set of status for family members without showing PHI.

@@ -4,45 +4,63 @@ application.templates = {};
 application.partials = {};
 application.templates.pixels_per_second = 200.0 / 60.0 / 60.0;
 application.statuses = {
-    value_check: function(order,type,default_val) {
-	var value = default_val;
-	for (var i in application.statuses.checks) {
-	    if (application.statuses.checks[i].check(order)) {
-		if (application.statuses.checks[i][type] != undefined) value = application.statuses.checks[i][type];
-		break;
-	    }
-	}
-	return value;
-
-    },
-    color: function(order) {
-	return application.statuses.value_check(order,"color","#ddd");
-    },
-    card_class: function(order) {
-	return application.statuses.value_check(order,"card_class","");
-    },
-    checks: [{name: "On Hold",
-	      color: "#f5f52b",
-	      card_class: "highlight",
-	      check: function(order) { return (order.adjusted.onhold == true); }},
-	     {name: "Cancelled",
-	      color: "#c8040e",
-	      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
-	     {name: "Started",
-	      color: "#704c8f",
-	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
-	     {name: "Completed",
-	      color: "#398cc4",
-	      card_class: "completed",
-	      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
-	     {name: "Patient Arrived",
-	      color: "#53a790",
-	      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }},
-	     {name: "Ordered",
-	      color: "#a0a0a0",
-	      check: function(order) { return (order.rad_exam == undefined || !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }}
-	    ]
+  value_check: function(order,type,default_val) {
+    var value = default_val;
+    for (var i in application.statuses.checks) {
+      if (application.statuses.checks[i].check(order)) {
+        if (application.statuses.checks[i][type] != undefined) value = application.statuses.checks[i][type];
+        break;
+      }
+    }
+    return value;
+  },
+  color: function(order) {
+    return application.statuses.value_check(order,"color","#ddd");
+  },
+  card_class: function(order) {
+    return application.statuses.value_check(order,"card_class","");
+  },
+  checks: [{name: "On Hold",
+    order: 5,
+    color: "#f5f52b",
+    card_class: "highlight",
+    check: function(order) { return (order.adjusted.onhold == true); }},
+    {name: "Cancelled",
+      order: 6,
+      color: "#c8040e",
+      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
+    {name: "Started",
+      order: 3,
+      color: "#631d76",
+      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.begin_exam && order.rad_exam.rad_exam_time.end_exam == null); }},
+    {name: "Completed",
+      order: 4,
+      color: "#005a8b",
+      card_class: "completed",
+      check: function(order) { return (order.rad_exam != undefined && order.rad_exam.rad_exam_time.end_exam != null); }},
+    {name: "Patient Arrived",
+      order: 2,
+      color: "#1e9d8b",
+      check: function(order) { return (order.rad_exam != undefined && (order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in) != null); }},
+    {name: "Ordered",
+      order: 1,
+      color: "#888888",
+      check: function(order) { return (order.rad_exam == undefined || !(order.rad_exam.rad_exam_time.sign_in || order.rad_exam.rad_exam_time.check_in)); }}
+  ]
 };
+
+// Sort checks by the order; be sure to dup the array as the original order needs to be preserved
+application.statuses.ordered_checks = application.statuses.checks.slice(0,application.statuses.checks.length).sort(function(a,b) {
+    if (a.order > b.order) {
+	return 1;
+    } else if (a.order < b.order) {
+	return -1;
+    } else {
+	return 0;
+    }
+});
+
+
 
 $(document).ready(function() {
     $.each($(".handlebars-template"),function(i,e) {
@@ -241,6 +259,44 @@ Handlebars.registerHelper('chronological_events',function(order) {
     return application.data.allEvents(order.id);
 });
 
+Handlebars.registerHelper('grouped_events',function(order) {
+  var events = application.data.allEvents(order.id);
+  var grouped_events = _.groupBy(events, function(event) {
+    switch (event.event_type) {
+      case "comment":
+        return "comment";
+      case "rounding-update":
+        return "rounding";
+      default:
+        return "event";
+    }
+  });
+  return grouped_events;
+});
+
+Handlebars.registerHelper('comment_events',function(order) {
+  return Handlebars.helpers.grouped_events(order)["comment"];
+});
+
+Handlebars.registerHelper('other_events',function(order) {
+  return Handlebars.helpers.grouped_events(order)["event"];
+});
+
+Handlebars.registerHelper('rounding_value',function(order) {
+  var updates = Handlebars.helpers.grouped_events(order)["rounding"];
+  if (updates) {
+    var most_recent_update = updates[0];
+    var res = $.map(most_recent_update.comments.split("\n"), function(line) {return line.trim()}).join("\n");
+    return {
+      id: order.id,
+      text: res,
+      author: most_recent_update.employee.name,
+      created_at: most_recent_update.created_at,
+    };
+  }
+  return {id: order.id, placeholder: "No rounding notes entered.", text: ""};
+});
+
 Handlebars.registerHelper('notification_type',function(type) {
     if (type == "comment") {
 	return "comment-notification " + type;
@@ -250,44 +306,52 @@ Handlebars.registerHelper('notification_type',function(type) {
 });
 
 Handlebars.registerHelper('render_event',function(event) {
-    //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
-    if (event.event_type == 'comment') {
-	return new Handlebars.SafeString(application.templates.eventComment(event));
-    } else if (event.event_type == 'location_update') {
-	return new Handlebars.SafeString(application.templates.eventLocationChange(event));
-    } else {
-	return new Handlebars.SafeString(application.templates.eventStateChange(event));
-    }
+  //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
+  if (event.event_type == 'comment') {
+    return new Handlebars.SafeString(application.templates.eventComment(event));
+  } else if (event.event_type == 'location_update') {
+    return new Handlebars.SafeString(application.templates.eventLocationChange(event));
+  } else if (event.event_type === "rounding-update") {
+    return new Handlebars.SafeString(application.templates.eventRoundingUpdate(event));
+  } else {
+    return new Handlebars.SafeString(application.templates.eventStateChange(event));
+  }
 });
 
 Handlebars.registerHelper('toggle_icon',function(name) {
-    var icon = "";
-    switch(name) {
-    case "constent":
-	icon = "fa fa-handshake-o";
-	break;
+  var icon = "";
+  switch(name) {
     case "onhold":
-	icon = "fa fa-hand-paper-o";
-	break;
+      icon = "fa fa-hand-paper-o";
+      break;
     case "anesthesia":
-	icon = "fa fa-bed";
-	break;
+      icon = "fa fa-bed";
+      break;
     case "consent":
-	icon = "fa fa-handshake-o";
-	break;
+      icon = "fa fa-handshake-o";
+      break;
+    case "ppca_ready":
+      icon = "fa fa-thumbs-o-up";
+      break;
     case "paperwork":
-	icon = "fa fa-file-text";
-    }
-    return icon;
+      icon = "fa fa-file-text";
+  }
+  return icon;
 });
 
 Handlebars.registerHelper('toggle_label',function(name) {
-    if (name == "onhold") {
-	var language = "";
-    } else {
-	var language = name.charAt(0).toUpperCase() + name.slice(1);
-    }
-    return new Handlebars.SafeString('<strong><i class="' + Handlebars.helpers.toggle_icon(name) + '"></i> ' + language + '</strong>');
+  var language = "";
+  switch (name) {
+    case "onhold":
+      break;
+    case "ppca_ready":
+      language = "PPCA Ready"
+      break;
+    default:
+      language = name.charAt(0).toUpperCase() + name.slice(1);
+  }
+
+  return new Handlebars.SafeString('<strong><i class="' + Handlebars.helpers.toggle_icon(name) + '"></i> ' + language + '</strong>');
 });
 
 Handlebars.registerHelper('toggle_state',function(name,new_state) {
