@@ -2,7 +2,7 @@
 
 const initialState = {};
 
-function calendar(state = initialState, action) {
+function calendar(state: Object = initialState, action: Object) {
   return state;
 }
 

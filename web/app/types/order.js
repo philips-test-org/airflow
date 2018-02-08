@@ -175,6 +175,26 @@ export type RadExam = {
   site_sublocation: Object
 }
 
+export type Employee = {
+  id: number,
+  person_id: number,
+  name: string,
+  fte: number,
+  updated_at: number,
+  active: boolean
+}
+
+export type Event = {
+  id: number,
+  exam_adjustment_id: number,
+  event_type: string,
+  new_state: {[string]: boolean},
+  comments: ?string,
+  created_at: number,
+  updated_at: string,
+  employee: Employee,
+}
+
 export type Order = {
   department_id: number,
   current_status_id: ?number,
@@ -202,6 +222,6 @@ export type Order = {
   patient_mrn: PatientMRN,
   rad_exams: Array<RadExam>,
   adjusted: Object,
-  events: Array<Object>,
+  events: Array<Event>,
   rad_exam: RadExam,
 }

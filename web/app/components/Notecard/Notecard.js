@@ -1,7 +1,12 @@
 // @flow
 import React, {Component} from 'react';
 import * as R from "ramda";
-import {formatName} from "../../lib/utility";
+import moment from "moment";
+
+import {
+  checkExamThenOrder,
+  formatName,
+} from "../../lib/utility";
 
 import type {
   Order
@@ -10,7 +15,11 @@ import type {
 type props = {
   order: Order,
   comments: Object,
+  startDate: number,
+  type: "calendar" | "overview" | "kiosk",
 }
+
+const PIXELS_PER_SECOND = 200.0 / 60.0 / 60.0;
 
 class Notecard extends Component<Props> {
   constructor(props: Props) {
@@ -20,18 +29,25 @@ class Notecard extends Component<Props> {
   render() {
     // TODO Fix setting styles inside of components
     const {order, comments} = this.props;
-    const cardClass = `notecard overview ${this.cardClass(order)} ${this.negativeDuration() ? "bad-duration" : ""}`
+    const cardClass = `notecard ${this.cardClass(order)}`
+    const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
+    const cardStyle = {
+      height: this.orderHeight(),
+      maxHeight: this.orderHeight(),
+      top: this.orderTop(),
+    };
+    console.log(cardStyle)
     return (
-      <div className={cardClass} id={`fixed-card-${order.id}`}>
+      <div className={cardClass} id={`fixed-card-${order.id}`} style={cardStyle}>
         <div className="left-tab" style={{backgroundColor: this.cardColor()}} />
 
         <div className="right-tab">
-          <div className="events">{comments ? <i className="fa fa-paperclip"></i> : null}</div>
+          <div className="events">{hasComments ? <i className="fa fa-paperclip"></i> : null}</div>
 
           {this.renderHeader()}
 
           <div className="body">
-            <div className="procedure">{this.checkExamThenOrder(R.lensPath(["procedure", "description"]))}</div>
+            <div className="procedure">{checkExamThenOrder(this.props.order, ["procedure", "description"])}</div>
             <div className="patient-location">{this.examLocation()}</div>
           </div>
 
@@ -43,11 +59,12 @@ class Notecard extends Component<Props> {
   }
 
   renderHeader() {
-    const patientTypeLens = R.lensPath(["site_class", "patient_type", "patient_type"]);
+    const patientPath = ["site_class", "patient_type", "patient_type"];
+    const patientName = formatName(this.props.order.patient_mrn.patient.name);
     return (
       <div className="heading">
-        <div className="patient-name">{this.props.order.patient_mrn.patient.name}</div>
-        <div className="patient-type">{this.checkExamThenOrder(patientTypeLens)}</div>
+        <div className="patient-name">{patientName}</div>
+        <div className="patient-type">{checkExamThenOrder(this.props.order, patientPath)}</div>
         <div className="mrn">{this.props.order.patient_mrn.mrn}</div>
       </div>
     );
@@ -61,9 +78,9 @@ class Notecard extends Component<Props> {
           {adjusted.anesthesia ? <div className="status-indicator anesthesia"><strong>GA</strong></div> : null}
         </div>
         <div className="right">
-          {adjusted.consent ? <div className="status-indicator consent"><i class="fa fa-handshake-o"></i></div> : null}
-          {adjusted.ppca_ready ? <div className="status-indicator ppca_ready"><i class="fa fa-thumbs-o-up"></i></div> : null}
-          {adjusted.paperwork ? <div className="status-indicator paperwork"><i class="fa fa-file-text"></i></div> : null}
+          {adjusted.consent ? <div className="status-indicator consent"><i className="fa fa-handshake-o"></i></div> : null}
+          {adjusted.ppca_ready ? <div className="status-indicator ppca_ready"><i className="fa fa-thumbs-o-up"></i></div> : null}
+          {adjusted.paperwork ? <div className="status-indicator paperwork"><i className="fa fa-file-text"></i></div> : null}
         </div>
       </div>
     )
@@ -72,15 +89,8 @@ class Notecard extends Component<Props> {
   examLocation() {
     const {order} = this.props;
     return R.defaultTo(null,
-      R.view(R.lensPath(["rad_exam", "site_sublocation", "site_location", "location"], order))
-    );
-  }
-
-  checkExamThenOrder(lens) {
-    return R.defaultTo(
-      R.view(lens, this.props.order),
-      R.view(lens, this.props.order.rad_exam)
-    );
+      R.view(R.lensPath(["rad_exam", "site_sublocation", "site_location", "location"]))
+    )(order);
   }
 
   negativeDuration() {
@@ -93,7 +103,11 @@ class Notecard extends Component<Props> {
   }
 
   cardClass() {
-    return this.cardStatuses("card_class");
+    return R.join(" ", [
+      this.props.type === "calendar" ? "scaled" : "overview",
+      this.negativeDuration() ? "bad-duration" : "",
+      this.cardStatuses("card_class"),
+    ]);
   }
 
   cardStatuses(type, default_value: string = "") {
@@ -171,6 +185,104 @@ class Notecard extends Component<Props> {
       }
     }
     return default_value;
+  }
+
+  // Find the start time for an exam
+  examStartTime(exam) {
+    if (exam.rad_exam_time == undefined) { return null; }
+    if (exam.rad_exam_time.begin_exam) {
+      return exam.rad_exam_time.begin_exam;
+    } else {
+      return exam.rad_exam_time.appointment;
+    }
+  }
+
+  // Find the start time for an order
+  orderStartTime() {
+    const {order} = this.props;
+    var startTime;
+    if (order.adjusted != undefined && order.adjusted.start_time) {
+      startTime = order.adjusted.start_time;
+    } else if (order.rad_exam) {
+      startTime = this.examStartTime(order.rad_exam)
+    } else {
+      startTime = order.appointment;
+    }
+    return startTime < this.props.startDate ? this.props.startDate : startTime;
+  }
+
+  unadjustedOrderStartTime() {
+    const {order} = this.props;
+    var startTime;
+    if (order.rad_exam) {
+      startTime = this.examStartTime(order.rad_exam)
+    } else {
+      startTime = order.appointment;
+    }
+    return startTime < this.props.startDate ? this.props.startDate : startTime;
+  }
+
+  orderStopTime() {
+    const {order} = this.props;
+    if (!R.isNil(order.adjusted) && order.adjusted.start_time) {
+      //adjusted start time plus the unadjusted duration
+      return order.adjusted.start_time + this.orderDuration();
+    } else if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
+      return order.rad_exam.rad_exam_time.end_exam;
+    } else if (typeof(order.appointment_duration) === "number") {
+      return this.orderStartTime() + (order.appointment_duration * 1000);
+    } else if (!R.isNil(order.rad_exam)) {
+      return this.orderStartTime() + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
+    } else {
+      return this.orderStartTime() + (order.procedure.scheduled_duration * 60 * 1000);
+    }
+  }
+
+  unadjustedOrderStopTime() {
+    const {order} = this.props;
+    if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
+      return order.rad_exam.rad_exam_time.end_exam;
+    } else if (typeof(order.appointment_duration) === "number") {
+      return this.unadjustedOrderStartTime() + (order.appointment_duration * 1000);
+    } else if (!R.isNil(order.rad_exam)) {
+      return this.unadjustedOrderStartTime() + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
+    } else {
+      return this.unadjustedOrderStartTime() + (order.procedure.scheduled_duration * 60 * 1000);
+    }
+  }
+
+  orderDuration() {
+    const {order} = this.props;
+    return this.unadjustedOrderStopTime(order) - this.unadjustedOrderStartTime(order);
+  }
+
+  orderHeightToStartTime(height) {
+    return this.props.startDate + (height / PIXELS_PER_SECOND * 1000);
+  }
+
+  orderHeightToStopTime(height) {
+    const {order} = this.props;
+    var duration = this.orderStopTime() - this.orderStartTime();
+    return this.orderHeightToStartTime(height) + duration;
+  }
+
+  orderHeight() {
+    const {order} = this.props;
+    const seconds = (this.orderDuration() / 1000);
+    // Default for bad data
+    if (seconds < 0) {
+      return "30px;"
+    } else {
+      return Math.round(seconds * PIXELS_PER_SECOND) + "px";
+    }
+  }
+
+  orderTop() {
+    const startTime = moment(this.orderStartTime());
+    const hoursToSeconds = startTime.hour() * 60 * 60;
+    const minutesToSeconds = startTime.minute() * 60;
+    const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, startTime.seconds()]);
+    return Math.round(totalSeconds * PIXELS_PER_SECOND) + "px";
   }
 }
 

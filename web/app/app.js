@@ -5,13 +5,14 @@ import {Provider} from "react-redux";
 import store from "./lib/store";
 
 import Notecard from "./components/Notecard";
+import Calendar from "./components/Calendar";
 
 const renderApp = (Component, target, props = {}) => {
   // Make sure the target element exists before attempting to render.
   if ($(target)) {
     render (
-      <Provider store={store}>
-        <Component {...props} />
+      <Provider store={store(props)}>
+        <Component />
       </Provider>,
       document.querySelector(target)
     )
@@ -28,6 +29,7 @@ $(() => {
     window.dispatch = store.dispatch;
     window.renderReact = renderApp;
     window.notecard = Notecard;
+    window.calendar = Calendar;
   }
 
   // Render components conditionally

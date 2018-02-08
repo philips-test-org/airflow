@@ -4,6 +4,6 @@ import {devToolsEnhancer} from "redux-devtools-extension";
 
 import rootReducer from "./reducers/index";
 
-const store = createStore(rootReducer, {}, devToolsEnhancer());
+const store = (initState = {}) => createStore(rootReducer, initState, devToolsEnhancer());
 
 export default store;

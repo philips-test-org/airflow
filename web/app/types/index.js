@@ -1,4 +1,8 @@
+// @flow
+
 import type {
+  Employee,
+  Event,
   Order,
   Patient,
   PatientMRN,
@@ -10,9 +14,11 @@ import type {
   RadExamTime,
   Resource,
   SiteClass,
-}
+} from "./order";
 
 export type {
+  Employee,
+  Event,
   Order,
   Patient,
   PatientMRN,
@@ -24,4 +30,4 @@ export type {
   RadExamTime,
   Resource,
   SiteClass,
-}
+};

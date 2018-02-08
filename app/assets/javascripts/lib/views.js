@@ -38,56 +38,56 @@ application.drawBoard = function() {
 
 application.calendar = {
 
-    setup: function() {
-      //build calendar
-      $("#workspace").html(application.templates.calendar(application.data));
+  setup: function() {
+    //build calendar
+    $("#workspace").html(application.templates.calendar(application.data));
 
-      //Make time and room headings scroll with calendar
-      $("#board").scroll(function(e) {
-        var scroll = this.scrollLeft;
-        $("#time-headings").offset({left: -1*scroll+50});
-        $("#vertical-time-headings").css({left: scroll});
-      });
+    //Make time and room headings scroll with calendar
+    $("#board").scroll(function(e) {
+      var scroll = this.scrollLeft;
+      $("#time-headings").offset({left: -1*scroll+50});
+      $("#vertical-time-headings").css({left: scroll});
+    });
 
-      // Set up the now line including redrawing
-      application.calendar.drawNow();
-      setInterval(application.calendar.drawNow, 1 / application.templates.pixels_per_second * 1000);
-      if ($("#right-now").css("display") != "none") {
-        $("#board").scrollTo({top: ($("#right-now").position().top - ($("#board").height()/2)), left: 0},500);
-      }
+    // Set up the now line including redrawing
+    application.calendar.drawNow();
+    setInterval(application.calendar.drawNow, 1 / application.templates.pixels_per_second * 1000);
+    if ($("#right-now").css("display") != "none") {
+      $("#board").scrollTo({top: ($("#right-now").position().top - ($("#board").height()/2)), left: 0},500);
+    }
 
-      // Setup card events for all cards
-      // this is done per card on redraw in the redrawCard function
-      $(".notecard").draggable({revert: 'invalid',
-        cursor: 'move',
-        delay: 200});
+    // Setup card events for all cards
+    // this is done per card on redraw in the redrawCard function
+    $(".notecard").draggable({revert: 'invalid',
+      cursor: 'move',
+      delay: 200});
 
-      // Setup column events
-      $("#time-grid tr td").droppable({
-        accepts: ".notecard",
-        drop: function(e) {
-          var column = $(this);
-          if ($(e.originalEvent.target).hasClass("notecard")) {
-            var notecard = $(e.originalEvent.target);
-          } else {
-            var notecard = $(e.originalEvent.target).parents(".notecard");
-          }
-          var id = notecard.find(".data").data("order-id");
-          var resource_id = column.data("resource-id");
+    // Setup column events
+    $("#time-grid tr td").droppable({
+      accepts: ".notecard",
+      drop: function(e) {
+        var column = $(this);
+        if ($(e.originalEvent.target).hasClass("notecard")) {
+          var notecard = $(e.originalEvent.target);
+        } else {
+          var notecard = $(e.originalEvent.target).parents(".notecard");
+        }
+        var id = notecard.find(".data").data("order-id");
+        var resource_id = column.data("resource-id");
 
-          application.data.updateLocation(id,resource_id,notecard.position().top);
-        }});
+        application.data.updateLocation(id,resource_id,notecard.position().top);
+      }});
 
 
-      application.data.hook("order-update","card-redraw", function(order) {
-        application.calendar.redrawCard(order);
-      });
-      application.data.hook("order-rollback","card-redraw", function(new_order,rollback_back_order) {
-        //console.log("Redrawing rolled back card",new_order,rollback_back_order);
-        application.calendar.redrawCard(rollback_back_order);
-      });
+    application.data.hook("order-update","card-redraw", function(order) {
+      application.calendar.redrawCard(order);
+    });
+    application.data.hook("order-rollback","card-redraw", function(new_order,rollback_back_order) {
+      //console.log("Redrawing rolled back card",new_order,rollback_back_order);
+      application.calendar.redrawCard(rollback_back_order);
+    });
 
-    },
+  },
   breakdown: function() {
     application.data.unhook("order-update","card-redraw");
   },
@@ -228,7 +228,7 @@ application.kiosk = $.extend({},application.calendar,{
       // Then set left to the the left position plus
       // the x axis scroll distance to keep that scroll in place
       $("#board").scrollTo({top: (($("#right-now").position().top + $("#board").scrollTop()) - ($("#board").height()/2)),
-				left: $("#board").position().left + $("#board").scrollLeft()},500);
-	  }
+        left: $("#board").position().left + $("#board").scrollLeft()},500);
+    }
   }
 });
