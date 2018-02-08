@@ -1,6 +1,7 @@
 // @flow
 import React, {Component} from 'react';
 import * as R from "ramda";
+import {formatName} from "../../lib/utility";
 
 import type {
   Order

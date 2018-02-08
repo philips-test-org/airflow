@@ -15,12 +15,12 @@
 
     <table id="time-headings">
       <tbody>
-	<tr class="heading">
-	  <td></td>
-	  {{#each resources}}
-	  {{> resourceHeading}}
-	  {{/each}}
-	</tr>
+        <tr class="heading">
+          <td></td>
+          {{#each resources}}
+          {{> resourceHeading}}
+          {{/each}}
+        </tr>
       </tbody>
     </table>
   </div>
@@ -30,25 +30,25 @@
 
     <table id="vertical-time-headings">
       <tbody>
-	<tr>
-	  <td>
-	    {{#each hours}}
-	    {{> hour}}
-	    {{/each}}
-	  </td>
-	</tr>
+        <tr>
+          <td>
+            {{#each hours}}
+            {{> hour}}
+            {{/each}}
+          </td>
+        </tr>
       </tbody>
     </table>
 
     <table id="time-grid">
       <tbody>
-	<div id="right-now"></div>
+        <div id="right-now"></div>
 
-	<tr>
-	  {{#each resources}}
-	  {{> resourceColumn resource=this hours=../hours}}
-	  {{/each}}
-	</tr>
+        <tr>
+          {{#each resources}}
+          {{> resourceColumn resource=this hours=../hours}}
+          {{/each}}
+        </tr>
       </tbody>
     </table>
   </div>
@@ -104,29 +104,29 @@
       <div class="events" style="{{#if (short_order this)}}left: 5px; top: 5px;{{/if}}">{{#has_comments this}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
 
       <div class="heading">
-	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
-	<div class="patient-type">{{exam_then_order this "site_class.patient_type.patient_type"}}</div>
-	<div class="mrn">{{this.patient_mrn.mrn}}</div>
+        <div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
+        <div class="patient-type">{{exam_then_order this "site_class.patient_type.patient_type"}}</div>
+        <div class="mrn">{{this.patient_mrn.mrn}}</div>
       </div>
 
       <div class="body">
-	<div class="procedure">{{exam_then_order this "procedure.description"}}</div>
-	<div class="patient-location">{{this.rad_exam.site_sublocation.site_location.location}}</div>
+        <div class="procedure">{{exam_then_order this "procedure.description"}}</div>
+        <div class="patient-location">{{this.rad_exam.site_sublocation.site_location.location}}</div>
       </div>
 
       <div class="footer" style="{{#if (short_order this)}}padding: 0px 2px;{{/if}}">
-	<div class="left">
-	  {{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><strong>GA</strong></div>{{/if}}
-	</div>
-	<div class="right">
-	  {{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
-	  {{#if this.adjusted.ppca_ready}}<div class="status-indicator ppca_ready"><i class="fa fa-thumbs-o-up"></i></div>{{/if}}
-	  {{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
-	</div>
+        <div class="left">
+          {{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><strong>GA</strong></div>{{/if}}
+        </div>
+        <div class="right">
+          {{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+          {{#if this.adjusted.ppca_ready}}<div class="status-indicator ppca_ready"><i class="fa fa-thumbs-o-up"></i></div>{{/if}}
+          {{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
+        </div>
       </div>
     </div>
 
-  <div class="hide data" data-order-id="{{this.id}}"></div>
+    <div class="hide data" data-order-id="{{this.id}}"></div>
   </div>
 </script>
 
@@ -139,25 +139,25 @@
       <div class="events">{{#has_comments this}}<i class="fa fa-paperclip"></i>{{/has_comments}}</div>
 
       <div class="heading">
-	<div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
-	<div class="patient-type">{{exam_then_order this "site_class.patient_type.patient_type"}}</div>
-	<div class="mrn">{{this.patient_mrn.mrn}}</div>
+        <div class="patient-name">{{format_name this.patient_mrn.patient.name}}</div>
+        <div class="patient-type">{{exam_then_order this "site_class.patient_type.patient_type"}}</div>
+        <div class="mrn">{{this.patient_mrn.mrn}}</div>
       </div>
 
       <div class="body">
-	<div class="procedure">{{exam_then_order this "procedure.description"}}</div>
-	<div class="patient-location">{{this.rad_exam.site_sublocation.site_location.location}}</div>
+        <div class="procedure">{{exam_then_order this "procedure.description"}}</div>
+        <div class="patient-location">{{this.rad_exam.site_sublocation.site_location.location}}</div>
       </div>
 
       <div class="footer" style="{{#if (short_order this)}}padding: 0px 2px;{{/if}}">
-	<div class="left">
-	  {{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><strong>GA</strong></div>{{/if}}
-	</div>
-	<div class="right">
-	  {{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
-	  {{#if this.adjusted.ppca_ready}}<div class="status-indicator ppca_ready"><i class="fa fa-thumbs-o-up"></i></div>{{/if}}
-	  {{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
-	</div>
+        <div class="left">
+          {{#if this.adjusted.anesthesia}}<div class="status-indicator anesthesia"><strong>GA</strong></div>{{/if}}
+        </div>
+        <div class="right">
+          {{#if this.adjusted.consent}}<div class="status-indicator consent"><i class="fa fa-handshake-o"></i></div>{{/if}}
+          {{#if this.adjusted.ppca_ready}}<div class="status-indicator ppca_ready"><i class="fa fa-thumbs-o-up"></i></div>{{/if}}
+          {{#if this.adjusted.paperwork}}<div class="status-indicator paperwork"><i class="fa fa-file-text"></i></div>{{/if}}
+        </div>
       </div>
     </div>
 
@@ -194,35 +194,35 @@
         </div>
         <div class="col-xs-6">
           {{> commentsInterface}}
-	      </div>
+        </div>
       </div>
     </div>
   </div>
 </script>
 
 <script class="handlebars-template" id="t-status-toggles" type="text/x-handlebars-template">
-    <div class="status-toggles">
-      <div class="status-toggle margin-right-sm">
-	<label><i class="fa fa-hand-paper-o"></i>On Hold</label>
-	<input type="checkbox" name="onhold" {{check_test this.adjusted.onhold}} data-size="mini" data-on="On Hold" data-off="Active" data-toggle="toggle" data-width="105">
-      </div>
-      <div class="status-toggle margin-right-sm">
-	<label>Anesthesia</label>
-	<input type="checkbox" name="anesthesia" {{check_test this.adjusted.anesthesia}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
-      </div>
-      <div class="status-toggle margin-right-sm">
-	<label><i class="fa fa-handshake-o"></i>Consent</label>
-	<input type="checkbox" name="consent" {{check_test this.adjusted.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
-      </div>
-      <div class="status-toggle margin-right-sm">
-        <label><i class="fa fa-thumbs-o-up"></i>PPCA Ready</label>
-        <input type="checkbox" name="ppca_ready" {{check_test this.adjusted.ppca_ready}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
-      </div>
-      <div class="status-toggle">
-	<label><i class="fa fa-file-text"></i>Paperwork</label>
-	<input type="checkbox" name="paperwork" {{check_test this.adjusted.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
-      </div>
+  <div class="status-toggles">
+    <div class="status-toggle margin-right-sm">
+      <label><i class="fa fa-hand-paper-o"></i>On Hold</label>
+      <input type="checkbox" name="onhold" {{check_test this.adjusted.onhold}} data-size="mini" data-on="On Hold" data-off="Active" data-toggle="toggle" data-width="105">
     </div>
+    <div class="status-toggle margin-right-sm">
+      <label>Anesthesia</label>
+      <input type="checkbox" name="anesthesia" {{check_test this.adjusted.anesthesia}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+    </div>
+    <div class="status-toggle margin-right-sm">
+      <label><i class="fa fa-handshake-o"></i>Consent</label>
+      <input type="checkbox" name="consent" {{check_test this.adjusted.consent}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+    </div>
+    <div class="status-toggle margin-right-sm">
+      <label><i class="fa fa-thumbs-o-up"></i>PPCA Ready</label>
+      <input type="checkbox" name="ppca_ready" {{check_test this.adjusted.ppca_ready}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+    </div>
+    <div class="status-toggle">
+      <label><i class="fa fa-file-text"></i>Paperwork</label>
+      <input type="checkbox" name="paperwork" {{check_test this.adjusted.paperwork}} data-size="mini" data-on="Complete" data-off="Incomplete" data-toggle="toggle" data-width="105">
+    </div>
+  </div>
 </script>
 
 <script class="handlebars-template" id="t-modal-card-status" type="text/x-handlebars-template">
@@ -291,41 +291,41 @@
 
 <script class="handlebars-template" id="t-rounding-panel" type="text/x-handlebars-template">
   {{#with (rounding_value this) as |roundingValue|}}
-    <div class="panel-body">
-      <div class="rounding" style="white-space:pre-line">
-        <p class="rounding-text">{{#if roundingValue.text}}{{roundingValue.text}}{{else}}{{roundingValue.placeholder}}{{/if}}</p>
-      </div>
-
-      <form id="rounding-form" class="hidden">
-        <div class="body">
-          <div class="content">
-            <textarea
-              name="rounding"
-              class="form-control rounding-box"
-              rows="9"
-              disabled
-              autofocus
-              placeholder="{{roundingValue.placeholder}}"
-              data-saved-value="{{roundingValue.text}}">{{roundingValue.text}}</textarea>
-            <input type="hidden" name="order_id" value="{{roundingValue.id}}" />
-          </div>
-          <div class="footer">
-            <div class="pull-right">
-              <button class="btn btn-warning edit-rounding-cancel hidden">Cancel</button>
-              <button class="btn btn-default save-rounding">Save</button>
-            </div>
-            <div style="clear: both;"></div>
-          </div>
-        </div>
-      </form>
+  <div class="panel-body">
+    <div class="rounding" style="white-space:pre-line">
+      <p class="rounding-text">{{#if roundingValue.text}}{{roundingValue.text}}{{else}}{{roundingValue.placeholder}}{{/if}}</p>
     </div>
 
-    {{#with author}}
-      <div class="panel-footer rounding-footer">
-        <p class="edited-by">Last edited by: {{roundingValue.author}} on <span class="time short">{{format_timestamp roundingValue.created_at}}</span></p>
+    <form id="rounding-form" class="hidden">
+      <div class="body">
+        <div class="content">
+          <textarea
+            name="rounding"
+            class="form-control rounding-box"
+            rows="9"
+            disabled
+            autofocus
+            placeholder="{{roundingValue.placeholder}}"
+            data-saved-value="{{roundingValue.text}}">{{roundingValue.text}}</textarea>
+          <input type="hidden" name="order_id" value="{{roundingValue.id}}" />
+        </div>
+        <div class="footer">
+          <div class="pull-right">
+            <button class="btn btn-warning edit-rounding-cancel hidden">Cancel</button>
+            <button class="btn btn-default save-rounding">Save</button>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
       </div>
-    {{else}}
-    {{/with}}
+    </form>
+  </div>
+
+  {{#with author}}
+  <div class="panel-footer rounding-footer">
+    <p class="edited-by">Last edited by: {{roundingValue.author}} on <span class="time short">{{format_timestamp roundingValue.created_at}}</span></p>
+  </div>
+  {{else}}
+  {{/with}}
   {{/with}}
 </script>
 
@@ -359,17 +359,17 @@
   <div class="events tab-content">
     <div role="tabpanel" class="event-list-pane tab-pane active" id="comment-list">
       {{#each (comment_events this)}}
-        {{render_event this}}
+      {{render_event this}}
       {{/each}}
     </div>
     <div role="tabpanel" class="event-list-pane tab-pane" id="event-list">
       {{#each (other_events this)}}
-        {{render_event this}}
+      {{render_event this}}
       {{/each}}
     </div>
     <div role="tabpanel" class="event-list-pane tab-pane" id="combined-events-list">
       {{#each (chronological_events this)}}
-        {{render_event this}}
+      {{render_event this}}
       {{/each}}
     </div>
   </div>
@@ -407,8 +407,8 @@
     {{/unless}}
     <div class="body">
       <div class="heading">
-	<!-- should be the employee associated with the action -->
-	<strong>{{employee.name}}</strong> commented on <span class="time short">{{format_timestamp created_at}}</span>
+        <!-- should be the employee associated with the action -->
+        <strong>{{employee.name}}</strong> commented on <span class="time short">{{format_timestamp created_at}}</span>
       </div>
       <div class="content">{{comments}}</div>
     </div>
@@ -422,8 +422,8 @@
     {{/unless}}
     <div class="body">
       <div class="heading">
-	<!-- should be the employee associated with the action -->
-	<strong>{{employee.name}}</strong> updated rounding on <span class="time short">{{format_timestamp created_at}}</span>
+        <!-- should be the employee associated with the action -->
+        <strong>{{employee.name}}</strong> updated rounding on <span class="time short">{{format_timestamp created_at}}</span>
       </div>
       <div class="content">{{comments}}</div>
     </div>
@@ -434,23 +434,23 @@
   <form id="comment-form">
     <div class="comment">
       <div class="avatar">
-	{{avatar <%= @employee.getId %> "<%= image_url('placeholder.png') %>"}}
+        {{avatar <%= @employee.getId %> "<%= image_url('placeholder.png') %>"}}
       </div>
       <div class="body">
-	<div class="heading form">
-	  Add comment to the order:
-	</div>
-	<div class="content">
-	  <textarea name="comments" class="form-control comment-box" autofocus></textarea>
-	  <input type="hidden" name="order_id" value="{{id}}" />
-	</div>
+        <div class="heading form">
+          Add comment to the order:
+        </div>
+        <div class="content">
+          <textarea name="comments" class="form-control comment-box" autofocus></textarea>
+          <input type="hidden" name="order_id" value="{{id}}" />
+        </div>
 
-	<div class="footer">
-	  <div class="pull-right">
-	    <button class="btn btn-default add-comment">Add Comment</button>
-	  </div>
-	  <div style="clear: both;"></div>
-	</div>
+        <div class="footer">
+          <div class="pull-right">
+            <button class="btn btn-default add-comment">Add Comment</button>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
 
       </div>
     </div>
