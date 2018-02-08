@@ -6,6 +6,7 @@ APPNAME=`cat config/application.name`
 VERSION=`git describe --always`
 WARFILE="$APPNAME.war.$VERSION"
 PACKAGEDIR="$APPNAME-$VERSION"
+GIT_COMMIT_HASH=`git log -1 --pretty=format:"%h"`
 
 echo "Warblizer: Creating version page"
 git describe --always > app/views/main/_version.html.erb
@@ -31,6 +32,6 @@ cp -Rv db_scripts $PACKAGEDIR
 cp -v CHANGELOG.md $PACKAGEDIR
 cp -v INSTALL.md $PACKAGEDIR
 cp -v $WARFILE $PACKAGEDIR
-zip -rq $PACKAGEDIR.zip $PACKAGEDIR
+zip -rq "$PACKAGEDIR-$GIT_COMMIT_HASH.zip" $PACKAGEDIR
 rm -rf $PACKAGEDIR
-echo "Packager: Created $PACKAGEDIR.zip"
+echo "Packager: Created $PACKAGEDIR-$GIT_COMMIT_HASH.zip"
