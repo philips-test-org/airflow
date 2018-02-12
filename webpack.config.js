@@ -7,7 +7,7 @@ module.exports = {
     }),
   ],
   entry: {
-    app: "./web/app/app.js",
+    app: ["babel-polyfill", "./web/app/app.js"],
   },
   output: {
     filename: "./javascripts/[name].bundle.js",

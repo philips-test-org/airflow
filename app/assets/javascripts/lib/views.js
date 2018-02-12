@@ -4,35 +4,35 @@ application.drawBoard = function() {
   //Fix: This needs to be adjusted to the group name when that backend exists
   var resource_group = $("#resource-group-buttons button").data("value");
   var resources = $.parseJSON($("#resource-groupings-json").text())[resource_group];
-  if (resources == undefined) {
-    $("#workspace").html(application.templates.noResources());
-  } else {
-    var data = $.map(resources,function(r,i) {
-      return {name: "resource_ids[]",
-        value: r.id};
-    });
-    data.push({name: "date",
-      value: $("#time-button").data("value")});
-    data.push({name: "resource_group",
-      value: resource_group});
-
-    if ($(".active .view-changer").data("view-type") == "kiosk") { var url = $.harbingerjs.core.url("/limited_exam_info"); }
-    else {  var url = $.harbingerjs.core.url("/exams"); }
-
-    $.ajax(url,
-      {data: data,
-        beforeSend: function() {
-          $("#workspace").html(application.templates.workspaceLoading());
-        },
-        error: function() {
-          if (console != undefined) { console.log("Error getting orders",arguments); }
-          $("#workspace").html(application.templates.errorLoading());
-        },
-        success: function(orders) {
-          application.data.formatOrders(orders);
-          application.view.setup();
-        }});
-  }
+  //if (resources == undefined) {
+    //$("#workspace").html(application.templates.noResources());
+  //} else {
+    //var data = $.map(resources,function(r,i) {
+      //return {name: "resource_ids[]",
+        //value: r.id};
+    //});
+    //data.push({name: "date",
+      //value: $("#time-button").data("value")});
+    //data.push({name: "resource_group",
+      //value: resource_group});
+//
+    //if ($(".active .view-changer").data("view-type") == "kiosk") { var url = $.harbingerjs.core.url("/limited_exam_info"); }
+    //else {  var url = $.harbingerjs.core.url("/exams"); }
+//
+    //$.ajax(url,
+      //{data: data,
+        //beforeSend: function() {
+          //$("#workspace").html(application.templates.workspaceLoading());
+        //},
+        //error: function() {
+          //if (console != undefined) { console.log("Error getting orders",arguments); }
+          //$("#workspace").html(application.templates.errorLoading());
+        //},
+        //success: function(orders) {
+          //application.data.formatOrders(orders);
+          //application.view.setup();
+        //}});
+  //}
 };
 
 

@@ -12,10 +12,16 @@ import type {
 type Props = {
   startDate: number,
   orders: {[string]: Array<Order>},
-  resources: {[string]: Array<Resource>}
+  resources: {[string]: Array<Resource>},
+  selectedResource: string,
 }
 
 class Calendar extends Component {
+  componentWillMount() {
+    const {resources, selectedResource} = this.props;
+    this.props.fetchExams(R.map((r) => r.id, resources[selectedResource]))
+  }
+
   render() {
     const lanes = R.map(
       ([header, orders]) => this.renderLane(header, orders),
@@ -43,7 +49,7 @@ class Calendar extends Component {
             <tbody>
               <tr>
                 <td>
-                  {/* TODO ADD HOURS */}
+                  {this.renderHours()}
                 </td>
               </tr>
             </tbody>
@@ -65,13 +71,33 @@ class Calendar extends Component {
 
   renderHeading(resourceName) {
     return (
-      <td><h1>{resourceName}</h1></td>
+      <td key={`${resourceName}-heading`}>
+        <h1>{resourceName}</h1>
+      </td>
     )
+  }
+
+  renderHours() {
+    return R.map((h) => {
+      let hourString = R.length(String(h)) === 1 ? `0${h}:00` : `${h}:00`;
+      return (
+        <div key={`hour-${hourString}`} className="hour">
+          {hourString}
+        </div>
+      )
+    }, R.range(0, 24));
   }
 
   renderLane(header, orders) {
     return (
       <td key={`${header}-lane`}>
+        <div className="markers">
+          {R.map((hour) => {
+            return (
+              <div key={`${hour}-marker`} className="row-marker"></div>
+            )
+          }, R.range(0, 48))}
+        </div>
         <NotecardLane
           orders={orders}
           type="calendar"

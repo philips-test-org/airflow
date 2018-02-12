@@ -28,7 +28,7 @@ class Notecard extends Component<Props> {
 
   render() {
     // TODO Fix setting styles inside of components
-    const {order, comments} = this.props;
+    const {order, comments, type} = this.props;
     const cardClass = `notecard ${this.cardClass(order)}`
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardStyle = {
@@ -36,9 +36,9 @@ class Notecard extends Component<Props> {
       maxHeight: this.orderHeight(),
       top: this.orderTop(),
     };
-    console.log(cardStyle)
+    const cardId = `${type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     return (
-      <div className={cardClass} id={`fixed-card-${order.id}`} style={cardStyle}>
+      <div className={cardClass} id={cardId} style={cardStyle}>
         <div className="left-tab" style={{backgroundColor: this.cardColor()}} />
 
         <div className="right-tab">

@@ -13,7 +13,7 @@
       <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <% @groupings.keys.each do |k| %>
-      <li><a data-value="<%= k %>" href="#"><%= k %></a></li>
+        <li><a data-value="<%= k %>" href="#"><%= k %></a></li>
       <% end %>
     </ul>
   </div>
@@ -23,3 +23,15 @@
 <div id="workspace" class="vertical-timeline">
   <%= image_tag("ajax-loader.gif") %>
 </div>
+
+<script>
+  var resourceGroup = $("#resource-group-buttons button").data("value");
+  var resources = $.parseJSON($("#resource-groupings-json").text());
+ $(document).ready(function() {
+   window.renderReact(window.calendar, "#workspace", {
+     board: {
+       resources: resources, selectedResource: resourceGroup
+     }
+   })
+ });
+</script>

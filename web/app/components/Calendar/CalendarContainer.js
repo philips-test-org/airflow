@@ -9,19 +9,23 @@ import {connect} from 'react-redux';
 
 import {ordersByResource} from "../../lib/utility";
 
+import {fetchExams} from "../../lib/actions";
+
 import Calendar from './Calendar';
 
 const mapStateToProps = (state: Object) => {
   return {
     startDate: state.board.startDate,
     orders: ordersByResource(state.board.orders),
+    resources: state.board.resources,
+    selectedResource: state.board.selectedResource,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fn: () => {
-      dispatch();
+    fetchExams: (resources: Array<number>) => {
+      dispatch(fetchExams(resources));
     },
   }
 };

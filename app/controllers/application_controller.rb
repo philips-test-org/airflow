@@ -47,5 +47,4 @@ class ApplicationController < ActionController::Base
                                options[:table_ids])
     end
   end
-
 end

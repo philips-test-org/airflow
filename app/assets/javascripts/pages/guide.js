@@ -1,81 +1,81 @@
 $(document).ready(function() {
 
-    if ($(".active .view-changer").length > 0) {
-	var view =  $(".active .view-changer").data("view-type");
-	application.view = application[view];
-    } else {
-	application.view = application.calendar;
+  if ($(".active .view-changer").length > 0) {
+    var view =  $(".active .view-changer").data("view-type");
+    application.view = application[view];
+  } else {
+    application.view = application.calendar;
+  }
+
+  application.drawBoard();
+
+  $(".view-changer").click(function(e) {
+    if ($(this).data("view-type") != "kiosk") {
+      e.preventDefault();
+      var view = $(this).data("view-type");
+      application.view.breakdown();
+      application.view = application[view];
+      $(this).parent().siblings().removeClass("active");
+      $(this).parent().addClass("active");
+      application.view.setup();
     }
+  });
 
-    application.drawBoard();
+  $("#view-controls #resource-group-buttons ul li a").click(function(e) {
+    e.preventDefault();
+    var group = $(this).data("value");
+    if (group != $("#resource-group-buttons button").data("value")) {
+      $("#resource-group-buttons button .group-name").text(group);
+      $("#resource-group-buttons button").data("value",group);
+      application.drawBoard();
+    }
+  });
 
-    $(".view-changer").click(function(e) {
-	if ($(this).data("view-type") != "kiosk") {
-	    e.preventDefault();
-	    var view = $(this).data("view-type");
-	    application.view.breakdown();
-	    application.view = application[view];
-	    $(this).parent().siblings().removeClass("active");
-	    $(this).parent().addClass("active");
-	    application.view.setup();
-	}
+  $("#view-controls #time-button").popover({
+    title: "Select a date to show",
+    content: application.templates.dateButtonPopover({}),
+    html: true,
+    placement: "bottom",
+    container: $("body")
+  });
+
+  $("#time-button").on("inserted.bs.popover",function(e) {
+    var set_epoch = $("#time-button").data("value");
+    if (set_epoch != undefined) {  var date = moment(set_epoch*1000); }
+    else { var date = moment() }
+    $('#view-datepicker').datetimepicker({
+      inline: true,
+      format: 'LL',
+      defaultDate: date
     });
-
-    $("#view-controls #resource-group-buttons ul li a").click(function(e) {
-	e.preventDefault();
-	var group = $(this).data("value");
-	if (group != $("#resource-group-buttons button").data("value")) {
-	    $("#resource-group-buttons button .group-name").text(group);
-	    $("#resource-group-buttons button").data("value",group);
-	    application.drawBoard();
-	}
+    $("#view-datepicker").on("dp.change",function(e) {
+      $("#time-button").data("value",e.date.unix());
+      $("#time-button").html(e.date.format('dddd, LL') + ' <span class="caret"></span>');
+      $("#time-button").trigger("click");
+      application.drawBoard();
     });
-
-    $("#view-controls #time-button").popover({
-	title: "Select a date to show",
-	content: application.templates.dateButtonPopover({}),
-	html: true,
-	placement: "bottom",
-	container: $("body")
+    $("#today-button").on("click",function(e) {
+      e.preventDefault();
+      $("#time-button").data("value",moment().unix());
+      $("#time-button").html('Today <span class="caret"></span>');
+      $("#time-button").trigger("click");
+      application.drawBoard();
     });
+  });
 
-    $("#time-button").on("inserted.bs.popover",function(e) {
-	var set_epoch = $("#time-button").data("value");
-	if (set_epoch != undefined) {  var date = moment(set_epoch*1000); }
-	else { var date = moment() }
-	$('#view-datepicker').datetimepicker({
-            inline: true,
-	    format: 'LL',
-	    defaultDate: date
-	});
-	$("#view-datepicker").on("dp.change",function(e) {
-	    $("#time-button").data("value",e.date.unix());
-	    $("#time-button").html(e.date.format('dddd, LL') + ' <span class="caret"></span>');
-	    $("#time-button").trigger("click");
-	    application.drawBoard();
-	});
-	$("#today-button").on("click",function(e) {
-	    e.preventDefault();
-	    $("#time-button").data("value",moment().unix());
-	    $("#time-button").html('Today <span class="caret"></span>');
-	    $("#time-button").trigger("click");
-	    application.drawBoard();
-	});
-    });
+  $("#legend-button").popover({
+    title: "Legend",
+    content: application.templates.legend(application.statuses),
+    html: true,
+    placement: "bottom",
+    container: 'body',
+    trigger: 'focus'
+  });
 
-    $("#legend-button").popover({
-	title: "Legend",
-	content: application.templates.legend(application.statuses),
-	html: true,
-	placement: "bottom",
-	container: 'body',
-	trigger: 'focus'
-    });
-
-    //safari can't seem to handle focus
-    $("#legend-button").click(function(){
-        $("#legend-button").focus();
-    });
+  //safari can't seem to handle focus
+  $("#legend-button").click(function(){
+    $("#legend-button").focus();
+  });
 
   connectToAPM();
 });

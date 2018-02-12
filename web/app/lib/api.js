@@ -2,15 +2,15 @@
 import {GET} from "./network";
 
 const ENDPOINTS = {
-  messages: "/messages",
+  exams: "/exams",
 }
 
-const fetchMessages = (topic: string) => (
-  GET(ENDPOINTS["messages"], {topic})
-)
+const fetchExams = (resourceIds: Array<number>) => (
+  GET(ENDPOINTS.exams, {resource_ids: resourceIds})
+);
 
 const Api = {
-  fetchMessages: fetchMessages,
+  fetchExams: fetchExams,
 }
 
 export default Api;
