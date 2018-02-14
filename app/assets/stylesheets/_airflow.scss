@@ -480,6 +480,9 @@ Shared Styles
     padding-left: 14px;
   }
   h5.no-margin { margin-top: 0; margin-bottom: 0; }
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #order-modal .modal-content {

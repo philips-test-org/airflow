@@ -4,17 +4,24 @@ import * as R from "ramda";
 import moment from "moment";
 
 import {
+  cardStatuses,
   checkExamThenOrder,
   formatName,
 } from "../../lib/utility";
+
+import {
+  examStartTime,
+  unadjustedOrderStartTime,
+} from "../../lib/data";
 
 import type {
   Order
 } from "../../types";
 
-type props = {
-  order: Order,
+type Props = {
   comments: Object,
+  order: Order,
+  openModal: (Order) => void,
   startDate: number,
   type: "calendar" | "overview" | "kiosk",
 }
@@ -27,7 +34,6 @@ class Notecard extends Component<Props> {
   }
 
   render() {
-    // TODO Fix setting styles inside of components
     const {order, comments, type} = this.props;
     const cardClass = `notecard ${this.cardClass(order)}`
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
@@ -38,7 +44,7 @@ class Notecard extends Component<Props> {
     };
     const cardId = `${type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     return (
-      <div className={cardClass} id={cardId} style={cardStyle}>
+      <div className={cardClass} id={cardId} style={cardStyle} onClick={this.openModal}>
         <div className="left-tab" style={{backgroundColor: this.cardColor()}} />
 
         <div className="right-tab">
@@ -88,9 +94,7 @@ class Notecard extends Component<Props> {
 
   examLocation() {
     const {order} = this.props;
-    return R.defaultTo(null,
-      R.view(R.lensPath(["rad_exam", "site_sublocation", "site_location", "location"]))
-    )(order);
+    return R.pathOr(null, ["rad_exam", "site_sublocation", "site_location", "location"], order);
   }
 
   negativeDuration() {
@@ -99,102 +103,15 @@ class Notecard extends Component<Props> {
   }
 
   cardColor() {
-    return this.cardStatuses("color", "#ddd");
+    return cardStatuses(this.props.order, "color", "#ddd");
   }
 
   cardClass() {
     return R.join(" ", [
       this.props.type === "calendar" ? "scaled" : "overview",
       this.negativeDuration() ? "bad-duration" : "",
-      this.cardStatuses("card_class"),
+      cardStatuses(this.props.order, "card_class"),
     ]);
-  }
-
-  cardStatuses(type, default_value: string = "") {
-    const order = this.props.order;
-    const checks = [
-      {
-        name: "On Hold",
-        order: 5,
-        color: "#f5f52b",
-        card_class: "highlight",
-        check: (order) => (order.adjusted.onhold == true)
-      },
-      {
-        name: "Cancelled",
-        order: 6,
-        color: "#c8040e",
-        check: (order) => {
-          let orderCancelled = order.current_status.universal_event_type == "cancelled";
-          let undefinedExam = order.rad_exam != undefined;
-          let examCancelled = order.rad_exam.current_status.universal_event_type.event_type == "cancelled";
-          return (orderCancelled || (undefinedExam && examCancelled));
-        }
-      },
-      {
-        name: "Started",
-        order: 3,
-        color: "#631d76",
-        check: (order) => {
-          let hasExam = order.rad_exam != undefined;
-          let hasBeginTime = order.rad_exam.rad_exam_time.begin_exam;
-          let noEndTime = order.rad_exam.rad_exam_time.end_exam == null;
-          return (hasExam && hasBeginTime && noEndTime);
-        }
-      },
-      {
-        name: "Completed",
-        order: 4,
-        color: "#005a8b",
-        card_class: "completed",
-        check: (order) => {
-          let hasExam = order.rad_exam != undefined;
-          let hasEndTime = order.rad_exam.rad_exam_time.end_exam == null;
-          return hasExam && hasEndTime;
-        }
-      },
-      {
-        name: "Patient Arrived",
-        order: 2,
-        color: "#1e9d8b",
-        check: (order) => {
-          let hasExam = order.rad_exam != undefined;
-          let hasSignInTime = order.rad_exam.rad_exam_time.sign_in !== null;
-          let hasCheckInTime = order.rad_exam.rad_exam_time.check_in !== null;
-          return (hasExam && (hasSignInTime || hasCheckInTime));
-        }
-      },
-      {
-        name: "Ordered",
-        order: 1,
-        color: "#888888",
-        check: (order) => {
-          let noExam = order.rad_exam == undefined;
-          let noSignInTime = R.isNil(order.rad_exam.rad_exam_time.sign_in);
-          let noCheckInTime = R.isNil(order.rad_exam.rad_exam_time.check_in);
-          return (noExam || noSignInTime || noCheckInTime);
-        }
-      }
-    ]
-
-    for (var i in application.statuses.checks) {
-      if (application.statuses.checks[i].check(order)) {
-        if (application.statuses.checks[i][type] != undefined) {
-          return application.statuses.checks[i][type];
-        }
-      }
-    }
-    return default_value;
-  }
-
-  // Find the start time for an exam
-  examStartTime(exam) {
-    if (exam.rad_exam_time == undefined) { return null; }
-    if (exam.rad_exam_time.begin_exam) {
-      return exam.rad_exam_time.begin_exam;
-    } else {
-      return exam.rad_exam_time.appointment;
-    }
   }
 
   // Find the start time for an order
@@ -204,18 +121,7 @@ class Notecard extends Component<Props> {
     if (order.adjusted != undefined && order.adjusted.start_time) {
       startTime = order.adjusted.start_time;
     } else if (order.rad_exam) {
-      startTime = this.examStartTime(order.rad_exam)
-    } else {
-      startTime = order.appointment;
-    }
-    return startTime < this.props.startDate ? this.props.startDate : startTime;
-  }
-
-  unadjustedOrderStartTime() {
-    const {order} = this.props;
-    var startTime;
-    if (order.rad_exam) {
-      startTime = this.examStartTime(order.rad_exam)
+      startTime = examStartTime(order.rad_exam)
     } else {
       startTime = order.appointment;
     }
@@ -239,21 +145,21 @@ class Notecard extends Component<Props> {
   }
 
   unadjustedOrderStopTime() {
-    const {order} = this.props;
+    const {order, startDate} = this.props;
     if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
       return order.rad_exam.rad_exam_time.end_exam;
     } else if (typeof(order.appointment_duration) === "number") {
-      return this.unadjustedOrderStartTime() + (order.appointment_duration * 1000);
+      return unadjustedOrderStartTime(startDate, order) + (order.appointment_duration * 1000);
     } else if (!R.isNil(order.rad_exam)) {
-      return this.unadjustedOrderStartTime() + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
+      return unadjustedOrderStartTime(startDate, order) + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
     } else {
-      return this.unadjustedOrderStartTime() + (order.procedure.scheduled_duration * 60 * 1000);
+      return unadjustedOrderStartTime(startDate, order) + (order.procedure.scheduled_duration * 60 * 1000);
     }
   }
 
   orderDuration() {
-    const {order} = this.props;
-    return this.unadjustedOrderStopTime(order) - this.unadjustedOrderStartTime(order);
+    const {order, startDate} = this.props;
+    return this.unadjustedOrderStopTime(order) - unadjustedOrderStartTime(startDate, order);
   }
 
   orderHeightToStartTime(height) {
@@ -283,6 +189,12 @@ class Notecard extends Component<Props> {
     const minutesToSeconds = startTime.minute() * 60;
     const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, startTime.seconds()]);
     return Math.round(totalSeconds * PIXELS_PER_SECOND) + "px";
+  }
+
+  openModal = () => {
+    this.props.openModal(R.merge(this.props.order, {
+      currentDuration: (this.orderDuration() / 1000)
+    }))
   }
 }
 

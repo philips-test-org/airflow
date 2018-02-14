@@ -9,24 +9,45 @@ import {connect} from 'react-redux';
 
 import {ordersByResource} from "../../lib/utility";
 
-import {fetchExams} from "../../lib/actions";
+import {
+  fetchAvatar,
+  fetchExams,
+  showOrderModal,
+  closeOrderModal,
+} from "../../lib/actions";
 
 import Calendar from './Calendar';
 
+import type {Order} from "../../types";
+
 const mapStateToProps = (state: Object) => {
   return {
-    startDate: state.board.startDate,
+    focusedOrder: state.board.focusedOrder,
     orders: ordersByResource(state.board.orders),
+    orderGroups: state.board.orderGroups,
     resources: state.board.resources,
-    selectedResource: state.board.selectedResource,
+    selectedResourceGroup: state.board.selectedResourceGroup,
+    selectedResources: state.board.selectedResources,
+    showModal: state.board.showModal,
+    startDate: state.board.startDate,
+    avatarMap: state.user.avatars,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchAvatar: (userId: number) => {
+      dispatch(fetchAvatar(userId));
+    },
     fetchExams: (resources: Array<number>) => {
       dispatch(fetchExams(resources));
     },
+    openModal: (order: Order) => {
+      dispatch(showOrderModal(order));
+    },
+    closeModal: () => {
+      dispatch(closeOrderModal());
+    }
   }
 };
 

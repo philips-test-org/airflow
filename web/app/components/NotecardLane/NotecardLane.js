@@ -10,6 +10,7 @@ import type {Order} from "../../types";
 
 type Props = {
   orders: Array<Order>,
+  openModal: (Order) => void,
   type: "calendar" | "overview" | "kiosk",
 }
 
@@ -20,6 +21,7 @@ class NotecardLane extends Component {
         <Notecard
           key={order.id}
           order={order}
+          openModal={this.props.openModal}
           comments={orderComments(order)}
           type={this.props.type}
           />

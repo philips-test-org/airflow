@@ -30,7 +30,9 @@
  $(document).ready(function() {
    window.renderReact(window.calendar, "#workspace", {
      board: {
-       resources: resources, selectedResource: resourceGroup
+       resources: resources,
+       selectedResource: resourceGroup,
+       selectedResources: resources[resourceGroup],
      }
    })
  });

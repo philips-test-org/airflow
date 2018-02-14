@@ -7,6 +7,9 @@ import type {
 const BoardActions = {
   FETCH_EXAMS: "FETCH_EXAMS",
   FETCH_EXAMS_SUCCEEDED: "FETCH_EXAMS_SUCCEEDED",
+  // ORDER MODAL
+  SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
+  CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
 }
 
 // Action generator functions
@@ -25,8 +28,23 @@ const fetchExamsSucceeded = (payload: Array<Order>) => {
   }
 }
 
+const showOrderModal = (order: Order) => {
+  return {
+    type: BoardActions.SHOW_ORDER_MODAL,
+    order,
+  }
+}
+
+const closeOrderModal = () => {
+  return {
+    type: BoardActions.CLOSE_ORDER_MODAL,
+  }
+}
+
 export {
   BoardActions,
   fetchExams,
   fetchExamsSucceeded,
+  showOrderModal,
+  closeOrderModal,
 }

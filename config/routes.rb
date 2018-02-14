@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'exams' => "exams#index"
   get 'exam_info' => "exams#show"
   get 'limited_exam_info' => "kiosk#exam_info"
-  get 'avatar' => 'pictures#show'
+  get "avatar/:id", to: 'avatars#show', as: "avatar"
   get 'about' => "main#about"
   get 'help' => "main#help"
 #  get 'cards' => "card_design#index"

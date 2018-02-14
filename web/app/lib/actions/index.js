@@ -13,7 +13,16 @@ import {
   BoardActions,
   fetchExams,
   fetchExamsSucceeded,
+  showOrderModal,
+  closeOrderModal,
 } from "./board";
+
+//USER
+import {
+  UserActions,
+  fetchAvatar,
+  fetchAvatarSucceeded,
+} from "./user";
 
 
 // All exports
@@ -25,4 +34,10 @@ export {
   BoardActions,
   fetchExams,
   fetchExamsSucceeded,
+  showOrderModal,
+  closeOrderModal,
+  // USER
+  UserActions,
+  fetchAvatar,
+  fetchAvatarSucceeded,
 }

@@ -1,4 +1,4 @@
-class PicturesController < ApplicationController
+class AvatarsController < ApplicationController
   before_filter :general_authentication
   before_filter :get_entity_manager
   after_filter :close_entity_manager
@@ -15,4 +15,9 @@ class PicturesController < ApplicationController
     end
   end
 
+  private
+
+  def avatar_params()
+    params.require("id")
+  end
 end

@@ -93,6 +93,7 @@ application.data = {
     if (application.data.resource(order) != undefined) {
       order.group_ident = application.data.orderGroupIdent(order);
       application.data.orderHash[order.id] = order;
+
       if (application.data.orderGroups[order.group_ident] == undefined) {
         application.data.orderGroups[order.group_ident] = [order.id];
         application.data.masterOrders.push(order.id);

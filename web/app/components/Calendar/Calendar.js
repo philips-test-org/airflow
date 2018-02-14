@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import * as R from "ramda";
 
 import NotecardLane from "../NotecardLane";
+import OrderModal from "../OrderModal";
 
 import type {
   Order,
@@ -10,16 +11,24 @@ import type {
 } from "../../types";
 
 type Props = {
-  startDate: number,
+  closeModal: () => void,
+  fetchAvatar: (userId: number) => void,
+  fetchExams: (resourceIds: Array<number>) => void,
+  focusedOrder: Order,
+  openModal: (Order) => void,
   orders: {[string]: Array<Order>},
+  orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
-  selectedResource: string,
+  selectedResourceGroup: string,
+  selectedResources: Array<Resource>,
+  showModal: boolean,
+  startDate: number,
 }
 
 class Calendar extends Component {
   componentWillMount() {
-    const {resources, selectedResource} = this.props;
-    this.props.fetchExams(R.map((r) => r.id, resources[selectedResource]))
+    const {selectedResources} = this.props;
+    this.props.fetchExams(R.pluck("id", selectedResources))
   }
 
   render() {
@@ -65,6 +74,8 @@ class Calendar extends Component {
             </tbody>
           </table>
         </div>
+
+        {this.renderOrderModal()}
       </div>
     );
   }
@@ -100,10 +111,27 @@ class Calendar extends Component {
         </div>
         <NotecardLane
           orders={orders}
+          openModal={this.props.openModal}
           type="calendar"
           />
       </td>
     )
+  }
+
+  renderOrderModal() {
+    if (!this.props.showModal) {return null}
+    return (
+      <OrderModal
+        closeModal={this.props.closeModal}
+        fetchAvatar={this.props.fetchAvatar}
+        order={this.props.focusedOrder}
+        orderGroup={this.orderGroup(this.props.focusedOrder)}
+        />
+    )
+  }
+
+  orderGroup(order) {
+    return this.props.orderGroups[order.groupIdentity]
   }
 }
 

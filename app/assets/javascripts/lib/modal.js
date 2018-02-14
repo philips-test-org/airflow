@@ -43,10 +43,10 @@ $(document).ready(function(e) {
     }
   });
 
-  $("#workspace").on("click",".notecard",function(e) {
-    var order = application.data.findOrder($(this).find(".data").data("order-id"));
-    application.modal.open(order);
-  });
+  //$("#workspace").on("click",".notecard",function(e) {
+    //var order = application.data.findOrder($(this).find(".data").data("order-id"));
+    //application.modal.open(order);
+  //});
 
 
   $("#order-modal").on("change",".status-toggle input",function(e) {
