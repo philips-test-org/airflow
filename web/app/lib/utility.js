@@ -1,16 +1,18 @@
 // @flow
 // Utility functions for working with data.
 import * as R from "ramda";
+import moment from "moment";
 
 import type {
   Event,
   Order,
+  Resource,
 } from "../types";
 
 // Remove "^" from name strings and rejoin comma separated.
 const formatName = R.compose(R.join(", "), R.reject(R.isEmpty), R.split("^"));
 
-const formatTimestamp = (epoch: string) => {
+const formatTimestamp = (epoch: ?(string | number)) => {
   if (!epoch) {return null}
   return moment(epoch).format("MMMM Do YYYY, HH:mm");
 }
@@ -72,7 +74,7 @@ function cardStatuses(order: Order, type: string, default_value: string = "") {
       card_class: "completed",
       check: (order) => {
         let hasExam = order.rad_exam != undefined;
-        let hasEndTime = order.rad_exam.rad_exam_time.end_exam == null;
+        let hasEndTime = order.rad_exam.rad_exam_time.end_exam !== null;
         return hasExam && hasEndTime;
       }
     },
@@ -100,17 +102,19 @@ function cardStatuses(order: Order, type: string, default_value: string = "") {
     }
   ]
 
-  for (var i in application.statuses.checks) {
-    if (application.statuses.checks[i].check(order)) {
-      if (application.statuses.checks[i][type] != undefined) {
-        return application.statuses.checks[i][type];
+  return R.reduce((acc, check) => {
+    if (check.check(order)) {
+      if (!R.isNil(type)) {
+        return check[type];
+      } else {
+        return acc;
       }
     }
-  }
-  return default_value;
+    return acc;
+  }, default_value, R.sort(R.prop("order"), checks));
 }
 
-function orderResource(resources, order) {
+function orderResource(resources: Array<Resource>, order: Order) {
   return R.compose(
     R.defaultTo(order.resource),
     R.find((resource) => resource.id === order.adjusted.resource_id || resource.id === order.rad_exam.resource_id)
@@ -125,7 +129,7 @@ function appointmentTime(order: Order) {
   return R.pathOr(order.appointment, ["rad_exam", "rad_exam_time", "appointment"], order);
 }
 
-const kioskNumber = (orderId: string) => String(orderId).slice(-4);
+const kioskNumber = (orderId: number | string) => String(orderId).slice(-4);
 
 export {
   appointmentTime,

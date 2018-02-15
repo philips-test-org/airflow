@@ -2,7 +2,10 @@
 
 import React, {Component} from "react";
 
-class Event extends Component {
+type Props = {
+}
+
+class Event extends Component<Props> {
   render() {
     return (
       <div>

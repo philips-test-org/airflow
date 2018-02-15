@@ -11,6 +11,7 @@ import Api from "../api";
 import {
   UserActions,
   fetchAvatarSucceeded,
+  requestFailed,
 } from "../actions";
 
 import type {Saga} from "redux-saga";

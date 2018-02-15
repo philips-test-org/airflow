@@ -4,7 +4,9 @@ import {all} from "redux-saga/effects";
 import boardSaga from "./board";
 import userSaga from "./user";
 
-function* rootSaga() {
+import type {Saga} from "redux-saga";
+
+function* rootSaga(): Saga<void> {
   yield all([
     boardSaga(),
     userSaga(),

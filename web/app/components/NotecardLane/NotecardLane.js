@@ -14,7 +14,7 @@ type Props = {
   type: "calendar" | "overview" | "kiosk",
 }
 
-class NotecardLane extends Component {
+class NotecardLane extends Component<Props> {
   render() {
     return (
       R.map((order) => (

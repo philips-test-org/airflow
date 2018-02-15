@@ -35,7 +35,7 @@ class Notecard extends Component<Props> {
 
   render() {
     const {order, comments, type} = this.props;
-    const cardClass = `notecard ${this.cardClass(order)}`
+    const cardClass = `notecard ${this.cardClass()}`
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardStyle = {
       height: this.orderHeight(),
@@ -117,15 +117,11 @@ class Notecard extends Component<Props> {
   // Find the start time for an order
   orderStartTime() {
     const {order} = this.props;
-    var startTime;
-    if (order.adjusted != undefined && order.adjusted.start_time) {
-      startTime = order.adjusted.start_time;
-    } else if (order.rad_exam) {
-      startTime = examStartTime(order.rad_exam)
-    } else {
-      startTime = order.appointment;
-    }
-    return startTime < this.props.startDate ? this.props.startDate : startTime;
+    const startTime =
+      R.path(["adjusted", "start_time"], order) ? order.adjusted.start_time :
+        order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
+    if (!startTime) {return 0}
+    return startTime && startTime < this.props.startDate ? this.props.startDate : startTime;
   }
 
   orderStopTime() {
@@ -136,7 +132,8 @@ class Notecard extends Component<Props> {
     } else if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
       return order.rad_exam.rad_exam_time.end_exam;
     } else if (typeof(order.appointment_duration) === "number") {
-      return this.orderStartTime() + (order.appointment_duration * 1000);
+      let durationMS = order.appointment_duration ? order.appointment_duration * 1000 : 0;
+      return this.orderStartTime() + durationMS;
     } else if (!R.isNil(order.rad_exam)) {
       return this.orderStartTime() + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
     } else {
@@ -149,7 +146,8 @@ class Notecard extends Component<Props> {
     if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
       return order.rad_exam.rad_exam_time.end_exam;
     } else if (typeof(order.appointment_duration) === "number") {
-      return unadjustedOrderStartTime(startDate, order) + (order.appointment_duration * 1000);
+      let durationMS = order.appointment_duration ? order.appointment_duration * 1000 : 0;
+      return unadjustedOrderStartTime(startDate, order) + durationMS;
     } else if (!R.isNil(order.rad_exam)) {
       return unadjustedOrderStartTime(startDate, order) + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
     } else {
@@ -159,21 +157,20 @@ class Notecard extends Component<Props> {
 
   orderDuration() {
     const {order, startDate} = this.props;
-    return this.unadjustedOrderStopTime(order) - unadjustedOrderStartTime(startDate, order);
+    const unadjustedStartTime = unadjustedOrderStartTime(startDate, order) || 0;
+    return this.unadjustedOrderStopTime() - unadjustedStartTime;
   }
 
-  orderHeightToStartTime(height) {
+  orderHeightToStartTime(height: number) {
     return this.props.startDate + (height / PIXELS_PER_SECOND * 1000);
   }
 
-  orderHeightToStopTime(height) {
-    const {order} = this.props;
+  orderHeightToStopTime(height: number) {
     var duration = this.orderStopTime() - this.orderStartTime();
     return this.orderHeightToStartTime(height) + duration;
   }
 
   orderHeight() {
-    const {order} = this.props;
     const seconds = (this.orderDuration() / 1000);
     // Default for bad data
     if (seconds < 0) {

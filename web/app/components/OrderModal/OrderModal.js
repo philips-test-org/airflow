@@ -17,9 +17,11 @@ import CommentInterface from "./CommentInterface";
 import StatusToggle from "./StatusToggle";
 
 import type {
-  Order,
+  Order as OrderT,
   User,
 } from "../../types";
+
+type Order = OrderT & {currentDuration: number}
 
 type Props = {
   avatarMap: {[number]: Blob},
@@ -30,7 +32,7 @@ type Props = {
   orderGroup: Array<Order>,
 }
 
-class OrderModal extends Component {
+class OrderModal extends Component<Props> {
   static defaultProps = {
     currentUser: {id: 21, avatar: null}
   }
@@ -203,7 +205,7 @@ class OrderModal extends Component {
     )
   }
 
-  renderDemographicsTableRow(key, value) {
+  renderDemographicsTableRow(key: string, value: any) {
     return (
       <tr>
         <th>{key}</th>
@@ -229,7 +231,7 @@ class OrderModal extends Component {
   }
 
   siteClassName() {
-    const siteClass = checkExamThenOrder(this.props.order, "site_class");
+    const siteClass = checkExamThenOrder(this.props.order, ["site_class"]);
     if (siteClass == undefined) {
       return "";
     } else if (siteClass.name != "" && siteClass.name != undefined) {
@@ -251,19 +253,18 @@ class OrderModal extends Component {
     return this.formatDuration(duration);
   }
 
-  formatDuration(duration: number) {
+  formatDuration(duration: ?number) {
     if ((duration || duration === 0) && !isNaN(duration)) {
       const extra = duration <= 0;
       if (extra) {
         const parsedDuration = moment.duration(Math.abs(duration), "seconds");
         var outputString;
 
-        if (extra) { var sign = "-"; } else { var sign = ""; }
-
+        const days = parsedDuration.get("days");
         if (days > 0) {
-          outputString = `${sign}${parsedDuration.get("days")}d, ${parsedDuration.get("hours")}h`;
+          outputString = `-${days}d, ${parsedDuration.get("hours")}h`;
         } else {
-          outputString = `${sign}${parsedDuration.get("hours")}h, ${parsedDuration.get("minutes")}m`;
+          outputString = `-${parsedDuration.get("hours")}h, ${parsedDuration.get("minutes")}m`;
         }
 
         return <span className="alert-red">${outputString}</span>;

@@ -15,7 +15,7 @@ type Props = {
   user: User,
 }
 
-class CommentInterface extends Component {
+class CommentInterface extends Component<Props> {
   render() {
     return (
       <div className="col-xs-6">

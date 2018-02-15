@@ -28,7 +28,7 @@ type Props = {
   startDate: number,
 }
 
-class Calendar extends Component {
+class Calendar extends Component<Props> {
   componentWillMount() {
     const {selectedResources} = this.props;
     this.props.fetchExams(R.pluck("id", selectedResources))
@@ -83,7 +83,7 @@ class Calendar extends Component {
     );
   }
 
-  renderHeading(resourceName) {
+  renderHeading(resourceName: string) {
     return (
       <td key={`${resourceName}-heading`}>
         <h1>{resourceName}</h1>
@@ -102,7 +102,7 @@ class Calendar extends Component {
     }, R.range(0, 24));
   }
 
-  renderLane(header, orders) {
+  renderLane(header: string, orders: Array<Order>) {
     return (
       <td key={`${header}-lane`}>
         <div className="markers">
@@ -135,7 +135,7 @@ class Calendar extends Component {
     )
   }
 
-  orderGroup(order) {
+  orderGroup(order: Order) {
     return this.props.orderGroups[order.groupIdentity]
   }
 }

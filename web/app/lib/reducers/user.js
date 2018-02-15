@@ -22,7 +22,6 @@ function user(state: Object = initialState, action: Object) {
 }
 
 function updateAvatarMap(state, {userId, payload}) {
-  console.log(payload);
   return R.mergeDeepRight(state, {avatars: {[userId]: payload}});
 }
 

@@ -48,11 +48,12 @@ const closeOrderModal = () => {
 const adjustOrder = (key: string, state: string | Object) => {
   return {
     type: BoardActions.ADJUST_ORDER,
-    resourceIds,
+    key,
+    state,
   }
 }
 
-const adjustOrderSucceeded = (payload: Array<Order>) => {
+const adjustOrderSucceeded = (payload: Object) => {
   return {
     type: BoardActions.ADJUST_ORDER_SUCCEEDED,
     payload,
@@ -63,6 +64,8 @@ export {
   BoardActions,
   fetchExams,
   fetchExamsSucceeded,
+  adjustOrder,
+  adjustOrderSucceeded,
   showOrderModal,
   closeOrderModal,
 }

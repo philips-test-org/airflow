@@ -224,4 +224,5 @@ export type Order = {
   adjusted: Object,
   events: Array<Event>,
   rad_exam: RadExam,
+  groupIdentity: string,
 }

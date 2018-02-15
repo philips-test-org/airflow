@@ -9,7 +9,7 @@ type Props = {
   label: string,
 }
 
-class StatusToggle extends Component {
+class StatusToggle extends Component<Props> {
   render() {
     return (
       <div className="status-toggle">

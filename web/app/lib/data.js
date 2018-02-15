@@ -7,6 +7,7 @@ import {
 
 import type {
   Order,
+  RadExam,
   Resource,
 } from "../types";
 
@@ -19,7 +20,7 @@ export function groupIdentity(resources: Array<Resource>, startDate: number, ord
 }
 
 // Find the start time for an exam
-export function examStartTime(exam) {
+export function examStartTime(exam: RadExam) {
   if (exam.rad_exam_time == undefined) { return null; }
   if (exam.rad_exam_time.begin_exam) {
     return exam.rad_exam_time.begin_exam;
@@ -29,12 +30,11 @@ export function examStartTime(exam) {
 }
 
 
-export function unadjustedOrderStartTime(startDate, order) {
-  var startTime;
-  if (order.rad_exam) {
-    startTime = examStartTime(order.rad_exam)
-  } else {
-    startTime = order.appointment;
-  }
+export function unadjustedOrderStartTime(startDate: number, order: Order): ?number {
+  const startTime =
+    order.rad_exam ?
+      examStartTime(order.rad_exam) :
+      order.appointment;
+  if (!startTime) {return null}
   return startTime < startDate ? startDate : startTime;
 }

@@ -4,7 +4,6 @@ import moment from "moment";
 
 import {
   groupIdentity,
-  groupByIdentities,
 } from "../data";
 
 import {
@@ -40,7 +39,7 @@ function showOrderModal(state, {order}) {
   return R.merge(state, {showModal: true, focusedOrder: order});
 }
 
-function closeOrderModal(state, {order}) {
+function closeOrderModal(state, _action) {
   return R.merge(state, {showModal: false, focusedOrder: undefined});
 }
 

@@ -7,7 +7,7 @@ import rootSaga from "./sagas";
 
 import rootReducer from "./reducers/index";
 
-const store = (initState = {}) => {
+const store = (initState: Object = {}) => {
   const sagaMiddleware = createSagaMiddleware();
 
   let s = createStore(rootReducer, initState, composeWithDevTools(
