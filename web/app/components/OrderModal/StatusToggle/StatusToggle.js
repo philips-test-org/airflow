@@ -1,6 +1,7 @@
 // @flow
 
-import React, {Component} from 'react';
+import React, {Component} from "react";
+import Toggle from "react-toggle";
 
 type Props = {
   faClass: string,
@@ -11,21 +12,19 @@ type Props = {
 class StatusToggle extends Component {
   render() {
     return (
-      <div className="status-toggle margin-right-sm">
-        <label><i className={`fa ${this.props.faClass}`}></i>{this.props.label}</label>
-        <input
-          type="checkbox"
-          name="onhold"
-          checked={this.props.isActive}
-          data-size="mini"
-          data-on={this.props.label}
-          data-off="Active"
-          data-toggle="toggle"
-          data-width="105"
+      <div className="status-toggle">
+        <label className="wrapped-toggle">
+          <span><i className={`fa ${this.props.faClass}`}></i>{this.props.label}</span>
+          <Toggle
+            defaultChecked={this.props.isActive}
+            onChange={this.handleChange}
           />
+        </label>
       </div>
     );
   }
+
+  handleChange = () => {}
 }
 
 export default StatusToggle;

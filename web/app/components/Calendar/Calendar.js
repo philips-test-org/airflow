@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import * as R from "ramda";
 
 import NotecardLane from "../NotecardLane";
@@ -8,10 +8,13 @@ import OrderModal from "../OrderModal";
 import type {
   Order,
   Resource,
+  User,
 } from "../../types";
 
 type Props = {
+  avatarMap: {[number]: Blob},
   closeModal: () => void,
+  currentUser: User,
   fetchAvatar: (userId: number) => void,
   fetchExams: (resourceIds: Array<number>) => void,
   focusedOrder: Order,
@@ -113,7 +116,7 @@ class Calendar extends Component {
           orders={orders}
           openModal={this.props.openModal}
           type="calendar"
-          />
+        />
       </td>
     )
   }
@@ -122,11 +125,13 @@ class Calendar extends Component {
     if (!this.props.showModal) {return null}
     return (
       <OrderModal
+        avatarMap={this.props.avatarMap}
         closeModal={this.props.closeModal}
+        currentUser={this.props.currentUser}
         fetchAvatar={this.props.fetchAvatar}
         order={this.props.focusedOrder}
         orderGroup={this.orderGroup(this.props.focusedOrder)}
-        />
+      />
     )
   }
 

@@ -1,4 +1,4 @@
 
-import Notecard from './Notecard';
+import Notecard from "./Notecard";
 
 export default Notecard;

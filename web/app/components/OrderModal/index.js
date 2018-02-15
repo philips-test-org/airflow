@@ -1,4 +1,4 @@
 
-import OrderModal from './OrderModal';
+import OrderModal from "./OrderModal";
 
 export default OrderModal;

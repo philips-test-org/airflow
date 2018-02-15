@@ -1,4 +1,4 @@
 
-import CommentInterface from './CommentInterface';
+import CommentInterface from "./CommentInterface";
 
 export default CommentInterface;

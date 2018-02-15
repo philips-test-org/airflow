@@ -1,4 +1,4 @@
 
-import StatusToggle from './StatusToggle';
+import StatusToggle from "./StatusToggle";
 
 export default StatusToggle;

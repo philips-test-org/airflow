@@ -16,7 +16,12 @@ import type {
   SiteClass,
 } from "./order";
 
+import type {
+  User,
+} from "./user";
+
 export type {
+  // ORDER
   Employee,
   Event,
   Order,
@@ -30,4 +35,6 @@ export type {
   RadExamTime,
   Resource,
   SiteClass,
+  // USER
+  User,
 };

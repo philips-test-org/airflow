@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import * as R from "ramda";
 import moment from "moment";
 

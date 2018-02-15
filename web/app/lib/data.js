@@ -18,7 +18,7 @@ export function groupIdentity(resources: Array<Resource>, startDate: number, ord
   return order.patient_mrn_id + orderResource(resources, order).id + unadjustedOrderStartTime(startDate, order);
 }
 
-  // Find the start time for an exam
+// Find the start time for an exam
 export function examStartTime(exam) {
   if (exam.rad_exam_time == undefined) { return null; }
   if (exam.rad_exam_time.begin_exam) {

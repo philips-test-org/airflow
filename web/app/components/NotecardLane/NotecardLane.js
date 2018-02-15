@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import * as R from "ramda";
 
 import {orderComments} from "../../lib/utility";
@@ -24,7 +24,7 @@ class NotecardLane extends Component {
           openModal={this.props.openModal}
           comments={orderComments(order)}
           type={this.props.type}
-          />
+        />
       ), this.props.orders)
     );
   }

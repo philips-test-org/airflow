@@ -12,7 +12,7 @@ const formatName = R.compose(R.join(", "), R.reject(R.isEmpty), R.split("^"));
 
 const formatTimestamp = (epoch: string) => {
   if (!epoch) {return null}
-  return moment(epoch).format('MMMM Do YYYY, HH:mm');
+  return moment(epoch).format("MMMM Do YYYY, HH:mm");
 }
 
 // Path array is an array of keys and/or array indices to follow

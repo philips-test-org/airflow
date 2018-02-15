@@ -1,4 +1,4 @@
 
-import NotecardLane from './NotecardLane';
+import NotecardLane from "./NotecardLane";
 
 export default NotecardLane;

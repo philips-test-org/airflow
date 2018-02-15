@@ -10,6 +10,8 @@ const BoardActions = {
   // ORDER MODAL
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
+  ADJUST_ORDER: "ADJUST_ORDER",
+  ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
 }
 
 // Action generator functions
@@ -28,6 +30,8 @@ const fetchExamsSucceeded = (payload: Array<Order>) => {
   }
 }
 
+// ORDER MODAL
+
 const showOrderModal = (order: Order) => {
   return {
     type: BoardActions.SHOW_ORDER_MODAL,
@@ -38,6 +42,20 @@ const showOrderModal = (order: Order) => {
 const closeOrderModal = () => {
   return {
     type: BoardActions.CLOSE_ORDER_MODAL,
+  }
+}
+
+const adjustOrder = (key: string, state: string | Object) => {
+  return {
+    type: BoardActions.ADJUST_ORDER,
+    resourceIds,
+  }
+}
+
+const adjustOrderSucceeded = (payload: Array<Order>) => {
+  return {
+    type: BoardActions.ADJUST_ORDER_SUCCEEDED,
+    payload,
   }
 }
 

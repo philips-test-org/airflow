@@ -1,4 +1,5 @@
 <div class="data hide" id="resource-groupings-json"><%= JSON.dump(@groupings) %></div>
+<div class="data hide" id="employee-json"><%= @employee.to_json %></div>
 <div id="view-controls">
   <div class="btn-group pull-left">
     <button class="btn btn-default btn-sm" id="legend-button">Legend <span class="caret"></span></button>
@@ -25,15 +26,17 @@
 </div>
 
 <script>
-  var resourceGroup = $("#resource-group-buttons button").data("value");
-  var resources = $.parseJSON($("#resource-groupings-json").text());
+ var resourceGroup = $("#resource-group-buttons button").data("value");
+ var resources = $.parseJSON($("#resource-groupings-json").text());
+ var employee = $.parseJSON($("#employee-json").text());
  $(document).ready(function() {
    window.renderReact(window.calendar, "#workspace", {
      board: {
        resources: resources,
        selectedResource: resourceGroup,
        selectedResources: resources[resourceGroup],
-     }
+     },
+     user: {currentUser: employee},
    })
  });
 </script>

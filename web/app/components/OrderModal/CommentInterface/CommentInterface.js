@@ -1,26 +1,21 @@
 // @flow
 
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import * as R from "ramda";
 
 import Event from "./Event";
+
+import type {User} from "../../../types";
 
 type Props = {
   avatar: ?Object,
   events: Array<Object>,
   fetchAvatar: (userId: number) => void,
   orderId: number,
-  userId: number,
+  user: User,
 }
 
 class CommentInterface extends Component {
-  componentWillMount() {
-    console.log(this.props)
-    if (R.isNil(this.props.avatar)) {
-      this.props.fetchAvatar(this.props.userId);
-    }
-  }
-
   render() {
     return (
       <div className="col-xs-6">
@@ -53,7 +48,7 @@ class CommentInterface extends Component {
       <form id="comment-form">
         <div className="comment">
           <div className="avatar">
-            <img className="avatar" src={this.props.avatar} />
+            <img className="avatar" src={`/avatar/${this.props.user.id}`} />
           </div>
           <div className="body">
             <div className="heading form">
@@ -79,8 +74,8 @@ class CommentInterface extends Component {
     const groupedEvents = R.groupBy((event) => {
       const type = event.event_type;
       return type === "comment" ? "comment" :
-             type === "rounding-update" ? "rounding" :
-             "event";
+        type === "rounding-update" ? "rounding" :
+          "event";
     }, this.props.events);
 
     return (

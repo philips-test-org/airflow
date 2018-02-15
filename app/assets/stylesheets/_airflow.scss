@@ -499,16 +499,28 @@ Shared Styles
 }
 
 .status-toggles {
+  display: flex;
   float: right;
-  margin-right: 10px;
+  margin-right: 1em;
 
   .status-toggle {
     display: inline;
+    margin-right: 1em;
     i { margin-right: 5px; }
   }
 
   .status-toggle.complete { color: #ccc; }
   .status-toggle.incomplete { color: #ccc; }
+}
+
+.wrapped-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > span {
+    margin-right: 0.25em;
+  }
 }
 
 .ui-droppable-hover {

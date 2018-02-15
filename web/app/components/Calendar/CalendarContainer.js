@@ -5,7 +5,7 @@
    needed to be useful.
 */
 
-import {connect} from 'react-redux';
+import {connect} from "react-redux";
 
 import {ordersByResource} from "../../lib/utility";
 
@@ -16,7 +16,7 @@ import {
   closeOrderModal,
 } from "../../lib/actions";
 
-import Calendar from './Calendar';
+import Calendar from "./Calendar";
 
 import type {Order} from "../../types";
 
@@ -30,6 +30,7 @@ const mapStateToProps = (state: Object) => {
     selectedResources: state.board.selectedResources,
     showModal: state.board.showModal,
     startDate: state.board.startDate,
+    currentUser: state.user.currentUser,
     avatarMap: state.user.avatars,
   };
 };

@@ -18,29 +18,27 @@ import StatusToggle from "./StatusToggle";
 
 import type {
   Order,
+  User,
 } from "../../types";
 
-type User = {
-  id: number,
-  avatar: Object,
-}
-
 type Props = {
+  avatarMap: {[number]: Blob},
   closeModal: () => void,
+  currentUser: User,
   fetchAvatar: (userId: number) => void,
   order: Order,
   orderGroup: Array<Order>,
-  user: User,
 }
 
 class OrderModal extends Component {
   static defaultProps = {
-    user: {id: 21, avatar: null}
+    currentUser: {id: 21, avatar: null}
   }
 
   render() {
-    const {order} = this.props;
+    const {order, avatarMap, currentUser} = this.props;
     const cardColor = cardStatuses(order, "color", "#ddd");
+    const userAvatar = avatarMap[currentUser.id];
     return (
       <div id="order-modal" className="modal fade in modal-open" tabIndex="-1" role="dialog" style={{display: "block"}}>
         <div className="modal-dialog modal-wide" role="document">
@@ -67,11 +65,11 @@ class OrderModal extends Component {
                     </div>
                   </div>
                   <CommentInterface
-                    avatar={this.props.user.avatar}
+                    avatar={userAvatar}
                     events={order.events}
                     fetchAvatar={this.props.fetchAvatar}
                     orderId={order.id}
-                    userId={this.props.user.id}
+                    user={this.props.currentUser}
                   />
                 </div>
               </div>
@@ -145,12 +143,12 @@ class OrderModal extends Component {
   }
 
   renderEditedBy(roundingValue: Object) {
-    if (!roundingValue.author) {return null};
+    if (!roundingValue.author) {return null}
     const {author, created_at} = roundingValue;
     return (
       <div className="panel-footer rounding-footer">
         <p className="edited-by">Last edited by: {author} on
-          <span className="time short">{formatTimestamp(created_at)}</span>
+        <span className="time short">{formatTimestamp(created_at)}</span>
         </p>
       </div>
     );
