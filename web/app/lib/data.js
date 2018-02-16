@@ -40,7 +40,7 @@ export function unadjustedOrderStartTime(startDate: number, order: Order): ?numb
 }
 
 export function wrapEvent(orderId: number, userId: number,
-  eventType: string = "event", comments: ?Array<Object> = null,
+  eventType: string = "event", comments: ?string = null,
   newState: Object = {}) {
   return {
     id: null, //needs to become an internal id

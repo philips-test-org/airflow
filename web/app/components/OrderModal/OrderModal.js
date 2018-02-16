@@ -73,6 +73,7 @@ class OrderModal extends Component<Props> {
                     avatar={userAvatar}
                     events={order.events}
                     fetchAvatar={this.props.fetchAvatar}
+                    handleNewComment={this.handleNewComment}
                     orderId={order.id}
                     user={this.props.currentUser}
                   />
@@ -292,6 +293,11 @@ class OrderModal extends Component<Props> {
   handleStatusChange = (eventType: string, newState: Object) => {
     const {order, currentUser} = this.props;
     this.props.adjustOrder(wrapEvent(order.id, currentUser.id, eventType, null, newState));
+  }
+
+  handleNewComment = (comment: string) => {
+    const {order, currentUser} = this.props;
+    this.props.adjustOrder(wrapEvent(order.id, currentUser.id, "comment", comment, {}));
   }
 
   closeModal = () => {

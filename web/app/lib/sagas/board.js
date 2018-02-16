@@ -4,6 +4,7 @@
 import {
   call,
   put,
+  takeEvery,
   takeLatest,
 } from "redux-saga/lib/effects";
 import Api from "../api";
@@ -44,5 +45,5 @@ function* adjustOrder(action): Saga<void> {
 
 export default function* boardSaga(): Saga<void> {
   yield takeLatest(FETCH_EXAMS, fetchExams)
-  yield takeLatest(ADJUST_ORDER, adjustOrder)
+  yield takeEvery(ADJUST_ORDER, adjustOrder)
 }

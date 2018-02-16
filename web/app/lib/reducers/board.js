@@ -52,7 +52,7 @@ function adjustOrder(state, {orderId, payload}) {
   return R.compose(
     R.set(R.lensProp("focusedOrder"), orderId),
     R.over(eventLens, R.prepend(payload)),
-    R.over(adjustedLens, R.mergeDeepLeft(JSON.parse(payload.new_state))),
+    R.over(adjustedLens, R.mergeDeepLeft(payload.new_state)),
   )(state)
 }
 

@@ -4,13 +4,19 @@ import React, {Component} from "react";
 import * as R from "ramda";
 
 import Event from "./Event";
+import Comment from "./Comment";
+import CommentForm from "./CommentForm";
 
-import type {User} from "../../../types";
+import type {
+  Event as EventT,
+  User,
+} from "../../../types";
 
 type Props = {
   avatar: ?Object,
   events: Array<Object>,
   fetchAvatar: (userId: number) => void,
+  handleNewComment: (comment: string) => void,
   orderId: number,
   user: User,
 }
@@ -19,7 +25,7 @@ class CommentInterface extends Component<Props> {
   render() {
     return (
       <div className="col-xs-6">
-        {this.renderCommentForm()}
+        <CommentForm userId={this.props.user.id} handleSubmit={this.props.handleNewComment} />
         <hr />
         <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
           <li role="presentation" className="event-list-nav active">
@@ -43,33 +49,6 @@ class CommentInterface extends Component<Props> {
     );
   }
 
-  renderCommentForm() {
-    return (
-      <form id="comment-form">
-        <div className="comment">
-          <div className="avatar">
-            <img className="avatar" src={`/avatar/${this.props.user.id}`} />
-          </div>
-          <div className="body">
-            <div className="heading form">
-              Add comment to the order:
-            </div>
-            <div className="content">
-              <textarea name="comments" className="form-control comment-box" autoFocus></textarea>
-              <input type="hidden" name="order_id" value="{this.props.orderId}" />
-            </div>
-            <div className="footer">
-              <div className="pull-right">
-                <button className="btn btn-default add-comment">Add Comment</button>
-              </div>
-              <div style={{clear: "both"}}></div>
-            </div>
-          </div>
-        </div>
-      </form>
-    )
-  }
-
   renderEventList() {
     const groupedEvents = R.groupBy((event) => {
       const type = event.event_type;
@@ -81,22 +60,35 @@ class CommentInterface extends Component<Props> {
     return (
       <div className="events tab-content">
         <div role="tabpanel" className="event-list-pane tab-pane active" id="comment-list">
-          {this.renderEvents(R.propOr([], "comment", groupedEvents))}
+          {this.renderComments(R.propOr([], "comment", groupedEvents))}
         </div>
         <div role="tabpanel" className="event-list-pane tab-pane" id="event-list">
           {this.renderEvents(R.propOr([], "event", groupedEvents))}
         </div>
         <div role="tabpanel" className="event-list-pane tab-pane" id="combined-events-list">
-          {this.renderEvents(this.props.events)}
+          {this.renderMixedEvents(this.props.events)}
         </div>
       </div>
     )
   }
 
   renderEvents(events) {
-    R.map((event) => (
+    return R.map((event) => (
       <Event key={event.id} {...event} />
     ), events);
+  }
+
+  renderComments(comments) {
+    return R.map((comment) => (
+      <Comment key={comment.id} {...comment} />
+    ), comments);
+  }
+
+  renderMixedEvents(events: Array<EventT>) {
+    return R.map((event) => {
+      const Component = R.equals(event.event_type, "comment") ? Comment : Event;
+      return <Component key={event.id} {...event} />
+    }, events);
   }
 }
 
