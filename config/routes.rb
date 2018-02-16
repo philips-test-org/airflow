@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'help' => "main#help"
 #  get 'cards' => "card_design#index"
   get 'main/:view' => "main#index"
-  post 'events/add' => "events#add"
+  post "events", to: "events#create"
 
   get 'resource_groups' => 'resource_groups#index'
   get 'resource_groups/search' => 'resource_groups#search'

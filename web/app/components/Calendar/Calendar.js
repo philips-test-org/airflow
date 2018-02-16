@@ -12,6 +12,7 @@ import type {
 } from "../../types";
 
 type Props = {
+  adjustOrder: (event: Object) => void,
   avatarMap: {[number]: Blob},
   closeModal: () => void,
   currentUser: User,
@@ -125,6 +126,7 @@ class Calendar extends Component<Props> {
     if (!this.props.showModal) {return null}
     return (
       <OrderModal
+        adjustOrder={this.props.adjustOrder}
         avatarMap={this.props.avatarMap}
         closeModal={this.props.closeModal}
         currentUser={this.props.currentUser}

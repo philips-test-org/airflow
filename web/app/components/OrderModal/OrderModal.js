@@ -13,6 +13,8 @@ import {
   patientType,
 } from "../../lib/utility";
 
+import {wrapEvent} from "../../lib/data";
+
 import CommentInterface from "./CommentInterface";
 import StatusToggle from "./StatusToggle";
 
@@ -24,6 +26,7 @@ import type {
 type Order = OrderT & {currentDuration: number}
 
 type Props = {
+  adjustOrder: (event: Object) => void,
   avatarMap: {[number]: Blob},
   closeModal: () => void,
   currentUser: User,
@@ -84,15 +87,22 @@ class OrderModal extends Component<Props> {
 
   renderStatusToggles() {
     const {order: {adjusted}} = this.props;
-    const checkStatus = R.flip(R.has)(adjusted);
+    // Flipping and partially applying so that the parameter name
+    // is the unapplied argument.
+    const checkStatus = R.flip(R.flip(R.propEq)(true))(adjusted);
     const toggles = [
-      {label: "On Hold", faClass: "fa-hand-paper-o", isActive: checkStatus("onhold")},
-      {label: "Anesthesia", faClass: "GA", isActive: checkStatus("anesthesia")},
-      {label: "Consent", faClass: "fa-handshake-o", isActive: checkStatus("consent")},
-      {label: "PPCA Ready", faClass: "fa-thumbs-o-up", isActive: checkStatus("ppca_ready")},
-      {label: "Paperwork", faClass: "fa-file-text", isActive: checkStatus("paperwork")},
+      {label: "On Hold", name: "onhold", faClass: "fa-hand-paper-o", isActive: checkStatus("onhold")},
+      {label: "Anesthesia", name: "anesthesia", faClass: "GA", isActive: checkStatus("anesthesia")},
+      {label: "Consent", name: "consent", faClass: "fa-handshake-o", isActive: checkStatus("consent")},
+      {label: "PPCA Ready", name: "ppca_ready", faClass: "fa-thumbs-o-up", isActive: checkStatus("ppca_ready")},
+      {label: "Paperwork", name: "paperwork", faClass: "fa-file-text", isActive: checkStatus("paperwork")},
     ];
-    return R.addIndex(R.map)((toggle, index) => <StatusToggle key={`order-panel-${index}`} {...toggle} />, toggles);
+    return R.addIndex(R.map)((toggle, index) => (
+      <StatusToggle
+        key={`order-panel-${index}`}
+        handleChange={this.handleStatusChange}
+        {...toggle} />
+    ), toggles);
   }
 
   renderRoundingInterface() {
@@ -277,6 +287,11 @@ class OrderModal extends Component<Props> {
     } else {
       return "---";
     }
+  }
+
+  handleStatusChange = (eventType: string, newState: Object) => {
+    const {order, currentUser} = this.props;
+    this.props.adjustOrder(wrapEvent(order.id, currentUser.id, eventType, null, newState));
   }
 
   closeModal = () => {

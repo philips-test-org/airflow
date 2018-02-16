@@ -1,15 +1,11 @@
 // @flow
-/*
-   NOTE: This file was auto-generated for a component
-   named "Calendar"; it is intended to be modified as
-   needed to be useful.
-*/
-
 import {connect} from "react-redux";
+import * as R from "ramda";
 
 import {ordersByResource} from "../../lib/utility";
 
 import {
+  adjustOrder,
   fetchAvatar,
   fetchExams,
   showOrderModal,
@@ -20,23 +16,26 @@ import Calendar from "./Calendar";
 
 import type {Order} from "../../types";
 
-const mapStateToProps = (state: Object) => {
+const mapStateToProps = ({board, user}: Object) => {
   return {
-    focusedOrder: state.board.focusedOrder,
-    orders: ordersByResource(state.board.orders),
-    orderGroups: state.board.orderGroups,
-    resources: state.board.resources,
-    selectedResourceGroup: state.board.selectedResourceGroup,
-    selectedResources: state.board.selectedResources,
-    showModal: state.board.showModal,
-    startDate: state.board.startDate,
-    currentUser: state.user.currentUser,
-    avatarMap: state.user.avatars,
+    focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
+    orders: ordersByResource(board.orders),
+    orderGroups: board.orderGroups,
+    resources: board.resources,
+    selectedResourceGroup: board.selectedResourceGroup,
+    selectedResources: board.selectedResources,
+    showModal: board.showModal,
+    startDate: board.startDate,
+    currentUser: user.currentUser,
+    avatarMap: user.avatars,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    adjustOrder: (event: Object) => {
+      dispatch(adjustOrder(event));
+    },
     fetchAvatar: (userId: number) => {
       dispatch(fetchAvatar(userId));
     },

@@ -25,22 +25,22 @@ class ExamAdjustment < ActiveRecord::Base
   end
 
   def self.iou(params)
-    ea = self.find_by_order_id(params[:id])
+    ea = self.find_by_order_id(params[:order_id])
     if ea
       aa = ea.adjusted_attributes.merge(params[:event][:new_state])
       ea.update_attribute(:adjusted_attributes,aa.to_json)
       ea
     else
-      self.create({:order_id => params[:id], :adjusted_attributes => params[:event][:new_state].to_json})
+      self.create({:order_id => params[:order_id], :adjusted_attributes => params[:event][:new_state].to_json})
     end
   end
 
   def self.ios(params)
-    ea = self.find_by_order_id(params[:id])
+    ea = self.find_by_order_id(params[:order_id])
     if ea
       ea
     else
-      ea.create({:order_id => params[:id]})
+      ea.create({:order_id => params[:order_id]})
     end
   end
 

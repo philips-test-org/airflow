@@ -11,6 +11,8 @@ import {
 // BOARD
 import {
   BoardActions,
+  adjustOrder,
+  adjustOrderSucceeded,
   fetchExams,
   fetchExamsSucceeded,
   showOrderModal,
@@ -32,6 +34,8 @@ export {
   requestFailed,
   // BOARD
   BoardActions,
+  adjustOrder,
+  adjustOrderSucceeded,
   fetchExams,
   fetchExamsSucceeded,
   showOrderModal,

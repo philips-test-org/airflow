@@ -7,16 +7,30 @@ type Props = {
   faClass: string,
   isActive: boolean,
   label: string,
+  name: string,
+  handleChange: (eventType: string, newState: Object) => void,
 }
 
-class StatusToggle extends Component<Props> {
+type State = {
+  checked: boolean,
+}
+
+class StatusToggle extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      checked: this.props.isActive,
+    }
+  }
+
   render() {
     return (
       <div className="status-toggle">
         <label className="wrapped-toggle">
           <span><i className={`fa ${this.props.faClass}`}></i>{this.props.label}</span>
           <Toggle
-            defaultChecked={this.props.isActive}
+            checked={this.state.checked}
             onChange={this.handleChange}
           />
         </label>
@@ -24,7 +38,13 @@ class StatusToggle extends Component<Props> {
     );
   }
 
-  handleChange = () => {}
+  handleChange = () => {
+    const {name} = this.props;
+
+    const newState = !this.state.checked;
+    this.props.handleChange(name, {[name]: newState})
+    this.setState({checked: newState});
+  }
 }
 
 export default StatusToggle;

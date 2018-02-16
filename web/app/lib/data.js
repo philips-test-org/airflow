@@ -1,5 +1,6 @@
 // @flow
 import * as R from "ramda";
+import moment from "moment";
 
 import {
   orderResource,
@@ -29,7 +30,6 @@ export function examStartTime(exam: RadExam) {
   }
 }
 
-
 export function unadjustedOrderStartTime(startDate: number, order: Order): ?number {
   const startTime =
     order.rad_exam ?
@@ -37,4 +37,18 @@ export function unadjustedOrderStartTime(startDate: number, order: Order): ?numb
       order.appointment;
   if (!startTime) {return null}
   return startTime < startDate ? startDate : startTime;
+}
+
+export function wrapEvent(orderId: number, userId: number,
+  eventType: string = "event", comments: ?Array<Object> = null,
+  newState: Object = {}) {
+  return {
+    id: null, //needs to become an internal id
+    employee: userId,
+    event_type: eventType,
+    comments: comments,
+    new_state: newState,
+    created_at: moment().unix()*1000,
+    order_id: orderId
+  }
 }

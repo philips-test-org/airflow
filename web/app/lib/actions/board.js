@@ -45,17 +45,17 @@ const closeOrderModal = () => {
   }
 }
 
-const adjustOrder = (key: string, state: string | Object) => {
+const adjustOrder = (event: Object) => {
   return {
     type: BoardActions.ADJUST_ORDER,
-    key,
-    state,
+    event,
   }
 }
 
-const adjustOrderSucceeded = (payload: Object) => {
+const adjustOrderSucceeded = (orderId: number, payload: Object) => {
   return {
     type: BoardActions.ADJUST_ORDER_SUCCEEDED,
+    orderId,
     payload,
   }
 }
