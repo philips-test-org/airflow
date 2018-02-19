@@ -24,6 +24,12 @@ class StatusToggle extends Component<Props, State> {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.isActive !== this.state.checked) {
+      this.setState({checked: newProps.isActive})
+    }
+  }
+
   render() {
     return (
       <div className="status-toggle">

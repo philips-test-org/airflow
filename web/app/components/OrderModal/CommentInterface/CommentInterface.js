@@ -5,6 +5,7 @@ import * as R from "ramda";
 
 import Event from "./Event";
 import Comment from "./Comment";
+import RoundingUpdate from "./RoundingUpdate";
 import CommentForm from "./CommentForm";
 
 import type {
@@ -50,12 +51,11 @@ class CommentInterface extends Component<Props> {
   }
 
   renderEventList() {
-    const groupedEvents = R.groupBy((event) => {
-      const type = event.event_type;
-      return type === "comment" ? "comment" :
-        type === "rounding-update" ? "rounding" :
-          "event";
-    }, this.props.events);
+    const commentsAndEvents = R.reject(R.propEq("event_type", "rounding-update"))
+    const groupedEvents = R.compose(
+      R.groupBy(({event_type}) => R.equals("comment", event_type) ? "comment" : "event"),
+      commentsAndEvents,
+    )(this.props.events);
 
     return (
       <div className="events tab-content">
@@ -86,7 +86,9 @@ class CommentInterface extends Component<Props> {
 
   renderMixedEvents(events: Array<EventT>) {
     return R.map((event) => {
-      const Component = R.equals(event.event_type, "comment") ? Comment : Event;
+      const Component =
+        event.event_type === "comment" ? Comment :
+          event.event_type === "rounding-update" ? RoundingUpdate : Event;
       return <Component key={event.id} {...event} />
     }, events);
   }

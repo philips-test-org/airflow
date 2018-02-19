@@ -14,7 +14,7 @@ type Props = {
   created_at: string,
 }
 
-class Comment extends Component<Props> {
+class RoundingUpdate extends Component<Props> {
   render() {
     const {employee, created_at, comments} = this.props
     return (
@@ -24,7 +24,7 @@ class Comment extends Component<Props> {
         </div>
         <div className="body">
           <div className="heading">
-            <strong>{employee.name}</strong> commented on <span className="time short">{formatTimestamp(created_at)}</span>
+            <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span>
           </div>
           <div className="content">{comments}</div>
         </div>
@@ -33,4 +33,4 @@ class Comment extends Component<Props> {
   }
 }
 
-export default Comment;
+export default RoundingUpdate;

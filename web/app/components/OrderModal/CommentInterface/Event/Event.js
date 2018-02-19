@@ -89,22 +89,6 @@ TODO: Handle these cases
   </div>
 </script>
 
-<script className="handlebars-template" id="t-event-rounding-update" type="text/x-handlebars-template">
-  <div className="comment">
-    <div className="avatar">
-      <!-- should be the employee associated with the action -->
-      {{avatar employee.id "<%= image_url('placeholder.png') %>"}}
-    </div>
-    <div className="body">
-      <div className="heading">
-        <!-- should be the employee associated with the action -->
-        <strong>{{employee.name}}</strong> updated rounding on <span className="time short">{{format_timestamp created_at}}</span>
-      </div>
-      <div className="content">{{comments}}</div>
-    </div>
-  </div>
-</script>
-
 */
 
 export default Event;

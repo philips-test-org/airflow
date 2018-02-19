@@ -64,8 +64,10 @@ class CommentForm extends Component<Props, State> {
   }
 
   handleSubmit = () => {
-    this.props.handleSubmit(this.state.comment);
-    this.setState({comment: ""});
+    if (this.state.comment !== "") {
+      this.props.handleSubmit(this.state.comment);
+      this.setState({comment: ""});
+    }
   }
 }
 

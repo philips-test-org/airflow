@@ -17,7 +17,7 @@ export type Resource = {
 
 export type Patient = {
   id: number,
-  gender: "M" | "F",
+  gender: string,
   name: string,
   updated_at: number,
   birthdate: string,

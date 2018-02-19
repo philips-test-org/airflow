@@ -8,6 +8,7 @@ import {
 
 import {
   BoardActions,
+  GeneralActions,
 } from "../actions";
 
 const {
@@ -16,6 +17,10 @@ const {
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
 } = BoardActions;
+
+const {
+  REQUEST_FAILED,
+} = GeneralActions;
 
 const initialState = {
   orders: [],
@@ -33,6 +38,7 @@ function board(state: Object = initialState, action: Object) {
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
   case SHOW_ORDER_MODAL: return showOrderModal(state, action);
   case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
+  case REQUEST_FAILED: return state;
   default: return state;
   }
 }

@@ -16,6 +16,7 @@ import {
 import {wrapEvent} from "../../lib/data";
 
 import CommentInterface from "./CommentInterface";
+import RoundingInterface from "./RoundingInterface";
 import StatusToggle from "./StatusToggle";
 
 import type {
@@ -44,6 +45,7 @@ class OrderModal extends Component<Props> {
     const {order, avatarMap, currentUser} = this.props;
     const cardColor = cardStatuses(order, "color", "#ddd");
     const userAvatar = avatarMap[currentUser.id];
+    const roundingValue = R.find(R.propEq("event_type", "rounding-update"), order.events);
     return (
       <div id="order-modal" className="modal fade in modal-open" tabIndex="-1" role="dialog" style={{display: "block"}}>
         <div className="modal-dialog modal-wide" role="document">
@@ -61,7 +63,7 @@ class OrderModal extends Component<Props> {
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-xs-6">
-                    {this.renderRoundingInterface()}
+                    <RoundingInterface handleSubmit={this.handleRoundingUpdate} rounding={roundingValue} />
                     <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
                       {this.renderOrderNavTabs()}
                     </ul>
@@ -106,69 +108,7 @@ class OrderModal extends Component<Props> {
     ), toggles);
   }
 
-  renderRoundingInterface() {
-    // TODO
-    const roundingValue = {}
-    return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <div className="row">
-            <div className="col-xs-9" >
-              <h5>Rounding</h5>
-            </div>
-            <div className="col-xs-3">
-              <a href="#" className="btn btn-primary edit-rounding pull-right"><i className="fa fa-pencil"></i></a>
-            </div>
-          </div>
-        </div>
-        <div className="panel-body">
-          <div className="rounding" style={{whiteSpace: "pre-line"}}>
-            <p className="rounding-text">{roundingValue.text ? roundingValue.text : roundingValue.placeholder}</p>
-          </div>
-
-          <form id="rounding-form" className="hidden">
-            <div className="body">
-              <div className="content">
-                <textarea
-                  name="rounding"
-                  className="form-control rounding-box"
-                  rows="9"
-                  disabled
-                  autoFocus
-                  placeholder={roundingValue.placeholder}
-                  data-saved-value={roundingValue.text}>{roundingValue.text}</textarea>
-                <input type="hidden" name="order_id" value={roundingValue.id} />
-              </div>
-              <div className="footer">
-                <div className="pull-right">
-                  <button className="btn btn-warning edit-rounding-cancel hidden">Cancel</button>
-                  <button className="btn btn-default save-rounding">Save</button>
-                </div>
-                <div style={{clear: "both"}}></div>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        {this.renderEditedBy(roundingValue)}
-      </div>
-    )
-  }
-
-  renderEditedBy(roundingValue: Object) {
-    if (!roundingValue.author) {return null}
-    const {author, created_at} = roundingValue;
-    return (
-      <div className="panel-footer rounding-footer">
-        <p className="edited-by">Last edited by: {author} on
-        <span className="time short">{formatTimestamp(created_at)}</span>
-        </p>
-      </div>
-    );
-  }
-
   renderOrderNavTabs() {
-    // TODO Fix classname/active status
     return (
       R.map((order) => (
         <li key={`${order.id}-nav-panel`} role="presentation" className={`${R.isNil(this.props.order.id) ? "" : "active"}`}>
@@ -298,6 +238,11 @@ class OrderModal extends Component<Props> {
   handleNewComment = (comment: string) => {
     const {order, currentUser} = this.props;
     this.props.adjustOrder(wrapEvent(order.id, currentUser.id, "comment", comment, {}));
+  }
+
+  handleRoundingUpdate = (comment: string) => {
+    const {order, currentUser} = this.props;
+    this.props.adjustOrder(wrapEvent(order.id, currentUser.id, "rounding-update", comment, {}));
   }
 
   closeModal = () => {

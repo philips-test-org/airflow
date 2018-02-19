@@ -1,6 +1,7 @@
 if (typeof application == "undefined") { application = {} }
 
 $(document).ready(function(e) {
+  /*
   $("#order-modal").on("click", ".edit-rounding", function(e) {
     e.preventDefault();
     var item = $(".rounding-box");
@@ -74,4 +75,5 @@ $(document).ready(function(e) {
       return line.trim();
     }).join("\n");
   }
+  */
 });
