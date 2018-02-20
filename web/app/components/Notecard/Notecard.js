@@ -12,6 +12,7 @@ import {
 import {
   examStartTime,
   unadjustedOrderStartTime,
+  PIXELS_PER_SECOND,
 } from "../../lib/data";
 
 import type {
@@ -25,8 +26,6 @@ type Props = {
   startDate: number,
   type: "calendar" | "overview" | "kiosk",
 }
-
-const PIXELS_PER_SECOND = 200.0 / 60.0 / 60.0;
 
 class Notecard extends Component<Props> {
   constructor(props: Props) {

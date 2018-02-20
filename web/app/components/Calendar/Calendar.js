@@ -4,6 +4,7 @@ import * as R from "ramda";
 
 import NotecardLane from "../NotecardLane";
 import OrderModal from "../OrderModal";
+import RightNow from "./RightNow";
 
 import type {
   Order,
@@ -29,10 +30,28 @@ type Props = {
   startDate: number,
 }
 
-class Calendar extends Component<Props> {
+type State = {boardWidth: number}
+
+class Calendar extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {boardWidth: 0};
+  }
+
   componentWillMount() {
     const {selectedResources} = this.props;
     this.props.fetchExams(R.pluck("id", selectedResources))
+  }
+
+  componentDidMount() {
+    this.updateWidth();
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (R.not(R.isEmpty(this.props.orders)) && R.not(R.equals(prevProps.orders, this.props.orders))) {
+      this.updateWidth();
+    }
   }
 
   render() {
@@ -68,7 +87,7 @@ class Calendar extends Component<Props> {
             </tbody>
           </table>
 
-          <div id="right-now"></div>
+          <RightNow width={this.state.boardWidth}/>
 
           <table id="time-grid">
             <tbody>
@@ -139,6 +158,12 @@ class Calendar extends Component<Props> {
 
   orderGroup(order: Order) {
     return this.props.orderGroups[order.groupIdentity]
+  }
+
+  updateWidth() {
+    const element = document.getElementById("board")
+    const width = element ? element.scrollWidth : 0;
+    this.setState({boardWidth: width});
   }
 }
 

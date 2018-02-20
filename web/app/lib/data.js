@@ -12,6 +12,8 @@ import type {
   Resource,
 } from "../types";
 
+export const PIXELS_PER_SECOND = 200.0 / 60.0 / 60.0;
+
 export function groupByIdentities(resources: Array<Resource>, startDate: number, orders: Array<Order>) {
   return R.groupBy((order) => groupIdentity(resources, startDate, order), orders);
 }
