@@ -113,7 +113,7 @@ class RoundingInterface extends Component<Props, State> {
 
   renderEditedBy() {
     const roundingValue = this.props.rounding;
-    if (!roundingValue.employee) {return null}
+    if (!R.prop("employee", roundingValue)) {return null}
     const {employee, created_at} = roundingValue;
     return (
       <div className="panel-footer rounding-footer">

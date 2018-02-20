@@ -12,9 +12,35 @@ type Props = {
   width: number,
 };
 
-class RightNow extends Component<Props> {
+type State = {
+  time: Object, // moment
+}
+
+const UPDATE_INTERVAL = 1000;
+
+class RightNow extends Component<Props, State> {
+  interval: number;
+
+  constructor(props: Props) {
+    super(props);
+
+
+    this.state = {
+      time: moment(),
+    }
+  }
+
   componentDidMount() {
     this.scrollTo();
+    this.interval = setInterval(this.updateTime, UPDATE_INTERVAL);
+  }
+
+  updateTime = () => {
+    this.setState({time: moment()});
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
@@ -40,7 +66,7 @@ class RightNow extends Component<Props> {
   }
 
   getHeight() {
-    const now = moment();
+    const now = this.state.time;
     const hoursToSeconds = now.hour() * 60 * 60;
     const minutesToSeconds = now.minute() * 60;
     const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, now.seconds()]);
