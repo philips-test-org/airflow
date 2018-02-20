@@ -24,7 +24,7 @@ class StatusToggle extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps: Props) {
     if (newProps.isActive !== this.state.checked) {
       this.setState({checked: newProps.isActive})
     }

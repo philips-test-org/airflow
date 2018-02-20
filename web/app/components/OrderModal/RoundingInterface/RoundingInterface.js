@@ -3,7 +3,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 
-import {formatTimestamp} from "../../../../lib/utility";
+import {formatTimestamp} from "../../../lib/utility";
 
 import Button from "../../Common/Button";
 
@@ -23,7 +23,7 @@ class RoundingInterface extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const roundingValue = props.rounding ? props.rounding.comments : "";
+    const roundingValue = R.pathOr("", ["rounding", "comments"], this.props);
 
     this.state = {
       editing: false,
@@ -112,12 +112,12 @@ class RoundingInterface extends Component<Props, State> {
   }
 
   renderEditedBy() {
-    const roundingValue = this.state.roundingValue ? this.state.roundingValue : "No rounding data entered.";
-    if (!roundingValue.author) {return null}
-    const {author, created_at} = roundingValue;
+    const roundingValue = this.props.rounding;
+    if (!roundingValue.employee) {return null}
+    const {employee, created_at} = roundingValue;
     return (
       <div className="panel-footer rounding-footer">
-        <p className="edited-by">Last edited by: {author} on
+        <p className="edited-by">Last edited by: {employee.name} on
         <span className="time short">{formatTimestamp(created_at)}</span>
         </p>
       </div>
@@ -125,8 +125,10 @@ class RoundingInterface extends Component<Props, State> {
   }
 
   updateRounding = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const roundingValue = event.target.value;
-    this.setState({roundingValue})
+    const roundingValue: string = event.target.value;
+    if (roundingValue) {
+      this.setState({roundingValue})
+    }
   }
 
   startEditing = () => {
@@ -134,7 +136,7 @@ class RoundingInterface extends Component<Props, State> {
   }
 
   stopEditing = () => {
-    const savedRounding = this.props.rounding ? this.props.rounding.comments : "";
+    const savedRounding = R.pathOr("", ["rounding", "comments"], this.props);
     this.setState({
       editing: false,
       roundingValue: savedRounding,

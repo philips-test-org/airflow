@@ -51,11 +51,9 @@ class CommentInterface extends Component<Props> {
   }
 
   renderEventList() {
-    const commentsAndEvents = R.reject(R.propEq("event_type", "rounding-update"))
-    const groupedEvents = R.compose(
-      R.groupBy(({event_type}) => R.equals("comment", event_type) ? "comment" : "event"),
-      commentsAndEvents,
-    )(this.props.events);
+    const groupedEvents = R.groupBy(
+      ({event_type}) => R.equals("comment", event_type) ? "comment" : "event",
+      this.props.events);
 
     return (
       <div className="events tab-content">
@@ -73,9 +71,12 @@ class CommentInterface extends Component<Props> {
   }
 
   renderEvents(events) {
-    return R.map((event) => (
-      <Event key={event.id} {...event} />
-    ), events);
+    return R.map((event) => {
+      if (event.event_type === "rounding-update") {
+        return this.renderRoundingUpdate(event);
+      }
+      return <Event key={event.id} {...event} />
+    }, events);
   }
 
   renderComments(comments) {
@@ -84,11 +85,23 @@ class CommentInterface extends Component<Props> {
     ), comments);
   }
 
+  renderRoundingUpdate(event: EventT) {
+    const thisIndex = R.findIndex(R.propEq("id", event.id), this.props.events) + 1;
+    const previousUpdate = R.compose(
+      R.take(1),
+      R.drop(thisIndex),
+      R.filter(R.propEq("event_type", "rounding-update"))
+    )(this.props.events)
+    return <RoundingUpdate key={event.id} lastUpdate={previousUpdate} {...event} />
+  }
+
   renderMixedEvents(events: Array<EventT>) {
     return R.map((event) => {
-      const Component =
-        event.event_type === "comment" ? Comment :
-          event.event_type === "rounding-update" ? RoundingUpdate : Event;
+      if (event.event_type === "rounding-update") {
+        return this.renderRoundingUpdate(event);
+      }
+
+      const Component = event.event_type === "comment" ? Comment : Event;
       return <Component key={event.id} {...event} />
     }, events);
   }
