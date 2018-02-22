@@ -12,8 +12,12 @@ import {
 import {
   examStartTime,
   unadjustedOrderStartTime,
-  PIXELS_PER_SECOND,
 } from "../../lib/data";
+
+import {
+  PIXELS_PER_SECOND,
+} from "../../lib/constants";
+
 
 import type {
   Order

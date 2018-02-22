@@ -1,10 +1,15 @@
 // @flow
 import React, {Component} from "react";
 import * as R from "ramda";
+import {throttle} from "lodash";
 
 import NotecardLane from "../NotecardLane";
 import OrderModal from "../OrderModal";
 import RightNow from "./RightNow";
+
+import {
+  NAVBAR_OFFSET,
+} from "../../lib/constants";
 
 import type {
   Order,
@@ -30,13 +35,19 @@ type Props = {
   startDate: number,
 }
 
-type State = {boardWidth: number}
+type State = {
+  boardWidth: number,
+  gridPosition: Object,
+}
 
 class Calendar extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = {boardWidth: 0};
+    this.state = {
+      boardWidth: 0,
+      gridPosition: {x: 0, y: 0},
+    };
   }
 
   componentWillMount() {
@@ -60,55 +71,57 @@ class Calendar extends Component<Props, State> {
       R.toPairs(this.props.orders)
     );
 
+    const translateX = Math.abs(this.state.gridPosition.x);
+    const tdStyle = {
+      transform: `translateX(${translateX}px)`,
+    };
+    const thStyle = {
+      position: "relative",
+      transform: `translate(${translateX}px, ${this.headerOffset()}px)`,
+      zIndex: 110,
+    };
+
     return (
-      <div>
-        <div id="board-headings">
-          <div id="white-spacer">
-          </div>
+      <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
+        <table id="time-grid">
+          <thead>
+            <tr className="heading">
+              <th className="fixed-column fixed-row" style={thStyle}>
+                <div className="header-spacer">&nbsp;</div>
+              </th>
+              {R.map(this.renderHeading, R.keys(this.props.orders))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="hourbar" className="fixed-column" style={tdStyle}>
+                {this.renderHours()}
+              </td>
+              {lanes}
+            </tr>
+          </tbody>
+        </table>
 
-          <table id="time-headings">
-            <tbody>
-              <tr className="heading">
-                <td></td>
-                {R.map(this.renderHeading, R.keys(this.props.orders))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div id="board">
-          <table id="vertical-time-headings">
-            <tbody>
-              <tr>
-                <td>
-                  {this.renderHours()}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <RightNow width={this.state.boardWidth}/>
-
-          <table id="time-grid">
-            <tbody>
-              <tr>
-                {lanes}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <RightNow width={this.state.boardWidth}/>
 
         {this.renderOrderModal()}
       </div>
     );
   }
 
-  renderHeading(resourceName: string) {
+  renderHeading = (resourceName: string) => {
+    const style = {
+      transform: `translateY(${this.headerOffset()}px)`,
+    };
     return (
-      <td key={`${resourceName}-heading`}>
-        <h1>{resourceName}</h1>
-      </td>
+      <th key={`${resourceName}-heading`} className="relative-column fixed-row" style={style}>
+        <div className="header-spacer">{resourceName}</div>
+      </th>
     )
+  }
+
+  headerOffset = () => {
+    return R.max(0, NAVBAR_OFFSET + R.negate(this.state.gridPosition.y));
   }
 
   renderHours() {
@@ -124,7 +137,7 @@ class Calendar extends Component<Props, State> {
 
   renderLane(header: string, orders: Array<Order>) {
     return (
-      <td key={`${header}-lane`}>
+      <td key={`${header}-lane`} className="relative-column">
         <div className="markers">
           {R.map((hour) => {
             return (
@@ -158,6 +171,14 @@ class Calendar extends Component<Props, State> {
 
   orderGroup(order: Order) {
     return this.props.orderGroups[order.groupIdentity]
+  }
+
+  updateScrollPosition = (event: SyntheticUIEvent<>) => {
+    const t = R.pathOr(null, ["target", "firstChild"], event);
+    if (t) {
+      const position = R.pick(["x", "y"], t.getBoundingClientRect());
+      this.setState({gridPosition: position});
+    }
   }
 
   updateWidth() {

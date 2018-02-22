@@ -6,7 +6,7 @@ import moment from "moment";
 
 import {
   PIXELS_PER_SECOND,
-} from "../../../lib/data";
+} from "../../../lib/constants";
 
 type Props = {
   width: number,
