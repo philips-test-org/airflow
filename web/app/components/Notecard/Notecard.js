@@ -45,15 +45,21 @@ const notecardSource = {
     const result = monitor.getDropResult();
     if (!R.isNil(result)) {
       const {targetResourceId, movementDelta} = result;
-      const newTop = R.max(0, component.orderTop() + movementDelta.y);
-      const newStart = component.orderHeightToStartTime(newTop);
-      const newStop = component.orderHeightToStopTime(newTop);
-      const newState = {
-        start_time: newStart,
-        stop_time: newStop,
-        resource_id: targetResourceId
+      const changedLanes = targetResourceId !== props.resourceId;
+      const changedTime = Math.abs(movementDelta.y) > 5; // 5 pixels is arbitrary.
+
+      // Prevent firing off events if card moved and was dropped back in same place.
+      if (changedLanes || changedTime) {
+        const newTop = R.max(0, component.orderTop() + movementDelta.y);
+        const newStart = component.orderHeightToStartTime(newTop);
+        const newStop = component.orderHeightToStopTime(newTop);
+        const newState = {
+          start_time: newStart,
+          stop_time: newStop,
+          resource_id: targetResourceId
+        }
+        props.updateOrderTime(props.order.id, newState);
       }
-      props.updateOrderTime(props.order.id, newState);
     }
   }
 }
