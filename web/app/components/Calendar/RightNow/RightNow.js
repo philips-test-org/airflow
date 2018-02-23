@@ -56,11 +56,10 @@ class RightNow extends Component<Props, State> {
   scrollTo() {
     const element = document.getElementById("right-now");
     if (element) {
-      // These options are valid via MDN
-      // (https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView)
-      // but Flow doesn't recognize them.
-      // $FlowFixMe
-      element.scrollIntoView({block: "center", behavior: "smooth"});
+      // Offset the scroll so that the bar is roughly in the
+      // middle of the viewport.
+      const offset = window.innerHeight / 2.2;
+      element.parentNode.scrollTop = this.getHeight() - offset;
     }
   }
 
