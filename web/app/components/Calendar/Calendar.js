@@ -31,6 +31,7 @@ type Props = {
   focusedOrder: Order,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
+  ordersLoaded: boolean,
   orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
@@ -106,7 +107,7 @@ class Calendar extends Component<Props, State> {
           </tbody>
         </table>
 
-        <RightNow width={this.state.boardWidth}/>
+        {this.renderRightNow()}
 
         {this.renderOrderModal()}
       </div>
@@ -123,10 +124,6 @@ class Calendar extends Component<Props, State> {
         <div className="header-spacer">{resourceName}</div>
       </th>
     )
-  }
-
-  headerOffset = () => {
-    return R.max(0, NAVBAR_OFFSET + R.negate(this.state.gridPosition.y));
   }
 
   renderHours() {
@@ -156,6 +153,11 @@ class Calendar extends Component<Props, State> {
     )
   }
 
+  renderRightNow() {
+    if (!this.props.ordersLoaded) {return null}
+    return (<RightNow width={this.state.boardWidth}/>);
+  }
+
   renderOrderModal() {
     if (!this.props.showModal) {return null}
     return (
@@ -170,6 +172,10 @@ class Calendar extends Component<Props, State> {
         resourceMap={this.props.selectedResources}
       />
     )
+  }
+
+  headerOffset = () => {
+    return R.max(0, NAVBAR_OFFSET + R.negate(this.state.gridPosition.y));
   }
 
   orderGroup(order: Order) {

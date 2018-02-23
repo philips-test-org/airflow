@@ -20,6 +20,7 @@ const mapStateToProps = ({board, user}: Object) => {
   return {
     focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
     orders: ordersByResource(board.orders),
+    ordersLoaded: !R.isEmpty(board.orders),
     orderGroups: board.orderGroups,
     resources: board.resources,
     selectedResourceGroup: board.selectedResourceGroup,
