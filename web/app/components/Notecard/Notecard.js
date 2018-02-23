@@ -2,6 +2,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 import moment from "moment";
+import {DragSource} from "react-dnd";
 
 import {
   cardStatuses,
@@ -15,6 +16,7 @@ import {
 } from "../../lib/data";
 
 import {
+  ItemTypes,
   PIXELS_PER_SECOND,
 } from "../../lib/constants";
 
@@ -29,24 +31,54 @@ type Props = {
   openModal: (Order) => void,
   startDate: number,
   type: "calendar" | "overview" | "kiosk",
+  connectDragSource: Function,
+  isDragging: boolean,
+  updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
 }
 
-class Notecard extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
+// Drag and Drop setup
+const notecardSource = {
+  beginDrag(props){
+    return {id: props.order.id};
+  },
+  endDrag(props, monitor, component) {
+    const result = monitor.getDropResult();
+    if (!R.isNil(result)) {
+      const {targetResourceId, movementDelta} = result;
+      const newTop = R.max(0, component.orderTop() + movementDelta.y);
+      const newStart = component.orderHeightToStartTime(newTop);
+      const newStop = component.orderHeightToStopTime(newTop);
+      const newState = {
+        start_time: newStart,
+        stop_time: newStop,
+        resource_id: targetResourceId
+      }
+      props.updateOrderTime(props.order.id, newState);
+    }
   }
+}
 
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+// React component
+class Notecard extends Component<Props> {
   render() {
-    const {order, comments, type} = this.props;
+    const {order, comments, type, connectDragSource, isDragging} = this.props;
     const cardClass = `notecard ${this.cardClass()}`
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardStyle = {
       height: this.orderHeight(),
       maxHeight: this.orderHeight(),
-      top: this.orderTop(),
+      top: `${this.orderTop()}px`,
+      opacity: isDragging ? 0.5 : 1,
     };
     const cardId = `${type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
-    return (
+    return connectDragSource(
       <div className={cardClass} id={cardId} style={cardStyle} onClick={this.openModal}>
         <div className="left-tab" style={{backgroundColor: this.cardColor()}} />
 
@@ -165,7 +197,8 @@ class Notecard extends Component<Props> {
   }
 
   orderHeightToStartTime(height: number) {
-    return this.props.startDate + (height / PIXELS_PER_SECOND * 1000);
+    // * 1000 to get from seconds -> milliseconds
+    return (this.props.startDate + (height / PIXELS_PER_SECOND * 1000));
   }
 
   orderHeightToStopTime(height: number) {
@@ -188,7 +221,7 @@ class Notecard extends Component<Props> {
     const hoursToSeconds = startTime.hour() * 60 * 60;
     const minutesToSeconds = startTime.minute() * 60;
     const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, startTime.seconds()]);
-    return Math.round(totalSeconds * PIXELS_PER_SECOND) + "px";
+    return Math.round(totalSeconds * PIXELS_PER_SECOND);
   }
 
   openModal = () => {
@@ -198,4 +231,4 @@ class Notecard extends Component<Props> {
   }
 }
 
-export default Notecard;
+export default DragSource(ItemTypes.NOTECARD, notecardSource, collect)(Notecard);

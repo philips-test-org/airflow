@@ -4,3 +4,8 @@
 export const PIXELS_PER_SECOND = 200.0 / 60.0 / 60.0;
 
 export const NAVBAR_OFFSET = 100;
+
+// Draggable Item types for React-DnD
+export const ItemTypes = {
+  NOTECARD: "notecard",
+};

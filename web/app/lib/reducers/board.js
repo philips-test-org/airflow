@@ -28,7 +28,7 @@ const initialState = {
   resources: {},
   selectedResourceGroup: "All",
   selectedResources: null,
-  startDate: moment().unix(),
+  startDate: computeStartDate(),
 };
 
 function board(state: Object = initialState, action: Object) {
@@ -70,6 +70,10 @@ function updateOrders(state, {payload}) {
     orders: payloadWithIdent,
     orderGroups: R.groupBy(R.prop("groupIdentity"), payloadWithIdent),
   });
+}
+
+function computeStartDate(selectedDate: number = moment().unix()) {
+  return moment(selectedDate * 1000).startOf("day").unix()*1000;
 }
 
 export default board;

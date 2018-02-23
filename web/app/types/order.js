@@ -188,7 +188,7 @@ export type Event = {
   id: number,
   exam_adjustment_id: number,
   event_type: string,
-  new_state: {[string]: boolean},
+  new_state: {start_time?: string | number} & {[string]: string | boolean},
   comments: ?string,
   created_at: number,
   updated_at: string,

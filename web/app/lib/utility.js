@@ -33,7 +33,10 @@ function orderComments(order: Order): Array<Event> {
 }
 
 function ordersByResource(orders: Array<Order>): {[string]: Array<Order>} {
-  return R.groupBy((order) => checkExamThenOrder(order, ["resource", "name"]), orders);
+  return R.groupBy((order) => {
+    const adjustedLocation = R.pathOr(false, ["adjusted", "resource_id"], order);
+    return adjustedLocation ? adjustedLocation : checkExamThenOrder(order, ["resource", "id"]);
+  }, orders)
 }
 
 function cardStatuses(order: Order, type: string, default_value: string = "") {

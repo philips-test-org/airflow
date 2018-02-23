@@ -2,6 +2,8 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 import {throttle} from "lodash";
+import {DragDropContext} from "react-dnd";
+import HTML5Backend from "react-dnd-html5-backend";
 
 import NotecardLane from "../NotecardLane";
 import OrderModal from "../OrderModal";
@@ -10,6 +12,8 @@ import RightNow from "./RightNow";
 import {
   NAVBAR_OFFSET,
 } from "../../lib/constants";
+
+import {wrapEvent} from "../../lib/data";
 
 import type {
   Order,
@@ -30,7 +34,7 @@ type Props = {
   orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
-  selectedResources: Array<Resource>,
+  selectedResources: {[string]: string},
   showModal: boolean,
   startDate: number,
 }
@@ -52,7 +56,7 @@ class Calendar extends Component<Props, State> {
 
   componentWillMount() {
     const {selectedResources} = this.props;
-    this.props.fetchExams(R.pluck("id", selectedResources))
+    this.props.fetchExams(R.keys(selectedResources))
   }
 
   componentDidMount() {
@@ -67,7 +71,7 @@ class Calendar extends Component<Props, State> {
 
   render() {
     const lanes = R.map(
-      ([header, orders]) => this.renderLane(header, orders),
+      ([resourceId, orders]) => this.renderLane(resourceId, orders),
       R.toPairs(this.props.orders)
     );
 
@@ -109,7 +113,8 @@ class Calendar extends Component<Props, State> {
     );
   }
 
-  renderHeading = (resourceName: string) => {
+  renderHeading = (resourceId: string) => {
+    const resourceName = this.props.selectedResources[resourceId];
     const style = {
       transform: `translateY(${this.headerOffset()}px)`,
     };
@@ -135,22 +140,19 @@ class Calendar extends Component<Props, State> {
     }, R.range(0, 24));
   }
 
-  renderLane(header: string, orders: Array<Order>) {
+  renderLane(resourceId: string, orders: Array<Order>) {
+    const resourceName = this.props.selectedResources[resourceId];
     return (
-      <td key={`${header}-lane`} className="relative-column">
-        <div className="markers">
-          {R.map((hour) => {
-            return (
-              <div key={`${hour}-marker`} className="row-marker"></div>
-            )
-          }, R.range(0, 48))}
-        </div>
-        <NotecardLane
-          orders={orders}
-          openModal={this.props.openModal}
-          type="calendar"
-        />
-      </td>
+      <NotecardLane
+        key={`${resourceId}-lane`}
+        updateOrderTime={this.updateOrderTime}
+        header={resourceName}
+        orders={orders}
+        openModal={this.props.openModal}
+        resourceId={resourceId}
+        startDate={this.props.startDate}
+        type="calendar"
+      />
     )
   }
 
@@ -165,6 +167,7 @@ class Calendar extends Component<Props, State> {
         fetchAvatar={this.props.fetchAvatar}
         order={this.props.focusedOrder}
         orderGroup={this.orderGroup(this.props.focusedOrder)}
+        resourceMap={this.props.selectedResources}
       />
     )
   }
@@ -186,6 +189,14 @@ class Calendar extends Component<Props, State> {
     const width = element ? element.scrollWidth : 0;
     this.setState({boardWidth: width});
   }
+
+  updateOrderTime = (orderId: number, newState: Object) => {
+    const {currentUser} = this.props;
+    this.props.adjustOrder(
+      wrapEvent(orderId, currentUser.id, "location_update", null, newState)
+    );
+
+  }
 }
 
-export default Calendar;
+export default DragDropContext(HTML5Backend)(Calendar);

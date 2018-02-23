@@ -23,7 +23,7 @@ const mapStateToProps = ({board, user}: Object) => {
     orderGroups: board.orderGroups,
     resources: board.resources,
     selectedResourceGroup: board.selectedResourceGroup,
-    selectedResources: board.selectedResources,
+    selectedResources: mapSelectedResources(board.selectedResources),
     showModal: board.showModal,
     startDate: board.startDate,
     currentUser: user.currentUser,
@@ -50,6 +50,11 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 };
+
+const mapSelectedResources = R.compose(
+  R.mergeAll,
+  R.map(({id, name}) => ({[id]: name}))
+)
 
 const CalendarContainer = connect(
   mapStateToProps,

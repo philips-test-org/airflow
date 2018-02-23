@@ -34,6 +34,7 @@ type Props = {
   fetchAvatar: (userId: number) => void,
   order: Order,
   orderGroup: Array<Order>,
+  resourceMap: {[string]: string},
 }
 
 class OrderModal extends Component<Props> {
@@ -77,6 +78,7 @@ class OrderModal extends Component<Props> {
                     fetchAvatar={this.props.fetchAvatar}
                     handleNewComment={this.handleNewComment}
                     orderId={order.id}
+                    resourceMap={this.props.resourceMap}
                     user={this.props.currentUser}
                   />
                 </div>

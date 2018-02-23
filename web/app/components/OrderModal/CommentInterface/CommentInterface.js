@@ -19,6 +19,7 @@ type Props = {
   fetchAvatar: (userId: number) => void,
   handleNewComment: (comment: string) => void,
   orderId: number,
+  resourceMap: {[number]: string},
   user: User,
 }
 
@@ -75,7 +76,7 @@ class CommentInterface extends Component<Props> {
       if (event.event_type === "rounding-update") {
         return this.renderRoundingUpdate(event);
       }
-      return <Event key={event.id} {...event} />
+      return <Event key={event.id} resourceMap={this.props.resourceMap} {...event} />
     }, events);
   }
 
@@ -102,7 +103,7 @@ class CommentInterface extends Component<Props> {
       }
 
       const Component = event.event_type === "comment" ? Comment : Event;
-      return <Component key={event.id} {...event} />
+      return <Component key={event.id} resourceMap={this.props.resourceMap} {...event} />
     }, events);
   }
 }
