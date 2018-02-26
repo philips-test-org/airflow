@@ -16,7 +16,12 @@ type State = {
   time: Object, // moment
 }
 
-const UPDATE_INTERVAL = 1000;
+// Update every 10 seconds
+const UPDATE_INTERVAL = 10000;
+
+// Offsetting the height of the bar based on the
+// height of the <th> elements of resource names.
+const HEADER_OFFSET = 49;
 
 class RightNow extends Component<Props, State> {
   interval: number;
@@ -68,7 +73,7 @@ class RightNow extends Component<Props, State> {
     const hoursToSeconds = now.hour() * 60 * 60;
     const minutesToSeconds = now.minute() * 60;
     const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, now.seconds()]);
-    return Math.round(PIXELS_PER_SECOND * totalSeconds);
+    return Math.round((PIXELS_PER_SECOND * totalSeconds) + HEADER_OFFSET);
   }
 }
 
