@@ -59,7 +59,7 @@ class NotecardLane extends Component<Props> {
             )
           }, R.range(0, 48))}
         </div>
-        <div style={{height: "100%"}}>
+        <div>
           {this.renderCards()}
         </div>
       </td>

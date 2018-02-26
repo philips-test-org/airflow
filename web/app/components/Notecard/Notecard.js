@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import moment from "moment";
 import {DragSource} from "react-dnd";
@@ -72,7 +72,7 @@ function collect(connect, monitor) {
 }
 
 // React component
-class Notecard extends Component<Props> {
+class Notecard extends PureComponent<Props> {
   render() {
     const {order, comments, type, connectDragSource, isDragging} = this.props;
     const cardClass = `notecard ${this.cardClass()}`
@@ -167,9 +167,10 @@ class Notecard extends Component<Props> {
 
   orderStopTime() {
     const {order} = this.props;
-    if (!R.isNil(order.adjusted) && order.adjusted.start_time) {
+    const {adjusted} = order;
+    if (!R.isNil(adjusted) && adjusted.start_time) {
       //adjusted start time plus the unadjusted duration
-      return order.adjusted.start_time + this.orderDuration();
+      return adjusted.start_time + this.orderDuration();
     } else if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
       return order.rad_exam.rad_exam_time.end_exam;
     } else if (typeof(order.appointment_duration) === "number") {
