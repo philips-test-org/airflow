@@ -696,6 +696,10 @@ table.roles{
       height: 20px;
       float: left;
       margin-right: 10px;
+
+      &.icon {
+        color: #53a790;
+      }
     }
     .name {
       line-height: 20px;

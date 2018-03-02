@@ -40,8 +40,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchAvatar: (userId: number) => {
       dispatch(fetchAvatar(userId));
     },
-    fetchExams: (resources: Array<number>) => {
-      dispatch(fetchExams(resources));
+    fetchExams: (resources: Array<number>, date: number) => {
+      dispatch(fetchExams(resources, date));
     },
     openModal: (order: Order) => {
       dispatch(showOrderModal(order));

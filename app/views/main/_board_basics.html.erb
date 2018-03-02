@@ -1,39 +1,21 @@
 <div class="data hide" id="resource-groupings-json"><%= JSON.dump(@groupings) %></div>
 <div class="data hide" id="employee-json"><%= @employee.to_json %></div>
-<div id="view-controls">
-  <div class="btn-group pull-left">
-    <button class="btn btn-default btn-sm" id="legend-button">Legend <span class="caret"></span></button>
-  </div>
-
-  <div class="btn-group pull-right">
-    <button class="btn btn-default btn-sm" id="time-button">Today <span class="caret"></span></button>
-  </div>
-  <div class="btn-group pull-right margin-right-sm" id="resource-group-buttons">
-    <button class="btn btn-default btn-sm dropdown-toggle" data-value="<%= session[:resource_group].nil? ? @groupings.keys.first : session[:resource_group] %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <span class="group-name"><%= session[:resource_group].nil? ? @groupings.keys.first : session[:resource_group] %></span>
-      <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <% @groupings.keys.each do |k| %>
-        <li><a data-value="<%= k %>" href="#"><%= k %></a></li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-
+<div class="data hide" id="selected-resource-group"><%= session[:resource_group] || @groupings.keys.first %></div>
 
 <div id="workspace" class="vertical-timeline">
-  <%= image_tag("ajax-loader.gif") %>
 </div>
 
 <script>
- var resourceGroup = $("#resource-group-buttons button").data("value");
+ //var resourceGroup = $("#resource-group-buttons button").data("value");
  var resources = $.parseJSON($("#resource-groupings-json").text());
  var employee = $.parseJSON($("#employee-json").text());
+ var resourceGroup = $("#selected-resource-group").text();
+
  $(document).ready(function() {
    window.renderReact(window.calendar, "#workspace", {
      board: {
        resources: resources,
-       selectedResource: resourceGroup,
+       selectedResourceGroup: resourceGroup,
        selectedResources: resources[resourceGroup],
      },
      user: {currentUser: employee},

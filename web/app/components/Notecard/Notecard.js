@@ -162,14 +162,14 @@ class Notecard extends PureComponent<Props> {
       R.path(["adjusted", "start_time"], order) ? order.adjusted.start_time :
         order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
     if (!startTime) {return 0}
-    return startTime && startTime < this.props.startDate ? this.props.startDate : startTime;
+    return startTime;
   }
 
   orderStopTime() {
     const {order} = this.props;
     const {adjusted} = order;
     if (!R.isNil(adjusted) && adjusted.start_time) {
-      //adjusted start time plus the unadjusted duration
+      // adjusted start time plus the unadjusted duration
       return adjusted.start_time + this.orderDuration();
     } else if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
       return order.rad_exam.rad_exam_time.end_exam;
@@ -214,10 +214,10 @@ class Notecard extends PureComponent<Props> {
   }
 
   orderHeight() {
-    const seconds = (this.orderDuration() / 1000);
+    const seconds = Math.abs(this.orderDuration() / 1000);
     // Default for bad data
     if (seconds < 0) {
-      return "30px;"
+      return "30px"
     } else {
       return Math.round(seconds * PIXELS_PER_SECOND) + "px";
     }

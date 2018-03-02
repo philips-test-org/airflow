@@ -25,7 +25,7 @@ const {
 
 function* fetchExams(action): Saga<void> {
   try {
-    const payload = yield call(Api.fetchExams, action.resourceIds);
+    const payload = yield call(Api.fetchExams, action.resourceIds, action.date);
     yield put(fetchExamsSucceeded(payload));
   } catch (e) {
     yield call(requestFailed(e));

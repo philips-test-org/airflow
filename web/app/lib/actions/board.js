@@ -1,4 +1,5 @@
 // @flow
+import moment from "moment";
 
 import type {
   Order
@@ -16,10 +17,11 @@ const BoardActions = {
 
 // Action generator functions
 
-const fetchExams = (resourceIds: Array<number>) => {
+const fetchExams = (resourceIds: Array<number>, date: number = moment().unix()) => {
   return {
     type: BoardActions.FETCH_EXAMS,
     resourceIds,
+    date,
   }
 }
 

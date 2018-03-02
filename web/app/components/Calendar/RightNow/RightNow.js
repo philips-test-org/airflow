@@ -64,7 +64,9 @@ class RightNow extends Component<Props, State> {
       // Offset the scroll so that the bar is roughly in the
       // middle of the viewport.
       const offset = window.innerHeight / 2.2;
-      element.parentNode.scrollTop = this.getHeight() - offset;
+      const parent = element.parentNode;
+      // $FlowFixMe
+      if (parent) {parent.scrollTop = this.getHeight() - offset}
     }
   }
 

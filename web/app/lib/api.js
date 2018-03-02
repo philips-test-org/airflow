@@ -10,8 +10,8 @@ const ENDPOINTS = {
   events: "/events",
 }
 
-const fetchExams = (resourceIds: Array<number>) => (
-  GET(ENDPOINTS.exams, {resource_ids: resourceIds})
+const fetchExams = (resourceIds: Array<number>, date: number) => (
+  GET(ENDPOINTS.exams, {resource_ids: resourceIds, date})
 );
 
 const fetchAvatar = (userId: number) => (

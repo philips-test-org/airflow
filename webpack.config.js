@@ -19,8 +19,8 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: [
-          "style",
-          "css",
+          "style-loader",
+          "css-loader",
         ],
       },
       {
@@ -36,8 +36,8 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: [
-          "style",
-          "css",
+          "style-loader",
+          "css-loader",
           "sass?includePaths[]=./node_modules/foundation-sites/scss/" +
           "&includePaths[]=./node_modules/motion-ui/src",
         ],

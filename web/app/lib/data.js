@@ -36,7 +36,7 @@ export function unadjustedOrderStartTime(startDate: number, order: Order): ?numb
       examStartTime(order.rad_exam) :
       order.appointment;
   if (!startTime) {return null}
-  return startTime < startDate ? startDate : startTime;
+  return startTime;
 }
 
 export function wrapEvent(orderId: number, userId: number,

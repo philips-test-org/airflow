@@ -3,6 +3,9 @@ import {render} from "react-dom";
 import {Provider} from "react-redux";
 import store from "./lib/store";
 
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+
 import Notecard from "./components/Notecard";
 import Calendar from "./components/Calendar";
 

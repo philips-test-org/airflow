@@ -8,6 +8,7 @@ import HTML5Backend from "react-dnd-html5-backend";
 import NotecardLane from "../NotecardLane";
 import OrderModal from "../OrderModal";
 import RightNow from "./RightNow";
+import ViewControls from "../ViewControls";
 
 import {
   NAVBAR_OFFSET,
@@ -27,7 +28,7 @@ type Props = {
   closeModal: () => void,
   currentUser: User,
   fetchAvatar: (userId: number) => void,
-  fetchExams: (resourceIds: Array<number>) => void,
+  fetchExams: (resourceIds: Array<number>, date?: number) => void,
   focusedOrder: Order,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
@@ -87,29 +88,37 @@ class Calendar extends Component<Props, State> {
     };
 
     return (
-      <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
-        <table id="time-grid">
-          <thead>
-            <tr className="heading">
-              <th className="fixed-column fixed-row" style={thStyle}>
-                <div className="header-spacer">&nbsp;</div>
-              </th>
-              {R.map(this.renderHeading, R.keys(this.props.orders))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td id="hourbar" className="fixed-column" style={tdStyle}>
-                {this.renderHours()}
-              </td>
-              {lanes}
-            </tr>
-          </tbody>
-        </table>
+      <div>
+        <ViewControls
+          resources={this.props.resources}
+          selectedDate={this.props.startDate}
+          selectedResourceGroup={this.props.selectedResourceGroup}
+          fetchExams={this.props.fetchExams}
+        />
+        <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
+          <table id="time-grid">
+            <thead>
+              <tr className="heading">
+                <th className="fixed-column fixed-row" style={thStyle}>
+                  <div className="header-spacer">&nbsp;</div>
+                </th>
+                {R.map(this.renderHeading, R.keys(this.props.orders))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="hourbar" className="fixed-column" style={tdStyle}>
+                  {this.renderHours()}
+                </td>
+                {lanes}
+              </tr>
+            </tbody>
+          </table>
 
-        {this.renderRightNow()}
+          {this.renderRightNow()}
 
-        {this.renderOrderModal()}
+          {this.renderOrderModal()}
+        </div>
       </div>
     );
   }
