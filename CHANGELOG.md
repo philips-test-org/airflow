@@ -1,3 +1,5 @@
+## v1.1.1-rc1 released 2018-03-20
+**bugfix:** user and admin manual URL configuration secured
 
 ## v1.1.0 released 2018-02-05
 
