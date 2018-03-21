@@ -1,3 +1,6 @@
+## v1.1.1-rc2 released 2018-03-21
+**bugfix:** removed redundant step from install script
+
 ## v1.1.1-rc1 released 2018-03-20
 **bugfix:** user and admin manual URL configuration secured
 
