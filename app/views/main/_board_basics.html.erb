@@ -4,21 +4,3 @@
 
 <div id="workspace" class="vertical-timeline">
 </div>
-
-<script>
- //var resourceGroup = $("#resource-group-buttons button").data("value");
- var resources = $.parseJSON($("#resource-groupings-json").text());
- var employee = $.parseJSON($("#employee-json").text());
- var resourceGroup = $("#selected-resource-group").text();
-
- $(document).ready(function() {
-   window.renderReact(window.calendar, "#workspace", {
-     board: {
-       resources: resources,
-       selectedResourceGroup: resourceGroup,
-       selectedResources: resources[resourceGroup],
-     },
-     user: {currentUser: employee},
-   })
- });
-</script>

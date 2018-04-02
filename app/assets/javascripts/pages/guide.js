@@ -13,11 +13,10 @@ $(document).ready(function() {
     if ($(this).data("view-type") != "kiosk") {
       e.preventDefault();
       var view = $(this).data("view-type");
-      application.view.breakdown();
       application.view = application[view];
       $(this).parent().siblings().removeClass("active");
       $(this).parent().addClass("active");
-      application.view.setup();
+      application.drawBoard();
     }
   });
 

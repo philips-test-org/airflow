@@ -27,7 +27,7 @@ const initialState = {
   orderGroups: {},
   resources: {},
   selectedResourceGroup: "All",
-  selectedResources: null,
+  selectedResources: [],
   startDate: computeStartDate(),
 };
 

@@ -1,6 +1,7 @@
 import React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
+import * as R from "ramda";
 import store from "./lib/store";
 
 import "react-dates/initialize";
@@ -9,11 +10,12 @@ import "react-dates/lib/css/_datepicker.css";
 import Notecard from "./components/Notecard";
 import Calendar from "./components/Calendar";
 
-const renderApp = (Component, target, props = {}) => {
+const renderApp = (Component, target, props = {key: "nilState"}) => {
   // Make sure the target element exists before attempting to render.
   if ($(target)) {
+    const initState = store(R.omit(["key"], props));
     render (
-      <Provider store={store(props)}>
+      <Provider key={props.key} store={initState}>
         <Component />
       </Provider>,
       document.querySelector(target)
@@ -33,11 +35,4 @@ $(() => {
     window.notecard = Notecard;
     window.calendar = Calendar;
   }
-
-  // Render components conditionally
-  // Right now these are hard-coded, but we could
-  // theoretically expose this into the window
-  // object too to allow us to render/mount components
-  // from inside of our Rails templates.
-  //renderApp(HelloWorld, '#view-controls');
 });
