@@ -2819,7 +2819,7 @@ var connectToChannel = function connectToChannel(socket, topic, callbacks) {
   channel.onClose(callbacks.onClose);
 
   channel.join().receive("ok", function () {
-    return callbacks.joinOk(socket);
+    return createQueue(channel, callbacks);
   }).receive("error", callbacks.joinError);
 
   return channel;
@@ -2828,6 +2828,17 @@ var connectToChannel = function connectToChannel(socket, topic, callbacks) {
 // Send a message to a channel.
 var sendMessage = function sendMessage(channel, message, callbacks) {
   channel.push("new_msg", { body: message }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
+    return logMessage("Networking issue...");
+  });
+};
+
+// Create the user's RabbitMQ queue.
+var createQueue = function createQueue(channel, callbacks) {
+  channel.push("create_queue", {}, TIMEOUT).receive("ok", function () {
+    return callbacks.joinOk();
+  }).receive("error", function (e) {
+    return console.log("Couldn't create queue", e);
+  }).receive("timeout", function () {
     return logMessage("Networking issue...");
   });
 };
@@ -2882,5 +2893,7 @@ var logMessage = function logMessage(message) {
   }
 };
 
+// TODO when fully ES6-ified in harbingerjs,
+//      uncomment this export.
 //export default (amqpListener: Class<AMQP>);
 $.amqpListener = amqpListener;
