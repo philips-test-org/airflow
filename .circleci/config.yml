@@ -58,6 +58,9 @@ jobs:
             - public/assets
             - tmp/cache/assets/production
 
+      - store_artifacts:
+          path: /tmp/airflow/release
+
       - persist_to_workspace:
           root: /home/circleci
           paths:
