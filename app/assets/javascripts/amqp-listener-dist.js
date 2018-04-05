@@ -2707,7 +2707,7 @@ if (typeof Object.assign != "function") {
 // The AMQP object.
 
 
-var TIMEOUT = 10000;
+var TIMEOUT = 100000;
 
 var DEFAULT_BIND_CALLBACKS = {
   ok: function ok() {},
@@ -2828,32 +2828,53 @@ var connectToChannel = function connectToChannel(socket, topic, callbacks) {
 // Send a message to a channel.
 var sendMessage = function sendMessage(channel, message, callbacks) {
   channel.push("new_msg", { body: message }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
-    return logMessage("Networking issue...");
+    logMessage("Networking issue... Reattempting.");
+    channel.resend(TIMEOUT);
+  });
+  channel.on("phx_reply", function (data) {
+    console.log(data);
   });
 };
 
 // Create the user's RabbitMQ queue.
 var createQueue = function createQueue(channel, callbacks) {
-  channel.push("create_queue", {}, TIMEOUT).receive("ok", function () {
-    return callbacks.joinOk();
-  }).receive("error", function (e) {
+  channel.push("create_queue", {}, TIMEOUT).receive("ok", function () {}).receive("error", function (e) {
     return console.log("Couldn't create queue", e);
   }).receive("timeout", function () {
-    return logMessage("Networking issue...");
+    logMessage("Networking issue... Reattempting.");
+    channel.resend(TIMEOUT);
+  });
+  channel.on("phx_reply", function (_ref3) {
+    var response = _ref3.response,
+        status = _ref3.status;
+
+    if (status == "ok" && response.type == "create_queue") {
+      callbacks.joinOk();
+    }
   });
 };
 
 // Bind the user's queue to a RabbitMQ exchange.
 var bindExchange = function bindExchange(channel, exchange, routingKey, callbacks) {
   channel.push("bind", { exchange: exchange, routing_key: routingKey }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
-    return logMessage("Networking issue...");
+    logMessage("Networking issue... Reattempting.");
+    channel.resend(TIMEOUT);
+  });
+  channel.on("phx_reply", function (_ref4) {
+    var response = _ref4.response,
+        status = _ref4.status;
+
+    if (status == "ok" && response.type == "bind") {
+      callbacks.ok();
+    }
   });
 };
 
 // Unbind the user's queue from a RabbitMQ exchange.
 var unbindExchange = function unbindExchange(channel, exchange, routingKey, callbacks) {
   channel.push("unbind", { exchange: exchange, routing_key: routingKey }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
-    return logMessage("Networking issue...");
+    logMessage("Networking issue... Reattempting.");
+    channel.resend(TIMEOUT);
   });
 };
 
