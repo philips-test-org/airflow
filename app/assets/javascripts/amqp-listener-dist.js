@@ -2829,7 +2829,6 @@ var connectToChannel = function connectToChannel(socket, topic, callbacks) {
 var sendMessage = function sendMessage(channel, message, callbacks) {
   channel.push("new_msg", { body: message }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
-    channel.resend(TIMEOUT);
   });
   channel.on("phx_reply", function (data) {
     console.log(data);
@@ -2839,10 +2838,9 @@ var sendMessage = function sendMessage(channel, message, callbacks) {
 // Create the user's RabbitMQ queue.
 var createQueue = function createQueue(channel, callbacks) {
   channel.push("create_queue", {}, TIMEOUT).receive("ok", function () {}).receive("error", function (e) {
-    return console.log("Couldn't create queue", e);
+    return logMessage("Couldn't create queue", e);
   }).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
-    channel.resend(TIMEOUT);
   });
   channel.on("phx_reply", function (_ref3) {
     var response = _ref3.response,
@@ -2856,15 +2854,14 @@ var createQueue = function createQueue(channel, callbacks) {
 
 // Bind the user's queue to a RabbitMQ exchange.
 var bindExchange = function bindExchange(channel, exchange, routingKey, callbacks) {
-  channel.push("bind", { exchange: exchange, routing_key: routingKey }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
+  channel.push("bind", { exchange: exchange, routing_key: routingKey }, TIMEOUT).receive("ok", function () {}).receive("error", callbacks.error).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
-    channel.resend(TIMEOUT);
   });
   channel.on("phx_reply", function (_ref4) {
     var response = _ref4.response,
         status = _ref4.status;
 
-    if (status == "ok" && response.type == "bind") {
+    if (status == "ok" && response.type == "bind" && response.routing_key == routingKey) {
       callbacks.ok();
     }
   });
@@ -2874,7 +2871,14 @@ var bindExchange = function bindExchange(channel, exchange, routingKey, callback
 var unbindExchange = function unbindExchange(channel, exchange, routingKey, callbacks) {
   channel.push("unbind", { exchange: exchange, routing_key: routingKey }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
-    channel.resend(TIMEOUT);
+  });
+  channel.on("phx_reply", function (_ref5) {
+    var response = _ref5.response,
+        status = _ref5.status;
+
+    if (status == "ok" && response.type == "unbind" && response.routing_key == routingKey) {
+      callbacks.ok();
+    }
   });
 };
 
