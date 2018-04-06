@@ -18,6 +18,8 @@ application.notification = {
 
 	if (message.id == undefined) { message.id = application.notification.serial++ }
 
+	message.is_notification = true
+
 	// If there is no previous message then draw
 	if ($("#notification-" + message.id).length == 0) {
 	    $("#notifications").prepend(application.templates.notification(message));

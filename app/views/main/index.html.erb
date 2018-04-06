@@ -377,7 +377,9 @@
 
 <script class="handlebars-template" id="t-event-state-change" type="text/x-handlebars-template">
   <div class="event">
-    <span class="avatar">{{avatar employee.id "<%= image_url('placeholder.png') %>"}}</span>
+    {{#unless is_notification}}
+      <span class="avatar">{{avatar employee.id "<%= image_url('placeholder.png') %>"}}</span>
+    {{/unless}}
     <span class="body">
       <strong>{{employee.name}}</strong> marked {{toggle_label event_type}} {{toggle_state event_type new_state}} on <span class="time short">{{format_timestamp created_at}}</span>
     </span>
@@ -386,7 +388,9 @@
 
 <script class="handlebars-template" id="t-event-location-change" type="text/x-handlebars-template">
   <div class="event">
-    <span class="avatar">{{avatar employee.id "<%= image_url('placeholder.png') %>"}}</span>
+    {{#unless is_notification}}
+      <span class="avatar">{{avatar employee.id "<%= image_url('placeholder.png') %>"}}</span>
+    {{/unless}}
     <span class="body">
       <strong>{{employee.name}}</strong> moved order to <strong>{{resource_name new_state.resource_id}}</strong> to <span class="time short"><strong>{{format_timestamp new_state.start_time}}</strong></span> on <span class="time short">{{format_timestamp created_at}}</span>
     </span>
@@ -395,10 +399,12 @@
 
 <script class="handlebars-template" id="t-event-comment" type="text/x-handlebars-template">
   <div class="comment">
-    <div class="avatar">
-      <!-- should be the employee associated with the action -->
-      {{avatar employee.id "<%= image_url('placeholder.png') %>"}}
-    </div>
+    {{#unless is_notification}}
+      <div class="avatar">
+        <!-- should be the employee associated with the action -->
+        {{avatar employee.id "<%= image_url('placeholder.png') %>"}}
+      </div>
+    {{/unless}}
     <div class="body">
       <div class="heading">
 	<!-- should be the employee associated with the action -->
@@ -411,10 +417,9 @@
 
 <script class="handlebars-template" id="t-event-rounding-update" type="text/x-handlebars-template">
   <div class="comment">
-    <div class="avatar">
-      <!-- should be the employee associated with the action -->
-      {{avatar employee.id "<%= image_url('placeholder.png') %>"}}
-    </div>
+    {{#unless is_notification}}
+      <span class="avatar">{{avatar employee.id "<%= image_url('placeholder.png') %>"}}</span>
+    {{/unless}}
     <div class="body">
       <div class="heading">
 	<!-- should be the employee associated with the action -->
