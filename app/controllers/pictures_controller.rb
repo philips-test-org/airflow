@@ -5,13 +5,13 @@ class PicturesController < ApplicationController
 
   def show
     id = params["id"].to_i
-    employee = Java::HarbingerSdkData::Employee.withId(id)
+    employee = Java::HarbingerSdkData::Employee.withId(id, @entity_manager)
 
     if employee && ! employee.demographicHash["photo"].blank?
       matches = employee.demographicHash["photo"].match(/\Adata:(.*);base64,(.*)\z/m)
       send_data Base64.decode64(matches[2]), type: matches[1], disposition: 'inline'
     else
-      render :nothing => true
+      send_data ActionController::Base.helpers.asset_path('placeholder.jpg')
     end
   end
 
