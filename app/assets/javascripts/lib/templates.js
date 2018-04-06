@@ -305,9 +305,8 @@ Handlebars.registerHelper('notification_type',function(type) {
     }
 });
 
-Handlebars.registerHelper('render_event',function(event, isNotification) {
+Handlebars.registerHelper('render_event',function(event) {
   //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
-  event.is_notification = isNotification;
   if (event.event_type == 'comment') {
     return new Handlebars.SafeString(application.templates.eventComment(event));
   } else if (event.event_type == 'location_update') {
