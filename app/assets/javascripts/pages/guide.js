@@ -82,8 +82,9 @@ $(document).ready(function() {
 
 function connectToAPM() {
   var amqp = new $.amqpListener();
-  var apmHost = document.location.hostname;
-  amqp.setup({host: apmHost, port: 4000});
+  var apmHost = harbingerjsApmHost;
+  var apmPort = harbingerjsApmPort;
+  amqp.setup({host: apmHost, port: apmPort});
 
   var joinCallbacks = {
     newMsg: function(msg) {

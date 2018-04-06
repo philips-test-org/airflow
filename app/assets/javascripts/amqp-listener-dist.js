@@ -2730,11 +2730,15 @@ var DEFAULT_CONNECT_CALLBACKS = {
   this.socket = null;
   this.channel = null;
 
-  this.setup = function (_ref) {
-    var host = _ref.host,
-        port = _ref.port;
-
-    _this.APM_URL = "ws://" + host + ":" + port + "/socket";
+  this.setup = function (ApmConfig) {
+    defaultApmConfig = { host: document.location.hostname, port: 4000 };
+    if (ApmConfig.host == "") {
+      ApmConfig.host = defaultApmConfig.host;
+    }
+    if (ApmConfig.port == "") {
+      ApmConfig.port = defaultApmConfig.port;
+    }
+    _this.APM_URL = "ws://" + ApmConfig.host + ":" + ApmConfig.port + "/socket";
   };
 
   this.connectToChannel = function (callbacks) {
@@ -2782,9 +2786,9 @@ var DEFAULT_CONNECT_CALLBACKS = {
 }
 
 // Initiate the Phoenix socket connection
-var connectToSocket = function connectToSocket(_ref2) {
-  var APM_URL = _ref2.APM_URL,
-      onClose = _ref2.onClose;
+var connectToSocket = function connectToSocket(_ref) {
+  var APM_URL = _ref.APM_URL,
+      onClose = _ref.onClose;
 
   var id = gen_id();
   var socket = new phoenix_1(APM_URL, { params: {
@@ -2825,7 +2829,7 @@ var connectToChannel = function connectToChannel(socket, topic, callbacks) {
   return channel;
 };
 
-// Send a message to a channel.
+// Send a message to a channele
 var sendMessage = function sendMessage(channel, message, callbacks) {
   channel.push("new_msg", { body: message }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
@@ -2842,9 +2846,9 @@ var createQueue = function createQueue(channel, callbacks) {
   }).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
   });
-  channel.on("phx_reply", function (_ref3) {
-    var response = _ref3.response,
-        status = _ref3.status;
+  channel.on("phx_reply", function (_ref2) {
+    var response = _ref2.response,
+        status = _ref2.status;
 
     if (status == "ok" && response.type == "create_queue") {
       callbacks.joinOk();
@@ -2857,9 +2861,9 @@ var bindExchange = function bindExchange(channel, exchange, routingKey, callback
   channel.push("bind", { exchange: exchange, routing_key: routingKey }, TIMEOUT).receive("ok", function () {}).receive("error", callbacks.error).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
   });
-  channel.on("phx_reply", function (_ref4) {
-    var response = _ref4.response,
-        status = _ref4.status;
+  channel.on("phx_reply", function (_ref3) {
+    var response = _ref3.response,
+        status = _ref3.status;
 
     if (status == "ok" && response.type == "bind" && response.routing_key == routingKey) {
       callbacks.ok();
@@ -2872,9 +2876,9 @@ var unbindExchange = function unbindExchange(channel, exchange, routingKey, call
   channel.push("unbind", { exchange: exchange, routing_key: routingKey }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
   });
-  channel.on("phx_reply", function (_ref5) {
-    var response = _ref5.response,
-        status = _ref5.status;
+  channel.on("phx_reply", function (_ref4) {
+    var response = _ref4.response,
+        status = _ref4.status;
 
     if (status == "ok" && response.type == "unbind" && response.routing_key == routingKey) {
       callbacks.ok();
