@@ -18,6 +18,10 @@
   }
 }
 
+#notifications .event .body {
+  margin-left: 0px;
+}
+
 .comment {
   margin-bottom: 10px;
   position: relative;
@@ -81,6 +85,16 @@
     border-style: solid solid outset;
     border-width: 8px;
     border-right-color: #bfccd1;
+  }
+}
+
+#notifications .comment {
+  .body {
+    margin-left: 0px;
+  }
+
+  .body:before, .body .heading:before {
+    display: none;
   }
 }
 
