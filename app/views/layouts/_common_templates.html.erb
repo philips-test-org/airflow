@@ -4,7 +4,7 @@
 <script class="handlebars-template" id="t-notification" type="text/x-handlebars-template">
   <div class="{{notification_type type}}" id="notification-{{id}}">
     {{#if (event_type_check type)}}
-      {{render_event event}}
+      {{render_event event true}}
     {{else}}
       <strong>{{type}}</strong> - {{message}}
     {{/if}}
