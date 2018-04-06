@@ -128,16 +128,30 @@ function connectToAPM() {
     onClose: alertDisconnected,
   }
 
+  // After ES6 compatibility is added in React refactor, global variable will
+  // be no more. An async/await refactor will clean this up.
+  var BOUND = 0;
   function bindExchanges() {
-    amqp.bindExchange("web-application-messages","airflow.#", {ok: function() {alertConnected("Airflow")}});
-    amqp.bindExchange("audit","rad_exams.#", {ok: function() {alertConnected("exams")}});
-    amqp.bindExchange("audit","rad_exam_times.#", {ok: function() {alertConnected("exam times")}});
-    amqp.bindExchange("audit","rad_exam_personnel.#", {ok: function() {alertConnected("exam personnel")}});
-    amqp.bindExchange("audit","orders.#", {ok: function() {alertConnected("orders")}})
+    amqp.bindExchange("web-application-messages","airflow.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","rad_exams.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","rad_exam_times.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","rad_exam_personnel.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","orders.#", {ok: function() {BOUND +=1}})
+    waitOnBind();
+  }
+
+  function waitOnBind() {
+    setTimeout(function() {
+      if (BOUND == 5) {
+        alertConnected();
+      } else {
+        waitOnBind();
+      }
+    }, 1000)
   }
 
   function alertConnected(queue) {
-    application.notification.flash("Receiving real-time data for " + queue + ".");
+    application.notification.flash("Receiving real-time data.");
   }
 
   function alertError(reason) {
