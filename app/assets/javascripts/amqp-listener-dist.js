@@ -2834,9 +2834,6 @@ var sendMessage = function sendMessage(channel, message, callbacks) {
   channel.push("new_msg", { body: message }, TIMEOUT).receive("ok", callbacks.ok).receive("error", callbacks.error).receive("timeout", function () {
     logMessage("Networking issue... Reattempting.");
   });
-  channel.on("phx_reply", function (data) {
-    console.log(data);
-  });
 };
 
 // Create the user's RabbitMQ queue.
