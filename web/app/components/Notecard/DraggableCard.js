@@ -1,14 +1,11 @@
 // @flow
 import React, {PureComponent} from "react";
+import {findDOMNode} from "react-dom";
 import * as R from "ramda";
 import moment from "moment";
 import {DragSource} from "react-dnd";
 
-import {
-  cardStatuses,
-  checkExamThenOrder,
-  formatName,
-} from "../../lib/utility";
+import BaseNotecard from "./BaseNotecard";
 
 import {
   examStartTime,
@@ -19,7 +16,6 @@ import {
   ItemTypes,
   PIXELS_PER_SECOND,
 } from "../../lib/constants";
-
 
 import type {
   Order
@@ -72,87 +68,22 @@ function collect(connect, monitor) {
 }
 
 // React component
-class Notecard extends PureComponent<Props> {
+class DraggableCard extends PureComponent<Props> {
   render() {
-    const {order, comments, type, connectDragSource, isDragging} = this.props;
-    const cardClass = `notecard ${this.cardClass()}`
-    const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
+    const {connectDragSource, isDragging} = this.props;
     const cardStyle = {
       height: this.orderHeight(),
       maxHeight: this.orderHeight(),
       top: `${this.orderTop()}px`,
       opacity: isDragging ? 0.5 : 1,
     };
-    const cardId = `${type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
-    return connectDragSource(
-      <div className={cardClass} id={cardId} style={cardStyle} onClick={this.openModal}>
-        <div className="left-tab" style={{backgroundColor: this.cardColor()}} />
-
-        <div className="right-tab">
-          <div className="events">{hasComments ? <i className="fa fa-paperclip"></i> : null}</div>
-
-          {this.renderHeader()}
-
-          <div className="body">
-            <div className="procedure">{checkExamThenOrder(this.props.order, ["procedure", "description"])}</div>
-            <div className="patient-location">{this.examLocation()}</div>
-          </div>
-
-          {this.renderFooter()}
-        </div>
-        <div className="hide data" data-order-id="{order.id}"></div>
-      </div>
-    );
-  }
-
-  renderHeader() {
-    const patientPath = ["site_class", "patient_type", "patient_type"];
-    const patientName = formatName(this.props.order.patient_mrn.patient.name);
     return (
-      <div className="heading">
-        <div className="patient-name">{patientName}</div>
-        <div className="patient-type">{checkExamThenOrder(this.props.order, patientPath)}</div>
-        <div className="mrn">{this.props.order.patient_mrn.mrn}</div>
-      </div>
+      <BaseNotecard
+        ref={instance => connectDragSource(findDOMNode(instance))}
+        style={cardStyle}
+        {...this.props}
+      />
     );
-  }
-
-  renderFooter() {
-    const {order: {adjusted}} = this.props;
-    return (
-      <div className="footer">
-        <div className="left">
-          {adjusted.anesthesia ? <div className="status-indicator anesthesia"><strong>GA</strong></div> : null}
-        </div>
-        <div className="right">
-          {adjusted.consent ? <div className="status-indicator consent"><i className="fa fa-handshake-o"></i></div> : null}
-          {adjusted.ppca_ready ? <div className="status-indicator ppca_ready"><i className="fa fa-thumbs-o-up"></i></div> : null}
-          {adjusted.paperwork ? <div className="status-indicator paperwork"><i className="fa fa-file-text"></i></div> : null}
-        </div>
-      </div>
-    )
-  }
-
-  examLocation() {
-    const {order} = this.props;
-    return R.pathOr(null, ["rad_exam", "site_sublocation", "site_location", "location"], order);
-  }
-
-  negativeDuration() {
-    // TODO FIXME
-    return false;
-  }
-
-  cardColor() {
-    return cardStatuses(this.props.order, "color", "#ddd");
-  }
-
-  cardClass() {
-    return R.join(" ", [
-      this.props.type === "calendar" ? "scaled" : "overview",
-      this.negativeDuration() ? "bad-duration" : "",
-      cardStatuses(this.props.order, "card_class"),
-    ]);
   }
 
   // Find the start time for an order
@@ -160,7 +91,7 @@ class Notecard extends PureComponent<Props> {
     const {order} = this.props;
     const startTime =
       R.path(["adjusted", "start_time"], order) ? order.adjusted.start_time :
-        order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
+      order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
     if (!startTime) {return 0}
     return startTime;
   }
@@ -238,4 +169,4 @@ class Notecard extends PureComponent<Props> {
   }
 }
 
-export default DragSource(ItemTypes.NOTECARD, notecardSource, collect)(Notecard);
+export default DragSource(ItemTypes.NOTECARD, notecardSource, collect)(DraggableCard);

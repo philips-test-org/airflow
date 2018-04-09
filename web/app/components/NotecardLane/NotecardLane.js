@@ -7,7 +7,7 @@ import {ItemTypes} from "../../lib/constants";
 
 import {orderComments} from "../../lib/utility";
 
-import Notecard from "../Notecard";
+import DraggableNotecard from "../Notecard";
 
 import type {Order} from "../../types";
 
@@ -69,7 +69,7 @@ class NotecardLane extends Component<Props> {
   renderCards() {
     return (
       R.map((order) => (
-        <Notecard
+        <DraggableNotecard
           key={order.id}
           comments={orderComments(order)}
           openModal={this.props.openModal}

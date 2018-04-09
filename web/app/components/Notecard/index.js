@@ -1,4 +1,4 @@
 
-import Notecard from "./Notecard";
+import DraggableCard from "./DraggableCard";
 
-export default Notecard;
+export default DraggableCard;
