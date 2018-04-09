@@ -63,6 +63,10 @@ jobs:
           paths:
             - project/*.zip
 
+      - store_artifacts:
+          path: ./airflow-*.zip
+
+
   deploy_test:
     <<: *defaults
     steps:

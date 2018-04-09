@@ -82,8 +82,9 @@ $(document).ready(function() {
 
 function connectToAPM() {
   var amqp = new $.amqpListener();
-  var apmHost = document.location.hostname;
-  amqp.setup({host: apmHost, port: 4000});
+  var apmHost = harbingerjsApmHost;
+  var apmPort = harbingerjsApmPort;
+  amqp.setup({host: apmHost, port: apmPort});
 
   var joinCallbacks = {
     newMsg: function(msg) {
@@ -124,22 +125,54 @@ function connectToAPM() {
       application.notification.flash("Connected to APM.");
       bindExchanges();
     },
-    joinError: function(resp) {console.log("Unable to join", resp)},
-    onClose: function() {
+    joinError: alertError,
+    onClose: alertDisconnected,
+  }
+
+  // After ES6 compatibility is added in React refactor, global variable will
+  // be no more. An async/await refactor will clean this up.
+  var BOUND = 0;
+  function bindExchanges() {
+    amqp.bindExchange("web-application-messages","airflow.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","rad_exams.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","rad_exam_times.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","rad_exam_personnel.#", {ok: function() {BOUND += 1}});
+    amqp.bindExchange("audit","orders.#", {ok: function() {BOUND +=1}})
+    waitOnBind();
+  }
+
+  function waitOnBind() {
+    setTimeout(function() {
+      if (BOUND == 5) {
+        alertConnected();
+      } else {
+        waitOnBind();
+      }
+    }, 1000)
+  }
+
+  function alertConnected(queue) {
+    application.notification.flash("Receiving real-time data.");
+  }
+
+  function alertError(reason) {
+    if (reason == "unauthorized") {
       application.notification.alert({
         type: "alert",
         id: "disconnect",
-        message: "You are no longer receiving real time updates. This likely means you need to log in again. Reload if this message persists more than 10 seconds.",
-      });
+        message: "You are no longer receiving real time updates. Please reload the page and log in again.",
+      })
+    } else {
+      alertDisconnected()
     }
   }
 
-  function bindExchanges() {
-    amqp.bindExchange("web-application-messages","airflow.#");
-    amqp.bindExchange("audit","rad_exams.#");
-    amqp.bindExchange("audit","rad_exam_times.#");
-    amqp.bindExchange("audit","rad_exam_personnel.#");
-    amqp.bindExchange("audit","orders.#")
+  function alertDisconnected() {
+    application.notification.alert({
+      type: "alert",
+      id: "disconnect",
+      message: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
+    });
   }
 
   amqp.connectToChannel(joinCallbacks)

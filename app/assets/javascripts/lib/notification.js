@@ -4,7 +4,7 @@ application.notification = {
     serial: 1,
     flash: function(message) {
 	var m = application.notification.draw(message);
-	setTimeout(function() { m.fadeOut(400,function() { m.remove() }); },3000);
+        setTimeout(function() { m.fadeOut(400,function() { m.remove() }); },6000);
     },
 
     alert: function(message) {
@@ -17,6 +17,8 @@ application.notification = {
 	}
 
 	if (message.id == undefined) { message.id = application.notification.serial++ }
+
+        if ( message.event ){ message.event.is_notification = true; }
 
 	// If there is no previous message then draw
 	if ($("#notification-" + message.id).length == 0) {
