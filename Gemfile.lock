@@ -67,7 +67,7 @@ GEM
       sass (>= 3.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    harbinger-rails-extensions (1.0.0)
+    harbinger-rails-extensions (1.1.0)
       amq-protocol (= 1.9.2)
       browser (~> 1.0)
       bunny (= 1.7.0)
