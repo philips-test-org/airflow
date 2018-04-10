@@ -9,7 +9,10 @@ import BaseNotecard from "./BaseNotecard";
 
 import {
   examStartTime,
+  maybeMsToSeconds,
+  orderDuration,
   unadjustedOrderStartTime,
+  unadjustedOrderStopTime,
 } from "../../lib/data";
 
 import {
@@ -78,6 +81,7 @@ class DraggableCard extends PureComponent<Props> {
       opacity: isDragging ? 0.5 : 1,
     };
     return (
+      // TODO the current duration doesn't stick to the order when the modal opens
       <BaseNotecard
         ref={instance => connectDragSource(findDOMNode(instance))}
         style={cardStyle}
@@ -97,11 +101,11 @@ class DraggableCard extends PureComponent<Props> {
   }
 
   orderStopTime() {
-    const {order} = this.props;
+    const {order, startDate} = this.props;
     const {adjusted} = order;
     if (!R.isNil(adjusted) && adjusted.start_time) {
       // adjusted start time plus the unadjusted duration
-      return adjusted.start_time + this.orderDuration();
+      return adjusted.start_time + orderDuration(startDate, order);
     } else if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
       return order.rad_exam.rad_exam_time.end_exam;
     } else if (typeof(order.appointment_duration) === "number") {
@@ -112,26 +116,6 @@ class DraggableCard extends PureComponent<Props> {
     } else {
       return this.orderStartTime() + (order.procedure.scheduled_duration * 60 * 1000);
     }
-  }
-
-  unadjustedOrderStopTime() {
-    const {order, startDate} = this.props;
-    if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
-      return order.rad_exam.rad_exam_time.end_exam;
-    } else if (typeof(order.appointment_duration) === "number") {
-      let durationMS = order.appointment_duration ? order.appointment_duration * 1000 : 0;
-      return unadjustedOrderStartTime(startDate, order) + durationMS;
-    } else if (!R.isNil(order.rad_exam)) {
-      return unadjustedOrderStartTime(startDate, order) + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
-    } else {
-      return unadjustedOrderStartTime(startDate, order) + (order.procedure.scheduled_duration * 60 * 1000);
-    }
-  }
-
-  orderDuration() {
-    const {order, startDate} = this.props;
-    const unadjustedStartTime = unadjustedOrderStartTime(startDate, order) || 0;
-    return this.unadjustedOrderStopTime() - unadjustedStartTime;
   }
 
   orderHeightToStartTime(height: number) {
@@ -145,7 +129,8 @@ class DraggableCard extends PureComponent<Props> {
   }
 
   orderHeight() {
-    const seconds = Math.abs(this.orderDuration() / 1000);
+    const {order, startDate} = this.props;
+    const seconds = Math.abs(maybeMsToSeconds(orderDuration(startDate, order)));
     // Default for bad data
     if (seconds < 0) {
       return "30px"
@@ -160,12 +145,6 @@ class DraggableCard extends PureComponent<Props> {
     const minutesToSeconds = startTime.minute() * 60;
     const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, startTime.seconds()]);
     return Math.round(totalSeconds * PIXELS_PER_SECOND);
-  }
-
-  openModal = () => {
-    this.props.openModal(R.merge(this.props.order, {
-      currentDuration: (this.orderDuration() / 1000)
-    }))
   }
 }
 

@@ -39,6 +39,32 @@ export function unadjustedOrderStartTime(startDate: number, order: Order): ?numb
   return startTime;
 }
 
+export function unadjustedOrderStopTime(startDate: number, order: Order): ?number {
+  if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
+    return order.rad_exam.rad_exam_time.end_exam;
+  } else if (typeof(order.appointment_duration) === "number") {
+    let durationMS = order.appointment_duration ? order.appointment_duration * 1000 : 0;
+    return unadjustedOrderStartTime(startDate, order) + durationMS;
+  } else if (!R.isNil(order.rad_exam)) {
+    return unadjustedOrderStartTime(startDate, order) + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
+  } else {
+    return unadjustedOrderStartTime(startDate, order) + (order.procedure.scheduled_duration * 60 * 1000);
+  }
+}
+
+// Returns milliseconds
+export function orderDuration(startDate: number, order: Order): ?number {
+  const unadjustedStartTime = unadjustedOrderStartTime(startDate, order) || 0;
+  return unadjustedOrderStopTime(startDate, order) - unadjustedStartTime;
+}
+
+export function maybeMsToSeconds(duration: ?number): ?number {
+  if (duration) {
+    return duration / 1000;
+  }
+  return null;
+}
+
 export function wrapEvent(orderId: number, userId: number,
   eventType: string = "event", comments: ?string = null,
   newState: Object = {}) {

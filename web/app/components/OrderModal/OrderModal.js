@@ -13,18 +13,20 @@ import {
   patientType,
 } from "../../lib/utility";
 
-import {wrapEvent} from "../../lib/data";
+import {
+  maybeMsToSeconds,
+  orderDuration,
+  wrapEvent,
+} from "../../lib/data";
 
 import CommentInterface from "./CommentInterface";
 import RoundingInterface from "./RoundingInterface";
 import StatusToggle from "./StatusToggle";
 
 import type {
-  Order as OrderT,
+  Order,
   User,
 } from "../../types";
-
-type Order = OrderT & {currentDuration: number}
 
 type Props = {
   adjustOrder: (event: Object) => void,
@@ -149,7 +151,7 @@ class OrderModal extends Component<Props> {
           {this.renderDemographicsTableRow("Check In", formatTimestamp(order.rad_exam.rad_exam_time.check_in))}
           {this.renderDemographicsTableRow("Appointment", formatTimestamp(appointmentTime(this.props.order)))}
           {this.renderDemographicsTableRow("Appointment Duration", this.formatDuration(order.appointment_duration))}
-          {this.renderDemographicsTableRow("Current Duration", this.formatDuration(order.currentDuration))}
+          {this.renderDemographicsTableRow("Current Duration", this.formatDuration(maybeMsToSeconds(orderDuration(this.props.startDate, order))))}
           {this.renderDemographicsTableRow("Begin Exam", formatTimestamp(order.rad_exam.rad_exam_time.begin_exam))}
           {this.renderDemographicsTableRow("End Exam", formatTimestamp(order.rad_exam.rad_exam_time.end_exam))}
           {this.renderDemographicsTableRow("Ordering Physician", order.rad_exam.rad_exam_personnel.ordering.name)}
@@ -208,23 +210,21 @@ class OrderModal extends Component<Props> {
 
   formatDuration(duration: ?number) {
     if ((duration || duration === 0) && !isNaN(duration)) {
-      const extra = duration <= 0;
-      if (extra) {
-        const parsedDuration = moment.duration(Math.abs(duration), "seconds");
-        var outputString;
+      const sign = duration <= 0 ? "-" : "";
+      const spanClass = duration <= 0 ? "alert-red" : "";
+      const parsedDuration = moment.duration(Math.abs(duration), "seconds");
+      const days = parsedDuration.get("days");
+      const hours = parsedDuration.get("hours");
+      const minutes = parsedDuration.get("minutes");
 
-        const days = parsedDuration.get("days");
-        if (days > 0) {
-          outputString = `-${days}d, ${parsedDuration.get("hours")}h`;
-        } else {
-          outputString = `-${parsedDuration.get("hours")}h, ${parsedDuration.get("minutes")}m`;
-        }
+      var outputString;
+      if (days > 0) {
+        outputString = `${days}d, ${hours}h`;
+      } else {
+        outputString = `${hours}h, ${minutes}m`;
+      }
 
-        return <span className="alert-red">${outputString}</span>;
-      }
-      else {
-        return null;
-      }
+      return <span className={spanClass}>{`${sign}${outputString}`}</span>;
     } else if (duration) {
       return duration;
     } else {
