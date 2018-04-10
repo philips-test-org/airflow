@@ -3,7 +3,6 @@ import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {
-  cardStatuses,
   checkExamThenOrder,
   formatName,
 } from "../../../lib/utility";
@@ -13,6 +12,8 @@ import type {
 } from "../../../types";
 
 type Props = {
+  cardClass: string,
+  cardColor: string,
   comments: Object,
   connectDragSource: Function,
   isDragging: boolean,
@@ -27,12 +28,11 @@ type Props = {
 class BaseNotecard extends PureComponent<Props> {
   render() {
     const {order, comments} = this.props;
-    const cardClass = `notecard ${this.cardClass()}`
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     return (
-      <div className={cardClass} id={cardId} style={this.props.style} onClick={this.openModal}>
-        <div className="left-tab" style={{backgroundColor: this.cardColor()}} />
+      <div className={this.props.cardClass} id={cardId} style={this.props.style} onClick={this.openModal}>
+        <div className="left-tab" style={{backgroundColor: this.props.cardColor}} />
 
         <div className="right-tab">
           <div className="events">{hasComments ? <i className="fa fa-paperclip"></i> : null}</div>
@@ -82,23 +82,6 @@ class BaseNotecard extends PureComponent<Props> {
   examLocation() {
     const {order} = this.props;
     return R.pathOr(null, ["rad_exam", "site_sublocation", "site_location", "location"], order);
-  }
-
-  cardColor() {
-    return cardStatuses(this.props.order, "color", "#ddd");
-  }
-
-  negativeDuration() {
-    // TODO FIXME
-    return false;
-  }
-
-  cardClass() {
-    return R.join(" ", [
-      this.props.type === "calendar" ? "scaled" : "overview",
-      this.negativeDuration() ? "bad-duration" : "",
-      cardStatuses(this.props.order, "card_class"),
-    ]);
   }
 
   openModal = () => {

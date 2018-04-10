@@ -18,17 +18,18 @@ import type {Order} from "../../types";
 
 const mapStateToProps = ({board, user}: Object) => {
   return {
+    avatarMap: user.avatars,
+    currentUser: user.currentUser,
     focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
+    orderGroups: board.orderGroups,
     orders: ordersByResource(board.orders),
     ordersLoaded: !R.isEmpty(board.orders),
-    orderGroups: board.orderGroups,
     resources: board.resources,
     selectedResourceGroup: board.selectedResourceGroup,
     selectedResources: mapSelectedResources(board.selectedResources),
     showModal: board.showModal,
     startDate: board.startDate,
-    currentUser: user.currentUser,
-    avatarMap: user.avatars,
+    viewType: board.viewType,
   };
 };
 

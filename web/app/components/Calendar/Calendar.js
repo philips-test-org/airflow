@@ -35,6 +35,7 @@ type Props = {
   showModal: boolean,
   startDate: number,
   style: {th: Object, td: Object},
+  viewType: "calendar" | "overview" | "kiosk",
 }
 
 class Calendar extends Component<Props> {
@@ -95,6 +96,7 @@ class Calendar extends Component<Props> {
         resourceId={resourceId}
         startDate={this.props.startDate}
         type="calendar"
+        viewType={this.props.viewType}
       />
     )
   }

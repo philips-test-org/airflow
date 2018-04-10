@@ -7,7 +7,6 @@ import store from "./lib/store";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 
-import Notecard from "./components/Notecard";
 import Airflow from "./components/Airflow";
 
 const renderApp = (Component, target, props = {key: "nilState"}) => {
@@ -32,7 +31,6 @@ $(() => {
   if (window) {
     window.dispatch = store.dispatch;
     window.renderReact = renderApp;
-    window.notecard = Notecard;
     window.airflow = Airflow;
   }
 });

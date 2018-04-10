@@ -7,7 +7,9 @@ import {ItemTypes} from "../../lib/constants";
 
 import {orderComments} from "../../lib/utility";
 
+import ScaledCard from "../Notecard/ScaledCard";
 import DraggableNotecard from "../Notecard";
+import KioskNotecard from "../Notecard/KioskNotecard";
 
 import type {Order} from "../../types";
 
@@ -23,6 +25,7 @@ type Props = {
   startDate: number,
   type: "calendar" | "overview" | "kiosk",
   updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
+  viewType: "calendar" | "overview" | "kiosk",
 }
 
 // React DnD setup
@@ -48,9 +51,16 @@ function collect(connect, monitor) {
 // React component
 class NotecardLane extends Component<Props> {
   render() {
-    const {connectDropTarget, isOver, header} = this.props;
+    if (this.props.viewType === "kiosk") {
+      return this.renderLane();
+    }
+    return this.props.connectDropTarget(this.renderLane());
+  }
+
+  renderLane() {
+    const {isOver, header} = this.props;
     const tdStyle = isOver ? {opacity: 0.33, backgroundColor: "lightgray"} : {}
-    return connectDropTarget(
+    return (
       <td key={`${header}-lane`} className="relative-column">
         <div className="markers" style={tdStyle}>
           {R.map((hour) => {
@@ -63,13 +73,15 @@ class NotecardLane extends Component<Props> {
           {this.renderCards()}
         </div>
       </td>
-    );
+    )
   }
 
   renderCards() {
+    const Component = this.props.viewType == "kiosk" ? KioskNotecard : DraggableNotecard;
+    const ScaledComponent = ScaledCard(Component);
     return (
       R.map((order) => (
-        <DraggableNotecard
+        <ScaledComponent
           key={order.id}
           comments={orderComments(order)}
           openModal={this.props.openModal}
