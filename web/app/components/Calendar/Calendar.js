@@ -1,6 +1,6 @@
+// @flow
 import React, {Component} from "react";
 import * as R from "ramda";
-import {throttle} from "lodash";
 import {DragDropContext} from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
@@ -9,14 +9,22 @@ import {wrapEvent} from "../../lib/data";
 import NotecardLane from "../NotecardLane";
 import RightNow from "./RightNow";
 
+import type {
+  Order,
+  Resource,
+  User,
+} from "../../types";
+
 type Props = {
   adjustOrder: (event: Object) => void,
   avatarMap: {[number]: Blob},
+  boardWidth: number,
   closeModal: () => void,
   currentUser: User,
   fetchAvatar: (userId: number) => void,
   fetchExams: (resourceIds: Array<number>, date?: number) => void,
   focusedOrder: Order,
+  headerOffset: number,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
   ordersLoaded: boolean,
@@ -26,6 +34,7 @@ type Props = {
   selectedResources: {[string]: string},
   showModal: boolean,
   startDate: number,
+  style: {th: Object, td: Object},
 }
 
 class Calendar extends Component<Props> {
@@ -37,28 +46,28 @@ class Calendar extends Component<Props> {
     );
 
     return (
-        <div className="grid-wrapper">
-          <table id="time-grid">
-            <thead>
-              <tr className="heading">
-                <th className="fixed-column fixed-row" style={style.th}>
-                  <div className="header-spacer">&nbsp;</div>
-                </th>
-                {R.map(this.renderHeading, R.keys(this.props.orders))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="hourbar" className="fixed-column" style={style.td}>
-                  {this.renderHours()}
-                </td>
-                {lanes}
-              </tr>
-            </tbody>
-          </table>
+      <div className="grid-wrapper">
+        <table id="time-grid">
+          <thead>
+            <tr className="heading">
+              <th className="fixed-column fixed-row" style={style.th}>
+                <div className="header-spacer">&nbsp;</div>
+              </th>
+              {R.map(this.renderHeading, R.keys(this.props.orders))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="hourbar" className="fixed-column" style={style.td}>
+                {this.renderHours()}
+              </td>
+              {lanes}
+            </tr>
+          </tbody>
+        </table>
 
-          {this.renderRightNow()}
-        </div>
+        {this.renderRightNow()}
+      </div>
     )
   }
 

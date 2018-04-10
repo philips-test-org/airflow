@@ -37,6 +37,7 @@ type Props = {
   order: Order,
   orderGroup: Array<Order>,
   resourceMap: {[string]: string},
+  startDate: number,
 }
 
 class OrderModal extends Component<Props> {

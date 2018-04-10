@@ -1,4 +1,5 @@
 // @flow
+/* eslint react/no-find-dom-node:0 */
 import React, {PureComponent} from "react";
 import {findDOMNode} from "react-dom";
 import * as R from "ramda";
@@ -11,8 +12,6 @@ import {
   examStartTime,
   maybeMsToSeconds,
   orderDuration,
-  unadjustedOrderStartTime,
-  unadjustedOrderStopTime,
 } from "../../lib/data";
 
 import {
@@ -95,7 +94,7 @@ class DraggableCard extends PureComponent<Props> {
     const {order} = this.props;
     const startTime =
       R.path(["adjusted", "start_time"], order) ? order.adjusted.start_time :
-      order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
+        order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
     if (!startTime) {return 0}
     return startTime;
   }
@@ -130,7 +129,8 @@ class DraggableCard extends PureComponent<Props> {
 
   orderHeight() {
     const {order, startDate} = this.props;
-    const seconds = Math.abs(maybeMsToSeconds(orderDuration(startDate, order)));
+    const durationSeconds = maybeMsToSeconds(orderDuration(startDate, order)) || 0;
+    const seconds = Math.abs(durationSeconds);
     // Default for bad data
     if (seconds < 0) {
       return "30px"

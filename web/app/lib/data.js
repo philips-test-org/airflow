@@ -39,7 +39,7 @@ export function unadjustedOrderStartTime(startDate: number, order: Order): ?numb
   return startTime;
 }
 
-export function unadjustedOrderStopTime(startDate: number, order: Order): ?number {
+export function unadjustedOrderStopTime(startDate: number, order: Order): number {
   if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
     return order.rad_exam.rad_exam_time.end_exam;
   } else if (typeof(order.appointment_duration) === "number") {
@@ -53,7 +53,7 @@ export function unadjustedOrderStopTime(startDate: number, order: Order): ?numbe
 }
 
 // Returns milliseconds
-export function orderDuration(startDate: number, order: Order): ?number {
+export function orderDuration(startDate: number, order: Order): number {
   const unadjustedStartTime = unadjustedOrderStartTime(startDate, order) || 0;
   return unadjustedOrderStopTime(startDate, order) - unadjustedStartTime;
 }

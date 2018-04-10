@@ -8,14 +8,19 @@ import {
   formatName,
 } from "../../../lib/utility";
 
+import type {
+  Order,
+} from "../../../types";
+
 type Props = {
   comments: Object,
-  order: Order,
-  openModal: (Order) => void,
-  startDate: number,
-  type: "calendar" | "overview" | "kiosk",
   connectDragSource: Function,
   isDragging: boolean,
+  openModal: (Order) => void,
+  order: Order,
+  startDate: number,
+  style: Object,
+  type: "calendar" | "overview" | "kiosk",
   updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
 }
 
