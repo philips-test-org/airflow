@@ -12,7 +12,7 @@ import {
   closeOrderModal,
 } from "../../lib/actions";
 
-import Calendar from "./Calendar";
+import Airflow from "./Airflow";
 
 import type {Order} from "../../types";
 
@@ -57,9 +57,9 @@ const mapSelectedResources = R.compose(
   R.map(({id, name}) => ({[id]: name}))
 )
 
-const CalendarContainer = connect(
+const AirflowContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Calendar);
+)(Airflow);
 
-export default CalendarContainer;
+export default AirflowContainer;

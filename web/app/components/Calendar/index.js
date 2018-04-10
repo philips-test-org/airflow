@@ -1,3 +1,3 @@
-import CalendarContainer from "./CalendarContainer";
+import Calendar from "./Calendar";
 
-export default CalendarContainer;
+export default Calendar;

@@ -8,7 +8,7 @@ application.calendar = function() {
   var resources = $.parseJSON($("#resource-groupings-json").text());
   var employee = $.parseJSON($("#employee-json").text());
   var resourceGroup = $("#selected-resource-group").text();
-  window.renderReact(window.calendar, "#workspace", {
+  window.renderReact(window.airflow, "#workspace", {
     board: {
       resources: resources,
       selectedResourceGroup: resourceGroup,
@@ -20,6 +20,9 @@ application.calendar = function() {
 };
 
 application.overview = function() {
+  var resources = $.parseJSON($("#resource-groupings-json").text());
+  var resourceGroup = $("#selected-resource-group").text();
+  var employee = $.parseJSON($("#employee-json").text());
   window.renderReact(window.calendar, "#workspace", {
     board: {
       resources: resources,

@@ -172,6 +172,10 @@ $card-color: #fff;
       &:not(:first-of-type) {
         border-left: unquote($border-unit) solid $grid-color;
       }
+
+      &:last-of-type {
+        border-right: unquote($border-unit) solid $grid-color;
+      }
     }
 
     tbody {
@@ -712,4 +716,9 @@ table.roles{
       line-height: 23px;
     }
   }
+}
+
+.grid-wrapper {
+  height: 100%;
+  width: 100%;
 }

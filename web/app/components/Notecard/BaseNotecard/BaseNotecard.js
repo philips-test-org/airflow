@@ -96,6 +96,10 @@ class BaseNotecard extends PureComponent<Props> {
     ]);
   }
 
+  openModal = () => {
+    const {order} = this.props;
+    this.props.openModal(order);
+  }
 }
 
 export default BaseNotecard;

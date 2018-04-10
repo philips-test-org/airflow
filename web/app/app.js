@@ -8,7 +8,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 
 import Notecard from "./components/Notecard";
-import Calendar from "./components/Calendar";
+import Airflow from "./components/Airflow";
 
 const renderApp = (Component, target, props = {key: "nilState"}) => {
   // Make sure the target element exists before attempting to render.
@@ -33,6 +33,6 @@ $(() => {
     window.dispatch = store.dispatch;
     window.renderReact = renderApp;
     window.notecard = Notecard;
-    window.calendar = Calendar;
+    window.airflow = Airflow;
   }
 });
