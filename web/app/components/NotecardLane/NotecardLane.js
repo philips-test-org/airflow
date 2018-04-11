@@ -23,9 +23,8 @@ type Props = {
   movementOffset: {x: number, y: number},
   resourceId: string,
   startDate: number,
-  type: "calendar" | "overview" | "kiosk",
+  type: "calendar" | "kiosk",
   updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
-  viewType: "calendar" | "overview" | "kiosk",
 }
 
 // React DnD setup
@@ -51,7 +50,7 @@ function collect(connect, monitor) {
 // React component
 class NotecardLane extends Component<Props> {
   render() {
-    if (this.props.viewType === "kiosk") {
+    if (this.props.type === "kiosk") {
       return this.renderLane();
     }
     return this.props.connectDropTarget(this.renderLane());
@@ -77,7 +76,7 @@ class NotecardLane extends Component<Props> {
   }
 
   renderCards() {
-    const Component = this.props.viewType == "kiosk" ? KioskNotecard : DraggableNotecard;
+    const Component = this.props.type == "kiosk" ? KioskNotecard : DraggableNotecard;
     const ScaledComponent = ScaledCard(Component);
     return (
       R.map((order) => (

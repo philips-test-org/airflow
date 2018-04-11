@@ -29,7 +29,7 @@ const initialState = {
   selectedResourceGroup: "All",
   selectedResources: [],
   startDate: computeStartDate(),
-  viewType: "calendar",
+  type: "calendar",
 };
 
 function board(state: Object = initialState, action: Object) {

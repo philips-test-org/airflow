@@ -64,9 +64,18 @@ class RightNow extends Component<Props, State> {
       // Offset the scroll so that the bar is roughly in the
       // middle of the viewport.
       const offset = window.innerHeight / 2.2;
+      // With the calendar refactor to be inside the Airflow component,
+      // There are two levels of parent divs that have to be traversed
+      // to get to the board that we want to scroll.
       const parent = element.parentNode;
       // $FlowFixMe
-      if (parent) {parent.scrollTop = this.getHeight() - offset}
+      if (parent) {
+        const parentsParent = parent.parentNode;
+        if (parentsParent) {
+          // $FlowFixMe
+          parent.scrollTop = this.getHeight() - offset
+        }
+      }
     }
   }
 

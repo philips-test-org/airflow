@@ -26,33 +26,40 @@ import type {
 type Props = {
   order: Order,
   startDate: number,
-  type: "calendar" | "overview" | "kiosk",
+  type: "calendar" | "kiosk",
 }
 
 function ScaledCard(WrappedComponent: ComponentType<any>) {
   return class ScaledCard extends Component<Props> {
     render() {
+      const orderHeight = this.orderHeight();
       const cardStyle = {
-        height: this.orderHeight(),
-        maxHeight: this.orderHeight(),
+        height: `${orderHeight}px`,
+        maxHeight: `${orderHeight}px`,
         top: `${this.orderTop()}px`,
       };
       const cardClass = `notecard ${this.cardClass()}`
       const cardColor = this.cardColor();
       return (
-        <WrappedComponent cardClass={cardClass} cardColor={cardColor} style={cardStyle} {...this.props} />
+        <WrappedComponent
+          cardClass={cardClass}
+          cardColor={cardColor}
+          style={cardStyle}
+          orderHeight={orderHeight}
+          {...this.props}
+        />
       )
     }
 
-    orderHeight() {
+    orderHeight(): number {
       const {order, startDate} = this.props;
       const durationSeconds = maybeMsToSeconds(orderDuration(startDate, order)) || 0;
       const seconds = Math.abs(durationSeconds);
       // Default for bad data
       if (seconds < 0) {
-        return "30px"
+        return 30;
       } else {
-        return Math.round(seconds * PIXELS_PER_SECOND) + "px";
+        return Math.round(seconds * PIXELS_PER_SECOND);
       }
     }
 
@@ -83,10 +90,12 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
     }
 
     cardClass() {
+      const {type} = this.props;
+      const status = type === "kiosk" ? "" : cardStatuses(this.props.order, "card_class");
       return R.join(" ", [
-        this.props.type === "calendar" ? "scaled" : "overview",
+        this.props.type === "overview" ? "overview" : "scaled",
         this.negativeDuration() ? "bad-duration" : "",
-        cardStatuses(this.props.order, "card_class"),
+        status,
       ]);
     }
   }

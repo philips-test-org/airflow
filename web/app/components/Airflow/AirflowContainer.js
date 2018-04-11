@@ -29,7 +29,7 @@ const mapStateToProps = ({board, user}: Object) => {
     selectedResources: mapSelectedResources(board.selectedResources),
     showModal: board.showModal,
     startDate: board.startDate,
-    viewType: board.viewType,
+    type: board.type,
   };
 };
 
