@@ -5,6 +5,7 @@ import * as R from "ramda";
 import moment from "moment";
 
 import {
+  HOURBAR_WIDTH,
   PIXELS_PER_SECOND,
 } from "../../../lib/constants";
 
@@ -51,7 +52,7 @@ class RightNow extends Component<Props, State> {
     const style = {
       top: this.getHeight(),
       display: "block",
-      width: this.props.width,
+      width: this.displayWidth(),
     }
     return (
       <div id="right-now" style={style}></div>
@@ -73,7 +74,7 @@ class RightNow extends Component<Props, State> {
         const parentsParent = parent.parentNode;
         if (parentsParent) {
           // $FlowFixMe
-          parent.scrollTop = this.getHeight() - offset
+          parentsParent.scrollTop = this.getHeight() - offset
         }
       }
     }
@@ -85,6 +86,11 @@ class RightNow extends Component<Props, State> {
     const minutesToSeconds = now.minute() * 60;
     const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, now.seconds()]);
     return Math.round((PIXELS_PER_SECOND * totalSeconds) + HEADER_OFFSET);
+  }
+
+  displayWidth() {
+    const timeGridWidth = this.props.width;
+    return timeGridWidth - HOURBAR_WIDTH;
   }
 }
 

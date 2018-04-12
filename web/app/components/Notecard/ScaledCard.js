@@ -33,10 +33,11 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
   return class ScaledCard extends Component<Props> {
     render() {
       const orderHeight = this.orderHeight();
+      const orderTop = this.orderTop();
       const cardStyle = {
         height: `${orderHeight}px`,
         maxHeight: `${orderHeight}px`,
-        top: `${this.orderTop()}px`,
+        top: `${orderTop}px`,
       };
       const cardClass = `notecard ${this.cardClass()}`
       const cardColor = this.cardColor();
@@ -46,6 +47,7 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
           cardColor={cardColor}
           style={cardStyle}
           orderHeight={orderHeight}
+          orderTop={orderTop}
           {...this.props}
         />
       )

@@ -39,7 +39,7 @@ type Props = {
 
 type State = {
   boardWidth: number,
-  gridPosition: Object,
+  gridPosition: {x: number, y: number},
 }
 
 class Airflow extends Component<Props, State> {
@@ -95,6 +95,7 @@ class Airflow extends Component<Props, State> {
             style={scrollStyle}
             headerOffset={this.headerOffset()}
             boardWidth={this.state.boardWidth}
+            gridPosition={this.state.gridPosition}
             {...this.props}
           />
           {this.renderOrderModal()}
@@ -138,7 +139,7 @@ class Airflow extends Component<Props, State> {
   }
 
   updateWidth() {
-    const element = document.getElementById("board")
+    const element = document.getElementById("time-grid")
     const width = element ? element.scrollWidth : 0;
     this.setState({boardWidth: width});
   }

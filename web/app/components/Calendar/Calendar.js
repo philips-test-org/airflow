@@ -89,13 +89,13 @@ class Calendar extends Component<Props> {
     return (
       <NotecardLane
         key={`${resourceId}-lane`}
-        updateOrderTime={this.updateOrderTime}
         header={resourceName}
-        orders={orders}
         openModal={this.props.openModal}
+        orders={orders}
         resourceId={resourceId}
         startDate={this.props.startDate}
         type={this.props.type}
+        updateOrderTime={this.updateOrderTime}
       />
     )
   }
