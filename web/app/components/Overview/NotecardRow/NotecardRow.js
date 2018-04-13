@@ -37,7 +37,7 @@ class NotecardRow extends Component<Props> {
       order={order}
       resourceId={this.props.resourceId}
       startDate={this.props.startDate}
-      type={this.props.type}
+      type="overview"
       />
   )
 }
