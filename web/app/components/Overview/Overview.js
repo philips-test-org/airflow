@@ -34,13 +34,13 @@ class Overview extends Component<Props> {
       R.toPairs(this.props.orders)
     );
     return (
-      <div id="relative-board" className="overview">
+      <div>
         {resourceRows}
       </div>
     );
   }
 
-  renderRow(resourceId: string, orders: Array<Order>) {
+  renderRow = (resourceId: string, orders: Array<Order>) => {
     const resourceName = this.props.selectedResources[resourceId];
     return (
       <NotecardRow

@@ -4,6 +4,7 @@ import * as R from "ramda";
 import {throttle} from "lodash";
 
 import Calendar from "../Calendar";
+import Overview from "../Overview";
 import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 
@@ -68,6 +69,7 @@ class Airflow extends Component<Props, State> {
   }
 
   render() {
+    const BodyComponent = this.props.type === "overview" ? Overview : Calendar;
     const translateX = Math.abs(this.state.gridPosition.x);
     const tdStyle = {
       transform: `translateX(${translateX}px)`,
@@ -91,7 +93,7 @@ class Airflow extends Component<Props, State> {
           fetchExams={this.props.fetchExams}
         />
         <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
-          <Calendar
+          <BodyComponent
             style={scrollStyle}
             headerOffset={this.headerOffset()}
             boardWidth={this.state.boardWidth}

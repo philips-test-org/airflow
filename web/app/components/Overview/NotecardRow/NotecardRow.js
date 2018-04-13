@@ -2,7 +2,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 
-import {orderComments} from "../../lib/utility";
+import {orderComments} from "../../../lib/utility";
 
 import BaseNotecard from "../../Notecard/BaseNotecard";
 
@@ -29,19 +29,17 @@ class NotecardRow extends Component<Props> {
     );
   }
 
-  renderCard(order: Order) {
-    return (
-      <BaseNotecard
-        key={order.id}
-        comments={orderComments(order)}
-        openModal={this.props.openModal}
-        order={order}
-        resourceId={this.props.resourceId}
-        startDate={this.props.startDate}
-        type={this.props.type}
+  renderCard = (order: Order) => (
+    <BaseNotecard
+      key={order.id}
+      comments={orderComments(order)}
+      openModal={this.props.openModal}
+      order={order}
+      resourceId={this.props.resourceId}
+      startDate={this.props.startDate}
+      type={this.props.type}
       />
-    )
-  }
+  )
 }
 
 export default NotecardRow;
