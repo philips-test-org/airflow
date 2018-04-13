@@ -9,6 +9,7 @@ import BaseNotecard from "../../Notecard/BaseNotecard";
 import type {Order} from "../../../types";
 
 type Props = {
+  fixedColStyle: Object,
   label: string,
   orders: Array<Order>,
   openModal: (Order) => void,
@@ -19,11 +20,12 @@ type Props = {
 
 class NotecardRow extends Component<Props> {
   render() {
-    const {orders, label} = this.props;
+    const {fixedColStyle, orders, label} = this.props;
     const cards = R.map(this.renderCard, orders)
+    const transformStyle = {transform: `${fixedColStyle.transform} rotate(-90deg)`};
     return (
-      <div className="resource-row">
-        <h1>{label}</h1>
+      <div className="resource-row fixed-column">
+        <h1 style={transformStyle}>{label}</h1>
         {cards}
       </div>
     );

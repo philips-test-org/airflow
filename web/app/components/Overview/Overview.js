@@ -50,6 +50,7 @@ class Overview extends Component<Props> {
         orders={orders}
         resourceId={resourceId}
         startDate={this.props.startDate}
+        fixedColStyle={this.props.style.td}
       />
     )
   }
