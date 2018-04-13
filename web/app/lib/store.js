@@ -1,5 +1,5 @@
 // @flow
-import {createStore, applyMiddleware} from "redux";
+import {createStore, applyMiddleware, compose} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 
@@ -10,7 +10,8 @@ import rootReducer from "./reducers/index";
 const store = (initState: Object = {}) => {
   const sagaMiddleware = createSagaMiddleware();
 
-  let s = createStore(rootReducer, initState, composeWithDevTools(
+  const compFun = window && window.__REDUX_DEVTOOLS_EXTENSION__ ? composeWithDevTools : compose;
+  let s = createStore(rootReducer, initState, compFun(
     applyMiddleware(
       sagaMiddleware
     )

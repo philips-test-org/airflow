@@ -22,19 +22,8 @@ const {
   REQUEST_FAILED,
 } = GeneralActions;
 
-const initialState = {
-  orders: [],
-  orderGroups: {},
-  resources: {},
-  selectedResourceGroup: "All",
-  selectedResources: [],
-  startDate: computeStartDate(),
-  type: "calendar",
-};
-
-function board(state: Object = initialState, action: Object) {
+function board(state: Object = {}, action: Object) {
   switch (action.type) {
-  case "@@INIT": return R.merge(initialState, state);
   case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
   case SHOW_ORDER_MODAL: return showOrderModal(state, action);

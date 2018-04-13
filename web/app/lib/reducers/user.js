@@ -15,7 +15,6 @@ const initialState = {
 
 function user(state: Object = initialState, action: Object) {
   switch (action.type) {
-  case "@@INIT": return R.merge(initialState, state);
   case FETCH_AVATAR_SUCCEEDED: return updateAvatarMap(state, action);
   default: return state;
   }
