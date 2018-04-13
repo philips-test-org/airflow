@@ -3,6 +3,7 @@ import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {
+  cardStatuses,
   checkExamThenOrder,
   formatName,
 } from "../../../lib/utility";
@@ -12,11 +13,7 @@ import type {
 } from "../../../types";
 
 type Props = {
-  cardClass: string,
-  cardColor: string,
   comments: Object,
-  connectDragSource: Function,
-  isDragging: boolean,
   openModal: (Order) => void,
   order: Order,
   startDate: number,
@@ -30,9 +27,11 @@ class BaseNotecard extends PureComponent<Props> {
     const {order, comments} = this.props;
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
+    const cardClass = `notecard ${this.cardClass()}`
+    const cardColor = this.cardColor();
     return (
-      <div className={this.props.cardClass} id={cardId} style={this.props.style} onClick={this.openModal}>
-        <div className="left-tab" style={{backgroundColor: this.props.cardColor}} />
+      <div className={cardClass} id={cardId} style={this.props.style} onClick={this.openModal}>
+        <div className="left-tab" style={{backgroundColor: cardColor}} />
 
         <div className="right-tab">
           <div className="events">{hasComments ? <i className="fa fa-paperclip"></i> : null}</div>
@@ -79,6 +78,20 @@ class BaseNotecard extends PureComponent<Props> {
     )
   }
 
+  cardClass() {
+    const {type} = this.props;
+    const status = type === "kiosk" ? "" : cardStatuses(this.props.order, "card_class");
+    return R.join(" ", [
+      this.props.type === "overview" ? "overview" : "scaled",
+      this.negativeDuration() ? "bad-duration" : "",
+      status,
+    ]);
+  }
+
+  cardColor() {
+    return cardStatuses(this.props.order, "color", "#ddd");
+  }
+
   examLocation() {
     const {order} = this.props;
     return R.pathOr(null, ["rad_exam", "site_sublocation", "site_location", "location"], order);
@@ -87,6 +100,11 @@ class BaseNotecard extends PureComponent<Props> {
   openModal = () => {
     const {order} = this.props;
     this.props.openModal(order);
+  }
+
+  negativeDuration() {
+    // TODO FIXME
+    return false;
   }
 }
 

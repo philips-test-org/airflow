@@ -10,10 +10,6 @@ import {
 } from "../../lib/data";
 
 import {
-  cardStatuses,
-} from "../../lib/utility";
-
-import {
   PIXELS_PER_SECOND,
 } from "../../lib/constants";
 
@@ -39,12 +35,8 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
         maxHeight: `${orderHeight}px`,
         top: `${orderTop}px`,
       };
-      const cardClass = `notecard ${this.cardClass()}`
-      const cardColor = this.cardColor();
       return (
         <WrappedComponent
-          cardClass={cardClass}
-          cardColor={cardColor}
           style={cardStyle}
           orderHeight={orderHeight}
           orderTop={orderTop}
@@ -80,25 +72,6 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
           order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
       if (!startTime) {return 0}
       return startTime;
-    }
-
-    negativeDuration() {
-      // TODO FIXME
-      return false;
-    }
-
-    cardColor() {
-      return cardStatuses(this.props.order, "color", "#ddd");
-    }
-
-    cardClass() {
-      const {type} = this.props;
-      const status = type === "kiosk" ? "" : cardStatuses(this.props.order, "card_class");
-      return R.join(" ", [
-        this.props.type === "overview" ? "overview" : "scaled",
-        this.negativeDuration() ? "bad-duration" : "",
-        status,
-      ]);
     }
   }
 }
