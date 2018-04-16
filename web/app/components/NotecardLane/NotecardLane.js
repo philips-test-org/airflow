@@ -76,11 +76,10 @@ class NotecardLane extends Component<Props> {
   }
 
   renderCards() {
-    const Component = this.props.type == "kiosk" ? KioskNotecard : DraggableNotecard;
-    const ScaledComponent = ScaledCard(Component);
+    const Component = this.props.type == "kiosk" ? ScaledCard(KioskNotecard) : DraggableNotecard;
     return (
       R.map((order) => (
-        <ScaledComponent
+        <Component
           key={order.id}
           comments={orderComments(order)}
           openModal={this.props.openModal}
