@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'unauthorized' => "unauthorized#index"
   get 'main' => "main#index", :defaults => {:view => "calendar"}
   get 'kiosk' => "kiosk#index"
+  get "employees/current" => "employees#current"
   get 'exams/kiosk' => "kiosk#exams"
   get 'exam' => "main#exam"
   get 'exams' => "exams#index"
