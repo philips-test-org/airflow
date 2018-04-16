@@ -62,20 +62,6 @@ $(document).ready(function() {
     });
   });
 
-  $("#legend-button").popover({
-    title: "Legend",
-    content: application.templates.legend(application.statuses),
-    html: true,
-    placement: "bottom",
-    container: 'body',
-    trigger: 'focus'
-  });
-
-  //safari can't seem to handle focus
-  $("#legend-button").click(function(){
-    $("#legend-button").focus();
-  });
-
   connectToAPM();
 });
 
