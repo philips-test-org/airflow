@@ -26,11 +26,10 @@ const fetchExams = (resourceIds: Array<number>, date: number = moment().unix()) 
   }
 }
 
-const fetchKioskExams = (resourceIds: Array<number>, date: number = moment().unix()) => {
+const fetchKioskExams = (resourceIds: Array<number>) => {
   return {
     type: BoardActions.FETCH_KIOSK_EXAMS,
     resourceIds,
-    date,
   }
 }
 

@@ -36,7 +36,7 @@ function* fetchExams(action): Saga<void> {
 
 function* fetchKioskExams(action): Saga<void> {
   try {
-    const payload = yield call(Api.fetchKioskExams, action.resourceIds, action.date);
+    const payload = yield call(Api.fetchKioskExams, action.resourceIds);
     yield put(fetchExamsSucceeded(payload));
   } catch (e) {
     yield call(requestFailed(e));

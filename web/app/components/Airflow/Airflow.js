@@ -96,10 +96,11 @@ class Airflow extends Component<Props, State> {
     return (
       <div>
         <ViewControls
+          fetchExams={this.props.fetchExams}
           resources={this.props.resources}
           selectedDate={this.props.startDate}
           selectedResourceGroup={this.props.selectedResourceGroup}
-          fetchExams={this.props.fetchExams}
+          viewType={this.props.type}
         />
         <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
           <BodyComponent

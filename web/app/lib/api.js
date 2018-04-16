@@ -15,8 +15,8 @@ const fetchExams = (resourceIds: Array<number>, date: number) => (
   GET(ENDPOINTS.exams, {resource_ids: resourceIds, date})
 );
 
-const fetchKioskExams = (resourceIds: Array<number>, date: number) => (
-  GET(ENDPOINTS.kiosk_exams, {resource_ids: resourceIds, date})
+const fetchKioskExams = (resourceIds: Array<number>) => (
+  GET(ENDPOINTS.kiosk_exams, {resource_ids: resourceIds})
 );
 
 const fetchAvatar = (userId: number) => (

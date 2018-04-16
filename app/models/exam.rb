@@ -1,5 +1,4 @@
-class Exam < ActiveRecord::Base
-
+class Exam
   def self.fetch(em, resource_ids, date)
     q = Java::HarbingerSdkData::Order.createQuery(em)
     q.join(".currentStatus.universalEventType")
@@ -22,5 +21,4 @@ class Exam < ActiveRecord::Base
     q.criteria.distinct(true)
     q.list
   end
-
 end
