@@ -7,6 +7,12 @@ class ResourceGroupsController < ApplicationController
 
   def index
     @resource_groups = ResourceGroup.all
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: ResourceGroup.resource_group_hash(@entity_manager).to_json
+      }
+    end
   end
 
   def search
@@ -39,6 +45,11 @@ class ResourceGroupsController < ApplicationController
     rg = ResourceGroup.find(params[:id])
     rg.destroy if rg
     render :text => "ok"
+  end
+
+  def selected
+    selected = session[:resource_group] || @groupings.keys.first
+    render json: selected
   end
 
   def associate
