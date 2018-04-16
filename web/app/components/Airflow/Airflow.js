@@ -26,6 +26,7 @@ type Props = {
   currentUser: User,
   fetchAvatar: (userId: number) => void,
   fetchExams: (resourceIds: Array<number>, date?: number) => void,
+  fetchKioskExams: (resourceIds: Array<number>, date?: number) => void,
   focusedOrder: Order,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
@@ -54,8 +55,15 @@ class Airflow extends Component<Props, State> {
   }
 
   componentWillMount() {
-    const {selectedResources} = this.props;
-    this.props.fetchExams(R.keys(selectedResources))
+    if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
+      this.fetchExams();
+    }
+  }
+
+  componentWillReceiveProps(newProps: Props) {
+    if (this.props.type !== newProps.type) {
+      this.fetchExams();
+    }
   }
 
   componentDidMount() {
@@ -144,6 +152,15 @@ class Airflow extends Component<Props, State> {
     const element = document.getElementById("time-grid")
     const width = element ? element.scrollWidth : 0;
     this.setState({boardWidth: width});
+  }
+
+  fetchExams() {
+    const {selectedResources} = this.props;
+    if (this.props.type === "kiosk") {
+      this.props.fetchKioskExams(R.keys(selectedResources))
+    } else {
+      this.props.fetchExams(R.keys(selectedResources))
+    }
   }
 }
 

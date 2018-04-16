@@ -1,13 +1,5 @@
 module OrmConverter
 
-
-  # def self.exam_with_comment(employee,comment)
-  #   {employee_id: employee.getId,
-  #    employee: {name: employee.name},
-  #    created_at: Time.now.to_i*1000,
-  #    comment: comment}
-  # end
-
   def self.test_exams
     params = {:resource_ids => [26]}
     date = Time.parse("2012-02-28")
@@ -107,44 +99,6 @@ module OrmConverter
       list
     end
   end
-
-  # def self.limited_exams(exams,em)
-  #   tree = {
-  #     :rad_exam_time => {},
-  #     :resource => {:modality => {}},
-  #     :procedure => {},
-  #     :current_status => {:universal_event_type => {}}
-  #   }
-  #   exams.inject([]) do |list,exam|
-  #     hash = get_data(tree,exam,{})
-  #     hash.merge!(ExamAdjustment.info_for(exam,em))
-  #     hash.delete("accession")
-  #     hash["events"] = []
-  #     list << hash
-  #     list
-  #   end
-  # end
-
-  # def self.exams(exams,em)
-  #   tree = {
-  #     :rad_exam_time => {},
-  #     :rad_exam_personnel => {},
-  #     :rad_exam_detail => {},
-  #     :procedure => {},
-  #     :patient_mrn => {:patient => {}},
-  #     :resource => {:modality => {}},
-  #     :site_class => {:patient_type => {}},
-  #     :current_status => {:universal_event_type => {}},
-  #     :site_sublocation => {:site_location => {}},
-  #     :order => {}
-  #   }
-  #   exams.inject([]) do |list,exam|
-  #     hash = get_data(tree,exam,{})
-  #     hash.merge!(ExamAdjustment.info_for(exam,em))
-  #     list << hash
-  #     list
-  #   end
-  # end
 
   def self.resource(resource)
     sub_objects = {:modality => {},

@@ -44,7 +44,7 @@
           <%= global_view_link("Calendar","calendar", {controller: :main, action: :index, :view => "calendar"}) %>
           <%= global_view_link("Overview","overview", {controller: :main, action: :index, :view => "overview"}) %>
         <% end %>
-        <%= global_view_link("Kiosk","kiosk", {controller: :kiosk, action: :index, :view => "kiosk"}) %>
+        <%= global_view_link("Kiosk","kiosk", {controller: :kiosk, action: :index}) %>
         <% unless session[:username].blank? %>
           <% authorized(["support-staff","ai-staff", "it-staff"]) do %>
             <li class="dropdown">

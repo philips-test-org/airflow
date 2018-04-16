@@ -3,6 +3,7 @@ import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {
+  cardStatuses,
   kioskNumber,
 } from "../../../lib/utility";
 
@@ -13,7 +14,6 @@ import type {
 } from "../../../types";
 
 type Props = {
-  cardClass: string,
   cardColor: string,
   order: Order,
   orderHeight: number,
@@ -30,9 +30,10 @@ class KioskNotecard extends PureComponent<Props> {
     const {order, orderHeight} = this.props;
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     const style = R.merge(this.props.style, {lineHeight: `${orderHeight}px`});
-    const tabStyle = {backgroundColor: this.props.cardColor};
+    const tabStyle = {backgroundColor: this.cardColor()};
+
     return (
-      <div className={this.props.cardClass} id={cardId} style={style} onClick={this.openModal}>
+      <div className="notecard scaled" id={cardId} style={style} onClick={this.openModal}>
         <div className="left-tab" style={tabStyle} />
         <div className="right-tab">
           {this.renderKioskNumber()}
@@ -64,6 +65,10 @@ class KioskNotecard extends PureComponent<Props> {
     const cardScrolledOffscreen = orderTop < gridTopWithHeaderOffset;
     const numberScrolledOffscreen = (orderTop - (orderHeight / 3) <= gridTopWithHeaderOffset);
     return cardScrolledOffscreen && numberScrolledOffscreen;
+  }
+
+  cardColor() {
+    return cardStatuses(this.props.order, "color", "#ddd");
   }
 
   openModal = () => {}
