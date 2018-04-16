@@ -64,17 +64,6 @@ application.statuses = {
   ]
 };
 
-// Sort checks by the order; be sure to dup the array as the original order needs to be preserved
-application.statuses.ordered_checks = application.statuses.checks.slice(0,application.statuses.checks.length).sort(function(a,b) {
-  if (a.order > b.order) {
-    return 1;
-  } else if (a.order < b.order) {
-    return -1;
-  } else {
-    return 0;
-  }
-});
-
 
 
 $(document).ready(function() {

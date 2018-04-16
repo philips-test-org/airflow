@@ -14,21 +14,25 @@ const formatName = R.compose(R.join(", "), R.reject(R.isEmpty), R.split("^"));
 
 export const STATUS_CHECKS = [
   {
-    name: "On Hold",
-    order: 5,
-    color: "#f5f52b",
-    card_class: "highlight",
-    check: (order: Order) => (order.adjusted.onhold == true)
+    name: "Ordered",
+    order: 1,
+    color: "#888888",
+    check: (order: Order) => {
+      let noExam = order.rad_exam == undefined;
+      let noSignInTime = R.isNil(order.rad_exam.rad_exam_time.sign_in);
+      let noCheckInTime = R.isNil(order.rad_exam.rad_exam_time.check_in);
+      return (noExam || noSignInTime || noCheckInTime);
+    }
   },
   {
-    name: "Cancelled",
-    order: 6,
-    color: "#c8040e",
+    name: "Patient Arrived",
+    order: 2,
+    color: "#1e9d8b",
     check: (order: Order) => {
-      let orderCancelled = R.path(["current_status", "universal_event_type", "event_type"], order) == "cancelled";
-      let undefinedExam = order.rad_exam != undefined;
-      let examCancelled = order.rad_exam.current_status.universal_event_type.event_type == "cancelled";
-      return (orderCancelled || (undefinedExam && examCancelled));
+      let hasExam = order.rad_exam != undefined;
+      let hasSignInTime = order.rad_exam.rad_exam_time.sign_in !== null;
+      let hasCheckInTime = order.rad_exam.rad_exam_time.check_in !== null;
+      return (hasExam && (hasSignInTime || hasCheckInTime));
     }
   },
   {
@@ -54,27 +58,23 @@ export const STATUS_CHECKS = [
     }
   },
   {
-    name: "Patient Arrived",
-    order: 2,
-    color: "#1e9d8b",
-    check: (order: Order) => {
-      let hasExam = order.rad_exam != undefined;
-      let hasSignInTime = order.rad_exam.rad_exam_time.sign_in !== null;
-      let hasCheckInTime = order.rad_exam.rad_exam_time.check_in !== null;
-      return (hasExam && (hasSignInTime || hasCheckInTime));
-    }
+    name: "On Hold",
+    order: 5,
+    color: "#f5f52b",
+    card_class: "highlight",
+    check: (order: Order) => (order.adjusted.onhold == true)
   },
   {
-    name: "Ordered",
-    order: 1,
-    color: "#888888",
+    name: "Cancelled",
+    order: 6,
+    color: "#c8040e",
     check: (order: Order) => {
-      let noExam = order.rad_exam == undefined;
-      let noSignInTime = R.isNil(order.rad_exam.rad_exam_time.sign_in);
-      let noCheckInTime = R.isNil(order.rad_exam.rad_exam_time.check_in);
-      return (noExam || noSignInTime || noCheckInTime);
+      let orderCancelled = R.path(["current_status", "universal_event_type", "event_type"], order) == "cancelled";
+      let undefinedExam = order.rad_exam != undefined;
+      let examCancelled = order.rad_exam.current_status.universal_event_type.event_type == "cancelled";
+      return (orderCancelled || (undefinedExam && examCancelled));
     }
-  }
+  },
 ]
 
 const formatTimestamp = (epoch: ?(string | number)) => {

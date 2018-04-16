@@ -1,0 +1,12 @@
+/*
+  Styling added since React update
+*/
+
+.open > #legend { display: block; }
+#legend {
+  min-width: 180px;
+  top: 30px;
+
+  .arrow { left: 36px; }
+}
+

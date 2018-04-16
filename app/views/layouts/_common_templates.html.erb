@@ -24,31 +24,6 @@
   </div>
 </script>
 
-<script class="handlebars-template" id="t-legend" type="text/x-handlebars-template">
-  <div id="legend">
-    {{#each ordered_checks}}
-    <div class="status">
-      <span class="color" style="background-color: {{this.color}}"></span><span class="name">{{this.name}}</span>
-    </div>
-    {{/each}}
-    <div class="status">
-      <span class="color" style="color: #53a790;"><i class="anesthesia">GA</i></span><span class="name">Anesthesia</span>
-    </div>
-    <div class="status">
-      <span class="color" style="color: #53a790;"><i class="fa fa-handshake-o"></i></span><span class="name">Consent</span>
-    </div>
-    <div class="status">
-      <span class="color" style="color: #53a790;"><i class="fa fa-thumbs-up"></i></span><span class="name">PPCA Ready</span>
-    </div>
-    <div class="status">
-      <span class="color" style="color: #53a790;"><i class="fa fa-file-text"></i></span><span class="name">Paperwork</span>
-    </div>
-    <div class="status">
-      <span class="color"><i class="fa fa-paperclip"></i></span><span class="name">Comment(s)</span>
-    </div>
-  </div>
-</script>
-
 <script class="handlebars-template" id="t-error-loading" type="text/x-handlebars-template">
   <div class="container margin-top">
     <div class="row">

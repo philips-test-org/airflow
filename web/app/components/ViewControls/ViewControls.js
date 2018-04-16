@@ -73,22 +73,26 @@ class ViewControls extends Component<Props, State> {
 
   renderLegend() {
     return (
-      <div id="legend" aria-labelledby="legend-button" className="dropdown-menu">
-        {R.map(this.renderStatus, STATUS_CHECKS)}
-        <div className="status">
-          <span className="color icon"><i className="anesthesia">GA</i></span><span className="name">Anesthesia</span>
-        </div>
-        <div className="status">
-          <span className="color icon"><i className="fa fa-handshake-o"></i></span><span className="name">Consent</span>
-        </div>
-        <div className="status">
-          <span className="color icon"><i className="fa fa-thumbs-up"></i></span><span className="name">PPCA Ready</span>
-        </div>
-        <div className="status">
-          <span className="color icon"><i className="fa fa-file-text"></i></span><span className="name">Paperwork</span>
-        </div>
-        <div className="status">
-          <span className="color"><i className="fa fa-paperclip"></i></span><span className="name">Comment(s)</span>
+      <div id="legend" aria-labelledby="legend-button" className="popover bottom">
+        <div className="arrow"></div>
+        <h3 className="popover-title">Legend</h3>
+        <div className="popover-content">
+          {R.map(this.renderStatus, STATUS_CHECKS)}
+          <div className="status">
+            <span className="color icon"><i className="anesthesia">GA</i></span><span className="name">Anesthesia</span>
+          </div>
+          <div className="status">
+            <span className="color icon"><i className="fa fa-handshake-o"></i></span><span className="name">Consent</span>
+          </div>
+          <div className="status">
+            <span className="color icon"><i className="fa fa-thumbs-up"></i></span><span className="name">PPCA Ready</span>
+          </div>
+          <div className="status">
+            <span className="color icon"><i className="fa fa-file-text"></i></span><span className="name">Paperwork</span>
+          </div>
+          <div className="status">
+            <span className="color"><i className="fa fa-paperclip"></i></span><span className="name">Comment(s)</span>
+          </div>
         </div>
       </div>
     )
@@ -108,7 +112,7 @@ class ViewControls extends Component<Props, State> {
     return (
       <div className="btn-group pull-right margin-right-sm" id="resource-group-buttons">
         <button className="btn btn-default dropdown-toggle" data-value={selectedResource} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span className="group-name">{selectedResource}</span>
+          <span className="group-name">{selectedResource} </span>
           <span className="caret"></span>
         </button>
         <ul className="dropdown-menu">
