@@ -60,11 +60,15 @@ class KioskNotecard extends PureComponent<Props> {
 
   shiftKioskNumber(): boolean {
     const {orderTop, orderHeight} = this.props;
-    const gridTop = Math.abs(R.prop("top", document.getElementById("time-grid").getBoundingClientRect()));
-    const gridTopWithHeaderOffset = gridTop + (NAVBAR_OFFSET / 2);
-    const cardScrolledOffscreen = orderTop < gridTopWithHeaderOffset;
-    const numberScrolledOffscreen = (orderTop - (orderHeight / 3) <= gridTopWithHeaderOffset);
-    return cardScrolledOffscreen && numberScrolledOffscreen;
+    const timeGrid = document.getElementById("time-grid");
+    if (timeGrid) {
+      const gridTop = Math.abs(R.prop("top", timeGrid.getBoundingClientRect()));
+      const gridTopWithHeaderOffset = gridTop + (NAVBAR_OFFSET / 2);
+      const cardScrolledOffscreen = orderTop < gridTopWithHeaderOffset;
+      const numberScrolledOffscreen = (orderTop - (orderHeight / 3) <= gridTopWithHeaderOffset);
+      return cardScrolledOffscreen && numberScrolledOffscreen;
+    }
+    return false;
   }
 
   cardColor() {

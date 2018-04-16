@@ -37,6 +37,7 @@ type Props = {
   selectedResources: {[string]: string},
   showModal: boolean,
   startDate: number,
+  type: "calendar" | "kiosk" | "overview",
 }
 
 type State = {

@@ -2,6 +2,7 @@ import React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
 import * as R from "ramda";
+import moment from "moment";
 import store from "./lib/store";
 
 import "react-dates/initialize";
@@ -37,7 +38,7 @@ const renderApp = (Component, target, props = {key: "nilState"}) => {
   }
 }
 
-function computeStartDate(selectedDate: number = moment().unix()) {
+function computeStartDate(selectedDate = moment().unix()) {
   return moment(selectedDate * 1000).startOf("day").unix()*1000;
 }
 

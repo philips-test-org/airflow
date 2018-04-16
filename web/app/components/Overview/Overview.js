@@ -4,27 +4,14 @@ import * as R from "ramda";
 
 import NotecardRow from "./NotecardRow";
 
+import type {Order} from "../../types";
+
 type Props = {
-  adjustOrder: (event: Object) => void,
-  avatarMap: {[number]: Blob},
-  boardWidth: number,
-  closeModal: () => void,
-  currentUser: User,
-  fetchAvatar: (userId: number) => void,
-  fetchExams: (resourceIds: Array<number>, date?: number) => void,
-  focusedOrder: Order,
-  headerOffset: number,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
-  ordersLoaded: boolean,
-  orderGroups: {[string]: Array<Order>},
-  resources: {[string]: Array<Resource>},
-  selectedResourceGroup: string,
   selectedResources: {[string]: string},
-  showModal: boolean,
   startDate: number,
   style: {th: Object, td: Object},
-  type: "calendar" | "overview" | "kiosk",
 }
 
 class Overview extends Component<Props> {

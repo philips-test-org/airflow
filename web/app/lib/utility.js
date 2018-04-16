@@ -105,7 +105,6 @@ function ordersByResource(orders: Array<Order>): {[string]: Array<Order>} {
 }
 
 function cardStatuses(order: Order, type: string, default_value: string = "") {
-
   return R.reduce((acc, check) => {
     if (check.check(order)) {
       if (!R.isNil(type)) {
@@ -115,7 +114,7 @@ function cardStatuses(order: Order, type: string, default_value: string = "") {
       }
     }
     return acc;
-  }, default_value, R.sort(R.prop("order"), STATUS_CHECKS));
+  }, default_value, R.sortBy(R.prop("order"), STATUS_CHECKS));
 }
 
 function orderResource(resources: Array<Resource>, order: Order) {
