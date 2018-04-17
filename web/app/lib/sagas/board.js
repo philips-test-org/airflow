@@ -30,6 +30,7 @@ const {
   FETCH_EXAMS,
   FETCH_KIOSK_EXAMS,
   FETCH_INITIAL_APP,
+  UPDATE_BROWSER_HISTORY,
 } = BoardActions;
 
 function* fetchExams(action): Saga<void> {
@@ -91,9 +92,14 @@ function* adjustOrder(action): Saga<void> {
   }
 }
 
+function* updateHistory(action): Saga<void> {
+  yield history.replaceState({}, action.title, action.path);
+}
+
 export default function* boardSaga(): Saga<void> {
   yield takeLatest(FETCH_EXAMS, fetchExams)
   yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
   yield takeLatest(FETCH_INITIAL_APP, fetchInitialApp)
   yield takeEvery(ADJUST_ORDER, adjustOrder)
+  yield takeEvery(UPDATE_BROWSER_HISTORY, updateHistory)
 }

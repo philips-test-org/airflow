@@ -10,38 +10,16 @@ import "react-dates/lib/css/_datepicker.css";
 
 import Airflow from "./components/Airflow";
 
-const initialState = {
-  board: {
-    orders: [],
-    orderGroups: {},
-    resources: {},
-    selectedResourceGroup: "All",
-    selectedResources: [],
-    startDate: computeStartDate(),
-    type: "calendar",
-    loading: true,
-    images: {},
-  },
-  user: {
-    avatars: {},
-  }
-};
-
 const renderApp = (Component, target, props = {key: "nilState"}) => {
   // Make sure the target element exists before attempting to render.
   if ($(target)) {
-    const initState = store(R.mergeDeepRight(initialState, R.omit(["key"], props)));
     render (
-      <Provider key={props.key} store={initState}>
+      <Provider key={props.key} store={store({board: R.merge(props, {hydrated: false})})}>
         <Component />
       </Provider>,
       document.querySelector(target)
     )
   }
-}
-
-function computeStartDate(selectedDate = moment().unix()) {
-  return moment(selectedDate * 1000).startOf("day").unix()*1000;
 }
 
 $(() => {

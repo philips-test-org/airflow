@@ -14,10 +14,10 @@ import {
 
 
 import type {
+  Images,
   Order,
   Resource,
   User,
-  Images,
   ViewType,
 } from "../../types";
 
@@ -44,6 +44,8 @@ type Props = {
   type: ViewType,
   images: Images,
   loading: boolean,
+  updateBrowserHistory: (title: string, path: string) => void,
+  updateViewType: (updatedView: ViewType) => void,
 }
 
 type State = {
@@ -62,6 +64,7 @@ class Airflow extends Component<Props, State> {
   }
 
   componentWillMount() {
+    this.setupViewChangeHandlers();
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
       this.props.fetchCurrentEmployee();
@@ -169,6 +172,24 @@ class Airflow extends Component<Props, State> {
     const element = document.getElementById("time-grid")
     const width = element ? element.scrollWidth : 0;
     this.setState({boardWidth: width});
+  }
+
+  setupViewChangeHandlers() {
+    this.kioskLink = document.getElementById("kiosk-link");
+    this.kioskLink.addEventListener("click", () => {this.viewClickHandler("kiosk", "/kiosk")})
+
+    this.calendarLink = document.getElementById("calendar-link");
+    this.calendarLink.addEventListener("click", () => {this.viewClickHandler("calendar", "/main/calendar")})
+
+    this.overviewLink = document.getElementById("overview-link");
+    this.overviewLink.addEventListener("click", () => {this.viewClickHandler("overview", "/main/overview")})
+  }
+
+  viewClickHandler = (type, path) => {
+    const {updateBrowserHistory, updateViewType} = this.props;
+
+    updateViewType(type);
+    updateBrowserHistory(type, path);
   }
 
   fetchExams() {

@@ -16,8 +16,11 @@ const BoardActions = {
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
   ADJUST_ORDER: "ADJUST_ORDER",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
+  // UI
   SHOW_LOADING: "SHOW_LOADING",
   HIDE_LOADING: "HIDE_LOADING",
+  UPDATE_BROWSER_HISTORY: "UPDATE_BROWSER_HISTORY",
+  UPDATE_VIEW_TYPE: "UPDATE_VIEW_TYPE",
   // Resources
   FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
   FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
@@ -77,6 +80,8 @@ const adjustOrderSucceeded = (orderId: number, payload: Object) => {
   }
 }
 
+// UI
+
 const showLoading = () => {
   return {
     type: BoardActions.SHOW_LOADING,
@@ -86,6 +91,21 @@ const showLoading = () => {
 const hideLoading = () => {
   return {
     type: BoardActions.HIDE_LOADING,
+  }
+}
+
+const updateBrowserHistory = (title: string, path: string) => {
+  return {
+    type: BoardActions.UPDATE_BROWSER_HISTORY,
+    title,
+    path,
+  }
+}
+
+const updateViewType = (updatedView: ViewType) => {
+  return {
+    type: BoardActions.UPDATE_VIEW_TYPE,
+    updatedView,
   }
 }
 
@@ -120,4 +140,6 @@ export {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  updateViewType,
+  updateBrowserHistory,
 }
