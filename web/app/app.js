@@ -19,6 +19,8 @@ const initialState = {
     selectedResources: [],
     startDate: computeStartDate(),
     type: "calendar",
+    loading: true,
+    images: {},
   },
   user: {
     avatars: {},

@@ -17,6 +17,7 @@ import type {
   Order,
   Resource,
   User,
+  Images,
 } from "../../types";
 
 type Props = {
@@ -38,6 +39,8 @@ type Props = {
   showModal: boolean,
   startDate: number,
   type: "calendar" | "kiosk" | "overview",
+  images: Images,
+  loading: boolean,
 }
 
 type State = {
@@ -78,6 +81,23 @@ class Airflow extends Component<Props, State> {
   }
 
   render() {
+    return (
+      <div>
+        <ViewControls
+          fetchExams={this.props.fetchExams}
+          resources={this.props.resources}
+          selectedDate={this.props.startDate}
+          selectedResourceGroup={this.props.selectedResourceGroup}
+          viewType={this.props.type}
+        />
+        {this.props.loading
+          ? <img src={this.props.images.spinner} />
+          : this.renderBoard()}
+      </div>
+    );
+  }
+
+  renderBoard() {
     const BodyComponent = this.props.type === "overview" ? Overview : Calendar;
     const translateX = Math.abs(this.state.gridPosition.x);
     const tdStyle = {
@@ -94,24 +114,15 @@ class Airflow extends Component<Props, State> {
     };
 
     return (
-      <div>
-        <ViewControls
-          fetchExams={this.props.fetchExams}
-          resources={this.props.resources}
-          selectedDate={this.props.startDate}
-          selectedResourceGroup={this.props.selectedResourceGroup}
-          viewType={this.props.type}
+      <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
+        <BodyComponent
+          style={scrollStyle}
+          headerOffset={this.headerOffset()}
+          boardWidth={this.state.boardWidth}
+          gridPosition={this.state.gridPosition}
+          {...this.props}
         />
-        <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
-          <BodyComponent
-            style={scrollStyle}
-            headerOffset={this.headerOffset()}
-            boardWidth={this.state.boardWidth}
-            gridPosition={this.state.gridPosition}
-            {...this.props}
-          />
-          {this.renderOrderModal()}
-        </div>
+        {this.renderOrderModal()}
       </div>
     );
   }

@@ -14,6 +14,9 @@ application.calendar = function() {
       selectedResourceGroup: resourceGroup,
       selectedResources: resources[resourceGroup] || [],
       type: "calendar",
+      images: {
+        spinner: "<%= image_path "ajax-loader.gif" %>",
+      },
     },
     user: {currentUser: employee},
     key: "calendarState",
@@ -30,6 +33,9 @@ application.overview = function() {
       selectedResourceGroup: resourceGroup,
       selectedResources: resources[resourceGroup] || [],
       type: "overview",
+      images: {
+        spinner: "<%= image_path "ajax-loader.gif" %>",
+      },
     },
     user: {currentUser: employee},
     key: "overviewState",
@@ -45,6 +51,9 @@ application.kiosk = function() {
       selectedResourceGroup: resourceGroup,
       selectedResources: resources[resourceGroup] || [],
       type: "kiosk",
+      images: {
+        spinner: "<%= image_path "ajax-loader.gif" %>",
+      },
     },
     key: "kioskState",
   })

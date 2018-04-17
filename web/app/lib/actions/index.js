@@ -18,6 +18,8 @@ import {
   fetchKioskExams,
   showOrderModal,
   closeOrderModal,
+  showLoading,
+  hideLoading,
 } from "./board";
 
 //USER
@@ -42,6 +44,8 @@ export {
   fetchKioskExams,
   showOrderModal,
   closeOrderModal,
+  showLoading,
+  hideLoading,
   // USER
   UserActions,
   fetchAvatar,

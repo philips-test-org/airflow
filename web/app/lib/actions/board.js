@@ -14,6 +14,8 @@ const BoardActions = {
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
   ADJUST_ORDER: "ADJUST_ORDER",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
+  SHOW_LOADING: "SHOW_LOADING",
+  HIDE_LOADING: "HIDE_LOADING",
 }
 
 // Action generator functions
@@ -70,6 +72,18 @@ const adjustOrderSucceeded = (orderId: number, payload: Object) => {
   }
 }
 
+const showLoading = () => {
+  return {
+    type: BoardActions.SHOW_LOADING,
+  }
+}
+
+const hideLoading = () => {
+  return {
+    type: BoardActions.HIDE_LOADING,
+  }
+}
+
 export {
   BoardActions,
   fetchExams,
@@ -79,4 +93,6 @@ export {
   adjustOrderSucceeded,
   showOrderModal,
   closeOrderModal,
+  showLoading,
+  hideLoading,
 }
