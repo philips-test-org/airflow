@@ -226,3 +226,7 @@ export type Order = {
   rad_exam: RadExam,
   groupIdentity: string,
 }
+
+export type Images = {
+  spinner: string,
+}

@@ -15,6 +15,8 @@ const {
   FETCH_EXAMS_SUCCEEDED,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
+  SHOW_LOADING,
+  HIDE_LOADING,
 } = BoardActions;
 
 const {
@@ -27,6 +29,8 @@ function board(state: Object = {}, action: Object) {
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
   case SHOW_ORDER_MODAL: return showOrderModal(state, action);
   case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
+  case SHOW_LOADING: return showLoading(state);
+  case HIDE_LOADING: return hideLoading(state);
   case REQUEST_FAILED: return state;
   default: return state;
   }
@@ -59,6 +63,14 @@ function updateOrders(state, {payload}) {
     orders: payloadWithIdent,
     orderGroups: R.groupBy(R.prop("groupIdentity"), payloadWithIdent),
   });
+}
+
+function showLoading(state) {
+  return R.merge(state, {loading: true});
+}
+
+function hideLoading(state) {
+  return R.merge(state, {loading: false});
 }
 
 export default board;

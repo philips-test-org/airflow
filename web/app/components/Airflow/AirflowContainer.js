@@ -31,6 +31,8 @@ const mapStateToProps = ({board, user}: Object) => {
     showModal: board.showModal,
     startDate: board.startDate,
     type: board.type,
+    loading: board.loading,
+    images: board.images,
   };
 };
 

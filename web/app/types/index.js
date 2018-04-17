@@ -14,6 +14,7 @@ import type {
   RadExamTime,
   Resource,
   SiteClass,
+  Images,
 } from "./order";
 
 import type {
@@ -35,6 +36,7 @@ export type {
   RadExamTime,
   Resource,
   SiteClass,
+  Images,
   // USER
   User,
 };

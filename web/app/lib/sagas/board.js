@@ -14,6 +14,8 @@ import {
   adjustOrderSucceeded,
   fetchExamsSucceeded,
   requestFailed,
+  showLoading,
+  hideLoading,
 } from "../actions";
 
 import type {Saga} from "redux-saga";
@@ -26,8 +28,10 @@ const {
 
 function* fetchExams(action): Saga<void> {
   try {
+    yield put(showLoading());
     const payload = yield call(Api.fetchExams, action.resourceIds, action.date);
     yield put(fetchExamsSucceeded(payload));
+    yield put(hideLoading());
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)
@@ -36,8 +40,10 @@ function* fetchExams(action): Saga<void> {
 
 function* fetchKioskExams(action): Saga<void> {
   try {
+    yield put(showLoading());
     const payload = yield call(Api.fetchKioskExams, action.resourceIds);
     yield put(fetchExamsSucceeded(payload));
+    yield put(hideLoading());
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)
