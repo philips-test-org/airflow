@@ -15,6 +15,7 @@ import {
   adjustOrderSucceeded,
   fetchExams,
   fetchExamsSucceeded,
+  fetchKioskExams,
   showOrderModal,
   closeOrderModal,
 } from "./board";
@@ -38,6 +39,7 @@ export {
   adjustOrderSucceeded,
   fetchExams,
   fetchExamsSucceeded,
+  fetchKioskExams,
   showOrderModal,
   closeOrderModal,
   // USER

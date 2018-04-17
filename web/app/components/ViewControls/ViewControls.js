@@ -15,6 +15,7 @@ type Props = {
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
   selectedDate: string,
+  viewType: "calendar" | "kiosk" | "overview",
 }
 
 type State = {
@@ -53,19 +54,7 @@ class ViewControls extends Component<Props, State> {
           {this.renderLegend()}
         </div>
 
-        <div className="btn-group pull-right">
-          <SingleDatePicker
-            date={moment(this.state.date)}
-            focused={this.state.showDatePicker}
-            isOutsideRange={R.F}
-            numberOfMonths={1}
-            onDateChange={this.selectDate}
-            onFocusChange={this.toggleDatePicker}
-            placeholder="Today"
-            readOnly={true}
-            small={true}
-          />
-        </div>
+        {this.renderDatePicker()}
         {this.renderResourceDropdown()}
       </div>
     );
@@ -102,6 +91,25 @@ class ViewControls extends Component<Props, State> {
     return (
       <div key={`status-${status.order}`} className="status">
         <span className="color" style={{backgroundColor: status.color}}></span><span className="name">{status.name}</span>
+      </div>
+    )
+  }
+
+  renderDatePicker() {
+    if (this.props.viewType === "kiosk") {return null}
+    return (
+      <div className="btn-group pull-right">
+        <SingleDatePicker
+          date={moment(this.state.date)}
+          focused={this.state.showDatePicker}
+          isOutsideRange={R.F}
+          numberOfMonths={1}
+          onDateChange={this.selectDate}
+          onFocusChange={this.toggleDatePicker}
+          placeholder="Today"
+          readOnly={true}
+          small={true}
+        />
       </div>
     )
   }

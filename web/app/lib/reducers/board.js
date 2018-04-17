@@ -1,6 +1,5 @@
 // @flow
 import * as R from "ramda";
-import moment from "moment";
 
 import {
   groupIdentity,
@@ -60,10 +59,6 @@ function updateOrders(state, {payload}) {
     orders: payloadWithIdent,
     orderGroups: R.groupBy(R.prop("groupIdentity"), payloadWithIdent),
   });
-}
-
-function computeStartDate(selectedDate: number = moment().unix()) {
-  return moment(selectedDate * 1000).startOf("day").unix()*1000;
 }
 
 export default board;

@@ -5,26 +5,7 @@ class ExamsController < ApplicationController
     session[:resource_group] = params[:resource_group]
     date = Time.at(params[:date].to_i) unless params[:date].blank?
     date ||= Time.now
-    q = Java::HarbingerSdkData::Order.createQuery(@entity_manager)
-    q.join(".currentStatus.universalEventType")
-    q.where([q.or([q.in(".resourceId",params[:resource_ids]),
-                   q.in(".radExams.resourceId",params[:resource_ids])]),
-             q.and([q.or([q.notEqual(".currentStatus.universalEventType.eventType","cancelled"),
-                          q.isNull(".currentStatus.universalEventTypeId")
-                         ]),
-                    q.or([q.notEqual(".radExams.currentStatus.universalEventType.eventType","cancelled"),
-                          q.isNull(".radExams.currentStatus.universalEventTypeId")])]),
-             q.or([q.between(".radExams.radExamTime.appointment",
-                             date.beginning_of_day,
-                             date.end_of_day),
-                   q.between(".radExams.radExamTime.beginExam",
-                             date.beginning_of_day,
-                             date.end_of_day),
-                   q.between(".appointment",date.beginning_of_day,date.end_of_day)])
-            ])
-    q.order(".orderNumber asc")
-    q.criteria.distinct(true)
-    orders = q.list
+    orders = Exam.fetch(@entity_manager, params[:resource_ids], date)
     log_hipaa_view(orders)
 
     render :json => OrmConverter.orders(orders,@entity_manager)

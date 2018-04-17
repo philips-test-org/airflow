@@ -40,7 +40,7 @@ class NotecardRow extends Component<Props> {
       resourceId={this.props.resourceId}
       startDate={this.props.startDate}
       type="overview"
-      />
+    />
   )
 }
 

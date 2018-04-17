@@ -21,11 +21,22 @@ import type {Saga} from "redux-saga";
 const {
   ADJUST_ORDER,
   FETCH_EXAMS,
+  FETCH_KIOSK_EXAMS,
 } = BoardActions;
 
 function* fetchExams(action): Saga<void> {
   try {
     const payload = yield call(Api.fetchExams, action.resourceIds, action.date);
+    yield put(fetchExamsSucceeded(payload));
+  } catch (e) {
+    yield call(requestFailed(e));
+    console.log("error", e)
+  }
+}
+
+function* fetchKioskExams(action): Saga<void> {
+  try {
+    const payload = yield call(Api.fetchKioskExams, action.resourceIds);
     yield put(fetchExamsSucceeded(payload));
   } catch (e) {
     yield call(requestFailed(e));
@@ -45,5 +56,6 @@ function* adjustOrder(action): Saga<void> {
 
 export default function* boardSaga(): Saga<void> {
   yield takeLatest(FETCH_EXAMS, fetchExams)
+  yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
   yield takeEvery(ADJUST_ORDER, adjustOrder)
 }

@@ -8,6 +8,7 @@ import {
   adjustOrder,
   fetchAvatar,
   fetchExams,
+  fetchKioskExams,
   showOrderModal,
   closeOrderModal,
 } from "../../lib/actions";
@@ -43,6 +44,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchExams: (resources: Array<number>, date: number) => {
       dispatch(fetchExams(resources, date));
+    },
+    fetchKioskExams: (resources: Array<number>) => {
+      dispatch(fetchKioskExams(resources));
     },
     openModal: (order: Order) => {
       dispatch(showOrderModal(order));

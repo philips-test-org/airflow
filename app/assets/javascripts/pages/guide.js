@@ -30,38 +30,6 @@ $(document).ready(function() {
     }
   });
 
-  $("#view-controls #time-button").popover({
-    title: "Select a date to show",
-    content: application.templates.dateButtonPopover({}),
-    html: true,
-    placement: "bottom",
-    container: $("body")
-  });
-
-  $("#time-button").on("inserted.bs.popover",function(e) {
-    var set_epoch = $("#time-button").data("value");
-    if (set_epoch != undefined) {  var date = moment(set_epoch*1000); }
-    else { var date = moment() }
-    $('#view-datepicker').datetimepicker({
-      inline: true,
-      format: 'LL',
-      defaultDate: date
-    });
-    $("#view-datepicker").on("dp.change",function(e) {
-      $("#time-button").data("value",e.date.unix());
-      $("#time-button").html(e.date.format('dddd, LL') + ' <span class="caret"></span>');
-      $("#time-button").trigger("click");
-      application.drawBoard();
-    });
-    $("#today-button").on("click",function(e) {
-      e.preventDefault();
-      $("#time-button").data("value",moment().unix());
-      $("#time-button").html('Today <span class="caret"></span>');
-      $("#time-button").trigger("click");
-      application.drawBoard();
-    });
-  });
-
   connectToAPM();
 });
 

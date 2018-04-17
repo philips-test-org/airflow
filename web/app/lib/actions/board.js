@@ -8,6 +8,7 @@ import type {
 const BoardActions = {
   FETCH_EXAMS: "FETCH_EXAMS",
   FETCH_EXAMS_SUCCEEDED: "FETCH_EXAMS_SUCCEEDED",
+  FETCH_KIOSK_EXAMS: "FETCH_KIOSK_EXAMS",
   // ORDER MODAL
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
@@ -22,6 +23,13 @@ const fetchExams = (resourceIds: Array<number>, date: number = moment().unix()) 
     type: BoardActions.FETCH_EXAMS,
     resourceIds,
     date,
+  }
+}
+
+const fetchKioskExams = (resourceIds: Array<number>) => {
+  return {
+    type: BoardActions.FETCH_KIOSK_EXAMS,
+    resourceIds,
   }
 }
 
@@ -66,6 +74,7 @@ export {
   BoardActions,
   fetchExams,
   fetchExamsSucceeded,
+  fetchKioskExams,
   adjustOrder,
   adjustOrderSucceeded,
   showOrderModal,
