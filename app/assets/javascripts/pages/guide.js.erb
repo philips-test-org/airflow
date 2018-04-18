@@ -1,33 +1,18 @@
 $(document).ready(function() {
-
   if ($(".active .view-changer").length > 0) {
     var view =  $(".active .view-changer").data("view-type");
-    application.view = application[view];
-  } else {
-    application.view = application.calendar;
+    window.renderReact(window.airflow, "#workspace", {
+      board: {
+        type: view,
+        images: {spinner: "<%= image_path "ajax-loader.gif" %>"},
+      },
+    });
   }
 
-  application.drawBoard();
-
   $(".view-changer").click(function(e) {
-    if ($(this).data("view-type") != "kiosk") {
-      e.preventDefault();
-      var view = $(this).data("view-type");
-      application.view = application[view];
-      $(this).parent().siblings().removeClass("active");
-      $(this).parent().addClass("active");
-      application.drawBoard();
-    }
-  });
-
-  $("#view-controls #resource-group-buttons ul li a").click(function(e) {
     e.preventDefault();
-    var group = $(this).data("value");
-    if (group != $("#resource-group-buttons button").data("value")) {
-      $("#resource-group-buttons button .group-name").text(group);
-      $("#resource-group-buttons button").data("value",group);
-      application.drawBoard();
-    }
+    $(this).parent().siblings().removeClass("active");
+    $(this).parent().addClass("active");
   });
 
   connectToAPM();

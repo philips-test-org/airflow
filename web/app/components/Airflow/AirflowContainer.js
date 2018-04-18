@@ -16,6 +16,8 @@ import {
   fetchCurrentEmployee,
   showOrderModal,
   closeOrderModal,
+  updateBrowserHistory,
+  updateViewType,
 } from "../../lib/actions";
 
 import Airflow from "./Airflow";
@@ -69,7 +71,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     closeModal: () => {
       dispatch(closeOrderModal());
-    }
+    },
+    updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => {
+      dispatch(updateBrowserHistory(state, title, path));
+    },
+    updateViewType: (updatedView: ViewType) => {
+      dispatch(updateViewType(updatedView));
+    },
   }
 };
 

@@ -15,12 +15,15 @@ import type {
   Resource,
   SiteClass,
   Images,
-  ViewType,
 } from "./order";
 
 import type {
   User,
 } from "./user";
+
+import type {
+  ViewType,
+} from "./general.js";
 
 export type {
   // ORDER
@@ -38,7 +41,8 @@ export type {
   Resource,
   SiteClass,
   Images,
-  ViewType,
   // USER
   User,
+  // GENERAL
+  ViewType,
 };

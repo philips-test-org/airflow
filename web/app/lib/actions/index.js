@@ -22,6 +22,8 @@ import {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  updateViewType,
+  updateBrowserHistory,
 } from "./board";
 
 //USER
@@ -52,6 +54,8 @@ export {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  updateViewType,
+  updateBrowserHistory,
   // USER
   UserActions,
   fetchAvatar,

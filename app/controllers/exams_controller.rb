@@ -3,9 +3,10 @@ class ExamsController < ApplicationController
 
   def index
     session[:resource_group] = params[:resource_group]
+    resource_ids = params[:resource_ids] || all_resource_group_ids()
     date = Time.at(params[:date].to_i) unless params[:date].blank?
     date ||= Time.now
-    orders = Exam.fetch(@entity_manager, params[:resource_ids], date)
+    orders = Exam.fetch(@entity_manager, resource_ids, date)
     log_hipaa_view(orders)
 
     render :json => OrmConverter.orders(orders,@entity_manager)
@@ -47,5 +48,11 @@ class ExamsController < ApplicationController
     log_hipaa_view(all)
 
     render :json => OrmConverter.orders(all,@entity_manager)
+  end
+
+  private
+
+  def all_resource_group_ids
+    ResourceGroup.resource_group_hash(@entity_manager).map {|k,v| v.map {|x| x["id"]}}.flatten.uniq
   end
 end

@@ -52,10 +52,12 @@ class BaseNotecard extends PureComponent<Props> {
 
   renderHeader() {
     const patientPath = ["site_class", "patient_type", "patient_type"];
-    const patientName = formatName(this.props.order.patient_mrn.patient.name);
+    const patientName = R.path(["patient_mrn", "patient", "name"], this.props.order);
+    if (!patientName) {return null}
+    const formattedName = formatName(patientName);
     return (
       <div className="heading">
-        <div className="patient-name">{patientName}</div>
+        <div className="patient-name">{formattedName}</div>
         <div className="patient-type">{checkExamThenOrder(this.props.order, patientPath)}</div>
         <div className="mrn">{this.props.order.patient_mrn.mrn}</div>
       </div>

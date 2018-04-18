@@ -19,6 +19,7 @@ const {
   SHOW_LOADING,
   HIDE_LOADING,
   FETCH_RESOURCES_SUCCEEDED,
+  UPDATE_VIEW_TYPE,
 } = BoardActions;
 
 const {
@@ -37,11 +38,14 @@ const initialState = {
   images: {},
 }
 
-function computeStartDate(selectedDate = moment().unix()) {
-  return moment(selectedDate * 1000).startOf("day").unix()*1000;
-}
-
-function board(state: Object = initialState,  action: Object) {
+function board(state: Object = initialState, action: Object) {
+  // This is to merge the reducers initial state with the type
+  // that gets passed in from the Rails side javascript.
+  if (R.prop("hydrated", state) === false) {
+    if (R.has("type", state)) {
+      return R.mergeAll([initialState, state, {hydrated: true}]);
+    }
+  }
   switch (action.type) {
   case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
@@ -50,6 +54,7 @@ function board(state: Object = initialState,  action: Object) {
   case SHOW_LOADING: return showLoading(state);
   case HIDE_LOADING: return hideLoading(state);
   case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
+  case UPDATE_VIEW_TYPE: return updateViewType(state, action);
   case REQUEST_FAILED: return state;
   default: return state;
   }
@@ -98,6 +103,14 @@ function updateResources(state, {resources, selectedResourceGroup}) {
     selectedResourceGroup,
     selectedResources: resources[selectedResourceGroup],
   });
+}
+
+function updateViewType(state, {updatedView}) {
+  return R.merge(state, {type: updatedView});
+}
+
+function computeStartDate(selectedDate = moment().unix()) {
+  return moment(selectedDate * 1000).startOf("day").unix()*1000;
 }
 
 export default board;
