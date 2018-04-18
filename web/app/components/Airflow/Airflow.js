@@ -30,6 +30,7 @@ type Props = {
   fetchExams: (resourceIds: Array<number>, date?: number) => void,
   fetchKioskExams: (resourceIds: Array<number>, date?: number) => void,
   fetchInitialApp: (type: ViewType, date?: number) => void,
+  fetchCurrentEmployee: () => void,
   focusedOrder: Order,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
