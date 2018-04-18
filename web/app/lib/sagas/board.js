@@ -72,8 +72,8 @@ function* fetchInitialApp(action): Saga<void> {
       ? yield call(Api.fetchKioskExams, resourceIds)
       : yield call(Api.fetchExams, resourceIds, action.date);
 
-    yield put(fetchExamsSucceeded(exams));
     yield put(fetchResourcesSucceeded(resourceGroups, resource));
+    yield put(fetchExamsSucceeded(exams));
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)
