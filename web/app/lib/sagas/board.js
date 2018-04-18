@@ -93,7 +93,7 @@ function* adjustOrder(action): Saga<void> {
 }
 
 function* updateHistory(action): Saga<void> {
-  yield history.replaceState({}, action.title, action.path);
+  yield history.pushState(action.state, action.title, action.path);
 }
 
 export default function* boardSaga(): Saga<void> {

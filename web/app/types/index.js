@@ -41,7 +41,6 @@ export type {
   Resource,
   SiteClass,
   Images,
-  ViewType,
   // USER
   User,
   // GENERAL

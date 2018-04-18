@@ -72,8 +72,8 @@ const mapDispatchToProps = (dispatch) => {
     closeModal: () => {
       dispatch(closeOrderModal());
     },
-    updateBrowserHistory: (title: string, path: string) => {
-      dispatch(updateBrowserHistory(title, path));
+    updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => {
+      dispatch(updateBrowserHistory(state, title, path));
     },
     updateViewType: (updatedView: ViewType) => {
       dispatch(updateViewType(updatedView));

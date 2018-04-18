@@ -44,7 +44,7 @@ type Props = {
   type: ViewType,
   images: Images,
   loading: boolean,
-  updateBrowserHistory: (title: string, path: string) => void,
+  updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => void,
   updateViewType: (updatedView: ViewType) => void,
 }
 
@@ -54,6 +54,10 @@ type State = {
 }
 
 class Airflow extends Component<Props, State> {
+  calendarLink: ?HTMLElement;
+  overviewLink: ?HTMLElement;
+  kioskLink: ?HTMLElement;
+
   constructor(props: Props) {
     super(props);
 
@@ -79,6 +83,14 @@ class Airflow extends Component<Props, State> {
 
   componentDidMount() {
     this.updateWidth();
+
+    window.onpopstate = () => {
+      if (R.prop(["state", "viewType"], history) !== this.props.type) {
+        this.props.updateViewType(history.state.viewType);
+        this.fetchExams(history.state.viewType);
+        this.updateActiveLink(history.state.viewType);
+      }
+    }
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -176,20 +188,48 @@ class Airflow extends Component<Props, State> {
 
   setupViewChangeHandlers() {
     this.kioskLink = document.getElementById("kiosk-link");
-    this.kioskLink.addEventListener("click", () => {this.viewClickHandler("kiosk", "/kiosk")})
+    if (this.kioskLink) {
+      this.kioskLink.addEventListener("click", () => {this.viewClickHandler("kiosk", "/kiosk")})
+    }
 
     this.calendarLink = document.getElementById("calendar-link");
-    this.calendarLink.addEventListener("click", () => {this.viewClickHandler("calendar", "/main/calendar")})
+    if (this.calendarLink) {
+      this.calendarLink.addEventListener("click", () => {this.viewClickHandler("calendar", "/main/calendar")})
+    }
 
     this.overviewLink = document.getElementById("overview-link");
-    this.overviewLink.addEventListener("click", () => {this.viewClickHandler("overview", "/main/overview")})
+    if (this.overviewLink) {
+      this.overviewLink.addEventListener("click", () => {this.viewClickHandler("overview", "/main/overview")})
+    }
   }
 
-  viewClickHandler = (type, path) => {
+  viewClickHandler = (type: ViewType, path: string) => {
     const {updateBrowserHistory, updateViewType} = this.props;
 
     updateViewType(type);
-    updateBrowserHistory(type, path);
+    updateBrowserHistory({viewType: this.props.type}, type, path);
+  }
+
+  updateActiveLink(viewType: ViewType) {
+    if (this.kioskLink && this.calendarLink && this.overviewLink) {
+      switch (viewType) {
+      case "kiosk":
+        this.kioskLink.className = "active";
+        this.calendarLink.className = "";
+        this.overviewLink.className = "";
+        break;
+      case "calendar":
+        this.kioskLink.className = "";
+        this.calendarLink.className = "active";
+        this.overviewLink.className = "";
+        break;
+      case "overview":
+        this.calendarLink.className = "";
+        this.kioskLink.className = "";
+        this.overviewLink.className = "active";
+        break;
+      }
+    }
   }
 
   fetchExams(viewType: ViewType) {

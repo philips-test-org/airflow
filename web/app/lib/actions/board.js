@@ -94,9 +94,10 @@ const hideLoading = () => {
   }
 }
 
-const updateBrowserHistory = (title: string, path: string) => {
+const updateBrowserHistory = (state: {viewType: ViewType}, title: string, path: string) => {
   return {
     type: BoardActions.UPDATE_BROWSER_HISTORY,
+    state,
     title,
     path,
   }

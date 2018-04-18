@@ -2,7 +2,7 @@ import React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
 import * as R from "ramda";
-import moment from "moment";
+
 import store from "./lib/store";
 
 import "react-dates/initialize";
@@ -13,6 +13,8 @@ import Airflow from "./components/Airflow";
 const renderApp = (Component, target, props = {key: "nilState"}) => {
   // Make sure the target element exists before attempting to render.
   if ($(target)) {
+    // Set the initial view in browser history
+    history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
     render (
       <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}}))}>
         <Component />
