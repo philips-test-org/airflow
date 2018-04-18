@@ -73,7 +73,7 @@ class Airflow extends Component<Props, State> {
 
   componentWillReceiveProps(newProps: Props) {
     if (this.props.type !== newProps.type) {
-      this.fetchExams();
+      this.fetchExams(newProps.type);
     }
   }
 
@@ -192,9 +192,9 @@ class Airflow extends Component<Props, State> {
     updateBrowserHistory(type, path);
   }
 
-  fetchExams() {
+  fetchExams(viewType: ViewType) {
     const {selectedResources} = this.props;
-    if (this.props.type === "kiosk") {
+    if (viewType === "kiosk") {
       this.props.fetchKioskExams(R.keys(selectedResources))
     } else {
       this.props.fetchExams(R.keys(selectedResources))
