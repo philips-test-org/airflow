@@ -18,6 +18,7 @@ import type {
   Resource,
   User,
   Images,
+  ViewType,
 } from "../../types";
 
 type Props = {
@@ -28,6 +29,8 @@ type Props = {
   fetchAvatar: (userId: number) => void,
   fetchExams: (resourceIds: Array<number>, date?: number) => void,
   fetchKioskExams: (resourceIds: Array<number>, date?: number) => void,
+  fetchInitialApp: (type: ViewType, date?: number) => void,
+  fetchCurrentEmployee: () => void,
   focusedOrder: Order,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
@@ -38,7 +41,7 @@ type Props = {
   selectedResources: {[string]: string},
   showModal: boolean,
   startDate: number,
-  type: "calendar" | "kiosk" | "overview",
+  type: ViewType,
   images: Images,
   loading: boolean,
 }
@@ -60,7 +63,8 @@ class Airflow extends Component<Props, State> {
 
   componentWillMount() {
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
-      this.fetchExams();
+      this.props.fetchInitialApp(this.props.type);
+      this.props.fetchCurrentEmployee();
     }
   }
 

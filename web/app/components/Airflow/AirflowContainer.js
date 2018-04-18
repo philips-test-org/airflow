@@ -2,20 +2,28 @@
 import {connect} from "react-redux";
 import * as R from "ramda";
 
-import {ordersByResource} from "../../lib/utility";
+import {
+  ordersByResource,
+  mapSelectedResources,
+} from "../../lib/utility";
 
 import {
   adjustOrder,
   fetchAvatar,
   fetchExams,
   fetchKioskExams,
+  fetchInitialApp,
+  fetchCurrentEmployee,
   showOrderModal,
   closeOrderModal,
 } from "../../lib/actions";
 
 import Airflow from "./Airflow";
 
-import type {Order} from "../../types";
+import type {
+  Order,
+  ViewType,
+} from "../../types";
 
 const mapStateToProps = ({board, user}: Object) => {
   return {
@@ -50,6 +58,12 @@ const mapDispatchToProps = (dispatch) => {
     fetchKioskExams: (resources: Array<number>) => {
       dispatch(fetchKioskExams(resources));
     },
+    fetchInitialApp: (type: ViewType, date: number) => {
+      dispatch(fetchInitialApp(type, date));
+    },
+    fetchCurrentEmployee: () => {
+      dispatch(fetchCurrentEmployee());
+    },
     openModal: (order: Order) => {
       dispatch(showOrderModal(order));
     },
@@ -58,11 +72,6 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 };
-
-const mapSelectedResources = R.compose(
-  R.mergeAll,
-  R.map(({id, name}) => ({[id]: name}))
-)
 
 const AirflowContainer = connect(
   mapStateToProps,

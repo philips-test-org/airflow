@@ -7,21 +7,28 @@ import {
 
 const {
   FETCH_AVATAR_SUCCEEDED,
+  FETCH_CURRENT_EMPLOYEE_SUCCEEDED,
 } = UserActions;
 
 const initialState = {
   avatars: {},
+  currentUser: {},
 };
 
 function user(state: Object = initialState, action: Object) {
   switch (action.type) {
   case FETCH_AVATAR_SUCCEEDED: return updateAvatarMap(state, action);
+  case FETCH_CURRENT_EMPLOYEE_SUCCEEDED: return updateCurrentUser(state, action);
   default: return state;
   }
 }
 
 function updateAvatarMap(state, {userId, payload}) {
   return R.mergeDeepRight(state, {avatars: {[userId]: payload}});
+}
+
+function updateCurrentUser(state, {payload}) {
+  return R.merge(state, {currentUser: payload});
 }
 
 export default user;

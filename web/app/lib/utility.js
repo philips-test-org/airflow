@@ -134,6 +134,11 @@ function appointmentTime(order: Order) {
 
 const kioskNumber = (orderId: number | string) => String(orderId).slice(-4);
 
+const mapSelectedResources = R.compose(
+  R.mergeAll,
+  R.map(({id, name}) => ({[id]: name}))
+)
+
 export {
   appointmentTime,
   cardStatuses,
@@ -145,4 +150,5 @@ export {
   orderResource,
   ordersByResource,
   patientType,
+  mapSelectedResources,
 }

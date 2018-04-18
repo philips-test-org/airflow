@@ -5,51 +5,32 @@ application.drawBoard = function() {
 };
 
 application.calendar = function() {
-  var resources = $.parseJSON($("#resource-groupings-json").text());
-  var employee = $.parseJSON($("#employee-json").text());
-  var resourceGroup = $("#selected-resource-group").text();
   window.renderReact(window.airflow, "#workspace", {
     board: {
-      resources: resources,
-      selectedResourceGroup: resourceGroup,
-      selectedResources: resources[resourceGroup] || [],
       type: "calendar",
       images: {
         spinner: "<%= image_path "ajax-loader.gif" %>",
       },
     },
-    user: {currentUser: employee},
     key: "calendarState",
   })
 };
 
 application.overview = function() {
-  var resources = $.parseJSON($("#resource-groupings-json").text());
-  var resourceGroup = $("#selected-resource-group").text();
-  var employee = $.parseJSON($("#employee-json").text());
   window.renderReact(window.airflow, "#workspace", {
     board: {
-      resources: resources,
-      selectedResourceGroup: resourceGroup,
-      selectedResources: resources[resourceGroup] || [],
       type: "overview",
       images: {
         spinner: "<%= image_path "ajax-loader.gif" %>",
       },
     },
-    user: {currentUser: employee},
     key: "overviewState",
   })
 };
 
 application.kiosk = function() {
-  var resources = $.parseJSON($("#resource-groupings-json").text());
-  var resourceGroup = $("#selected-resource-group").text();
   window.renderReact(window.airflow, "#workspace", {
     board: {
-      resources: resources,
-      selectedResourceGroup: resourceGroup,
-      selectedResources: resources[resourceGroup] || [],
       type: "kiosk",
       images: {
         spinner: "<%= image_path "ajax-loader.gif" %>",
