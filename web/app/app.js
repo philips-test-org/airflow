@@ -14,7 +14,7 @@ const renderApp = (Component, target, props = {key: "nilState"}) => {
   // Make sure the target element exists before attempting to render.
   if ($(target)) {
     render (
-      <Provider key={props.key} store={store({board: R.merge(props, {hydrated: false})})}>
+      <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}}))}>
         <Component />
       </Provider>,
       document.querySelector(target)

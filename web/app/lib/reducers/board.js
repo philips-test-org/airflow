@@ -43,7 +43,7 @@ function board(state: Object = initialState, action: Object) {
   // that gets passed in from the Rails side javascript.
   if (R.prop("hydrated", state) === false) {
     if (R.has("type", state)) {
-      return R.merge(initialState, {type: state.type, hydrated: true})
+      return R.mergeAll([initialState, state, {hydrated: true}]);
     }
   }
   switch (action.type) {

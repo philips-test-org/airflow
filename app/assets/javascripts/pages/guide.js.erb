@@ -1,7 +1,12 @@
 $(document).ready(function() {
   if ($(".active .view-changer").length > 0) {
     var view =  $(".active .view-changer").data("view-type");
-    window.renderReact(window.airflow, "#workspace", {type: view});
+    window.renderReact(window.airflow, "#workspace", {
+      board: {
+        type: view,
+        images: {spinner: "<%= image_path "ajax-loader.gif" %>"},
+      },
+    });
   }
 
   $(".view-changer").click(function(e) {
