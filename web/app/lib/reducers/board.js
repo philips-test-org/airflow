@@ -1,5 +1,6 @@
 // @flow
 import * as R from "ramda";
+import moment from "moment";
 
 import {
   groupIdentity,
@@ -17,13 +18,30 @@ const {
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
   HIDE_LOADING,
+  FETCH_RESOURCES_SUCCEEDED,
 } = BoardActions;
 
 const {
   REQUEST_FAILED,
 } = GeneralActions;
 
-function board(state: Object = {}, action: Object) {
+const initialState = {
+  orders: [],
+  orderGroups: {},
+  resources: {},
+  selectedResourceGroup: "All",
+  selectedResources: [],
+  startDate: computeStartDate(),
+  type: "calendar",
+  loading: true,
+  images: {},
+}
+
+function computeStartDate(selectedDate = moment().unix()) {
+  return moment(selectedDate * 1000).startOf("day").unix()*1000;
+}
+
+function board(state: Object = initialState,  action: Object) {
   switch (action.type) {
   case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
@@ -31,6 +49,7 @@ function board(state: Object = {}, action: Object) {
   case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
   case SHOW_LOADING: return showLoading(state);
   case HIDE_LOADING: return hideLoading(state);
+  case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
   case REQUEST_FAILED: return state;
   default: return state;
   }
@@ -71,6 +90,14 @@ function showLoading(state) {
 
 function hideLoading(state) {
   return R.merge(state, {loading: false});
+}
+
+function updateResources(state, {resources, selectedResourceGroup}) {
+  return R.merge(state, {
+    resources,
+    selectedResourceGroup,
+    selectedResources: resources[selectedResourceGroup],
+  });
 }
 
 export default board;

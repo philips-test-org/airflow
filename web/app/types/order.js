@@ -230,3 +230,5 @@ export type Order = {
 export type Images = {
   spinner: string,
 }
+
+export type ViewType = "calendar" | "kiosk" | "overview"

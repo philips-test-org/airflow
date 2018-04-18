@@ -48,8 +48,14 @@ class ResourceGroupsController < ApplicationController
   end
 
   def selected
+    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
+    # Reset resource group if the group doesn't exist
+    if session[:resource_group] and @groupings[session[:resource_group]] == nil
+      session[:resource_group] = nil
+    end
+
     selected = session[:resource_group] || @groupings.keys.first
-    render json: selected
+    render json: {resource: selected}
   end
 
   def associate

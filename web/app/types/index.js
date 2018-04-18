@@ -15,6 +15,7 @@ import type {
   Resource,
   SiteClass,
   Images,
+  ViewType,
 } from "./order";
 
 import type {
@@ -37,6 +38,7 @@ export type {
   Resource,
   SiteClass,
   Images,
+  ViewType,
   // USER
   User,
 };

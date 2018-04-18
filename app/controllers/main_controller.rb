@@ -6,11 +6,6 @@ class MainController < ApplicationController
 
   def index
     @employee = Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
-    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
-    # Reset resource group if the group doesn't exist
-    if session[:resource_group] and @groupings[session[:resource_group]] == nil
-      session[:resource_group] = nil
-    end
   end
 
   def about

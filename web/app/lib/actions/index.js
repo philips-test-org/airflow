@@ -20,6 +20,8 @@ import {
   closeOrderModal,
   showLoading,
   hideLoading,
+  fetchInitialApp,
+  fetchResourcesSucceeded,
 } from "./board";
 
 //USER
@@ -27,6 +29,8 @@ import {
   UserActions,
   fetchAvatar,
   fetchAvatarSucceeded,
+  fetchCurrentEmployee,
+  fetchCurrentEmployeeSucceeded,
 } from "./user";
 
 
@@ -46,8 +50,12 @@ export {
   closeOrderModal,
   showLoading,
   hideLoading,
+  fetchInitialApp,
+  fetchResourcesSucceeded,
   // USER
   UserActions,
   fetchAvatar,
   fetchAvatarSucceeded,
+  fetchCurrentEmployee,
+  fetchCurrentEmployeeSucceeded,
 }

@@ -2,7 +2,9 @@
 import moment from "moment";
 
 import type {
-  Order
+  Order,
+  Resource,
+  ViewType,
 } from "../../types";
 
 const BoardActions = {
@@ -16,6 +18,9 @@ const BoardActions = {
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
   SHOW_LOADING: "SHOW_LOADING",
   HIDE_LOADING: "HIDE_LOADING",
+  // Resources
+  FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
+  FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
 }
 
 // Action generator functions
@@ -84,6 +89,24 @@ const hideLoading = () => {
   }
 }
 
+// Resources
+
+const fetchInitialApp = (viewType: ViewType, date: number = moment().unix()) => {
+  return {
+    type: BoardActions.FETCH_INITIAL_APP,
+    viewType: viewType,
+    date,
+  }
+}
+
+const fetchResourcesSucceeded = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
+  return {
+    type: BoardActions.FETCH_RESOURCES_SUCCEEDED,
+    resources,
+    selectedResourceGroup,
+  }
+}
+
 export {
   BoardActions,
   fetchExams,
@@ -95,4 +118,6 @@ export {
   closeOrderModal,
   showLoading,
   hideLoading,
+  fetchInitialApp,
+  fetchResourcesSucceeded,
 }
