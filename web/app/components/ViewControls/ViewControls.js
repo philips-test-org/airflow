@@ -6,6 +6,8 @@ import moment from "moment";
 
 import {SingleDatePicker} from "react-dates";
 
+import ResourceItem from "./ResourceItem";
+
 import {STATUS_CHECKS} from "../../lib/utility";
 
 import type {Resource} from "../../types";
@@ -130,17 +132,15 @@ class ViewControls extends Component<Props, State> {
     )
   }
 
-  renderResource = (resourceName: string) => {
-    return (
-      <li key={`resource-listing-${resourceName}`} onClick={this.selectResourceGroup}>
-        <a data-value={resourceName} href="#">{resourceName}</a>
-      </li>
-    )
-  }
+  renderResource = (resourceName: string) => (
+    <ResourceItem
+      key={`resource-listing-${resourceName}`}
+      name={resourceName}
+      onClick={this.selectResourceGroup}
+    />
+  )
 
-  selectResourceGroup = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    const selectedResource = event.target.dataset.value;
+  selectResourceGroup = (selectedResource: string) => {
     this.setState({selectedResource});
     const resourceIds = R.map(R.prop("id"), this.props.resources[selectedResource]);
     this.fetchExams({resourceIds});
