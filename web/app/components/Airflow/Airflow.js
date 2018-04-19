@@ -87,11 +87,15 @@ class Airflow extends Component<Props, State> {
     this.updateWidth();
 
     window.onpopstate = () => {
-      if (R.prop(["state", "viewType"], history) !== this.props.type) {
-        this.props.updateViewType(history.state.viewType);
-        this.fetchExams(history.state.viewType);
-        this.updateActiveLink(history.state.viewType);
-      }
+      if (R.prop(["state", "viewType"], history) === this.props.type) return;
+
+      const getViewType = R.path(["state", "viewType"]);
+      const viewType = getViewType(history);
+      if (!viewType) return;
+
+      this.props.updateViewType(viewType);
+      this.fetchExams(viewType);
+      this.updateActiveLink(viewType);
     }
   }
 
