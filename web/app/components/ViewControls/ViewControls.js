@@ -139,6 +139,7 @@ class ViewControls extends Component<Props, State> {
   }
 
   selectResourceGroup = (event: SyntheticInputEvent<HTMLInputElement>) => {
+    event.preventDefault();
     const selectedResource = event.target.dataset.value;
     this.setState({selectedResource});
     const resourceIds = R.map(R.prop("id"), this.props.resources[selectedResource]);
