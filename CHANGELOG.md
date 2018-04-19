@@ -1,4 +1,11 @@
 
+## v1.1.1 released 2018-04-09
+
+* **improvement:** updated APM client for APM v1.0.2
+* **improvement:** updated notifications to exclude avatars to reduce load
+* **bugfix:** user and admin manual URL configuration secured
+* **bugfix:** removed redundant step from install script
+
 ## v1.1.0 released 2018-02-05
 
 * **new:** real-time data now uses new platform messaging service for improved performance and reliability

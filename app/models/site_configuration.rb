@@ -2,7 +2,7 @@ class SiteConfiguration < ActiveRecord::Base
   self.table_name = "airflow_site_config"
   ROLES_LISTS = ["clinical_roles_auth_list"]
   OTHER_CONFIG_VARS = []
-  APP_MANUALS = ["admin_manual", "user_manual"]
+  APP_MANUALS = []
   DEFAULTS = {
     :clinical_roles_auth_list => ["director", "technologist", "radiologist", "ai-staff", "it-staff", "supervisor", "executive"],
     :admin_manual => "https://docs.analytical.info/app-manuals/airflow/admin-manual.pdf",
