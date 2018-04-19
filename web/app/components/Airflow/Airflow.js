@@ -51,7 +51,6 @@ type Props = {
 type State = {
   boardWidth: number,
   gridPosition: {x: number, y: number},
-  widthSet: false,
 }
 
 class Airflow extends Component<Props, State> {
@@ -65,7 +64,6 @@ class Airflow extends Component<Props, State> {
     this.state = {
       boardWidth: 0,
       gridPosition: {x: 0, y: 0},
-      widthSet: false,
     };
   }
 
@@ -84,8 +82,6 @@ class Airflow extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.updateWidth();
-
     window.onpopstate = () => {
       if (R.prop(["state", "viewType"], history) === this.props.type) return;
 
@@ -100,7 +96,7 @@ class Airflow extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (R.not(R.isEmpty(this.props.orders)) && !this.props.loading && !this.state.widthSet) {
+    if (R.not(R.isEmpty(this.props.orders)) && !this.props.loading && prevProps.loading) {
       this.updateWidth();
     }
   }
@@ -190,7 +186,7 @@ class Airflow extends Component<Props, State> {
     const element = document.getElementById("time-grid")
     const width = element ? element.scrollWidth : 0;
     if (width > 0) {
-      this.setState({boardWidth: width, widthSet: true});
+      this.setState({boardWidth: width});
     }
   }
 
@@ -247,7 +243,6 @@ class Airflow extends Component<Props, State> {
     } else {
       this.props.fetchExams(R.keys(selectedResources))
     }
-    this.setState({widthSet: false});
   }
 }
 
