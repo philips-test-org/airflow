@@ -18,12 +18,14 @@ import {
   closeOrderModal,
   updateBrowserHistory,
   updateViewType,
+  updateSelectedResourceGroup,
 } from "../../lib/actions";
 
 import Airflow from "./Airflow";
 
 import type {
   Order,
+  Resource,
   ViewType,
 } from "../../types";
 
@@ -54,11 +56,11 @@ const mapDispatchToProps = (dispatch) => {
     fetchAvatar: (userId: number) => {
       dispatch(fetchAvatar(userId));
     },
-    fetchExams: (resources: Array<number>, date: number) => {
-      dispatch(fetchExams(resources, date));
+    fetchExams: (selectedResourceGroup: string, resources: Array<number>, date: number) => {
+      dispatch(fetchExams(selectedResourceGroup, resources, date));
     },
-    fetchKioskExams: (resources: Array<number>) => {
-      dispatch(fetchKioskExams(resources));
+    fetchKioskExams: (selectedResourceGroup: string, resources: Array<number>) => {
+      dispatch(fetchKioskExams(selectedResourceGroup, resources));
     },
     fetchInitialApp: (type: ViewType, date: number) => {
       dispatch(fetchInitialApp(type, date));
@@ -77,6 +79,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateViewType: (updatedView: ViewType) => {
       dispatch(updateViewType(updatedView));
+    },
+    updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
+      dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
     },
   }
 };

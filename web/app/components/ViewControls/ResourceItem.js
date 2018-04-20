@@ -2,15 +2,18 @@
 
 import React, {PureComponent} from "react";
 
+import type {Resource} from "../../types";
+
 type Props = {
-  onClick: (name: string) => void,
+  onClick: (resources: {[string]: Array<Resource>}, name: string) => void,
   name: string,
+  resources: {[string]: Array<Resource>},
 }
 
 class ResourceItem extends PureComponent<Props> {
   onClick = (event: SyntheticEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    this.props.onClick(this.props.name);
+    this.props.onClick(this.props.resources, this.props.name);
   }
 
   render() {

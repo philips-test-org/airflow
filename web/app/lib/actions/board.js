@@ -21,6 +21,7 @@ const BoardActions = {
   HIDE_LOADING: "HIDE_LOADING",
   UPDATE_BROWSER_HISTORY: "UPDATE_BROWSER_HISTORY",
   UPDATE_VIEW_TYPE: "UPDATE_VIEW_TYPE",
+  UPDATE_SELECTED_RESOURCE_GROUP: "UPDATE_SELECTED_RESOURCE_GROUP",
   // Resources
   FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
   FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
@@ -28,17 +29,19 @@ const BoardActions = {
 
 // Action generator functions
 
-const fetchExams = (resourceIds: Array<number>, date: number = moment().unix()) => {
+const fetchExams = (resourceGroup: string, resourceIds: Array<number>, date: number = moment().unix()) => {
   return {
     type: BoardActions.FETCH_EXAMS,
+    resourceGroup,
     resourceIds,
     date,
   }
 }
 
-const fetchKioskExams = (resourceIds: Array<number>) => {
+const fetchKioskExams = (resourceGroup: string, resourceIds: Array<number>) => {
   return {
     type: BoardActions.FETCH_KIOSK_EXAMS,
+    resourceGroup,
     resourceIds,
   }
 }
@@ -128,6 +131,14 @@ const fetchResourcesSucceeded = (resources: {[string]: Array<Resource>}, selecte
   }
 }
 
+const updateSelectedResourceGroup = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
+  return {
+    type: BoardActions.UPDATE_SELECTED_RESOURCE_GROUP,
+    resources,
+    selectedResourceGroup,
+  }
+}
+
 export {
   BoardActions,
   fetchExams,
@@ -143,4 +154,5 @@ export {
   fetchResourcesSucceeded,
   updateViewType,
   updateBrowserHistory,
+  updateSelectedResourceGroup,
 }

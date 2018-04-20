@@ -4,6 +4,7 @@ class KioskController < ApplicationController
   after_filter :close_entity_manager
 
   def index
+    session[:resource_group] = params[:resource_group]
     @groupings = ResourceGroup.resource_group_hash(@entity_manager)
   end
 
