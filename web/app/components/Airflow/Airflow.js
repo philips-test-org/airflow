@@ -67,15 +67,15 @@ class Airflow extends Component<Props, State> {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    // Setup
     this.setupViewChangeHandlers();
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
       this.props.fetchCurrentEmployee();
     }
-  }
 
-  componentDidMount() {
+    // Manage state when user navigates back and forward with browser
     window.onpopstate = () => {
       const viewType = R.prop(["state", "viewType"], history);
       if (!viewType || viewType === this.props.type) return;
