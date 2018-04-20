@@ -75,19 +75,10 @@ class Airflow extends Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(newProps: Props) {
-    if (this.props.type !== newProps.type) {
-      this.fetchExams(newProps.type);
-    }
-  }
-
   componentDidMount() {
     window.onpopstate = () => {
-      if (R.prop(["state", "viewType"], history) === this.props.type) return;
-
-      const getViewType = R.path(["state", "viewType"]);
-      const viewType = getViewType(history);
-      if (!viewType) return;
+      const viewType = R.prop(["state", "viewType"], history);
+      if (!viewType || viewType === this.props.type) return;
 
       this.props.updateViewType(viewType);
       this.fetchExams(viewType);
@@ -96,6 +87,19 @@ class Airflow extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
+    const {type: newType} = this.props;
+    const {type: oldType} = prevProps;
+    if (oldType !== newType) {
+      // Refetch exams only if switching from kiosk to something else, or vise versa
+      if(R.contains("kiosk", [oldType, newType])) {
+        this.fetchExams(newType);
+      } else {
+        // If we're switching from calendar to overview, or vise versa, we need
+        // to update the width since this is not going to pop a loading
+        this.updateWidth();
+      }
+    }
+
     if (R.not(R.isEmpty(this.props.orders)) && !this.props.loading && prevProps.loading) {
       this.updateWidth();
     }
