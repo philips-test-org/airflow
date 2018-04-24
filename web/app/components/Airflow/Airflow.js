@@ -2,6 +2,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 import {throttle} from "lodash";
+import moment from "moment";
 
 import Calendar from "../Calendar";
 import Overview from "../Overview";
@@ -45,6 +46,7 @@ type Props = {
   images: Images,
   loading: boolean,
   updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => void,
+  updateDate: (date: moment) => void,
   updateViewType: (updatedView: ViewType) => void,
   updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
 }
@@ -114,6 +116,7 @@ class Airflow extends Component<Props, State> {
           resources={this.props.resources}
           selectedDate={this.props.startDate}
           selectedResourceGroup={this.props.selectedResourceGroup}
+          updateDate={this.props.updateDate}
           updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
           viewType={this.props.type}
         />

@@ -19,6 +19,7 @@ const {
   SHOW_LOADING,
   HIDE_LOADING,
   FETCH_RESOURCES_SUCCEEDED,
+  UPDATE_DATE,
   UPDATE_VIEW_TYPE,
   UPDATE_SELECTED_RESOURCE_GROUP,
 } = BoardActions;
@@ -55,6 +56,7 @@ function board(state: Object = initialState, action: Object) {
   case SHOW_LOADING: return showLoading(state);
   case HIDE_LOADING: return hideLoading(state);
   case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
+  case UPDATE_DATE: return updateDate(state, action);
   case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
   case UPDATE_VIEW_TYPE: return updateViewType(state, action);
   case REQUEST_FAILED: return state;
@@ -104,6 +106,12 @@ function updateResources(state, {resources, selectedResourceGroup}) {
     resources,
     selectedResourceGroup,
     selectedResources: resources[selectedResourceGroup],
+  });
+}
+
+function updateDate(state, {date}) {
+  return R.merge(state, {
+    startDate: date,
   });
 }
 

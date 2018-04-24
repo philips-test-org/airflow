@@ -1,6 +1,7 @@
 // @flow
 import {connect} from "react-redux";
 import * as R from "ramda";
+import moment from "moment";
 
 import {
   ordersByResource,
@@ -17,6 +18,7 @@ import {
   showOrderModal,
   closeOrderModal,
   updateBrowserHistory,
+  updateDate,
   updateViewType,
   updateSelectedResourceGroup,
 } from "../../lib/actions";
@@ -76,6 +78,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => {
       dispatch(updateBrowserHistory(state, title, path));
+    },
+    updateDate: (date: moment) => {
+      dispatch(updateDate(date));
     },
     updateViewType: (updatedView: ViewType) => {
       dispatch(updateViewType(updatedView));
