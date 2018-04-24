@@ -77,7 +77,7 @@ class Airflow extends Component<Props, State> {
 
     // Manage state when user navigates back and forward with browser
     window.onpopstate = () => {
-      const viewType = R.prop(["state", "viewType"], history);
+      const viewType = R.path(["state", "viewType"], history);
       if (!viewType || viewType === this.props.type) return;
 
       this.props.updateViewType(viewType);
