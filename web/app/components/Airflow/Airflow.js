@@ -83,11 +83,9 @@ class Airflow extends Component<Props, State> {
 
   componentDidMount() {
     window.onpopstate = () => {
-      if (R.prop(["state", "viewType"], history) === this.props.type) return;
-
       const getViewType = R.path(["state", "viewType"]);
       const viewType = getViewType(history);
-      if (!viewType) return;
+      if (!viewType || viewType === this.props.type) return;
 
       this.props.updateViewType(viewType);
       this.fetchExams(viewType);
