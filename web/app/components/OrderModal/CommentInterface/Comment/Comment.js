@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 
 import {formatTimestamp} from "../../../../lib/utility";
 
@@ -14,7 +14,7 @@ type Props = {
   created_at: string,
 }
 
-class Comment extends Component<Props> {
+class Comment extends PureComponent<Props> {
   render() {
     const {employee, created_at, comments} = this.props
     return (

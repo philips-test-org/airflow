@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {formatTimestamp} from "../../../lib/utility";
@@ -19,7 +19,7 @@ type State = {
   roundingValue: string,
 }
 
-class RoundingInterface extends Component<Props, State> {
+class RoundingInterface extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 

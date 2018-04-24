@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import Event from "./Event";
@@ -23,7 +23,7 @@ type Props = {
   user: User,
 }
 
-class CommentInterface extends Component<Props> {
+class CommentInterface extends PureComponent<Props> {
   render() {
     return (
       <div className="col-xs-6">

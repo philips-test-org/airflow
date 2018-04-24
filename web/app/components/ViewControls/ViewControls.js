@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -26,7 +26,7 @@ type State = {
   date: moment | number,
 }
 
-class ViewControls extends Component<Props, State> {
+class ViewControls extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 

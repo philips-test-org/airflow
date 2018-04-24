@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import {DragDropContext} from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
@@ -39,7 +39,7 @@ type Props = {
   type: ViewType,
 }
 
-class Calendar extends Component<Props> {
+class Calendar extends PureComponent<Props> {
   render() {
     const {style} = this.props;
 

@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {formatTimestamp} from "../../../../lib/utility";
@@ -46,7 +46,7 @@ const FA_CLASS = {
   paperwork: "fa fa-file-text",
 }
 
-class Event extends Component<Props> {
+class Event extends PureComponent<Props> {
   render() {
     const {employee} = this.props;
     return (

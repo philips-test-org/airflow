@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {orderComments} from "../../../lib/utility";
@@ -19,7 +19,7 @@ type Props = {
   boardWidth: number,
 }
 
-class NotecardRow extends Component<Props> {
+class NotecardRow extends PureComponent<Props> {
   render() {
     const {fixedColStyle, orders, label, boardWidth} = this.props;
     const cards = R.map(this.renderCard, orders)

@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -26,7 +26,7 @@ type Props = {
 }
 
 function ScaledCard(WrappedComponent: ComponentType<any>) {
-  return class ScaledCard extends Component<Props> {
+  return class ScaledCard extends PureComponent<Props> {
     render() {
       const orderHeight = this.orderHeight();
       const orderTop = this.orderTop();
