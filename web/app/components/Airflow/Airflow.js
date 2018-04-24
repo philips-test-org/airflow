@@ -67,24 +67,17 @@ class Airflow extends Component<Props, State> {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    // Setup
     this.setupViewChangeHandlers();
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
       this.props.fetchCurrentEmployee();
     }
-  }
 
-  componentWillReceiveProps(newProps: Props) {
-    if (this.props.type !== newProps.type) {
-      this.fetchExams(newProps.type);
-    }
-  }
-
-  componentDidMount() {
+    // Manage state when user navigates back and forward with browser
     window.onpopstate = () => {
-      const getViewType = R.path(["state", "viewType"]);
-      const viewType = getViewType(history);
+      const viewType = R.path(["state", "viewType"], history);
       if (!viewType || viewType === this.props.type) return;
 
       this.props.updateViewType(viewType);
@@ -94,6 +87,19 @@ class Airflow extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
+    const {type: newType} = this.props;
+    const {type: oldType} = prevProps;
+    if (oldType !== newType) {
+      // Refetch exams only if switching from kiosk to something else, or vise versa
+      if(R.contains("kiosk", [oldType, newType])) {
+        this.fetchExams(newType);
+      } else {
+        // If we're switching from calendar to overview, or vise versa, we need
+        // to update the width since this is not going to pop a loading
+        this.updateWidth();
+      }
+    }
+
     if (R.not(R.isEmpty(this.props.orders)) && !this.props.loading && prevProps.loading) {
       this.updateWidth();
     }
