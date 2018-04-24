@@ -13,17 +13,17 @@ import {STATUS_CHECKS} from "../../lib/utility";
 import type {Resource} from "../../types";
 
 type Props = {
-  fetchExams: (resourceIds: Array<number>, date?: number) => void,
+  fetchExams: (resourceGroup: string, resourceIds: Array<number>, date?: number) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
   selectedDate: string,
   viewType: "calendar" | "kiosk" | "overview",
+  updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
 }
 
 type State = {
   showDatePicker: boolean,
   date: moment | number,
-  selectedResource: string,
 }
 
 class ViewControls extends Component<Props, State> {
@@ -32,7 +32,6 @@ class ViewControls extends Component<Props, State> {
 
     this.state = {
       showDatePicker: false,
-      selectedResource: props.selectedResourceGroup,
       date: props.selectedDate,
     }
   }
@@ -41,9 +40,6 @@ class ViewControls extends Component<Props, State> {
     let updatedState = {}
     if (newProps.selectedDate !== this.props.selectedDate) {
       updatedState["date"] = newProps.selectedDate;
-    }
-    if (newProps.selectedResourceGroup !== this.props.selectedResourceGroup) {
-      updatedState["selectedResource"] = newProps.selectedResourceGroup;
     }
     this.setState(R.merge(this.state, updatedState));
   }
@@ -117,12 +113,11 @@ class ViewControls extends Component<Props, State> {
   }
 
   renderResourceDropdown() {
-    const {resources} = this.props;
-    const {selectedResource} = this.state;
+    const {resources, selectedResourceGroup} = this.props;
     return (
       <div className="btn-group pull-right margin-right-sm" id="resource-group-buttons">
-        <button className="btn btn-default dropdown-toggle" data-value={selectedResource} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span className="group-name">{selectedResource} </span>
+        <button className="btn btn-default dropdown-toggle" data-value={selectedResourceGroup} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span className="group-name">{selectedResourceGroup} </span>
           <span className="caret"></span>
         </button>
         <ul className="dropdown-menu">
@@ -135,30 +130,31 @@ class ViewControls extends Component<Props, State> {
   renderResource = (resourceName: string) => (
     <ResourceItem
       key={`resource-listing-${resourceName}`}
+      resources={this.props.resources}
       name={resourceName}
       onClick={this.selectResourceGroup}
     />
   )
 
-  selectResourceGroup = (selectedResource: string) => {
-    this.setState({selectedResource});
-    const resourceIds = R.map(R.prop("id"), this.props.resources[selectedResource]);
-    this.fetchExams({resourceIds});
+  selectResourceGroup = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
+    this.props.updateSelectedResourceGroup(resources, selectedResourceGroup);
+    const resourceIds = R.map(R.prop("id"), this.props.resources[selectedResourceGroup]);
+    this.fetchExams(selectedResourceGroup, {resourceIds});
   }
 
   selectDate = (date: moment) => {
     this.setState({date});
-    this.fetchExams({date});
+    this.fetchExams(this.props.selectedResourceGroup, {date});
   }
 
   toggleDatePicker = () => {
     this.setState({showDatePicker: !this.state.showDatePicker});
   }
 
-  fetchExams = ({resourceIds, date}: {resourceIds?: Array<number>, date?: moment}) => {
-    const resources = resourceIds || R.map(R.prop("id"), this.props.resources[this.state.selectedResource]);
+  fetchExams = (selectedResourceGroup: string, {resourceIds, date}: {resourceIds?: Array<number>, date?: moment}) => {
+    const resources = resourceIds || R.map(R.prop("id"), this.props.resources[this.props.selectedResourceGroup]);
     const selectedDate = date ? date.unix() : moment(this.state.date).unix();
-    this.props.fetchExams(resources, selectedDate);
+    this.props.fetchExams(selectedResourceGroup,  resources, selectedDate);
   }
 }
 

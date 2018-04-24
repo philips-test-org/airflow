@@ -27,8 +27,8 @@ type Props = {
   closeModal: () => void,
   currentUser: User,
   fetchAvatar: (userId: number) => void,
-  fetchExams: (resourceIds: Array<number>, date?: number) => void,
-  fetchKioskExams: (resourceIds: Array<number>, date?: number) => void,
+  fetchExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
+  fetchKioskExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
   fetchInitialApp: (type: ViewType, date?: number) => void,
   fetchCurrentEmployee: () => void,
   focusedOrder: Order,
@@ -46,6 +46,7 @@ type Props = {
   loading: boolean,
   updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => void,
   updateViewType: (updatedView: ViewType) => void,
+  updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
 }
 
 type State = {
@@ -113,6 +114,7 @@ class Airflow extends Component<Props, State> {
           resources={this.props.resources}
           selectedDate={this.props.startDate}
           selectedResourceGroup={this.props.selectedResourceGroup}
+          updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
           viewType={this.props.type}
         />
         {this.props.loading
@@ -246,9 +248,9 @@ class Airflow extends Component<Props, State> {
   fetchExams(viewType: ViewType) {
     const {selectedResources} = this.props;
     if (viewType === "kiosk") {
-      this.props.fetchKioskExams(R.keys(selectedResources))
+      this.props.fetchKioskExams(this.props.selectedResourceGroup, R.keys(selectedResources))
     } else {
-      this.props.fetchExams(R.keys(selectedResources))
+      this.props.fetchExams(this.props.selectedResourceGroup, R.keys(selectedResources))
     }
   }
 }

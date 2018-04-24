@@ -14,12 +14,12 @@ const ENDPOINTS = {
   currentEmployee: "/employees/current",
 }
 
-const fetchExams = (resourceIds: Array<number>, date: number) => (
-  GET(ENDPOINTS.exams, {resource_ids: resourceIds, date})
+const fetchExams = (resourceGroup: String, resourceIds: Array<number>, date: number) => (
+  GET(ENDPOINTS.exams, {resource_group: resourceGroup, resource_ids: resourceIds, date})
 );
 
-const fetchKioskExams = (resourceIds: Array<number>) => (
-  GET(ENDPOINTS.kioskExams, {resource_ids: resourceIds})
+const fetchKioskExams = (resourceGroup: String, resourceIds: Array<number>) => (
+  GET(ENDPOINTS.kioskExams, {resource_group: resourceGroup, resource_ids: resourceIds})
 );
 
 const fetchAvatar = (userId: number) => (

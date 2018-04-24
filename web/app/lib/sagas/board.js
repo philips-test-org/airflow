@@ -36,7 +36,7 @@ const {
 function* fetchExams(action): Saga<void> {
   try {
     yield put(showLoading());
-    const payload = yield call(Api.fetchExams, action.resourceIds, action.date);
+    const payload = yield call(Api.fetchExams, action.resourceGroup, action.resourceIds, action.date);
     yield put(fetchExamsSucceeded(payload));
     yield put(hideLoading());
   } catch (e) {
@@ -48,7 +48,7 @@ function* fetchExams(action): Saga<void> {
 function* fetchKioskExams(action): Saga<void> {
   try {
     yield put(showLoading());
-    const payload = yield call(Api.fetchKioskExams, action.resourceIds);
+    const payload = yield call(Api.fetchKioskExams, action.resourceGroup, action.resourceIds);
     yield put(fetchExamsSucceeded(payload));
     yield put(hideLoading());
   } catch (e) {
@@ -69,8 +69,8 @@ function* fetchInitialApp(action): Saga<void> {
     const resourceIds = R.keys(mapSelectedResources(resourceGroups[resource]));
 
     const exams = action.viewType === "kiosk"
-      ? yield call(Api.fetchKioskExams, resourceIds)
-      : yield call(Api.fetchExams, resourceIds, action.date);
+      ? yield call(Api.fetchKioskExams, resource, resourceIds)
+      : yield call(Api.fetchExams, resource, resourceIds, action.date);
 
     yield put(fetchResourcesSucceeded(resourceGroups, resource));
     yield put(fetchExamsSucceeded(exams));
