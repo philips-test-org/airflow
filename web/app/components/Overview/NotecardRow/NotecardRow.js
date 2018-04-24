@@ -16,15 +16,16 @@ type Props = {
   resourceId: string,
   startDate: number,
   type: "overview",
+  boardWidth: number,
 }
 
 class NotecardRow extends Component<Props> {
   render() {
-    const {fixedColStyle, orders, label} = this.props;
+    const {fixedColStyle, orders, label, boardWidth} = this.props;
     const cards = R.map(this.renderCard, orders)
     const transformStyle = {transform: `${fixedColStyle.transform} rotate(-90deg)`};
     return (
-      <div className="resource-row fixed-column">
+      <div className="resource-row" style={{width: boardWidth}}>
         <h1 style={transformStyle}>{label}</h1>
         {cards}
       </div>

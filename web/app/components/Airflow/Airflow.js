@@ -181,8 +181,11 @@ class Airflow extends Component<Props, State> {
   }
 
   updateWidth() {
-    const element = document.getElementById("time-grid")
+    const elementId = R.equals("overview", this.props.type) ? "board" : "time-grid";
+
+    const element = document.getElementById(elementId);
     const width = element ? element.scrollWidth : 0;
+
     if (width > 0) {
       this.setState({boardWidth: width});
     }

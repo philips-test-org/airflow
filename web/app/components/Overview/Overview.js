@@ -12,6 +12,7 @@ type Props = {
   selectedResources: {[string]: string},
   startDate: number,
   style: {th: Object, td: Object},
+  boardWidth: number,
 }
 
 class Overview extends Component<Props> {
@@ -38,6 +39,7 @@ class Overview extends Component<Props> {
         resourceId={resourceId}
         startDate={this.props.startDate}
         fixedColStyle={this.props.style.td}
+        boardWidth={this.props.boardWidth}
       />
     )
   }
