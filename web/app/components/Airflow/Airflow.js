@@ -82,19 +82,19 @@ class Airflow extends Component<Props, State> {
   }
 
   componentDidMount() {
-    this.updateWidth();
-
     window.onpopstate = () => {
-      if (R.prop(["state", "viewType"], history) !== this.props.type) {
-        this.props.updateViewType(history.state.viewType);
-        this.fetchExams(history.state.viewType);
-        this.updateActiveLink(history.state.viewType);
-      }
+      const getViewType = R.path(["state", "viewType"]);
+      const viewType = getViewType(history);
+      if (!viewType || viewType === this.props.type) return;
+
+      this.props.updateViewType(viewType);
+      this.fetchExams(viewType);
+      this.updateActiveLink(viewType);
     }
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (R.not(R.isEmpty(this.props.orders)) && R.not(R.equals(prevProps.orders, this.props.orders))) {
+    if (R.not(R.isEmpty(this.props.orders)) && !this.props.loading && prevProps.loading) {
       this.updateWidth();
     }
   }
@@ -183,7 +183,9 @@ class Airflow extends Component<Props, State> {
   updateWidth() {
     const element = document.getElementById("time-grid")
     const width = element ? element.scrollWidth : 0;
-    this.setState({boardWidth: width});
+    if (width > 0) {
+      this.setState({boardWidth: width});
+    }
   }
 
   setupViewChangeHandlers() {
