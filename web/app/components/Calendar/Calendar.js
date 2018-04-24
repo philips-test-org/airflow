@@ -6,13 +6,14 @@ import HTML5Backend from "react-dnd-html5-backend";
 
 import {wrapEvent} from "../../lib/data";
 
-import NotecardLane from "../NotecardLane";
+import NotecardLanes from "./NotecardLanes";
 import RightNow from "./RightNow";
 
 import type {
   Order,
   Resource,
   User,
+  ViewType,
 } from "../../types";
 
 type Props = {
@@ -35,16 +36,12 @@ type Props = {
   showModal: boolean,
   startDate: number,
   style: {th: Object, td: Object},
-  type: "calendar" | "overview" | "kiosk",
+  type: ViewType,
 }
 
 class Calendar extends Component<Props> {
   render() {
     const {style} = this.props;
-    const lanes = R.map(
-      ([resourceId, orders]) => this.renderLane(resourceId, orders),
-      R.toPairs(this.props.orders)
-    );
 
     return (
       <div className="grid-wrapper">
@@ -62,7 +59,14 @@ class Calendar extends Component<Props> {
               <td id="hourbar" className="fixed-column" style={style.td}>
                 {this.renderHours()}
               </td>
-              {lanes}
+              <NotecardLanes
+                openModal={this.props.openModal}
+                orders={this.props.orders}
+                selectedResources={this.props.selectedResources}
+                startDate={this.props.startDate}
+                type={this.props.type}
+                updateOrderTime={this.updateOrderTime}
+              />
             </tr>
           </tbody>
         </table>
@@ -81,22 +85,6 @@ class Calendar extends Component<Props> {
       <th key={`${resourceName}-heading`} className="relative-column fixed-row" style={style}>
         <div className="header-spacer">{resourceName}</div>
       </th>
-    )
-  }
-
-  renderLane(resourceId: string, orders: Array<Order>) {
-    const resourceName = this.props.selectedResources[resourceId];
-    return (
-      <NotecardLane
-        key={`${resourceId}-lane`}
-        header={resourceName}
-        openModal={this.props.openModal}
-        orders={orders}
-        resourceId={resourceId}
-        startDate={this.props.startDate}
-        type={this.props.type}
-        updateOrderTime={this.updateOrderTime}
-      />
     )
   }
 
