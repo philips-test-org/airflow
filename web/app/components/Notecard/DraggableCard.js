@@ -25,6 +25,7 @@ import type {
 
 type Props = {
   comments: Object,
+  isFiltered: boolean,
   order: Order,
   openModal: (Order) => void,
   startDate: number,
@@ -77,7 +78,7 @@ class DraggableCard extends PureComponent<Props> {
       height: this.orderHeight(),
       maxHeight: this.orderHeight(),
       top: `${this.orderTop()}px`,
-      opacity: isDragging ? 0.5 : 1,
+      opacity: isDragging || this.props.isFiltered ? 0.4 : 1,
     };
     return (
       // TODO the current duration doesn't stick to the order when the modal opens

@@ -10,6 +10,7 @@ import type {
 } from "../../types";
 
 type Props = {
+  filteredOrderIds: Array<number>,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
   selectedResources: {[string]: string},
@@ -27,6 +28,7 @@ class NotecardLanes extends PureComponent<Props> {
         header={resourceName}
         openModal={this.props.openModal}
         orders={orders}
+        filteredOrderIds={this.props.filteredOrderIds}
         resourceId={resourceId}
         startDate={this.props.startDate}
         type={this.props.type}

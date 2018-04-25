@@ -15,6 +15,7 @@ import type {Order} from "../../types";
 
 type Props = {
   connectDropTarget: Function,
+  filteredOrderIds: Array<Order>,
   header: string,
   isOver: boolean,
   orders: Array<Order>,
@@ -82,6 +83,7 @@ class NotecardLane extends PureComponent<Props> {
         <Component
           key={order.id}
           comments={orderComments(order)}
+          isFiltered={R.contains(order.id, this.props.filteredOrderIds || [])}
           openModal={this.props.openModal}
           order={order}
           resourceId={this.props.resourceId}

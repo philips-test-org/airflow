@@ -24,6 +24,7 @@ type Props = {
   currentUser: User,
   fetchAvatar: (userId: number) => void,
   fetchExams: (resourceIds: Array<number>, date?: number) => void,
+  filteredOrderIds: Array<number>,
   focusedOrder: Order,
   headerOffset: number,
   openModal: (Order) => void,
@@ -62,6 +63,7 @@ class Calendar extends PureComponent<Props> {
               <NotecardLanes
                 openModal={this.props.openModal}
                 orders={this.props.orders}
+                filteredOrderIds={this.props.filteredOrderIds}
                 selectedResources={this.props.selectedResources}
                 startDate={this.props.startDate}
                 type={this.props.type}

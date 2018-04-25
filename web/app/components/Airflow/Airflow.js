@@ -54,6 +54,7 @@ type Props = {
 type State = {
   boardWidth: number,
   gridPosition: {x: number, y: number},
+  filteredOrderIds: Array<number>,
 }
 
 class Airflow extends Component<Props, State> {
@@ -67,6 +68,7 @@ class Airflow extends Component<Props, State> {
     this.state = {
       boardWidth: 0,
       gridPosition: {x: 0, y: 0},
+      filteredOrderIds: [],
     };
   }
 
@@ -119,6 +121,7 @@ class Airflow extends Component<Props, State> {
           updateDate={this.props.updateDate}
           updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
           viewType={this.props.type}
+          filterOrders={this.filterOrders}
         />
         {this.props.loading
           ? <img src={this.props.images.spinner} />
@@ -150,6 +153,7 @@ class Airflow extends Component<Props, State> {
           headerOffset={this.headerOffset()}
           boardWidth={this.state.boardWidth}
           gridPosition={this.state.gridPosition}
+          filteredOrderIds={this.state.filteredOrderIds}
           {...this.props}
         />
         {this.renderOrderModal()}
@@ -246,6 +250,32 @@ class Airflow extends Component<Props, State> {
         break;
       }
     }
+  }
+
+  filterOrders = (search: string) => {
+    if (search === "") {
+      return this.setState({filteredOrderIds: []});
+    }
+
+    const ordersList = R.compose(R.flatten, R.values)(this.props.orders);
+    const filteredOrderIds = R.pluck("id", R.reject(R.partial(this.orderMatchesSearchTerm, [search]), ordersList));
+    this.setState({filteredOrderIds});
+  }
+
+  orderMatchesSearchTerm = (search: string, order: Order) => {
+    const paths = [
+      ["patient_mrn", "mrn"],
+      ["patient_mrn", "patient", "name"],
+      ["rad_exam", "accession"],
+      ["procedure", "description"],
+      ["rad_exam", "procedure", "description"],
+      ["procedure", "code"],
+      ["rad_exam", "procedure", "code"],
+    ];
+
+    return R.any(
+      path => R.pathSatisfies(value => value ? value.match(new RegExp(search, "i")) : false, path, order)
+    )(paths);
   }
 
   fetchExams(viewType: ViewType) {
