@@ -7,6 +7,7 @@ import NotecardRow from "./NotecardRow";
 import type {Order} from "../../types";
 
 type Props = {
+  filteredOrderIds: Array<number>,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
   selectedResources: {[string]: string},
@@ -33,6 +34,7 @@ class Overview extends PureComponent<Props> {
     return (
       <NotecardRow
         key={`${resourceId}-row`}
+        filteredOrderIds={this.props.filteredOrderIds}
         label={resourceName}
         openModal={this.props.openModal}
         orders={orders}

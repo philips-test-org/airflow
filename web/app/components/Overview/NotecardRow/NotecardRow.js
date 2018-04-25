@@ -9,6 +9,7 @@ import BaseNotecard from "../../Notecard/BaseNotecard";
 import type {Order} from "../../../types";
 
 type Props = {
+  filteredOrderIds: Array<number>,
   fixedColStyle: Object,
   label: string,
   orders: Array<Order>,
@@ -36,6 +37,7 @@ class NotecardRow extends PureComponent<Props> {
     <BaseNotecard
       key={order.id}
       comments={orderComments(order)}
+      isFiltered={R.contains(order.id, this.props.filteredOrderIds)}
       openModal={this.props.openModal}
       order={order}
       resourceId={this.props.resourceId}

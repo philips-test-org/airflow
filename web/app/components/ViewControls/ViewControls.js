@@ -17,13 +17,13 @@ import type {
 
 type Props = {
   fetchExams: (resourceGroup: string, resourceIds: Array<number>, date?: number) => void,
+  filterOrders: (search: string) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
   selectedDate: string,
   viewType: ViewType,
   updateDate: (date: moment) => void,
   updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
-  filterOrders: (search: string) => void,
 }
 
 type State = {

@@ -83,7 +83,7 @@ class NotecardLane extends PureComponent<Props> {
         <Component
           key={order.id}
           comments={orderComments(order)}
-          isFiltered={R.contains(order.id, this.props.filteredOrderIds || [])}
+          isFiltered={R.contains(order.id, this.props.filteredOrderIds)}
           openModal={this.props.openModal}
           order={order}
           resourceId={this.props.resourceId}

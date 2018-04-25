@@ -14,6 +14,7 @@ import type {
 
 type Props = {
   comments: Object,
+  isFiltered: boolean,
   openModal: (Order) => void,
   order: Order,
   startDate: number,
@@ -86,6 +87,7 @@ class BaseNotecard extends PureComponent<Props> {
     return R.join(" ", [
       this.props.type === "overview" ? "overview" : "scaled",
       this.negativeDuration() ? "bad-duration" : "",
+      this.props.isFiltered ? "filtered" : "",
       status,
     ]);
   }
