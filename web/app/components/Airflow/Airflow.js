@@ -75,7 +75,9 @@ class Airflow extends Component<Props, State> {
     this.setupViewChangeHandlers();
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
-      this.props.fetchCurrentEmployee();
+      if (!this.props.viewType === "kiosk") {
+        this.props.fetchCurrentEmployee();
+      }
     }
 
     // Manage state when user navigates back and forward with browser
@@ -95,6 +97,7 @@ class Airflow extends Component<Props, State> {
     if (oldType !== newType) {
       // Refetch exams only if switching from kiosk to something else, or vise versa
       if(R.contains("kiosk", [oldType, newType])) {
+        this.props.fetchCurrentEmployee();
         this.fetchExams(newType);
       } else {
         // If we're switching from calendar to overview, or vise versa, we need
