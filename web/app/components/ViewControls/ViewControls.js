@@ -112,7 +112,7 @@ class ViewControls extends PureComponent<Props, State> {
     const {resources, selectedResourceGroup} = this.props;
     return (
       <div className="btn-group pull-right margin-right-sm" id="resource-group-buttons">
-        <button className="btn btn-default dropdown-toggle" data-value={selectedResourceGroup} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button className="btn btn-default btn-sm dropdown-toggle" data-value={selectedResourceGroup} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span className="group-name">{selectedResourceGroup} </span>
           <span className="caret"></span>
         </button>

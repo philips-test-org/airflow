@@ -2,11 +2,25 @@
   Styling added since React update
 */
 
+// Legend
 .open > #legend { display: block; }
 #legend {
   min-width: 180px;
   top: 30px;
 
   .arrow { left: 36px; }
+}
+
+// Override SingleDatePicker
+.SingleDatePickerInput { height: 30px; }
+.DateInput.DateInput__small {
+  vertical-align: top;
+  height: 28px;
+}
+.DateInput_input.DateInput_input.DateInput_input__small {
+  font-size: 12px;
+  color: #333;
+  vertical-align: top;
+  padding: 5px 10px 3px;
 }
 
