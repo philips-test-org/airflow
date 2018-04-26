@@ -26,8 +26,10 @@ import type {
 type Props = {
   comments: Object,
   isFiltered: boolean,
+  isFocused: boolean,
   order: Order,
   openModal: (Order) => void,
+  scrollToY: (y: number) => void,
   startDate: number,
   type: "calendar" | "overview" | "kiosk",
   connectDragSource: Function,
@@ -72,6 +74,12 @@ function collect(connect, monitor) {
 
 // React component
 class DraggableCard extends PureComponent<Props> {
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.isFocused !== prevProps.isFocused && this.props.isFocused) {
+      this.props.scrollToY(this.orderTop());
+    }
+  }
+
   render() {
     const {connectDragSource, isDragging} = this.props;
     const cardStyle = {

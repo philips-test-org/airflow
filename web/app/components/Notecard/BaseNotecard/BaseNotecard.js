@@ -31,7 +31,12 @@ class BaseNotecard extends PureComponent<Props> {
     const cardClass = `notecard ${this.cardClass()}`
     const cardColor = this.cardColor();
     return (
-      <div className={cardClass} id={cardId} style={this.props.style} onClick={this.openModal}>
+      <div
+        className={cardClass}
+        id={cardId}
+        style={this.props.style}
+        onClick={this.openModal}
+      >
         <div className="left-tab" style={{backgroundColor: cardColor}} />
 
         <div className="right-tab">

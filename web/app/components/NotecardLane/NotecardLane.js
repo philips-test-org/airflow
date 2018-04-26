@@ -16,6 +16,7 @@ import type {Order} from "../../types";
 type Props = {
   connectDropTarget: Function,
   filteredOrderIds: Array<Order>,
+  focusedOrderId: number,
   header: string,
   isOver: boolean,
   orders: Array<Order>,
@@ -23,6 +24,7 @@ type Props = {
   movedOrder: Order,
   movementOffset: {x: number, y: number},
   resourceId: string,
+  scrollToCoordinates: (x: number, y: number) => void,
   startDate: number,
   type: "calendar" | "kiosk",
   updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
@@ -50,6 +52,15 @@ function collect(connect, monitor) {
 
 // React component
 class NotecardLane extends PureComponent<Props> {
+  lane: ?HTMLElement;
+
+  scrollToY = (y: number) => {
+    if (this.lane) {
+      const x = this.lane.offsetLeft;
+      this.props.scrollToCoordinates(x, y);
+    }
+  }
+
   render() {
     if (this.props.type === "kiosk") {
       return this.renderLane();
@@ -61,7 +72,11 @@ class NotecardLane extends PureComponent<Props> {
     const {isOver, header} = this.props;
     const tdStyle = isOver ? {opacity: 0.33, backgroundColor: "lightgray"} : {}
     return (
-      <td key={`${header}-lane`} className="relative-column">
+      <td
+        key={`${header}-lane`}
+        className="relative-column"
+        ref={el => {if (el) this.lane = el}}
+      >
         <div className="markers" style={tdStyle}>
           {R.map((hour) => {
             return (
@@ -78,20 +93,27 @@ class NotecardLane extends PureComponent<Props> {
 
   renderCards() {
     const Component = this.props.type == "kiosk" ? ScaledCard(KioskNotecard) : DraggableNotecard;
+
     return (
-      R.map((order) => (
-        <Component
-          key={order.id}
-          comments={orderComments(order)}
-          isFiltered={R.contains(order.id, this.props.filteredOrderIds)}
-          openModal={this.props.openModal}
-          order={order}
-          resourceId={this.props.resourceId}
-          startDate={this.props.startDate}
-          type={this.props.type}
-          updateOrderTime={this.props.updateOrderTime}
-        />
-      ), this.props.orders)
+      R.map((order) => {
+        const isFiltered = R.contains(order.id, this.props.filteredOrderIds);
+
+        return (
+          <Component
+            key={order.id}
+            comments={orderComments(order)}
+            isFiltered={isFiltered}
+            isFocused={this.props.focusedOrderId === order.id}
+            openModal={this.props.openModal}
+            order={order}
+            resourceId={this.props.resourceId}
+            scrollToY={this.scrollToY}
+            startDate={this.props.startDate}
+            type={this.props.type}
+            updateOrderTime={this.props.updateOrderTime}
+          />
+        );
+      }, this.props.orders)
     )
   }
 }

@@ -25,13 +25,14 @@ type Props = {
   fetchAvatar: (userId: number) => void,
   fetchExams: (resourceIds: Array<number>, date?: number) => void,
   filteredOrderIds: Array<number>,
-  focusedOrder: Order,
+  focusedOrderId: number,
   headerOffset: number,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
   ordersLoaded: boolean,
   orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
+  scrollToCoordinates: (x: number, y: number) => void,
   selectedResourceGroup: string,
   selectedResources: {[string]: string},
   showModal: boolean,
@@ -41,6 +42,15 @@ type Props = {
 }
 
 class Calendar extends PureComponent<Props> {
+  hourbar: ?HTMLElement;
+
+  scrollToCoordinates = (x: number, y: number) => {
+    if (this.hourbar) {
+      const offset = this.hourbar.offsetWidth;
+      this.props.scrollToCoordinates(x - offset, y);
+    }
+  }
+
   render() {
     const {style} = this.props;
 
@@ -57,13 +67,20 @@ class Calendar extends PureComponent<Props> {
           </thead>
           <tbody>
             <tr>
-              <td id="hourbar" className="fixed-column" style={style.td}>
+              <td
+                id="hourbar"
+                className="fixed-column"
+                style={style.td}
+                ref={el => this.hourbar = el}
+              >
                 {this.renderHours()}
               </td>
               <NotecardLanes
                 openModal={this.props.openModal}
                 orders={this.props.orders}
                 filteredOrderIds={this.props.filteredOrderIds}
+                focusedOrderId={this.props.focusedOrderId}
+                scrollToCoordinates={this.scrollToCoordinates}
                 selectedResources={this.props.selectedResources}
                 startDate={this.props.startDate}
                 type={this.props.type}
