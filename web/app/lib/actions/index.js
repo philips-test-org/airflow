@@ -5,6 +5,7 @@
 // GENERAL
 import {
   GeneralActions,
+  redirectToSSO,
   requestFailed,
 } from "./general";
 
@@ -42,6 +43,7 @@ import {
 export {
   // GENERAL
   GeneralActions,
+  redirectToSSO,
   requestFailed,
   // BOARD
   BoardActions,

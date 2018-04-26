@@ -48,6 +48,7 @@ function board(state: Object = initialState, action: Object) {
       return R.mergeAll([initialState, state, {hydrated: true}]);
     }
   }
+
   switch (action.type) {
   case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);

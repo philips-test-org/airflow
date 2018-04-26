@@ -1,5 +1,6 @@
 // @flow
 /* eslint no-console: 0 */
+import * as R from "ramda";
 
 import {
   call,
@@ -10,6 +11,7 @@ import {
 import Api from "../api";
 
 import {
+  GeneralActions,
   UserActions,
   fetchAvatarSucceeded,
   fetchCurrentEmployeeSucceeded,
@@ -22,6 +24,10 @@ const {
   FETCH_AVATAR,
   FETCH_CURRENT_EMPLOYEE,
 } = UserActions;
+
+const {
+  REDIRECT_TO_SSO,
+} = GeneralActions;
 
 function* fetchAvatar(action): Saga<void> {
   try {
@@ -43,9 +49,26 @@ function* fetchCurrentEmployee(): Saga<void> {
   }
 }
 
+function* redirectToSSO({ssoUrl, viewType}): Saga<void> {
+  var origin = document.location.origin;
+  var redirectTo;
+  if (viewType == "calendar") {
+    redirectTo = origin + "/main/calendar";
+  } else {
+    redirectTo = origin + "/main/overview";
+  }
+  if (!R.empty(ssoUrl)) {
+    window.location = `${ssoUrl}/UI/Login?goto=${encodeURIComponent(redirectTo)}`;
+  } else {
+    console.warn("No SSO Url set.")
+  }
+  yield;
+}
+
 function* userSaga(): Saga<void> {
   yield takeEvery(FETCH_AVATAR, fetchAvatar);
   yield takeLatest(FETCH_CURRENT_EMPLOYEE, fetchCurrentEmployee);
+  yield takeLatest(REDIRECT_TO_SSO, redirectToSSO);
 }
 
 export default userSaga;

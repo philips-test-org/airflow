@@ -16,7 +16,7 @@ const renderApp = (Component, target, props = {key: "nilState"}) => {
     // Set the initial view in browser history
     history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
     render (
-      <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}}))}>
+      <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))}>
         <Component />
       </Provider>,
       document.querySelector(target)

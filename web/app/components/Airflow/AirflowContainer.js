@@ -17,6 +17,7 @@ import {
   fetchCurrentEmployee,
   showOrderModal,
   closeOrderModal,
+  redirectToSSO,
   updateBrowserHistory,
   updateDate,
   updateViewType,
@@ -43,6 +44,7 @@ const mapStateToProps = ({board, user}: Object) => {
     selectedResourceGroup: board.selectedResourceGroup,
     selectedResources: mapSelectedResources(board.selectedResources),
     showModal: board.showModal,
+    ssoUrl: user.ssoUrl,
     startDate: board.startDate,
     type: board.type,
     loading: board.loading,
@@ -75,6 +77,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     closeModal: () => {
       dispatch(closeOrderModal());
+    },
+    redirectToSSO: (ssoUrl: string, viewType: ViewType) => {
+      dispatch(redirectToSSO(ssoUrl, viewType));
     },
     updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => {
       dispatch(updateBrowserHistory(state, title, path));

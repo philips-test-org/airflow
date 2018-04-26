@@ -28,27 +28,29 @@ type Props = {
   closeModal: () => void,
   currentUser: User,
   fetchAvatar: (userId: number) => void,
-  fetchExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
-  fetchKioskExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
-  fetchInitialApp: (type: ViewType, date?: number) => void,
   fetchCurrentEmployee: () => void,
+  fetchExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
+  fetchInitialApp: (type: ViewType, date?: number) => void,
+  fetchKioskExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
   focusedOrder: Order,
+  images: Images,
+  loading: boolean,
   openModal: (Order) => void,
+  orderGroups: {[string]: Array<Order>},
   orders: {[string]: Array<Order>},
   ordersLoaded: boolean,
-  orderGroups: {[string]: Array<Order>},
+  redirectToSSO: (ssoUrl: string, destination: ViewType) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
   selectedResources: {[string]: string},
   showModal: boolean,
+  ssoUrl: string,
   startDate: number,
   type: ViewType,
-  images: Images,
-  loading: boolean,
   updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => void,
   updateDate: (date: moment) => void,
-  updateViewType: (updatedView: ViewType) => void,
   updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
+  updateViewType: (updatedView: ViewType) => void,
 }
 
 type State = {
@@ -75,7 +77,7 @@ class Airflow extends Component<Props, State> {
     this.setupViewChangeHandlers();
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
-      if (!this.props.viewType === "kiosk") {
+      if (this.props.type !== "kiosk") {
         this.props.fetchCurrentEmployee();
       }
     }
@@ -95,9 +97,17 @@ class Airflow extends Component<Props, State> {
     const {type: newType} = this.props;
     const {type: oldType} = prevProps;
     if (oldType !== newType) {
-      // Refetch exams only if switching from kiosk to something else, or vise versa
-      if(R.contains("kiosk", [oldType, newType])) {
-        this.props.fetchCurrentEmployee();
+      if (R.isEmpty(this.props.currentUser)) {
+        if (oldType === "kiosk") {
+          // If coming from kiosk and the current user isn't set, redirects
+          // to login via SSO.
+          this.props.redirectToSSO(this.props.ssoUrl, newType);
+        } else {
+          this.props.fetchCurrentEmployee();
+        }
+      } else if (R.contains("kiosk", [oldType, newType])) {
+        // Refetch exams only if switching from kiosk to something else, or vise versa
+        // and the currentUser is set.
         this.fetchExams(newType);
       } else {
         // If we're switching from calendar to overview, or vise versa, we need
