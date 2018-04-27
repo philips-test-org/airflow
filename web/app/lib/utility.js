@@ -58,15 +58,22 @@ export const STATUS_CHECKS = [
     }
   },
   {
-    name: "On Hold",
+    name: "PPCA Ready",
     order: 5,
+    color: "#C4F3E6",
+    card_class: "ppca_ready",
+    check: (order: Order) => (order.adjusted.ppca_ready == true)
+  },
+  {
+    name: "On Hold",
+    order: 6,
     color: "#f5f52b",
     card_class: "highlight",
     check: (order: Order) => (order.adjusted.onhold == true)
   },
   {
     name: "Cancelled",
-    order: 6,
+    order: 7,
     color: "#c8040e",
     check: (order: Order) => {
       let orderCancelled = R.path(["current_status", "universal_event_type", "event_type"], order) == "cancelled";

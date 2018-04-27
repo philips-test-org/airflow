@@ -98,7 +98,8 @@ class OrderModal extends PureComponent<Props> {
       {label: "On Hold", name: "onhold", faClass: "fa-hand-paper-o", isActive: checkStatus("onhold")},
       {label: "Anesthesia", name: "anesthesia", faClass: "GA", isActive: checkStatus("anesthesia")},
       {label: "Consent", name: "consent", faClass: "fa-handshake-o", isActive: checkStatus("consent")},
-      {label: "PPCA Ready", name: "ppca_ready", faClass: "fa-thumbs-o-up", isActive: checkStatus("ppca_ready")},
+      {label: "PPCA Arrival", name: "ppca_arrival", faClass: "fa-thumbs-o-up", isActive: checkStatus("ppca_arrival")},
+      {label: "PPCA Ready", name: "ppca_ready", faClass: "fa-check-circle-o", isActive: checkStatus("ppca_ready")},
       {label: "Paperwork", name: "paperwork", faClass: "fa-file-text", isActive: checkStatus("paperwork")},
     ];
     return R.addIndex(R.map)((toggle, index) => (
