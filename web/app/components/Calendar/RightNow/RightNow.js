@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -24,7 +24,7 @@ const UPDATE_INTERVAL = 10000;
 // height of the <th> elements of resource names.
 const HEADER_OFFSET = 49;
 
-class RightNow extends Component<Props, State> {
+class RightNow extends PureComponent<Props, State> {
   interval: number;
 
   constructor(props: Props) {

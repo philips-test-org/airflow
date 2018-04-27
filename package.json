@@ -28,7 +28,8 @@
     "react-redux": "^5.0.6",
     "react-toggle": "^4.0.2",
     "redux": "^3.7.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "why-did-you-update": "^0.1.1"
   },
   "devDependencies": {
     "babel": "^6.23.0",

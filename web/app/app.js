@@ -10,6 +10,11 @@ import "react-dates/lib/css/_datepicker.css";
 
 import Airflow from "./components/Airflow";
 
+if (process.env.NODE_ENV !== "production") {
+  const {whyDidYouUpdate} = require("why-did-you-update")
+  whyDidYouUpdate(React, {exclude: [/^Connect/, /^withStyles/]})
+}
+
 const renderApp = (Component, target, props = {key: "nilState"}) => {
   // Make sure the target element exists before attempting to render.
   if ($(target)) {
