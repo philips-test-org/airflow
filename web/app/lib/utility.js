@@ -60,7 +60,7 @@ export const STATUS_CHECKS = [
   {
     name: "PPCA Ready",
     order: 5,
-    color: "#6BE483",
+    color: "#C4F3E6",
     card_class: "ppca_ready",
     check: (order: Order) => (order.adjusted.ppca_ready == true)
   },
