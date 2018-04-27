@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import {DropTarget} from "react-dnd";
 
@@ -48,7 +48,7 @@ function collect(connect, monitor) {
 }
 
 // React component
-class NotecardLane extends Component<Props> {
+class NotecardLane extends PureComponent<Props> {
   render() {
     if (this.props.type === "kiosk") {
       return this.renderLane();

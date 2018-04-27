@@ -20,6 +20,7 @@ const BoardActions = {
   SHOW_LOADING: "SHOW_LOADING",
   HIDE_LOADING: "HIDE_LOADING",
   UPDATE_BROWSER_HISTORY: "UPDATE_BROWSER_HISTORY",
+  UPDATE_DATE: "UPDATE_DATE",
   UPDATE_VIEW_TYPE: "UPDATE_VIEW_TYPE",
   UPDATE_SELECTED_RESOURCE_GROUP: "UPDATE_SELECTED_RESOURCE_GROUP",
   // Resources
@@ -106,6 +107,13 @@ const updateBrowserHistory = (state: {viewType: ViewType}, title: string, path: 
   }
 }
 
+const updateDate = (date: moment) => {
+  return {
+    type: BoardActions.UPDATE_DATE,
+    date,
+  }
+}
+
 const updateViewType = (updatedView: ViewType) => {
   return {
     type: BoardActions.UPDATE_VIEW_TYPE,
@@ -152,6 +160,7 @@ export {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  updateDate,
   updateViewType,
   updateBrowserHistory,
   updateSelectedResourceGroup,

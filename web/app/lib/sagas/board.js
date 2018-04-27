@@ -60,17 +60,18 @@ function* fetchKioskExams(action): Saga<void> {
 function* fetchInitialApp(action): Saga<void> {
   try {
     yield put(showLoading());
-
+    var exams;
     const [resourceGroups, {resource}] = yield [
       call(Api.fetchResourceGroups),
       call(Api.fetchSelectedResourceGroup),
     ];
-
     const resourceIds = R.keys(mapSelectedResources(resourceGroups[resource]));
 
-    const exams = action.viewType === "kiosk"
-      ? yield call(Api.fetchKioskExams, resource, resourceIds)
-      : yield call(Api.fetchExams, resource, resourceIds, action.date);
+    if (action.viewType === "kiosk") {
+      exams = yield call(Api.fetchKioskExams, resource, resourceIds)
+    } else {
+      exams = yield call(Api.fetchExams, resource, resourceIds, action.date);
+    }
 
     yield put(fetchResourcesSucceeded(resourceGroups, resource));
     yield put(fetchExamsSucceeded(exams));

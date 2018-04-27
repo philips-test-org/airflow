@@ -1,9 +1,20 @@
 // @flow
 // General purpose actions.
 
+import type {ViewType} from "../../types";
+
 const GeneralActions = {
-  REQUEST_FAILED: "REQUEST_FAILED"
+  REDIRECT_TO_SSO: "REDIRECT_TO_SSO",
+  REQUEST_FAILED: "REQUEST_FAILED",
 };
+
+const redirectToSSO = (ssoUrl: string, viewType: ViewType) => {
+  return {
+    type: GeneralActions.REDIRECT_TO_SSO,
+    ssoUrl,
+    viewType,
+  }
+}
 
 const requestFailed = (error: Object) => {
   return {
@@ -12,8 +23,8 @@ const requestFailed = (error: Object) => {
   }
 }
 
-
 export {
   GeneralActions,
+  redirectToSSO,
   requestFailed,
 }

@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -10,38 +10,32 @@ import ResourceItem from "./ResourceItem";
 
 import {STATUS_CHECKS} from "../../lib/utility";
 
-import type {Resource} from "../../types";
+import type {
+  Resource,
+  ViewType,
+} from "../../types";
 
 type Props = {
   fetchExams: (resourceGroup: string, resourceIds: Array<number>, date?: number) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
   selectedDate: string,
-  viewType: "calendar" | "kiosk" | "overview",
+  viewType: ViewType,
+  updateDate: (date: moment) => void,
   updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
 }
 
 type State = {
   showDatePicker: boolean,
-  date: moment | number,
 }
 
-class ViewControls extends Component<Props, State> {
+class ViewControls extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
       showDatePicker: false,
-      date: props.selectedDate,
     }
-  }
-
-  componentWillReceiveProps(newProps: Props) {
-    let updatedState = {}
-    if (newProps.selectedDate !== this.props.selectedDate) {
-      updatedState["date"] = newProps.selectedDate;
-    }
-    this.setState(R.merge(this.state, updatedState));
   }
 
   render() {
@@ -94,11 +88,13 @@ class ViewControls extends Component<Props, State> {
   }
 
   renderDatePicker() {
-    if (this.props.viewType === "kiosk") {return null}
+    const {viewType} = this.props;
+    if (viewType === "kiosk") {return null}
+    const date = this.dateAsMoment();
     return (
       <div className="btn-group pull-right">
         <SingleDatePicker
-          date={moment(this.state.date)}
+          date={date}
           focused={this.state.showDatePicker}
           isOutsideRange={R.F}
           numberOfMonths={1}
@@ -143,7 +139,7 @@ class ViewControls extends Component<Props, State> {
   }
 
   selectDate = (date: moment) => {
-    this.setState({date});
+    this.props.updateDate(date);
     this.fetchExams(this.props.selectedResourceGroup, {date});
   }
 
@@ -153,8 +149,14 @@ class ViewControls extends Component<Props, State> {
 
   fetchExams = (selectedResourceGroup: string, {resourceIds, date}: {resourceIds?: Array<number>, date?: moment}) => {
     const resources = resourceIds || R.map(R.prop("id"), this.props.resources[this.props.selectedResourceGroup]);
-    const selectedDate = date ? date.unix() : moment(this.state.date).unix();
+    const selectedDate = date ? date.unix() : this.dateAsMoment().unix();
     this.props.fetchExams(selectedResourceGroup,  resources, selectedDate);
+  }
+
+  dateAsMoment(): moment {
+    // Ensures that the date in use is a moment.
+    const {selectedDate} = this.props;
+    return moment.isMoment(selectedDate) ? selectedDate : moment(selectedDate);
   }
 }
 

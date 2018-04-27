@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 
 type Props = {
   handleClick: () => void,
@@ -8,7 +8,7 @@ type Props = {
   text: string,
 }
 
-class Button extends Component<Props> {
+class Button extends PureComponent<Props> {
   render() {
     const {className, handleClick, text} = this.props;
     return (

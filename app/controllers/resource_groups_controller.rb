@@ -1,6 +1,6 @@
 class ResourceGroupsController < ApplicationController
   before_filter :get_entity_manager
-  before_filter :general_authentication
+  before_filter :general_authentication, except: [:index, :selected]
   after_filter :log_usage_data
   after_filter :close_entity_manager
 

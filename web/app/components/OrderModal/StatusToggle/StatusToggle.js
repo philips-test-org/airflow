@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import Toggle from "react-toggle";
 
 type Props = {
@@ -15,7 +15,7 @@ type State = {
   checked: boolean,
 }
 
-class StatusToggle extends Component<Props, State> {
+class StatusToggle extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 

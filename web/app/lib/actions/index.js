@@ -5,6 +5,7 @@
 // GENERAL
 import {
   GeneralActions,
+  redirectToSSO,
   requestFailed,
 } from "./general";
 
@@ -22,6 +23,7 @@ import {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  updateDate,
   updateViewType,
   updateBrowserHistory,
   updateSelectedResourceGroup,
@@ -41,6 +43,7 @@ import {
 export {
   // GENERAL
   GeneralActions,
+  redirectToSSO,
   requestFailed,
   // BOARD
   BoardActions,
@@ -55,6 +58,7 @@ export {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  updateDate,
   updateViewType,
   updateBrowserHistory,
   updateSelectedResourceGroup,

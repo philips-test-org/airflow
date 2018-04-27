@@ -1,5 +1,5 @@
 // @flow
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -40,11 +40,7 @@ type Props = {
   startDate: number,
 }
 
-class OrderModal extends Component<Props> {
-  static defaultProps = {
-    currentUser: {id: 21, avatar: null}
-  }
-
+class OrderModal extends PureComponent<Props> {
   render() {
     const {order, avatarMap, currentUser} = this.props;
     const cardColor = cardStatuses(order, "color", "#ddd");
