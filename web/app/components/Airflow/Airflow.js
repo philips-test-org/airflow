@@ -325,14 +325,19 @@ class Airflow extends Component<Props, State> {
   }
 
   scrollToX = (x: number) => {
+    if (this.board) return;
+
     setTimeout(() => {
+      // $FlowFixMe
       const {scrollLeft} = this.board;
       if (Math.abs(scrollLeft - x) < SCROLL_SPEED) {
+        // $FlowFixMe
         this.board.scrollLeft = x;
       } else {
         const newPos = scrollLeft < x
           ? scrollLeft + SCROLL_SPEED
           : scrollLeft - SCROLL_SPEED;
+        // $FlowFixMe
         this.board.scrollLeft = newPos;
         this.scrollToX(x);
       }
@@ -340,14 +345,19 @@ class Airflow extends Component<Props, State> {
   }
 
   scrollToY = (y: number) => {
+    if (!this.board) return;
+
     setTimeout(() => {
+      // $FlowFixMe
       const {scrollTop} = this.board;
       if (Math.abs(scrollTop - y) < SCROLL_SPEED) {
+        // $FlowFixMe
         this.board.scrollTop = y;
       } else {
         const newPos = scrollTop < y
           ? scrollTop + SCROLL_SPEED
           : scrollTop - SCROLL_SPEED;
+        // $FlowFixMe
         this.board.scrollTop = newPos;
         this.scrollToY(y);
       }
