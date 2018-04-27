@@ -10,8 +10,11 @@ import type {
 } from "../../types";
 
 type Props = {
+  filteredOrderIds: Array<number>,
+  focusedOrderId: number,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
+  scrollToCoordinates: (x: number, y: number) => void,
   selectedResources: {[string]: string},
   startDate: number,
   type: ViewType,
@@ -24,10 +27,13 @@ class NotecardLanes extends PureComponent<Props> {
     return (
       <NotecardLane
         key={`${resourceId}-lane`}
+        filteredOrderIds={this.props.filteredOrderIds}
+        focusedOrderId={this.props.focusedOrderId}
         header={resourceName}
         openModal={this.props.openModal}
         orders={orders}
         resourceId={resourceId}
+        scrollToCoordinates={this.props.scrollToCoordinates}
         startDate={this.props.startDate}
         type={this.props.type}
         updateOrderTime={this.props.updateOrderTime}

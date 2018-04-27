@@ -14,8 +14,12 @@ import type {
 
 type Props = {
   comments: Object,
+  isFiltered: boolean,
+  isFocused: boolean,
   openModal: (Order) => void,
   order: Order,
+  scrollToY: (y: number) => void,
+  scrollToX: (x: number) => void,
   startDate: number,
   style: Object,
   type: "calendar" | "overview" | "kiosk",
@@ -23,6 +27,19 @@ type Props = {
 }
 
 class BaseNotecard extends PureComponent<Props> {
+  card: ?HTMLElement;
+
+  componentDidUpdate(prevProps: Props) {
+    if (this.card && this.props.isFocused !== prevProps.isFocused && this.props.isFocused) {
+      if (this.props.scrollToY) {
+        this.props.scrollToY(this.card.offsetTop);
+      }
+      if (this.props.scrollToX) {
+        this.props.scrollToX(this.card.offsetLeft);
+      }
+    }
+  }
+
   render() {
     const {order, comments} = this.props;
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
@@ -30,7 +47,13 @@ class BaseNotecard extends PureComponent<Props> {
     const cardClass = `notecard ${this.cardClass()}`
     const cardColor = this.cardColor();
     return (
-      <div className={cardClass} id={cardId} style={this.props.style} onClick={this.openModal}>
+      <div
+        className={cardClass}
+        id={cardId}
+        style={this.props.style}
+        onClick={this.openModal}
+        ref={el => this.card = el}
+      >
         <div className="left-tab" style={{backgroundColor: cardColor}} />
 
         <div className="right-tab">
@@ -86,6 +109,7 @@ class BaseNotecard extends PureComponent<Props> {
     return R.join(" ", [
       this.props.type === "overview" ? "overview" : "scaled",
       this.negativeDuration() ? "bad-duration" : "",
+      this.props.isFiltered ? "filtered" : "",
       status,
     ]);
   }

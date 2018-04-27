@@ -17,6 +17,7 @@ import type {
 
 type Props = {
   fetchExams: (resourceGroup: string, resourceIds: Array<number>, date?: number) => void,
+  filterOrders: (search: string) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
   selectedDate: string,
@@ -38,6 +39,10 @@ class ViewControls extends PureComponent<Props, State> {
     }
   }
 
+  onChangeFilter = ({target}: SyntheticInputEvent<HTMLInputElement>) => {
+    this.props.filterOrders(target.value);
+  }
+
   render() {
     return (
       <div id="view-controls">
@@ -45,6 +50,7 @@ class ViewControls extends PureComponent<Props, State> {
           <button className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" id="legend-button">Legend <span className="caret"></span></button>
           {this.renderLegend()}
         </div>
+        {this.renderSearchFilter()}
 
         {this.renderDatePicker()}
         {this.renderResourceDropdown()}
@@ -77,6 +83,17 @@ class ViewControls extends PureComponent<Props, State> {
         </div>
       </div>
     )
+  }
+
+  renderSearchFilter() {
+    const {viewType} = this.props;
+    if (viewType === "kiosk") {return null}
+    return (
+      <div className="input-group pull-left col-xs-2 form-group-sm margin-left-sm">
+        <input type="text" className="form-control" id="search-field" placeholder="Search" onChange={this.onChangeFilter} />
+        <div className="input-group-addon"><i className="fa fa-search"></i></div>
+      </div>
+    );
   }
 
   renderStatus(status: Object) {
@@ -112,7 +129,7 @@ class ViewControls extends PureComponent<Props, State> {
     const {resources, selectedResourceGroup} = this.props;
     return (
       <div className="btn-group pull-right margin-right-sm" id="resource-group-buttons">
-        <button className="btn btn-default dropdown-toggle" data-value={selectedResourceGroup} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button className="btn btn-default btn-sm dropdown-toggle" data-value={selectedResourceGroup} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span className="group-name">{selectedResourceGroup} </span>
           <span className="caret"></span>
         </button>

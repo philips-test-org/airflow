@@ -56,12 +56,15 @@ type Props = {
 type State = {
   boardWidth: number,
   gridPosition: {x: number, y: number},
+  filteredOrderIds: Array<number>,
+  focusedOrderId: ?number,
 }
 
 class Airflow extends Component<Props, State> {
   calendarLink: ?HTMLElement;
   overviewLink: ?HTMLElement;
   kioskLink: ?HTMLElement;
+  board: ?HTMLElement;
 
   constructor(props: Props) {
     super(props);
@@ -69,6 +72,8 @@ class Airflow extends Component<Props, State> {
     this.state = {
       boardWidth: 0,
       gridPosition: {x: 0, y: 0},
+      filteredOrderIds: [],
+      focusedOrderId: null,
     };
   }
 
@@ -132,6 +137,7 @@ class Airflow extends Component<Props, State> {
           updateDate={this.props.updateDate}
           updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
           viewType={this.props.type}
+          filterOrders={this.filterOrders}
         />
         {this.props.loading
           ? <img src={this.props.images.spinner} />
@@ -157,12 +163,19 @@ class Airflow extends Component<Props, State> {
     };
 
     return (
-      <div id="board" onScroll={throttle(this.updateScrollPosition, 100)}>
+      <div
+        id="board"
+        onScroll={throttle(this.updateScrollPosition, 100)}
+        ref={el => {if (el) this.board = el}}
+      >
         <BodyComponent
           style={scrollStyle}
           headerOffset={this.headerOffset()}
           boardWidth={this.state.boardWidth}
           gridPosition={this.state.gridPosition}
+          filteredOrderIds={this.state.filteredOrderIds}
+          focusedOrderId={this.state.focusedOrderId}
+          scrollToCoordinates={this.scrollToCoordinates}
           {...this.props}
         />
         {this.renderOrderModal()}
@@ -261,12 +274,52 @@ class Airflow extends Component<Props, State> {
     }
   }
 
+  filterOrders = (search: string) => {
+    if (search === "") {
+      return this.setState({filteredOrderIds: []});
+    }
+
+    // Find only orders that do NOT match the search string
+    const ordersList = R.compose(R.flatten, R.values)(this.props.orders);
+    const filteredOrderIds = R.pluck("id", R.reject(R.partial(this.orderMatchesSearchTerm, [search]), ordersList));
+
+    // If only one result isn't filtered, make that the "focused" order
+    const results = R.difference(R.pluck("id", ordersList), filteredOrderIds);
+    const focusedOrderId = results.length === 1
+      ? R.head(results) : null;
+
+    this.setState({filteredOrderIds, focusedOrderId});
+  }
+
+  orderMatchesSearchTerm = (search: string, order: Order) => {
+    const paths = [
+      ["patient_mrn", "mrn"],
+      ["patient_mrn", "patient", "name"],
+      ["rad_exam", "accession"],
+      ["procedure", "description"],
+      ["rad_exam", "procedure", "description"],
+      ["procedure", "code"],
+      ["rad_exam", "procedure", "code"],
+    ];
+
+    return R.any(
+      path => R.pathSatisfies(value => value ? value.match(new RegExp(search, "i")) : false, path, order)
+    )(paths);
+  }
+
   fetchExams(viewType: ViewType) {
     const {selectedResources} = this.props;
     if (viewType === "kiosk") {
       this.props.fetchKioskExams(this.props.selectedResourceGroup, R.keys(selectedResources))
     } else {
       this.props.fetchExams(this.props.selectedResourceGroup, R.keys(selectedResources))
+    }
+  }
+
+  scrollToCoordinates = (x: number, y: number) => {
+    if (this.board) {
+      this.board.scrollLeft = x;
+      this.board.scrollTop = y;
     }
   }
 }
