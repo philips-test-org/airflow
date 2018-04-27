@@ -11,6 +11,7 @@ import ViewControls from "../ViewControls";
 
 import {
   NAVBAR_OFFSET,
+  SCROLL_SPEED,
 } from "../../lib/constants";
 
 
@@ -318,9 +319,39 @@ class Airflow extends Component<Props, State> {
 
   scrollToCoordinates = (x: number, y: number) => {
     if (this.board) {
-      this.board.scrollLeft = x;
-      this.board.scrollTop = y;
+      this.scrollToX(x);
+      this.scrollToY(y);
     }
+  }
+
+  scrollToX = (x: number) => {
+    setTimeout(() => {
+      const {scrollLeft} = this.board;
+      if (Math.abs(scrollLeft - x) < SCROLL_SPEED) {
+        this.board.scrollLeft = x;
+      } else {
+        const newPos = scrollLeft < x
+          ? scrollLeft + SCROLL_SPEED
+          : scrollLeft - SCROLL_SPEED;
+        this.board.scrollLeft = newPos;
+        this.scrollToX(x);
+      }
+    }, 10);
+  }
+
+  scrollToY = (y: number) => {
+    setTimeout(() => {
+      const {scrollTop} = this.board;
+      if (Math.abs(scrollTop - y) < SCROLL_SPEED) {
+        this.board.scrollTop = y;
+      } else {
+        const newPos = scrollTop < y
+          ? scrollTop + SCROLL_SPEED
+          : scrollTop - SCROLL_SPEED;
+        this.board.scrollTop = newPos;
+        this.scrollToY(y);
+      }
+    }, 10);
   }
 }
 

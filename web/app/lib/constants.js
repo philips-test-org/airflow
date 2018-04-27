@@ -11,7 +11,10 @@ export const NAVBAR_OFFSET = 100;
 // Instead, must be updated here and in css.
 export const HOURBAR_WIDTH = 50;
 
+export const SCROLL_SPEED = 100;
+
 // Draggable Item types for React-DnD
 export const ItemTypes = {
   NOTECARD: "notecard",
 };
+
