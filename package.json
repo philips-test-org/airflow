@@ -10,7 +10,7 @@
     "lint": "yarn eslint --color -c web/.eslintrc web",
     "start": "webpack --watch -p",
     "build": "webpack -p",
-    "watch": "webpack --watch",
+    "watch": "webpack --watch -d",
     "test": "mocha --compilers js:babel-core/register --require ./web/test/test_helper.js --recursive ./web/test -R nyan",
     "test:watch": "npm run test -- --watch"
   },
