@@ -1,5 +1,5 @@
 // @flow
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import * as R from "ramda";
 
 import NotecardLane from "../NotecardLane";
@@ -21,7 +21,11 @@ type Props = {
   updateOrderTime: (orderId: number, newState: Object) => void
 }
 
-class NotecardLanes extends PureComponent<Props> {
+class NotecardLanes extends Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
+    return !R.equals(nextProps, this.props);
+  }
+
   renderLane(resourceId: string, orders: Array<Order>) {
     const resourceName = this.props.selectedResources[resourceId];
     return (

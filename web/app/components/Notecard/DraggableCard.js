@@ -1,6 +1,6 @@
 // @flow
 /* eslint react/no-find-dom-node:0 */
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import {findDOMNode} from "react-dom";
 import * as R from "ramda";
 import moment from "moment";
@@ -71,7 +71,11 @@ function collect(connect, monitor) {
 }
 
 // React component
-class DraggableCard extends PureComponent<Props> {
+class DraggableCard extends Component<Props> {
+  shouldComponentUpdate(nextProps, nextState) {
+    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+  }
+
   render() {
     const {connectDragSource, isDragging} = this.props;
     const cardStyle = {

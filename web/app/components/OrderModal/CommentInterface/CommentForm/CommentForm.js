@@ -1,6 +1,7 @@
 // @flow
 
 import React, {Component} from "react";
+import * as R from "ramda";
 
 import Button from "../../../Common/Button";
 
@@ -20,6 +21,10 @@ class CommentForm extends Component<Props, State> {
     this.state = {
       comment: "",
     };
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
   }
 
   render() {
