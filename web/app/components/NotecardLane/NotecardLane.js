@@ -209,9 +209,11 @@ class NotecardLane extends Component<Props, State> {
     if (R.isNil(lastOverlap)) return [overlapObj];
 
     // Check if the first value in the pair to is already overlapping other orders.
-    const multi = R.any((id) => R.equals(id, x.id))(R.pluck("id", lastOverlap.overlapping))
+    const overlappingIds = R.pluck("id", lastOverlap.overlapping);
+    const multi = R.any((id) => R.contains(id, [x.id, y.id]), overlappingIds);
     if (multi) {
-      let obj = {depth: lastOverlap.depth + 1, overlapping: R.append(y, lastOverlap.overlapping)};
+      const overlapper = R.find(({id}) => R.not(R.contains(id, overlappingIds)), [x, y]);
+      let obj = {depth: lastOverlap.depth + 1, overlapping: R.append(overlapper, lastOverlap.overlapping)};
       // Return a new list of overlap objects with the multi overlap object updated at the head.
       return R.prepend(obj, R.tail(acc));
     }
