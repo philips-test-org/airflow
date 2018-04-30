@@ -41,7 +41,7 @@ class BaseNotecard extends PureComponent<Props> {
   }
 
   render() {
-    const {order, comments} = this.props;
+    const {order, comments, style} = this.props;
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     const cardClass = `notecard ${this.cardClass()}`
@@ -50,7 +50,7 @@ class BaseNotecard extends PureComponent<Props> {
       <div
         className={cardClass}
         id={cardId}
-        style={this.props.style}
+        style={style}
         onClick={this.openModal}
         ref={el => this.card = el}
       >
