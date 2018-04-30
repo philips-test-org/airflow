@@ -182,33 +182,40 @@ class NotecardLane extends Component<Props, State> {
     const positions = R.map(card => {
       const top = card.decoratedComponentInstance.orderTop();
       const height = card.decoratedComponentInstance.orderHeight();
+      const start = card.decoratedComponentInstance.orderStartTime();
       return {
         id: card.props.order.id,
-        top: top,
+        top,
         bottom: top + height,
+        start,
       };
     }, cards);
-    return this.fold(R.aperture(2, positions));
+    return R.compose(
+      this.fold,
+      R.aperture(2),
+      R.sortBy(R.prop("start"))
+    )(positions);
   }
 
   fold = R.reduce((acc, [x, y]) => {
-    var overlap = this.overlaps(x, y);
+    const overlap = this.overlaps(x, y);
     // Don't care if there is no overlap.
     if (!overlap) return acc;
 
-    var lastOverlap = R.head(acc);
+    const lastOverlap = R.head(acc);
     // If this is the first overlap, wrap it in a list and return it.
-    if (R.isNil(lastOverlap)) return [{depth: 2, overlapping: [x, y]}];
+    const overlapObj = {depth: 2, overlapping: [x, y]};
+    if (R.isNil(lastOverlap)) return [overlapObj];
 
     // Check if the first value in the pair to is already overlapping other orders.
-    var multi = R.any((id) => R.propEq(id, x.id))(R.pluck("id", lastOverlap.overlapping))
+    const multi = R.any((id) => R.equals(id, x.id))(R.pluck("id", lastOverlap.overlapping))
     if (multi) {
-      var overlapObj = {depth: lastOverlap.depth + 1, overlapping: R.append(y, lastOverlap.overlapping)};
+      let obj = {depth: lastOverlap.depth + 1, overlapping: R.append(y, lastOverlap.overlapping)};
       // Return a new list of overlap objects with the multi overlap object updated at the head.
-      return R.prepend(overlapObj, R.tail(acc));
+      return R.prepend(obj, R.tail(acc));
     }
 
-    return acc;
+    return R.prepend(overlapObj, acc);
   }, [])
 
   laneWidthMultiplier = R.compose(R.reduce(R.max, 0), R.pluck("depth"));
