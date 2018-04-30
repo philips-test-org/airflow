@@ -189,7 +189,8 @@ class NotecardLane extends Component<Props, State> {
         bottom: top + height,
         start,
       };
-    }, cards);
+    }, R.reject(R.isNil, cards));
+
     return R.compose(
       this.fold,
       R.aperture(2),
