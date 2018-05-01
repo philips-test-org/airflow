@@ -255,21 +255,22 @@ Overview
   .row-label{
     h1 {
       position: absolute;
-      left: -48px;
-      top: 47px;
-      width: 138px;
+      left: 0;
+      top: 0;
       z-index: 102;
-      padding: 13px 0;
+      padding: 13px;
       margin: 0;
       background-color: #fff;
       text-align: center;
       font-size: 16px;
       font-weight: normal;
-      -webkit-transform: rotate(-90deg);
-      -moz-transform: rotate(-90deg);
-      -ms-transform: rotate(-90deg);
-      -o-transform: rotate(-90deg);
-      filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+      white-space: nowrap;
+      -ms-writing-mode: tb-lr;
+      writing-mode: vertical-lr;
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
     }
   }
   .cards {

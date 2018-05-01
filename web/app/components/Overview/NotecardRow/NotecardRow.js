@@ -6,8 +6,6 @@ import {orderComments} from "../../../lib/utility";
 
 import BaseNotecard from "../../Notecard/BaseNotecard";
 
-import {VERTICAL_HEADER_OFFSET} from "../../../lib/constants";
-
 import type {Order} from "../../../types";
 
 type Props = {
@@ -80,20 +78,19 @@ class NotecardRow extends Component<Props> {
   )
 
   getHeaderPosition() {
-    let headerPosition = VERTICAL_HEADER_OFFSET;
+    let headerPosition = 0;
     if (this.row && this.header) {
       const rowHeight = this.row.offsetHeight;
       const rowOffset = this.row.offsetTop;
-      const headerHeight = this.header.offsetWidth;
-      // headerHeight uses width not height, because its turned 90 degrees
+      const headerHeight = this.header.offsetHeight;
 
       // If we scrolled to the header, stick it to the top
       if (this.props.headerOffset > rowOffset) {
-        headerPosition = VERTICAL_HEADER_OFFSET + this.props.headerOffset - rowOffset;
+        headerPosition = this.props.headerOffset - rowOffset;
       }
       // If we are scrolling off this row, stick it to the bottom
       if (this.props.headerOffset > rowOffset + rowHeight - headerHeight) {
-        headerPosition = VERTICAL_HEADER_OFFSET + rowHeight - headerHeight;
+        headerPosition = rowHeight - headerHeight;
       }
     }
 

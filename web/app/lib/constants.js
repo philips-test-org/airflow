@@ -13,8 +13,6 @@ export const HOURBAR_WIDTH = 50;
 
 export const SCROLL_SPEED = 100;
 
-export const VERTICAL_HEADER_OFFSET = 47;
-
 // Draggable Item types for React-DnD
 export const ItemTypes = {
   NOTECARD: "notecard",
