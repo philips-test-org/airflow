@@ -92,7 +92,7 @@ class BaseNotecard extends PureComponent<Props> {
     return (
       <div className="footer">
         <div className="left">
-          {adjusted.anesthesia ? <div className="status-indicator anesthesia"><strong>GA</strong></div> : null}
+          {adjusted.anesthesia ? <div className="status-indicator anesthesia"><strong>A</strong></div> : null}
         </div>
         <div className="right">
           {adjusted.consent ? <div className="status-indicator consent"><i className="fa fa-handshake-o"></i></div> : null}
