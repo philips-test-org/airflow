@@ -36,7 +36,7 @@ type Props = {
 type CardPosition = {id: number, top: number, bottom: number};
 
 type State = {
-  overlappingCards: Array<{depth: number, overlapping: Array<CardPosition>}>,
+  overlappingCards: Array<{cards: Array<CardPosition>, offset: number}>,
   hasOverlap: boolean,
 }
 
@@ -106,7 +106,7 @@ class NotecardLane extends Component<Props, State> {
   renderLane() {
     const {isOver, header} = this.props;
     const {hasOverlap, overlappingCards} = this.state;
-    const tdStyle = isOver ? {opacity: 0.33, backgroundColor: "lightgray"} : {}
+    const tdStyle = isOver ? {opacity: 0.33, backgroundColor: "lightgray"} : {};
 
     const widthMultiplier = hasOverlap ? this.laneWidthMultiplier(overlappingCards) : 1;
     const width = COL_WIDTH * widthMultiplier;
@@ -166,16 +166,15 @@ class NotecardLane extends Component<Props, State> {
   }
 
   checkForCardOverlap() {
-    const overlappingCards = this.cardOverlaps();
-    const overlaps = R.compose(
+    const overlappingCards = R.compose(
       R.chain(this.prettyPrint),
       R.pluck("overlapping")
-    )(overlappingCards);
+    )(this.cardOverlaps());
 
     this.setState({
-      overlappingCards: overlaps,
+      overlappingCards,
       hasOverlap: R.length(overlappingCards) > 0,
-    })
+    });
   }
 
   cardOverlaps() {
@@ -183,19 +182,17 @@ class NotecardLane extends Component<Props, State> {
     const positions = R.map(card => {
       const top = card.decoratedComponentInstance.orderTop();
       const height = card.decoratedComponentInstance.orderHeight();
-      const start = card.decoratedComponentInstance.orderStartTime();
       return {
         id: card.props.order.id,
         top,
         bottom: top + height,
-        start,
       };
     }, R.reject(R.isNil, cards));
 
     return R.compose(
       this.overlapFold,
-      R.aperture(2),
-      R.sortBy(R.prop("start"))
+      R.reject(([{id: id1}, {id: id2}]) => id1 == id2),
+      R.xprod(positions)
     )(positions);
   }
 
@@ -206,7 +203,7 @@ class NotecardLane extends Component<Props, State> {
 
     const lastOverlap = R.head(acc);
     // If this is the first overlap, wrap it in a list and return it.
-    const overlapObj = {depth: 2, overlapping: [x, y]};
+    const overlapObj = {overlapping: [x, y]};
     if (R.isNil(lastOverlap)) return [overlapObj];
 
     // Check if the first value in the pair to is already overlapping other orders.
@@ -214,15 +211,22 @@ class NotecardLane extends Component<Props, State> {
     const multi = R.any((id) => R.contains(id, [x.id, y.id]), overlappingIds);
     if (multi) {
       const overlapper = R.find(({id}) => R.not(R.contains(id, overlappingIds)), [x, y]);
-      let obj = {depth: lastOverlap.depth + 1, overlapping: R.append(overlapper, lastOverlap.overlapping)};
-      // Return a new list of overlap objects with the multi overlap object updated at the head.
-      return R.prepend(obj, R.tail(acc));
+      if (overlapper) {
+        let obj = {overlapping: R.append(overlapper, lastOverlap.overlapping)};
+        // Return a new list of overlap objects with the multi overlap object updated at the head.
+        return R.prepend(obj, R.tail(acc));
+      } else {return acc}
     }
 
     return R.prepend(overlapObj, acc);
   }, []);
 
-  laneWidthMultiplier = R.compose(R.reduce(R.max, 0), R.map(R.inc), R.pluck("offset"));
+  // Scalar to multiply lane width by based on max overlap columns.
+  laneWidthMultiplier = R.compose(
+    R.reduce(R.max, 0),
+    R.map(R.inc),
+    R.pluck("offset")
+  );
 
   overlaps = (card1: CardPosition, card2: CardPosition): boolean => {
     const twoInOne = (card2.top >= card1.top) && (card2.top <= card1.bottom);
@@ -230,26 +234,38 @@ class NotecardLane extends Component<Props, State> {
     return twoInOne || oneInTwo;
   };
 
-  addCard = ({offset, cards}, card) => ({offset, cards: R.append(card, cards)});
   noOverlap = (x, y) => R.not(this.overlaps(x, y));
+
+  addCard = ({offset, cards}, card) => ({offset, cards: R.append(card, cards)});
+
+  // Check whether a card doesn't overlap any other cards in a column.
   canPutInLane = ({cards}, card) => {
     if (R.isEmpty(cards) || R.isNil(cards)) return true;
     return R.all((c) => this.noOverlap(card, c), cards);
   };
 
-  prettyPrintFold = (lanes, card, offset) => {
-    if (R.isEmpty(lanes) || R.isNil(lanes)) {
+  prettyPrintFold = (columns, card, offset) => {
+    // Determines whether a card can go into a column in the lane
+    // based on it's position vs positions of others already in the
+    // lane. If there is overlap with cards already in the column
+    // then recursively try to put it in the remaining columns that
+    // make up the lane. If it doesn't fit in any of the columns that
+    // have already been added, adds it in a new column.
+    if (R.isEmpty(columns) || R.isNil(columns)) {
       return [{offset, cards: [card]}];
     }
-    const h = R.head(lanes);
-    const t = R.tail(lanes);
+
+    const h = R.head(columns);
+    const t = R.tail(columns);
     if (this.canPutInLane(h, card)) {
       return R.prepend(this.addCard(h, card), t);
     } else {
-      return R.prepend(h, this.prettyPrintFold(R.tail(lanes), card, offset + 1));
+      return R.prepend(h, this.prettyPrintFold(t, card, offset + 1));
     }
   };
 
+  // Divides cards into columns inside the lane based on which ones actually overlap
+  // while trying to minimize the total width of the lane.
   prettyPrint = R.reduce((acc, card) => (this.prettyPrintFold(acc, card, 0)), [{offset: 0, cards: []}]);
 }
 

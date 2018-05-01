@@ -225,7 +225,7 @@ $card-color: #fff;
   .notecard.scaled {
     position: absolute;
     z-index: 101;
-    left: unquote($card-left-unit);
+    margin-left: unquote($card-left-unit);
   }
   .notecard.scaled:hover {
     z-index: 102;
