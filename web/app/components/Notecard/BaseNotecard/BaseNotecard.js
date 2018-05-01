@@ -19,7 +19,6 @@ type Props = {
   openModal: (Order) => void,
   order: Order,
   scrollToY: (y: number) => void,
-  scrollToX: (x: number) => void,
   startDate: number,
   style: Object,
   type: "calendar" | "overview" | "kiosk",
@@ -31,12 +30,7 @@ class BaseNotecard extends PureComponent<Props> {
 
   componentDidUpdate(prevProps: Props) {
     if (this.card && this.props.isFocused !== prevProps.isFocused && this.props.isFocused) {
-      if (this.props.scrollToY) {
-        this.props.scrollToY(this.card.offsetTop);
-      }
-      if (this.props.scrollToX) {
-        this.props.scrollToX(this.card.offsetLeft);
-      }
+      this.props.scrollToY(this.card.offsetTop);
     }
   }
 

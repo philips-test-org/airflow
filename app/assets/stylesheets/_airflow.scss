@@ -215,9 +215,6 @@ $card-color: #fff;
     top: 100px;
     bottom: 0;
     overflow-y: auto;
-    overflow-x: auto;
-    /*padding: 5px;*/
-
   }
 
   .notecard.scaled {
@@ -243,43 +240,41 @@ Overview
   bottom: 0;
   overflow-y: auto;
   overflow-x: auto;
-  /*padding: 5px;*/
-
 }
 
-.resource-row:first-child {
-  /*border-top: unquote($border-unit) solid $grid-color;*/
-}
-
-.resource-row:nth-child(2n) {
+.resource-row:nth-child(2n) .cards {
   background-color: #fafafa;
 }
 
 .resource-row {
+  overflow: hidden;
   border-bottom: unquote($border-unit) solid $grid-color;
   position: relative;
-  padding: 5px 0 5px 50px;
-  height: 140px;
-  white-space: nowrap;
+  padding: 0 0 0 43px;
 
-  h1 {
-    position: absolute;
-    left: -48px;
-    top: 47px;
-    width: 138px;
-    z-index: 102;
-    padding: 13px 0;
-    margin: 0;
-    border-bottom: unquote($border-unit) solid $grid-color;
-    background-color: #fff;
-    text-align: center;
-    font-size: 16px;
-    font-weight: normal;
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  .row-label{
+    h1 {
+      position: absolute;
+      left: -48px;
+      top: 47px;
+      width: 138px;
+      z-index: 102;
+      padding: 13px 0;
+      margin: 0;
+      background-color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-weight: normal;
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    }
+  }
+  .cards {
+    border-left: unquote($border-unit) solid $grid-color;
+    padding: 5px 5px 0 5px;
   }
 }
 
