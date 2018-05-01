@@ -136,17 +136,13 @@ class NotecardLane extends Component<Props, State> {
   renderCards() {
     const Component = this.props.type == "kiosk" ? ScaledCard(KioskNotecard) : DraggableNotecard;
     const {overlappingCards} = this.state;
-    const mapIndexed = R.addIndex(R.map);
-    const overlaps = R.compose(
-      R.chain(mapIndexed((c, i) => ({id: c.id, shift: i}))),
-      R.pluck("overlapping")
-    )(overlappingCards);
+    const overlaps = R.chain(({offset, cards}) => R.map(({id}) =>  ({offset, id}), cards), overlappingCards);
 
     return (
       R.map((order) => {
         const isFiltered = R.contains(order.id, this.props.filteredOrderIds);
         const overlapShift = R.find(R.propEq("id", order.id), overlaps);
-        const offset = !R.isNil(overlapShift) ? {left: COL_WIDTH * overlapShift.shift} : {};
+        const offset = !R.isNil(overlapShift) ? {left: COL_WIDTH * overlapShift.offset} : {};
 
         return (
           <Component
@@ -171,8 +167,13 @@ class NotecardLane extends Component<Props, State> {
 
   checkForCardOverlap() {
     const overlappingCards = this.cardOverlaps();
+    const overlaps = R.compose(
+      R.chain(this.prettyPrint),
+      R.pluck("overlapping")
+    )(overlappingCards);
+
     this.setState({
-      overlappingCards,
+      overlappingCards: overlaps,
       hasOverlap: R.length(overlappingCards) > 0,
     })
   }
@@ -192,13 +193,13 @@ class NotecardLane extends Component<Props, State> {
     }, R.reject(R.isNil, cards));
 
     return R.compose(
-      this.fold,
+      this.overlapFold,
       R.aperture(2),
       R.sortBy(R.prop("start"))
     )(positions);
   }
 
-  fold = R.reduce((acc, [x, y]) => {
+  overlapFold = R.reduce((acc, [x, y]) => {
     const overlap = this.overlaps(x, y);
     // Don't care if there is no overlap.
     if (!overlap) return acc;
@@ -219,15 +220,37 @@ class NotecardLane extends Component<Props, State> {
     }
 
     return R.prepend(overlapObj, acc);
-  }, [])
+  }, []);
 
-  laneWidthMultiplier = R.compose(R.reduce(R.max, 0), R.pluck("depth"));
+  laneWidthMultiplier = R.compose(R.reduce(R.max, 0), R.map(R.inc), R.pluck("offset"));
 
   overlaps = (card1: CardPosition, card2: CardPosition): boolean => {
     const twoInOne = (card2.top >= card1.top) && (card2.top <= card1.bottom);
     const oneInTwo = (card1.top >= card2.top) && (card1.top <= card2.bottom);
     return twoInOne || oneInTwo;
-  }
+  };
+
+  addCard = ({offset, cards}, card) => ({offset, cards: R.append(card, cards)});
+  noOverlap = (x, y) => R.not(this.overlaps(x, y));
+  canPutInLane = ({cards}, card) => {
+    if (R.isEmpty(cards) || R.isNil(cards)) return true;
+    return R.all((c) => this.noOverlap(card, c), cards);
+  };
+
+  prettyPrintFold = (lanes, card, offset) => {
+    if (R.isEmpty(lanes) || R.isNil(lanes)) {
+      return [{offset, cards: [card]}];
+    }
+    const h = R.head(lanes);
+    const t = R.tail(lanes);
+    if (this.canPutInLane(h, card)) {
+      return R.prepend(this.addCard(h, card), t);
+    } else {
+      return R.prepend(h, this.prettyPrintFold(R.tail(lanes), card, offset + 1));
+    }
+  };
+
+  prettyPrint = R.reduce((acc, card) => (this.prettyPrintFold(acc, card, 0)), [{offset: 0, cards: []}]);
 }
 
 export default DropTarget(ItemTypes.NOTECARD, laneTarget, collect)(NotecardLane);
