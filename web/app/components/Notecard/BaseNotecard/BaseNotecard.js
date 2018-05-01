@@ -64,6 +64,7 @@ class BaseNotecard extends PureComponent<Props> {
           <div className="body">
             <div className="procedure">{checkExamThenOrder(this.props.order, ["procedure", "description"])}</div>
             <div className="patient-location">{this.examLocation()}</div>
+            <div className="ordering-physician">Ordered by: {this.props.order.rad_exam.rad_exam_personnel.ordering.name}</div>
           </div>
 
           {this.renderFooter()}
