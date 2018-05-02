@@ -1,5 +1,5 @@
 // @flow
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import * as R from "ramda";
 import {DragDropContext} from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
@@ -41,8 +41,12 @@ type Props = {
   type: ViewType,
 }
 
-class Calendar extends PureComponent<Props> {
+class Calendar extends Component<Props> {
   hourbar: ?HTMLElement;
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+  }
 
   scrollToCoordinates = (x: number, y: number) => {
     if (this.hourbar) {

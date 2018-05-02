@@ -1,5 +1,5 @@
 // @flow
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import * as R from "ramda";
 import {DropTarget} from "react-dnd";
 
@@ -51,8 +51,12 @@ function collect(connect, monitor) {
 }
 
 // React component
-class NotecardLane extends PureComponent<Props> {
+class NotecardLane extends Component<Props> {
   lane: ?HTMLElement;
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+  }
 
   scrollToY = (y: number) => {
     if (this.lane) {

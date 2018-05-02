@@ -8,6 +8,7 @@ import Calendar from "../Calendar";
 import Overview from "../Overview";
 import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
+import ErrorBoundary from "../ErrorBoundary";
 
 import {
   NAVBAR_OFFSET,
@@ -130,16 +131,18 @@ class Airflow extends Component<Props, State> {
   render() {
     return (
       <div>
-        <ViewControls
-          fetchExams={this.props.fetchExams}
-          resources={this.props.resources}
-          selectedDate={this.props.startDate}
-          selectedResourceGroup={this.props.selectedResourceGroup}
-          updateDate={this.props.updateDate}
-          updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
-          viewType={this.props.type}
-          filterOrders={this.filterOrders}
-        />
+        <ErrorBoundary id="view-controls">
+          <ViewControls
+            fetchExams={this.props.fetchExams}
+            resources={this.props.resources}
+            selectedDate={this.props.startDate}
+            selectedResourceGroup={this.props.selectedResourceGroup}
+            updateDate={this.props.updateDate}
+            updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
+            viewType={this.props.type}
+            filterOrders={this.filterOrders}
+          />
+        </ErrorBoundary>
         {this.props.loading
           ? <img src={this.props.images.spinner} />
           : this.renderBoard()}
