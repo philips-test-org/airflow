@@ -40,6 +40,10 @@ class BaseNotecard extends PureComponent<Props> {
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     const cardClass = `notecard ${this.cardClass()}`
     const cardColor = this.cardColor();
+    const orderingPhysician = R.defaultTo(
+      "unknown",
+      R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], this.props.order),
+    );
     return (
       <div
         className={cardClass}
@@ -58,7 +62,7 @@ class BaseNotecard extends PureComponent<Props> {
           <div className="body">
             <div className="procedure">{checkExamThenOrder(this.props.order, ["procedure", "description"])}</div>
             <div className="patient-location">{this.examLocation()}</div>
-            <div className="ordering-physician">Ordered by: {this.props.order.rad_exam.rad_exam_personnel.ordering.name}</div>
+            <div className="ordering-physician">Ordered by: {orderingPhysician}</div>
           </div>
 
           {this.renderFooter()}
