@@ -19,6 +19,7 @@ import {
 import type {
   Images,
   Order,
+  RadExam,
   Resource,
   User,
   ViewType,
@@ -30,11 +31,13 @@ type Props = {
   boardWidth: number,
   closeModal: () => void,
   currentUser: User,
+  examsByPerson: Array<RadExam>,
   fetchAvatar: (userId: number) => void,
   fetchCurrentEmployee: () => void,
   fetchExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
   fetchInitialApp: (type: ViewType, date?: number) => void,
   fetchKioskExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
+  fetchPersonExams: (personId: number) => void,
   focusedOrder: Order,
   images: Images,
   loading: boolean,
@@ -186,6 +189,7 @@ class Airflow extends Component<Props, State> {
           scrollToCoordinates={this.scrollToCoordinates}
           {...this.props}
           updateWidth={throttledWidthUpdate}
+          openModal={this.openModal}
         />
         {this.renderOrderModal()}
       </div>
@@ -194,12 +198,16 @@ class Airflow extends Component<Props, State> {
 
   renderOrderModal() {
     if (!this.props.showModal) {return null}
+    const exams = this.props.examsByPerson[
+      this.getPersonId(this.props.focusedOrder)
+    ];
     return (
       <OrderModal
         adjustOrder={this.props.adjustOrder}
         avatarMap={this.props.avatarMap}
         closeModal={this.props.closeModal}
         currentUser={this.props.currentUser}
+        exams={exams}
         fetchAvatar={this.props.fetchAvatar}
         order={this.props.focusedOrder}
         orderGroup={this.orderGroup(this.props.focusedOrder)}
@@ -207,6 +215,14 @@ class Airflow extends Component<Props, State> {
         startDate={this.props.startDate}
       />
     )
+  }
+
+  getPersonId = (focusedOrder: Order): number =>
+    R.path(["patient_mrn", "patient_id"], focusedOrder);
+
+  openModal = (order: Order) => {
+    this.props.openModal(order);
+    this.props.fetchPersonExams(this.getPersonId(order));
   }
 
   headerOffset = () => {

@@ -172,7 +172,22 @@ export type RadExam = {
   resource: Resource,
   site_class: SiteClass,
   current_status: RadExamStatus,
-  site_sublocation: Object
+  site_sublocation: Object,
+  image_viewer: ImageViewer,
+  integration_json: IntegrationJson,
+}
+
+export type ImageViewer = {
+  type: string,
+  class: string,
+  url: string,
+  parameters: Object,
+  static_paramters: Object,
+}
+
+export type IntegrationJson = {
+  accession: string,
+  mrn: string,
 }
 
 export type Employee = {

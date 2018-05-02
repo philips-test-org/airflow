@@ -13,6 +13,7 @@ import {
   fetchAvatar,
   fetchExams,
   fetchKioskExams,
+  fetchPersonExams,
   fetchInitialApp,
   fetchCurrentEmployee,
   showOrderModal,
@@ -37,7 +38,10 @@ const mapStateToProps = ({board, user}: Object) => {
   return {
     avatarMap: user.avatars,
     currentUser: user.currentUser,
+    examsByPerson: board.examsByPerson,
     focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
+    images: board.images,
+    loading: board.loading,
     orderGroups: board.orderGroups,
     orders: ordersByResource(board.orders),
     ordersLoaded: !R.isEmpty(board.orders),
@@ -67,6 +71,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchKioskExams: (selectedResourceGroup: string, resources: Array<number>) => {
       dispatch(fetchKioskExams(selectedResourceGroup, resources));
+    },
+    fetchPersonExams: (personId: number) => {
+      dispatch(fetchPersonExams(personId));
     },
     fetchInitialApp: (type: ViewType, date: number) => {
       dispatch(fetchInitialApp(type, date));

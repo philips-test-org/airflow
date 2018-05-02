@@ -14,6 +14,7 @@ import {
 const {
   ADJUST_ORDER_SUCCEEDED,
   FETCH_EXAMS_SUCCEEDED,
+  FETCH_PERSON_EXAMS_SUCCEEDED,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
@@ -40,6 +41,7 @@ const initialState = {
   loading: true,
   images: {},
   width: 0,
+  examsByPerson: {},
 }
 
 function board(state: Object = initialState, action: Object) {
@@ -54,6 +56,7 @@ function board(state: Object = initialState, action: Object) {
   switch (action.type) {
   case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
+  case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
   case SHOW_ORDER_MODAL: return showOrderModal(state, action);
   case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
   case SHOW_LOADING: return showLoading(state);
@@ -94,6 +97,12 @@ function updateOrders(state, {payload}) {
   return R.merge(state, {
     orders: payloadWithIdent,
     orderGroups: R.groupBy(R.prop("groupIdentity"), payloadWithIdent),
+  });
+}
+
+function updateExams(state, {personId, payload}) {
+  return R.merge(state, {
+    examsByPerson: R.merge(state.examsByPerson, {[personId]: payload}),
   });
 }
 
