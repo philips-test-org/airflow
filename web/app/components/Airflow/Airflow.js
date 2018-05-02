@@ -27,6 +27,7 @@ import type {
 type Props = {
   adjustOrder: (event: Object) => void,
   avatarMap: {[number]: Blob},
+  boardWidth: number,
   closeModal: () => void,
   currentUser: User,
   fetchAvatar: (userId: number) => void,
@@ -53,10 +54,10 @@ type Props = {
   updateDate: (date: moment) => void,
   updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
   updateViewType: (updatedView: ViewType) => void,
+  updateWidth: (updatedWidth: number) => void,
 }
 
 type State = {
-  boardWidth: number,
   gridPosition: {x: number, y: number},
   filteredOrderIds: Array<number>,
   focusedOrderId: ?number,
@@ -72,7 +73,6 @@ class Airflow extends Component<Props, State> {
     super(props);
 
     this.state = {
-      boardWidth: 0,
       gridPosition: {x: 0, y: 0},
       filteredOrderIds: [],
       focusedOrderId: null,
@@ -101,7 +101,7 @@ class Airflow extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    const {type: newType} = this.props;
+    const {type: newType, updateWidth, boardWidth} = this.props;
     const {type: oldType} = prevProps;
     if (oldType !== newType) {
       if (R.isEmpty(this.props.currentUser)) {
@@ -119,12 +119,12 @@ class Airflow extends Component<Props, State> {
       } else {
         // If we're switching from calendar to overview, or vise versa, we need
         // to update the width since this is not going to pop a loading
-        this.updateWidth();
+        this.updateWidth(updateWidth, boardWidth);
       }
     }
 
     if (R.not(R.isEmpty(this.props.orders)) && !this.props.loading && prevProps.loading) {
-      this.updateWidth();
+      this.updateWidth(updateWidth, boardWidth);
     }
   }
 
@@ -165,6 +165,10 @@ class Airflow extends Component<Props, State> {
       td: tdStyle,
       th: thStyle,
     };
+    const throttledWidthUpdate = throttle(
+      () => this.updateWidth(this.props.updateWidth, this.props.boardWidth),
+      500
+    );
 
     return (
       <div
@@ -175,12 +179,13 @@ class Airflow extends Component<Props, State> {
         <BodyComponent
           style={scrollStyle}
           headerOffset={this.headerOffset()}
-          boardWidth={this.state.boardWidth}
+          boardWidth={this.props.boardWidth}
           gridPosition={this.state.gridPosition}
           filteredOrderIds={this.state.filteredOrderIds}
           focusedOrderId={this.state.focusedOrderId}
           scrollToCoordinates={this.scrollToCoordinates}
           {...this.props}
+          updateWidth={throttledWidthUpdate}
         />
         {this.renderOrderModal()}
       </div>
@@ -221,14 +226,14 @@ class Airflow extends Component<Props, State> {
     }
   }
 
-  updateWidth() {
-    const elementId = R.equals("overview", this.props.type) ? "board" : "time-grid";
+  updateWidth = (f: (number) => void, currentWidth: number) => {
+    const elementId = "time-grid";
 
     const element = document.getElementById(elementId);
     const width = element ? element.scrollWidth : 0;
 
-    if (width > 0) {
-      this.setState({boardWidth: width});
+    if (width && width > 0 && width != currentWidth) {
+      f(width);
     }
   }
 

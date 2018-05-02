@@ -57,7 +57,7 @@ const notecardSource = {
           start_time: newStart,
           stop_time: newStop,
           resource_id: targetResourceId
-        }
+        };
         props.updateOrderTime(props.order.id, newState);
       }
     }

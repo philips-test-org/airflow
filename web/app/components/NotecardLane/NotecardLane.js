@@ -31,6 +31,7 @@ type Props = {
   startDate: number,
   type: "calendar" | "kiosk",
   updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
+  updateWidth: () => void,
 }
 
 type CardPosition = {id: number, top: number, bottom: number};
@@ -38,6 +39,7 @@ type CardPosition = {id: number, top: number, bottom: number};
 type State = {
   overlappingCards: Array<{cards: Array<CardPosition>, offset: number}>,
   hasOverlap: boolean,
+  widthMultiplier: number,
 }
 
 // React DnD setup
@@ -72,6 +74,7 @@ class NotecardLane extends Component<Props, State> {
     this.state = {
       hasOverlap: false,
       overlappingCards: [],
+      widthMultiplier: 0,
     }
   }
 
@@ -79,9 +82,13 @@ class NotecardLane extends Component<Props, State> {
     this.checkForCardOverlap();
   }
 
-  componentDidUpdate(prevProps: Props) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.props.orders != prevProps.orders) {
       this.checkForCardOverlap();
+    }
+
+    if (this.state.widthMultiplier != prevState.widthMultiplier) {
+      this.props.updateWidth();
     }
   }
 
@@ -105,10 +112,9 @@ class NotecardLane extends Component<Props, State> {
 
   renderLane() {
     const {isOver, header} = this.props;
-    const {hasOverlap, overlappingCards} = this.state;
+    const {widthMultiplier} = this.state;
     const tdStyle = isOver ? {opacity: 0.33, backgroundColor: "lightgray"} : {};
 
-    const widthMultiplier = hasOverlap ? this.laneWidthMultiplier(overlappingCards) : 1;
     const width = COL_WIDTH * widthMultiplier;
     const thStyle = {width, minWidth: width};
 
@@ -170,10 +176,13 @@ class NotecardLane extends Component<Props, State> {
       R.chain(this.prettyPrint),
       R.pluck("overlapping")
     )(this.cardOverlaps());
+    const hasOverlap = R.length(overlappingCards) > 0;
+    const widthMultiplier = hasOverlap ? this.laneWidthMultiplier(overlappingCards) : 1;
 
     this.setState({
       overlappingCards,
-      hasOverlap: R.length(overlappingCards) > 0,
+      hasOverlap,
+      widthMultiplier,
     });
   }
 

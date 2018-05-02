@@ -25,6 +25,7 @@ import {
   fetchResourcesSucceeded,
   updateDate,
   updateViewType,
+  updateWidth,
   updateBrowserHistory,
   updateSelectedResourceGroup,
 } from "./board";
@@ -60,6 +61,7 @@ export {
   fetchResourcesSucceeded,
   updateDate,
   updateViewType,
+  updateWidth,
   updateBrowserHistory,
   updateSelectedResourceGroup,
   // USER

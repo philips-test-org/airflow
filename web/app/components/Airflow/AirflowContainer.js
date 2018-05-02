@@ -21,6 +21,7 @@ import {
   updateBrowserHistory,
   updateDate,
   updateViewType,
+  updateWidth,
   updateSelectedResourceGroup,
 } from "../../lib/actions";
 
@@ -49,6 +50,7 @@ const mapStateToProps = ({board, user}: Object) => {
     type: board.type,
     loading: board.loading,
     images: board.images,
+    boardWidth: board.width,
   };
 };
 
@@ -89,6 +91,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateViewType: (updatedView: ViewType) => {
       dispatch(updateViewType(updatedView));
+    },
+    updateWidth: (updatedWidth: number) => {
+      dispatch(updateWidth(updatedWidth));
     },
     updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
       dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));

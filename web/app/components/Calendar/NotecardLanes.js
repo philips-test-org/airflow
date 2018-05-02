@@ -18,7 +18,8 @@ type Props = {
   selectedResources: {[string]: string},
   startDate: number,
   type: ViewType,
-  updateOrderTime: (orderId: number, newState: Object) => void
+  updateOrderTime: (orderId: number, newState: Object) => void,
+  updateWidth: (number) => void,
 }
 
 class NotecardLanes extends Component<Props> {
@@ -41,6 +42,7 @@ class NotecardLanes extends Component<Props> {
         startDate={this.props.startDate}
         type={this.props.type}
         updateOrderTime={this.props.updateOrderTime}
+        updateWidth={this.props.updateWidth}
       />
     )
   }
