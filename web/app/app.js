@@ -19,6 +19,7 @@ if (process.env.NODE_ENV !== "production") {
     /^DragSource/,
     /^DragTarget/,
     /^DragDropContext/,
+    /^DropTarget/,
     /^DayPickerSingleDateController/,
     /^CalendarMonth/,
   ]});

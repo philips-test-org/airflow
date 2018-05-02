@@ -93,7 +93,8 @@ class NotecardLane extends Component<Props, State> {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+    const omitFns = R.omit(["updateWidth"]);
+    return !R.equals(omitFns(nextProps), omitFns(this.props)) || !R.equals(nextState, this.state);
   }
 
   scrollToY = (y: number) => {

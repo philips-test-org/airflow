@@ -24,7 +24,8 @@ type Props = {
 
 class NotecardLanes extends Component<Props> {
   shouldComponentUpdate(nextProps: Props) {
-    return !R.equals(nextProps, this.props);
+    const omitFns = R.omit(["updateWidth"]);
+    return !R.equals(omitFns(nextProps), omitFns(this.props));
   }
 
   renderLane(resourceId: string, orders: Array<Order>) {
