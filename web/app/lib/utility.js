@@ -146,6 +146,16 @@ const mapSelectedResources = R.compose(
   R.map(({id, name}) => ({[id]: name}))
 )
 
+function printOrders() {
+  var content = document.getElementById("print-view-contents");
+  var pri = document.getElementById("print-view-frame").contentWindow;
+  pri.document.open();
+  pri.document.write(content.innerHTML);
+  pri.document.close();
+  pri.focus();
+  pri.print();
+}
+
 export {
   appointmentTime,
   cardStatuses,
@@ -153,9 +163,10 @@ export {
   formatName,
   formatTimestamp,
   kioskNumber,
+  mapSelectedResources,
   orderComments,
   orderResource,
   ordersByResource,
   patientType,
-  mapSelectedResources,
+  printOrders,
 }

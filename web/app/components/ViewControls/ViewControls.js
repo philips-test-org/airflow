@@ -8,7 +8,10 @@ import {SingleDatePicker} from "react-dates";
 
 import ResourceItem from "./ResourceItem";
 
-import {STATUS_CHECKS} from "../../lib/utility";
+import {
+    printOrders,
+    STATUS_CHECKS,
+} from "../../lib/utility";
 
 import type {
   Resource,
@@ -153,21 +156,11 @@ class ViewControls extends PureComponent<Props, State> {
   renderPrintButton() {
     return (
       <div className="btn-group pull-right margin-right-sm" id="print-button">
-        <button className="btn btn-default btn-sm" onClick={this.openPrintDialog}>
+        <button className="btn btn-default btn-sm" onClick={printOrders} title="Printer-friendly view">
           <i className="fa fa-print" aria-hidden="true"></i>
         </button>
       </div>
     )
-  }
-
-  openPrintDialog() {
-      var content = document.getElementById("print-view-contents");
-      var pri = document.getElementById("print-view-frame").contentWindow;
-      pri.document.open();
-      pri.document.write(content.innerHTML);
-      pri.document.close();
-      pri.focus();
-      pri.print();
   }
 
   selectResourceGroup = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {

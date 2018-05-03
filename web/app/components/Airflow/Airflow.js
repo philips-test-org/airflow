@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import * as R from "ramda";
 import {throttle} from "lodash";
 import moment from "moment";
+import key from "keymaster";
 
 import Calendar from "../Calendar";
 import Overview from "../Overview";
@@ -16,6 +17,9 @@ import {
   SCROLL_SPEED,
 } from "../../lib/constants";
 
+import {
+  printOrders,
+} from "../../lib/utility";
 
 import type {
   Images,
@@ -98,7 +102,12 @@ class Airflow extends Component<Props, State> {
       this.props.updateViewType(viewType);
       this.fetchExams(viewType);
       this.updateActiveLink(viewType);
-    }
+    };
+
+    key('⌘+p, ctrl+p', function(event, handler) {
+      event.preventDefault();
+      printOrders();
+    });
   }
 
   componentDidUpdate(prevProps: Props) {

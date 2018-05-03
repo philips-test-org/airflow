@@ -1,19 +1,17 @@
 /* Printing */
 @media print {
-
     .grid-wrapper, #view-controls {
         display: none;
     }
 
-    .print-view {
+    .print-view-contents {
         display: block;
-        position: relative;
 
     }
 
-    dl {
-        position: relative;
+    .print-order {
         page-break-inside: avoid;
+        page-break-after: avoid;
         break-inside: avoid;
     }
 }

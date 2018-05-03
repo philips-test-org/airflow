@@ -25,7 +25,7 @@ class PrintView extends PureComponent {
     return (
       <div className="print-view">
         <div id="print-view-contents">
-        {printContent}
+          {printContent}
         </div>
         <iframe id="print-view-frame"></iframe>
       </div>
@@ -36,7 +36,7 @@ class PrintView extends PureComponent {
     const resourceName = this.props.selectedResources[resourceId];
       return (
         <div key={`print-lane-${resourceName}`}>
-          <h1>{resourceName}</h1>
+          <h2>{resourceName}</h2>
           <hr />
           {this.renderOrders(orders)}
         </div>
@@ -49,17 +49,23 @@ class PrintView extends PureComponent {
   }
 
   renderOrder = (order: Order) => (
-    <div key={order.id}>
+    <div key={order.id} className="print-order" style={{pageBreakInside: "avoid", marginBottom: "1em"}}>
       <h3 className="patient-name">{this.name(order)}</h3>
-      <dl>
-        <dt>Procedure:</dt>
-        <dd className="procedure">{checkExamThenOrder(order, ["procedure", "description"])}</dd>
-        <dt>Ordering Physician:</dt>
-        <dd>{R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order)}</dd>
-        <dt>Rounding:</dt>
-        <dd>{this.rounding(order)}</dd>
-        <hr />
-      </dl>
+      <div>
+        <div>
+          <strong>Procedure: </strong>
+          <span className="procedure">{checkExamThenOrder(order, ["procedure", "description"])}</span>
+        </div>
+        <div>
+          <strong>Ordering Physician: </strong>
+          <span>{R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order)}</span>
+        </div>
+        <div>
+          <strong>Rounding: </strong>
+          <span>{this.rounding(order)}</span>
+        </div>
+      </div>
+      <hr />
     </div>
   )
 
