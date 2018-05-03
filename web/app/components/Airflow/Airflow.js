@@ -104,7 +104,7 @@ class Airflow extends Component<Props, State> {
       this.updateActiveLink(viewType);
     };
 
-    key('⌘+p, ctrl+p', function(event, handler) {
+    key("⌘+p, ctrl+p", (event, _handler) => {
       event.preventDefault();
       printOrders();
     });

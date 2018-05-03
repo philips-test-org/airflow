@@ -148,12 +148,16 @@ const mapSelectedResources = R.compose(
 
 function printOrders() {
   var content = document.getElementById("print-view-contents");
-  var pri = document.getElementById("print-view-frame").contentWindow;
-  pri.document.open();
-  pri.document.write(content.innerHTML);
-  pri.document.close();
-  pri.focus();
-  pri.print();
+  // Iframe
+  var frame: any = document.getElementById("print-view-frame");
+  if (content && frame) {
+    const pri = frame.contentWindow;
+    pri.document.open();
+    pri.document.write(content.innerHTML);
+    pri.document.close();
+    pri.focus();
+    pri.print();
+  }
 }
 
 export {

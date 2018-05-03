@@ -4,7 +4,6 @@ import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {
-  cardStatuses,
   checkExamThenOrder,
   formatName,
 } from "../../lib/utility";
@@ -13,9 +12,10 @@ import type {Order} from "../../types";
 
 type Props = {
   orders: Order,
+  selectedResources: {[number]: string},
 };
 
-class PrintView extends PureComponent {
+class PrintView extends PureComponent<Props> {
   render() {
     const printContent = R.map(
       ([resourceId, orders]) => this.renderLane(resourceId, orders),
@@ -34,19 +34,18 @@ class PrintView extends PureComponent {
 
   renderLane(resourceId: number, orders: Array<Order>) {
     const resourceName = this.props.selectedResources[resourceId];
-      return (
-        <div key={`print-lane-${resourceName}`}>
-          <h2>{resourceName}</h2>
-          <hr />
-          {this.renderOrders(orders)}
-        </div>
-      )
+    return (
+      <div key={`print-lane-${resourceName}`}>
+        <h2>{resourceName}</h2>
+        <hr />
+        {this.renderOrders(orders)}
+      </div>
+    )
   }
 
-  renderOrders(orders: Array<Order>) {
-    const patientPath = ["site_class", "patient_type", "patient_type"];
-    return R.map(this.renderOrder, R.flatten(R.values(this.props.orders)))
-  }
+  renderOrders = (orders: Array<Order>) => (
+    R.map(this.renderOrder, R.flatten(R.values(orders)))
+  )
 
   renderOrder = (order: Order) => (
     <div key={order.id} className="print-order" style={{pageBreakInside: "avoid", marginBottom: "1em"}}>

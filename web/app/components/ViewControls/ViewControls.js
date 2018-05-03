@@ -9,8 +9,8 @@ import {SingleDatePicker} from "react-dates";
 import ResourceItem from "./ResourceItem";
 
 import {
-    printOrders,
-    STATUS_CHECKS,
+  printOrders,
+  STATUS_CHECKS,
 } from "../../lib/utility";
 
 import type {

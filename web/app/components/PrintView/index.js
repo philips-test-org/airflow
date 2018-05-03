@@ -1,4 +1,3 @@
-
-import PrintView from './PrintView';
+import PrintView from "./PrintView";
 
 export default PrintView;
