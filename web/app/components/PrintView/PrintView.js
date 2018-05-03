@@ -1,6 +1,6 @@
 // @flow
 
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import * as R from "ramda";
 
 import {
@@ -15,7 +15,11 @@ type Props = {
   selectedResources: {[number]: string},
 };
 
-class PrintView extends PureComponent<Props> {
+class PrintView extends Component<Props> {
+  shouldComponentUpdate(newProps: Props) {
+    return !R.equals(this.props, newProps);
+  }
+
   render() {
     const printContent = R.map(
       ([resourceId, orders]) => this.renderLane(resourceId, orders),
@@ -35,7 +39,7 @@ class PrintView extends PureComponent<Props> {
   renderLane(resourceId: number, orders: Array<Order>) {
     const resourceName = this.props.selectedResources[resourceId];
     return (
-      <div key={`print-lane-${resourceName}`}>
+      <div key={`print-lane-${resourceName}`} style={{pageBreakAfter: "always"}}>
         <h2>{resourceName}</h2>
         <hr />
         {this.renderOrders(orders)}
