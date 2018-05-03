@@ -9,12 +9,12 @@ import type {Order} from "../../types";
 type Props = {
   filteredOrderIds: Array<number>,
   focusedOrderId: number,
+  headerOffset: number,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
   scrollToCoordinates: (x: number, y: number) => void,
   selectedResources: {[string]: string},
   startDate: number,
-  style: {th: Object, td: Object},
   boardWidth: number,
 }
 
@@ -38,13 +38,13 @@ class Overview extends PureComponent<Props> {
         key={`${resourceId}-row`}
         filteredOrderIds={this.props.filteredOrderIds}
         focusedOrderId={this.props.focusedOrderId}
+        headerOffset={this.props.headerOffset}
         label={resourceName}
         openModal={this.props.openModal}
         orders={orders}
         resourceId={resourceId}
         scrollToCoordinates={this.props.scrollToCoordinates}
         startDate={this.props.startDate}
-        fixedColStyle={this.props.style.td}
         boardWidth={this.props.boardWidth}
       />
     )

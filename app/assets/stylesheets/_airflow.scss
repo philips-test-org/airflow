@@ -7,6 +7,8 @@ $dark-alert-red: #A40008;
 $very-dark-alert-red: #750006;
 $alert-text-color: #fff;
 $complete-green: #279A2F;
+$card-footer-bg-color: #f7f7f7;
+$card-footer-font-color: #616161;
 
 $ON-HOLD-HEX: #F5F52B;
 $ON-HOLD-RGBA: rgba(245, 245, 43, 0.8);
@@ -217,9 +219,6 @@ $card-color: #fff;
     top: 100px;
     bottom: 0;
     overflow-y: auto;
-    overflow-x: auto;
-    /*padding: 5px;*/
-
   }
 
   .notecard.scaled {
@@ -245,43 +244,42 @@ Overview
   bottom: 0;
   overflow-y: auto;
   overflow-x: auto;
-  /*padding: 5px;*/
-
 }
 
-.resource-row:first-child {
-  /*border-top: unquote($border-unit) solid $grid-color;*/
-}
-
-.resource-row:nth-child(2n) {
+.resource-row:nth-child(2n) .cards {
   background-color: #fafafa;
 }
 
 .resource-row {
+  overflow: hidden;
   border-bottom: unquote($border-unit) solid $grid-color;
   position: relative;
-  padding: 5px 0 5px 50px;
-  height: 140px;
-  white-space: nowrap;
+  padding: 0 0 0 43px;
 
-  h1 {
-    position: absolute;
-    left: -48px;
-    top: 47px;
-    width: 138px;
-    z-index: 102;
-    padding: 13px 0;
-    margin: 0;
-    border-bottom: unquote($border-unit) solid $grid-color;
-    background-color: #fff;
-    text-align: center;
-    font-size: 16px;
-    font-weight: normal;
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  .row-label{
+    h1 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 102;
+      padding: 13px;
+      margin: 0;
+      background-color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-weight: normal;
+      white-space: nowrap;
+      -ms-writing-mode: tb-lr;
+      writing-mode: vertical-lr;
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+    }
+  }
+  .cards {
+    border-left: unquote($border-unit) solid $grid-color;
+    padding: 5px 5px 0 5px;
   }
 }
 
@@ -377,22 +375,16 @@ Shared Styles
   }
 
   .footer {
-    .right {
-      position: absolute;
-      bottom: 0px;
-      right: 4px;
-    }
-    .left {
-      position: absolute;
-      bottom: 0px;
-      left: 18px;
-    }
-    padding: 0px 10px 5px;
-    text-align: right;
-    color: #757575;
+    padding: 0px 10px;
+    background-color: $card-footer-bg-color !important;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    width: 224px;
+    box-shadow: 0px -0.5px 3px rgba(50, 50, 50, 0.2);
+    color: $card-footer-font-color;
+
     .status-indicator {
-      color: #53a790;
-      background-color: #fff;
       display: inline;
     }
   }
@@ -426,21 +418,16 @@ Shared Styles
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 25px $ON-HOLD-RGBA;
   background-color: $ON-HOLD-HEX !important;
   .left-pane { background-color: $ON-HOLD-HEX !important; }
-  .status-indicator { background-color: $ON-HOLD-HEX !important; }
 }
 
 .notecard.ppca_ready {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 25px $PPCA-READY-RGBA;
     background-color: $PPCA-READY-HEX !important;
     .left-pane { background-color: $PPCA-READY-HEX !important; }
-    .status-indicator { background-color: $PPCA-READY-HEX !important; }
 }
 
 .notecard.completed {
   background-color: #ddd !important;
-  .footer .status-indicator {
-    background-color: #ddd !important;
-  }
 }
 
 .notecard.bad-duration {

@@ -19,7 +19,6 @@ type Props = {
   openModal: (Order) => void,
   order: Order,
   scrollToY: (y: number) => void,
-  scrollToX: (x: number) => void,
   startDate: number,
   style: Object,
   type: "calendar" | "overview" | "kiosk",
@@ -31,12 +30,7 @@ class BaseNotecard extends PureComponent<Props> {
 
   componentDidUpdate(prevProps: Props) {
     if (this.card && this.props.isFocused !== prevProps.isFocused && this.props.isFocused) {
-      if (this.props.scrollToY) {
-        this.props.scrollToY(this.card.offsetTop);
-      }
-      if (this.props.scrollToX) {
-        this.props.scrollToX(this.card.offsetLeft);
-      }
+      this.props.scrollToY(this.card.offsetTop);
     }
   }
 
@@ -46,6 +40,10 @@ class BaseNotecard extends PureComponent<Props> {
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     const cardClass = `notecard ${this.cardClass()}`
     const cardColor = this.cardColor();
+    const orderingPhysician = R.defaultTo(
+      "unknown",
+      R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], this.props.order),
+    );
     return (
       <div
         className={cardClass}
@@ -64,6 +62,7 @@ class BaseNotecard extends PureComponent<Props> {
           <div className="body">
             <div className="procedure">{checkExamThenOrder(this.props.order, ["procedure", "description"])}</div>
             <div className="patient-location">{this.examLocation()}</div>
+            <div className="ordering-physician">Ordered by: {orderingPhysician}</div>
           </div>
 
           {this.renderFooter()}
@@ -92,7 +91,7 @@ class BaseNotecard extends PureComponent<Props> {
     return (
       <div className="footer">
         <div className="left">
-          {adjusted.anesthesia ? <div className="status-indicator anesthesia"><strong>GA</strong></div> : null}
+          {adjusted.anesthesia ? <div className="status-indicator anesthesia"><strong>A</strong></div> : null}
         </div>
         <div className="right">
           {adjusted.consent ? <div className="status-indicator consent"><i className="fa fa-handshake-o"></i></div> : null}

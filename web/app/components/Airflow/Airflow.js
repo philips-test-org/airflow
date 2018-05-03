@@ -333,7 +333,7 @@ class Airflow extends Component<Props, State> {
   }
 
   scrollToX = (x: number) => {
-    if (this.board) return;
+    if (!this.board) return;
 
     setTimeout(() => {
       // $FlowFixMe
