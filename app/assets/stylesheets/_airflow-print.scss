@@ -1,0 +1,19 @@
+/* Printing */
+@media print {
+
+    .grid-wrapper, #view-controls {
+        display: none;
+    }
+
+    .print-view {
+        display: block;
+        position: relative;
+
+    }
+
+    dl {
+        position: relative;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+}

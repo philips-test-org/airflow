@@ -9,6 +9,7 @@ import Overview from "../Overview";
 import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
+import PrintView from "../PrintView";
 
 import {
   NAVBAR_OFFSET,
@@ -188,6 +189,10 @@ class Airflow extends Component<Props, State> {
           updateWidth={throttledWidthUpdate}
         />
         {this.renderOrderModal()}
+        <PrintView
+          orders={this.props.orders}
+          selectedResources={this.props.selectedResources}
+        />
       </div>
     );
   }

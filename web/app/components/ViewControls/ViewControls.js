@@ -54,6 +54,7 @@ class ViewControls extends PureComponent<Props, State> {
 
         {this.renderDatePicker()}
         {this.renderResourceDropdown()}
+        {this.renderPrintButton()}
       </div>
     );
   }
@@ -148,6 +149,26 @@ class ViewControls extends PureComponent<Props, State> {
       onClick={this.selectResourceGroup}
     />
   )
+
+  renderPrintButton() {
+    return (
+      <div className="btn-group pull-right margin-right-sm" id="print-button">
+        <button className="btn btn-default btn-sm" onClick={this.openPrintDialog}>
+          <i className="fa fa-print" aria-hidden="true"></i>
+        </button>
+      </div>
+    )
+  }
+
+  openPrintDialog() {
+      var content = document.getElementById("print-view-contents");
+      var pri = document.getElementById("print-view-frame").contentWindow;
+      pri.document.open();
+      pri.document.write(content.innerHTML);
+      pri.document.close();
+      pri.focus();
+      pri.print();
+  }
 
   selectResourceGroup = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
     this.props.updateSelectedResourceGroup(resources, selectedResourceGroup);
