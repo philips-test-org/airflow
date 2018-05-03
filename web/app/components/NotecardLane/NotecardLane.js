@@ -190,8 +190,15 @@ class NotecardLane extends Component<Props, State> {
   cardOverlaps() {
     const cards = R.values(this.cards);
     const positions = R.map(card => {
-      const top = card.decoratedComponentInstance.orderTop();
-      const height = card.decoratedComponentInstance.orderHeight();
+      let top;
+      let height;
+      if (R.has("decoratedComponentInstance", card)) {
+        top = card.decoratedComponentInstance.orderTop();
+        height = card.decoratedComponentInstance.orderHeight();
+      } else {
+        top = card.orderTop();
+        height = card.orderHeight();
+      }
       return {
         id: card.props.order.id,
         top,
