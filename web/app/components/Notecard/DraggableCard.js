@@ -26,6 +26,7 @@ import type {
 type Props = {
   comments: Object,
   isFiltered: boolean,
+  offsetStyle: Object,
   order: Order,
   openModal: (Order) => void,
   startDate: number,
@@ -56,7 +57,7 @@ const notecardSource = {
           start_time: newStart,
           stop_time: newStop,
           resource_id: targetResourceId
-        }
+        };
         props.updateOrderTime(props.order.id, newState);
       }
     }
@@ -78,12 +79,12 @@ class DraggableCard extends Component<Props> {
 
   render() {
     const {connectDragSource, isDragging} = this.props;
-    const cardStyle = {
-      height: this.orderHeight(),
-      maxHeight: this.orderHeight(),
+    const cardStyle = R.merge({
+      height: `${this.orderHeight()}px`,
+      maxHeight: `${this.orderHeight()}px`,
       top: `${this.orderTop()}px`,
       opacity: isDragging || this.props.isFiltered ? 0.4 : 1,
-    };
+    }, this.props.offsetStyle);
     return (
       // TODO the current duration doesn't stick to the order when the modal opens
       <BaseNotecard
@@ -138,9 +139,9 @@ class DraggableCard extends Component<Props> {
     const seconds = Math.abs(durationSeconds);
     // Default for bad data
     if (seconds < 0) {
-      return "30px"
+      return 30;
     } else {
-      return Math.round(seconds * PIXELS_PER_SECOND) + "px";
+      return Math.round(seconds * PIXELS_PER_SECOND);
     }
   }
 

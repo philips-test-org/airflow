@@ -22,6 +22,7 @@ const BoardActions = {
   UPDATE_BROWSER_HISTORY: "UPDATE_BROWSER_HISTORY",
   UPDATE_DATE: "UPDATE_DATE",
   UPDATE_VIEW_TYPE: "UPDATE_VIEW_TYPE",
+  UPDATE_WIDTH: "UPDATE_WIDTH",
   UPDATE_SELECTED_RESOURCE_GROUP: "UPDATE_SELECTED_RESOURCE_GROUP",
   // Resources
   FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
@@ -121,6 +122,13 @@ const updateViewType = (updatedView: ViewType) => {
   }
 }
 
+const updateWidth = (updatedWidth: number) => {
+  return {
+    type: BoardActions.UPDATE_WIDTH,
+    updatedWidth,
+  }
+}
+
 // Resources
 
 const fetchInitialApp = (viewType: ViewType, date: number = moment().unix()) => {
@@ -164,4 +172,5 @@ export {
   updateViewType,
   updateBrowserHistory,
   updateSelectedResourceGroup,
+  updateWidth,
 }

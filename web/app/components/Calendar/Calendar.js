@@ -39,6 +39,7 @@ type Props = {
   startDate: number,
   style: {th: Object, td: Object},
   type: ViewType,
+  updateWidth: (number) => void,
 }
 
 class Calendar extends Component<Props> {
@@ -89,6 +90,7 @@ class Calendar extends Component<Props> {
                 startDate={this.props.startDate}
                 type={this.props.type}
                 updateOrderTime={this.updateOrderTime}
+                updateWidth={this.props.updateWidth}
               />
             </tr>
           </tbody>
@@ -132,7 +134,6 @@ class Calendar extends Component<Props> {
     this.props.adjustOrder(
       wrapEvent(orderId, currentUser.id, "location_update", null, newState)
     );
-
   }
 }
 

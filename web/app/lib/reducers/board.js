@@ -21,6 +21,7 @@ const {
   FETCH_RESOURCES_SUCCEEDED,
   UPDATE_DATE,
   UPDATE_VIEW_TYPE,
+  UPDATE_WIDTH,
   UPDATE_SELECTED_RESOURCE_GROUP,
 } = BoardActions;
 
@@ -38,6 +39,7 @@ const initialState = {
   type: "calendar",
   loading: true,
   images: {},
+  width: 0,
 }
 
 function board(state: Object = initialState, action: Object) {
@@ -60,6 +62,7 @@ function board(state: Object = initialState, action: Object) {
   case UPDATE_DATE: return updateDate(state, action);
   case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
   case UPDATE_VIEW_TYPE: return updateViewType(state, action);
+  case UPDATE_WIDTH: return updateWidth(state, action);
   case REQUEST_FAILED: return state;
   default: return state;
   }
@@ -125,6 +128,10 @@ function updateSelectedResourceGroup(state, {resources, selectedResourceGroup}) 
 
 function updateViewType(state, {updatedView}) {
   return R.merge(state, {type: updatedView});
+}
+
+function updateWidth(state, {updatedWidth}) {
+  return R.merge(state, {width: updatedWidth});
 }
 
 function computeStartDate(selectedDate = moment().unix()) {

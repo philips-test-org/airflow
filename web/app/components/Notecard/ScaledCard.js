@@ -20,6 +20,7 @@ import type {
 } from "../../types";
 
 type Props = {
+  offsetStyle: Object,
   order: Order,
   startDate: number,
   type: "calendar" | "kiosk",
@@ -30,11 +31,11 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
     render() {
       const orderHeight = this.orderHeight();
       const orderTop = this.orderTop();
-      const cardStyle = {
+      const cardStyle = R.merge({
         height: `${orderHeight}px`,
         maxHeight: `${orderHeight}px`,
         top: `${orderTop}px`,
-      };
+      }, this.props.offsetStyle);
       return (
         <WrappedComponent
           style={cardStyle}

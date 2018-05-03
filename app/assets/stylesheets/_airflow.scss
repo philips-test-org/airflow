@@ -160,6 +160,7 @@ $card-color: #fff;
 
     .relative-column {
       position: relative;
+      width: unquote($col-unit);
     }
 
     .header-spacer {
@@ -199,7 +200,8 @@ $card-color: #fff;
       td .markers .row-marker {
         border-bottom: unquote($border-unit) solid $grid-color;
         height: unquote($half-unit);
-        width: unquote($col-unit);
+        width: 100%;
+        min-width: unquote($col-unit);
       }
 
       td .markers .row-marker:nth-child(2n-1) {
@@ -223,7 +225,7 @@ $card-color: #fff;
   .notecard.scaled {
     position: absolute;
     z-index: 101;
-    left: unquote($card-left-unit);
+    margin-left: unquote($card-left-unit);
   }
   .notecard.scaled:hover {
     z-index: 102;
