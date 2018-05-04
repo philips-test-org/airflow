@@ -24,3 +24,14 @@
   padding: 5px 10px 3px;
 }
 
+// Exam Image Links for PACS
+.exam-image {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}

@@ -101,8 +101,10 @@ function updateOrders(state, {payload}) {
 }
 
 function updateExams(state, {personId, payload}) {
+  const sortedExams = R.reverse(R.sortBy(R.path(["rad_exam_time", "end_exam"]), payload));
+
   return R.merge(state, {
-    examsByPerson: R.merge(state.examsByPerson, {[personId]: payload}),
+    examsByPerson: R.merge(state.examsByPerson, {[personId]: sortedExams}),
   });
 }
 

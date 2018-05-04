@@ -22,9 +22,11 @@ import {
 import CommentInterface from "./CommentInterface";
 import RoundingInterface from "./RoundingInterface";
 import StatusToggle from "./StatusToggle";
+import ExamImageLink from "./ExamImageLink";
 
 import type {
   Order,
+  RadExam,
   User,
 } from "../../types";
 
@@ -33,6 +35,7 @@ type Props = {
   avatarMap: {[number]: Blob},
   closeModal: () => void,
   currentUser: User,
+  exams: Array<RadExam>,
   fetchAvatar: (userId: number) => void,
   order: Order,
   orderGroup: Array<Order>,
@@ -40,7 +43,16 @@ type Props = {
   startDate: number,
 }
 
-class OrderModal extends PureComponent<Props> {
+type State = {
+  showMoreImages: boolean,
+}
+
+class OrderModal extends PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {showMoreImages: false};
+  }
+
   render() {
     const {order, avatarMap, currentUser} = this.props;
     const cardColor = cardStatuses(order, "color", "#ddd");
@@ -57,13 +69,14 @@ class OrderModal extends PureComponent<Props> {
                 {this.renderStatusToggles()}
               </div>
               <h4 className="modal-title">{formatName(order.patient_mrn.patient.name)}</h4>
-              <h5 clas="no-margin">Kiosk Number: {kioskNumber(order.id)}</h5>
+              <h5>Kiosk Number: {kioskNumber(order.id)}</h5>
             </div>
             <div className="modal-body">
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-xs-6">
                     <RoundingInterface handleSubmit={this.handleRoundingUpdate} rounding={roundingValue} />
+                    {this.renderImages()}
                     <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
                       {this.renderOrderNavTabs()}
                     </ul>
@@ -165,6 +178,64 @@ class OrderModal extends PureComponent<Props> {
         <td>{value}</td>
       </tr>
     )
+  }
+
+  renderImages() {
+    const {exams} = this.props;
+
+    let body = <p>No completed exam images available</p>;
+
+    if (exams && exams.length > 0) {
+      const exam = R.head(exams);
+      const otherExams = exams.length === 1
+        ? null : this.renderRemainingExamImages();
+
+      body = (
+        <div>
+          <ExamImageLink
+            key={exam.id}
+            description={R.path(["procedure", "description"], exam)}
+            time={R.path(["rad_exam_time", "end_exam"], exam)}
+            imageViewer={exam.image_viewer}
+            integrationJson={exam.integration_json}
+          />
+          {otherExams}
+        </div>
+      );
+    }
+
+    return (
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <h5>Exam Images</h5>
+        </div>
+        <div className="panel-body">{body}</div>
+      </div>
+    );
+  }
+
+  renderRemainingExamImages() {
+    const remainingExams = R.tail(this.props.exams).map(exam => (
+      <ExamImageLink
+        key={exam.id}
+        description={R.path(["procedure", "description"], exam)}
+        time={R.path(["rad_exam_time", "end_exam"], exam)}
+        imageViewer={exam.image_viewer}
+        integrationJson={exam.integration_json}
+      />
+    ));
+
+    return (
+      <div>
+        {!this.state.showMoreImages && <a href="#" onClick={this.viewMoreImages}>View more</a>}
+        {this.state.showMoreImages && remainingExams}
+      </div>
+    );
+  }
+
+  viewMoreImages = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    this.setState({showMoreImages: true});
   }
 
   patientLocation() {
