@@ -37,6 +37,7 @@ import type {
 const mapStateToProps = ({board, user}: Object) => {
   return {
     avatarMap: user.avatars,
+    boardWidth: board.width,
     currentUser: user.currentUser,
     examsByPerson: board.examsByPerson,
     focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
@@ -52,9 +53,6 @@ const mapStateToProps = ({board, user}: Object) => {
     ssoUrl: user.ssoUrl,
     startDate: board.startDate,
     type: board.type,
-    loading: board.loading,
-    images: board.images,
-    boardWidth: board.width,
   };
 };
 
