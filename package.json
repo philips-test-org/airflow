@@ -17,6 +17,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "diff": "^3.4.0",
+    "keymaster": "^1.6.2",
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "ramda": "^0.25.0",
