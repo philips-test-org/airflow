@@ -1,7 +1,8 @@
 // @flow
 declare var $: any;
 
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
+import * as R from "ramda";
 
 import {formatTimestamp} from "../../../lib/utility";
 
@@ -17,7 +18,11 @@ type Props = {
   integrationJson: IntegrationJson,
 }
 
-class ExamImageLink extends PureComponent<Props> {
+class ExamImageLink extends Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
+    return !R.equals(nextProps, this.props);
+  }
+
   render() {
     const {description, time} = this.props;
     return (

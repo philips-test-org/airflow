@@ -1,5 +1,5 @@
 // @flow
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -47,10 +47,14 @@ type State = {
   showMoreImages: boolean,
 }
 
-class OrderModal extends PureComponent<Props, State> {
+class OrderModal extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {showMoreImages: false};
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
   }
 
   render() {
