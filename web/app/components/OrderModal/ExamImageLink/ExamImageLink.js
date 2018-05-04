@@ -28,7 +28,7 @@ class ExamImageLink extends Component<Props> {
     return (
       <div className="clearfix exam-image">
         <h5 className="left no-margin">
-          {description}
+          {description || "Exam"}
           <br />
           <span className="small">{formatTimestamp(time)}</span>
         </h5>
