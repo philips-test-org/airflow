@@ -146,6 +146,11 @@ const mapSelectedResources = R.compose(
   R.map(({id, name}) => ({[id]: name}))
 )
 
+function isIE(): (?number) {
+  var myNav = navigator.userAgent.toLowerCase();
+  return (myNav.indexOf("msie") !== -1) ? parseInt(myNav.split("msie")[1]) : null;
+}
+
 export {
   appointmentTime,
   cardStatuses,
@@ -153,6 +158,7 @@ export {
   formatName,
   formatTimestamp,
   kioskNumber,
+  isIE,
   orderComments,
   orderResource,
   ordersByResource,

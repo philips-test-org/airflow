@@ -10,6 +10,8 @@ import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
 
+import {isIE} from "../../lib/utility";
+
 import {
   NAVBAR_OFFSET,
   SCROLL_SPEED,
@@ -84,7 +86,11 @@ class Airflow extends Component<Props, State> {
 
   componentDidMount() {
     // Setup
-    this.setupViewChangeHandlers();
+    // $FlowFixMe
+    if (!isIE() || isIE() > 9) {
+      this.setupViewChangeHandlers();
+    }
+
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
       if (this.props.type !== "kiosk") {
@@ -98,9 +104,12 @@ class Airflow extends Component<Props, State> {
       if (!viewType || viewType === this.props.type) return;
 
       this.props.updateViewType(viewType);
-      this.fetchExams(viewType);
       this.updateActiveLink(viewType);
-    }
+
+      if (R.contains("kiosk", [viewType, this.props.type])) {
+        this.fetchExams(viewType);
+      }
+    };
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -256,25 +265,34 @@ class Airflow extends Component<Props, State> {
   setupViewChangeHandlers() {
     this.kioskLink = document.getElementById("kiosk-link");
     if (this.kioskLink) {
-      this.kioskLink.addEventListener("click", () => {this.viewClickHandler("kiosk", "/kiosk")})
+      this.kioskLink.addEventListener("click",
+        (e: MouseEvent) => {this.viewClickHandler(e, "kiosk", "/kiosk")}
+      )
     }
 
     this.calendarLink = document.getElementById("calendar-link");
     if (this.calendarLink) {
-      this.calendarLink.addEventListener("click", () => {this.viewClickHandler("calendar", "/main/calendar")})
+      this.calendarLink.addEventListener("click",
+        (e: MouseEvent) => {this.viewClickHandler(e, "calendar", "/main/calendar")}
+      )
     }
 
     this.overviewLink = document.getElementById("overview-link");
     if (this.overviewLink) {
-      this.overviewLink.addEventListener("click", () => {this.viewClickHandler("overview", "/main/overview")})
+      this.overviewLink.addEventListener("click",
+        (e: MouseEvent) => {this.viewClickHandler(e, "overview", "/main/overview")}
+      )
     }
   }
 
-  viewClickHandler = (type: ViewType, path: string) => {
+  viewClickHandler = (e: MouseEvent, type: ViewType, path: string) => {
+    e.preventDefault();
+
     const {updateBrowserHistory, updateViewType} = this.props;
 
     updateViewType(type);
     updateBrowserHistory({viewType: this.props.type}, type, path);
+    this.updateActiveLink(this.props.type);
   }
 
   updateActiveLink(viewType: ViewType) {

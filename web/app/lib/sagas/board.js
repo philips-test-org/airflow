@@ -89,7 +89,6 @@ function* fetchInitialApp(action): Saga<void> {
     yield put(fetchExamsSucceeded(exams));
   } catch (e) {
     yield call(requestFailed(e));
-    console.log("error", e)
   } finally {
     yield put(hideLoading());
   }

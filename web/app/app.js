@@ -1,5 +1,6 @@
 /* global process, require */
 import "raf/polyfill";
+import "url-search-params-polyfill";
 
 import React from "react";
 import {render} from "react-dom";
@@ -7,6 +8,7 @@ import {Provider} from "react-redux";
 import * as R from "ramda";
 
 import store from "./lib/store";
+import {isIE} from "./lib/utility";
 
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -31,7 +33,9 @@ const renderApp = (Component, target, props = {key: "nilState"}) => {
   // Make sure the target element exists before attempting to render.
   if ($(target)) {
     // Set the initial view in browser history
-    history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
+    if (!isIE() || isIE() > 9) {
+      history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
+    }
     render (
       <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))}>
         <Component />

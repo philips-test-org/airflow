@@ -32,6 +32,7 @@
     "react-toggle": "^4.0.2",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
+    "url-search-params-polyfill": "^4.0.0",
     "whatwg-fetch": "^2.0.4",
     "why-did-you-update": "^0.1.1"
   },
