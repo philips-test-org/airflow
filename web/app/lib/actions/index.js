@@ -5,6 +5,7 @@
 // GENERAL
 import {
   GeneralActions,
+  connectAPM,
   redirectToSSO,
   requestFailed,
 } from "./general";
@@ -23,11 +24,13 @@ import {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  replaceOrder,
   updateDate,
   updateViewType,
   updateWidth,
   updateBrowserHistory,
   updateSelectedResourceGroup,
+  dispatchNotification,
 } from "./board";
 
 //USER
@@ -44,6 +47,7 @@ import {
 export {
   // GENERAL
   GeneralActions,
+  connectAPM,
   redirectToSSO,
   requestFailed,
   // BOARD
@@ -59,11 +63,13 @@ export {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  replaceOrder,
   updateDate,
   updateViewType,
   updateWidth,
   updateBrowserHistory,
   updateSelectedResourceGroup,
+  dispatchNotification,
   // USER
   UserActions,
   fetchAvatar,

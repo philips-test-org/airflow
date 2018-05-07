@@ -29,6 +29,7 @@ const {
   REDIRECT_TO_SSO,
 } = GeneralActions;
 
+
 function* fetchAvatar(action): Saga<void> {
   try {
     const payload = yield call(Api.fetchAvatar, action.userId);

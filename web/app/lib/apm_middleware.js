@@ -1,29 +1,18 @@
-$(document).ready(function() {
-  if ($(".active .view-changer").length > 0) {
-    var view =  $(".active .view-changer").data("view-type");
-    window.renderReact(window.airflow, "#workspace", {
-      board: {
-        type: view,
-        images: {spinner: "<%= image_path "ajax-loader.gif" %>"},
-      },
-      user: {
-        ssoUrl: '<%= Java::harbinger.sdk.SSO.ssoUrl rescue "" %>',
-      },
-    });
-  }
+//@flow
 
-  $(".view-changer").click(function(e) {
-    e.preventDefault();
-    $(this).parent().siblings().removeClass("active");
-    $(this).parent().addClass("active");
-  });
+import {
+  replaceOrder,
+  dispatchNotification,
+} from "./actions";
 
-  //connectToAPM();
-});
+const apmConnector = store => next => action => {
+  if (action.type !== "CONNECT_APM") return next(action);
+  connectToAPM(store);
+}
 
-function connectToAPM() {
+function connectToAPM(store) {
   var amqp = new $.amqpListener();
-  var apmHost = "sparkqa2.analytical.info"; //harbingerjsApmHost;
+  var apmHost = harbingerjsApmHost;
   var apmPort = harbingerjsApmPort;
   amqp.setup({host: apmHost, port: apmPort});
 
@@ -33,37 +22,41 @@ function connectToAPM() {
       var exchange = msg.exchange;
       var payload = msg.payload;
 
-      if (exchange === "web-application-messages" &&
-          amqp.matchRoutingKey("airflow.#", routing_key)) {
+      if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
         var tokens = routing_key.split("."),
-          event_type = tokens[1],
-          employee_id = tokens[2],
-          order_id = tokens[3],
-          resource_id = tokens[4];
+            event_type = tokens[1],
+            employee_id = tokens[2],
+            order_id = tokens[3],
+            resource_id = tokens[4];
+
         if (employee_id != application.employee.id) {
-          application.data.update(order_id,function(order,rollback_id) {
-            $.extend(order.adjusted,payload.adjusted);
-            order.events = payload.events;
-            return order;
-          },["order-update","modal-update"]);
           var events = payload.events;
           var event = events.sort(function (x, y) {
             return new Date(y.updated_at) - new Date(x.updated_at);
           }).shift();
+
           if (event.event_type == "comment") {
             var event_type = "comment";
           } else {
             var event_type = "event";
           }
-          application.notification.flash({type: event_type, event: event});
+          store.dispatch(dispatchNotification({type: "flash", event: event}));
+          store.dispatch(replaceOrder(payload.id, payload));
         }
       } else if (exchange === "audit") {
+        // TODO - FIXME
         application.auditBuffer.push(routing_key, msg.payload, msg.exchange);
       }
     },
     joinOk: function() {
       $("#notification-disconnect").remove();
-      application.notification.flash("Connected to APM.");
+      store.dispatch(dispatchNotification({
+        type: "flash",
+        event: {
+          id: "connected-apm",
+          message: "Connected to APM",
+        },
+      }));
       bindExchanges();
     },
     joinError: alertError,
@@ -93,28 +86,36 @@ function connectToAPM() {
   }
 
   function alertConnected(queue) {
-    application.notification.flash("Receiving real-time data.");
+    store.dispatch(dispatchNotification({
+      type: "flash",
+      event: {
+        id: "connected-queues",
+        message: "Receiving real-time data.",
+      },
+    }));
   }
 
   function alertError(reason) {
     if (reason == "unauthorized") {
-      application.notification.alert({
+      store.dispatch(dispatchNotification({
         type: "alert",
         id: "disconnect",
         message: "You are no longer receiving real time updates. Please reload the page and log in again.",
-      })
+      }));
     } else {
       alertDisconnected()
     }
   }
 
   function alertDisconnected() {
-    application.notification.alert({
+    store.dispatch(dispatchNotification({
       type: "alert",
       id: "disconnect",
       message: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
-    });
+    }));
   }
 
-  amqp.connectToChannel(joinCallbacks)
+  amqp.connectToChannel(joinCallbacks);
 }
+
+export default apmConnector;

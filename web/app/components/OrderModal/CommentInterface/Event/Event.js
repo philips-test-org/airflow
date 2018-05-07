@@ -9,13 +9,17 @@ import type {
   Event as EventT,
 } from "../../../../types";
 
-type ResourceMap = {resourceMap: {[string]: string}};
-type Props = EventT & ResourceMap;
+type ExtraProps = {
+  resourceMap: {[string]: string},
+  hideAvatar: boolean,
+};
+type Props = EventT & ExtraProps;
 
 const EVENT_LABELS = {
   onhold: "On Hold",
   anesthesia: "Anesthesia",
   consent: "Consent",
+  ppca_arrival: "PPCA Arrival",
   ppca_ready: "PPCA Ready",
   paperwork: "Paperwork",
   location_update: "Location"
@@ -27,6 +31,7 @@ const EVENT_STATES = {
     anesthesia: "Complete",
     consent: "Complete",
     ppca_ready: "Complete",
+    ppca_arrival: "Complete",
     paperwork: "Complete",
   },
   false: {
@@ -34,6 +39,7 @@ const EVENT_STATES = {
     anesthesia: "Incomplete",
     consent: "Incomplete",
     ppca_ready: "Incomplete",
+    ppca_arrival: "Incomplete",
     paperwork: "Incomplete",
   }
 }
@@ -52,12 +58,14 @@ class Event extends Component<Props> {
   }
 
   render() {
-    const {employee} = this.props;
+    const {employee, renderAvatar} = this.props;
     return (
       <div className="event">
-        <span className="avatar">
-          <img className="avatar" src={`/avatar/${employee.id}`} />
-        </span>
+        {renderAvatar ?
+          <span className="avatar">
+            <img className="avatar" src={`/avatar/${employee.id}`} />
+         </span> :
+         null}
         {this.renderVerbage()}
       </div>
     );
@@ -108,5 +116,7 @@ class Event extends Component<Props> {
     )
   }
 }
+
+Event.defaultProps = {hideAvatar: false};
 
 export default Event;

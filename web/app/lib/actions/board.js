@@ -2,6 +2,7 @@
 import moment from "moment";
 
 import type {
+  Event,
   Order,
   Resource,
   ViewType,
@@ -16,6 +17,7 @@ const BoardActions = {
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
   ADJUST_ORDER: "ADJUST_ORDER",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
+  REPLACE_ORDER: "REPLACE_ORDER",
   // UI
   SHOW_LOADING: "SHOW_LOADING",
   HIDE_LOADING: "HIDE_LOADING",
@@ -27,6 +29,8 @@ const BoardActions = {
   // Resources
   FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
   FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
+  // NOTIFICATIONS
+  DISPATCH_NOTIFICATION: "DISPATCH_NOTIFICATION",
 }
 
 // Action generator functions
@@ -80,6 +84,14 @@ const adjustOrder = (event: Object) => {
 const adjustOrderSucceeded = (orderId: number, payload: Object) => {
   return {
     type: BoardActions.ADJUST_ORDER_SUCCEEDED,
+    orderId,
+    payload,
+  }
+}
+
+const replaceOrder = (orderId: number, payload: Object) => {
+  return {
+    type: BoardActions.REPLACE_ORDER,
     orderId,
     payload,
   }
@@ -155,6 +167,15 @@ const updateSelectedResourceGroup = (resources: {[string]: Array<Resource>}, sel
   }
 }
 
+// NOTIFICATIONS
+const dispatchNotification = ({type, event}: {type: "flash" | "alert", event: Event}) => {
+  return {
+    type: BoardActions.DISPATCH_NOTIFICATION,
+    event_type: type,
+    event,
+  }
+}
+
 export {
   BoardActions,
   fetchExams,
@@ -168,9 +189,11 @@ export {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  replaceOrder,
   updateDate,
   updateViewType,
   updateBrowserHistory,
   updateSelectedResourceGroup,
   updateWidth,
+  dispatchNotification,
 }

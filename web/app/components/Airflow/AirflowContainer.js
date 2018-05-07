@@ -10,6 +10,7 @@ import {
 
 import {
   adjustOrder,
+  connectAPM,
   fetchAvatar,
   fetchExams,
   fetchKioskExams,
@@ -38,6 +39,7 @@ const mapStateToProps = ({board, user}: Object) => {
     avatarMap: user.avatars,
     currentUser: user.currentUser,
     focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
+    notifications: board.notifications,
     orderGroups: board.orderGroups,
     orders: ordersByResource(board.orders),
     ordersLoaded: !R.isEmpty(board.orders),
@@ -58,6 +60,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     adjustOrder: (event: Object) => {
       dispatch(adjustOrder(event));
+    },
+    connectAPM: () => {
+      dispatch(connectAPM());
     },
     fetchAvatar: (userId: number) => {
       dispatch(fetchAvatar(userId));

@@ -9,6 +9,7 @@ import Overview from "../Overview";
 import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
+import Notifications from "../Notifications";
 
 import {
   NAVBAR_OFFSET,
@@ -26,6 +27,7 @@ import type {
 
 type Props = {
   adjustOrder: (event: Object) => void,
+  connectAPM: () => void,
   avatarMap: {[number]: Blob},
   boardWidth: number,
   closeModal: () => void,
@@ -38,6 +40,7 @@ type Props = {
   focusedOrder: Order,
   images: Images,
   loading: boolean,
+  notifications: Array<{type: "flash" | "alert", message: string}>,
   openModal: (Order) => void,
   orderGroups: {[string]: Array<Order>},
   orders: {[string]: Array<Order>},
@@ -81,6 +84,8 @@ class Airflow extends Component<Props, State> {
 
   componentDidMount() {
     // Setup
+    this.props.connectAPM();
+
     this.setupViewChangeHandlers();
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
@@ -188,6 +193,7 @@ class Airflow extends Component<Props, State> {
           updateWidth={throttledWidthUpdate}
         />
         {this.renderOrderModal()}
+        <Notifications notifications={this.props.notifications} />
       </div>
     );
   }

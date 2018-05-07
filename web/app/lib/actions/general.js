@@ -4,9 +4,16 @@
 import type {ViewType} from "../../types";
 
 const GeneralActions = {
+  CONNECT_APM: "CONNECT_APM",
   REDIRECT_TO_SSO: "REDIRECT_TO_SSO",
   REQUEST_FAILED: "REQUEST_FAILED",
 };
+
+const connectAPM = () => {
+  return {
+    type: GeneralActions.CONNECT_APM,
+  }
+}
 
 const redirectToSSO = (ssoUrl: string, viewType: ViewType) => {
   return {
@@ -25,6 +32,7 @@ const requestFailed = (error: Object) => {
 
 export {
   GeneralActions,
+  connectAPM,
   redirectToSSO,
   requestFailed,
 }
