@@ -262,7 +262,7 @@ Overview
       left: 0;
       top: 0;
       z-index: 102;
-      padding: 13px;
+      padding: 12px;
       margin: 0;
       background-color: #fff;
       text-align: center;
@@ -380,7 +380,7 @@ Shared Styles
     overflow: hidden;
     position: absolute;
     bottom: 0;
-    width: 224px;
+    width: calc(100% - 12px);
     box-shadow: 0px -0.5px 3px rgba(50, 50, 50, 0.2);
     color: $card-footer-font-color;
 
@@ -507,13 +507,10 @@ Shared Styles
 }
 
 .wrapped-toggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   > span {
     margin-right: 0.25em;
   }
+  > .react-toggle { vertical-align: middle; }
 }
 
 .ui-droppable-hover {
