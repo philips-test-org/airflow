@@ -141,7 +141,7 @@ $card-color: #fff;
 
   #time-grid {
     position: absolute;
-    /*left: 50px;*/
+    border-collapse: separate;
 
     .fixed-column {
       background-color: #FFFFFF;
@@ -156,13 +156,12 @@ $card-color: #fff;
       }
     }
 
-    .fixed-row {
-      border-bottom: unquote($border-unit) solid $grid-color !important;
-    }
-
     .relative-column {
       position: relative;
       width: unquote($col-unit);
+      &~ .relative-column {
+        border-left: unquote($border-unit) solid $grid-color;
+      }
     }
 
     .header-spacer {
@@ -178,10 +177,6 @@ $card-color: #fff;
       text-align: center;
       z-index: 108;
 
-      &:not(:first-of-type) {
-        border-left: unquote($border-unit) solid $grid-color;
-      }
-
       &:last-of-type {
         border-right: unquote($border-unit) solid $grid-color;
       }
@@ -190,9 +185,11 @@ $card-color: #fff;
     tbody {
 
       td {
-        border-right: unquote($border-unit) solid $grid-color;
         position: relative;
         vertical-align: top;
+        &:last-child {
+          border-right: unquote($border-unit) solid $grid-color;
+        }
       }
 
       .markers {
@@ -273,7 +270,8 @@ Overview
       writing-mode: vertical-lr;
       -webkit-transform: rotate(180deg);
       -moz-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
+      // Do not use the ms-transform because it doesn't work the same in IE9
+      // -ms-transform: rotate(180deg);
       -o-transform: rotate(180deg);
     }
   }

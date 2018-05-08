@@ -167,10 +167,12 @@ class Airflow extends Component<Props, State> {
     const translateX = Math.abs(this.state.gridPosition.x);
     const tdStyle = {
       transform: `translateX(${translateX}px)`,
+      msTransform: `translateX(${translateX}px)`,
     };
     const thStyle = {
       position: "relative",
       transform: `translate(${translateX}px, ${this.headerOffset()}px)`,
+      msTransform: `translate(${translateX}px, ${this.headerOffset()}px)`,
       zIndex: 110,
     };
     const scrollStyle = {
