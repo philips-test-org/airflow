@@ -246,7 +246,8 @@ class Airflow extends Component<Props, State> {
   updateScrollPosition = (event: SyntheticUIEvent<>) => {
     const t = R.pathOr(null, ["target", "firstChild"], event);
     if (t) {
-      const position = R.pick(["x", "y"], t.getBoundingClientRect());
+      const bounding = t.getBoundingClientRect();
+      const position = {x: bounding.left, y: bounding.top};
       this.setState({gridPosition: position});
     }
   }
