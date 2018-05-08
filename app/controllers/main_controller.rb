@@ -48,8 +48,7 @@ class MainController < ApplicationController
         all = [order, order.master_order].compact.uniq
       else
         q = Java::HarbingerSdkData::Order.createQuery(@entity_manager)
-        q.where([q.notEqual(".id",order.getId),
-                 q.equal(".patientMrnId",order.patient_mrn_id),
+        q.where([q.equal(".patientMrnId",order.patient_mrn_id),
                  q.equal(".resourceId",order.resource_id),
                  q.equal(".appointment",order.appointment)])
         all = q.list.to_a.inject([]) {|list,o| list + [o,o.master_order] }.compact.uniq
