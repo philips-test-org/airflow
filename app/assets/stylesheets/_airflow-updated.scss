@@ -35,3 +35,33 @@
     border-bottom: none;
   }
 }
+
+// Calendar Cards
+.ghost-card {
+  background: #ccc;
+  width: 100%;
+  position: absolute;
+  left: 0;
+
+  > div {
+    position: relative;
+    height: 100%;
+
+    .start-time, .stop-time {
+      position: absolute;
+      z-index: 102;
+      background: #fff;
+      padding: 2px 5px;
+    }
+    .start-time {
+      top: -24px;
+      border-radius: 5px 5px 0 0;
+      box-shadow: 0px -0.5px 3px rgba(50, 50, 50, 0.2)
+    }
+    .stop-time {
+      bottom: -34px;
+      border-radius: 0 0 5px 5px;
+      box-shadow: 0px 0.5px 3px rgba(50, 50, 50, 0.2)
+    }
+  }
+}
