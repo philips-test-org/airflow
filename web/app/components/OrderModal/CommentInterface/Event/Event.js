@@ -18,7 +18,7 @@ const EVENT_LABELS = {
   consent: "Consent",
   ppca_ready: "PPCA Ready",
   paperwork: "Paperwork",
-  location_update: "Location"
+  location_update: "Location",
 }
 
 const EVENT_STATES = {
@@ -35,7 +35,7 @@ const EVENT_STATES = {
     consent: "Incomplete",
     ppca_ready: "Incomplete",
     paperwork: "Incomplete",
-  }
+  },
 }
 
 const FA_CLASS = {

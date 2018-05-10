@@ -54,20 +54,20 @@ function board(state: Object = initialState, action: Object) {
   }
 
   switch (action.type) {
-  case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
-  case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
-  case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
-  case SHOW_ORDER_MODAL: return showOrderModal(state, action);
-  case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
-  case SHOW_LOADING: return showLoading(state);
-  case HIDE_LOADING: return hideLoading(state);
-  case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
-  case UPDATE_DATE: return updateDate(state, action);
-  case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
-  case UPDATE_VIEW_TYPE: return updateViewType(state, action);
-  case UPDATE_WIDTH: return updateWidth(state, action);
-  case REQUEST_FAILED: return state;
-  default: return state;
+    case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
+    case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
+    case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
+    case SHOW_ORDER_MODAL: return showOrderModal(state, action);
+    case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
+    case SHOW_LOADING: return showLoading(state);
+    case HIDE_LOADING: return hideLoading(state);
+    case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
+    case UPDATE_DATE: return updateDate(state, action);
+    case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
+    case UPDATE_VIEW_TYPE: return updateViewType(state, action);
+    case UPDATE_WIDTH: return updateWidth(state, action);
+    case REQUEST_FAILED: return state;
+    default: return state;
   }
 }
 
