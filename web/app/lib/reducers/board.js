@@ -14,6 +14,7 @@ import {
 const {
   ADJUST_ORDER_SUCCEEDED,
   FETCH_EXAMS_SUCCEEDED,
+  FETCH_EXAM_SUCCEEDED,
   DISPATCH_NOTIFICATION,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
@@ -57,6 +58,7 @@ function board(state: Object = initialState, action: Object) {
   switch (action.type) {
   case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
   case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
+  case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
   case SHOW_ORDER_MODAL: return showOrderModal(state, action);
   case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
   case SHOW_LOADING: return showLoading(state);
@@ -90,6 +92,23 @@ function adjustOrder(state, {orderId, payload}) {
     R.over(eventLens, R.prepend(payload)),
     R.over(adjustedLens, R.mergeDeepLeft(payload.new_state)),
   )(state)
+}
+
+function upsertOrders(state, {payload}) {
+  const updatedOrders = R.reduce((acc, order) => {
+    console.log(acc, order)
+    const orderLens = R.lensPath([R.findIndex(R.propEq("id", order.id), acc)]);
+    if (!R.isNil(R.view(orderLens, acc))) {
+      return R.set(orderLens, payload, acc);
+    }
+    return R.append(payload, acc);
+
+  }, state.orders, payload);
+
+  debugger;
+  return R.mergeDeepRight(state, {
+    orders: updatedOrders,
+  });
 }
 
 function replaceOrder(state, {orderId, payload}) {

@@ -11,6 +11,8 @@ import type {
 const BoardActions = {
   FETCH_EXAMS: "FETCH_EXAMS",
   FETCH_EXAMS_SUCCEEDED: "FETCH_EXAMS_SUCCEEDED",
+  FETCH_EXAM: "FETCH_EXAM",
+  FETCH_EXAM_SUCCEEDED: "FETCH_EXAM_SUCCEEDED",
   FETCH_KIOSK_EXAMS: "FETCH_KIOSK_EXAMS",
   // ORDER MODAL
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
@@ -55,6 +57,21 @@ const fetchKioskExams = (resourceGroup: string, resourceIds: Array<number>) => {
 const fetchExamsSucceeded = (payload: Array<Order>) => {
   return {
     type: BoardActions.FETCH_EXAMS_SUCCEEDED,
+    payload,
+  }
+}
+
+const fetchExam = (id: number, table: string) => {
+  return {
+    type: BoardActions.FETCH_EXAM,
+    id,
+    table,
+  }
+}
+
+const fetchExamSucceeded = (payload: Array<Order>) => {
+  return {
+    type: BoardActions.FETCH_EXAM_SUCCEEDED,
     payload,
   }
 }
@@ -180,6 +197,8 @@ export {
   BoardActions,
   fetchExams,
   fetchExamsSucceeded,
+  fetchExam,
+  fetchExamSucceeded,
   fetchKioskExams,
   adjustOrder,
   adjustOrderSucceeded,

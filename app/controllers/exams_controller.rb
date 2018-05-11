@@ -22,8 +22,7 @@ class ExamsController < ApplicationController
         all = [order, order.master_order].compact.uniq
       else
         q = Java::HarbingerSdkData::Order.createQuery(@entity_manager)
-        q.where([q.notEqual(".id",order.getId),
-                 q.equal(".patientMrnId",order.patient_mrn_id),
+        q.where([q.equal(".patientMrnId",order.patient_mrn_id),
                  q.equal(".resourceId",order.resource_id),
                  q.equal(".appointment",order.appointment)])
         all = q.list.to_a.inject([]) {|list,o| list + [o,o.master_order] }.compact.uniq
@@ -31,8 +30,7 @@ class ExamsController < ApplicationController
     else
       exam = Java::HarbingerSdkData::RadExam.withId(params[:id].to_i,@entity_manager)
       q = Java::HarbingerSdkData::RadExam.createQuery(@entity_manager)
-      filters = [q.notEqual(".id",exam.getId),
-                 q.equal(".patientMrnId",exam.patient_mrn_id),
+      filters = [q.equal(".patientMrnId",exam.patient_mrn_id),
                  q.equal(".resourceId",exam.resource_id),]
       if exam.radExamTime and exam.radExamTime.beginExam
         filters << q.equal(".radExamTime.beginExam",exam.radExamTime.beginExam)

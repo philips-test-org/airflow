@@ -19,8 +19,8 @@ export const STATUS_CHECKS = [
     color: "#888888",
     check: (order: Order) => {
       let noExam = order.rad_exam == undefined;
-      let noSignInTime = R.isNil(order.rad_exam.rad_exam_time.sign_in);
-      let noCheckInTime = R.isNil(order.rad_exam.rad_exam_time.check_in);
+      let noSignInTime = R.isNil(R.path(["rad_exam", "rad_exam_time", "sign_in"], order));
+      let noCheckInTime = R.isNil(R.path(["rad_exam", "rad_exam_time", "check_in"], order));
       return (noExam || noSignInTime || noCheckInTime);
     }
   },
@@ -30,8 +30,8 @@ export const STATUS_CHECKS = [
     color: "#1e9d8b",
     check: (order: Order) => {
       let hasExam = order.rad_exam != undefined;
-      let hasSignInTime = order.rad_exam.rad_exam_time.sign_in !== null;
-      let hasCheckInTime = order.rad_exam.rad_exam_time.check_in !== null;
+      let hasSignInTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "sign_in"], order));
+      let hasCheckInTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "check_in"], order));
       return (hasExam && (hasSignInTime || hasCheckInTime));
     }
   },
@@ -41,8 +41,8 @@ export const STATUS_CHECKS = [
     color: "#631d76",
     check: (order: Order) => {
       let hasExam = order.rad_exam != undefined;
-      let hasBeginTime = order.rad_exam.rad_exam_time.begin_exam;
-      let noEndTime = order.rad_exam.rad_exam_time.end_exam == null;
+      let hasBeginTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "begin_exam"], order));
+      let noEndTime = R.isNil(R.path(["rad_exam", "rad_exam_time", "end_exam"], order));
       return (hasExam && hasBeginTime && noEndTime);
     }
   },
@@ -53,7 +53,7 @@ export const STATUS_CHECKS = [
     card_class: "completed",
     check: (order: Order) => {
       let hasExam = order.rad_exam != undefined;
-      let hasEndTime = order.rad_exam.rad_exam_time.end_exam !== null;
+      let hasEndTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "end_exam"], order));
       return hasExam && hasEndTime;
     }
   },
@@ -78,7 +78,7 @@ export const STATUS_CHECKS = [
     check: (order: Order) => {
       let orderCancelled = R.path(["current_status", "universal_event_type", "event_type"], order) == "cancelled";
       let undefinedExam = order.rad_exam != undefined;
-      let examCancelled = order.rad_exam.current_status.universal_event_type.event_type == "cancelled";
+      let examCancelled = R.path(["rad_exam", "current_status", "universal_event_type", "event_type"], order) == "cancelled";
       return (orderCancelled || (undefinedExam && examCancelled));
     }
   },
@@ -127,7 +127,10 @@ function cardStatuses(order: Order, type: string, default_value: string = "") {
 function orderResource(resources: Array<Resource>, order: Order) {
   return R.compose(
     R.defaultTo(order.resource),
-    R.find((resource) => resource.id === order.adjusted.resource_id || resource.id === order.rad_exam.resource_id)
+    R.find((resource) =>
+           resource.id === R.path(["adjusted", "resource_id"], order) ||
+           resource.id === R.path(["rad_exam", "resource_id"], order)
+          )
   )(resources)
 }
 

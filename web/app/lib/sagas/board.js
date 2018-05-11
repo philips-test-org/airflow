@@ -15,10 +15,12 @@ import {
   BoardActions,
   adjustOrderSucceeded,
   fetchExamsSucceeded,
+  fetchExamSucceeded,
   requestFailed,
   showLoading,
   hideLoading,
   fetchResourcesSucceeded,
+  replaceOrder,
 } from "../actions";
 
 import type {Saga} from "redux-saga";
@@ -28,6 +30,7 @@ import {mapSelectedResources} from "../../lib/utility";
 const {
   ADJUST_ORDER,
   FETCH_EXAMS,
+  FETCH_EXAM,
   FETCH_KIOSK_EXAMS,
   FETCH_INITIAL_APP,
   UPDATE_BROWSER_HISTORY,
@@ -39,6 +42,16 @@ function* fetchExams(action): Saga<void> {
     const payload = yield call(Api.fetchExams, action.resourceGroup, action.resourceIds, action.date);
     yield put(fetchExamsSucceeded(payload));
     yield put(hideLoading());
+  } catch (e) {
+    yield call(requestFailed(e));
+    console.log("error", e)
+  }
+}
+
+function* fetchExam(action): Saga<void> {
+  try {
+    const payload = yield call(Api.fetchExam, action.id, action.table);
+    yield put(fetchExamSucceeded(payload));
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)
@@ -99,6 +112,7 @@ function* updateHistory(action): Saga<void> {
 
 export default function* boardSaga(): Saga<void> {
   yield takeLatest(FETCH_EXAMS, fetchExams)
+  yield takeLatest(FETCH_EXAM, fetchExam)
   yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
   yield takeLatest(FETCH_INITIAL_APP, fetchInitialApp)
   yield takeEvery(ADJUST_ORDER, adjustOrder)

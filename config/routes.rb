@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'exams/kiosk' => "kiosk#exams"
   get 'exam' => "main#exam"
   get 'exams' => "exams#index"
+  get 'exams/:id' => "exams#show"
   get 'exam_info' => "exams#show"
   get "avatar/:id", to: 'avatars#show', as: "avatar"
   get 'about' => "main#about"

@@ -1,8 +1,9 @@
 //@flow
 
 import {
-  replaceOrder,
   dispatchNotification,
+  fetchExam,
+  replaceOrder,
 } from "./actions";
 
 const apmConnector = store => next => action => {
@@ -12,40 +13,43 @@ const apmConnector = store => next => action => {
 
 function connectToAPM(store) {
   var amqp = new $.amqpListener();
-  var apmHost = harbingerjsApmHost;
+  var apmHost = "sparkqa2.analytical.info";//harbingerjsApmHost;
   var apmPort = harbingerjsApmPort;
   amqp.setup({host: apmHost, port: apmPort});
 
   var joinCallbacks = {
     newMsg: function(msg) {
-      var routing_key = msg.routing_key;
-      var exchange = msg.exchange;
-      var payload = msg.payload;
+      const routing_key = msg.routing_key;
+      const exchange = msg.exchange;
+      const payload = msg.payload;
+
+      const tokens = routing_key.split(".");
+      const table = tokens[0];
+      var event_type = tokens[1];
+      const employee_id = tokens[2];
+      const order_id = tokens[3];
+      const resource_id = tokens[4];
+      console.log(msg);
 
       if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
-        var tokens = routing_key.split("."),
-            event_type = tokens[1],
-            employee_id = tokens[2],
-            order_id = tokens[3],
-            resource_id = tokens[4];
-
         if (employee_id != application.employee.id) {
-          var events = payload.events;
-          var event = events.sort(function (x, y) {
+          const events = payload.events;
+          const event = events.sort(function (x, y) {
             return new Date(y.updated_at) - new Date(x.updated_at);
           }).shift();
 
           if (event.event_type == "comment") {
-            var event_type = "comment";
+            event_type = "comment";
           } else {
-            var event_type = "event";
+            event_type = "event";
           }
           store.dispatch(dispatchNotification({type: "flash", event: event}));
           store.dispatch(replaceOrder(payload.id, payload));
         }
       } else if (exchange === "audit") {
         // TODO - FIXME
-        application.auditBuffer.push(routing_key, msg.payload, msg.exchange);
+        store.dispatch(fetchExam(payload.affected_row_id, table));
+        //application.auditBuffer.push(routing_key, msg.payload, msg.exchange);
       }
     },
     joinOk: function() {

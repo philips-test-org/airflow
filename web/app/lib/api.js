@@ -6,6 +6,7 @@ import {
 
 const ENDPOINTS = {
   exams: "/exams",
+  exam: (id) => `/exams/${id}`,
   kioskExams: "/exams/kiosk",
   avatar: (userId) => `/avatar/${userId}`,
   events: "/events",
@@ -16,6 +17,10 @@ const ENDPOINTS = {
 
 const fetchExams = (resourceGroup: String, resourceIds: Array<number>, date: number) => (
   GET(ENDPOINTS.exams, {resource_group: resourceGroup, resource_ids: resourceIds, date})
+);
+
+const fetchExam = (id: number, table: string) => (
+  GET(ENDPOINTS.exam(id), {table})
 );
 
 const fetchKioskExams = (resourceGroup: String, resourceIds: Array<number>) => (
@@ -46,6 +51,7 @@ const Api = {
   createEvent: createEvent,
   fetchAvatar: fetchAvatar,
   fetchExams: fetchExams,
+  fetchExam: fetchExam,
   fetchKioskExams: fetchKioskExams,
   fetchResourceGroups: fetchResourceGroups,
   fetchSelectedResourceGroup: fetchSelectedResourceGroups,
