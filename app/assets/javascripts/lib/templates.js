@@ -20,15 +20,16 @@ application.statuses = {
   card_class: function(order) {
     return application.statuses.value_check(order,"card_class","");
   },
-  checks: [{name: "On Hold",
+  checks: [
+    {name: "Cancelled",
+     order: 6,
+     color: "#c8040e",
+     check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
+    {name: "On Hold",
     order: 5,
     color: "#f5f52b",
     card_class: "highlight",
     check: function(order) { return (order.adjusted.onhold == true); }},
-    {name: "Cancelled",
-      order: 6,
-      color: "#c8040e",
-      check: function(order) { return (order.current_status.universal_event_type == "cancelled" || (order.rad_exam != undefined && order.rad_exam.current_status.universal_event_type.event_type == "cancelled")); }},
     {name: "Started",
       order: 3,
       color: "#631d76",
