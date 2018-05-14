@@ -1,4 +1,5 @@
 module OrmConverter
+  require 'json'
 
   def self.test_exams
     params = {:resource_ids => [26]}
@@ -95,6 +96,27 @@ module OrmConverter
         hash[:rad_exams].each {|re| re.delete("accession") } #rad_exam accession deleted because of shared hash memory
       end
       hash.delete("order_number")
+      list << hash
+      list
+    end
+  end
+
+  def self.rad_exams(exams, em)
+    tree = {
+      :rad_exam_time => {},
+      :rad_exam_personnel => {:ordering => {}},
+      :rad_exam_detail => {},
+      :procedure => {},
+      :patient_mrn => {:patient => {}},
+      :resource => {:modality => {}},
+      :site_class => {:patient_type => {}},
+      :current_status => {:universal_event_type => {}},
+      :site_sublocation => {:site_location => {}},
+    }
+    exams.inject([]) do |list, rad_exam|
+      hash = get_data(tree, rad_exam, {})
+      hash[:image_viewer] = JSON.parse(rad_exam.imageViewer)
+      hash[:integration_json] = JSON.parse(rad_exam.integrationJson)
       list << hash
       list
     end

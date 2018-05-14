@@ -75,6 +75,6 @@ export function wrapEvent(orderId: number, userId: number,
     comments: comments,
     new_state: newState,
     created_at: moment().unix()*1000,
-    order_id: orderId
+    order_id: orderId,
   }
 }

@@ -26,9 +26,9 @@ function user(state: Object = initialState, action: Object) {
   }
 
   switch (action.type) {
-  case FETCH_AVATAR_SUCCEEDED: return updateAvatarMap(state, action);
-  case FETCH_CURRENT_EMPLOYEE_SUCCEEDED: return updateCurrentUser(state, action);
-  default: return state;
+    case FETCH_AVATAR_SUCCEEDED: return updateAvatarMap(state, action);
+    case FETCH_CURRENT_EMPLOYEE_SUCCEEDED: return updateCurrentUser(state, action);
+    default: return state;
   }
 }
 

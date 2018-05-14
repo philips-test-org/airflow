@@ -40,6 +40,7 @@ class NotecardLanes extends Component<Props> {
         orders={orders}
         resourceId={resourceId}
         scrollToCoordinates={this.props.scrollToCoordinates}
+        showGhostEndTime
         startDate={this.props.startDate}
         type={this.props.type}
         updateOrderTime={this.props.updateOrderTime}

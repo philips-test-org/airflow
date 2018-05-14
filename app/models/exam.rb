@@ -21,4 +21,9 @@ class Exam
     q.criteria.distinct(true)
     q.list
   end
+
+  def self.fetch_exams_with_person_id(em, person_id)
+    patient = Java::HarbingerSdkData::Patient.withId(person_id, em)
+    patient.radExams
+  end
 end

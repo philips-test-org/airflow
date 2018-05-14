@@ -12,7 +12,7 @@ module.exports = {
     }),
   ],
   entry: {
-    app: ["babel-polyfill", "./web/app/app.js"],
+    app: ["whatwg-fetch", "babel-polyfill", "./web/app/app.js"],
   },
   output: {
     filename: "./[name].bundle.js",
