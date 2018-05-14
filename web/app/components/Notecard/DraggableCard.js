@@ -38,8 +38,12 @@ type Props = {
 
 // Drag and Drop setup
 const notecardSource = {
-  beginDrag(props){
-    return {id: props.order.id};
+  beginDrag(props, monitor, component){
+    return {
+      id: props.order.id,
+      orderTop: component.orderTop(),
+      orderHeight: component.orderHeight(),
+    };
   },
   endDrag(props, monitor, component) {
     const result = monitor.getDropResult();
@@ -61,7 +65,7 @@ const notecardSource = {
         props.updateOrderTime(props.order.id, newState);
       }
     }
-  }
+  },
 }
 
 function collect(connect, monitor) {
@@ -73,8 +77,8 @@ function collect(connect, monitor) {
 
 // React component
 class DraggableCard extends Component<Props> {
-  shouldComponentUpdate(nextProps, nextState) {
-    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+  shouldComponentUpdate(nextProps) {
+    return !R.equals(nextProps, this.props);
   }
 
   render() {
