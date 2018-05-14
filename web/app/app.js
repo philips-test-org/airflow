@@ -25,18 +25,31 @@ if (process.env.NODE_ENV !== "production") {
   ]});
 }
 
-const renderApp = (Component, target, props = {key: "nilState"}) => {
-  // Make sure the target element exists before attempting to render.
-  if ($(target)) {
-    // Set the initial view in browser history
-    history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
-    render (
-      <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))}>
-        <Component />
-      </Provider>,
-      document.querySelector(target)
-    )
-  }
+
+// Make sure the target element exists before attempting to render.
+const target = "#workspace";
+if ($(target)) {
+  const spinnerUrl = $(target).data("spinnerUrl");
+  const ssoUrl = $(target).data("ssoUrl");
+  const view = $(".active .view-changer").data("view-type");
+  const props = {
+    board: {
+      type: view,
+      images: {spinner: spinnerUrl},
+    },
+    user: {
+      ssoUrl,
+    },
+  };
+
+  // Set the initial view in browser history
+  history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
+  render (
+    <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))}>
+      <Airflow />
+    </Provider>,
+    document.querySelector(target)
+  )
 }
 
 $(() => {
@@ -47,7 +60,5 @@ $(() => {
 
   if (window) {
     window.dispatch = store.dispatch;
-    window.renderReact = renderApp;
-    window.airflow = Airflow;
   }
 });
