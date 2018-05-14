@@ -50,7 +50,7 @@ class ViewControls extends PureComponent<Props, State> {
     return (
       <div id="view-controls">
         <div className="btn-group pull-left">
-          <button className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" id="legend-button">Legend <span className="caret"></span></button>
+          <button className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" id="legend-button">Legend! <span className="caret"></span></button>
           {this.renderLegend()}
         </div>
         {this.renderSearchFilter()}

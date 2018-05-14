@@ -2,6 +2,11 @@ var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
+  devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
+  },
   plugins: [
     new webpack.ProvidePlugin({
     }),
@@ -10,12 +15,12 @@ module.exports = {
     app: ["babel-polyfill", "./web/app/app.js"],
   },
   output: {
-    filename: "./javascripts/[name].bundle.js",
+    filename: "./[name].bundle.js",
     path: path.resolve("app", "assets"),
-    publicPath: "/assets/",
+    publicPath: "http://localhost:3000/assets/",
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
         loaders: [
@@ -30,6 +35,8 @@ module.exports = {
           loader: "babel-loader",
           options: {
             babelrc: true,
+            cacheDirectory: true,
+            plugins: ['react-hot-loader/babel']
           }
         }
       },
