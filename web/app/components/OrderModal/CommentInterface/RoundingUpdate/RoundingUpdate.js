@@ -47,11 +47,11 @@ class RoundingUpdate extends Component<Props, State> {
         <div className="body">
           <div className="heading">
             <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span>
-          {this.props.hideDiff ? null :
+            {this.props.hideDiff ? null :
               <span className="pull-right">
                 <Button text="Diff" className={`btn-sm btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
               </span>
-          }
+            }
           </div>
           <div className="content">{this.state.showDiff ? this.renderDiff() : comments}</div>
         </div>

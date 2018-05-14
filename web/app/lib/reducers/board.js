@@ -96,16 +96,14 @@ function adjustOrder(state, {orderId, payload}) {
 
 function upsertOrders(state, {payload}) {
   const updatedOrders = R.reduce((acc, order) => {
-    console.log(acc, order)
     const orderLens = R.lensPath([R.findIndex(R.propEq("id", order.id), acc)]);
     if (!R.isNil(R.view(orderLens, acc))) {
-      return R.set(orderLens, payload, acc);
+      return R.set(orderLens, order, acc);
     }
-    return R.append(payload, acc);
+    return R.append(order, acc);
 
   }, state.orders, payload);
 
-  debugger;
   return R.mergeDeepRight(state, {
     orders: updatedOrders,
   });

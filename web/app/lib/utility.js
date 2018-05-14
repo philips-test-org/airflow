@@ -128,9 +128,9 @@ function orderResource(resources: Array<Resource>, order: Order) {
   return R.compose(
     R.defaultTo(order.resource),
     R.find((resource) =>
-           resource.id === R.path(["adjusted", "resource_id"], order) ||
-           resource.id === R.path(["rad_exam", "resource_id"], order)
-          )
+      resource.id === R.path(["adjusted", "resource_id"], order) ||
+    resource.id === R.path(["rad_exam", "resource_id"], order)
+    )
   )(resources)
 }
 

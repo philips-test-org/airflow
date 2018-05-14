@@ -13,7 +13,9 @@ const apmConnector = store => next => action => {
 
 function connectToAPM(store) {
   var amqp = new $.amqpListener();
+  // eslint-disable-next-line no-undef
   var apmHost = "sparkqa2.analytical.info";//harbingerjsApmHost;
+  // eslint-disable-next-line no-undef
   var apmPort = harbingerjsApmPort;
   amqp.setup({host: apmHost, port: apmPort});
 
@@ -29,7 +31,6 @@ function connectToAPM(store) {
       const employee_id = tokens[2];
       const order_id = tokens[3];
       const resource_id = tokens[4];
-      console.log(msg);
 
       if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
         if (employee_id != application.employee.id) {
@@ -47,9 +48,7 @@ function connectToAPM(store) {
           store.dispatch(replaceOrder(payload.id, payload));
         }
       } else if (exchange === "audit") {
-        // TODO - FIXME
         store.dispatch(fetchExam(payload.affected_row_id, table));
-        //application.auditBuffer.push(routing_key, msg.payload, msg.exchange);
       }
     },
     joinOk: function() {

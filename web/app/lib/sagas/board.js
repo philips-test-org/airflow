@@ -20,7 +20,6 @@ import {
   showLoading,
   hideLoading,
   fetchResourcesSucceeded,
-  replaceOrder,
 } from "../actions";
 
 import type {Saga} from "redux-saga";

@@ -64,8 +64,8 @@ class Event extends Component<Props> {
         {renderAvatar ?
           <span className="avatar">
             <img className="avatar" src={`/avatar/${employee.id}`} />
-         </span> :
-         null}
+          </span> :
+          null}
         {this.renderVerbage()}
       </div>
     );
