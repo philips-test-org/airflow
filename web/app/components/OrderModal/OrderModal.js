@@ -1,4 +1,6 @@
 // @flow
+declare var $: any;
+
 import React, {Component} from "react";
 import * as R from "ramda";
 import moment from "moment";
@@ -25,6 +27,8 @@ import StatusToggle from "./StatusToggle";
 import ExamImageLink from "./ExamImageLink";
 
 import type {
+  ImageViewer,
+  IntegrationJson,
   Order,
   RadExam,
   User,
@@ -73,14 +77,16 @@ class OrderModal extends Component<Props, State> {
                 {this.renderStatusToggles()}
               </div>
               <h4 className="modal-title">{formatName(order.patient_mrn.patient.name)}</h4>
-              <h5>Kiosk Number: {kioskNumber(order.id)}</h5>
+              <div className="clearfix">
+                <h5 className="left">Kiosk Number: {kioskNumber(order.id)}</h5>
+                {this.renderImages()}
+              </div>
             </div>
             <div className="modal-body">
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-xs-6">
                     <RoundingInterface handleSubmit={this.handleRoundingUpdate} rounding={roundingValue} />
-                    {this.renderImages()}
                     <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
                       {this.renderOrderNavTabs()}
                     </ul>
@@ -187,59 +193,45 @@ class OrderModal extends Component<Props, State> {
   renderImages() {
     const {exams} = this.props;
 
-    let body = <p>No completed exam images available</p>;
+    if (!exams || exams.length <= 0) return;
 
-    if (exams && exams.length > 0) {
-      const exam = R.head(exams);
-      const otherExams = exams.length === 1
-        ? null : this.renderRemainingExamImages();
-
-      body = (
-        <div>
-          <ExamImageLink
-            key={exam.id}
-            description={R.path(["procedure", "description"], exam)}
-            time={R.path(["rad_exam_time", "end_exam"], exam)}
-            imageViewer={exam.image_viewer}
-            integrationJson={exam.integration_json}
-          />
-          {otherExams}
-        </div>
-      );
-    }
+    const firstExam = R.head(exams);
 
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading">
-          <h5>Exam Images</h5>
-        </div>
-        <div className="panel-body">{body}</div>
+      <div className="btn-group pacs-dropdown right">
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          onClick={() => this.viewImage(firstExam.image_viewer, firstExam.integration_json)}
+        >
+          View Most Recent Image
+        </button>
+        <button type="button" className="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span className="caret"></span>
+          <span className="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul className="dropdown-menu">{this.renderExamImagesList()}</ul>
       </div>
     );
   }
 
-  renderRemainingExamImages() {
-    const remainingExams = R.tail(this.props.exams).map(exam => (
+  renderExamImagesList() {
+    const exams = this.props.exams.map(exam => (
       <ExamImageLink
         key={exam.id}
         description={R.path(["procedure", "description"], exam)}
         time={R.path(["rad_exam_time", "end_exam"], exam)}
         imageViewer={exam.image_viewer}
         integrationJson={exam.integration_json}
+        viewImage={this.viewImage}
       />
     ));
-
-    return (
-      <div>
-        {!this.state.showMoreImages && <a href="#" onClick={this.viewMoreImages}>View more</a>}
-        {this.state.showMoreImages && remainingExams}
-      </div>
-    );
+    const divider = <li role="separator" className="divider"></li>;
+    return R.intersperse(divider, exams);
   }
 
-  viewMoreImages = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    this.setState({showMoreImages: true});
+  viewImage = (imageViewer: ImageViewer, integrationJson: IntegrationJson) => {
+    $.harbingerjs.integration.view(imageViewer, integrationJson);
   }
 
   patientLocation() {

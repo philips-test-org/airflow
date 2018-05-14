@@ -3,12 +3,14 @@ import React, {Component} from "react";
 import * as R from "ramda";
 import {throttle} from "lodash";
 import moment from "moment";
+import key from "keymaster";
 
 import Calendar from "../Calendar";
 import Overview from "../Overview";
 import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
+import PrintView from "../PrintView";
 
 import {isIE} from "../../lib/utility";
 
@@ -17,6 +19,9 @@ import {
   SCROLL_SPEED,
 } from "../../lib/constants";
 
+import {
+  printOrders,
+} from "../../lib/utility";
 
 import type {
   Images,
@@ -33,7 +38,7 @@ type Props = {
   boardWidth: number,
   closeModal: () => void,
   currentUser: User,
-  examsByPerson: Array<RadExam>,
+  examsByPerson: {[number]: Array<RadExam>},
   fetchAvatar: (userId: number) => void,
   fetchCurrentEmployee: () => void,
   fetchExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
@@ -110,6 +115,11 @@ class Airflow extends Component<Props, State> {
         this.fetchExams(viewType);
       }
     };
+
+    key("⌘+p, ctrl+p", (event, _handler) => {
+      event.preventDefault();
+      printOrders();
+    });
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -203,6 +213,10 @@ class Airflow extends Component<Props, State> {
           openModal={this.openModal}
         />
         {this.renderOrderModal()}
+        <PrintView
+          orders={this.props.orders}
+          selectedResources={this.props.selectedResources}
+        />
       </div>
     );
   }

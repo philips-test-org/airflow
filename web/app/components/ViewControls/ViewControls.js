@@ -8,7 +8,10 @@ import {SingleDatePicker} from "react-dates";
 
 import ResourceItem from "./ResourceItem";
 
-import {STATUS_CHECKS} from "../../lib/utility";
+import {
+  printOrders,
+  STATUS_CHECKS,
+} from "../../lib/utility";
 
 import type {
   Resource,
@@ -54,6 +57,7 @@ class ViewControls extends PureComponent<Props, State> {
 
         {this.renderDatePicker()}
         {this.renderResourceDropdown()}
+        {this.renderPrintButton()}
       </div>
     );
   }
@@ -148,6 +152,18 @@ class ViewControls extends PureComponent<Props, State> {
       onClick={this.selectResourceGroup}
     />
   )
+
+  renderPrintButton() {
+    const {viewType} = this.props;
+    if (viewType === "kiosk") {return null}
+    return (
+      <div className="btn-group pull-right margin-right-sm" id="print-button">
+        <button className="btn btn-default btn-sm" onClick={printOrders} title="Printer-friendly view">
+          <i className="fa fa-print" aria-hidden="true"></i>
+        </button>
+      </div>
+    )
+  }
 
   selectResourceGroup = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
     this.props.updateSelectedResourceGroup(resources, selectedResourceGroup);

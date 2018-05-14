@@ -1,5 +1,4 @@
 // @flow
-declare var $: any;
 
 import React, {Component} from "react";
 import * as R from "ramda";
@@ -16,6 +15,7 @@ type Props = {
   time: number,
   imageViewer: ImageViewer,
   integrationJson: IntegrationJson,
+  viewImage: (imageViewer: ImageViewer, integrationJson: IntegrationJson) => void,
 }
 
 class ExamImageLink extends Component<Props> {
@@ -26,20 +26,19 @@ class ExamImageLink extends Component<Props> {
   render() {
     const {description, time} = this.props;
     return (
-      <div className="clearfix exam-image">
-        <h5 className="left no-margin">
-          {description || "Exam"}
-          <br />
-          <span className="small">{formatTimestamp(time)}</span>
-        </h5>
-        <button className="btn btn-primary btn-sm right" onClick={this.viewImage}>View Image</button>
-      </div>
+      <li><a href="#" onClick={this.viewImage}>
+        {description || "Exam"}
+        <br />
+        {formatTimestamp(time)}
+      </a></li>
     );
   }
 
-  viewImage = () => {
+  viewImage = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     const {imageViewer, integrationJson} = this.props;
-    $.harbingerjs.integration.view(imageViewer, integrationJson);
+    this.props.viewImage(imageViewer, integrationJson);
   }
 }
 
