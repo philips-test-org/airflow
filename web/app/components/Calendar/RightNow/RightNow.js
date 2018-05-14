@@ -25,7 +25,7 @@ const UPDATE_INTERVAL = 10000;
 const HEADER_OFFSET = 49;
 
 class RightNow extends PureComponent<Props, State> {
-  interval: number;
+  interval: IntervalID;
 
   constructor(props: Props) {
     super(props);

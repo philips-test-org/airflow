@@ -15,6 +15,7 @@ import {
   BoardActions,
   adjustOrderSucceeded,
   fetchExamsSucceeded,
+  fetchPersonExamsSucceeded,
   requestFailed,
   showLoading,
   hideLoading,
@@ -28,6 +29,7 @@ import {mapSelectedResources} from "../../lib/utility";
 const {
   ADJUST_ORDER,
   FETCH_EXAMS,
+  FETCH_PERSON_EXAMS,
   FETCH_KIOSK_EXAMS,
   FETCH_INITIAL_APP,
   UPDATE_BROWSER_HISTORY,
@@ -51,6 +53,16 @@ function* fetchKioskExams(action): Saga<void> {
     const payload = yield call(Api.fetchKioskExams, action.resourceGroup, action.resourceIds);
     yield put(fetchExamsSucceeded(payload));
     yield put(hideLoading());
+  } catch (e) {
+    yield call(requestFailed(e));
+    console.log("error", e)
+  }
+}
+
+function* fetchPersonExams(action): Saga<void> {
+  try {
+    const payload = yield call(Api.fetchPersonExams, action.personId);
+    yield put(fetchPersonExamsSucceeded(action.personId, payload));
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)
@@ -100,6 +112,7 @@ function* updateHistory(action): Saga<void> {
 export default function* boardSaga(): Saga<void> {
   yield takeLatest(FETCH_EXAMS, fetchExams)
   yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
+  yield takeLatest(FETCH_PERSON_EXAMS, fetchPersonExams)
   yield takeLatest(FETCH_INITIAL_APP, fetchInitialApp)
   yield takeEvery(ADJUST_ORDER, adjustOrder)
   yield takeEvery(UPDATE_BROWSER_HISTORY, updateHistory)
