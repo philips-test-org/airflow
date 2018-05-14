@@ -146,6 +146,11 @@ const mapSelectedResources = R.compose(
   R.map(({id, name}) => ({[id]: name}))
 )
 
+function isIE(): (?number) {
+  var myNav = navigator.userAgent.toLowerCase();
+  return (myNav.indexOf("msie") !== -1) ? parseInt(myNav.split("msie")[1]) : null;
+}
+
 function printOrders() {
   var content = document.getElementById("print-view-contents");
   // Iframe
@@ -167,6 +172,7 @@ export {
   formatName,
   formatTimestamp,
   kioskNumber,
+  isIE,
   mapSelectedResources,
   orderComments,
   orderResource,
