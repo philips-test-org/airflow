@@ -19,6 +19,7 @@ import {
 
 import type {
   Images,
+  Notification,
   Order,
   Resource,
   User,
@@ -40,7 +41,7 @@ type Props = {
   focusedOrder: Order,
   images: Images,
   loading: boolean,
-  notifications: Array<{type: "flash" | "alert", message: string}>,
+  notifications: Array<Notification>,
   openModal: (Order) => void,
   orderGroups: {[string]: Array<Order>},
   orders: {[string]: Array<Order>},

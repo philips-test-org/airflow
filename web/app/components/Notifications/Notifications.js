@@ -4,9 +4,9 @@ import * as R from "ramda";
 
 import Notification from "./Notification";
 
-import type {Event} from "../../types";
-
-type NotificationT = {event_type: "flash" | "alert", event: Event};
+import type {
+  Notification as NotificationT,
+} from "../../types";
 
 type Props = {
   notifications: Array<NotificationT>,

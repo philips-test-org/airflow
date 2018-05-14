@@ -22,6 +22,7 @@ import type {
 } from "./user";
 
 import type {
+  Notification,
   ViewType,
 } from "./general.js";
 
@@ -44,5 +45,6 @@ export type {
   // USER
   User,
   // GENERAL
+  Notification,
   ViewType,
 };

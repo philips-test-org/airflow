@@ -18,8 +18,10 @@ const DISPLAY_TIME = 6000;
 
 class Notification extends PureComponent<Props> {
   componentDidMount() {
-    const {event: {id}} = this.props;
-    setTimeout(() => {this.props.markAsDisplayed(id)}, DISPLAY_TIME)
+    const {event: {id}, event_type} = this.props;
+    if (event_type != "alert") {
+      setTimeout(() => {this.props.markAsDisplayed(id)}, DISPLAY_TIME)
+    }
   }
 
   render() {

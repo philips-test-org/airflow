@@ -58,14 +58,14 @@ class Event extends Component<Props> {
   }
 
   render() {
-    const {employee, renderAvatar} = this.props;
+    const {employee, hideAvatar} = this.props;
     return (
       <div className="event">
-        {renderAvatar ?
+        {hideAvatar ? null :
           <span className="avatar">
             <img className="avatar" src={`/avatar/${employee.id}`} />
-          </span> :
-          null}
+          </span>
+        }
         {this.renderVerbage()}
       </div>
     );

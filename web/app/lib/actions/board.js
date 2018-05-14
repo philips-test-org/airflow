@@ -3,6 +3,7 @@ import moment from "moment";
 
 import type {
   Event,
+  Notification,
   Order,
   Resource,
   ViewType,
@@ -185,7 +186,7 @@ const updateSelectedResourceGroup = (resources: {[string]: Array<Resource>}, sel
 }
 
 // NOTIFICATIONS
-const dispatchNotification = ({type, event}: {type: "flash" | "alert", event: Event}) => {
+const dispatchNotification = ({type, event}: Notification) => {
   return {
     type: BoardActions.DISPATCH_NOTIFICATION,
     event_type: type,

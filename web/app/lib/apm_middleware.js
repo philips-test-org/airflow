@@ -1,5 +1,7 @@
 //@flow
 
+import * as R from "ramda";
+
 import {
   dispatchNotification,
   fetchExam,
@@ -14,7 +16,7 @@ const apmConnector = store => next => action => {
 function connectToAPM(store) {
   var amqp = new $.amqpListener();
   // eslint-disable-next-line no-undef
-  var apmHost = "sparkqa2.analytical.info";//harbingerjsApmHost;
+  var apmHost = harbingerjsApmHost;
   // eslint-disable-next-line no-undef
   var apmPort = harbingerjsApmPort;
   amqp.setup({host: apmHost, port: apmPort});
@@ -32,8 +34,10 @@ function connectToAPM(store) {
       const order_id = tokens[3];
       const resource_id = tokens[4];
 
+      const currentUser = R.path(["user", "currentUser", "id"], store.getState());
+
       if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
-        if (employee_id != application.employee.id) {
+        if (employee_id != currentUser) {
           const events = payload.events;
           const event = events.sort(function (x, y) {
             return new Date(y.updated_at) - new Date(x.updated_at);
@@ -74,7 +78,7 @@ function connectToAPM(store) {
     amqp.bindExchange("audit","rad_exams.#", {ok: function() {BOUND += 1}});
     amqp.bindExchange("audit","rad_exam_times.#", {ok: function() {BOUND += 1}});
     amqp.bindExchange("audit","rad_exam_personnel.#", {ok: function() {BOUND += 1}});
-    amqp.bindExchange("audit","orders.#", {ok: function() {BOUND +=1}})
+    amqp.bindExchange("audit","orders.#", {ok: function() {BOUND +=1}});
     waitOnBind();
   }
 
@@ -88,7 +92,7 @@ function connectToAPM(store) {
     }, 1000)
   }
 
-  function alertConnected(queue) {
+  function alertConnected(_queue) {
     store.dispatch(dispatchNotification({
       type: "flash",
       event: {
@@ -102,8 +106,10 @@ function connectToAPM(store) {
     if (reason == "unauthorized") {
       store.dispatch(dispatchNotification({
         type: "alert",
-        id: "disconnect",
-        message: "You are no longer receiving real time updates. Please reload the page and log in again.",
+        event: {
+          id: "disconnect",
+          message: "You are no longer receiving real time updates. Please reload the page and log in again.",
+        }
       }));
     } else {
       alertDisconnected()
@@ -113,8 +119,10 @@ function connectToAPM(store) {
   function alertDisconnected() {
     store.dispatch(dispatchNotification({
       type: "alert",
-      id: "disconnect",
-      message: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
+      event: {
+        id: "disconnect",
+        message: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
+      }
     }));
   }
 

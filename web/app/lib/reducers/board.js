@@ -109,9 +109,14 @@ function upsertOrders(state, {payload}) {
   });
 }
 
-function replaceOrder(state, {orderId, payload}) {
+function replaceOrder(state, action) {
+  const {orderId, payload} = action;
   const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
-  return R.set(orderLens, payload, state);
+  const orderWithGroup = R.assoc(
+    "groupIdentity",
+    groupIdentity(state.selectedResources, state.startDate, payload),
+    payload);
+  return R.set(orderLens, orderWithGroup, state);
 }
 
 function updateOrders(state, {payload}) {
