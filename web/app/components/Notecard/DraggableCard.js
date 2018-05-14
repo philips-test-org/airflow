@@ -20,7 +20,7 @@ import {
 } from "../../lib/constants";
 
 import type {
-  Order
+  Order,
 } from "../../types";
 
 type Props = {
@@ -60,7 +60,7 @@ const notecardSource = {
         const newState = {
           start_time: newStart,
           stop_time: newStop,
-          resource_id: targetResourceId
+          resource_id: targetResourceId,
         };
         props.updateOrderTime(props.order.id, newState);
       }
@@ -71,7 +71,7 @@ const notecardSource = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
   }
 }
 

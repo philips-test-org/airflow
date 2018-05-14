@@ -22,7 +22,7 @@ export const STATUS_CHECKS = [
       let noSignInTime = R.isNil(order.rad_exam.rad_exam_time.sign_in);
       let noCheckInTime = R.isNil(order.rad_exam.rad_exam_time.check_in);
       return (noExam || noSignInTime || noCheckInTime);
-    }
+    },
   },
   {
     name: "Patient Arrived",
@@ -33,7 +33,7 @@ export const STATUS_CHECKS = [
       let hasSignInTime = order.rad_exam.rad_exam_time.sign_in !== null;
       let hasCheckInTime = order.rad_exam.rad_exam_time.check_in !== null;
       return (hasExam && (hasSignInTime || hasCheckInTime));
-    }
+    },
   },
   {
     name: "Started",
@@ -44,7 +44,7 @@ export const STATUS_CHECKS = [
       let hasBeginTime = order.rad_exam.rad_exam_time.begin_exam;
       let noEndTime = order.rad_exam.rad_exam_time.end_exam == null;
       return (hasExam && hasBeginTime && noEndTime);
-    }
+    },
   },
   {
     name: "Completed",
@@ -55,21 +55,21 @@ export const STATUS_CHECKS = [
       let hasExam = order.rad_exam != undefined;
       let hasEndTime = order.rad_exam.rad_exam_time.end_exam !== null;
       return hasExam && hasEndTime;
-    }
+    },
   },
   {
     name: "PPCA Ready",
     order: 5,
     color: "#C4F3E6",
     card_class: "ppca_ready",
-    check: (order: Order) => (order.adjusted.ppca_ready == true)
+    check: (order: Order) => (order.adjusted.ppca_ready == true),
   },
   {
     name: "On Hold",
     order: 6,
     color: "#f5f52b",
     card_class: "highlight",
-    check: (order: Order) => (order.adjusted.onhold == true)
+    check: (order: Order) => (order.adjusted.onhold == true),
   },
   {
     name: "Cancelled",
@@ -80,7 +80,7 @@ export const STATUS_CHECKS = [
       let undefinedExam = order.rad_exam != undefined;
       let examCancelled = order.rad_exam.current_status.universal_event_type.event_type == "cancelled";
       return (orderCancelled || (undefinedExam && examCancelled));
-    }
+    },
   },
 ]
 

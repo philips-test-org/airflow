@@ -315,21 +315,21 @@ class Airflow extends Component<Props, State> {
   updateActiveLink(viewType: ViewType) {
     if (this.kioskLink && this.calendarLink && this.overviewLink) {
       switch (viewType) {
-      case "kiosk":
-        this.kioskLink.className = "active";
-        this.calendarLink.className = "";
-        this.overviewLink.className = "";
-        break;
-      case "calendar":
-        this.kioskLink.className = "";
-        this.calendarLink.className = "active";
-        this.overviewLink.className = "";
-        break;
-      case "overview":
-        this.calendarLink.className = "";
-        this.kioskLink.className = "";
-        this.overviewLink.className = "active";
-        break;
+        case "kiosk":
+          this.kioskLink.className = "active";
+          this.calendarLink.className = "";
+          this.overviewLink.className = "";
+          break;
+        case "calendar":
+          this.kioskLink.className = "";
+          this.calendarLink.className = "active";
+          this.overviewLink.className = "";
+          break;
+        case "overview":
+          this.calendarLink.className = "";
+          this.kioskLink.className = "";
+          this.overviewLink.className = "active";
+          break;
       }
     }
   }
