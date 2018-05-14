@@ -10,7 +10,8 @@
     "lint": "yarn eslint --color -c web/.eslintrc web",
     "start": "webpack --watch --mode production",
     "build": "webpack --mode production",
-    "watch": "webpack-dev-server --progress --inline --hot --mode development --port 3000",
+    "watch": "webpack --watch -d --hide-modules --progress --env.DEBUG=true",
+    "watch:hot": "webpack-dev-server --progress --inline --hot --mode development --port 3000",
     "test": "mocha --compilers js:babel-core/register --require ./web/test/test_helper.js --recursive ./web/test -R nyan",
     "test:watch": "npm run test -- --watch"
   },

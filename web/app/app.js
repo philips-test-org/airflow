@@ -11,7 +11,7 @@ import "react-dates/lib/css/_datepicker.css";
 
 import Airflow from "./components/Airflow";
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production" && process.env.DEBUG === "true") {
   const {whyDidYouUpdate} = require("why-did-you-update");
   whyDidYouUpdate(React, {exclude: [
     /^Connect/,
