@@ -36,7 +36,7 @@ type Props = {
   boardWidth: number,
   closeModal: () => void,
   currentUser: User,
-  examsByPerson: Array<RadExam>,
+  examsByPerson: {[number]: Array<RadExam>},
   fetchAvatar: (userId: number) => void,
   fetchCurrentEmployee: () => void,
   fetchExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
