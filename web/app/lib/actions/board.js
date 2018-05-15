@@ -2,7 +2,6 @@
 import moment from "moment";
 
 import type {
-  Event,
   Notification,
   Order,
   Resource,

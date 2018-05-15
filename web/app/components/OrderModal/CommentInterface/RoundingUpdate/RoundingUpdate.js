@@ -27,6 +27,11 @@ type State = {
 }
 
 class RoundingUpdate extends Component<Props, State> {
+  static defaultProps: {
+    hideAvatar: boolean,
+    hideDiff: boolean,
+  }
+
   constructor(props: Props) {
     super(props);
 

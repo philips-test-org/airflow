@@ -14,6 +14,7 @@ type Props = {
 
 type State = {
   displayed: Array<NotificationT>,
+  undisplayed: Array<NotificationT>,
 };
 
 class Notifications extends PureComponent<Props, State> {

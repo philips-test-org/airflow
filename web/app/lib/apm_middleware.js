@@ -8,17 +8,18 @@ import {
   replaceOrder,
 } from "./actions";
 
-const apmConnector = store => next => action => {
+const apmConnector = (store: Object) => (next: Function) => (action: Object) => {
   if (action.type !== "CONNECT_APM") return next(action);
   connectToAPM(store);
 }
 
 function connectToAPM(store) {
+  // $FlowFixMe
   var amqp = new $.amqpListener();
-  // eslint-disable-next-line no-undef
-  var apmHost = harbingerjsApmHost;
-  // eslint-disable-next-line no-undef
-  var apmPort = harbingerjsApmPort;
+  // $FlowFixMe
+  var apmHost = harbingerjsApmHost; // eslint-disable-line no-undef
+  // $FlowFixMe
+  var apmPort = harbingerjsApmPort; // eslint-disable-line no-undef
   amqp.setup({host: apmHost, port: apmPort});
 
   var joinCallbacks = {
@@ -29,10 +30,7 @@ function connectToAPM(store) {
 
       const tokens = routing_key.split(".");
       const table = tokens[0];
-      var event_type = tokens[1];
       const employee_id = tokens[2];
-      const order_id = tokens[3];
-      const resource_id = tokens[4];
 
       const currentUser = R.path(["user", "currentUser", "id"], store.getState());
 
@@ -43,11 +41,6 @@ function connectToAPM(store) {
             return new Date(y.updated_at) - new Date(x.updated_at);
           }).shift();
 
-          if (event.event_type == "comment") {
-            event_type = "comment";
-          } else {
-            event_type = "event";
-          }
           store.dispatch(dispatchNotification({type: "flash", event: event}));
           store.dispatch(replaceOrder(payload.id, payload));
         }

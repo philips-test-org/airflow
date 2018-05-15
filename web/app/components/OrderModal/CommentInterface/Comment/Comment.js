@@ -16,6 +16,8 @@ type Props = {
 }
 
 class Comment extends PureComponent<Props> {
+  static defaultProps: {hideAvatar: boolean}
+
   render() {
     const {employee, created_at, comments, hideAvatar} = this.props
     return (

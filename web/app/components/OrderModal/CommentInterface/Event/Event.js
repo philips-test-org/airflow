@@ -53,6 +53,8 @@ const FA_CLASS = {
 }
 
 class Event extends Component<Props> {
+  static defaultProps: {hideAvatar: boolean}
+
   shouldComponentUpdate(nextProps: Props) {
     return !R.equals(nextProps, this.props);
   }

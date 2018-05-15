@@ -6,11 +6,15 @@ import Event from "../../OrderModal/CommentInterface/Event";
 import Comment from "../../OrderModal/CommentInterface/Comment";
 import RoundingUpdate from "../../OrderModal/CommentInterface/RoundingUpdate";
 
-import type {EventT} from "../../../types";
+import type {
+  Event as EventT,
+} from "../../../types";
 
 type Props = {
+  event: EventT & {
+    message: string,
+  },
   event_type: "flash" | "alert",
-  event: EventT | {message: string},
   markAsDisplayed: (id: number) => void,
 };
 
@@ -43,7 +47,7 @@ class Notification extends PureComponent<Props> {
   renderNotification() {
     const {event} = this.props;
     if (event.event_type === "rounding-update") {
-      return this.renderRoundingUpdate(event);
+      return this.renderRoundingUpdate();
     } else if (R.has("message", event)) {
       return <span>{event.message}</span>;
     }
