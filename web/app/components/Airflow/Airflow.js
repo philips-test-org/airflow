@@ -1,9 +1,11 @@
 // @flow
+/* global module */
 import React, {Component} from "react";
 import * as R from "ramda";
 import {throttle} from "lodash";
 import moment from "moment";
 import key from "keymaster";
+import {hot} from "react-hot-loader";
 
 import Calendar from "../Calendar";
 import Overview from "../Overview";
@@ -424,4 +426,4 @@ class Airflow extends Component<Props, State> {
   }
 }
 
-export default Airflow;
+export default hot(module)(Airflow);
