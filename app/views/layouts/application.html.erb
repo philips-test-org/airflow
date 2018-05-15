@@ -75,5 +75,12 @@
 
   <!-- Common templates -->
   <%= render partial: "layouts/common_templates" %>
+
+  <%# React %>
+  <% if ENV["RAILS_ENV"] != "production" && ENV["HOT"] == "true" %>
+    <script src="http://localhost:3000/assets/app.bundle.js"></script>
+  <% else %>
+    <script src="/assets/packs/app.bundle.js"></script>
+  <% end %>
 </body>
 </html>
