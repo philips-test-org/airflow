@@ -48,7 +48,7 @@ const FA_CLASS = {
   onhold: "fa fa-hand-paper-o",
   anesthesia: "",
   consent: "fa fa-handshake-o",
-  ppca_ready: "fa fa-thumbs-o-up",
+  ppca_arrival: "fa fa-thumbs-o-up",
   paperwork: "fa fa-file-text",
 }
 
