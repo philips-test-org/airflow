@@ -2,9 +2,11 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 import {DropTarget} from "react-dnd";
+import moment from "moment";
 
 import {
   COL_WIDTH,
+  PIXELS_PER_SECOND,
   ItemTypes,
 } from "../../lib/constants";
 
@@ -28,6 +30,7 @@ type Props = {
   movementOffset: {x: number, y: number},
   resourceId: string,
   scrollToCoordinates: (x: number, y: number) => void,
+  showGhostEndTime: boolean,
   startDate: number,
   type: "calendar" | "kiosk",
   updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
@@ -40,6 +43,8 @@ type State = {
   overlappingCards: Array<{cards: Array<CardPosition>, offset: number}>,
   hasOverlap: boolean,
   widthMultiplier: number,
+  ghostTop: number,
+  ghostHeight: number,
 }
 
 // React DnD setup
@@ -50,7 +55,14 @@ const laneTarget = {
       targetResourceId: props.resourceId,
       movementDelta: movementOffset,
     }
-  }
+  },
+  hover(props, monitor, component) {
+    const movementDelta = monitor.getDifferenceFromInitialOffset();
+    const newTop = R.max(0, monitor.getItem().orderTop + movementDelta.y);
+    const orderHeight = monitor.getItem().orderHeight;
+
+    component.setGhost(newTop, orderHeight);
+  },
 }
 
 function collect(connect, monitor) {
@@ -75,6 +87,8 @@ class NotecardLane extends Component<Props, State> {
       hasOverlap: false,
       overlappingCards: [],
       widthMultiplier: 0,
+      ghostTop: 0,
+      ghostHeight: 0,
     }
   }
 
@@ -136,8 +150,33 @@ class NotecardLane extends Component<Props, State> {
         <div>
           {this.renderCards()}
         </div>
+        {isOver && this.renderGhostCard()}
       </td>
     )
+  }
+
+  renderGhostCard() {
+    const ghostStyle = {
+      top: this.state.ghostTop,
+      height: this.state.ghostHeight,
+    };
+
+    const heightToTime = (top) => this.props.startDate + (top / PIXELS_PER_SECOND * 1000);
+    const orderStartTime = heightToTime(this.state.ghostTop);
+    const orderStopTime = heightToTime(this.state.ghostTop + this.state.ghostHeight);
+    const startTimeFormatted = moment(orderStartTime).format("kk:mm");
+    const stopTimeFormatted = moment(orderStopTime).format("kk:mm");
+
+    return (
+      <div className="ghost-card" style={ghostStyle}>
+        <div>
+          <p className="start-time">{startTimeFormatted}</p>
+          {this.props.showGhostEndTime &&
+            <p className="stop-time">{stopTimeFormatted}</p>
+          }
+        </div>
+      </div>
+    );
   }
 
   renderCards() {
@@ -284,6 +323,10 @@ class NotecardLane extends Component<Props, State> {
   // Divides cards into columns inside the lane based on which ones actually overlap
   // while trying to minimize the total width of the lane.
   prettyPrint = R.reduce((acc, card) => (this.prettyPrintFold(acc, card, 0)), [{offset: 0, cards: []}]);
+
+  setGhost = (ghostTop, ghostHeight) => {
+    this.setState({ghostTop, ghostHeight});
+  }
 }
 
 export default DropTarget(ItemTypes.NOTECARD, laneTarget, collect)(NotecardLane);

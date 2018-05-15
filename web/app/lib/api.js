@@ -8,6 +8,7 @@ const ENDPOINTS = {
   exams: "/exams",
   exam: (id) => `/exams/${id}`,
   kioskExams: "/exams/kiosk",
+  personExams: (personId) => `/persons/${personId}/exams`,
   avatar: (userId) => `/avatar/${userId}`,
   events: "/events",
   resourceGroups: "/resource_groups",
@@ -27,6 +28,10 @@ const fetchKioskExams = (resourceGroup: String, resourceIds: Array<number>) => (
   GET(ENDPOINTS.kioskExams, {resource_group: resourceGroup, resource_ids: resourceIds})
 );
 
+const fetchPersonExams = (personId: number) => (
+  GET(ENDPOINTS.personExams(personId), {})
+);
+
 const fetchAvatar = (userId: number) => (
   GET(ENDPOINTS.avatar(userId), {})
 );
@@ -35,7 +40,7 @@ const fetchResourceGroups = () => (
   GET(ENDPOINTS.resourceGroups)
 );
 
-const fetchSelectedResourceGroups = () => (
+const fetchSelectedResourceGroup = () => (
   GET(ENDPOINTS.selectedResourceGroup)
 );
 
@@ -48,14 +53,15 @@ const createEvent = (event: Object) => (
 )
 
 const Api = {
-  createEvent: createEvent,
-  fetchAvatar: fetchAvatar,
-  fetchExams: fetchExams,
-  fetchExam: fetchExam,
-  fetchKioskExams: fetchKioskExams,
-  fetchResourceGroups: fetchResourceGroups,
-  fetchSelectedResourceGroup: fetchSelectedResourceGroups,
-  fetchCurrentEmployee: fetchCurrentEmployee,
+  createEvent,
+  fetchAvatar,
+  fetchExams,
+  fetchExam,
+  fetchKioskExams,
+  fetchPersonExams,
+  fetchResourceGroups,
+  fetchSelectedResourceGroup,
+  fetchCurrentEmployee,
 }
 
 export default Api;

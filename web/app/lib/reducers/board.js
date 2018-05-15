@@ -16,6 +16,7 @@ const {
   FETCH_EXAMS_SUCCEEDED,
   FETCH_EXAM_SUCCEEDED,
   DISPATCH_NOTIFICATION,
+  FETCH_PERSON_EXAMS_SUCCEEDED,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
@@ -44,6 +45,7 @@ const initialState = {
   loading: true,
   images: {},
   width: 0,
+  examsByPerson: {},
 }
 
 function board(state: Object = initialState, action: Object) {
@@ -56,22 +58,23 @@ function board(state: Object = initialState, action: Object) {
   }
 
   switch (action.type) {
-  case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
-  case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
-  case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
-  case SHOW_ORDER_MODAL: return showOrderModal(state, action);
-  case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
-  case SHOW_LOADING: return showLoading(state);
-  case HIDE_LOADING: return hideLoading(state);
-  case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
-  case REPLACE_ORDER: return replaceOrder(state, action);
-  case UPDATE_DATE: return updateDate(state, action);
-  case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
-  case UPDATE_VIEW_TYPE: return updateViewType(state, action);
-  case UPDATE_WIDTH: return updateWidth(state, action);
-  case DISPATCH_NOTIFICATION: return dispatchNotification(state, action);
-  case REQUEST_FAILED: return state;
-  default: return state;
+    case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
+    case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
+    case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
+    case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
+    case SHOW_ORDER_MODAL: return showOrderModal(state, action);
+    case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
+    case SHOW_LOADING: return showLoading(state);
+    case HIDE_LOADING: return hideLoading(state);
+    case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
+    case REPLACE_ORDER: return replaceOrder(state, action);
+    case UPDATE_DATE: return updateDate(state, action);
+    case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
+    case UPDATE_VIEW_TYPE: return updateViewType(state, action);
+    case UPDATE_WIDTH: return updateWidth(state, action);
+    case DISPATCH_NOTIFICATION: return dispatchNotification(state, action);
+    case REQUEST_FAILED: return state;
+    default: return state;
   }
 }
 
@@ -126,6 +129,14 @@ function updateOrders(state, {payload}) {
   return R.merge(state, {
     orders: payloadWithIdent,
     orderGroups: R.groupBy(R.prop("groupIdentity"), payloadWithIdent),
+  });
+}
+
+function updateExams(state, {personId, payload}) {
+  const sortedExams = R.reverse(R.sortBy(R.path(["rad_exam_time", "end_exam"]), payload));
+
+  return R.merge(state, {
+    examsByPerson: R.merge(state.examsByPerson, {[personId]: sortedExams}),
   });
 }
 

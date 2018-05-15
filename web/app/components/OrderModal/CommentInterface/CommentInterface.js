@@ -1,6 +1,6 @@
 // @flow
 
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import * as R from "ramda";
 
 import Event from "./Event";
@@ -23,7 +23,11 @@ type Props = {
   user: User,
 }
 
-class CommentInterface extends PureComponent<Props> {
+class CommentInterface extends Component<Props> {
+  shouldComponentUpdate(nextProps: Props) {
+    return !R.equals(nextProps, this.props);
+  }
+
   render() {
     return (
       <div className="col-xs-6">

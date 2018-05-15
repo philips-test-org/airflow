@@ -6,6 +6,7 @@ import type {
   Order,
   Resource,
   ViewType,
+  RadExam,
 } from "../../types";
 
 const BoardActions = {
@@ -14,6 +15,8 @@ const BoardActions = {
   FETCH_EXAM: "FETCH_EXAM",
   FETCH_EXAM_SUCCEEDED: "FETCH_EXAM_SUCCEEDED",
   FETCH_KIOSK_EXAMS: "FETCH_KIOSK_EXAMS",
+  FETCH_PERSON_EXAMS: "FETCH_PERSON_EXAMS",
+  FETCH_PERSON_EXAMS_SUCCEEDED: "FETCH_PERSON_EXAMS_SUCCEEDED",
   // ORDER MODAL
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
@@ -72,6 +75,21 @@ const fetchExam = (id: number, table: string) => {
 const fetchExamSucceeded = (payload: Array<Order>) => {
   return {
     type: BoardActions.FETCH_EXAM_SUCCEEDED,
+    payload,
+  }
+}
+
+const fetchPersonExams = (personId: number) => {
+  return {
+    type: BoardActions.FETCH_PERSON_EXAMS,
+    personId,
+  }
+}
+
+const fetchPersonExamsSucceeded = (personId: number, payload: Array<RadExam>) => {
+  return {
+    type: BoardActions.FETCH_PERSON_EXAMS_SUCCEEDED,
+    personId,
     payload,
   }
 }
@@ -200,6 +218,8 @@ export {
   fetchExam,
   fetchExamSucceeded,
   fetchKioskExams,
+  fetchPersonExams,
+  fetchPersonExamsSucceeded,
   adjustOrder,
   adjustOrderSucceeded,
   showOrderModal,

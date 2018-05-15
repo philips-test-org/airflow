@@ -105,6 +105,7 @@ class Calendar extends Component<Props> {
     const resourceName = this.props.selectedResources[resourceId];
     const style = {
       transform: `translateY(${this.props.headerOffset}px)`,
+      msTransform: `translateY(${this.props.headerOffset}px)`,
     };
     return (
       <th key={`${resourceName}-heading`} className="relative-column fixed-row" style={style}>

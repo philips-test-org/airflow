@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import * as R from "ramda";
 import {throttle} from "lodash";
 import moment from "moment";
+import key from "keymaster";
 
 import Calendar from "../Calendar";
 import Overview from "../Overview";
@@ -10,17 +11,24 @@ import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
 import Notifications from "../Notifications";
+import PrintView from "../PrintView";
+
+import {isIE} from "../../lib/utility";
 
 import {
   NAVBAR_OFFSET,
   SCROLL_SPEED,
 } from "../../lib/constants";
 
+import {
+  printOrders,
+} from "../../lib/utility";
 
 import type {
   Images,
   Notification,
   Order,
+  RadExam,
   Resource,
   User,
   ViewType,
@@ -33,11 +41,13 @@ type Props = {
   boardWidth: number,
   closeModal: () => void,
   currentUser: User,
+  examsByPerson: {[number]: Array<RadExam>},
   fetchAvatar: (userId: number) => void,
   fetchCurrentEmployee: () => void,
   fetchExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
   fetchInitialApp: (type: ViewType, date?: number) => void,
   fetchKioskExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
+  fetchPersonExams: (personId: number) => void,
   focusedOrder: Order,
   images: Images,
   loading: boolean,
@@ -88,6 +98,11 @@ class Airflow extends Component<Props, State> {
     this.props.connectAPM();
 
     this.setupViewChangeHandlers();
+    // $FlowFixMe
+    if (!isIE() || isIE() > 9) {
+      this.setupViewChangeHandlers();
+    }
+
     if (R.either(R.isNil, R.isEmpty)(this.props.orders)) {
       this.props.fetchInitialApp(this.props.type);
       if (this.props.type !== "kiosk") {
@@ -101,9 +116,17 @@ class Airflow extends Component<Props, State> {
       if (!viewType || viewType === this.props.type) return;
 
       this.props.updateViewType(viewType);
-      this.fetchExams(viewType);
       this.updateActiveLink(viewType);
-    }
+
+      if (R.contains("kiosk", [viewType, this.props.type])) {
+        this.fetchExams(viewType);
+      }
+    };
+
+    key("⌘+p, ctrl+p", (event, _handler) => {
+      event.preventDefault();
+      printOrders();
+    });
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -161,10 +184,12 @@ class Airflow extends Component<Props, State> {
     const translateX = Math.abs(this.state.gridPosition.x);
     const tdStyle = {
       transform: `translateX(${translateX}px)`,
+      msTransform: `translateX(${translateX}px)`,
     };
     const thStyle = {
       position: "relative",
       transform: `translate(${translateX}px, ${this.headerOffset()}px)`,
+      msTransform: `translate(${translateX}px, ${this.headerOffset()}px)`,
       zIndex: 110,
     };
     const scrollStyle = {
@@ -192,21 +217,30 @@ class Airflow extends Component<Props, State> {
           scrollToCoordinates={this.scrollToCoordinates}
           {...this.props}
           updateWidth={throttledWidthUpdate}
+          openModal={this.openModal}
         />
         {this.renderOrderModal()}
         <Notifications notifications={this.props.notifications} />
+        <PrintView
+          orders={this.props.orders}
+          selectedResources={this.props.selectedResources}
+        />
       </div>
     );
   }
 
   renderOrderModal() {
     if (!this.props.showModal) {return null}
+    const exams = this.props.examsByPerson[
+      this.getPersonId(this.props.focusedOrder)
+    ];
     return (
       <OrderModal
         adjustOrder={this.props.adjustOrder}
         avatarMap={this.props.avatarMap}
         closeModal={this.props.closeModal}
         currentUser={this.props.currentUser}
+        exams={exams}
         fetchAvatar={this.props.fetchAvatar}
         order={this.props.focusedOrder}
         orderGroup={this.orderGroup(this.props.focusedOrder)}
@@ -214,6 +248,14 @@ class Airflow extends Component<Props, State> {
         startDate={this.props.startDate}
       />
     )
+  }
+
+  getPersonId = (focusedOrder: Order): number =>
+    R.path(["patient_mrn", "patient_id"], focusedOrder);
+
+  openModal = (order: Order) => {
+    this.props.openModal(order);
+    this.props.fetchPersonExams(this.getPersonId(order));
   }
 
   headerOffset = () => {
@@ -228,7 +270,8 @@ class Airflow extends Component<Props, State> {
   updateScrollPosition = (event: SyntheticUIEvent<>) => {
     const t = R.pathOr(null, ["target", "firstChild"], event);
     if (t) {
-      const position = R.pick(["x", "y"], t.getBoundingClientRect());
+      const bounding = t.getBoundingClientRect();
+      const position = {x: bounding.left, y: bounding.top};
       this.setState({gridPosition: position});
     }
   }
@@ -247,45 +290,54 @@ class Airflow extends Component<Props, State> {
   setupViewChangeHandlers() {
     this.kioskLink = document.getElementById("kiosk-link");
     if (this.kioskLink) {
-      this.kioskLink.addEventListener("click", () => {this.viewClickHandler("kiosk", "/kiosk")})
+      this.kioskLink.addEventListener("click",
+        (e: MouseEvent) => {this.viewClickHandler(e, "kiosk", "/kiosk")}
+      )
     }
 
     this.calendarLink = document.getElementById("calendar-link");
     if (this.calendarLink) {
-      this.calendarLink.addEventListener("click", () => {this.viewClickHandler("calendar", "/main/calendar")})
+      this.calendarLink.addEventListener("click",
+        (e: MouseEvent) => {this.viewClickHandler(e, "calendar", "/main/calendar")}
+      )
     }
 
     this.overviewLink = document.getElementById("overview-link");
     if (this.overviewLink) {
-      this.overviewLink.addEventListener("click", () => {this.viewClickHandler("overview", "/main/overview")})
+      this.overviewLink.addEventListener("click",
+        (e: MouseEvent) => {this.viewClickHandler(e, "overview", "/main/overview")}
+      )
     }
   }
 
-  viewClickHandler = (type: ViewType, path: string) => {
+  viewClickHandler = (e: MouseEvent, type: ViewType, path: string) => {
+    e.preventDefault();
+
     const {updateBrowserHistory, updateViewType} = this.props;
 
     updateViewType(type);
     updateBrowserHistory({viewType: this.props.type}, type, path);
+    this.updateActiveLink(this.props.type);
   }
 
   updateActiveLink(viewType: ViewType) {
     if (this.kioskLink && this.calendarLink && this.overviewLink) {
       switch (viewType) {
-      case "kiosk":
-        this.kioskLink.className = "active";
-        this.calendarLink.className = "";
-        this.overviewLink.className = "";
-        break;
-      case "calendar":
-        this.kioskLink.className = "";
-        this.calendarLink.className = "active";
-        this.overviewLink.className = "";
-        break;
-      case "overview":
-        this.calendarLink.className = "";
-        this.kioskLink.className = "";
-        this.overviewLink.className = "active";
-        break;
+        case "kiosk":
+          this.kioskLink.className = "active";
+          this.calendarLink.className = "";
+          this.overviewLink.className = "";
+          break;
+        case "calendar":
+          this.kioskLink.className = "";
+          this.calendarLink.className = "active";
+          this.overviewLink.className = "";
+          break;
+        case "overview":
+          this.calendarLink.className = "";
+          this.kioskLink.className = "";
+          this.overviewLink.className = "active";
+          break;
       }
     }
   }

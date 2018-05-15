@@ -34,11 +34,11 @@ class CommentForm extends Component<Props, State> {
           <div className="avatar">
             <img className="avatar" src={`/avatar/${this.props.userId}`} />
           </div>
-          <div className="body">
-            <div className="heading form">
-              Add comment to the order:
+          <div className="body panel panel-default">
+            <div className="panel-heading">
+              <h5>Add comment to the order</h5>
             </div>
-            <div className="content">
+            <div className="panel-body">
               <textarea
                 name="comments"
                 className="form-control comment-box"
@@ -47,7 +47,7 @@ class CommentForm extends Component<Props, State> {
                 value={this.state.comment}
               />
             </div>
-            <div className="footer">
+            <div className="panel-footer">
               <div className="pull-right">
                 <Button
                   className="btn-default add-comment"

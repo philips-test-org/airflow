@@ -1,5 +1,7 @@
 // @flow
-import React, {PureComponent} from "react";
+declare var $: any;
+
+import React, {Component} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -22,9 +24,13 @@ import {
 import CommentInterface from "./CommentInterface";
 import RoundingInterface from "./RoundingInterface";
 import StatusToggle from "./StatusToggle";
+import ExamImageLink from "./ExamImageLink";
 
 import type {
+  ImageViewer,
+  IntegrationJson,
   Order,
+  RadExam,
   User,
 } from "../../types";
 
@@ -33,6 +39,7 @@ type Props = {
   avatarMap: {[number]: Blob},
   closeModal: () => void,
   currentUser: User,
+  exams: Array<RadExam>,
   fetchAvatar: (userId: number) => void,
   order: Order,
   orderGroup: Array<Order>,
@@ -40,7 +47,20 @@ type Props = {
   startDate: number,
 }
 
-class OrderModal extends PureComponent<Props> {
+type State = {
+  showMoreImages: boolean,
+}
+
+class OrderModal extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {showMoreImages: false};
+  }
+
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+  }
+
   render() {
     const {order, avatarMap, currentUser} = this.props;
     const cardColor = cardStatuses(order, "color", "#ddd");
@@ -57,7 +77,10 @@ class OrderModal extends PureComponent<Props> {
                 {this.renderStatusToggles()}
               </div>
               <h4 className="modal-title">{formatName(order.patient_mrn.patient.name)}</h4>
-              <h5 clas="no-margin">Kiosk Number: {kioskNumber(order.id)}</h5>
+              <div className="clearfix">
+                <h5 className="left">Kiosk Number: {kioskNumber(order.id)}</h5>
+                {this.renderImages()}
+              </div>
             </div>
             <div className="modal-body">
               <div className="container-fluid">
@@ -165,6 +188,50 @@ class OrderModal extends PureComponent<Props> {
         <td>{value}</td>
       </tr>
     )
+  }
+
+  renderImages() {
+    const {exams} = this.props;
+
+    if (!exams || exams.length <= 0) return;
+
+    const firstExam = R.head(exams);
+
+    return (
+      <div className="btn-group pacs-dropdown right">
+        <button
+          type="button"
+          className="btn btn-primary btn-sm"
+          onClick={() => this.viewImage(firstExam.image_viewer, firstExam.integration_json)}
+        >
+          View Most Recent Image
+        </button>
+        <button type="button" className="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span className="caret"></span>
+          <span className="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul className="dropdown-menu">{this.renderExamImagesList()}</ul>
+      </div>
+    );
+  }
+
+  renderExamImagesList() {
+    const exams = this.props.exams.map(exam => (
+      <ExamImageLink
+        key={exam.id}
+        description={R.path(["procedure", "description"], exam)}
+        time={R.path(["rad_exam_time", "end_exam"], exam)}
+        imageViewer={exam.image_viewer}
+        integrationJson={exam.integration_json}
+        viewImage={this.viewImage}
+      />
+    ));
+    const divider = <li role="separator" className="divider"></li>;
+    return R.intersperse(divider, exams);
+  }
+
+  viewImage = (imageViewer: ImageViewer, integrationJson: IntegrationJson) => {
+    $.harbingerjs.integration.view(imageViewer, integrationJson);
   }
 
   patientLocation() {

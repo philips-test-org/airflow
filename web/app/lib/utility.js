@@ -22,7 +22,7 @@ export const STATUS_CHECKS = [
       let noSignInTime = R.isNil(R.path(["rad_exam", "rad_exam_time", "sign_in"], order));
       let noCheckInTime = R.isNil(R.path(["rad_exam", "rad_exam_time", "check_in"], order));
       return (noExam || noSignInTime || noCheckInTime);
-    }
+    },
   },
   {
     name: "Patient Arrived",
@@ -33,7 +33,7 @@ export const STATUS_CHECKS = [
       let hasSignInTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "sign_in"], order));
       let hasCheckInTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "check_in"], order));
       return (hasExam && (hasSignInTime || hasCheckInTime));
-    }
+    },
   },
   {
     name: "Started",
@@ -44,7 +44,7 @@ export const STATUS_CHECKS = [
       let hasBeginTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "begin_exam"], order));
       let noEndTime = R.isNil(R.path(["rad_exam", "rad_exam_time", "end_exam"], order));
       return (hasExam && hasBeginTime && noEndTime);
-    }
+    },
   },
   {
     name: "Completed",
@@ -55,21 +55,21 @@ export const STATUS_CHECKS = [
       let hasExam = order.rad_exam != undefined;
       let hasEndTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "end_exam"], order));
       return hasExam && hasEndTime;
-    }
+    },
   },
   {
     name: "PPCA Ready",
     order: 5,
     color: "#7AF3D2",
     card_class: "ppca_ready",
-    check: (order: Order) => (order.adjusted.ppca_ready == true)
+    check: (order: Order) => (order.adjusted.ppca_ready == true),
   },
   {
     name: "On Hold",
     order: 6,
     color: "#f5f52b",
     card_class: "highlight",
-    check: (order: Order) => (order.adjusted.onhold == true)
+    check: (order: Order) => (order.adjusted.onhold == true),
   },
   {
     name: "Cancelled",
@@ -80,7 +80,7 @@ export const STATUS_CHECKS = [
       let undefinedExam = order.rad_exam != undefined;
       let examCancelled = R.path(["rad_exam", "current_status", "universal_event_type", "event_type"], order) == "cancelled";
       return (orderCancelled || (undefinedExam && examCancelled));
-    }
+    },
   },
 ]
 
@@ -149,6 +149,25 @@ const mapSelectedResources = R.compose(
   R.map(({id, name}) => ({[id]: name}))
 )
 
+function isIE(): (?number) {
+  var myNav = navigator.userAgent.toLowerCase();
+  return (myNav.indexOf("msie") !== -1) ? parseInt(myNav.split("msie")[1]) : null;
+}
+
+function printOrders() {
+  var content = document.getElementById("print-view-contents");
+  // Iframe
+  var frame: any = document.getElementById("print-view-frame");
+  if (content && frame) {
+    const pri = frame.contentWindow;
+    pri.document.open();
+    pri.document.write(content.innerHTML);
+    pri.document.close();
+    pri.focus();
+    pri.print();
+  }
+}
+
 export {
   appointmentTime,
   cardStatuses,
@@ -156,9 +175,11 @@ export {
   formatName,
   formatTimestamp,
   kioskNumber,
+  isIE,
+  mapSelectedResources,
   orderComments,
   orderResource,
   ordersByResource,
   patientType,
-  mapSelectedResources,
+  printOrders,
 }

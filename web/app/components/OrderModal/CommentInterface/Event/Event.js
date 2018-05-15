@@ -22,7 +22,7 @@ const EVENT_LABELS = {
   ppca_arrival: "PPCA Arrival",
   ppca_ready: "PPCA Ready",
   paperwork: "Paperwork",
-  location_update: "Location"
+  location_update: "Location",
 }
 
 const EVENT_STATES = {
@@ -41,7 +41,7 @@ const EVENT_STATES = {
     ppca_ready: "Incomplete",
     ppca_arrival: "Incomplete",
     paperwork: "Incomplete",
-  }
+  },
 }
 
 const FA_CLASS = {

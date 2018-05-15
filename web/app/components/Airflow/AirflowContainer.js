@@ -14,6 +14,7 @@ import {
   fetchAvatar,
   fetchExams,
   fetchKioskExams,
+  fetchPersonExams,
   fetchInitialApp,
   fetchCurrentEmployee,
   showOrderModal,
@@ -37,8 +38,12 @@ import type {
 const mapStateToProps = ({board, user}: Object) => {
   return {
     avatarMap: user.avatars,
+    boardWidth: board.width,
     currentUser: user.currentUser,
+    examsByPerson: board.examsByPerson,
     focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
+    images: board.images,
+    loading: board.loading,
     notifications: board.notifications,
     orderGroups: board.orderGroups,
     orders: ordersByResource(board.orders),
@@ -50,9 +55,6 @@ const mapStateToProps = ({board, user}: Object) => {
     ssoUrl: user.ssoUrl,
     startDate: board.startDate,
     type: board.type,
-    loading: board.loading,
-    images: board.images,
-    boardWidth: board.width,
   };
 };
 
@@ -72,6 +74,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchKioskExams: (selectedResourceGroup: string, resources: Array<number>) => {
       dispatch(fetchKioskExams(selectedResourceGroup, resources));
+    },
+    fetchPersonExams: (personId: number) => {
+      dispatch(fetchPersonExams(personId));
     },
     fetchInitialApp: (type: ViewType, date: number) => {
       dispatch(fetchInitialApp(type, date));

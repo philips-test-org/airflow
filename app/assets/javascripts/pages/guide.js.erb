@@ -12,13 +12,7 @@ $(document).ready(function() {
     });
   }
 
-  $(".view-changer").click(function(e) {
-    e.preventDefault();
-    $(this).parent().siblings().removeClass("active");
-    $(this).parent().addClass("active");
-  });
-
-  //connectToAPM();
+  connectToAPM();
 });
 
 function connectToAPM() {
