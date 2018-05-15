@@ -175,7 +175,7 @@ class Airflow extends Component<Props, State> {
           />
         </ErrorBoundary>
         {this.props.loading
-          ? <img src={this.props.images.spinner} />
+          ? <img className="spinner" src={this.props.images.spinner} />
           : this.renderBoard()}
       </div>
     );
