@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import * as R from "ramda";
 import {DragDropContext} from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import moment from "moment";
 
 import {wrapEvent} from "../../lib/data";
 
@@ -115,7 +116,9 @@ class Calendar extends Component<Props> {
   }
 
   renderRightNow() {
-    if (!this.props.ordersLoaded) {return null}
+    if (!this.props.ordersLoaded) return null;
+    const today = moment().startOf("day");
+    if (!today.isSame(this.props.startDate)) return null;
     return (<RightNow width={this.props.boardWidth}/>);
   }
 

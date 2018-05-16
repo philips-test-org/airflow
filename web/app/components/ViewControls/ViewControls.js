@@ -189,7 +189,7 @@ class ViewControls extends PureComponent<Props, State> {
   dateAsMoment(): moment {
     // Ensures that the date in use is a moment.
     const {selectedDate} = this.props;
-    return moment.isMoment(selectedDate) ? selectedDate : moment(selectedDate);
+    return moment.isMoment(selectedDate) ? selectedDate.startOf("day") : moment(selectedDate).startOf("day");
   }
 }
 
