@@ -10,7 +10,7 @@ export type Notification = {
   event: Event | {
     id: string,
     message: string,
-    event_type?: "flash" | "alert",
+    event_type?: "info" | "flash" | "alert",
   },
   message?: string,
 }

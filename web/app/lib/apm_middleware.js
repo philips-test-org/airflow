@@ -54,6 +54,7 @@ function connectToAPM(store) {
         type: "flash",
         event: {
           id: "connected-apm",
+          event_type: "info",
           message: "Connected to APM",
         },
       }));
@@ -90,6 +91,7 @@ function connectToAPM(store) {
       type: "flash",
       event: {
         id: "connected-queues",
+        event_type: "info",
         message: "Receiving real-time data.",
       },
     }));
@@ -101,8 +103,9 @@ function connectToAPM(store) {
         type: "alert",
         event: {
           id: "disconnect",
+          event_type: "alert",
           message: "You are no longer receiving real time updates. Please reload the page and log in again.",
-        }
+        },
       }));
     } else {
       alertDisconnected()
@@ -114,8 +117,9 @@ function connectToAPM(store) {
       type: "alert",
       event: {
         id: "disconnect",
+        event_type: "alert",
         message: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
-      }
+      },
     }));
   }
 
