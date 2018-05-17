@@ -19,6 +19,12 @@ type Props = {
 }
 
 class Overview extends PureComponent<Props> {
+  componentDidMount() {
+    if (this.props.filteredOrderIds.length == 0) {
+      this.props.scrollToCoordinates(0,0);
+    }
+  }
+
   render() {
     const resourceRows = R.map(
       ([resourceId, orders]) => this.renderRow(resourceId, orders),

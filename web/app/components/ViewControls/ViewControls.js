@@ -37,6 +37,7 @@ class ViewControls extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    this.searchInput = React.createRef();
     this.state = {
       showDatePicker: false,
     }
@@ -44,6 +45,11 @@ class ViewControls extends PureComponent<Props, State> {
 
   onChangeFilter = ({target}: SyntheticInputEvent<HTMLInputElement>) => {
     this.props.filterOrders(target.value);
+  }
+
+  clearSearch = () => {
+    this.searchInput.current.value = "";
+    this.props.filterOrders("");
   }
 
   render() {
@@ -94,8 +100,8 @@ class ViewControls extends PureComponent<Props, State> {
     if (viewType === "kiosk") {return null}
     return (
       <div className="input-group pull-left col-xs-2 form-group-sm margin-left-sm">
-        <input type="text" className="form-control" id="search-field" placeholder="Search" onChange={this.onChangeFilter} />
-        <div className="input-group-addon"><i className="fa fa-search"></i></div>
+        <input type="text" className="form-control" id="search-field" ref={this.searchInput} placeholder="Search" onChange={this.onChangeFilter} />
+        <div className="input-group-addon clickable" onClick={this.clearSearch}><i className="fa fa-times"></i></div>
       </div>
     );
   }
