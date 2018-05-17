@@ -112,6 +112,10 @@ $card-color: #fff;
   border-bottom: unquote($border-unit) solid $grid-color;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .vertical-timeline {
 
   #right-now {
