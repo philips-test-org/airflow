@@ -50,6 +50,16 @@ class Calendar extends Component<Props> {
     return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
   }
 
+  componentDidMount() {
+    const {startDate} = this.props;
+    const startMoment: moment = moment.isMoment(startDate) ? startDate : moment(startDate);
+    const today = moment().startOf("day");
+    if (!startMoment.isSame(today)) {
+      // Move to the top of the screen and bring the header row along.
+      this.scrollToCoordinates(0, 0);
+    }
+  }
+
   scrollToCoordinates = (x: number, y: number) => {
     if (this.hourbar) {
       const offset = this.hourbar.offsetWidth;
