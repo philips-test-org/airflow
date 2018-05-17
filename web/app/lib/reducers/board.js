@@ -14,12 +14,15 @@ import {
 const {
   ADJUST_ORDER_SUCCEEDED,
   FETCH_EXAMS_SUCCEEDED,
+  FETCH_EXAM_SUCCEEDED,
+  DISPATCH_NOTIFICATION,
   FETCH_PERSON_EXAMS_SUCCEEDED,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
   HIDE_LOADING,
   FETCH_RESOURCES_SUCCEEDED,
+  REPLACE_ORDER,
   UPDATE_DATE,
   UPDATE_VIEW_TYPE,
   UPDATE_WIDTH,
@@ -34,6 +37,7 @@ const initialState = {
   orders: [],
   orderGroups: {},
   resources: {},
+  notifications: [],
   selectedResourceGroup: "All",
   selectedResources: [],
   startDate: computeStartDate(),
@@ -56,16 +60,19 @@ function board(state: Object = initialState, action: Object) {
   switch (action.type) {
     case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
     case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
+    case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
     case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
     case SHOW_ORDER_MODAL: return showOrderModal(state, action);
     case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
     case SHOW_LOADING: return showLoading(state);
     case HIDE_LOADING: return hideLoading(state);
     case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
+    case REPLACE_ORDER: return replaceOrder(state, action);
     case UPDATE_DATE: return updateDate(state, action);
     case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
     case UPDATE_VIEW_TYPE: return updateViewType(state, action);
     case UPDATE_WIDTH: return updateWidth(state, action);
+    case DISPATCH_NOTIFICATION: return dispatchNotification(state, action);
     case REQUEST_FAILED: return state;
     default: return state;
   }
@@ -88,6 +95,31 @@ function adjustOrder(state, {orderId, payload}) {
     R.over(eventLens, R.prepend(payload)),
     R.over(adjustedLens, R.mergeDeepLeft(payload.new_state)),
   )(state)
+}
+
+function upsertOrders(state, {payload}) {
+  const updatedOrders = R.reduce((acc, order) => {
+    const orderLens = R.lensPath([R.findIndex(R.propEq("id", order.id), acc)]);
+    if (!R.isNil(R.view(orderLens, acc))) {
+      return R.set(orderLens, order, acc);
+    }
+    return R.append(order, acc);
+
+  }, state.orders, payload);
+
+  return R.mergeDeepRight(state, {
+    orders: updatedOrders,
+  });
+}
+
+function replaceOrder(state, action) {
+  const {orderId, payload} = action;
+  const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
+  const orderWithGroup = R.assoc(
+    "groupIdentity",
+    groupIdentity(state.selectedResources, state.startDate, payload),
+    payload);
+  return R.set(orderLens, orderWithGroup, state);
 }
 
 function updateOrders(state, {payload}) {
@@ -147,6 +179,10 @@ function updateWidth(state, {updatedWidth}) {
 
 function computeStartDate(selectedDate = moment().unix()) {
   return moment(selectedDate * 1000).startOf("day").unix()*1000;
+}
+
+function dispatchNotification(state, action) {
+  return R.merge(state, {notifications: R.prepend(R.omit(["type"], action), state.notifications)});
 }
 
 export default board;

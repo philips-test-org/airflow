@@ -18,6 +18,8 @@ type Props = {
   comments: string,
   created_at: string,
   lastUpdate: Event,
+  hideAvatar: boolean,
+  hideDiff: boolean,
 }
 
 type State = {
@@ -25,6 +27,11 @@ type State = {
 }
 
 class RoundingUpdate extends Component<Props, State> {
+  static defaultProps: {
+    hideAvatar: boolean,
+    hideDiff: boolean,
+  }
+
   constructor(props: Props) {
     super(props);
 
@@ -34,18 +41,22 @@ class RoundingUpdate extends Component<Props, State> {
   }
 
   render() {
-    const {employee, created_at, comments} = this.props
+    const {employee, created_at, comments, hideAvatar} = this.props
     return (
       <div className="comment">
-        <div className="avatar">
-          <img className="avatar" src={`/avatar/${employee.id}`} />
-        </div>
+        {hideAvatar ? null :
+          <div className="avatar">
+            <img className="avatar" src={`/avatar/${employee.id}`} />
+          </div>
+        }
         <div className="body">
           <div className="heading">
             <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span>
-            <span className="pull-right">
-              <Button text="Diff" className={`btn-sm btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
-            </span>
+            {this.props.hideDiff ? null :
+              <span className="pull-right">
+                <Button text="Diff" className={`btn-sm btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
+              </span>
+            }
           </div>
           <div className="content">{this.state.showDiff ? this.renderDiff() : comments}</div>
         </div>
@@ -73,6 +84,11 @@ class RoundingUpdate extends Component<Props, State> {
   toggleDiff = () => {
     this.setState({showDiff: !this.state.showDiff});
   }
+}
+
+RoundingUpdate.defaultProps = {
+  hideAvatar: false,
+  hideDiff: false,
 }
 
 export default RoundingUpdate;

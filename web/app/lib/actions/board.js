@@ -2,6 +2,7 @@
 import moment from "moment";
 
 import type {
+  Notification,
   Order,
   Resource,
   ViewType,
@@ -11,6 +12,8 @@ import type {
 const BoardActions = {
   FETCH_EXAMS: "FETCH_EXAMS",
   FETCH_EXAMS_SUCCEEDED: "FETCH_EXAMS_SUCCEEDED",
+  FETCH_EXAM: "FETCH_EXAM",
+  FETCH_EXAM_SUCCEEDED: "FETCH_EXAM_SUCCEEDED",
   FETCH_KIOSK_EXAMS: "FETCH_KIOSK_EXAMS",
   FETCH_PERSON_EXAMS: "FETCH_PERSON_EXAMS",
   FETCH_PERSON_EXAMS_SUCCEEDED: "FETCH_PERSON_EXAMS_SUCCEEDED",
@@ -19,6 +22,7 @@ const BoardActions = {
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
   ADJUST_ORDER: "ADJUST_ORDER",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
+  REPLACE_ORDER: "REPLACE_ORDER",
   // UI
   SHOW_LOADING: "SHOW_LOADING",
   HIDE_LOADING: "HIDE_LOADING",
@@ -30,6 +34,8 @@ const BoardActions = {
   // Resources
   FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
   FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
+  // NOTIFICATIONS
+  DISPATCH_NOTIFICATION: "DISPATCH_NOTIFICATION",
 }
 
 // Action generator functions
@@ -54,6 +60,21 @@ const fetchKioskExams = (resourceGroup: string, resourceIds: Array<number>) => {
 const fetchExamsSucceeded = (payload: Array<Order>) => {
   return {
     type: BoardActions.FETCH_EXAMS_SUCCEEDED,
+    payload,
+  }
+}
+
+const fetchExam = (id: number, table: string) => {
+  return {
+    type: BoardActions.FETCH_EXAM,
+    id,
+    table,
+  }
+}
+
+const fetchExamSucceeded = (payload: Array<Order>) => {
+  return {
+    type: BoardActions.FETCH_EXAM_SUCCEEDED,
     payload,
   }
 }
@@ -98,6 +119,14 @@ const adjustOrder = (event: Object) => {
 const adjustOrderSucceeded = (orderId: number, payload: Object) => {
   return {
     type: BoardActions.ADJUST_ORDER_SUCCEEDED,
+    orderId,
+    payload,
+  }
+}
+
+const replaceOrder = (orderId: number, payload: Object) => {
+  return {
+    type: BoardActions.REPLACE_ORDER,
     orderId,
     payload,
   }
@@ -173,10 +202,21 @@ const updateSelectedResourceGroup = (resources: {[string]: Array<Resource>}, sel
   }
 }
 
+// NOTIFICATIONS
+const dispatchNotification = ({type, event}: Notification) => {
+  return {
+    type: BoardActions.DISPATCH_NOTIFICATION,
+    event_type: type,
+    event,
+  }
+}
+
 export {
   BoardActions,
   fetchExams,
   fetchExamsSucceeded,
+  fetchExam,
+  fetchExamSucceeded,
   fetchKioskExams,
   fetchPersonExams,
   fetchPersonExamsSucceeded,
@@ -188,9 +228,11 @@ export {
   hideLoading,
   fetchInitialApp,
   fetchResourcesSucceeded,
+  replaceOrder,
   updateDate,
   updateViewType,
   updateBrowserHistory,
   updateSelectedResourceGroup,
   updateWidth,
+  dispatchNotification,
 }
