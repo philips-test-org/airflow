@@ -77,7 +77,7 @@ class OrderModal extends Component<Props, State> {
                 {this.renderStatusToggles()}
               </div>
               <h4 className="modal-title">{formatName(order.patient_mrn.patient.name)}</h4>
-              <div className="clearfix">
+              <div className="clearfix modal-subhead">
                 <h5 className="left">Kiosk Number: {kioskNumber(order.id)}</h5>
                 {this.renderImages()}
               </div>
