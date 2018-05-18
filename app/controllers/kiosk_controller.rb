@@ -1,5 +1,6 @@
 class KioskController < ApplicationController
   before_filter :get_entity_manager
+  before_filter :check_for_resource_groups
   after_filter :log_usage_data, :except => :exam_info
   after_filter :close_entity_manager
 

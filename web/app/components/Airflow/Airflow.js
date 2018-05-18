@@ -181,7 +181,19 @@ class Airflow extends Component<Props, State> {
     );
   }
 
+  renderNoResourcesMessage() {
+    return (
+      <div className="container-fluid alerts">
+        <div className="alert alert-danger">At least one Resource Group must be created. Please contact your administrator to create a Resource Group.</div>
+      </div>
+    );
+  }
+
   renderBoard() {
+    if (R.keys(this.props.selectedResources).length <= 0) {
+      return this.renderNoResourcesMessage();
+    }
+
     const BodyComponent = this.props.type === "overview" ? Overview : Calendar;
     const translateX = Math.abs(this.state.gridPosition.x);
     const tdStyle = {

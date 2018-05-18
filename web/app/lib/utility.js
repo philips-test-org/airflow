@@ -144,10 +144,13 @@ function appointmentTime(order: Order) {
 
 const kioskNumber = (orderId: number | string) => String(orderId).slice(-4);
 
-const mapSelectedResources = R.compose(
-  R.mergeAll,
-  R.map(({id, name}) => ({[id]: name}))
-)
+const mapSelectedResources = (resources: Array<Resource>) => {
+  if (!resources || R.length(resources) <= 0) return {};
+  return R.compose(
+    R.mergeAll,
+    R.map(({id, name}) => ({[id]: name}))
+  )(resources);
+}
 
 function isIE(): (?number) {
   var myNav = navigator.userAgent.toLowerCase();

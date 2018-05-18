@@ -23,6 +23,12 @@ class ApplicationController < ActionController::Base
     authenticate_and_authorize(["it-staff","ai-staff"])
   end
 
+  def check_for_resource_groups
+    return if !session[:username] || ResourceGroup.any?
+    
+    redirect_to resource_groups_url, alert: "You must add at least one resource group"
+  end
+
   # Takes a list of ORM objects (rad_exams, or patient_mrns, but NOT rad_exams and patient_mrns)
   # and does the HIPAA auditing.
   def log_hipaa_view(objects,options={})
