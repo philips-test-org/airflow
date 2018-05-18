@@ -70,6 +70,14 @@
     </div>
   </div>
 
+  <% if flash.any? %>
+    <div class="container-fluid alerts">
+      <% flash.each do |key, message| %>
+        <div class="<%= flash_class(key) %>" role="alert"><%= message %></div>
+      <% end %>
+    </div>
+  <% end %>
+
   <!-- Navbar Ends here... -->
   <%= yield %>
 
