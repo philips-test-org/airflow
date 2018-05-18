@@ -271,8 +271,12 @@ class Airflow extends Component<Props, State> {
 
   updateScrollPosition = (event: SyntheticUIEvent<>) => {
     const t = R.pathOr(null, ["target", "firstChild"], event);
-    if (t) {
-      const bounding = t.getBoundingClientRect();
+    this.updateGridPositionWithBoard(t);
+  }
+
+  updateGridPositionWithBoard(board: ?HTMLElement) {
+    if (board) {
+      const bounding = board.getBoundingClientRect();
       const position = {x: bounding.left, y: bounding.top};
       this.setState({gridPosition: position});
     }
@@ -410,6 +414,7 @@ class Airflow extends Component<Props, State> {
         this.board.scrollLeft = newPos;
         this.scrollToX(x);
       }
+      this.updateGridPositionWithBoard(this.board);
     }, 10);
   }
 
@@ -430,6 +435,7 @@ class Airflow extends Component<Props, State> {
         this.board.scrollTop = newPos;
         this.scrollToY(y);
       }
+      this.updateGridPositionWithBoard(this.board);
     }, 10);
   }
 }

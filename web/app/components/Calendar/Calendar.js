@@ -56,7 +56,7 @@ class Calendar extends Component<Props> {
     const today = moment().startOf("day");
     if (!startMoment.isSame(today)) {
       // Move to the top of the screen and bring the header row along.
-      this.scrollToCoordinates(0, 0);
+      this.props.scrollToCoordinates(0, 0);
     }
   }
 
