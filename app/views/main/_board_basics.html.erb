@@ -1,2 +1,9 @@
 <div id="workspace" class="vertical-timeline" data-spinnerUrl="<%= image_path "ajax-loader.gif" %>" data-ssoUrl="<%= Java::harbinger.sdk.SSO.ssoUrl rescue "" %>">
 </div>
+
+<%# React %>
+<% if ENV["RAILS_ENV"] != "production" && ENV["HOT"] == "true" %>
+  <script src="http://localhost:3000/assets/app.bundle.js"></script>
+<% else %>
+  <script src="/assets/packs/app.bundle.js"></script>
+<% end %>
