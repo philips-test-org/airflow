@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import * as R from "ramda";
 import {DragDropContext} from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import moment from "moment";
 
 import {wrapEvent} from "../../lib/data";
 
@@ -47,6 +48,16 @@ class Calendar extends Component<Props> {
 
   shouldComponentUpdate(nextProps, nextState) {
     return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+  }
+
+  componentDidMount() {
+    const {startDate} = this.props;
+    const startMoment: moment = moment.isMoment(startDate) ? startDate : moment(startDate);
+    const today = moment().startOf("day");
+    if (!startMoment.isSame(today)) {
+      // Move to the top of the screen and bring the header row along.
+      this.props.scrollToCoordinates(0, 0);
+    }
   }
 
   scrollToCoordinates = (x: number, y: number) => {
@@ -115,7 +126,9 @@ class Calendar extends Component<Props> {
   }
 
   renderRightNow() {
-    if (!this.props.ordersLoaded) {return null}
+    if (!this.props.ordersLoaded) return null;
+    const today = moment().startOf("day");
+    if (!today.isSame(this.props.startDate)) return null;
     return (<RightNow width={this.props.boardWidth}/>);
   }
 

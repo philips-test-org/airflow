@@ -24,15 +24,19 @@
   padding: 5px 10px 3px;
 }
 
-// Exam Image Links for PACS
-.pacs-dropdown {
-  ul {
-    max-width: 215px;
-    max-height: 600px;
-    overflow-y: auto;
-    a {
-      overflow: hidden;
-      text-overflow: ellipsis;
+.modal-subhead {
+  margin-top: 10px;
+  h5 { margin-top: 0; }
+  // Exam Image Links for PACS
+  .pacs-dropdown {
+    ul {
+      max-width: 215px;
+      max-height: 600px;
+      overflow-y: auto;
+      a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }
