@@ -65,7 +65,13 @@
             <%= global_navigation_link "About", :controller => :main,  :action => :about %>
           </ul>
         </li>
-        <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
+        <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">
+          <% if session[:username] %>
+            Logout
+          <% else %>
+            Login
+          <% end %>
+        </a></li>
       </ul>
     </div>
   </div>
