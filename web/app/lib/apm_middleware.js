@@ -9,6 +9,8 @@ import {
   replaceOrder,
 } from "./actions";
 
+import {orderResourceId} from "./utility";
+
 const apmConnector = (store: Object) => (next: Function) => (action: Object) => {
   if (action.type !== "CONNECT_APM") return next(action);
   connectToAPM(store);
@@ -33,10 +35,15 @@ function connectToAPM(store) {
       const table = tokens[0];
       const employee_id = tokens[2];
 
-      const currentUser = R.path(["user", "currentUser", "id"], store.getState());
+      const state = store.getState();
+      const currentUser = R.path(["user", "currentUser", "id"], state);
+
+      const orderIsInSelectedResources = (order, {board: {selectedResources}}) => (
+        R.contains(orderResourceId(order), R.pluck("id", selectedResources))
+      );
 
       if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
-        if (employee_id != currentUser) {
+        if (employee_id != currentUser && orderIsInSelectedResources(payload, state)) {
           const events = payload.events;
           const event = events.sort(function (x, y) {
             return new Date(y.updated_at) - new Date(x.updated_at);
