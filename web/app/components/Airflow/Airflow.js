@@ -244,7 +244,9 @@ class Airflow extends Component<Props, State> {
   }
 
   renderOrderModal() {
-    if (!this.props.showModal) {return null}
+    if (!this.props.showModal || !this.props.focusedOrder || !this.props.orderGroups) {
+      return null;
+    }
     const exams = this.props.examsByPerson[
       this.getPersonId(this.props.focusedOrder)
     ];

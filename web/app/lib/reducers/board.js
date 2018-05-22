@@ -99,27 +99,39 @@ function adjustOrder(state, {orderId, payload}) {
 
 function upsertOrders(state, {payload}) {
   const updatedOrders = R.reduce((acc, order) => {
+    const orderWithGroup = R.assoc(
+      "groupIdentity",
+      groupIdentity(state.selectedResources, state.startDate, order),
+      order,
+    );
     const orderLens = R.lensPath([R.findIndex(R.propEq("id", order.id), acc)]);
     if (!R.isNil(R.view(orderLens, acc))) {
-      return R.set(orderLens, order, acc);
+      return R.set(orderLens, orderWithGroup, acc);
     }
-    return R.append(order, acc);
+    return R.append(orderWithGroup, acc);
 
   }, state.orders, payload);
 
-  return R.mergeDeepRight(state, {
+  return R.merge(state, {
     orders: updatedOrders,
+    orderGroups: R.groupBy(R.prop("groupIdentity"), updatedOrders),
   });
 }
 
 function replaceOrder(state, action) {
   const {orderId, payload} = action;
-  const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
+  const orderLens = R.lensIndex(R.findIndex(R.propEq("id", orderId), state.orders));
   const orderWithGroup = R.assoc(
     "groupIdentity",
     groupIdentity(state.selectedResources, state.startDate, payload),
-    payload);
-  return R.set(orderLens, orderWithGroup, state);
+    payload,
+  );
+
+  const orders = R.set(orderLens, orderWithGroup, state.orders);
+  return R.merge(state, {
+    orders,
+    orderGroups: R.groupBy(R.prop("groupIdentity"), orders),
+  });
 }
 
 function updateOrders(state, {payload}) {
