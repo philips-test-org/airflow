@@ -2731,7 +2731,7 @@ var DEFAULT_CONNECT_CALLBACKS = {
   this.channel = null;
 
   this.setup = function (ApmConfig) {
-    defaultApmConfig = { host: document.location.hostname, port: 4000 };
+    const defaultApmConfig = { host: document.location.hostname, port: 4000 };
     if (ApmConfig.host == "") {
       ApmConfig.host = defaultApmConfig.host;
     }
@@ -2919,7 +2919,4 @@ var logMessage = function logMessage(message) {
   }
 };
 
-// TODO when fully ES6-ified in harbingerjs,
-//      uncomment this export.
-//export default (amqpListener: Class<AMQP>);
-$.amqpListener = amqpListener;
+export default (amqpListener: Class<AMQP>);

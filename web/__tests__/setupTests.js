@@ -11,6 +11,8 @@ import calendarExams from "./mockState/calendarExams";
 import resources from "./mockState/resources";
 
 global.React = React;
+global.harbingerjsApmHost = "localhost";
+global.harbingerjsApmPort = 4000;
 
 enzyme.configure({adapter: new Adapter()});
 

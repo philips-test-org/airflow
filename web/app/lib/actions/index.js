@@ -35,6 +35,7 @@ import {
   updateBrowserHistory,
   updateSelectedResourceGroup,
   dispatchNotification,
+  markNotificationDisplayed,
 } from "./board";
 
 //USER
@@ -78,6 +79,7 @@ export {
   updateBrowserHistory,
   updateSelectedResourceGroup,
   dispatchNotification,
+  markNotificationDisplayed,
   // USER
   UserActions,
   fetchAvatar,

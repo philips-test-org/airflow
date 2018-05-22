@@ -53,6 +53,7 @@ type Props = {
   focusedOrder: Order,
   images: Images,
   loading: boolean,
+  markNotificationDisplayed: (id: number | string) => void,
   notifications: Array<Notification>,
   openModal: (Order) => void,
   orderGroups: {[string]: Array<Order>},
@@ -234,7 +235,10 @@ class Airflow extends Component<Props, State> {
           openModal={this.openModal}
         />
         {this.renderOrderModal()}
-        <Notifications notifications={this.props.notifications} />
+        <Notifications
+          notifications={this.props.notifications}
+          markNotificationDisplayed={this.props.markNotificationDisplayed}
+        />
         <PrintView
           orders={this.props.orders}
           selectedResources={this.props.selectedResources}

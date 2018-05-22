@@ -36,6 +36,7 @@ const BoardActions = {
   FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
   // NOTIFICATIONS
   DISPATCH_NOTIFICATION: "DISPATCH_NOTIFICATION",
+  MARK_NOTIFICATION_DISPLAYED: "MARK_NOTIFICATION_DISPLAYED",
 }
 
 // Action generator functions
@@ -211,6 +212,14 @@ const dispatchNotification = ({type, event}: Notification) => {
   }
 }
 
+const markNotificationDisplayed = (id: number | string) => {
+  return {
+    type: BoardActions.MARK_NOTIFICATION_DISPLAYED,
+    id,
+  }
+}
+
+
 export {
   BoardActions,
   fetchExams,
@@ -235,4 +244,5 @@ export {
   updateSelectedResourceGroup,
   updateWidth,
   dispatchNotification,
+  markNotificationDisplayed,
 }

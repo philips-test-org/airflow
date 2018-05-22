@@ -1,6 +1,7 @@
 //@flow
 
 import * as R from "ramda";
+import amqpListener from "./amqp-listener-dist";
 
 import {
   dispatchNotification,
@@ -15,7 +16,7 @@ const apmConnector = (store: Object) => (next: Function) => (action: Object) => 
 
 function connectToAPM(store) {
   // $FlowFixMe
-  var amqp = new $.amqpListener();
+  var amqp = new amqpListener();
   // $FlowFixMe
   var apmHost = harbingerjsApmHost; // eslint-disable-line no-undef
   // $FlowFixMe
@@ -49,13 +50,13 @@ function connectToAPM(store) {
       }
     },
     joinOk: function() {
-      $("#notification-disconnect").remove();
       store.dispatch(dispatchNotification({
         type: "flash",
         event: {
           id: "connected-apm",
           event_type: "info",
           message: "Connected to APM",
+          displayed: false,
         },
       }));
       bindExchanges();
@@ -66,24 +67,13 @@ function connectToAPM(store) {
 
   // After ES6 compatibility is added in React refactor, global variable will
   // be no more. An async/await refactor will clean this up.
-  var BOUND = 0;
-  function bindExchanges() {
-    amqp.bindExchange("web-application-messages","airflow.#", {ok: function() {BOUND += 1}});
-    amqp.bindExchange("audit","rad_exams.#", {ok: function() {BOUND += 1}});
-    amqp.bindExchange("audit","rad_exam_times.#", {ok: function() {BOUND += 1}});
-    amqp.bindExchange("audit","rad_exam_personnel.#", {ok: function() {BOUND += 1}});
-    amqp.bindExchange("audit","orders.#", {ok: function() {BOUND +=1}});
-    waitOnBind();
-  }
-
-  function waitOnBind() {
-    setTimeout(function() {
-      if (BOUND == 5) {
-        alertConnected();
-      } else {
-        waitOnBind();
-      }
-    }, 1000)
+  async function bindExchanges() {
+    await amqp.bindExchange("web-application-messages","airflow.#", {ok: function() {}});
+    await amqp.bindExchange("audit","rad_exams.#", {ok: function() {}});
+    await amqp.bindExchange("audit","rad_exam_times.#", {ok: function() {}});
+    await amqp.bindExchange("audit","rad_exam_personnel.#", {ok: function() {}});
+    await amqp.bindExchange("audit","orders.#", {ok: function() {}});
+    alertConnected();
   }
 
   function alertConnected(_queue) {
@@ -93,6 +83,7 @@ function connectToAPM(store) {
         id: "connected-queues",
         event_type: "info",
         message: "Receiving real-time data.",
+        displayed: false,
       },
     }));
   }
@@ -105,6 +96,7 @@ function connectToAPM(store) {
           id: "disconnect",
           event_type: "alert",
           message: "You are no longer receiving real time updates. Please reload the page and log in again.",
+          displayed: false,
         },
       }));
     } else {
@@ -119,6 +111,7 @@ function connectToAPM(store) {
         id: "disconnect",
         event_type: "alert",
         message: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
+        displayed: false,
       },
     }));
   }
