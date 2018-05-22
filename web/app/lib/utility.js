@@ -124,6 +124,13 @@ function cardStatuses(order: Order, type: string, default_value: string = "") {
   }, default_value, R.sortBy(R.prop("order"), STATUS_CHECKS));
 }
 
+function orderResourceId(order: Order) {
+  return R.defaultTo(
+    R.path(["rad_exam", "resource_id"], order),
+    R.path(["adjusted", "resource_id"], order),
+  )
+}
+
 function orderResource(resources: Array<Resource>, order: Order) {
   return R.compose(
     R.defaultTo(order.resource),
@@ -181,6 +188,7 @@ export {
   isIE,
   mapSelectedResources,
   orderComments,
+  orderResourceId,
   orderResource,
   ordersByResource,
   patientType,
