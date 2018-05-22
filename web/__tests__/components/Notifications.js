@@ -1,3 +1,4 @@
+/* global React */
 import {shallow} from "enzyme";
 import * as jsc from "jsverify";
 import * as R from "ramda";
