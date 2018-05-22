@@ -1,5 +1,5 @@
 // @flow
-import React, {PureComponent} from "react";
+import React, {Component} from "react";
 import * as R from "ramda";
 
 import Notification from "./Notification";
@@ -9,37 +9,36 @@ import type {
 } from "../../types";
 
 type Props = {
+  markNotificationDisplayed: (id: number | string) => void,
   notifications: Array<NotificationT>,
 };
 
 type State = {
-  displayed: Array<NotificationT>,
   undisplayed: Array<NotificationT>,
 };
 
-class Notifications extends PureComponent<Props, State> {
+class Notifications extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      displayed: [],
       undisplayed: [],
     }
   }
 
-  static getDerivedStateFromProps({notifications: nextNotifications}: Props, {displayed, undisplayed}: State) {
-    const getEventId = R.map(R.path(["event", "id"]));
-    if (nextNotifications.length != (displayed.length + undisplayed.length)) {
-      // Enqueue new notifications
-      const newNotifications = R.reject(
-        ({event: {id}}) => R.contains(id, displayed) || R.contains(id, getEventId(undisplayed)),
-        nextNotifications
-      );
-      return {
-        undisplayed: R.concat(undisplayed, newNotifications),
-      };
-    }
-    return null;
+  shouldComponentUpdate(newProps: Props) {
+    return !R.equals(newProps, this.props);
+  }
+
+  static getDerivedStateFromProps({notifications: nextNotifications}: Props) {
+    // Enqueue new notifications
+    const newNotifications = R.reject(
+      R.path(["event", "displayed"]),
+      nextNotifications
+    );
+    return {
+      undisplayed: newNotifications,
+    };
   }
 
   render() {
@@ -51,15 +50,13 @@ class Notifications extends PureComponent<Props, State> {
   }
 
   renderNotification = ({event_type, event}: NotificationT) => (
-    <Notification key={event.id} event_type={event_type} event={event} markAsDisplayed={this.markAsDisplayed} />
+    <Notification
+      key={event.id}
+      event_type={event_type}
+      event={event}
+      markAsDisplayed={this.props.markNotificationDisplayed}
+    />
   )
-
-  markAsDisplayed = (id: number) => {
-    this.setState({
-      displayed: R.prepend(id, this.state.displayed),
-      undisplayed: R.reject(({event: {id: undisplayedId}}) => id == undisplayedId, this.state.undisplayed),
-    });
-  }
 }
 
 export default Notifications;

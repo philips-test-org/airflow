@@ -16,6 +16,7 @@ const {
   FETCH_EXAMS_SUCCEEDED,
   FETCH_EXAM_SUCCEEDED,
   DISPATCH_NOTIFICATION,
+  MARK_NOTIFICATION_DISPLAYED,
   FETCH_PERSON_EXAMS_SUCCEEDED,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
@@ -73,6 +74,7 @@ function board(state: Object = initialState, action: Object) {
     case UPDATE_VIEW_TYPE: return updateViewType(state, action);
     case UPDATE_WIDTH: return updateWidth(state, action);
     case DISPATCH_NOTIFICATION: return dispatchNotification(state, action);
+    case MARK_NOTIFICATION_DISPLAYED: return markNotificationDisplayed(state, action);
     case REQUEST_FAILED: return state;
     default: return state;
   }
@@ -182,7 +184,30 @@ function computeStartDate(selectedDate = moment().unix()) {
 }
 
 function dispatchNotification(state, action) {
-  return R.merge(state, {notifications: R.prepend(R.omit(["type"], action), state.notifications)});
+  const mergeFn = (notificationList) => {
+    const newNotifications = R.prepend(R.omit(["type"], action), notificationList);
+    const uniqueNotifications = R.uniqBy(R.path(["event", "id"]), newNotifications);
+    return R.merge(state, {notifications: uniqueNotifications});
+  };
+
+  if (R.path(["event", "id"], action) == "connected-apm") {
+    let noDisconnectNotifications = R.reject(
+      (notification) => notification.event.id == "disconnect",
+      state.notifications
+    );
+    return mergeFn(noDisconnectNotifications);
+  }
+  return mergeFn(state.notifications);
+}
+
+function markNotificationDisplayed(state, {id}) {
+  const notificationLens = R.lensPath([
+    "notifications",
+    R.findIndex((event) => R.pathSatisfies(R.equals(id), ["event", "id"], event), state.notifications),
+    "event",
+    "displayed",
+  ]);
+  return R.set(notificationLens, true, state);
 }
 
 export default board;

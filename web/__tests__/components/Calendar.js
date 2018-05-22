@@ -1,6 +1,5 @@
 import Calendar from "../../app/components/Calendar";
 import BaseNotecard from "../../app/components/Notecard/BaseNotecard";
-import * as R from "ramda";
 
 import {flushAllPromises, mountAirflow} from "../helpers";
 
@@ -9,7 +8,6 @@ describe("<Calendar>", () => {
 
   beforeEach(async () => {
     const airflow = mountAirflow("calendar");
-    
     await flushAllPromises();
     airflow.update();
 

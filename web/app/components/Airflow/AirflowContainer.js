@@ -19,6 +19,7 @@ import {
   fetchCurrentEmployee,
   showOrderModal,
   closeOrderModal,
+  markNotificationDisplayed,
   redirectToSSO,
   updateBrowserHistory,
   updateDate,
@@ -89,6 +90,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     closeModal: () => {
       dispatch(closeOrderModal());
+    },
+    markNotificationDisplayed: (id: number | string) => {
+      dispatch(markNotificationDisplayed(id))
     },
     redirectToSSO: (ssoUrl: string, viewType: ViewType) => {
       dispatch(redirectToSSO(ssoUrl, viewType));

@@ -7,8 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "lint": "yarn eslint --color -c web/.eslintrc web",
-    "lint:watch": "yarn esw -w -f simple-detail --clear --color -c web/.eslintrc web",
+    "lint": "yarn eslint --color -c web/.eslintrc web --ignore-path web/.eslintignore",
+    "lint:watch": "yarn esw -w -f simple-detail --clear --color -c web/.eslintrc web --ignore-path web/.eslintignore",
     "flow:watch": "flow-watch",
     "start": "webpack --watch --mode production",
     "build": "webpack --mode production",
