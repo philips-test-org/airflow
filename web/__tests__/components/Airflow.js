@@ -8,7 +8,7 @@ describe("<Airflow>", () => {
     const airflow = mountAirflow("calendar");
 
     expect(airflow.find("img.spinner").exists()).toEqual(true);
-    
+
     await flushAllPromises();
     airflow.update();
 
@@ -21,7 +21,7 @@ describe("<Airflow>", () => {
     const airflow = mountAirflow("overview");
 
     expect(airflow.find("img.spinner").exists()).toEqual(true);
-    
+
     await flushAllPromises();
     airflow.update();
 

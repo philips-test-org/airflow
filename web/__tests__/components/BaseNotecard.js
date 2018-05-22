@@ -11,7 +11,7 @@ describe("<BaseNotecard>", () => {
 
   beforeEach(async () => {
     airflow = mountAirflow("calendar");
-    
+
     await flushAllPromises();
     airflow.update();
 
@@ -19,7 +19,7 @@ describe("<BaseNotecard>", () => {
   });
 
   it("renders a BaseNotecard for grouped orders with a tab for each order", async () => {
-    const groupedCard = 
+    const groupedCard =
       calendar
         .find(BaseNotecard)
         .filterWhere(n => R.prop("patient_mrn_id", n.prop("order")) == 769712)
