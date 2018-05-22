@@ -52,7 +52,7 @@ if ($(target).length > 0) {
     history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
   }
   render (
-    <Provider key={props.key} store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))}>
+    <Provider store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))}>
       <Airflow />
     </Provider>,
     document.querySelector(target)

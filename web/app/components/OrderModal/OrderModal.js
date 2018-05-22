@@ -87,7 +87,7 @@ class OrderModal extends Component<Props, State> {
                 <div className="row">
                   <div className="col-xs-6">
                     <RoundingInterface handleSubmit={this.handleRoundingUpdate} rounding={roundingValue} />
-                    <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
+                    <ul className="order-tabs nav nav-tabs nav-bottom-margin" role="tablist">
                       {this.renderOrderNavTabs()}
                     </ul>
                     <div className="tab-content">
