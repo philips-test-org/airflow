@@ -13,9 +13,9 @@ type Props = {
   filteredOrderIds: Array<number>,
   focusedOrderId: number,
   openModal: (Order) => void,
-  orders: {[string]: Array<Order>},
+  orders: {[number]: Array<Order>},
   scrollToCoordinates: (x: number, y: number) => void,
-  selectedResources: {[string]: string},
+  selectedResources: {[number]: string},
   startDate: number,
   type: ViewType,
   updateOrderTime: (orderId: number, newState: Object) => void,
@@ -28,7 +28,8 @@ class NotecardLanes extends Component<Props> {
     return !R.equals(omitFns(nextProps), omitFns(this.props));
   }
 
-  renderLane(resourceId: string, orders: Array<Order>) {
+  renderLane = (resourceId: number) => {
+    const orders = this.props.orders[resourceId] || [];
     const resourceName = this.props.selectedResources[resourceId];
     return (
       <NotecardLane
@@ -50,10 +51,7 @@ class NotecardLanes extends Component<Props> {
   }
 
   render() {
-    return R.map(
-      ([resourceId, orders]) => this.renderLane(resourceId, orders),
-      R.toPairs(this.props.orders)
-    );
+    return R.map(this.renderLane, R.keys(this.props.selectedResources));
   }
 }
 
