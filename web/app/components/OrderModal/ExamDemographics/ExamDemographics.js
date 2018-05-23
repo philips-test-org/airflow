@@ -1,0 +1,135 @@
+// @flow
+
+import React, {Component} from "react";
+import * as R from "ramda";
+import moment from "moment";
+
+import {
+  appointmentTime,
+  checkExamThenOrder,
+  formatTimestamp,
+  patientType,
+} from "../../../lib/utility";
+
+import {
+  maybeMsToSeconds,
+  orderDuration,
+} from "../../../lib/data";
+
+import type {
+  Order,
+} from "../../../types";
+
+type Props = {
+  order: Order,
+  startDate: number,
+}
+
+class ExamDemographics extends Component<Props> {
+  shouldComponentUpdate(newProps: Props) {
+    return !R.equals(this.props, newProps);
+  }
+
+  render() {
+    const {order} = this.props;
+    return (
+      <table className="table table-bordered table-striped">
+        <tbody>
+          {this.renderDemographicsTableRow("Accession", order.rad_exam.accession)}
+          {this.renderDemographicsTableRow("Order Number", order.order_number)}
+          {this.renderDemographicsTableRow("Patient MRN", order.patient_mrn.mrn)}
+          {this.renderDemographicsTableRow("Patient DOB", order.patient_mrn.patient.birthdate)}
+          {this.renderDemographicsTableRow("Patient Location", this.patientLocation())}
+          {this.renderDemographicsTableRow("Patient Type", patientType(order))}
+          {this.renderDemographicsTableRow("Patient Class", this.siteClassName())}
+          {this.renderDemographicsTableRow("Resource", this.resourceName())}
+          {this.renderDemographicsTableRow("Procedure", checkExamThenOrder(order, ["procedure", "description"]))}
+          {this.renderDemographicsTableRow("Default Procedure Duration", this.defaultProcedureDuration())}
+          {this.renderDemographicsTableRow("Sign In", formatTimestamp(order.rad_exam.rad_exam_time.sign_in))}
+          {this.renderDemographicsTableRow("Check In", formatTimestamp(order.rad_exam.rad_exam_time.check_in))}
+          {this.renderDemographicsTableRow("Appointment", formatTimestamp(appointmentTime(order)))}
+          {this.renderDemographicsTableRow("Appointment Duration", this.formatDuration(order.appointment_duration))}
+          {this.renderDemographicsTableRow("Current Duration", this.formatDuration(maybeMsToSeconds(orderDuration(this.props.startDate, order))))}
+          {this.renderDemographicsTableRow("Begin Exam", formatTimestamp(order.rad_exam.rad_exam_time.begin_exam))}
+          {this.renderDemographicsTableRow("End Exam", formatTimestamp(order.rad_exam.rad_exam_time.end_exam))}
+          {this.renderDemographicsTableRow("Ordering Physician", order.rad_exam.rad_exam_personnel.ordering.name)}
+        </tbody>
+      </table>
+    )
+  }
+
+  renderDemographicsTableRow(key: string, value: any) {
+    return (
+      <tr>
+        <th>{key}</th>
+        <td>{value}</td>
+      </tr>
+    )
+  }
+
+  patientLocation() {
+    const {order} = this.props;
+    const basePath = ["rad_exam", "site_sublocation", "site_location"]
+    if (R.path(basePath, order)) {
+      const name = R.pathOr(
+        R.path(R.append("location", basePath), order),
+        R.append("name", basePath),
+        order
+      );
+      const room = order.rad_exam.site_sublocation.room;
+      const bed = order.rad_exam.site_sublocation.bed;
+      return `${name}, Room: ${room}, Bed: ${bed}`;
+    }
+    return null;
+  }
+
+  siteClassName() {
+    const siteClass = checkExamThenOrder(this.props.order, ["site_class"]);
+    if (siteClass == undefined) {
+      return "";
+    } else if (siteClass.name != "" && siteClass.name != undefined) {
+      return siteClass.name;
+    } else {
+      return siteClass.site_class;
+    }
+  }
+
+  resourceName() {
+    const {order} = this.props;
+    return checkExamThenOrder(order, ["resource", "name"]) ||
+           checkExamThenOrder(order, ["resource", "resource"]);
+  }
+
+  defaultProcedureDuration() {
+    const {order} = this.props;
+    var duration = 60 * checkExamThenOrder(order, ["procedure", "scheduled_duration"]);
+    return this.formatDuration(duration);
+  }
+
+  formatDuration(duration: ?number) {
+    if ((duration || duration === 0) && !isNaN(duration)) {
+      const sign = duration <= 0 ? "-" : "";
+      const spanClass = duration <= 0 ? "alert-red" : "";
+      const parsedDuration = moment.duration(Math.abs(duration), "seconds");
+      const days = parsedDuration.get("days");
+      const hours = parsedDuration.get("hours");
+      const minutes = parsedDuration.get("minutes");
+
+      var outputString;
+      if (days > 0) {
+        outputString = `${days}d, ${hours}h`;
+      } else {
+        outputString = `${hours}h, ${minutes}m`;
+      }
+
+      return <span className={spanClass}>{`${sign}${outputString}`}</span>;
+    } else if (duration) {
+      return duration;
+    } else {
+      return "---";
+    }
+  }
+
+}
+
+export default ExamDemographics;
