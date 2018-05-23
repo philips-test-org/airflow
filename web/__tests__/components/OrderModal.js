@@ -22,28 +22,29 @@ const defaultProps = {
 
 
 describe("<OrderModal>", () => {
-  it("renders the correct number of order nav elements for grouped orders", () => {
-    const wrapper = shallow(
-      <OrderModal {...defaultProps} />
-    );
-    expect(wrapper.find(".order-nav").length).toEqual(2);
-  });
-
   it("renders the correct number of exam image links for patients with multiple visits", () => {
     const wrapper = shallow(
       <OrderModal {...defaultProps} />
     );
     expect(wrapper.find(ExamImageLink).length).toEqual(3);
   });
+});
+
+describe("<ExamDemographics>", () => {
+  it("renders the correct number of order nav elements for grouped orders", () => {
+    const wrapper = shallow(
+      <ExamDemographics {...defaultProps} />
+    );
+    expect(wrapper.find(".order-nav").length).toEqual(2);
+  });
+
 
   it("switches demographics when an order nav link is clicked", () => {
     const wrapper = shallow(
-      <OrderModal {...defaultProps} />
+      <ExamDemographics {...defaultProps} />
     );
-    let demographics = wrapper.find(ExamDemographics).first();
-    expect(demographics.props().order.id).toEqual(781787);
+    expect(wrapper.state().selectedOrder).toEqual(781787);
     wrapper.find("#nav-781786").simulate("click");
-    demographics = wrapper.find(ExamDemographics).first();
-    expect(demographics.props().order.id).toEqual(781786);
+    expect(wrapper.state().selectedOrder).toEqual(781786);
   });
 });

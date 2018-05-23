@@ -42,17 +42,13 @@ type Props = {
 }
 
 type State = {
-  selectedOrder: number,
   showMoreImages: boolean,
 }
 
 class OrderModal extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      selectedOrder: props.order.id,
-      showMoreImages: false,
-    };
+    this.state = {showMoreImages: false};
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -85,12 +81,11 @@ class OrderModal extends Component<Props, State> {
                 <div className="row">
                   <div className="col-xs-6">
                     <RoundingInterface handleSubmit={this.handleRoundingUpdate} rounding={roundingValue} />
-                    <ul className="order-tabs nav nav-tabs nav-bottom-margin" role="tablist">
-                      {this.renderOrderNavTabs()}
-                    </ul>
-                    <div className="tab-content">
-                      {this.renderOrderTabPanel()}
-                    </div>
+                    <ExamDemographics
+                      order={this.props.order}
+                      orderGroup={this.props.orderGroup}
+                      startDate={this.props.startDate}
+                    />
                   </div>
                   <CommentInterface
                     avatar={userAvatar}
@@ -129,36 +124,6 @@ class OrderModal extends Component<Props, State> {
         handleChange={this.handleStatusChange}
         {...toggle} />
     ), toggles);
-  }
-
-  renderOrderNavTabs() {
-    const {selectedOrder} = this.state;
-    return (
-      R.map((order) => {
-        const className = `order-nav ${R.equals(order.id, selectedOrder) ? "active" : ""}`;
-        return (
-          <li key={`${order.id}-nav-panel`} role="presentation" className={className}>
-            <a href={`#order-content-${order.id}`}
-              id={`nav-${order.id}`}
-              aria-controls="home"
-              role="tab"
-              onClick={() => {this.handleOrderNavClick(order.id)}}
-            >{order.order_number}</a>
-          </li>
-        );
-      }, this.props.orderGroup)
-    );
-  }
-
-  handleOrderNavClick(id: number) {
-    this.setState({selectedOrder: id});
-  }
-
-  renderOrderTabPanel() {
-    const order = R.find(R.propEq("id", this.state.selectedOrder), this.props.orderGroup);
-    return (
-      <ExamDemographics order={order} startDate={this.props.startDate} />
-    )
   }
 
   renderImages() {
