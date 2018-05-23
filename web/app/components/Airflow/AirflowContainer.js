@@ -48,6 +48,7 @@ const mapStateToProps = ({board, user}: Object) => {
     notifications: board.notifications,
     orderGroups: board.orderGroups,
     orders: ordersByResource(board.orders),
+    ordersMergedByGroup: ordersByResource(board.ordersMergedByGroup),
     ordersLoaded: !R.isEmpty(board.orders),
     resources: board.resources,
     selectedResourceGroup: board.selectedResourceGroup,

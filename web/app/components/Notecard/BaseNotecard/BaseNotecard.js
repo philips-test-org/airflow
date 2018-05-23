@@ -55,7 +55,10 @@ class BaseNotecard extends PureComponent<Props> {
         <div className="left-tab" style={{backgroundColor: cardColor}} />
 
         <div className="right-tab">
-          <div className="events">{hasComments ? <i className="fa fa-paperclip"></i> : null}</div>
+          <div className="events">
+            {hasComments ? <i className="fa fa-paperclip"></i> : null}
+            {R.prop("merged", order) ? <i className="fa fa-compress"></i> : null}
+          </div>
 
           {this.renderHeader()}
 

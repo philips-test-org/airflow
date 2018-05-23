@@ -226,7 +226,7 @@ class OrderModal extends Component<Props, State> {
         viewImage={this.viewImage}
       />
     ));
-    const divider = <li role="separator" className="divider"></li>;
+    const divider = <li key="separator" role="separator" className="divider"></li>;
     return R.intersperse(divider, exams);
   }
 

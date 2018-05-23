@@ -39,6 +39,7 @@ const {
 const initialState = {
   orders: [],
   orderGroups: {},
+  ordersMergedByGroup: [],
   resources: {},
   notifications: [],
   selectedResourceGroup: "All",
@@ -146,9 +147,12 @@ function updateOrders(state, {payload}) {
   const payloadWithIdent = R.map((order) => (
     R.assoc("groupIdentity", groupIdentity(state.selectedResources, state.startDate, order), order)
   ), payload);
+  const orderGroups = R.groupBy(R.prop("groupIdentity"), payloadWithIdent);
+  const ordersMergedByGroup = mergeGroupedOrders(orderGroups);
   return R.merge(state, {
     orders: payloadWithIdent,
-    orderGroups: R.groupBy(R.prop("groupIdentity"), payloadWithIdent),
+    orderGroups,
+    ordersMergedByGroup,
   });
 }
 
@@ -226,6 +230,26 @@ function markNotificationDisplayed(state, {id}) {
     "displayed",
   ]);
   return R.set(notificationLens, true, state);
+}
+
+function mergeGroupedOrders(groupIdentities) {
+  const innerMerge = R.compose(
+    R.assoc("merged", true),
+    R.reduce((acc, order) => (
+      R.isEmpty(acc) ? order :
+        R.mergeDeepWithKey(
+          (key, a, o) =>
+            key != "adjusted" ? a : R.mergeWithKey((k, l, r) => l[k] || r[k], a, o)
+        ), acc, order), {})
+  );
+  const vals_or_merge = (vals) => (
+    vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals)]
+  );
+  return R.compose(
+    R.flatten,
+    R.map(vals_or_merge),
+    R.values
+  )(groupIdentities);
 }
 
 export default board;

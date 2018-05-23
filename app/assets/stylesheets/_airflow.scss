@@ -347,6 +347,9 @@ Shared Styles
     position: absolute;
     right: 5px;
     top: 2px;
+    > * {
+      padding: 0px 10px;
+    }
   }
 
   .heading {

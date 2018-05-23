@@ -240,6 +240,7 @@ class NotecardLane extends Component<Props, State> {
       }
       return {
         id: card.props.order.id,
+        groupingId: card.props.order.groupIdentity,
         top,
         bottom: top + height,
       };
