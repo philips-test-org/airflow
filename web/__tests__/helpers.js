@@ -30,5 +30,8 @@ export function mountAirflow(type) {
   };
   const store = storeFunc(props);
 
-  return mount(<Airflow store={store} />);
+  return {
+    airflow: mount(<Airflow store={store} />),
+    store,
+  };
 }

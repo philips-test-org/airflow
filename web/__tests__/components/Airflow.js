@@ -5,7 +5,7 @@ import {flushAllPromises, mountAirflow} from "../helpers";
 
 describe("<Airflow>", () => {
   it("renders a Calendar", async () => {
-    const airflow = mountAirflow("calendar");
+    const {airflow} = mountAirflow("calendar");
 
     expect(airflow.find("img.spinner").exists()).toEqual(true);
 
@@ -18,7 +18,7 @@ describe("<Airflow>", () => {
   });
 
   it("renders the Overview", async () => {
-    const airflow = mountAirflow("overview");
+    const {airflow} = mountAirflow("overview");
 
     expect(airflow.find("img.spinner").exists()).toEqual(true);
 

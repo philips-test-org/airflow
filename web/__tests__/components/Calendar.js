@@ -7,7 +7,7 @@ describe("<Calendar>", () => {
   let calendar;
 
   beforeEach(async () => {
-    const airflow = mountAirflow("calendar");
+    const {airflow} = mountAirflow("calendar");
     await flushAllPromises();
     airflow.update();
 
