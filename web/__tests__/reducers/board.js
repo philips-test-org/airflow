@@ -40,7 +40,7 @@ describe("board reducer", () => {
     expect(board(initState, dispatchNotification(notification))).toHaveProperty("notifications", [res]);
   });
 
-  it ("removes disconnection notifications after reconnecting", () => {
+  it("removes disconnection notifications after reconnecting", () => {
     const disconnect = {
       type: "alert",
       event: {

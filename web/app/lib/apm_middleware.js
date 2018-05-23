@@ -26,36 +26,7 @@ function connectToAPM(store) {
   amqp.setup({host: apmHost, port: apmPort});
 
   var joinCallbacks = {
-    newMsg: function(msg) {
-      const routing_key = msg.routing_key;
-      const exchange = msg.exchange;
-      const payload = msg.payload;
-
-      const tokens = routing_key.split(".");
-      const table = tokens[0];
-      const employee_id = tokens[2];
-
-      const state = store.getState();
-      const currentUser = R.path(["user", "currentUser", "id"], state);
-
-      const orderIsInSelectedResources = (order, {board: {selectedResources}}) => (
-        R.contains(orderResourceId(order), R.pluck("id", selectedResources))
-      );
-
-      if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
-        if (employee_id != currentUser && orderIsInSelectedResources(payload, state)) {
-          const events = payload.events;
-          const event = events.sort(function (x, y) {
-            return new Date(y.updated_at) - new Date(x.updated_at);
-          }).shift();
-
-          store.dispatch(dispatchNotification({type: "flash", event: event}));
-          store.dispatch(replaceOrder(payload.id, payload));
-        }
-      } else if (exchange === "audit") {
-        store.dispatch(fetchExam(payload.affected_row_id, table));
-      }
-    },
+    newMsg: (msg) => processMessage(msg, store, amqp),
     joinOk: function() {
       store.dispatch(dispatchNotification({
         type: "flash",
@@ -124,6 +95,37 @@ function connectToAPM(store) {
   }
 
   amqp.connectToChannel(joinCallbacks);
+}
+
+export function processMessage(msg: Object, store: Object, amqp: Object = new amqpListener()) {
+  const routing_key = msg.routing_key;
+  const exchange = msg.exchange;
+  const payload = msg.payload;
+
+  const tokens = routing_key.split(".");
+  const table = tokens[0];
+  const employee_id = tokens[2];
+
+  const state = store.getState();
+  const currentUser = R.path(["user", "currentUser", "id"], state);
+
+  const orderIsInSelectedResources = (order, {board: {selectedResources}}) => (
+    R.contains(parseInt(orderResourceId(order)), R.pluck("id", selectedResources))
+  );
+
+  if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
+    if (employee_id != currentUser && orderIsInSelectedResources(payload, state)) {
+      const events = payload.events;
+      const event = events.sort(function (x, y) {
+        return new Date(y.updated_at) - new Date(x.updated_at);
+      }).shift();
+
+      store.dispatch(dispatchNotification({type: "flash", event: event}));
+      store.dispatch(replaceOrder(payload.id, payload));
+    }
+  } else if (exchange === "audit") {
+    store.dispatch(fetchExam(payload.affected_row_id, table));
+  }
 }
 
 export default apmConnector;

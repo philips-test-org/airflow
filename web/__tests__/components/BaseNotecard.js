@@ -10,7 +10,7 @@ describe("<BaseNotecard>", () => {
   let calendar;
 
   beforeEach(async () => {
-    airflow = mountAirflow("calendar");
+    airflow = mountAirflow("calendar").airflow;
 
     await flushAllPromises();
     airflow.update();
