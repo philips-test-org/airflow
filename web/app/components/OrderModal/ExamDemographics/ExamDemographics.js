@@ -38,12 +38,12 @@ class ExamDemographics extends Component<Props, State> {
     };
   }
 
-  shouldComponentUpdate(newProps: Props) {
-    return !R.equals(this.props, newProps);
+  shouldComponentUpdate(newProps: Props, newState: State) {
+    return !R.equals(this.props, newProps) || !R.equals(this.state, newState);
   }
 
   render() {
-    const {order} = this.props;
+    const order = R.find(R.propEq("id", this.state.selectedOrder), this.props.orderGroup);
     return (
       <div id="exam-demographics">
         {this.renderOrderNavTabs()}
@@ -78,12 +78,16 @@ class ExamDemographics extends Component<Props, State> {
     const tabs = R.map((order) => {
       const className = `order-nav ${R.equals(order.id, selectedOrder) ? "active" : ""}`;
       return (
-        <li key={`${order.id}-nav-panel`} role="presentation" className={className}>
+        <li
+          key={`${order.id}-nav-panel`}
+          role="presentation"
+          className={className}
+          id={`nav-${order.id}`}
+          onClick={() => {this.handleOrderNavClick(order.id)}}
+        >
           <a href="#"
-            id={`nav-${order.id}`}
             aria-controls="home"
             role="tab"
-            onClick={() => {this.handleOrderNavClick(order.id)}}
           >{order.order_number}</a>
         </li>
       );
