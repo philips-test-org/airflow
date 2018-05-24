@@ -125,7 +125,13 @@ function mergeGroupedOrders(groupIdentities) {
       if (R.isEmpty(acc)) return order
       return R.mergeDeepWithKey(
         (key, a, o) => {
-          return key != "adjusted" ? a : R.mergeWithKey((k, l, r) => l[k] || r[k], a, o)
+          if (key == "adjusted") {
+            return R.mergeWithKey((k, l, r) => l[k] || r[k], a, o)
+          }
+          if (key == "events") {
+            return R.concat(a, o)
+          }
+          return a
         }, acc, order)
     }, {})
   );
