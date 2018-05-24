@@ -282,6 +282,7 @@ Overview
   .cards {
     border-left: unquote($border-unit) solid $grid-color;
     padding: 5px 5px 0 5px;
+    min-height: 150px;
   }
 }
 

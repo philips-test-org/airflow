@@ -26,10 +26,7 @@ class Overview extends PureComponent<Props> {
   }
 
   render() {
-    const resourceRows = R.map(
-      ([resourceId, orders]) => this.renderRow(resourceId, orders),
-      R.toPairs(this.props.orders)
-    );
+    const resourceRows = R.map(this.renderRow, R.keys(this.props.selectedResources));
     return (
       <div>
         {resourceRows}
@@ -37,7 +34,8 @@ class Overview extends PureComponent<Props> {
     );
   }
 
-  renderRow = (resourceId: string, orders: Array<Order>) => {
+  renderRow = (resourceId: string) => {
+    const orders = this.props.orders[resourceId] || [];
     const resourceName = this.props.selectedResources[resourceId];
     return (
       <NotecardRow

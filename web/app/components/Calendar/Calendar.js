@@ -29,14 +29,14 @@ type Props = {
   focusedOrderId: number,
   headerOffset: number,
   openModal: (Order) => void,
-  orders: {[string]: Array<Order>},
-  ordersMergedByGroup: {[string]: Array<Order>},
+  orders: {[number]: Array<Order>},
+  ordersMergedByGroup: {[number]: Array<Order>},
   ordersLoaded: boolean,
   orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
   scrollToCoordinates: (x: number, y: number) => void,
   selectedResourceGroup: string,
-  selectedResources: {[string]: string},
+  selectedResources: {[number]: string},
   showModal: boolean,
   startDate: number,
   style: {th: Object, td: Object},
@@ -79,7 +79,7 @@ class Calendar extends Component<Props> {
               <th className="fixed-column fixed-row" style={style.th}>
                 <div className="header-spacer">&nbsp;</div>
               </th>
-              {R.map(this.renderHeading, R.keys(this.props.orders))}
+              {R.map(this.renderHeading, R.values(this.props.selectedResources))}
             </tr>
           </thead>
           <tbody>
@@ -113,14 +113,14 @@ class Calendar extends Component<Props> {
     )
   }
 
-  renderHeading = (resourceId: string) => {
+  renderHeading = (resourceId: number) => {
     const resourceName = this.props.selectedResources[resourceId];
     const style = {
       transform: `translateY(${this.props.headerOffset}px)`,
       msTransform: `translateY(${this.props.headerOffset}px)`,
     };
     return (
-      <th key={`${resourceName}-heading`} className="relative-column fixed-row" style={style}>
+      <th key={`${resourceId}-heading`} className="relative-column fixed-row" style={style}>
         <div className="header-spacer">{resourceName}</div>
       </th>
     )

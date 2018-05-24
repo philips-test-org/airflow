@@ -1,7 +1,7 @@
 // @flow
 declare var $: any;
 
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
 import * as R from "ramda";
 
 import {
@@ -162,8 +162,14 @@ class OrderModal extends Component<Props, State> {
         viewImage={this.viewImage}
       />
     ));
-    const divider = <li key="separator" role="separator" className="divider"></li>;
-    return R.intersperse(divider, exams);
+
+    const separator = <li role="separator" className="divider"></li>;
+    return exams.map((exam, i) => (
+      <Fragment key={i}>
+        {!!i && separator}
+        {exam}
+      </Fragment>
+    ));
   }
 
   viewImage = (imageViewer: ImageViewer, integrationJson: IntegrationJson) => {
