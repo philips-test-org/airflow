@@ -20,4 +20,4 @@ target/
 sdk/*.jar
 /node_modules
 yarn-error.log
-app/assets/javascripts/app.bundle.js
+.DS_Store

@@ -178,6 +178,19 @@ function printOrders() {
   }
 }
 
+const throttle = (func: Function, limit: number) => {
+  let inThrottle
+  return function() {
+    const args = arguments
+    const context = this
+    if (!inThrottle) {
+      func.apply(context, args)
+      inThrottle = true
+      setTimeout(() => inThrottle = false, limit)
+    }
+  }
+}
+
 export {
   appointmentTime,
   cardStatuses,
@@ -193,4 +206,5 @@ export {
   ordersByResource,
   patientType,
   printOrders,
+  throttle,
 }

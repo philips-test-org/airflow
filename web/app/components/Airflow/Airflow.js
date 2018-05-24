@@ -2,7 +2,6 @@
 /* global module */
 import React, {Component} from "react";
 import * as R from "ramda";
-import {throttle} from "lodash";
 import moment from "moment";
 import key from "keymaster";
 import {hot} from "react-hot-loader";
@@ -15,7 +14,7 @@ import ErrorBoundary from "../ErrorBoundary";
 import Notifications from "../Notifications";
 import PrintView from "../PrintView";
 
-import {isIE} from "../../lib/utility";
+import {isIE, throttle} from "../../lib/utility";
 
 import {
   NAVBAR_OFFSET,
