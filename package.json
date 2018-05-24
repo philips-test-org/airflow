@@ -10,10 +10,10 @@
     "lint": "yarn eslint --color -c web/.eslintrc web --ignore-path web/.eslintignore",
     "lint:watch": "yarn esw -w -f simple-detail --clear --color -c web/.eslintrc web --ignore-path web/.eslintignore",
     "flow:watch": "flow-watch",
-    "start": "webpack --watch --mode production",
-    "build": "webpack --mode production",
+    "start": "webpack --watch --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "watch": "webpack --watch -d --hide-modules --progress --env.DEBUG=true",
-    "watch:hot": "webpack-dev-server --progress --inline --hot --mode development --port 3000",
+    "watch:hot": "webpack-dev-server --progress --inline --hot --config webpack.dev.js --port 3000",
     "test": "jest",
     "test:watch": "npm run test -- --watch"
   },
@@ -79,6 +79,7 @@
     "style-loader": "^0.20.3",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.2"
   }
 }
