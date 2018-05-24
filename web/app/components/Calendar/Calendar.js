@@ -30,6 +30,7 @@ type Props = {
   headerOffset: number,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
+  ordersMergedByGroup: {[string]: Array<Order>},
   ordersLoaded: boolean,
   orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
@@ -93,7 +94,7 @@ class Calendar extends Component<Props> {
               </td>
               <NotecardLanes
                 openModal={this.props.openModal}
-                orders={this.props.orders}
+                orders={this.props.ordersMergedByGroup}
                 filteredOrderIds={this.props.filteredOrderIds}
                 focusedOrderId={this.props.focusedOrderId}
                 scrollToCoordinates={this.scrollToCoordinates}

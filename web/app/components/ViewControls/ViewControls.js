@@ -34,6 +34,8 @@ type State = {
 }
 
 class ViewControls extends PureComponent<Props, State> {
+  searchInput: Object;
+
   constructor(props: Props) {
     super(props);
 

@@ -38,7 +38,6 @@ const {
 
 const initialState = {
   orders: [],
-  orderGroups: {},
   resources: {},
   notifications: [],
   selectedResourceGroup: "All",
@@ -108,11 +107,7 @@ function upsertOrders(state, {payload}) {
 
   const updatedOrders = R.reduce((acc, order) => {
     if (!orderIsInSelectedResources(order, state)) return acc;
-    const orderWithGroup = R.assoc(
-      "groupIdentity",
-      groupIdentity(state.selectedResources, state.startDate, order),
-      order,
-    );
+    const orderWithGroup = associateGroupIdentity(state.selectedResources, state.startDate, order);
     const orderLens = R.lensPath([R.findIndex(R.propEq("id", order.id), acc)]);
     if (!R.isNil(R.view(orderLens, acc))) {
       return R.set(orderLens, orderWithGroup, acc);
@@ -123,32 +118,26 @@ function upsertOrders(state, {payload}) {
 
   return R.merge(state, {
     orders: updatedOrders,
-    orderGroups: R.groupBy(R.prop("groupIdentity"), updatedOrders),
   });
 }
 
 function replaceOrder(state, {orderId, payload}) {
   const orderLens = R.lensIndex(R.findIndex(R.propEq("id", orderId), state.orders));
-  const orderWithGroup = R.assoc(
-    "groupIdentity",
-    groupIdentity(state.selectedResources, state.startDate, payload),
-    payload,
-  );
+  const orderWithGroup = associateGroupIdentity(state.selectedResources, state.startDate, payload);
 
   const orders = R.set(orderLens, orderWithGroup, state.orders);
   return R.merge(state, {
     orders,
-    orderGroups: R.groupBy(R.prop("groupIdentity"), orders),
   });
 }
 
 function updateOrders(state, {payload}) {
-  const payloadWithIdent = R.map((order) => (
-    R.assoc("groupIdentity", groupIdentity(state.selectedResources, state.startDate, order), order)
-  ), payload);
+  const payloadWithIdent = R.map(
+    (order) => associateGroupIdentity(state.selectedResources, state.startDate, order),
+    payload
+  );
   return R.merge(state, {
     orders: payloadWithIdent,
-    orderGroups: R.groupBy(R.prop("groupIdentity"), payloadWithIdent),
   });
 }
 
@@ -227,5 +216,12 @@ function markNotificationDisplayed(state, {id}) {
   ]);
   return R.set(notificationLens, true, state);
 }
+
+const associateGroupIdentity = (selectedResources, startDate, payload) => R.assoc(
+  "groupIdentity",
+  groupIdentity(selectedResources, startDate, payload),
+  payload,
+);
+
 
 export default board;

@@ -38,7 +38,7 @@ class NotecardLanes extends Component<Props> {
         header={resourceName}
         openModal={this.props.openModal}
         orders={orders}
-        resourceId={resourceId}
+        resourceId={parseInt(resourceId)}
         scrollToCoordinates={this.props.scrollToCoordinates}
         showGhostEndTime
         startDate={this.props.startDate}
