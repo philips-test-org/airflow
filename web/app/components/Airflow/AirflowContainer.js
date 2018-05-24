@@ -38,18 +38,19 @@ import type {
 
 const mapStateToProps = ({board, user}: Object) => {
   const orderGroups = R.groupBy(R.prop("groupIdentity"), board.orders);
+  const mergedByGroup = mergeGroupedOrders(orderGroups);
   return {
     avatarMap: user.avatars,
     boardWidth: board.width,
     currentUser: user.currentUser,
     examsByPerson: board.examsByPerson,
-    focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
+    focusedOrder: R.find(R.propEq("id", board.focusedOrder), mergedByGroup),
     images: board.images,
     loading: board.loading,
     notifications: board.notifications,
     orderGroups,
     orders: ordersByResource(board.orders),
-    ordersMergedByGroup: ordersByResource(mergeGroupedOrders(orderGroups)),
+    ordersMergedByGroup: ordersByResource(mergedByGroup),
     ordersLoaded: !R.isEmpty(board.orders),
     resources: board.resources,
     selectedResourceGroup: board.selectedResourceGroup,
@@ -120,16 +121,17 @@ const mapDispatchToProps = (dispatch) => {
 function mergeGroupedOrders(groupIdentities) {
   const innerMerge = R.compose(
     R.assoc("merged", true),
-    R.reduce((acc, order) => (
-      R.isEmpty(acc) ? order :
-        R.mergeDeepWithKey(
-          (key, a, o) =>
-            key != "adjusted" ? a : R.mergeWithKey((k, l, r) => l[k] || r[k], a, o)
-        ), acc, order), {})
+    R.reduce((acc, order) => {
+      if (R.isEmpty(acc)) return order
+      return R.mergeDeepWithKey(
+        (key, a, o) => {
+          return key != "adjusted" ? a : R.mergeWithKey((k, l, r) => l[k] || r[k], a, o)
+        }, acc, order)
+    }, {})
   );
-  const vals_or_merge = (vals) => (
-    vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals)]
-  );
+  const vals_or_merge = (vals) => {
+    return vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals)]
+  };
   return R.compose(
     R.flatten,
     R.map(vals_or_merge),
