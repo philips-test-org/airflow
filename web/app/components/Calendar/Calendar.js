@@ -29,8 +29,8 @@ type Props = {
   focusedOrderId: number,
   headerOffset: number,
   openModal: (Order) => void,
-  orders: {[string]: Array<Order>},
-  ordersMergedByGroup: {[string]: Array<Order>},
+  orders: {[number]: Array<Order>},
+  ordersMergedByGroup: {[number]: Array<Order>},
   ordersLoaded: boolean,
   orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
@@ -79,7 +79,7 @@ class Calendar extends Component<Props> {
               <th className="fixed-column fixed-row" style={style.th}>
                 <div className="header-spacer">&nbsp;</div>
               </th>
-              {R.map(this.renderHeading, R.keys(this.props.selectedResources))}
+              {R.map(this.renderHeading, R.values(this.props.selectedResources))}
             </tr>
           </thead>
           <tbody>
