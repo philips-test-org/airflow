@@ -18,10 +18,10 @@ export const GET = (url: string, params: Object = {}) => {
   }).then((response) => {
     if (response.ok) {
       if (R.contains("application/json", response.headers.get("content-type"))) {
-        return response.json();
+        return checkAuthenticated(response.json());
       } else {
         try {
-          return response.blob();
+          return checkAuthenticated(response.blob());
         } catch(error) {
           console.log(error)
         }
@@ -44,10 +44,10 @@ export const POST = (url: string, params: Object = {}) => {
   }).then((response) => {
     if (response.ok) {
       if (R.contains("application/json", response.headers.get("content-type"))) {
-        return response.json();
+        return checkAuthenticated(response.json());
       } else {
         try {
-          return response.blob();
+          return checkAuthenticated(response.blob());
         } catch(error) {
           console.log(error)
         }
@@ -80,4 +80,13 @@ const getCSRFToken = () => {
   // Suppressing the error for now.
   // $FlowFixMe
   return selector.content;
+}
+
+const checkAuthenticated = (promise) => {
+  promise.then(json => {
+    if (R.propEq("authenticated", false, json)) {
+      location.reload();
+    }
+  });
+  return promise;
 }
