@@ -21,9 +21,7 @@ type Props = {
 
 class Overview extends PureComponent<Props> {
   componentDidMount() {
-    if (this.props.filteredOrderIds.length == 0) {
-      this.props.scrollToTop();
-    }
+    this.props.scrollToTop();
   }
 
   render() {
