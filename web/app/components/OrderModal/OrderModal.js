@@ -92,7 +92,6 @@ class OrderModal extends Component<Props, State> {
                     events={order.events}
                     fetchAvatar={this.props.fetchAvatar}
                     handleNewComment={this.handleNewComment}
-                    orderId={order.id}
                     resourceMap={this.props.resourceMap}
                     user={this.props.currentUser}
                   />

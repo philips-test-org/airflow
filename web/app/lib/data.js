@@ -20,6 +20,18 @@ export function groupIdentity(resources: Array<Resource>, startDate: number, ord
   return order.patient_mrn_id + orderResource(resources, order).id + unadjustedOrderStartTime(startDate, order);
 }
 
+export function getOrderStartTime(order: Order) {
+  const hasMergedStartTime = R.has("startTime", order);
+  const hasStartTime = R.path(["adjusted", "start_time"], order);
+  const startTime =
+        hasMergedStartTime ? order.startTime :
+          hasStartTime ? order.adjusted.start_time :
+            order.rad_exam ? examStartTime(order.rad_exam) :
+              order.appointment;
+  if (!startTime) return 0;
+  return startTime;
+}
+
 // Find the start time for an exam
 export function examStartTime(exam: RadExam) {
   if (exam.rad_exam_time == undefined) { return null; }
@@ -31,15 +43,16 @@ export function examStartTime(exam: RadExam) {
 }
 
 export function unadjustedOrderStartTime(startDate: number, order: Order): ?number {
+  if (R.has("startTime", order)) return order.startTime;
   const startTime =
-    order.rad_exam ?
-      examStartTime(order.rad_exam) :
-      order.appointment;
+      order.rad_exam ? examStartTime(order.rad_exam) :
+        order.appointment;
   if (!startTime) {return null}
   return startTime;
 }
 
 export function unadjustedOrderStopTime(startDate: number, order: Order): number {
+  if (R.prop("stopTime", order)) return order.stopTime;
   if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
     return order.rad_exam.rad_exam_time.end_exam;
   } else if (typeof(order.appointment_duration) === "number") {

@@ -1,11 +1,16 @@
 // @flow
-import React, {PureComponent} from "react";
+import React, {Fragment, PureComponent} from "react";
 import * as R from "ramda";
 
 import {
   cardStatuses,
   checkExamThenOrder,
   formatName,
+  getPatientMrn,
+  getPatientName,
+  getPatientType,
+  getProcedure,
+  orderingPhysician,
 } from "../../../lib/utility";
 
 import type {
@@ -40,10 +45,6 @@ class BaseNotecard extends PureComponent<Props> {
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
     const cardClass = `notecard ${this.cardClass()}`
     const cardColor = this.cardColor();
-    const orderingPhysician = R.defaultTo(
-      "unknown",
-      R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], this.props.order),
-    );
     return (
       <div
         className={cardClass}
@@ -63,9 +64,7 @@ class BaseNotecard extends PureComponent<Props> {
           {this.renderHeader()}
 
           <div className="body">
-            <div className="procedure">{checkExamThenOrder(this.props.order, ["procedure", "description"])}</div>
-            <div className="patient-location">{this.examLocation()}</div>
-            <div className="ordering-physician">Ordered by: {orderingPhysician}</div>
+            {this.renderAllProcedures()}
           </div>
 
           {this.renderFooter()}
@@ -76,17 +75,39 @@ class BaseNotecard extends PureComponent<Props> {
   }
 
   renderHeader() {
-    const patientPath = ["site_class", "patient_type", "patient_type"];
-    const patientName = R.path(["patient_mrn", "patient", "name"], this.props.order);
+    const patientType = getPatientType(this.props.order);
+    const patientName = getPatientName(this.props.order);
+    const patientMrn = getPatientMrn(this.props.order);
     if (!patientName) {return null}
     const formattedName = formatName(patientName);
     return (
       <div className="heading">
         <div className="patient-name">{formattedName}</div>
-        <div className="patient-type">{checkExamThenOrder(this.props.order, patientPath)}</div>
-        <div className="mrn">{this.props.order.patient_mrn.mrn}</div>
+        <div className="patient-type">{patientType}</div>
+        <div className="mrn">{patientMrn}</div>
       </div>
     );
+  }
+
+  renderAllProcedures() {
+    const {order} = this.props;
+    if (R.has("procedures", order)) {
+      return R.map((o) => this.renderProcedure(o.procedure, o.orderedBy), order.procedures)
+    }
+    const procedure = getProcedure(order);
+    const orderedBy = orderingPhysician(order);
+    return this.renderProcedure(procedure, orderedBy);
+
+  }
+
+  renderProcedure(procedure, orderedBy) {
+    return (
+      <Fragment key={`procedure-${procedure}-${orderedBy}`}>
+        <div className="procedure">{procedure}</div>
+        <div className="patient-location">{this.examLocation()}</div>
+        <div className="ordering-physician">Ordered by: {orderedBy}</div>
+      </Fragment>
+    )
   }
 
   renderFooter() {

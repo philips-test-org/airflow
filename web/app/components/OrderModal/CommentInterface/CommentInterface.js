@@ -18,7 +18,6 @@ type Props = {
   events: Array<Object>,
   fetchAvatar: (userId: number) => void,
   handleNewComment: (comment: string) => void,
-  orderId: number,
   resourceMap: {[number]: string},
   user: User,
 }

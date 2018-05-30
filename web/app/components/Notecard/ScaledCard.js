@@ -7,6 +7,7 @@ import {
   examStartTime,
   maybeMsToSeconds,
   orderDuration,
+  getOrderStartTime,
 } from "../../lib/data";
 
 import {
@@ -59,20 +60,11 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
     }
 
     orderTop() {
-      const startTime = moment(this.orderStartTime());
+      const startTime = moment(getOrderStartTime(this.props.order));
       const hoursToSeconds = startTime.hour() * 60 * 60;
       const minutesToSeconds = startTime.minute() * 60;
       const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, startTime.seconds()]);
       return Math.round(totalSeconds * PIXELS_PER_SECOND);
-    }
-
-    orderStartTime() {
-      const {order} = this.props;
-      const startTime =
-        R.path(["adjusted", "start_time"], order) ? order.adjusted.start_time :
-          order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
-      if (!startTime) {return 0}
-      return startTime;
     }
   }
 }

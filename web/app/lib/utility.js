@@ -104,11 +104,20 @@ function orderComments(order: Order): Array<Event> {
   return R.filter(({event_type}) => (event_type === "comment"), order.events);
 }
 
+function hasComments(order: Order): boolean {
+  return orderComments(order).length > 0
+}
+
 function ordersByResource(orders: Array<Order>): {[string]: Array<Order>} {
-  return R.groupBy((order) => {
-    const adjustedLocation = R.pathOr(false, ["adjusted", "resource_id"], order);
-    return adjustedLocation ? adjustedLocation : checkExamThenOrder(order, ["resource", "id"]);
-  }, orders)
+  return R.groupBy(getOrderResource, orders)
+}
+
+const getOrderResource = (order: Order) => {
+  const mergedResourceId = R.prop("resourceId", order);
+  const adjustedLocation = R.pathOr(false, ["adjusted", "resource_id"], order);
+  return mergedResourceId ? mergedResourceId :
+    adjustedLocation ? adjustedLocation :
+        checkExamThenOrder(order, ["resource", "id"]);
 }
 
 function cardStatuses(order: Order, type: string, default_value: string = "") {
@@ -141,8 +150,10 @@ function orderResource(resources: Array<Resource>, order: Order) {
   )(resources)
 }
 
-function patientType(order: Order) {
-  return checkExamThenOrder(order, ["site_class", "patient_type", "patient_type"]);
+function getPatientType(order: Order) {
+  return R.has("patientType", order) ?
+    order.patientType :
+    checkExamThenOrder(order, ["site_class", "patient_type", "patient_type"]);
 }
 
 function appointmentTime(order: Order) {
@@ -178,6 +189,35 @@ function printOrders() {
   }
 }
 
+const orderingPhysician = (order: Order) => R.defaultTo(
+  "unknown",
+  R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order),
+);
+
+const getPatientName = (order: Order) => (
+  R.has("patientName", order) ?
+    order.patientName :
+    R.path(["patient_mrn", "patient", "name"], order)
+)
+
+const getPatientMrn = (order: Order) => (
+  R.has("patientMrn", order) ?
+    order.patientMrn :
+    R.path(["patient_mrn", "mrn"], order)
+)
+
+const getPersonId = (order: Order) => {
+  return R.propEq("merged", true, order) ?
+    R.path(["orders", 0, "patient_mrn", "patient_id"], order) :
+    R.path(["patient_mrn", "patient_id"], order)
+}
+
+const getProcedure = (order: Order) => (
+  R.has("procedures", order) ?
+    order.procedures :
+    checkExamThenOrder(order, ["procedure", "description"])
+)
+
 export {
   appointmentTime,
   cardStatuses,
@@ -185,12 +225,19 @@ export {
   formatName,
   formatTimestamp,
   kioskNumber,
+  hasComments,
   isIE,
   mapSelectedResources,
   orderComments,
   orderResourceId,
   orderResource,
   ordersByResource,
-  patientType,
+  orderingPhysician,
+  getOrderResource,
+  getPatientMrn,
+  getPatientName,
+  getPatientType,
+  getPersonId,
+  getProcedure,
   printOrders,
 }
