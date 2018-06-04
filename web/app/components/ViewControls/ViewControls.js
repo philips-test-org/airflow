@@ -4,7 +4,7 @@ import React, {PureComponent} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
-import {SingleDatePicker} from "react-dates";
+import SingleDatePicker from "react-dates/lib/components/SingleDatePicker";
 
 import ResourceItem from "./ResourceItem";
 

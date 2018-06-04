@@ -2,7 +2,6 @@
 /* global module */
 import React, {Component} from "react";
 import * as R from "ramda";
-import {throttle} from "lodash";
 import moment from "moment";
 import key from "keymaster";
 import {hot} from "react-hot-loader";
@@ -18,6 +17,7 @@ import PrintView from "../PrintView";
 import {
   getPersonId,
   isIE,
+  throttle,
 } from "../../lib/utility";
 
 import {
@@ -232,6 +232,7 @@ class Airflow extends Component<Props, State> {
           gridPosition={this.state.gridPosition}
           filteredOrderIds={this.state.filteredOrderIds}
           focusedOrderId={this.state.focusedOrderId}
+          scrollToTop={this.scrollToTop}
           scrollToCoordinates={this.scrollToCoordinates}
           {...this.props}
           updateWidth={throttledWidthUpdate}
@@ -289,15 +290,9 @@ class Airflow extends Component<Props, State> {
 
   updateScrollPosition = (event: SyntheticUIEvent<>) => {
     const t = R.pathOr(null, ["target", "firstChild"], event);
-    this.updateGridPositionWithBoard(t);
-  }
-
-  updateGridPositionWithBoard(board: ?HTMLElement) {
-    if (board) {
-      const bounding = board.getBoundingClientRect();
-      const position = {x: bounding.left, y: bounding.top};
-      this.setState({gridPosition: position});
-    }
+    const bounding = t.getBoundingClientRect();
+    const position = {x: bounding.left, y: bounding.top};
+    this.setState({gridPosition: position});
   }
 
   updateWidth = (f: (number) => void, currentWidth: number) => {
@@ -408,6 +403,13 @@ class Airflow extends Component<Props, State> {
     }
   }
 
+  scrollToTop = () => {
+    if (!this.board) return;
+    this.board.scrollLeft = 0;
+    this.board.scrollTop = 0;
+
+  }
+
   scrollToCoordinates = (x: number, y: number) => {
     if (this.board) {
       this.scrollToX(x);
@@ -415,12 +417,14 @@ class Airflow extends Component<Props, State> {
     }
   }
 
-  scrollToX = (x: number) => {
+  scrollToX = (x: number, lastX: ?number) => {
     if (!this.board) return;
 
     setTimeout(() => {
       // $FlowFixMe
       const {scrollLeft} = this.board;
+      if (lastX === scrollLeft) return;
+
       if (Math.abs(scrollLeft - x) < SCROLL_SPEED) {
         // $FlowFixMe
         this.board.scrollLeft = x;
@@ -430,18 +434,19 @@ class Airflow extends Component<Props, State> {
           : scrollLeft - SCROLL_SPEED;
         // $FlowFixMe
         this.board.scrollLeft = newPos;
-        this.scrollToX(x);
+        this.scrollToX(x, scrollLeft);
       }
-      this.updateGridPositionWithBoard(this.board);
     }, 10);
   }
 
-  scrollToY = (y: number) => {
+  scrollToY = (y: number, lastY: ?number) => {
     if (!this.board) return;
 
     setTimeout(() => {
       // $FlowFixMe
       const {scrollTop} = this.board;
+      if (lastY === scrollTop) return;
+
       if (Math.abs(scrollTop - y) < SCROLL_SPEED) {
         // $FlowFixMe
         this.board.scrollTop = y;
@@ -451,9 +456,8 @@ class Airflow extends Component<Props, State> {
           : scrollTop - SCROLL_SPEED;
         // $FlowFixMe
         this.board.scrollTop = newPos;
-        this.scrollToY(y);
+        this.scrollToY(y, scrollTop);
       }
-      this.updateGridPositionWithBoard(this.board);
     }, 10);
   }
 }

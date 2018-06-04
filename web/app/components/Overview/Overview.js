@@ -13,6 +13,7 @@ type Props = {
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
   scrollToCoordinates: (x: number, y: number) => void,
+  scrollToTop: () => void,
   selectedResources: {[string]: string},
   startDate: number,
   boardWidth: number,
@@ -20,9 +21,7 @@ type Props = {
 
 class Overview extends PureComponent<Props> {
   componentDidMount() {
-    if (this.props.filteredOrderIds.length == 0) {
-      this.props.scrollToCoordinates(0,0);
-    }
+    this.props.scrollToTop();
   }
 
   render() {

@@ -1,16 +1,10 @@
-var webpack = require("webpack");
-var path = require("path");
+const webpack = require("webpack");
+const path = require("path");
 
 module.exports = {
-  devtool: "cheap-module-eval-source-map",
-  devServer: {
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  },
   plugins: [
-    new webpack.ProvidePlugin({
-    }),
+    // Ignore all locale files of moment.js
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
   entry: {
     app: ["whatwg-fetch", "babel-polyfill", "./web/app/app.js"],
@@ -59,10 +53,5 @@ module.exports = {
         loader: "url-loader?limit=100000",
       },
     ],
-  },
-  externals: {
-    //"react/addons": true,
-    //"react/lib/ExecutionEnvironment": true,
-    //"react/lib/ReactContext": true,
   },
 };

@@ -387,7 +387,9 @@ export default [
     master_order: {},
     resource: {},
     site_class: {},
-    procedure: {},
+    procedure: {
+      code: "890FSDFS",
+    },
     current_status: {},
     patient_mrn: {
       empi: false,
@@ -705,7 +707,7 @@ export default [
         active: true,
         practice_fee: 0,
         code: "CT-2547",
-        description: "CT CHEST SPINE W/DYE",
+        description: "XORPDF",
         reportable: true,
       },
       patient_mrn: {
