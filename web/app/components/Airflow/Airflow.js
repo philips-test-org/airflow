@@ -229,6 +229,7 @@ class Airflow extends Component<Props, State> {
           gridPosition={this.state.gridPosition}
           filteredOrderIds={this.state.filteredOrderIds}
           focusedOrderId={this.state.focusedOrderId}
+          scrollToTop={this.scrollToTop}
           scrollToCoordinates={this.scrollToCoordinates}
           {...this.props}
           updateWidth={throttledWidthUpdate}
@@ -408,10 +409,18 @@ class Airflow extends Component<Props, State> {
     }
   }
 
+  scrollToTop = () => {
+    if (!this.board) return;
+    this.board.scrollLeft = 0;
+    this.board.scrollTop = 0;
+
+  }
+
   scrollToCoordinates = (x: number, y: number) => {
     if (this.board) {
       this.scrollToX(x);
       this.scrollToY(y);
+      this.updateGridPositionWithBoard(this.board);
     }
   }
 

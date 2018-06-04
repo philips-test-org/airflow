@@ -12,7 +12,27 @@ class ApplicationController < ActionController::Base
   end
 
   def general_authentication
-    authenticate_and_authorize(SiteConfiguration.get_clinical_roles_for_key("clinical_roles_auth_list"))
+    respond_to do |format|
+      format.html do
+        authenticate_and_authorize(SiteConfiguration.get_clinical_roles_for_key("clinical_roles_auth_list"))
+      end
+
+      # If request is JSON and the user is no longer authenticated, send JSON back stating this
+      # So that React and use that to redirect the user to login
+      format.json do
+        token_cookie_name = get_cookie_name_for_token
+        token_cookie = get_token_cookie(token_cookie_name)
+        valid_token_test = Java::harbinger.sdk.SSO.valid_token(token_cookie)
+        if !valid_token_test
+          render json: {
+            error: "Not authenticated",
+            authenticated: false
+          }
+        else
+          authenticate_and_authorize(SiteConfiguration.get_clinical_roles_for_key("clinical_roles_auth_list"))
+        end
+      end
+    end
   end
 
   def get_employee
