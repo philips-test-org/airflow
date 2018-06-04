@@ -289,15 +289,9 @@ class Airflow extends Component<Props, State> {
 
   updateScrollPosition = (event: SyntheticUIEvent<>) => {
     const t = R.pathOr(null, ["target", "firstChild"], event);
-    this.updateGridPositionWithBoard(t);
-  }
-
-  updateGridPositionWithBoard(board: ?HTMLElement) {
-    if (board) {
-      const bounding = board.getBoundingClientRect();
-      const position = {x: bounding.left, y: bounding.top};
-      this.setState({gridPosition: position});
-    }
+    const bounding = t.getBoundingClientRect();
+    const position = {x: bounding.left, y: bounding.top};
+    this.setState({gridPosition: position});
   }
 
   updateWidth = (f: (number) => void, currentWidth: number) => {
@@ -419,16 +413,17 @@ class Airflow extends Component<Props, State> {
     if (this.board) {
       this.scrollToX(x);
       this.scrollToY(y);
-      this.updateGridPositionWithBoard(this.board);
     }
   }
 
-  scrollToX = (x: number) => {
+  scrollToX = (x: number, lastX: ?number) => {
     if (!this.board) return;
 
     setTimeout(() => {
       // $FlowFixMe
       const {scrollLeft} = this.board;
+      if (lastX === scrollLeft) return;
+
       if (Math.abs(scrollLeft - x) < SCROLL_SPEED) {
         // $FlowFixMe
         this.board.scrollLeft = x;
@@ -438,18 +433,19 @@ class Airflow extends Component<Props, State> {
           : scrollLeft - SCROLL_SPEED;
         // $FlowFixMe
         this.board.scrollLeft = newPos;
-        this.scrollToX(x);
+        this.scrollToX(x, scrollLeft);
       }
-      this.updateGridPositionWithBoard(this.board);
     }, 10);
   }
 
-  scrollToY = (y: number) => {
+  scrollToY = (y: number, lastY: ?number) => {
     if (!this.board) return;
 
     setTimeout(() => {
       // $FlowFixMe
       const {scrollTop} = this.board;
+      if (lastY === scrollTop) return;
+
       if (Math.abs(scrollTop - y) < SCROLL_SPEED) {
         // $FlowFixMe
         this.board.scrollTop = y;
@@ -459,9 +455,8 @@ class Airflow extends Component<Props, State> {
           : scrollTop - SCROLL_SPEED;
         // $FlowFixMe
         this.board.scrollTop = newPos;
-        this.scrollToY(y);
+        this.scrollToY(y, scrollTop);
       }
-      this.updateGridPositionWithBoard(this.board);
     }, 10);
   }
 }
