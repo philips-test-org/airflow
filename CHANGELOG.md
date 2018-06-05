@@ -1,4 +1,9 @@
 
+## v1.1.2 released 2018-06-05
+
+* **bugfix:** "On Hold" status no longer takes priority over "Cancelled" status
+* **bugfix:** cards now consistently update when an exam message is received for an existing order
+
 ## v1.1.1 released 2018-04-09
 
 * **improvement:** updated APM client for APM v1.0.2
