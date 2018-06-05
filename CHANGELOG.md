@@ -1,7 +1,8 @@
-## v1.1.2 released 2018-05-17
 
-* **bugfix:** fixed "On Hold" status taking priority over "Cancelled" status
-* **bugfix:** fixed cards not updating when an exam message is received for an existing order
+## v1.1.2 released 2018-06-05
+
+* **bugfix:** "On Hold" status no longer takes priority over "Cancelled" status
+* **bugfix:** cards now consistently update when an exam message is received for an existing order
 
 ## v1.1.1 released 2018-04-09
 
