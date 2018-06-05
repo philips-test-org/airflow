@@ -76,7 +76,15 @@ const mapStateToProps = ({board, user}: Object) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     adjustOrder: (event: Object) => {
-      dispatch(adjustOrder(event));
+      const {order_id} = event;
+      if (typeof order_id == "string") {
+        const ids = R.compose(R.map(parseInt), R.split("-"))(order_id);
+        R.forEach((id) => {
+          dispatch(adjustOrder(Object.assign(event, {order_id: id})));
+        }, ids);
+      } else {
+        dispatch(adjustOrder(event));
+      }
     },
     connectAPM: () => {
       dispatch(connectAPM());
@@ -130,7 +138,34 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 function mergeGroupedOrders(groupIdentities, startDate) {
-  const innerMerge = R.reduce((acc, order) => {
+  const valsOrMerge = (vals) => {
+    //if (vals.length > 1) debugger;
+    return vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals, startDate)]
+  };
+  return R.compose(
+    R.flatten,
+    R.map(valsOrMerge),
+    R.values
+  )(groupIdentities);
+}
+
+const innerMerge = (vals, startDate) => {
+  const orderAcc = {
+    adjusted: {start_time: null},
+    events: [],
+    hasComments: false,
+    id: null,
+    merged: true,
+    orders: [],
+    patientMrn: null,
+    patientName: null,
+    procedures: [],
+    resourceId: null,
+    startTime: null,
+    stopTime: null,
+  }
+
+  return R.reduce((acc, order) => {
     acc.adjusted = R.mergeWith((a, o) => a || o, acc.adjusted, order.adjusted)
     acc.events = R.concat(acc.events, order.events)
     acc.hasComments = acc.hasComments || hasComments(order)
@@ -153,29 +188,7 @@ function mergeGroupedOrders(groupIdentities, startDate) {
       R.min(acc.startTime, getOrderStartTime(order))
     acc.stopTime = R.max(acc.stopTime, unadjustedOrderStopTime(startDate, order))
     return acc;
-  }, {
-    adjusted: {start_time: null},
-    events: [],
-    hasComments: false,
-    id: null,
-    merged: true,
-    orders: [],
-    patientMrn: null,
-    patientName: null,
-    procedures: [],
-    resourceId: null,
-    startTime: null,
-    stopTime: null,
-  })
-  const valsOrMerge = (vals) => {
-    //if (vals.length > 1) debugger;
-    return vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals)]
-  };
-  return R.compose(
-    R.flatten,
-    R.map(valsOrMerge),
-    R.values
-  )(groupIdentities);
+  }, orderAcc, vals)
 }
 
 const findFocusedOrder = (id, mergedOrders) => {

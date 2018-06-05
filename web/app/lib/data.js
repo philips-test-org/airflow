@@ -51,6 +51,15 @@ export function unadjustedOrderStartTime(startDate: number, order: Order): ?numb
   return startTime;
 }
 
+export function orderStopTime(startDate: number, order: Order): number {
+  const {adjusted} = order;
+  if (!R.isNil(adjusted) && adjusted.start_time) {
+    // adjusted start time plus the unadjusted duration
+    return adjusted.start_time + orderDuration(startDate, order);
+  }
+  return unadjustedOrderStopTime(startDate, order);
+}
+
 export function unadjustedOrderStopTime(startDate: number, order: Order): number {
   if (R.prop("stopTime", order)) return order.stopTime;
   if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
