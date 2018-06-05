@@ -4,6 +4,7 @@ import * as R from "ramda";
 import moment from "moment";
 
 import {
+  cardStatuses,
   checkExamThenOrder,
   getOrderResource,
   getPatientName,
@@ -138,6 +139,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 function mergeGroupedOrders(groupIdentities, startDate) {
+  // TODO: add check for changes and don't run if no change
   const valsOrMerge = (vals) => {
     //if (vals.length > 1) debugger;
     return vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals, startDate)]
@@ -163,6 +165,7 @@ const innerMerge = (vals, startDate) => {
     resourceId: null,
     startTime: null,
     stopTime: null,
+    cardStatus: null,
   }
 
   return R.reduce((acc, order) => {
@@ -187,6 +190,13 @@ const innerMerge = (vals, startDate) => {
       getOrderStartTime(order) :
       R.min(acc.startTime, getOrderStartTime(order))
     acc.stopTime = R.max(acc.stopTime, unadjustedOrderStopTime(startDate, order))
+
+    if (!acc.cardStatus) {
+      acc.cardStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"});
+    } else {
+      let orderStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"})
+      R.maxBy(R.prop("order"), [acc.orderStatus, orderStatus])
+    }
     return acc;
   }, orderAcc, vals)
 }

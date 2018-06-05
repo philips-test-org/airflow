@@ -4,7 +4,6 @@ import * as R from "ramda";
 
 import {
   cardStatuses,
-  checkExamThenOrder,
   formatName,
   getPatientMrn,
   getPatientName,
@@ -43,8 +42,8 @@ class BaseNotecard extends PureComponent<Props> {
     const {order, comments, style} = this.props;
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
-    const cardClass = `notecard ${this.cardClass()}`
-    const cardColor = this.cardColor();
+    const {color, card_class} = this.cardStatus();
+    const cardClass = `notecard ${this.cardClass(card_class)}`;
     return (
       <div
         className={cardClass}
@@ -53,7 +52,7 @@ class BaseNotecard extends PureComponent<Props> {
         onClick={this.openModal}
         ref={el => this.card = el}
       >
-        <div className="left-tab" style={{backgroundColor: cardColor}} />
+        <div className="left-tab" style={{backgroundColor: color}} />
 
         <div className="right-tab">
           <div className="events">
@@ -126,9 +125,9 @@ class BaseNotecard extends PureComponent<Props> {
     )
   }
 
-  cardClass() {
+  cardClass(statusClass) {
     const {type} = this.props;
-    const status = type === "kiosk" ? "" : cardStatuses(this.props.order, "card_class");
+    const status = type === "kiosk" ? "" : statusClass;
     return R.join(" ", [
       this.props.type === "overview" ? "overview" : "scaled",
       this.negativeDuration() ? "bad-duration" : "",
@@ -137,8 +136,10 @@ class BaseNotecard extends PureComponent<Props> {
     ]);
   }
 
-  cardColor() {
-    return cardStatuses(this.props.order, "color", "#ddd");
+  cardStatus() {
+    const {order} = this.props;
+    return R.has("cardStatus", order) ? order.cardStatus:
+      cardStatuses(order, ["color", "card_class"], {color: "#ddd"});
   }
 
   examLocation() {

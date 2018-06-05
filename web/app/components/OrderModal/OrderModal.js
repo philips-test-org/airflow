@@ -57,7 +57,7 @@ class OrderModal extends Component<Props, State> {
 
   render() {
     const {order, avatarMap, currentUser} = this.props;
-    const cardColor = cardStatuses(order, "color", "#ddd");
+    const cardColor = this.cardColor();
     const userAvatar = avatarMap[currentUser.id];
     const roundingValue = R.find(R.propEq("event_type", "rounding-update"), order.events);
     return (
@@ -169,6 +169,12 @@ class OrderModal extends Component<Props, State> {
         {exam}
       </Fragment>
     ));
+  }
+
+  cardColor() {
+    const {order} = this.props;
+    return R.has("cardStatus", order) ? order.cardStatus.color:
+      cardStatuses(order, ["color"], {color: "#ddd"}).color;
   }
 
   viewImage = (imageViewer: ImageViewer, integrationJson: IntegrationJson) => {

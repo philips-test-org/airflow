@@ -117,14 +117,14 @@ const getOrderResource = (order: Order) => {
   const adjustedLocation = R.pathOr(false, ["adjusted", "resource_id"], order);
   return mergedResourceId ? mergedResourceId :
     adjustedLocation ? adjustedLocation :
-        checkExamThenOrder(order, ["resource", "id"]);
+      checkExamThenOrder(order, ["resource", "id"]);
 }
 
-function cardStatuses(order: Order, type: string, default_value: string = "") {
+function cardStatuses(order: Order, keys: Array<string>, default_value: Object = {}) {
   return R.reduce((acc, check) => {
     if (check.check(order)) {
-      if (!R.isNil(type)) {
-        return check[type];
+      if (!R.isNil(keys)) {
+        return R.pick(keys, check);
       } else {
         return acc;
       }
