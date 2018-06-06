@@ -1,4 +1,7 @@
-<div id="workspace" class="vertical-timeline" data-spinnerUrl="<%= image_path "ajax-loader.gif" %>" data-ssoUrl="<%= Java::harbinger.sdk.SSO.ssoUrl rescue "" %>">
+<div id="workspace" class="vertical-timeline"
+     data-spinnerUrl="<%= image_path "ajax-loader.gif" %>"
+     data-ssoUrl="<%= java.lang.System.getProperty("harbinger.sso.url") rescue "" %>"
+>
 </div>
 
 <%# React %>

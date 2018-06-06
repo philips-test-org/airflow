@@ -110,17 +110,19 @@ const closeOrderModal = () => {
   }
 }
 
-const adjustOrder = (event: Object) => {
+const adjustOrder = (event: Object, originatingId: string | number) => {
   return {
     type: BoardActions.ADJUST_ORDER,
     event,
+    originatingId,
   }
 }
 
-const adjustOrderSucceeded = (orderId: number, payload: Object) => {
+const adjustOrderSucceeded = (orderId: number, originatingId: string | number, payload: Object) => {
   return {
     type: BoardActions.ADJUST_ORDER_SUCCEEDED,
     orderId,
+    originatingId,
     payload,
   }
 }

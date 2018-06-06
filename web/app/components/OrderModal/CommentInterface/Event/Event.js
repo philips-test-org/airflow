@@ -100,9 +100,9 @@ class Event extends Component<Props> {
     const eventTime = formatTimestamp(created_at);
     if (event_type !== "location_update") {
       return (
-        <span className="body">
-          <strong>{name}</strong> marked {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime}</span>
-        </span>
+        <div className="body">
+          <strong>{name}</strong> marked {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime} {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}</span> {this.renderOrderNumber()}
+        </div>
       )
     } else if (event_type === "location_update") {
       return (
@@ -116,6 +116,24 @@ class Event extends Component<Props> {
         <strong>{name}</strong> did something at <span className="time short">{eventTime}</span>
       </span>
     )
+  }
+
+  renderOrderNumber() {
+    const {orderNumber, orderNumbers} = this.props;
+    let num;
+    if (orderNumbers) {
+      num = orderNumbers.join(", ");
+    } else if (orderNumber) {
+      num = orderNumber;
+    } else {
+      return null;
+    }
+
+    return (
+      <div className="event-footer">
+        <strong>Order:</strong> {num}
+      </div>
+    );
   }
 }
 

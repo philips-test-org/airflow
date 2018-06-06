@@ -55,9 +55,12 @@ class CommentInterface extends Component<Props> {
   }
 
   renderEventList() {
+    const {events: undupedEvents} = this.props;
+    const events = this.deduplicateEvents(undupedEvents);
     const groupedEvents = R.groupBy(
       ({event_type}) => R.equals("comment", event_type) ? "comment" : "event",
-      this.props.events);
+      events
+    );
 
     return (
       <div className="events tab-content">
@@ -68,7 +71,7 @@ class CommentInterface extends Component<Props> {
           {this.renderEvents(R.propOr([], "event", groupedEvents))}
         </div>
         <div role="tabpanel" className="event-list-pane tab-pane" id="combined-events-list">
-          {this.renderMixedEvents(this.props.events)}
+          {this.renderMixedEvents(events)}
         </div>
       </div>
     )
@@ -90,12 +93,14 @@ class CommentInterface extends Component<Props> {
   }
 
   renderRoundingUpdate(event: EventT) {
-    const thisIndex = R.findIndex(R.propEq("id", event.id), this.props.events) + 1;
+    const {events: undupedEvents} = this.props;
+    const events = this.deduplicateEvents(undupedEvents);
+    const thisIndex = R.findIndex(R.propEq("id", event.id), events) + 1;
     const previousUpdate = R.compose(
       R.take(1),
       R.drop(thisIndex),
       R.filter(R.propEq("event_type", "rounding-update"))
-    )(this.props.events)
+    )(events)
     return <RoundingUpdate key={event.id} lastUpdate={previousUpdate} {...event} />
   }
 
@@ -109,6 +114,44 @@ class CommentInterface extends Component<Props> {
       return <Component key={event.id} resourceMap={this.props.resourceMap} {...event} />
     }, events);
   }
+
+  deduplicateEvents(events: Array<EventT>) {
+    if (R.isEmpty(events)) return events;
+    let acc = [];
+    let i = 0;
+    while (i < events.length) {
+      const event = events[i];
+      let j = i + 1;
+      let nextEvent = events[j];
+      let mergedEvent = Object.assign({}, event, {orderNumbers: [event.orderNumber]});
+      while (this.sameEvent(event, nextEvent)) {
+        let updatedOrderNumbers = R.contains(nextEvent.orderNumber, mergedEvent.orderNumbers) ?
+          mergedEvent.orderNumbers :
+          R.append(nextEvent.orderNumber, mergedEvent.orderNumbers);
+        mergedEvent = Object.assign(mergedEvent, {
+          merged: true,
+          orderNumbers: updatedOrderNumbers,
+        });
+        j += 1;
+        nextEvent = events[j];
+      }
+      acc.push(mergedEvent);
+      i = j;
+    }
+    return acc;
+  }
+
+  sameEvent(eventA: EventT, eventB: EventT) {
+    const getExamId = R.prop("exam_adjustment_id");
+    const getEventType = R.prop("event_type");
+    const getCreatedAt = R.prop("created_at");
+
+    const differentExams = getExamId(eventA) != getExamId(eventB);
+    const sameType = getEventType(eventA) == getEventType(eventB);
+    const createdTogether = (getCreatedAt(eventA) - getCreatedAt(eventB)) < 2000;
+    return differentExams && sameType && createdTogether;
+  }
+
 }
 
 export default CommentInterface;

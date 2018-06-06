@@ -4,7 +4,6 @@ import * as R from "ramda";
 import moment from "moment";
 
 import {
-  examStartTime,
   maybeMsToSeconds,
   orderDuration,
   getOrderStartTime,

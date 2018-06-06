@@ -48,9 +48,10 @@ const fetchCurrentEmployee = () => (
   GET(ENDPOINTS.currentEmployee)
 );
 
-const createEvent = (event: Object) => (
-  POST(ENDPOINTS.events, event)
-)
+async function createEvent(event: Object) {
+  let payload = await POST(ENDPOINTS.events, event);
+  return Object.assign({}, payload, {order_id: event.order_id})
+}
 
 const Api = {
   createEvent,

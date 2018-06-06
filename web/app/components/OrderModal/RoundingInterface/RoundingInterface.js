@@ -69,7 +69,7 @@ class RoundingInterface extends PureComponent<Props, State> {
   renderRoundingValue() {
     const roundingValue = this.state.roundingValue ? this.state.roundingValue : "No rounding data entered.";
     return (
-      <div className="rounding" style={{whiteSpace: "pre"}}>
+      <div className="rounding">
         <p className="rounding-text">{roundingValue}</p>
       </div>
     )

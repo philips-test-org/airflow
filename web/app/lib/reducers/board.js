@@ -89,12 +89,12 @@ function closeOrderModal(state, _action) {
   return R.merge(state, {showModal: false, focusedOrder: undefined});
 }
 
-function adjustOrder(state, {orderId, payload}) {
+function adjustOrder(state, {orderId, originatingId, payload}) {
   const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
   const eventLens = R.compose(orderLens, R.lensProp("events"));
   const adjustedLens = R.compose(orderLens, R.lensProp("adjusted"));
   return R.compose(
-    R.set(R.lensProp("focusedOrder"), orderId),
+    R.set(R.lensProp("focusedOrder"), originatingId),
     R.over(eventLens, R.prepend(payload)),
     R.over(adjustedLens, R.mergeDeepLeft(payload.new_state)),
   )(state)

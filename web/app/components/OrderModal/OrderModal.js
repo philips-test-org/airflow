@@ -42,13 +42,25 @@ type Props = {
 }
 
 type State = {
+  order: Order,
   showMoreImages: boolean,
 }
 
 class OrderModal extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = {showMoreImages: false};
+
+    const order = props.order.merged ? props.order.orders[0] : props.order;
+
+    this.state = {
+      order,
+      showMoreImages: false,
+    };
+  }
+
+  static getDerivedStateFromProps({order: nextOrder}: Props) {
+    const order = nextOrder.merged ? nextOrder.orders[0] : nextOrder;
+    return {order};
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -56,10 +68,12 @@ class OrderModal extends Component<Props, State> {
   }
 
   render() {
-    const {order, avatarMap, currentUser} = this.props;
+    const {avatarMap, currentUser} = this.props;
+    const {order} = this.state;
     const cardColor = this.cardColor();
     const userAvatar = avatarMap[currentUser.id];
     const roundingValue = R.find(R.propEq("event_type", "rounding-update"), order.events);
+    const events = this.assocEventsWithOrderNumber();
     return (
       <div id="order-modal" className="modal fade in modal-open" tabIndex="-1" role="dialog" style={{display: "block"}}>
         <div className="modal-dialog modal-wide" role="document">
@@ -82,14 +96,14 @@ class OrderModal extends Component<Props, State> {
                   <div className="col-xs-6">
                     <RoundingInterface handleSubmit={this.handleRoundingUpdate} rounding={roundingValue} />
                     <ExamDemographics
-                      order={this.props.order}
+                      order={order}
                       orderGroup={this.props.orderGroup}
                       startDate={this.props.startDate}
                     />
                   </div>
                   <CommentInterface
                     avatar={userAvatar}
-                    events={order.events}
+                    events={events}
                     fetchAvatar={this.props.fetchAvatar}
                     handleNewComment={this.handleNewComment}
                     resourceMap={this.props.resourceMap}
@@ -104,11 +118,19 @@ class OrderModal extends Component<Props, State> {
     );
   }
 
+  assocEventsWithOrderNumber() {
+    if (this.props.order.merged) {
+      return this.props.order.events;
+    }
+    const {events, order_number} = this.props.order;
+    return R.map(R.assoc("orderNumber", order_number), events);
+  }
+
   renderStatusToggles() {
     const {order: {adjusted}} = this.props;
     // Flipping and partially applying so that the parameter name
     // is the unapplied argument.
-    const checkStatus = R.flip(R.flip(R.propEq)(true))(adjusted);
+    const checkStatus = (param) => R.propEq(param, true, adjusted);
     const toggles = [
       {label: "On Hold", name: "onhold", faClass: "fa-hand-paper-o", isActive: checkStatus("onhold")},
       {label: "Anesthesia", name: "anesthesia", faClass: "GA", isActive: checkStatus("anesthesia")},
@@ -172,7 +194,7 @@ class OrderModal extends Component<Props, State> {
   }
 
   cardColor() {
-    const {order} = this.props;
+    const {order} = this.state;
     return R.has("cardStatus", order) ? order.cardStatus.color:
       cardStatuses(order, ["color"], {color: "#ddd"}).color;
   }
@@ -181,19 +203,28 @@ class OrderModal extends Component<Props, State> {
     $.harbingerjs.integration.view(imageViewer, integrationJson);
   }
 
+  id() {
+    return this.props.order.merged ?
+      this.props.orderGroup.reverse().map(order => order.id).join("-") :
+      this.props.order.id;
+  }
+
   handleStatusChange = (eventType: string, newState: Object) => {
-    const {order, currentUser} = this.props;
-    this.props.adjustOrder(wrapEvent(order.id, currentUser.id, eventType, null, newState));
+    const {currentUser} = this.props;
+    const id = this.id();
+    this.props.adjustOrder(wrapEvent(id, currentUser.id, eventType, null, newState), id);
   }
 
   handleNewComment = (comment: string) => {
-    const {order, currentUser} = this.props;
-    this.props.adjustOrder(wrapEvent(order.id, currentUser.id, "comment", comment, {}));
+    const {currentUser} = this.props;
+    const id = this.id();
+    this.props.adjustOrder(wrapEvent(id, currentUser.id, "comment", comment, {}), id);
   }
 
   handleRoundingUpdate = (comment: string) => {
-    const {order, currentUser} = this.props;
-    this.props.adjustOrder(wrapEvent(order.id, currentUser.id, "rounding-update", comment, {}));
+    const {currentUser} = this.props;
+    const id = this.id();
+    this.props.adjustOrder(wrapEvent(id, currentUser.id, "rounding-update", comment, {}), id);
   }
 
   closeModal = () => {

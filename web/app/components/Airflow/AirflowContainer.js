@@ -76,15 +76,14 @@ const mapStateToProps = ({board, user}: Object) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    adjustOrder: (event: Object) => {
+    adjustOrder: (event: Object, originatingId: string | number) => {
       const {order_id} = event;
       if (typeof order_id == "string") {
         const ids = R.compose(R.map(parseInt), R.split("-"))(order_id);
-        R.forEach((id) => {
-          dispatch(adjustOrder(Object.assign(event, {order_id: id})));
-        }, ids);
+        const events = R.map((id) => Object.assign({}, event, {order_id: id}), ids);
+        dispatch(adjustOrder(events, originatingId));
       } else {
-        dispatch(adjustOrder(event));
+        dispatch(adjustOrder(event, originatingId));
       }
     },
     connectAPM: () => {
@@ -166,11 +165,17 @@ const innerMerge = (vals, startDate) => {
     startTime: null,
     stopTime: null,
     cardStatus: null,
+    groupIdentity: null,
   }
 
   return R.reduce((acc, order) => {
     acc.adjusted = R.mergeWith((a, o) => a || o, acc.adjusted, order.adjusted)
-    acc.events = R.concat(acc.events, order.events)
+    acc.events = R.sortBy(
+      R.prop("id"),
+      R.concat(acc.events,
+        R.map(R.assoc("orderNumber", order.order_number), order.events)
+      )
+    ).reverse();
     acc.hasComments = acc.hasComments || hasComments(order)
     if (!acc.patientName) {
       acc.patientName = getPatientName(order)
@@ -190,6 +195,7 @@ const innerMerge = (vals, startDate) => {
       getOrderStartTime(order) :
       R.min(acc.startTime, getOrderStartTime(order))
     acc.stopTime = R.max(acc.stopTime, unadjustedOrderStopTime(startDate, order))
+    acc.groupIdentity = acc.groupIdentity || order.groupIdentity;
 
     if (!acc.cardStatus) {
       acc.cardStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"});
@@ -202,15 +208,6 @@ const innerMerge = (vals, startDate) => {
 }
 
 const findFocusedOrder = (id, mergedOrders) => {
-  if (R.type(id) == "String") {
-    const ids = R.compose(R.map(parseInt), R.split("-"))(id);
-    return R.compose(
-      R.find(R.propEq("id", R.last(ids))),
-      R.flatten,
-      R.pluck("orders"),
-      R.filter(R.propEq("merged", true))
-    )(mergedOrders)
-  }
   return R.find(R.propEq("id", id), mergedOrders)
 }
 

@@ -50,11 +50,11 @@ class RoundingUpdate extends Component<Props, State> {
           </div>
         }
         <div className="body">
-          <div className="heading">
-            <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span>
+          <div className="heading clearfix">
+          <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
             {this.props.hideDiff ? null :
               <span className="pull-right">
-                <Button text="Diff" className={`btn-sm btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
+                <Button text="Diff" className={`btn-xs btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
               </span>
             }
           </div>
