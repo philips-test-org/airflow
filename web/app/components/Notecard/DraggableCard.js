@@ -9,7 +9,6 @@ import {DragSource} from "react-dnd";
 import BaseNotecard from "./BaseNotecard";
 
 import {
-  examStartTime,
   getOrderStartTime,
   maybeMsToSeconds,
   orderDuration,

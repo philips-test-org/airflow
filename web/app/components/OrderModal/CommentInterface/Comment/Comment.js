@@ -30,7 +30,7 @@ class Comment extends PureComponent<Props> {
         }
         <div className="body">
           <div className="heading">
-          <strong>{employee.name}</strong> commented on <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
+            <strong>{employee.name}</strong> commented on <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
           </div>
           <div className="content">{comments}</div>
         </div>

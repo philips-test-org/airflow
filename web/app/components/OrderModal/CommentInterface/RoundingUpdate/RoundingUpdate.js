@@ -51,7 +51,7 @@ class RoundingUpdate extends Component<Props, State> {
         }
         <div className="body">
           <div className="heading clearfix">
-          <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
+            <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
             {this.props.hideDiff ? null :
               <span className="pull-right">
                 <Button text="Diff" className={`btn-xs btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
@@ -65,16 +65,16 @@ class RoundingUpdate extends Component<Props, State> {
   }
 
   renderDiff() {
-    const {comments, lastUpdate} = this.props
+    const {comments, lastUpdate} = this.props;
     const commentDiff = D.diffWords(R.pathOr("", [0, "comments"], lastUpdate), comments);
     const idxMap = R.addIndex(R.map);
     return (
       idxMap((change, idx) => {
         const key = `diff-chunk-${idx}`;
         if (change.added) {
-          return (<span key={key} style={{backgroundColor: "#ADFEB4"}}>{change.value}</span>)
+          return (<span key={key} style={{backgroundColor: "#ADFEB4"}}>{change.value}</span>);
         } else if (change.removed) {
-          return (<span key={key} style={{backgroundColor: "#FFB7B9"}}>{change.value}</span>)
+          return (<span key={key} style={{backgroundColor: "#FFB7B9"}}>{change.value}</span>);
         }
         return (<span key={key}>{change.value}</span>);
       }, commentDiff)
