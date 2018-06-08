@@ -17,6 +17,7 @@ import type {
   Resource,
   SiteClass,
   Images,
+  MergedOrder,
 } from "./order";
 
 import type {
@@ -46,6 +47,7 @@ export type {
   Resource,
   SiteClass,
   Images,
+  MergedOrder,
   // USER
   User,
   // GENERAL

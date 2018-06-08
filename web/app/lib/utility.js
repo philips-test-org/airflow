@@ -5,6 +5,7 @@ import moment from "moment";
 
 import type {
   Event,
+  MergedOrder,
   Order,
   Resource,
 } from "../types";
@@ -91,11 +92,11 @@ const formatTimestamp = (epoch: ?(string | number)) => {
 
 // Path array is an array of keys and/or array indices to follow
 // to pull some data out of a compound object.
-function checkExamThenOrder(order: Order, pathArray: Array<string | number>) {
+function checkExamThenOrder(order: Order | MergedOrder, pathArray: Array<string | number>) {
   const lens = R.lensPath(pathArray);
   return R.defaultTo(
     R.view(lens, order),
-    R.view(lens, order.rad_exam)
+    R.view(lens, R.prop("rad_exam", order))
   );
 }
 
@@ -120,7 +121,7 @@ const getOrderResource = (order: Order) => {
       checkExamThenOrder(order, ["resource", "id"]);
 }
 
-function cardStatuses(order: Order, keys: Array<string>, default_value: Object = {}) {
+function cardStatuses(order: Order | MergedOrder, keys: Array<string>, default_value: Object = {}) {
   return R.reduce((acc, check) => {
     if (check.check(order)) {
       if (!R.isNil(keys)) {
@@ -150,8 +151,8 @@ function orderResource(resources: Array<Resource>, order: Order) {
   )(resources)
 }
 
-function getPatientType(order: Order) {
-  return R.has("patientType", order) ?
+function getPatientType(order: Order | MergedOrder) {
+  return order.merged ?
     order.patientType :
     checkExamThenOrder(order, ["site_class", "patient_type", "patient_type"]);
 }
@@ -194,26 +195,26 @@ const orderingPhysician = (order: Order) => R.defaultTo(
   R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order),
 );
 
-const getPatientName = (order: Order) => (
-  R.has("patientName", order) ?
+const getPatientName = (order: Order | MergedOrder) => (
+  order.merged ?
     order.patientName :
     R.path(["patient_mrn", "patient", "name"], order)
 )
 
-const getPatientMrn = (order: Order) => (
-  R.has("patientMrn", order) ?
+const getPatientMrn = (order: Order | MergedOrder) => (
+  order.merged ?
     order.patientMrn :
     R.path(["patient_mrn", "mrn"], order)
 )
 
-const getPersonId = (order: Order) => {
+const getPersonId = (order: Order | MergedOrder) => {
   return R.propEq("merged", true, order) ?
     R.path(["orders", 0, "patient_mrn", "patient_id"], order) :
     R.path(["patient_mrn", "patient_id"], order)
 }
 
-const getProcedure = (order: Order) => (
-  R.has("procedures", order) ?
+const getProcedure = (order: Order | MergedOrder) => (
+  order.merged ?
     order.procedures :
     checkExamThenOrder(order, ["procedure", "description"])
 )
