@@ -86,10 +86,10 @@ function* fetchInitialApp(action): Saga<void> {
   try {
     yield put(showLoading());
     var exams;
-    const [resourceGroups, {resource}] = yield [
+    const [resourceGroups, {resource}] = yield all([
       call(Api.fetchResourceGroups),
       call(Api.fetchSelectedResourceGroup),
-    ];
+    ]);
     if (R.length(R.keys(resourceGroups)) > 0) {
       const resourceIds = R.keys(mapSelectedResources(resourceGroups[resource]));
 
@@ -116,7 +116,7 @@ function* adjustOrder(action): Saga<void> {
     let payload;
     if (R.type(action.event) == "Array") {
       payload = yield all(R.map(event => call(Api.createEvent, event), action.event));
-      yield R.map(result => put(adjustOrderSucceeded(result.order_id, action.originatingId, result)), payload);
+      yield all(R.map(result => put(adjustOrderSucceeded(result.order_id, action.originatingId, result)), payload));
     } else {
       payload = yield call(Api.createEvent, action.event);
       yield put(adjustOrderSucceeded(payload.order_id, action.originatingId, payload));
