@@ -101,14 +101,14 @@ class Event extends Component<Props> {
     if (event_type !== "location_update") {
       return (
         <div className="body">
-          <strong>{name}</strong> marked {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime} {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}</span> {this.renderOrderNumber()}
+          <strong>{name}</strong> marked {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
         </div>
       )
     } else if (event_type === "location_update") {
       return (
-        <span className="body">
-          <strong>{name}</strong> moved order to <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> to <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> on <span className="time short">{eventTime}</span>
-        </span>
+        <div className="body">
+          <strong>{name}</strong> moved order to <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> @ <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
+        </div>
       )
     }
     return (
@@ -116,6 +116,10 @@ class Event extends Component<Props> {
         <strong>{name}</strong> did something at <span className="time short">{eventTime}</span>
       </span>
     )
+  }
+
+  renderMergedIcon() {
+    return R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null;
   }
 
   renderOrderNumber() {
