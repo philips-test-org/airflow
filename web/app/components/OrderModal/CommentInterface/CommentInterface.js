@@ -2,6 +2,7 @@
 
 import React, {Component} from "react";
 import * as R from "ramda";
+import moment from "moment";
 
 import Event from "./Event";
 import Comment from "./Comment";
@@ -147,7 +148,7 @@ class CommentInterface extends Component<Props> {
   sameEvent(eventA: EventT, eventB: EventT) {
     const getExamId = R.prop("exam_adjustment_id");
     const getEventType = R.prop("event_type");
-    const getCreatedAt = R.prop("created_at");
+    const getCreatedAt = (event) => this.createdAt(R.prop("created_at", event));
 
     const differentExams = getExamId(eventA) != getExamId(eventB);
     const sameType = getEventType(eventA) == getEventType(eventB);
@@ -155,6 +156,9 @@ class CommentInterface extends Component<Props> {
     return differentExams && sameType && createdTogether;
   }
 
+  createdAt(createdAt): moment {
+    return moment.isMoment(createdAt) ? createdAt : moment(createdAt);
+  }
 }
 
 export default CommentInterface;
