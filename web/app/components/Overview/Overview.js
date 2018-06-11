@@ -12,6 +12,7 @@ type Props = {
   headerOffset: number,
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
+  ordersMergedByGroup: {[string]: Array<Order>},
   scrollToCoordinates: (x: number, y: number) => void,
   scrollToTop: () => void,
   selectedResources: {[string]: string},
@@ -34,7 +35,7 @@ class Overview extends PureComponent<Props> {
   }
 
   renderRow = (resourceId: string) => {
-    const orders = this.props.orders[resourceId] || [];
+    const orders = this.props.ordersMergedByGroup[resourceId] || [];
     const resourceName = this.props.selectedResources[resourceId];
     return (
       <NotecardRow
