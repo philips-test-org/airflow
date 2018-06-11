@@ -6,14 +6,15 @@ import * as R from "ramda";
 import {formatTimestamp} from "../../../../lib/utility";
 
 import type {
-  Event as EventT,
+  DedupedEvent,
 } from "../../../../types";
 
 type ExtraProps = {
   resourceMap: {[string]: string},
   hideAvatar: boolean,
 };
-type Props = EventT & ExtraProps;
+
+type Props = DedupedEvent & ExtraProps;
 
 const EVENT_LABELS = {
   onhold: "On Hold",

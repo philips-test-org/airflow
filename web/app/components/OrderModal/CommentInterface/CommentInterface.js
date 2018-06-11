@@ -9,6 +9,7 @@ import RoundingUpdate from "./RoundingUpdate";
 import CommentForm from "./CommentForm";
 
 import type {
+  DedupedEvent,
   Event as EventT,
   User,
 } from "../../../types";
@@ -21,6 +22,8 @@ type Props = {
   resourceMap: {[number]: string},
   user: User,
 }
+
+type AnnotatedEvent = {|orderNumber: string, orderNumbers: Array<string>|} & EventT
 
 class CommentInterface extends Component<Props> {
   shouldComponentUpdate(nextProps: Props) {
@@ -104,7 +107,7 @@ class CommentInterface extends Component<Props> {
     return <RoundingUpdate key={event.id} lastUpdate={previousUpdate} {...event} />
   }
 
-  renderMixedEvents(events: Array<EventT>) {
+  renderMixedEvents(events: Array<DedupedEvent>) {
     return R.map((event) => {
       if (event.event_type === "rounding-update") {
         return this.renderRoundingUpdate(event);
@@ -115,20 +118,20 @@ class CommentInterface extends Component<Props> {
     }, events);
   }
 
-  deduplicateEvents(events: Array<EventT>) {
-    if (R.isEmpty(events)) return events;
-    let acc = [];
+  deduplicateEvents(events: Array<AnnotatedEvent>): Array<DedupedEvent> {
+    if (R.isEmpty(events)) return [];
+    let acc: Array<DedupedEvent> = [];
     let i = 0;
     while (i < events.length) {
       const event = events[i];
       let j = i + 1;
       let nextEvent = events[j];
-      let mergedEvent = Object.assign({}, event, {orderNumbers: [event.orderNumber]});
+      let mergedEvent: DedupedEvent = Object.assign({}, event, {orderNumbers: [event.orderNumber], merged: false});
       while (this.sameEvent(event, nextEvent)) {
         let updatedOrderNumbers = R.contains(nextEvent.orderNumber, mergedEvent.orderNumbers) ?
           mergedEvent.orderNumbers :
           R.append(nextEvent.orderNumber, mergedEvent.orderNumbers);
-        mergedEvent = Object.assign(mergedEvent, {
+        mergedEvent = Object.assign({}, mergedEvent, {
           merged: true,
           orderNumbers: updatedOrderNumbers,
         });

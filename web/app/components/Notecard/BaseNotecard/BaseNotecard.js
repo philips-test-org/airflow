@@ -13,6 +13,7 @@ import {
 } from "../../../lib/utility";
 
 import type {
+  MergedOrder,
   Order,
 } from "../../../types";
 
@@ -20,8 +21,8 @@ type Props = {
   comments: Object,
   isFiltered: boolean,
   isFocused: boolean,
-  openModal: (Order) => void,
-  order: Order,
+  openModal: (order: Order | MergedOrder) => void,
+  order: Order | MergedOrder,
   scrollToY: (y: number) => void,
   startDate: number,
   style: Object,
@@ -90,16 +91,19 @@ class BaseNotecard extends PureComponent<Props> {
 
   renderAllProcedures() {
     const {order} = this.props;
-    if (R.has("procedures", order)) {
-      return R.map((o) => this.renderProcedure(o.procedure, o.orderedBy), order.procedures)
+    if (order.merged) {
+      return R.map((o) => this.renderProcedure(o.procedure, o.orderedBy), order.procedures);
+    } else {
+      const procedure = getProcedure(order);
+      const orderedBy = orderingPhysician(order);
+      if (typeof procedure == "string") {
+        return this.renderProcedure(procedure, orderedBy);
+      }
     }
-    const procedure = getProcedure(order);
-    const orderedBy = orderingPhysician(order);
-    return this.renderProcedure(procedure, orderedBy);
-
+    return null;
   }
 
-  renderProcedure(procedure, orderedBy) {
+  renderProcedure(procedure: string, orderedBy: string) {
     return (
       <Fragment key={`procedure-${procedure}-${orderedBy}`}>
         <div className="procedure">{procedure}</div>
@@ -125,7 +129,7 @@ class BaseNotecard extends PureComponent<Props> {
     )
   }
 
-  cardClass(statusClass) {
+  cardClass(statusClass: string) {
     const {type} = this.props;
     const status = type === "kiosk" ? "" : statusClass;
     return R.join(" ", [
@@ -138,7 +142,7 @@ class BaseNotecard extends PureComponent<Props> {
 
   cardStatus() {
     const {order} = this.props;
-    return R.has("cardStatus", order) ? order.cardStatus:
+    return R.has("cardStatus", order) ? R.prop("cardStatus", order) :
       cardStatuses(order, ["color", "card_class"], {color: "#ddd"});
   }
 

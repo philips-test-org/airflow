@@ -1,6 +1,7 @@
 // @flow
 
 import type {
+  DedupedEvent,
   Employee,
   Event,
   Order,
@@ -31,6 +32,7 @@ import type {
 
 export type {
   // ORDER
+  DedupedEvent,
   Employee,
   Event,
   Order,

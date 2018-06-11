@@ -190,7 +190,7 @@ function printOrders() {
   }
 }
 
-const orderingPhysician = (order: Order) => R.defaultTo(
+const orderingPhysician = (order: Order | MergedOrder) => R.defaultTo(
   "unknown",
   R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order),
 );
@@ -213,7 +213,7 @@ const getPersonId = (order: Order | MergedOrder) => {
     R.path(["patient_mrn", "patient_id"], order)
 }
 
-const getProcedure = (order: Order | MergedOrder) => (
+const getProcedure = (order: Order | MergedOrder): Array<Object> | string => (
   order.merged ?
     order.procedures :
     checkExamThenOrder(order, ["procedure", "description"])

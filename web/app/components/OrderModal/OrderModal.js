@@ -29,7 +29,7 @@ import type {
 } from "../../types";
 
 type Props = {
-  adjustOrder: (event: Object) => void,
+  adjustOrder: (event: Object, id: string | number) => void,
   avatarMap: {[number]: Blob},
   closeModal: () => void,
   currentUser: User,
@@ -195,7 +195,7 @@ class OrderModal extends Component<Props, State> {
 
   cardColor() {
     const {order} = this.state;
-    return R.has("cardStatus", order) ? order.cardStatus.color:
+    return R.has("cardStatus", order) ? R.path(["cardStatus", "color"], order) :
       cardStatuses(order, ["color"], {color: "#ddd"}).color;
   }
 

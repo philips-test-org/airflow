@@ -201,8 +201,6 @@ export type Employee = {
 
 export type Event = {
   id: number,
-  orderNumber?: string,
-  orderNumbers?: Array<string>,
   exam_adjustment_id: number,
   event_type: string,
   new_state: {start_time?: string | number} & {[string]: string | boolean},
@@ -210,6 +208,12 @@ export type Event = {
   created_at: number,
   updated_at: string,
   employee: Employee,
+}
+
+export type DedupedEvent = Event & {
+  orderNumber: string,
+  orderNumbers: Array<string>,
+  merged: boolean,
 }
 
 export type Order = {|
@@ -242,6 +246,7 @@ export type Order = {|
   events: Array<Event>,
   rad_exam: RadExam,
   groupIdentity: string,
+  merged?: false,
 |}
 
 export type Images = {

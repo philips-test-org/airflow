@@ -43,7 +43,6 @@ import {
 import Airflow from "./Airflow";
 
 import type {
-  Order,
   Resource,
   ViewType,
 } from "../../types";
@@ -107,8 +106,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchCurrentEmployee: () => {
       dispatch(fetchCurrentEmployee());
     },
-    openModal: (order: Order) => {
-      dispatch(showOrderModal(order));
+    openModal: (id: string | number) => {
+      dispatch(showOrderModal(id));
     },
     closeModal: () => {
       dispatch(closeOrderModal());

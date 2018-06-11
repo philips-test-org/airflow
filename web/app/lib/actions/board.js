@@ -97,10 +97,10 @@ const fetchPersonExamsSucceeded = (personId: number, payload: Array<RadExam>) =>
 
 // ORDER MODAL
 
-const showOrderModal = (order: Order) => {
+const showOrderModal = (id: string | number) => {
   return {
     type: BoardActions.SHOW_ORDER_MODAL,
-    order,
+    id,
   }
 }
 

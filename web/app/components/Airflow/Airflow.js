@@ -58,7 +58,7 @@ type Props = {
   loading: boolean,
   markNotificationDisplayed: (id: number | string) => void,
   notifications: Array<Notification>,
-  openModal: (Order) => void,
+  openModal: (id: string | number) => void,
   orderGroups: {[string]: Array<Order>},
   orders: {[string]: Array<Order>},
   ordersLoaded: boolean,
@@ -275,7 +275,7 @@ class Airflow extends Component<Props, State> {
   }
 
   openModal = (order: Order) => {
-    this.props.openModal(order);
+    this.props.openModal(order.id);
     this.props.fetchPersonExams(getPersonId(order));
   }
 

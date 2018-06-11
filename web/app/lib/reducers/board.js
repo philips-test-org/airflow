@@ -81,8 +81,8 @@ function board(state: Object = initialState, action: Object) {
   }
 }
 
-function showOrderModal(state, {order}) {
-  return R.merge(state, {showModal: true, focusedOrder: order.id});
+function showOrderModal(state, {id}) {
+  return R.merge(state, {showModal: true, focusedOrder: id});
 }
 
 function closeOrderModal(state, _action) {
