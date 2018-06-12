@@ -6,14 +6,15 @@ import * as R from "ramda";
 import {formatTimestamp} from "../../../../lib/utility";
 
 import type {
-  Event as EventT,
+  DedupedEvent,
 } from "../../../../types";
 
 type ExtraProps = {
   resourceMap: {[string]: string},
   hideAvatar: boolean,
 };
-type Props = EventT & ExtraProps;
+
+type Props = DedupedEvent & ExtraProps;
 
 const EVENT_LABELS = {
   onhold: "On Hold",
@@ -100,15 +101,15 @@ class Event extends Component<Props> {
     const eventTime = formatTimestamp(created_at);
     if (event_type !== "location_update") {
       return (
-        <span className="body">
-          <strong>{name}</strong> marked {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime}</span>
-        </span>
+        <div className="body">
+          <strong>{name}</strong> marked {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
+        </div>
       )
     } else if (event_type === "location_update") {
       return (
-        <span className="body">
-          <strong>{name}</strong> moved order to <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> to <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> on <span className="time short">{eventTime}</span>
-        </span>
+        <div className="body">
+          <strong>{name}</strong> moved order to <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> @ <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
+        </div>
       )
     }
     return (
@@ -116,6 +117,28 @@ class Event extends Component<Props> {
         <strong>{name}</strong> did something at <span className="time short">{eventTime}</span>
       </span>
     )
+  }
+
+  renderMergedIcon() {
+    return R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null;
+  }
+
+  renderOrderNumber() {
+    const {orderNumber, orderNumbers} = this.props;
+    let num;
+    if (orderNumbers) {
+      num = orderNumbers.join(", ");
+    } else if (orderNumber) {
+      num = orderNumber;
+    } else {
+      return null;
+    }
+
+    return (
+      <div className="event-footer">
+        <strong>Order:</strong> {num}
+      </div>
+    );
   }
 }
 

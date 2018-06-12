@@ -210,7 +210,13 @@ export type Event = {
   employee: Employee,
 }
 
-export type Order = {
+export type DedupedEvent = Event & {
+  orderNumber: string,
+  orderNumbers: Array<string>,
+  merged: boolean,
+}
+
+export type Order = {|
   department_id: number,
   current_status_id: ?number,
   site_class_id: ?number,
@@ -240,8 +246,32 @@ export type Order = {
   events: Array<Event>,
   rad_exam: RadExam,
   groupIdentity: string,
-}
+  merged?: false,
+|}
 
 export type Images = {
   spinner: string,
 }
+
+export type MergedOrder = {|
+  adjusted: Object,
+  events: Array<Event>,
+  cardStatus: {
+    card_class: string,
+    color: string,
+    order: number,
+  },
+  events: Array<Event>,
+  groupIdentity: string,
+  hasComments: boolean,
+  id: string,
+  merged: boolean,
+  orders: Array<Order>,
+  patientMrn: string,
+  patientName: string,
+  patientType?: string,
+  procedures: Array<{orderedBy: string, procedure: string}>,
+  resourceId: number,
+  startTime: number,
+  stopTime: number,
+|}

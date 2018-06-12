@@ -5,6 +5,7 @@ import moment from "moment";
 
 import type {
   Event,
+  MergedOrder,
   Order,
   Resource,
 } from "../types";
@@ -91,11 +92,11 @@ const formatTimestamp = (epoch: ?(string | number)) => {
 
 // Path array is an array of keys and/or array indices to follow
 // to pull some data out of a compound object.
-function checkExamThenOrder(order: Order, pathArray: Array<string | number>) {
+function checkExamThenOrder(order: Order | MergedOrder, pathArray: Array<string | number>) {
   const lens = R.lensPath(pathArray);
   return R.defaultTo(
     R.view(lens, order),
-    R.view(lens, order.rad_exam)
+    R.view(lens, R.prop("rad_exam", order))
   );
 }
 
@@ -104,18 +105,27 @@ function orderComments(order: Order): Array<Event> {
   return R.filter(({event_type}) => (event_type === "comment"), order.events);
 }
 
-function ordersByResource(orders: Array<Order>): {[string]: Array<Order>} {
-  return R.groupBy((order) => {
-    const adjustedLocation = R.pathOr(false, ["adjusted", "resource_id"], order);
-    return adjustedLocation ? adjustedLocation : checkExamThenOrder(order, ["resource", "id"]);
-  }, orders)
+function hasComments(order: Order): boolean {
+  return orderComments(order).length > 0
 }
 
-function cardStatuses(order: Order, type: string, default_value: string = "") {
+function ordersByResource(orders: Array<Order>): {[string]: Array<Order>} {
+  return R.groupBy(getOrderResource, orders)
+}
+
+const getOrderResource = (order: Order) => {
+  const mergedResourceId = R.prop("resourceId", order);
+  const adjustedLocation = R.pathOr(false, ["adjusted", "resource_id"], order);
+  return mergedResourceId ? mergedResourceId :
+    adjustedLocation ? adjustedLocation :
+      checkExamThenOrder(order, ["resource", "id"]);
+}
+
+function cardStatuses(order: Order | MergedOrder, keys: Array<string>, default_value: Object = {}) {
   return R.reduce((acc, check) => {
     if (check.check(order)) {
-      if (!R.isNil(type)) {
-        return check[type];
+      if (!R.isNil(keys)) {
+        return R.pick(keys, check);
       } else {
         return acc;
       }
@@ -141,8 +151,10 @@ function orderResource(resources: Array<Resource>, order: Order) {
   )(resources)
 }
 
-function patientType(order: Order) {
-  return checkExamThenOrder(order, ["site_class", "patient_type", "patient_type"]);
+function getPatientType(order: Order | MergedOrder) {
+  return order.merged ?
+    order.patientType :
+    checkExamThenOrder(order, ["site_class", "patient_type", "patient_type"]);
 }
 
 function appointmentTime(order: Order) {
@@ -178,6 +190,35 @@ function printOrders() {
   }
 }
 
+const orderingPhysician = (order: Order | MergedOrder) => R.defaultTo(
+  "unknown",
+  R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order),
+);
+
+const getPatientName = (order: Order | MergedOrder) => (
+  order.merged ?
+    order.patientName :
+    R.path(["patient_mrn", "patient", "name"], order)
+)
+
+const getPatientMrn = (order: Order | MergedOrder) => (
+  order.merged ?
+    order.patientMrn :
+    R.path(["patient_mrn", "mrn"], order)
+)
+
+const getPersonId = (order: Order | MergedOrder) => {
+  return R.propEq("merged", true, order) ?
+    R.path(["orders", 0, "patient_mrn", "patient_id"], order) :
+    R.path(["patient_mrn", "patient_id"], order)
+}
+
+const getProcedure = (order: Order | MergedOrder): Array<Object> | string => (
+  order.merged ?
+    order.procedures :
+    checkExamThenOrder(order, ["procedure", "description"])
+)
+
 const throttle = (func: Function, limit: number) => {
   let inThrottle
   return function() {
@@ -198,13 +239,20 @@ export {
   formatName,
   formatTimestamp,
   kioskNumber,
+  hasComments,
   isIE,
   mapSelectedResources,
   orderComments,
   orderResourceId,
   orderResource,
   ordersByResource,
-  patientType,
+  orderingPhysician,
+  getOrderResource,
+  getPatientMrn,
+  getPatientName,
+  getPatientType,
+  getPersonId,
+  getProcedure,
   printOrders,
   throttle,
 }

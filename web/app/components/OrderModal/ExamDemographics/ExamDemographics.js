@@ -8,7 +8,7 @@ import {
   appointmentTime,
   checkExamThenOrder,
   formatTimestamp,
-  patientType,
+  getPatientType,
 } from "../../../lib/utility";
 
 import {
@@ -54,7 +54,7 @@ class ExamDemographics extends Component<Props, State> {
             {this.renderDemographicsTableRow("Patient MRN", order.patient_mrn.mrn)}
             {this.renderDemographicsTableRow("Patient DOB", order.patient_mrn.patient.birthdate)}
             {this.renderDemographicsTableRow("Patient Location", this.patientLocation())}
-            {this.renderDemographicsTableRow("Patient Type", patientType(order))}
+            {this.renderDemographicsTableRow("Patient Type", getPatientType(order))}
             {this.renderDemographicsTableRow("Patient Class", this.siteClassName())}
             {this.renderDemographicsTableRow("Resource", this.resourceName())}
             {this.renderDemographicsTableRow("Procedure", checkExamThenOrder(order, ["procedure", "description"]))}

@@ -1,6 +1,7 @@
 // @flow
 
 import React, {PureComponent} from "react";
+import * as R from "ramda";
 
 import {formatTimestamp} from "../../../../lib/utility";
 
@@ -29,7 +30,7 @@ class Comment extends PureComponent<Props> {
         }
         <div className="body">
           <div className="heading">
-            <strong>{employee.name}</strong> commented on <span className="time short">{formatTimestamp(created_at)}</span>
+            <strong>{employee.name}</strong> commented on <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
           </div>
           <div className="content">{comments}</div>
         </div>

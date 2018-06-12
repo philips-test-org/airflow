@@ -69,7 +69,7 @@ class RoundingInterface extends PureComponent<Props, State> {
   renderRoundingValue() {
     const roundingValue = this.state.roundingValue ? this.state.roundingValue : "No rounding data entered.";
     return (
-      <div className="rounding" style={{whiteSpace: "pre"}}>
+      <div className="rounding">
         <p className="rounding-text">{roundingValue}</p>
       </div>
     )
@@ -117,8 +117,7 @@ class RoundingInterface extends PureComponent<Props, State> {
     const {employee, created_at} = roundingValue;
     return (
       <div className="panel-footer rounding-footer">
-        <p className="edited-by">Last edited by: {employee.name} on
-        <span className="time short">{formatTimestamp(created_at)}</span>
+        <p className="edited-by">Last edited by: {employee.name} on <span className="time short">{formatTimestamp(created_at)}</span>
         </p>
       </div>
     );

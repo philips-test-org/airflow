@@ -4,9 +4,21 @@ import * as R from "ramda";
 import moment from "moment";
 
 import {
+  cardStatuses,
+  checkExamThenOrder,
+  getOrderResource,
+  getPatientName,
+  getPatientMrn,
+  hasComments,
+  orderingPhysician,
   ordersByResource,
   mapSelectedResources,
 } from "../../lib/utility";
+
+import {
+  getOrderStartTime,
+  unadjustedOrderStopTime,
+} from "../../lib/data";
 
 import {
   adjustOrder,
@@ -31,25 +43,25 @@ import {
 import Airflow from "./Airflow";
 
 import type {
-  Order,
   Resource,
   ViewType,
 } from "../../types";
 
 const mapStateToProps = ({board, user}: Object) => {
   const orderGroups = R.groupBy(R.prop("groupIdentity"), board.orders);
+  const mergedByGroup = mergeGroupedOrders(orderGroups, board.startDate);
   return {
     avatarMap: user.avatars,
     boardWidth: board.width,
     currentUser: user.currentUser,
     examsByPerson: board.examsByPerson,
-    focusedOrder: R.find(R.propEq("id", board.focusedOrder), board.orders),
+    focusedOrder: findFocusedOrder(board.focusedOrder, mergedByGroup),
     images: board.images,
     loading: board.loading,
     notifications: board.notifications,
     orderGroups,
     orders: ordersByResource(board.orders),
-    ordersMergedByGroup: ordersByResource(mergeGroupedOrders(orderGroups)),
+    ordersMergedByGroup: ordersByResource(mergedByGroup),
     ordersLoaded: !R.isEmpty(board.orders),
     resources: board.resources,
     selectedResourceGroup: board.selectedResourceGroup,
@@ -63,8 +75,15 @@ const mapStateToProps = ({board, user}: Object) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    adjustOrder: (event: Object) => {
-      dispatch(adjustOrder(event));
+    adjustOrder: (event: Object, originatingId: string | number) => {
+      const {order_id} = event;
+      if (typeof order_id == "string") {
+        const ids = R.compose(R.map(parseInt), R.split("-"))(order_id);
+        const events = R.map((id) => Object.assign({}, event, {order_id: id}), ids);
+        dispatch(adjustOrder(events, originatingId));
+      } else {
+        dispatch(adjustOrder(event, originatingId));
+      }
     },
     connectAPM: () => {
       dispatch(connectAPM());
@@ -87,8 +106,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchCurrentEmployee: () => {
       dispatch(fetchCurrentEmployee());
     },
-    openModal: (order: Order) => {
-      dispatch(showOrderModal(order));
+    openModal: (id: string | number) => {
+      dispatch(showOrderModal(id));
     },
     closeModal: () => {
       dispatch(closeOrderModal());
@@ -117,24 +136,78 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-function mergeGroupedOrders(groupIdentities) {
-  const innerMerge = R.compose(
-    R.assoc("merged", true),
-    R.reduce((acc, order) => (
-      R.isEmpty(acc) ? order :
-        R.mergeDeepWithKey(
-          (key, a, o) =>
-            key != "adjusted" ? a : R.mergeWithKey((k, l, r) => l[k] || r[k], a, o)
-        ), acc, order), {})
-  );
-  const vals_or_merge = (vals) => (
-    vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals)]
-  );
+function mergeGroupedOrders(groupIdentities, startDate) {
+  // TODO: add check for changes and don't run if no change
+  const valsOrMerge = (vals) => {
+    //if (vals.length > 1) debugger;
+    return vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals, startDate)]
+  };
   return R.compose(
     R.flatten,
-    R.map(vals_or_merge),
+    R.map(valsOrMerge),
     R.values
   )(groupIdentities);
+}
+
+const innerMerge = (vals, startDate) => {
+  const orderAcc = {
+    adjusted: {start_time: null},
+    events: [],
+    hasComments: false,
+    id: null,
+    merged: true,
+    orders: [],
+    patientMrn: null,
+    patientName: null,
+    procedures: [],
+    resourceId: null,
+    startTime: null,
+    stopTime: null,
+    cardStatus: null,
+    groupIdentity: null,
+  }
+
+  return R.reduce((acc, order) => {
+    acc.adjusted = R.mergeWith((a, o) => a || o, acc.adjusted, order.adjusted)
+    acc.events = R.sortBy(
+      R.prop("id"),
+      R.concat(acc.events,
+        R.map(R.assoc("orderNumber", order.order_number), order.events)
+      )
+    ).reverse();
+    acc.hasComments = acc.hasComments || hasComments(order)
+    if (!acc.patientName) {
+      acc.patientName = getPatientName(order)
+    }
+    if (!acc.patientMrn) {
+      acc.patientMrn = getPatientMrn(order)
+    }
+    // Setting to the last order's id to make card keys and OrderModal work.
+    acc.id = !acc.id ? `${order.id}` : `${order.id}-${acc.id}`;
+    acc.procedures = R.append({
+      orderedBy: orderingPhysician(order),
+      procedure: checkExamThenOrder(order, ["procedure", "description"]),
+    }, acc.procedures)
+    acc.orders = R.append(order, acc.orders)
+    acc.resourceId = acc.resourceId || getOrderResource(order)
+    acc.startTime = acc.startTime == null ?
+      getOrderStartTime(order) :
+      R.min(acc.startTime, getOrderStartTime(order))
+    acc.stopTime = R.max(acc.stopTime, unadjustedOrderStopTime(startDate, order))
+    acc.groupIdentity = acc.groupIdentity || order.groupIdentity;
+
+    if (!acc.cardStatus) {
+      acc.cardStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"});
+    } else {
+      let orderStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"})
+      R.maxBy(R.prop("order"), [acc.orderStatus, orderStatus])
+    }
+    return acc;
+  }, orderAcc, vals)
+}
+
+const findFocusedOrder = (id, mergedOrders) => {
+  return R.find(R.propEq("id", id), mergedOrders)
 }
 
 const AirflowContainer = connect(

@@ -1,26 +1,26 @@
-import Calendar from "../../app/components/Calendar";
+import Overview from "../../app/components/Overview";
 import BaseNotecard from "../../app/components/Notecard/BaseNotecard";
 
 import {flushAllPromises, mountAirflow} from "../helpers";
 
-describe("<Calendar>", () => {
+describe("<Overview>", () => {
   let airflow;
-  let calendar;
+  let overview;
 
   beforeEach(async () => {
-    airflow = mountAirflow("calendar").airflow;
+    airflow = mountAirflow("overview").airflow;
     await flushAllPromises();
     airflow.update();
 
-    calendar = airflow.find(Calendar);
+    overview = airflow.find(Overview);
   });
 
   it("renders 6 BaseNotecards (8 orders, 2 groups of 2)", async () => {
-    expect(calendar.find(BaseNotecard)).toHaveLength(6);
+    expect(overview.find(BaseNotecard)).toHaveLength(6);
   });
 
   it("filters cards based on mrn", async () => {
-    expect(calendar.find(".notecard")).toHaveLength(6);
+    expect(overview.find(".notecard")).toHaveLength(6);
 
     const input = airflow.find("#search-field");
     input.instance().value = "2174069";
@@ -34,7 +34,7 @@ describe("<Calendar>", () => {
   });
 
   it("filters cards based on name", async () => {
-    expect(calendar.find(".notecard")).toHaveLength(6);
+    expect(overview.find(".notecard")).toHaveLength(6);
 
     const input = airflow.find("#search-field");
     input.instance().value = "Marnell";
@@ -48,7 +48,7 @@ describe("<Calendar>", () => {
   });
 
   it("filters cards based on rad exam accession", async () => {
-    expect(calendar.find(".notecard")).toHaveLength(6);
+    expect(overview.find(".notecard")).toHaveLength(6);
 
     const input = airflow.find("#search-field");
     input.instance().value = "2174070";
@@ -62,7 +62,7 @@ describe("<Calendar>", () => {
   });
 
   it("filters cards based on rad exam precedure description", async () => {
-    expect(calendar.find(".notecard")).toHaveLength(6);
+    expect(overview.find(".notecard")).toHaveLength(6);
 
     const input = airflow.find("#search-field");
     input.instance().value = "XORPDF";
@@ -76,7 +76,7 @@ describe("<Calendar>", () => {
   });
 
   it("filters cards based on precedure code", async () => {
-    expect(calendar.find(".notecard")).toHaveLength(6);
+    expect(overview.find(".notecard")).toHaveLength(6);
 
     const input = airflow.find("#search-field");
     input.instance().value = "CT-2554";
@@ -90,7 +90,7 @@ describe("<Calendar>", () => {
   });
 
   it("filters cards based on precedure code", async () => {
-    expect(calendar.find(".notecard")).toHaveLength(6);
+    expect(overview.find(".notecard")).toHaveLength(6);
 
     const input = airflow.find("#search-field");
     input.instance().value = "890FSDFS";

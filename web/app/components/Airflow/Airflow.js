@@ -14,7 +14,11 @@ import ErrorBoundary from "../ErrorBoundary";
 import Notifications from "../Notifications";
 import PrintView from "../PrintView";
 
-import {isIE, throttle} from "../../lib/utility";
+import {
+  getPersonId,
+  isIE,
+  throttle,
+} from "../../lib/utility";
 
 import {
   NAVBAR_OFFSET,
@@ -54,7 +58,7 @@ type Props = {
   loading: boolean,
   markNotificationDisplayed: (id: number | string) => void,
   notifications: Array<Notification>,
-  openModal: (Order) => void,
+  openModal: (id: string | number) => void,
   orderGroups: {[string]: Array<Order>},
   orders: {[string]: Array<Order>},
   ordersLoaded: boolean,
@@ -252,7 +256,7 @@ class Airflow extends Component<Props, State> {
       return null;
     }
     const exams = this.props.examsByPerson[
-      this.getPersonId(this.props.focusedOrder)
+      getPersonId(this.props.focusedOrder)
     ];
     return (
       <OrderModal
@@ -270,12 +274,9 @@ class Airflow extends Component<Props, State> {
     )
   }
 
-  getPersonId = (focusedOrder: Order): number =>
-    R.path(["patient_mrn", "patient_id"], focusedOrder);
-
   openModal = (order: Order) => {
-    this.props.openModal(order);
-    this.props.fetchPersonExams(this.getPersonId(order));
+    this.props.openModal(order.id);
+    this.props.fetchPersonExams(getPersonId(order));
   }
 
   headerOffset = () => {

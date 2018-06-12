@@ -4,6 +4,7 @@
 import * as R from "ramda";
 
 import {
+  all,
   call,
   put,
   takeEvery,
@@ -85,10 +86,10 @@ function* fetchInitialApp(action): Saga<void> {
   try {
     yield put(showLoading());
     var exams;
-    const [resourceGroups, {resource}] = yield [
+    const [resourceGroups, {resource}] = yield all([
       call(Api.fetchResourceGroups),
       call(Api.fetchSelectedResourceGroup),
-    ];
+    ]);
     if (R.length(R.keys(resourceGroups)) > 0) {
       const resourceIds = R.keys(mapSelectedResources(resourceGroups[resource]));
 
@@ -112,8 +113,14 @@ function* fetchInitialApp(action): Saga<void> {
 
 function* adjustOrder(action): Saga<void> {
   try {
-    const payload = yield call(Api.createEvent, action.event);
-    yield put(adjustOrderSucceeded(action.event.order_id, payload));
+    let payload;
+    if (R.type(action.event) == "Array") {
+      payload = yield all(R.map(event => call(Api.createEvent, event), action.event));
+      yield all(R.map(result => put(adjustOrderSucceeded(result.order_id, action.originatingId, result)), payload));
+    } else {
+      payload = yield call(Api.createEvent, action.event);
+      yield put(adjustOrderSucceeded(payload.order_id, action.originatingId, payload));
+    }
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)

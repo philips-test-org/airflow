@@ -9,9 +9,10 @@ import {DragSource} from "react-dnd";
 import BaseNotecard from "./BaseNotecard";
 
 import {
-  examStartTime,
+  getOrderStartTime,
   maybeMsToSeconds,
   orderDuration,
+  orderStopTime,
 } from "../../lib/data";
 
 import {
@@ -99,41 +100,14 @@ class DraggableCard extends Component<Props> {
     );
   }
 
-  // Find the start time for an order
-  orderStartTime() {
-    const {order} = this.props;
-    const startTime =
-      R.path(["adjusted", "start_time"], order) ? order.adjusted.start_time :
-        order.rad_exam ? examStartTime(order.rad_exam) : order.appointment;
-    if (!startTime) {return 0}
-    return startTime;
-  }
-
-  orderStopTime() {
-    const {order, startDate} = this.props;
-    const {adjusted} = order;
-    if (!R.isNil(adjusted) && adjusted.start_time) {
-      // adjusted start time plus the unadjusted duration
-      return adjusted.start_time + orderDuration(startDate, order);
-    } else if (!R.isNil(order.rad_exam) && order.rad_exam.rad_exam_time.end_exam) {
-      return order.rad_exam.rad_exam_time.end_exam;
-    } else if (typeof(order.appointment_duration) === "number") {
-      let durationMS = order.appointment_duration ? order.appointment_duration * 1000 : 0;
-      return this.orderStartTime() + durationMS;
-    } else if (!R.isNil(order.rad_exam)) {
-      return this.orderStartTime() + (order.rad_exam.procedure.scheduled_duration * 60 * 1000);
-    } else {
-      return this.orderStartTime() + (order.procedure.scheduled_duration * 60 * 1000);
-    }
-  }
-
   orderHeightToStartTime(height: number) {
     // * 1000 to get from seconds -> milliseconds
     return (this.props.startDate + (height / PIXELS_PER_SECOND * 1000));
   }
 
   orderHeightToStopTime(height: number) {
-    var duration = this.orderStopTime() - this.orderStartTime();
+    const {order, startDate} = this.props;
+    var duration = orderStopTime(startDate, order) - getOrderStartTime(this.props.order);
     return this.orderHeightToStartTime(height) + duration;
   }
 
@@ -150,7 +124,7 @@ class DraggableCard extends Component<Props> {
   }
 
   orderTop() {
-    const startTime = moment(this.orderStartTime());
+    const startTime = moment(getOrderStartTime(this.props.order));
     const hoursToSeconds = startTime.hour() * 60 * 60;
     const minutesToSeconds = startTime.minute() * 60;
     const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, startTime.seconds()]);

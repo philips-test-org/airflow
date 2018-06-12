@@ -1,14 +1,19 @@
 // @flow
-import React, {PureComponent} from "react";
+import React, {Fragment, PureComponent} from "react";
 import * as R from "ramda";
 
 import {
   cardStatuses,
-  checkExamThenOrder,
   formatName,
+  getPatientMrn,
+  getPatientName,
+  getPatientType,
+  getProcedure,
+  orderingPhysician,
 } from "../../../lib/utility";
 
 import type {
+  MergedOrder,
   Order,
 } from "../../../types";
 
@@ -16,8 +21,8 @@ type Props = {
   comments: Object,
   isFiltered: boolean,
   isFocused: boolean,
-  openModal: (Order) => void,
-  order: Order,
+  openModal: (order: Order | MergedOrder) => void,
+  order: Order | MergedOrder,
   scrollToY: (y: number) => void,
   startDate: number,
   style: Object,
@@ -38,12 +43,8 @@ class BaseNotecard extends PureComponent<Props> {
     const {order, comments, style} = this.props;
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
-    const cardClass = `notecard ${this.cardClass()}`
-    const cardColor = this.cardColor();
-    const orderingPhysician = R.defaultTo(
-      "unknown",
-      R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], this.props.order),
-    );
+    const {color, card_class} = this.cardStatus();
+    const cardClass = `notecard ${this.cardClass(card_class)}`;
     return (
       <div
         className={cardClass}
@@ -52,7 +53,7 @@ class BaseNotecard extends PureComponent<Props> {
         onClick={this.openModal}
         ref={el => this.card = el}
       >
-        <div className="left-tab" style={{backgroundColor: cardColor}} />
+        <div className="left-tab" style={{backgroundColor: color}} />
 
         <div className="right-tab">
           <div className="events">
@@ -63,9 +64,7 @@ class BaseNotecard extends PureComponent<Props> {
           {this.renderHeader()}
 
           <div className="body">
-            <div className="procedure">{checkExamThenOrder(this.props.order, ["procedure", "description"])}</div>
-            <div className="patient-location">{this.examLocation()}</div>
-            <div className="ordering-physician">Ordered by: {orderingPhysician}</div>
+            {this.renderAllProcedures()}
           </div>
 
           {this.renderFooter()}
@@ -76,17 +75,42 @@ class BaseNotecard extends PureComponent<Props> {
   }
 
   renderHeader() {
-    const patientPath = ["site_class", "patient_type", "patient_type"];
-    const patientName = R.path(["patient_mrn", "patient", "name"], this.props.order);
+    const patientType = getPatientType(this.props.order);
+    const patientName = getPatientName(this.props.order);
+    const patientMrn = getPatientMrn(this.props.order);
     if (!patientName) {return null}
     const formattedName = formatName(patientName);
     return (
       <div className="heading">
         <div className="patient-name">{formattedName}</div>
-        <div className="patient-type">{checkExamThenOrder(this.props.order, patientPath)}</div>
-        <div className="mrn">{this.props.order.patient_mrn.mrn}</div>
+        <div className="patient-type">{patientType}</div>
+        <div className="mrn">{patientMrn}</div>
       </div>
     );
+  }
+
+  renderAllProcedures() {
+    const {order} = this.props;
+    if (order.merged) {
+      return R.map((o) => this.renderProcedure(o.procedure, o.orderedBy), order.procedures);
+    } else {
+      const procedure = getProcedure(order);
+      const orderedBy = orderingPhysician(order);
+      if (typeof procedure == "string") {
+        return this.renderProcedure(procedure, orderedBy);
+      }
+    }
+    return null;
+  }
+
+  renderProcedure(procedure: string, orderedBy: string) {
+    return (
+      <Fragment key={`procedure-${procedure}-${orderedBy}`}>
+        <div className="procedure">{procedure}</div>
+        <div className="patient-location">{this.examLocation()}</div>
+        <div className="ordering-physician">Ordered by: {orderedBy}</div>
+      </Fragment>
+    )
   }
 
   renderFooter() {
@@ -105,9 +129,9 @@ class BaseNotecard extends PureComponent<Props> {
     )
   }
 
-  cardClass() {
+  cardClass(statusClass: string) {
     const {type} = this.props;
-    const status = type === "kiosk" ? "" : cardStatuses(this.props.order, "card_class");
+    const status = type === "kiosk" ? "" : statusClass;
     return R.join(" ", [
       this.props.type === "overview" ? "overview" : "scaled",
       this.negativeDuration() ? "bad-duration" : "",
@@ -116,8 +140,10 @@ class BaseNotecard extends PureComponent<Props> {
     ]);
   }
 
-  cardColor() {
-    return cardStatuses(this.props.order, "color", "#ddd");
+  cardStatus() {
+    const {order} = this.props;
+    return R.has("cardStatus", order) ? R.prop("cardStatus", order) :
+      cardStatuses(order, ["color", "card_class"], {color: "#ddd"});
   }
 
   examLocation() {

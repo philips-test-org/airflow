@@ -97,10 +97,10 @@ const fetchPersonExamsSucceeded = (personId: number, payload: Array<RadExam>) =>
 
 // ORDER MODAL
 
-const showOrderModal = (order: Order) => {
+const showOrderModal = (id: string | number) => {
   return {
     type: BoardActions.SHOW_ORDER_MODAL,
-    order,
+    id,
   }
 }
 
@@ -110,17 +110,19 @@ const closeOrderModal = () => {
   }
 }
 
-const adjustOrder = (event: Object) => {
+const adjustOrder = (event: Object, originatingId: string | number) => {
   return {
     type: BoardActions.ADJUST_ORDER,
     event,
+    originatingId,
   }
 }
 
-const adjustOrderSucceeded = (orderId: number, payload: Object) => {
+const adjustOrderSucceeded = (orderId: number, originatingId: string | number, payload: Object) => {
   return {
     type: BoardActions.ADJUST_ORDER_SUCCEEDED,
     orderId,
+    originatingId,
     payload,
   }
 }

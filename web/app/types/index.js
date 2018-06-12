@@ -1,6 +1,7 @@
 // @flow
 
 import type {
+  DedupedEvent,
   Employee,
   Event,
   Order,
@@ -17,6 +18,7 @@ import type {
   Resource,
   SiteClass,
   Images,
+  MergedOrder,
 } from "./order";
 
 import type {
@@ -30,6 +32,7 @@ import type {
 
 export type {
   // ORDER
+  DedupedEvent,
   Employee,
   Event,
   Order,
@@ -46,6 +49,7 @@ export type {
   Resource,
   SiteClass,
   Images,
+  MergedOrder,
   // USER
   User,
   // GENERAL

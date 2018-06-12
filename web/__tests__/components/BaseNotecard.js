@@ -22,7 +22,7 @@ describe("<BaseNotecard>", () => {
     const groupedCard =
       calendar
         .find(BaseNotecard)
-        .filterWhere(n => R.prop("patient_mrn_id", n.prop("order")) == 769712)
+        .filterWhere(n => R.prop("patientMrn", n.prop("order")) == "2200179")
         .first();
 
     expect(airflow.find(OrderModal).exists()).toEqual(false);
