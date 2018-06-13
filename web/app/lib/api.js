@@ -4,16 +4,19 @@ import {
   POST,
 } from "./network";
 
+// $FlowFixMe
+const ROOT = harbingerjsRelativeRoot == "/" ? "" : harbingerjsRelativeRoot;
+
 const ENDPOINTS = {
-  exams: "/exams",
-  exam: (id) => `/exams/${id}`,
-  kioskExams: "/exams/kiosk",
-  personExams: (personId) => `/persons/${personId}/exams`,
-  avatar: (userId) => `/avatar/${userId}`,
-  events: "/events",
-  resourceGroups: "/resource_groups",
-  selectedResourceGroup: "/resource_groups/selected",
-  currentEmployee: "/employees/current",
+  exams: `${ROOT}/exams`,
+  exam: (id) => `${ROOT}/exams/${id}`,
+  kioskExams: `${ROOT}/exams/kiosk`,
+  personExams: (personId) => `${ROOT}/persons/${personId}/exams`,
+  avatar: (userId) => `${ROOT}/avatar/${userId}`,
+  events: `${ROOT}/events`,
+  resourceGroups: `${ROOT}/resource_groups`,
+  selectedResourceGroup: `${ROOT}/resource_groups/selected`,
+  currentEmployee: `${ROOT}/employees/current`,
 }
 
 const fetchExams = (resourceGroup: String, resourceIds: Array<number>, date: number) => (

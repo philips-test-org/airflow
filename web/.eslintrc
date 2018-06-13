@@ -9,7 +9,8 @@
     "plugin:flowtype/recommended"
   ],
   "globals": {
-    "$": true
+    "$": true,
+    "harbingerjsRelativeRoot": true
   },
   "parserOptions": {
     "ecmaFeatures": {
