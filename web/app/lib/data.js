@@ -1,11 +1,14 @@
 // @flow
+// Utility functions for calculating things based on (primarily order) data.
+
 import * as R from "ramda";
 import moment from "moment";
 
 import {
-  checkExamThenOrder,
-  orderResource,
-} from "./utility";
+  getOrderComments,
+  getOrderResource,
+  getScheduledDuration,
+} from "./selectors";
 
 import type {
   MergedOrder,
@@ -14,29 +17,8 @@ import type {
   Resource,
 } from "../types";
 
-export function groupByIdentities(resources: Array<Resource>, startDate: number, orders: Array<Order>) {
-  return R.groupBy((order) => groupIdentity(resources, startDate, order), orders);
-}
-
-export function groupIdentity(resources: Array<Resource>, startDate: number, order: Order) {
-  return order.patient_mrn_id + orderResource(resources, order).id + unadjustedOrderStartTime(order);
-}
-
-export function getOrderStartTime(order: Order | MergedOrder) {
-  if (order.merged) {
-    return order.startTime;
-  } else {
-    const hasStartTime = R.path(["adjusted", "start_time"], order);
-    const startTime = hasStartTime ? order.adjusted.start_time :
-      unadjustedOrderStartTime(order);
-    if (!startTime) return 0;
-    return startTime;
-
-  }
-}
-
 // Find the start time for an exam
-export function examStartTime(exam: RadExam) {
+function examStartTime(exam: RadExam) {
   if (exam.rad_exam_time == undefined) { return null; }
   if (exam.rad_exam_time.begin_exam) {
     return exam.rad_exam_time.begin_exam;
@@ -45,20 +27,15 @@ export function examStartTime(exam: RadExam) {
   }
 }
 
-export function unadjustedOrderStartTime(order: Order | MergedOrder): ?number {
-  let startTime;
-  if (order.merged) {
-    startTime = order.startTime;
-  } else {
-    startTime = order.rad_exam ? 
-      examStartTime(order.rad_exam) :
-      R.prop("appointment", order);
-  }
-  if (!startTime) {return null}
-  return startTime;
+function groupIdentity(resources: Array<Resource>, startDate: number, order: Order) {
+  return order.patient_mrn_id + getOrderResource(resources, order).id + unadjustedOrderStartTime(order);
 }
 
-export function orderStopTime(startDate: number, order: Order): number {
+function hasComments(order: Order): boolean {
+  return getOrderComments(order).length > 0
+}
+
+function orderStopTime(startDate: number, order: Order): number {
   const {adjusted} = order;
   if (!R.isNil(adjusted) && adjusted.start_time) {
     // adjusted start time plus the unadjusted duration
@@ -67,7 +44,26 @@ export function orderStopTime(startDate: number, order: Order): number {
   return unadjustedOrderStopTime(startDate, order);
 }
 
-export function unadjustedOrderStopTime(startDate: number, order: Order | MergedOrder): number {
+// Returns milliseconds
+function orderDuration(startDate: number, order: Order | MergedOrder): number {
+  const unadjustedStartTime = unadjustedOrderStartTime(order) || 0;
+  return unadjustedOrderStopTime(startDate, order) - unadjustedStartTime;
+}
+
+function unadjustedOrderStartTime(order: Order | MergedOrder): ?number {
+  let startTime;
+  if (order.merged) {
+    startTime = order.startTime;
+  } else {
+    startTime = order.rad_exam ?
+      examStartTime(order.rad_exam) :
+      R.prop("appointment", order);
+  }
+  if (!startTime) {return null}
+  return startTime;
+}
+
+function unadjustedOrderStopTime(startDate: number, order: Order | MergedOrder): number {
   if (order.merged) {
     return order.stopTime;
   } else if (!order.merged) {
@@ -78,24 +74,11 @@ export function unadjustedOrderStopTime(startDate: number, order: Order | Merged
       return unadjustedOrderStartTime(order) + durationMS;
     }
   }
-  const scheduledDuration = checkExamThenOrder(order, ["procedure", "scheduled_duration"]);
+  const scheduledDuration = getScheduledDuration(order);
   return unadjustedOrderStartTime(order) + (scheduledDuration * 60 * 1000);
 }
 
-// Returns milliseconds
-export function orderDuration(startDate: number, order: Order | MergedOrder): number {
-  const unadjustedStartTime = unadjustedOrderStartTime(order) || 0;
-  return unadjustedOrderStopTime(startDate, order) - unadjustedStartTime;
-}
-
-export function maybeMsToSeconds(duration: ?number): ?number {
-  if (duration) {
-    return duration / 1000;
-  }
-  return null;
-}
-
-export function wrapEvent(orderId: number | string, userId: number,
+function wrapEvent(orderId: number | string, userId: number,
   eventType: string = "event", comments: ?string = null,
   newState: Object = {}) {
   return {
@@ -107,4 +90,15 @@ export function wrapEvent(orderId: number | string, userId: number,
     created_at: moment().unix()*1000,
     order_id: orderId,
   }
+}
+
+export {
+  examStartTime,
+  groupIdentity,
+  hasComments,
+  orderDuration,
+  orderStopTime,
+  unadjustedOrderStartTime,
+  unadjustedOrderStopTime,
+  wrapEvent,
 }

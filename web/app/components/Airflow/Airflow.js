@@ -15,19 +15,13 @@ import Notifications from "../Notifications";
 import PrintView from "../PrintView";
 
 import {
-  getPersonId,
-  isIE,
-  throttle,
-} from "../../lib/utility";
-
-import {
   NAVBAR_OFFSET,
   SCROLL_SPEED,
-} from "../../lib/constants";
-
-import {
+  getPersonId,
+  isIE,
   printOrders,
-} from "../../lib/utility";
+  throttle,
+} from "../../lib";
 
 import type {
   Images,

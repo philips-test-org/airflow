@@ -9,7 +9,7 @@ import {
   replaceOrder,
 } from "./actions";
 
-import {orderResourceId} from "./utility";
+import {getOrderResourceId} from "./selectors";
 
 const apmConnector = (store: Object) => (next: Function) => (action: Object) => {
   if (action.type !== "CONNECT_APM") return next(action);
@@ -110,7 +110,7 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
   const currentUser = R.path(["user", "currentUser", "id"], state);
 
   const orderIsInSelectedResources = (order, {board: {selectedResources}}) => (
-    R.contains(parseInt(orderResourceId(order)), R.pluck("id", selectedResources))
+    R.contains(parseInt(getOrderResourceId(order)), R.pluck("id", selectedResources))
   );
 
   if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {

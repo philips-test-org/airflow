@@ -3,11 +3,10 @@ import React, {PureComponent} from "react";
 import * as R from "ramda";
 
 import {
+  NAVBAR_OFFSET,
   cardStatuses,
   kioskNumber,
-} from "../../../lib/utility";
-
-import {NAVBAR_OFFSET} from "../../../lib/constants";
+} from "../../../lib";
 
 import type {
   Order,

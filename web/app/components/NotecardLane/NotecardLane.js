@@ -6,11 +6,10 @@ import moment from "moment";
 
 import {
   COL_WIDTH,
-  PIXELS_PER_SECOND,
   ItemTypes,
-} from "../../lib/constants";
-
-import {orderComments} from "../../lib/utility";
+  PIXELS_PER_SECOND,
+  getOrderComments,
+} from "../../lib";
 
 import ScaledCard from "../Notecard/ScaledCard";
 import DraggableNotecard from "../Notecard";
@@ -193,7 +192,7 @@ class NotecardLane extends Component<Props, State> {
         return (
           <Component
             key={order.id}
-            comments={orderComments(order)}
+            comments={getOrderComments(order)}
             isFiltered={isFiltered}
             isFocused={this.props.focusedOrderId === order.id}
             openModal={this.props.openModal}

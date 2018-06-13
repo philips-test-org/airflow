@@ -5,20 +5,17 @@ import moment from "moment";
 
 import {
   cardStatuses,
-  checkExamThenOrder,
-  getOrderResource,
-  getPatientName,
-  getPatientMrn,
-  hasComments,
-  orderingPhysician,
-  ordersByResource,
-  mapSelectedResources,
-} from "../../lib/utility";
-
-import {
+  getOrderResourceId,
   getOrderStartTime,
+  getOrderingPhysician,
+  getPatientMrn,
+  getPatientName,
+  getProcedure,
+  hasComments,
+  mapSelectedResources,
+  ordersByResource,
   unadjustedOrderStopTime,
-} from "../../lib/data";
+} from "../../lib";
 
 import {
   adjustOrder,
@@ -185,11 +182,11 @@ const innerMerge = (vals, startDate) => {
     // Setting to the last order's id to make card keys and OrderModal work.
     acc.id = !acc.id ? `${order.id}` : `${order.id}-${acc.id}`;
     acc.procedures = R.append({
-      orderedBy: orderingPhysician(order),
-      procedure: checkExamThenOrder(order, ["procedure", "description"]),
+      orderedBy: getOrderingPhysician(order),
+      procedure: getProcedure(order),
     }, acc.procedures)
     acc.orders = R.append(order, acc.orders)
-    acc.resourceId = acc.resourceId || getOrderResource(order)
+    acc.resourceId = acc.resourceId || getOrderResourceId(order)
     acc.startTime = acc.startTime == null ?
       getOrderStartTime(order) :
       R.min(acc.startTime, getOrderStartTime(order))

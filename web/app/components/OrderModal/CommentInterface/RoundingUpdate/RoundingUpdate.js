@@ -4,7 +4,7 @@ import React, {Component} from "react";
 import * as R from "ramda";
 import * as D from "diff";
 
-import {formatTimestamp} from "../../../../lib/utility";
+import {formatTimestamp} from "../../../../lib";
 
 import Button from "../../../Common/Button";
 

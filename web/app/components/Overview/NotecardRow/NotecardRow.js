@@ -2,7 +2,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 
-import {orderComments} from "../../../lib/utility";
+import {getOrderComments} from "../../../lib";
 
 import BaseNotecard from "../../Notecard/BaseNotecard";
 
@@ -65,7 +65,7 @@ class NotecardRow extends Component<Props> {
   renderCard = (order: Order) => (
     <BaseNotecard
       key={order.id}
-      comments={orderComments(order)}
+      comments={getOrderComments(order)}
       isFiltered={R.contains(order.id, this.props.filteredOrderIds)}
       isFocused={this.props.focusedOrderId === order.id}
       openModal={this.props.openModal}
