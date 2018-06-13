@@ -71,7 +71,8 @@ class KioskNotecard extends PureComponent<Props> {
   }
 
   cardColor() {
-    return cardStatuses(this.props.order, ["color"], {color: "#ddd"});
+    const {color} = cardStatuses(this.props.order, ["color"], {color: "#ddd"});
+    return color;
   }
 
   openModal = () => {};
