@@ -33,9 +33,8 @@ if (process.env.NODE_ENV !== "production" && process.env.DEBUG === "true") {
 // Make sure the target element exists before attempting to render.
 const target = "#workspace";
 if ($(target).length > 0) {
-  const data = $(target).data();
-  const spinnerUrl = R.prop("spinnerurl", data);
-  const ssoUrl = R.prop("ssourl", data);
+  const spinnerUrl = $(target).data("spinnerurl");
+  const ssoUrl = $(target).data("ssourl");
   const view = $(".active .view-changer").data("viewType");
   const props = {
     board: {
