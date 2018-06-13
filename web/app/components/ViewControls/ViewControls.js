@@ -45,12 +45,23 @@ class ViewControls extends PureComponent<Props, State> {
     }
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const {viewType: newType} = this.props;
+    const {viewType: oldType} = prevProps;
+    if (oldType !== newType) {
+      // Reset Search
+      this.clearSearch();
+    }
+  }
+
   onChangeFilter = ({target}: SyntheticInputEvent<HTMLInputElement>) => {
     this.props.filterOrders(target.value);
   }
 
   clearSearch = () => {
-    this.searchInput.current.value = "";
+    if (this.searchInput && this.searchInput.current) {
+      this.searchInput.current.value = "";
+    }
     this.props.filterOrders("");
   }
 
