@@ -5,7 +5,7 @@ import {DragDropContext} from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import moment from "moment";
 
-import {wrapEvent} from "../../lib/data";
+import {wrapEvent} from "../../lib";
 
 import NotecardLanes from "./NotecardLanes";
 import RightNow from "./RightNow";

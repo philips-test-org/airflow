@@ -26,7 +26,7 @@ import {
 
 import type {Saga} from "redux-saga";
 
-import {mapSelectedResources} from "../../lib/utility";
+import {mapSelectedResources} from "../../lib";
 
 const {
   ADJUST_ORDER,

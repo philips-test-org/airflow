@@ -3,7 +3,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 
-import {formatTimestamp} from "../../../lib/utility";
+import {formatTimestamp} from "../../../lib";
 
 import type {
   ImageViewer,

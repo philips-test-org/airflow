@@ -8,7 +8,7 @@ import {Provider} from "react-redux";
 import * as R from "ramda";
 
 import store from "./lib/store";
-import {isIE} from "./lib/utility";
+import {isIE} from "./lib";
 
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";

@@ -6,18 +6,12 @@ import moment from "moment";
 import {
   checkExamThenOrder,
   formatTimestamp,
-  maybeMsToSeconds,
-} from "../../../lib/utility";
-
-import {
   getAppointmentTime,
   getPatientType,
   getProcedure,
-} from "../../../lib/selectors";
-
-import {
+  maybeMsToSeconds,
   orderDuration,
-} from "../../../lib/data";
+} from "../../../lib";
 
 import type {
   Order,
