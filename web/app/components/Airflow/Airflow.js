@@ -97,7 +97,6 @@ class Airflow extends Component<Props, State> {
     // Setup
     this.props.connectAPM();
 
-    this.setupViewChangeHandlers();
     // $FlowFixMe
     if (!isIE() || isIE() > 9) {
       this.setupViewChangeHandlers();
