@@ -23,6 +23,8 @@ ASSETS="precompile" RAILS_RELATIVE_URL_ROOT="/$APPNAME" RAILS_ENV=production jru
 echo "Warblizer: Getting React/JS dependencies"
 yarn global add webpack
 yarn global add webpack-cli
+yarn link webpack
+yarn link webpack-cli
 yarn install --production
 
 echo "Warblizer: Building javascript bundle"
