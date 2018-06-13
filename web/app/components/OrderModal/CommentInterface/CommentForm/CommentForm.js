@@ -3,6 +3,8 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 
+import {avatarPath} from "../../../../lib";
+
 import Button from "../../../Common/Button";
 
 type Props = {
@@ -28,11 +30,12 @@ class CommentForm extends Component<Props, State> {
   }
 
   render() {
+    const avatarSrc = avatarPath(this.props.userId);
     return (
       <form>
         <div className="comment">
           <div className="avatar">
-            <img className="avatar" src={`/avatar/${this.props.userId}`} />
+            <img className="avatar" src={avatarSrc} />
           </div>
           <div className="body panel panel-default">
             <div className="panel-heading">

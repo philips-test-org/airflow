@@ -8,6 +8,7 @@ import {
 } from "./selectors";
 
 import {
+  APP_ROOT,
   STATUS_CHECKS,
 } from "./constants";
 
@@ -16,6 +17,8 @@ import type {
   Order,
   Resource,
 } from "../types";
+
+const avatarPath = (userId: number) => `${APP_ROOT}/avatar/${userId}`;
 
 // Remove "^" from name strings and rejoin comma separated.
 const formatName = R.compose(R.join(", "), R.reject(R.isEmpty), R.split("^"));
@@ -104,6 +107,7 @@ const throttle = (func: Function, limit: number) => {
 
 
 export {
+  avatarPath,
   cardStatuses,
   checkExamThenOrder,
   formatName,

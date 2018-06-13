@@ -4,19 +4,20 @@ import {
   POST,
 } from "./network";
 
-// $FlowFixMe
-const ROOT = harbingerjsRelativeRoot == "/" ? "" : harbingerjsRelativeRoot;
+import {
+  APP_ROOT,
+} from "./constants";
 
 const ENDPOINTS = {
-  exams: `${ROOT}/exams`,
-  exam: (id) => `${ROOT}/exams/${id}`,
-  kioskExams: `${ROOT}/exams/kiosk`,
-  personExams: (personId) => `${ROOT}/persons/${personId}/exams`,
-  avatar: (userId) => `${ROOT}/avatar/${userId}`,
-  events: `${ROOT}/events`,
-  resourceGroups: `${ROOT}/resource_groups`,
-  selectedResourceGroup: `${ROOT}/resource_groups/selected`,
-  currentEmployee: `${ROOT}/employees/current`,
+  exams: `${APP_ROOT}/exams`,
+  exam: (id) => `${APP_ROOT}/exams/${id}`,
+  kioskExams: `${APP_ROOT}/exams/kiosk`,
+  personExams: (personId) => `${APP_ROOT}/persons/${personId}/exams`,
+  avatar: (userId) => `${APP_ROOT}/avatar/${userId}`,
+  events: `${APP_ROOT}/events`,
+  resourceGroups: `${APP_ROOT}/resource_groups`,
+  selectedResourceGroup: `${APP_ROOT}/resource_groups/selected`,
+  currentEmployee: `${APP_ROOT}/employees/current`,
 }
 
 const fetchExams = (resourceGroup: String, resourceIds: Array<number>, date: number) => (

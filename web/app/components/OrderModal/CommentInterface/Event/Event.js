@@ -3,7 +3,10 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 
-import {formatTimestamp} from "../../../../lib";
+import {
+  avatarPath,
+  formatTimestamp,
+} from "../../../../lib";
 
 import type {
   DedupedEvent,
@@ -62,11 +65,12 @@ class Event extends Component<Props> {
 
   render() {
     const {employee, hideAvatar} = this.props;
+    const avatarSrc = avatarPath(employee.id);
     return (
       <div className="event">
         {hideAvatar ? null :
           <span className="avatar">
-            <img className="avatar" src={`/avatar/${employee.id}`} />
+            <img className="avatar" src={avatarSrc} />
           </span>
         }
         {this.renderVerbage()}

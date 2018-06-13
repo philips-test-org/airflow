@@ -37,6 +37,7 @@ import {
 } from "./selectors";
 
 import {
+  avatarPath,
   cardStatuses,
   checkExamThenOrder,
   formatName,
@@ -82,6 +83,7 @@ export {
   getProcedure,
   getScheduledDuration,
   // UTILITY
+  avatarPath,
   cardStatuses,
   checkExamThenOrder,
   formatName,
