@@ -1,6 +1,7 @@
 // @flow
 
 import {
+  APP_ROOT,
   PIXELS_PER_SECOND,
   NAVBAR_OFFSET,
   COL_WIDTH,
@@ -53,6 +54,7 @@ import {
 
 export {
   // CONSTANTS
+  APP_ROOT,
   PIXELS_PER_SECOND,
   NAVBAR_OFFSET,
   COL_WIDTH,

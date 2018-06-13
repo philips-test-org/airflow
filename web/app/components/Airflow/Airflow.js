@@ -15,6 +15,7 @@ import Notifications from "../Notifications";
 import PrintView from "../PrintView";
 
 import {
+  APP_ROOT,
   NAVBAR_OFFSET,
   SCROLL_SPEED,
   getPersonId,
@@ -304,21 +305,21 @@ class Airflow extends Component<Props, State> {
     this.kioskLink = document.getElementById("kiosk-link");
     if (this.kioskLink) {
       this.kioskLink.addEventListener("click",
-        (e: MouseEvent) => {this.viewClickHandler(e, "kiosk", "/kiosk")}
+        (e: MouseEvent) => {this.viewClickHandler(e, "kiosk", `${APP_ROOT}/kiosk`)}
       )
     }
 
     this.calendarLink = document.getElementById("calendar-link");
     if (this.calendarLink) {
       this.calendarLink.addEventListener("click",
-        (e: MouseEvent) => {this.viewClickHandler(e, "calendar", "/main/calendar")}
+        (e: MouseEvent) => {this.viewClickHandler(e, "calendar", `${APP_ROOT}/main/calendar`)}
       )
     }
 
     this.overviewLink = document.getElementById("overview-link");
     if (this.overviewLink) {
       this.overviewLink.addEventListener("click",
-        (e: MouseEvent) => {this.viewClickHandler(e, "overview", "/main/overview")}
+        (e: MouseEvent) => {this.viewClickHandler(e, "overview", `${APP_ROOT}/main/overview`)}
       )
     }
   }
