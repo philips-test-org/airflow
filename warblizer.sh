@@ -18,6 +18,7 @@ echo "Warblizer: Precompiling Assets (this takes a while)"
 ASSETS="precompile" RAILS_RELATIVE_URL_ROOT="/$APPNAME" RAILS_ENV=production jruby -J-XX:MaxPermSize=256m -S bundle exec rake assets:precompile
 
 echo "Warblizer: Getting React/JS dependencies"
+yarn global add webpack
 yarn install --production
 
 echo "Warblizer: Building javascript bundle"
