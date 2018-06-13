@@ -8,11 +8,8 @@ import {
   cardStatuses,
   formatName,
   kioskNumber,
-} from "../../lib/utility";
-
-import {
   wrapEvent,
-} from "../../lib/data";
+} from "../../lib";
 
 import CommentInterface from "./CommentInterface";
 import RoundingInterface from "./RoundingInterface";

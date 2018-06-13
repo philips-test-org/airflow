@@ -11,7 +11,7 @@ import {
   GeneralActions,
 } from "../actions";
 
-import {orderResourceId} from "../utility";
+import {getOrderResourceId} from "../selectors";
 
 const {
   ADJUST_ORDER_SUCCEEDED,
@@ -102,7 +102,7 @@ function adjustOrder(state, {orderId, originatingId, payload}) {
 
 function upsertOrders(state, {payload}) {
   const orderIsInSelectedResources = (order, {selectedResources}) => (
-    R.contains(orderResourceId(order), R.pluck("id", selectedResources))
+    R.contains(getOrderResourceId(order), R.pluck("id", selectedResources))
   );
 
   const updatedOrders = R.reduce((acc, order) => {

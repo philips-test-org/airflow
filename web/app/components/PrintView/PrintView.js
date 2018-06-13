@@ -4,9 +4,9 @@ import React, {Component} from "react";
 import * as R from "ramda";
 
 import {
-  checkExamThenOrder,
   formatName,
-} from "../../lib/utility";
+  getProcedure,
+} from "../../lib";
 
 import type {Order} from "../../types";
 
@@ -57,7 +57,7 @@ class PrintView extends Component<Props> {
       <div>
         <div>
           <strong>Procedure: </strong>
-          <span className="procedure">{checkExamThenOrder(order, ["procedure", "description"])}</span>
+          <span className="procedure">{getProcedure(order)}</span>
         </div>
         <div>
           <strong>Ordering Physician: </strong>

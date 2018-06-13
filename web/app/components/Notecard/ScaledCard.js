@@ -4,14 +4,11 @@ import * as R from "ramda";
 import moment from "moment";
 
 import {
+  getOrderStartTime,
   maybeMsToSeconds,
   orderDuration,
-  getOrderStartTime,
-} from "../../lib/data";
-
-import {
   PIXELS_PER_SECOND,
-} from "../../lib/constants";
+} from "../../lib";
 
 import type {ComponentType} from "react";
 

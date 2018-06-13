@@ -1,20 +1,17 @@
 // @flow
-
 import React, {Component} from "react";
 import * as R from "ramda";
 import moment from "moment";
 
 import {
-  appointmentTime,
   checkExamThenOrder,
   formatTimestamp,
+  getAppointmentTime,
   getPatientType,
-} from "../../../lib/utility";
-
-import {
+  getProcedure,
   maybeMsToSeconds,
   orderDuration,
-} from "../../../lib/data";
+} from "../../../lib";
 
 import type {
   Order,
@@ -57,11 +54,11 @@ class ExamDemographics extends Component<Props, State> {
             {this.renderDemographicsTableRow("Patient Type", getPatientType(order))}
             {this.renderDemographicsTableRow("Patient Class", this.siteClassName())}
             {this.renderDemographicsTableRow("Resource", this.resourceName())}
-            {this.renderDemographicsTableRow("Procedure", checkExamThenOrder(order, ["procedure", "description"]))}
+            {this.renderDemographicsTableRow("Procedure", getProcedure(order))}
             {this.renderDemographicsTableRow("Default Procedure Duration", this.defaultProcedureDuration())}
             {this.renderDemographicsTableRow("Sign In", formatTimestamp(order.rad_exam.rad_exam_time.sign_in))}
             {this.renderDemographicsTableRow("Check In", formatTimestamp(order.rad_exam.rad_exam_time.check_in))}
-            {this.renderDemographicsTableRow("Appointment", formatTimestamp(appointmentTime(order)))}
+            {this.renderDemographicsTableRow("Appointment", formatTimestamp(getAppointmentTime(order)))}
             {this.renderDemographicsTableRow("Appointment Duration", this.formatDuration(order.appointment_duration))}
             {this.renderDemographicsTableRow("Current Duration", this.formatDuration(maybeMsToSeconds(orderDuration(this.props.startDate, order))))}
             {this.renderDemographicsTableRow("Begin Exam", formatTimestamp(order.rad_exam.rad_exam_time.begin_exam))}

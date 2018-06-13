@@ -5,12 +5,12 @@ import * as R from "ramda";
 import {
   cardStatuses,
   formatName,
+  getOrderingPhysician,
   getPatientMrn,
   getPatientName,
   getPatientType,
   getProcedure,
-  orderingPhysician,
-} from "../../../lib/utility";
+} from "../../../lib";
 
 import type {
   MergedOrder,
@@ -95,7 +95,7 @@ class BaseNotecard extends PureComponent<Props> {
       return R.map((o) => this.renderProcedure(o.procedure, o.orderedBy), order.procedures);
     } else {
       const procedure = getProcedure(order);
-      const orderedBy = orderingPhysician(order);
+      const orderedBy = getOrderingPhysician(order);
       if (typeof procedure == "string") {
         return this.renderProcedure(procedure, orderedBy);
       }
