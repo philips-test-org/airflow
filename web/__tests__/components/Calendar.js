@@ -1,5 +1,7 @@
 import Calendar from "../../app/components/Calendar";
+import Airflow from "../../app/components/Airflow/Airflow";
 import BaseNotecard from "../../app/components/Notecard/BaseNotecard";
+import OrderModal from "../../app/components/OrderModal";
 
 import {flushAllPromises, mountAirflow} from "../helpers";
 
@@ -101,5 +103,15 @@ describe("<Calendar>", () => {
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
     expect(filteredCardsCount).toEqual(3);
+  });
+
+  it("closes the modal when clicking off the modal", async () => {
+    expect(airflow.find(OrderModal)).toHaveLength(0);
+
+    airflow.find(".notecard").first().simulate("click");
+    expect(airflow.find(OrderModal)).toHaveLength(1);
+
+    airflow.find("#order-modal").simulate("click");
+    expect(airflow.find(OrderModal)).toHaveLength(0);
   });
 });

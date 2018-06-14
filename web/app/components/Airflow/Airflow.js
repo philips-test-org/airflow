@@ -127,6 +127,12 @@ class Airflow extends Component<Props, State> {
       event.preventDefault();
       printOrders();
     });
+
+    key("esc, escape", (_event, _handler) => {
+      if (this.props.showModal) {
+        this.props.closeModal()
+      }
+    });
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -218,6 +224,7 @@ class Airflow extends Component<Props, State> {
         id="board"
         onScroll={throttle(this.updateScrollPosition, 100)}
         ref={el => {if (el) this.board = el}}
+        onClick={this.handleBoardClick}
       >
         <BodyComponent
           style={scrollStyle}
@@ -394,6 +401,17 @@ class Airflow extends Component<Props, State> {
       this.props.fetchKioskExams(this.props.selectedResourceGroup, R.keys(selectedResources))
     } else {
       this.props.fetchExams(this.props.selectedResourceGroup, R.keys(selectedResources))
+    }
+  }
+
+  handleBoardClick = (event: SyntheticEvent<>) => {
+    const target = event.target;
+    if (this.props.showModal) {
+      // If the click is on the transparent modal padding, id will be order-modal,
+      // if the click is elsewhere in the modal, it won't be.
+      if (target && R.prop("id", target) == "order-modal") {
+        this.props.closeModal();
+      }
     }
   }
 
