@@ -4,9 +4,9 @@ import * as R from "ramda";
 import amqpListener from "./amqp-listener-dist";
 
 import {
+  adjustOrderSucceeded,
   dispatchNotification,
   fetchExam,
-  replaceOrder,
 } from "./actions";
 
 import {getOrderResourceId} from "./selectors";
@@ -121,7 +121,7 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
       }).shift();
 
       store.dispatch(dispatchNotification({type: "flash", event: event}));
-      store.dispatch(replaceOrder(payload.id, payload));
+      store.dispatch(adjustOrderSucceeded(payload.id, payload.id, event));
     }
   } else if (exchange === "audit") {
     store.dispatch(fetchExam(payload.affected_row_id, table));

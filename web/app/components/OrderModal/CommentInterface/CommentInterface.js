@@ -24,7 +24,11 @@ type Props = {
   user: User,
 }
 
-type AnnotatedEvent = {|orderNumber: string, orderNumbers: Array<string>|} & EventT
+type AnnotatedEvent = {|
+  orderNumber: string,
+  orderNumbers: Array<string>,
+  mergedOrder: boolean,
+|} & EventT
 
 class CommentInterface extends Component<Props> {
   shouldComponentUpdate(nextProps: Props) {
