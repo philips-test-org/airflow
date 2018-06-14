@@ -45,7 +45,6 @@ class CommentForm extends Component<Props, State> {
               <textarea
                 name="comments"
                 className="form-control comment-box"
-                autoFocus
                 onChange={this.updateComment}
                 value={this.state.comment}
               />
