@@ -1,5 +1,4 @@
 import Calendar from "../../app/components/Calendar";
-import Airflow from "../../app/components/Airflow/Airflow";
 import BaseNotecard from "../../app/components/Notecard/BaseNotecard";
 import OrderModal from "../../app/components/OrderModal";
 

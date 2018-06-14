@@ -205,9 +205,9 @@ const innerMerge = (vals, startDate) => {
   }, orderAcc, vals)
 }
 
-const findFocusedOrder = (id, mergedOrders) => {
-  return R.find(R.propEq("id", id), mergedOrders)
-}
+const findFocusedOrder = (id, mergedOrders) => (
+  R.find(R.propEq("id", id), mergedOrders)
+)
 
 const AirflowContainer = connect(
   mapStateToProps,
