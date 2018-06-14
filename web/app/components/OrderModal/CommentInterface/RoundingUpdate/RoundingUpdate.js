@@ -4,7 +4,10 @@ import React, {Component} from "react";
 import * as R from "ramda";
 import * as D from "diff";
 
-import {formatTimestamp} from "../../../../lib";
+import {
+  avatarPath,
+  formatTimestamp,
+} from "../../../../lib";
 
 import Button from "../../../Common/Button";
 
@@ -42,11 +45,12 @@ class RoundingUpdate extends Component<Props, State> {
 
   render() {
     const {employee, created_at, comments, hideAvatar} = this.props
+    const avatarSrc = avatarPath(employee.id);
     return (
       <div className="comment">
         {hideAvatar ? null :
           <div className="avatar">
-            <img className="avatar" src={`/avatar/${employee.id}`} />
+            <img className="avatar" src={avatarSrc} />
           </div>
         }
         <div className="body">

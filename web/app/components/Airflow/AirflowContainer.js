@@ -30,6 +30,7 @@ import {
   closeOrderModal,
   markNotificationDisplayed,
   redirectToSSO,
+  showLoading,
   updateBrowserHistory,
   updateDate,
   updateViewType,
@@ -113,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(markNotificationDisplayed(id))
     },
     redirectToSSO: (ssoUrl: string, viewType: ViewType) => {
+      dispatch(showLoading());
       dispatch(redirectToSSO(ssoUrl, viewType));
     },
     updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => {

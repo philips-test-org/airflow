@@ -4,16 +4,20 @@ import {
   POST,
 } from "./network";
 
+import {
+  APP_ROOT,
+} from "./constants";
+
 const ENDPOINTS = {
-  exams: "/exams",
-  exam: (id) => `/exams/${id}`,
-  kioskExams: "/exams/kiosk",
-  personExams: (personId) => `/persons/${personId}/exams`,
-  avatar: (userId) => `/avatar/${userId}`,
-  events: "/events",
-  resourceGroups: "/resource_groups",
-  selectedResourceGroup: "/resource_groups/selected",
-  currentEmployee: "/employees/current",
+  exams: `${APP_ROOT}/exams`,
+  exam: (id) => `${APP_ROOT}/exams/${id}`,
+  kioskExams: `${APP_ROOT}/exams/kiosk`,
+  personExams: (personId) => `${APP_ROOT}/persons/${personId}/exams`,
+  avatar: (userId) => `${APP_ROOT}/avatar/${userId}`,
+  events: `${APP_ROOT}/events`,
+  resourceGroups: `${APP_ROOT}/resource_groups`,
+  selectedResourceGroup: `${APP_ROOT}/resource_groups/selected`,
+  currentEmployee: `${APP_ROOT}/employees/current`,
 }
 
 const fetchExams = (resourceGroup: String, resourceIds: Array<number>, date: number) => (

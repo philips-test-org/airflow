@@ -1,6 +1,6 @@
 defaults: &defaults
   docker:
-      - image: ctoland/circleci-build:0.0.7
+      - image: tpoulsen/react:latest
 
 version: 2
 jobs:

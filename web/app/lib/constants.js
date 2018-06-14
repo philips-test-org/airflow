@@ -4,6 +4,9 @@ import * as R from "ramda";
 
 import type {Order} from "../types";
 
+//$FlowFixMe
+export const APP_ROOT = harbingerjsRelativeRoot == "/" ? "" : harbingerjsRelativeRoot;
+
 export const PIXELS_PER_SECOND = 200.0 / 60.0 / 60.0;
 
 export const NAVBAR_OFFSET = 100;

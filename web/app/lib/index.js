@@ -1,6 +1,7 @@
 // @flow
 
 import {
+  APP_ROOT,
   PIXELS_PER_SECOND,
   NAVBAR_OFFSET,
   COL_WIDTH,
@@ -37,6 +38,7 @@ import {
 } from "./selectors";
 
 import {
+  avatarPath,
   cardStatuses,
   checkExamThenOrder,
   formatName,
@@ -52,6 +54,7 @@ import {
 
 export {
   // CONSTANTS
+  APP_ROOT,
   PIXELS_PER_SECOND,
   NAVBAR_OFFSET,
   COL_WIDTH,
@@ -82,6 +85,7 @@ export {
   getProcedure,
   getScheduledDuration,
   // UTILITY
+  avatarPath,
   cardStatuses,
   checkExamThenOrder,
   formatName,

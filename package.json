@@ -11,7 +11,7 @@
     "lint:watch": "yarn esw -w -f simple-detail --clear --color -c web/.eslintrc web --ignore-path web/.eslintignore",
     "flow:watch": "flow-watch",
     "start": "webpack --watch --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "yarn webpack --config webpack.prod.js",
     "watch": "webpack --watch -d --hide-modules --progress --env.DEBUG=true",
     "watch:hot": "webpack-dev-server --progress --inline --hot --config webpack.dev.js --port 3000",
     "test": "jest",

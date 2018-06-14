@@ -3,7 +3,10 @@
 import React, {PureComponent} from "react";
 import * as R from "ramda";
 
-import {formatTimestamp} from "../../../../lib";
+import {
+  avatarPath,
+  formatTimestamp,
+} from "../../../../lib";
 
 import type {
   User,
@@ -21,11 +24,12 @@ class Comment extends PureComponent<Props> {
 
   render() {
     const {employee, created_at, comments, hideAvatar} = this.props
+    const avatarSrc = avatarPath(employee.id);
     return (
       <div className="comment">
         {hideAvatar ? null :
           <div className="avatar">
-            <img className="avatar" src={`/avatar/${employee.id}`} />
+            <img className="avatar" src={avatarSrc} />
           </div>
         }
         <div className="body">

@@ -8,7 +8,10 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/lib/effects";
+
 import Api from "../api";
+
+import {APP_ROOT} from "../constants";
 
 import {
   GeneralActions,
@@ -54,9 +57,9 @@ function* redirectToSSO({ssoUrl, viewType}): Saga<void> {
   var origin = document.location.origin;
   var redirectTo;
   if (viewType == "calendar") {
-    redirectTo = origin + "/main/calendar";
+    redirectTo = `${origin}${APP_ROOT}/main/calendar`;
   } else {
-    redirectTo = origin + "/main/overview";
+    redirectTo = `${origin}${APP_ROOT}/main/overview`;
   }
   if (!R.empty(ssoUrl)) {
     window.location = `${ssoUrl}/UI/Login?goto=${encodeURIComponent(redirectTo)}`;

@@ -13,6 +13,7 @@ import resources from "./mockState/resources";
 global.React = React;
 global.harbingerjsApmHost = "localhost";
 global.harbingerjsApmPort = 4000;
+global.harbingerjsRelativeRoot = "/";
 
 enzyme.configure({adapter: new Adapter()});
 
