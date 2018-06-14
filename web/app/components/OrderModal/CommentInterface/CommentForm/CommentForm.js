@@ -12,21 +12,14 @@ type Props = {
   handleSubmit: (comment: string) => void,
 }
 
-type State = {
-  comment: string,
-}
-
-class CommentForm extends Component<Props, State> {
+class CommentForm extends Component<Props> {
+  commentField: ?HTMLTextAreaElement;
   constructor(props: Props) {
     super(props);
-
-    this.state = {
-      comment: "",
-    };
   }
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return !R.equals(nextProps, this.props) || !R.equals(nextState, this.state);
+  shouldComponentUpdate(nextProps: Props) {
+    return !R.equals(nextProps, this.props);
   }
 
   render() {
@@ -45,8 +38,7 @@ class CommentForm extends Component<Props, State> {
               <textarea
                 name="comments"
                 className="form-control comment-box"
-                onChange={this.updateComment}
-                value={this.state.comment}
+                ref={el => this.commentField = el}
               />
             </div>
             <div className="panel-footer">
@@ -65,15 +57,10 @@ class CommentForm extends Component<Props, State> {
     );
   }
 
-  updateComment = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const comment = event.target.value;
-    this.setState({comment: comment})
-  }
-
   handleSubmit = () => {
-    if (this.state.comment !== "") {
-      this.props.handleSubmit(this.state.comment);
-      this.setState({comment: ""});
+    if (this.commentField && this.commentField.value !== "") {
+      this.props.handleSubmit(this.commentField.value);
+      if (this.commentField) this.commentField.value = "";
     }
   }
 }

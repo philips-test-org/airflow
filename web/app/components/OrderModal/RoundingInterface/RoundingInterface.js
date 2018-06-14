@@ -20,6 +20,8 @@ type State = {
 }
 
 class RoundingInterface extends PureComponent<Props, State> {
+  roundingField: ?HTMLTextAreaElement;
+
   constructor(props: Props) {
     super(props);
 
@@ -75,8 +77,13 @@ class RoundingInterface extends PureComponent<Props, State> {
     )
   }
 
+  componentDidUpdate() {
+    if (this.state.editing && this.roundingField) {
+      this.roundingField.value = this.state.roundingValue;
+    }
+  }
+
   renderRoundingForm() {
-    const {roundingValue} = this.state;
     return (
       <form id="rounding-form" className="rounding">
         <div className="body">
@@ -86,9 +93,8 @@ class RoundingInterface extends PureComponent<Props, State> {
               className="form-control rounding-box"
               rows="9"
               autoFocus
-              onChange={this.updateRounding}
+              ref={el => this.roundingField = el }
               placeholder="No rounding data entered."
-              value={roundingValue}
             />
           </div>
           <div className="footer">
@@ -143,8 +149,14 @@ class RoundingInterface extends PureComponent<Props, State> {
   }
 
   submitRounding = () => {
-    this.props.handleSubmit(this.state.roundingValue);
-    this.setState({editing: false});
+    if (this.roundingField && this.roundingField.value !== "") {
+      this.props.handleSubmit(this.roundingField.value);
+      this.setState({
+        editing: false,
+        // $FlowFixMe
+        roundingValue: this.roundingField.value,
+      });
+    }
   }
 }
 
