@@ -38,7 +38,7 @@ class ResourceGroupsController < ApplicationController
 
   def create
     rg = ResourceGroup.create({group_name: params[:name]})
-    render :json => rg
+    render :json => rg, content_type: "applicaton/json"
   end
 
   def delete
