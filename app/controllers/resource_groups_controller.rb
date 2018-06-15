@@ -35,12 +35,12 @@ class ResourceGroupsController < ApplicationController
       selected_list = []
     end
 
-    render :json => (selected_list + search_list), content_type: "applicaton/json"
+    render :json => (selected_list + search_list).to_json
   end
 
   def create
     rg = ResourceGroup.create({group_name: params[:name]})
-    render :json => rg, content_type: "applicaton/json"
+    render :json => rg
   end
 
   def delete
