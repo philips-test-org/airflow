@@ -4,14 +4,14 @@ $(document).ready(function() {
 
 $(function(){
     //set the heights so that they aren't constantly changing
-    var height = _.max(_.map($("td .connected-sortable"), function(item){
-        return $(item).parent("td").height();
+    var height = Math.max.apply($.map($("td .connected-sortable"), function(item){
+      return $(item).parent("td").height();
     }));
     $("table.roles td").css("height", height);
 
     var fromList;
-    _.each($(".access-container"), function(accessContainer){
-        var id = $(accessContainer).attr("id")
+      $(".access-container").each(function(accessContainer){
+        var id = $(accessContainer).attr("id");
         $(accessContainer).find(".connected-sortable").sortable({
             connectWith: "#" + id + " .connected-sortable",
             start: function(event, ui){
@@ -30,7 +30,7 @@ $(function(){
             key = $(this).attr("data-key"),
             container = $(this).parents(".access-container");
 
-        data[key] = _.map(container.find(".should-send li"), function(listItem){
+        data[key] = $.map(container.find(".should-send li"), function(listItem){
             return $(listItem).attr("data-role-id");
         });
 
@@ -52,7 +52,7 @@ $(function(){
                 var successIcon = container.find('.success');
 
                 //update access lists
-                _.each(JSON.parse(response.configuration.configuration_json)[key], function(item){
+                $.each(JSON.parse(response.configuration.configuration_json)[key], function(item){
                     var selector = "li[data-role-id='" + item + "']";
                     if ( $(container).find(".all-access").find(selector).length == 0 ){
                         var copy = $(container).find(".no-access").find(selector).clone();
