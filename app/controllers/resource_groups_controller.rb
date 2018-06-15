@@ -33,7 +33,7 @@ class ResourceGroupsController < ApplicationController
       selected_list = []
     end
 
-    render :json => (selected_list + search_list)
+    render :json => (selected_list + search_list), content_type: "applicaton/json"
   end
 
   def create
