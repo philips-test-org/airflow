@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :check_session_username
 
   def get_entity_manager
     @entity_manager ||= Java::HarbingerSdk::DataUtils.getEntityManager
@@ -20,10 +21,7 @@ class ApplicationController < ActionController::Base
       # If request is JSON and the user is no longer authenticated, send JSON back stating this
       # So that React and use that to redirect the user to login
       format.json do
-        token_cookie_name = get_cookie_name_for_token
-        token_cookie = get_token_cookie(token_cookie_name)
-        valid_token_test = Java::harbinger.sdk.SSO.valid_token(token_cookie)
-        if !valid_token_test
+        if !valid_token?
           render json: {
             error: "Not authenticated",
             authenticated: false
@@ -34,6 +32,18 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def check_session_username
+    return if valid_token?
+    session.delete(:username)
+  end
+  
+  def valid_token?
+    token_cookie_name = get_cookie_name_for_token
+    token_cookie = get_token_cookie(token_cookie_name)
+    valid_token_test = Java::harbinger.sdk.SSO.valid_token(token_cookie)
+  end
+
 
   def get_employee
     @employee ||= Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)

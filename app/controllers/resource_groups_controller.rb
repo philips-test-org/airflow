@@ -8,7 +8,9 @@ class ResourceGroupsController < ApplicationController
   def index
     @resource_groups = ResourceGroup.all
     respond_to do |format|
-      format.html
+      format.html {
+        general_authentication
+      }
       format.json {
         render json: ResourceGroup.resource_group_hash(@entity_manager).to_json
       }
@@ -33,7 +35,7 @@ class ResourceGroupsController < ApplicationController
       selected_list = []
     end
 
-    render :json => (selected_list + search_list)
+    render :json => (selected_list + search_list).to_json
   end
 
   def create
