@@ -20,27 +20,8 @@ Handlebars.registerHelper('notification_type',function(type) {
   }
 });
 
-Handlebars.registerHelper('event_type_check',function(type) {
-  if (type == "comment" || type == "event") return true;
-  else return false;
-});
-
 /* General Helpers */
 Handlebars.registerHelper('or',function(a,b) {
   if (a == "" || a == undefined || a == null) return b;
   else return a;
 });
-
-Handlebars.registerHelper('render_event',function(event) {
-  //var template = "event" + event.event_type.charAt(0).toUpperCase() + event.event_type.slice(1);
-  if (event.event_type == 'comment') {
-    return new Handlebars.SafeString(application.templates.eventComment(event));
-  } else if (event.event_type == 'location_update') {
-    return new Handlebars.SafeString(application.templates.eventLocationChange(event));
-  } else if (event.event_type === "rounding-update") {
-    return new Handlebars.SafeString(application.templates.eventRoundingUpdate(event));
-  } else {
-    return new Handlebars.SafeString(application.templates.eventStateChange(event));
-  }
-});
-
