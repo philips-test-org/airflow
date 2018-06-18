@@ -170,8 +170,9 @@ function updateResources(state, {resources, selectedResourceGroup}) {
 }
 
 function updateDate(state, {date}) {
+  // Set to the start of the day. By default, react-dates does this already.
   return R.merge(state, {
-    startDate: date,
+    startDate: date.startOf("day"),
   });
 }
 

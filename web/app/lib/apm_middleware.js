@@ -117,7 +117,7 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
 
   if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
     const examstart = getOrderStartTime(payload);
-    const isToday = examstart == null || moment(examstart).startOf('day').unix()*1000 == state.board.startDate;
+    const isToday = examstart == null || moment(examstart).startOf("day").unix()*1000 == state.board.startDate;
 
     if (employee_id != currentUser && orderIsInSelectedResources(payload, state) && isToday) {
       const events = payload.events;

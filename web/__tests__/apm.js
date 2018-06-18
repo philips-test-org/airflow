@@ -5,7 +5,10 @@ import fetchMock from "fetch-mock";
 
 import storeFunc from "../app/lib/store";
 import {processMessage} from "../app/lib/apm_middleware";
-import {updateSelectedResourceGroup} from "../app/lib/actions";
+import {
+  updateDate,
+  updateSelectedResourceGroup,
+} from "../app/lib/actions";
 import {flushAllPromises} from "./helpers";
 
 import sameResourceMessage from "./mockState/messages/sameResourceMessage";
@@ -53,11 +56,30 @@ describe("APM messages coming from airflow", () => {
     store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
 
     const beginExamLens = lensPath(["payload", "adjusted", "start_time"]);
-    const pastDate = moment().add(-10, "days").unix() * 1000;
+    const pastDate = moment().add(-10, "days");
     const message = set(beginExamLens, pastDate, sameResourceMessage);
     processMessage(message, store);
 
     expect(store.getState().board.notifications).toHaveLength(0);
+  });
+
+  it("does add a notification when the message is for an order that doesn't take place today", () => {
+    expect(store.getState().board.notifications).toHaveLength(0);
+
+    // Update the redux state to set startDate to a pastDate.
+    const pastDate = moment().add(-10, "days");
+    store.dispatch(updateDate(pastDate));
+    expect(store.getState().board.startDate).toEqual(pastDate);
+
+    store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
+
+    // Modify the order start time to equal pastDate.
+    const beginExamLens = lensPath(["payload", "adjusted", "start_time"]);
+    const message = set(beginExamLens, pastDate, sameResourceMessage);
+
+    processMessage(message, store);
+
+    expect(store.getState().board.notifications).toHaveLength(1);
   });
 });
 
