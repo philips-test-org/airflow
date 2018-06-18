@@ -30,6 +30,7 @@ const {
   UPDATE_VIEW_TYPE,
   UPDATE_WIDTH,
   UPDATE_SELECTED_RESOURCE_GROUP,
+  UPDATE_WIDTH_MULTIPLIER,
 } = BoardActions;
 
 const {
@@ -47,6 +48,7 @@ const initialState = {
   loading: true,
   images: {},
   width: 0,
+  widthMultipliers: {},
   examsByPerson: {},
 }
 
@@ -76,6 +78,7 @@ function board(state: Object = initialState, action: Object) {
     case UPDATE_WIDTH: return updateWidth(state, action);
     case DISPATCH_NOTIFICATION: return dispatchNotification(state, action);
     case MARK_NOTIFICATION_DISPLAYED: return markNotificationDisplayed(state, action);
+    case UPDATE_WIDTH_MULTIPLIER: return updateWidthMultiplier(state, action);
     case REQUEST_FAILED: return state;
     default: return state;
   }
@@ -216,6 +219,11 @@ function markNotificationDisplayed(state, {id}) {
     "displayed",
   ]);
   return R.set(notificationLens, true, state);
+}
+
+function updateWidthMultiplier(state, {resourceId, widthMultiplier}) {
+  const widthMultipliers = R.merge(state.widthMultipliers, {[resourceId]: widthMultiplier});
+  return R.merge(state, {widthMultipliers});
 }
 
 const associateGroupIdentity = (selectedResources, startDate, payload) => R.assoc(

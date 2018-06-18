@@ -34,6 +34,7 @@ type Props = {
   ordersLoaded: boolean,
   orderGroups: {[string]: Array<Order>},
   resources: {[string]: Array<Resource>},
+  updateWidthMultiplier: (resourceID: number, widthMultiplier: number) => void,
   scrollToCoordinates: (x: number, y: number) => void,
   selectedResourceGroup: string,
   selectedResources: {[number]: string},
@@ -74,14 +75,6 @@ class Calendar extends Component<Props> {
     return (
       <div className="grid-wrapper">
         <table id="time-grid">
-          <thead>
-            <tr className="heading">
-              <th className="fixed-column fixed-row" style={style.th}>
-                <div className="header-spacer">&nbsp;</div>
-              </th>
-              {R.map(this.renderHeading, R.keys(this.props.selectedResources))}
-            </tr>
-          </thead>
           <tbody>
             <tr>
               <td
@@ -97,6 +90,7 @@ class Calendar extends Component<Props> {
                 orders={this.props.ordersMergedByGroup}
                 filteredOrderIds={this.props.filteredOrderIds}
                 focusedOrderId={this.props.focusedOrderId}
+                updateWidthMultiplier={this.props.updateWidthMultiplier}
                 scrollToCoordinates={this.scrollToCoordinates}
                 selectedResources={this.props.selectedResources}
                 startDate={this.props.startDate}
@@ -110,19 +104,6 @@ class Calendar extends Component<Props> {
 
         {this.renderRightNow()}
       </div>
-    )
-  }
-
-  renderHeading = (resourceId: number) => {
-    const resourceName = this.props.selectedResources[resourceId];
-    const style = {
-      transform: `translateY(${this.props.headerOffset}px)`,
-      msTransform: `translateY(${this.props.headerOffset}px)`,
-    };
-    return (
-      <th key={`${resourceId}-heading`} className="relative-column fixed-row" style={style}>
-        <div className="header-spacer">{resourceName}</div>
-      </th>
     )
   }
 
