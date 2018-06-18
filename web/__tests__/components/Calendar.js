@@ -1,7 +1,12 @@
 import Calendar from "../../app/components/Calendar";
 import BaseNotecard from "../../app/components/Notecard/BaseNotecard";
 import OrderModal from "../../app/components/OrderModal";
+import ViewControls from "../../app/components/ViewControls"
+import fetchMock from "fetch-mock";
+import moment from "moment";
 
+import afterMidnightExams from "../mockState/afterMidnightExams";
+import resources from "../mockState/resources";
 import {flushAllPromises, mountAirflow} from "../helpers";
 
 describe("<Calendar>", () => {
@@ -112,5 +117,36 @@ describe("<Calendar>", () => {
 
     airflow.find("#order-modal").simulate("click");
     expect(airflow.find(OrderModal)).toHaveLength(0);
+  });
+});
+
+describe("<Calendar> card", () => {
+  it("does not have a duration that goes past midnight", async () => {
+    // Couldn't figure out how to change the exams fetch without redoing them all
+    fetchMock.restore();
+    fetchMock.get("glob:/exams*", afterMidnightExams, {overwriteRoutes: false});
+    fetchMock.get("/resource_groups?", resources);
+    fetchMock.get("/resource_groups/selected?", {"resource": "My group"});
+    fetchMock.get("/employees/current?", {
+      active: true,
+      fte: 1,
+      id: 21,
+      name :"Some Person",
+      person_id: 21,
+      updated_at: "2017-11-09T14:00:37-05:00",
+    });
+    fetchMock.get("glob:/persons/*", []);
+    
+    const airflow = mountAirflow("calendar").airflow;
+    await flushAllPromises();
+    airflow.update();
+
+    const calendar = airflow.find(Calendar);
+    airflow.find(ViewControls).instance().selectDate(moment("2018-05-16T04:00:00.000Z"));
+    await flushAllPromises();
+
+    calendar.find(BaseNotecard).forEach(card => {
+      expect(card.prop("style").height).toEqual("162623px");
+    });
   });
 });
