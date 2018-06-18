@@ -27,7 +27,8 @@ type Props = {
   openModal: (Order) => void,
   movedOrder: Order,
   movementOffset: {x: number, y: number},
-  resourceId: string,
+  resourceId: number,
+  updateWidthMultiplier: (resourceId: number, widthMultiplier: number) => void,
   scrollToCoordinates: (x: number, y: number) => void,
   showGhostEndTime: boolean,
   startDate: number,
@@ -217,6 +218,8 @@ class NotecardLane extends Component<Props, State> {
     )(this.cardOverlaps());
     const hasOverlap = R.length(overlappingCards) > 0;
     const widthMultiplier = hasOverlap ? this.laneWidthMultiplier(overlappingCards) : 1;
+
+    this.props.updateWidthMultiplier(this.props.resourceId, widthMultiplier)
 
     this.setState({
       overlappingCards,

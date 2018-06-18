@@ -36,6 +36,7 @@ import {
   updateViewType,
   updateWidth,
   updateSelectedResourceGroup,
+  updateWidthMultiplier,
 } from "../../lib/actions";
 
 import Airflow from "./Airflow";
@@ -68,6 +69,7 @@ const mapStateToProps = ({board, user}: Object) => {
     ssoUrl: user.ssoUrl,
     startDate: board.startDate,
     type: board.type,
+    widthMultipliers: board.widthMultipliers,
   };
 };
 
@@ -131,6 +133,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
       dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
+    },
+    updateWidthMultiplier: (resourceId: number, widthMultiplier: number) => {
+      dispatch(updateWidthMultiplier(resourceId, widthMultiplier));
     },
   }
 };

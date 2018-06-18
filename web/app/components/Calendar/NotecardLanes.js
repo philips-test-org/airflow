@@ -15,6 +15,7 @@ type Props = {
   openModal: (Order) => void,
   orders: {[number]: Array<Order>},
   scrollToCoordinates: (x: number, y: number) => void,
+  updateWidthMultiplier: (resourceId: number, widthMultiplier: number) => void,
   selectedResources: {[number]: string},
   startDate: number,
   type: ViewType,
@@ -40,6 +41,7 @@ class NotecardLanes extends Component<Props> {
         openModal={this.props.openModal}
         orders={orders}
         resourceId={parseInt(resourceId)}
+        updateWidthMultiplier={this.props.updateWidthMultiplier}
         scrollToCoordinates={this.props.scrollToCoordinates}
         showGhostEndTime
         startDate={this.props.startDate}

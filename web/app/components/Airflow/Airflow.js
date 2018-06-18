@@ -16,6 +16,8 @@ import PrintView from "../PrintView";
 
 import {
   APP_ROOT,
+  COL_WIDTH,
+  HOURBAR_WIDTH,
   NAVBAR_OFFSET,
   SCROLL_SPEED,
   getPersonId,
@@ -60,7 +62,7 @@ type Props = {
   redirectToSSO: (ssoUrl: string, destination: ViewType) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
-  selectedResources: {[string]: string},
+  selectedResources: {[number]: string},
   showModal: boolean,
   ssoUrl: string,
   startDate: number,
@@ -70,6 +72,8 @@ type Props = {
   updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
   updateViewType: (updatedView: ViewType) => void,
   updateWidth: (updatedWidth: number) => void,
+  updateWidthMultiplier: (resourceId: number, widthMultiplier: number) => void,
+  widthMultipliers: {[number]: number},
 }
 
 type State = {
@@ -220,36 +224,60 @@ class Airflow extends Component<Props, State> {
     );
 
     return (
-      <div
-        id="board"
-        onScroll={throttle(this.updateScrollPosition, 100)}
-        ref={el => {if (el) this.board = el}}
-        onClick={this.handleBoardClick}
-      >
-        <BodyComponent
-          style={scrollStyle}
-          headerOffset={this.headerOffset()}
-          boardWidth={this.props.boardWidth}
-          gridPosition={this.state.gridPosition}
-          filteredOrderIds={this.state.filteredOrderIds}
-          focusedOrderId={this.state.focusedOrderId}
-          scrollToTop={this.scrollToTop}
-          scrollToCoordinates={this.scrollToCoordinates}
-          {...this.props}
-          updateWidth={throttledWidthUpdate}
-          openModal={this.openModal}
-        />
-        {this.renderOrderModal()}
-        <Notifications
-          notifications={this.props.notifications}
-          markNotificationDisplayed={this.props.markNotificationDisplayed}
-        />
-        <PrintView
-          orders={this.props.orders}
-          selectedResources={this.props.selectedResources}
-        />
+      <div>
+        <div id="board-headings">
+          <div id="white-spacer">&nbsp;</div>
+          <table id="time-headings" style={{left: HOURBAR_WIDTH - translateX}}>
+            <tbody>
+              <tr className="heading">
+                {R.map(this.renderHeading, R.keys(this.props.selectedResources))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          id="board"
+          onScroll={throttle(this.updateScrollPosition, 100)}
+          ref={el => {if (el) this.board = el}}
+          onClick={this.handleBoardClick}
+        >
+          <BodyComponent
+            style={scrollStyle}
+            headerOffset={this.headerOffset()}
+            boardWidth={this.props.boardWidth}
+            gridPosition={this.state.gridPosition}
+            filteredOrderIds={this.state.filteredOrderIds}
+            focusedOrderId={this.state.focusedOrderId}
+            updateWidthMultiplier={this.props.updateWidthMultiplier}
+            scrollToTop={this.scrollToTop}
+            scrollToCoordinates={this.scrollToCoordinates}
+            {...this.props}
+            updateWidth={throttledWidthUpdate}
+            openModal={this.openModal}
+          />
+          {this.renderOrderModal()}
+          <Notifications
+            notifications={this.props.notifications}
+            markNotificationDisplayed={this.props.markNotificationDisplayed}
+          />
+          <PrintView
+            orders={this.props.orders}
+            selectedResources={this.props.selectedResources}
+          />
+        </div>
       </div>
     );
+  }
+
+  renderHeading = (resourceId: number) => {
+    const resourceName = this.props.selectedResources[resourceId];
+    const widthMultiplier = this.props.widthMultipliers[resourceId] || 1;
+    const style = {minWidth: (COL_WIDTH * widthMultiplier) + (widthMultiplier > 1 ? 0 : 1)};
+    return (
+      <td key={`${resourceId}-heading`} style={style}>
+        <h1 className="header-spacer">{resourceName}</h1>
+      </td>
+    )
   }
 
   renderOrderModal() {

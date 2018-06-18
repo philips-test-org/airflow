@@ -36,6 +36,7 @@ import {
   updateSelectedResourceGroup,
   dispatchNotification,
   markNotificationDisplayed,
+  updateWidthMultiplier,
 } from "./board";
 
 //USER
@@ -80,6 +81,7 @@ export {
   updateSelectedResourceGroup,
   dispatchNotification,
   markNotificationDisplayed,
+  updateWidthMultiplier,
   // USER
   UserActions,
   fetchAvatar,

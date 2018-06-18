@@ -135,7 +135,6 @@ $card-color: #fff;
     height: unquote($hour-unit);
     width: 50px;
     border-bottom: unquote($border-unit) solid $grid-color;
-    border-right: unquote($border-unit) solid $grid-color;
     padding-right: 5px;
   }
 
@@ -145,33 +144,18 @@ $card-color: #fff;
 
   #time-grid {
     position: absolute;
-    border-collapse: separate;
 
     .fixed-column {
       background-color: #FFFFFF;
       z-index: 106;
       width: 50px;
-
-      &.fixed-row {
-        > .header-spacer {
-          border-right: unquote($border-unit) solid $grid-color;
-          border-left: none;
-        }
-      }
     }
 
     .relative-column {
       position: relative;
       width: unquote($col-unit);
-      &~ .relative-column {
-        border-left: unquote($border-unit) solid $grid-color;
-      }
-    }
-
-    .header-spacer {
-      margin-bottom: 0;
-      padding: 0.5em 0 0.5em 0;
-      border-bottom: unquote($border-unit) solid $grid-color !important;
+      border-left: unquote($border-unit) solid $grid-color;
+      border-right: unquote($border-unit) solid $grid-color;
     }
 
     th {
@@ -180,10 +164,6 @@ $card-color: #fff;
       height: 2em;
       text-align: center;
       z-index: 108;
-
-      &:last-of-type {
-        border-right: unquote($border-unit) solid $grid-color;
-      }
     }
 
     tbody {
@@ -213,11 +193,49 @@ $card-color: #fff;
     }
   }
 
+  #board-headings {
+    position: fixed;
+    left: 0;
+    top: 100px;
+    z-index: 105;
+  }
+  #white-spacer {
+    position: fixed;
+    left: 0px;
+    top: 100px;
+    width: 51px;
+    border-bottom: 1px solid $grid-color;
+    border-right: 1px solid $grid-color;
+    height: 49px;
+    background-color: #fff;
+    z-index: 106;
+  }
+  #time-headings {
+    position: absolute;
+    left: 50px;
+    z-index: 104;
+
+    tr.heading td {
+      text-align: center;
+      border-right: 1px solid $grid-color;
+      border-bottom: 1px solid $grid-color;
+      height: 48px;
+
+      h1 {
+        font-size: 20px;
+        font-weight: normal;
+        margin: 5px;
+        padding: 0.5em 0 0.5em 0;
+        margin: 0;
+      }
+    }
+  }
+
   #board {
     position: absolute;
     left: 0;
     right: 0;
-    top: 100px;
+    top: 149px;
     bottom: 0;
     overflow-y: auto;
   }

@@ -37,6 +37,7 @@ const BoardActions = {
   // NOTIFICATIONS
   DISPATCH_NOTIFICATION: "DISPATCH_NOTIFICATION",
   MARK_NOTIFICATION_DISPLAYED: "MARK_NOTIFICATION_DISPLAYED",
+  UPDATE_WIDTH_MULTIPLIER: "UPDATE_WIDTH_MULTIPLIER",
 }
 
 // Action generator functions
@@ -221,6 +222,14 @@ const markNotificationDisplayed = (id: number | string) => {
   }
 }
 
+const updateWidthMultiplier = (resourceId: number, widthMultiplier: number) => {
+  return {
+    type: BoardActions.UPDATE_WIDTH_MULTIPLIER,
+    resourceId,
+    widthMultiplier,
+  }
+}
+
 
 export {
   BoardActions,
@@ -247,4 +256,5 @@ export {
   updateWidth,
   dispatchNotification,
   markNotificationDisplayed,
+  updateWidthMultiplier,
 }
