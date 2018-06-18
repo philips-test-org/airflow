@@ -93,10 +93,12 @@ function adjustOrder(state, {orderId, payload}) {
   const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
   const eventLens = R.compose(orderLens, R.lensProp("events"));
   const adjustedLens = R.compose(orderLens, R.lensProp("adjusted"));
+  const order = R.view(orderLens, state);
+  if (R.isNil(order)) return state;
   return R.compose(
     R.over(eventLens, R.prepend(payload)),
     R.over(adjustedLens, R.mergeDeepLeft(payload.new_state)),
-  )(state)
+  )(state);
 }
 
 function upsertOrders(state, {payload}) {
