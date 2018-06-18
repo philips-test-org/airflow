@@ -36,7 +36,8 @@ describe("<Airflow>", () => {
     airflow.update();
 
     // We have 4 resources, plus the spacer to the left of the column headers
-    expect(airflow.find("#time-grid .heading .header-spacer")).toHaveLength(5);
+    expect(airflow.find("#board-headings .heading").children()).toHaveLength(4);
+    expect(airflow.find("#board-headings #white-spacer")).toHaveLength(1);
   });
 
   it("renders a row for each selected resource, even if it has no orders", async () => {
