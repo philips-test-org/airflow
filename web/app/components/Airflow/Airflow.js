@@ -169,7 +169,7 @@ class Airflow extends Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <div className={this.props.type === "overview" ? "overview" : ""}>
         <ErrorBoundary id="view-controls">
           <ViewControls
             fetchExams={this.props.fetchExams}
@@ -225,16 +225,7 @@ class Airflow extends Component<Props, State> {
 
     return (
       <div>
-        <div id="board-headings">
-          <div id="white-spacer">&nbsp;</div>
-          <table id="time-headings" style={{left: HOURBAR_WIDTH - translateX}}>
-            <tbody>
-              <tr className="heading">
-                {R.map(this.renderHeading, R.keys(this.props.selectedResources))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        {this.props.type !== "overview" && this.renderHeadings(translateX)}
         <div
           id="board"
           onScroll={throttle(this.updateScrollPosition, 100)}
@@ -265,6 +256,21 @@ class Airflow extends Component<Props, State> {
             selectedResources={this.props.selectedResources}
           />
         </div>
+      </div>
+    );
+  }
+
+  renderHeadings(translateX: number) {
+    return (
+      <div id="board-headings">
+        <div id="white-spacer">&nbsp;</div>
+        <table id="time-headings" style={{left: HOURBAR_WIDTH - translateX}}>
+          <tbody>
+            <tr className="heading">
+              {R.map(this.renderHeading, R.keys(this.props.selectedResources))}
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   }

@@ -239,6 +239,9 @@ $card-color: #fff;
     bottom: 0;
     overflow-y: auto;
   }
+  .overview #board {
+    top: 100px;
+  }
 
   .notecard.scaled {
     position: absolute;
