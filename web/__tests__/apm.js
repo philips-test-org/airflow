@@ -1,3 +1,6 @@
+import {lensPath, set} from "ramda";
+import moment from "moment";
+
 import fetchMock from "fetch-mock";
 
 import storeFunc from "../app/lib/store";
@@ -40,6 +43,19 @@ describe("APM messages coming from airflow", () => {
 
     store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
     processMessage(differentResourceMessage, store);
+
+    expect(store.getState().board.notifications).toHaveLength(0);
+  });
+
+  it("does not add a notification when the message is for an order that doesn't take place today", () => {
+    expect(store.getState().board.notifications).toHaveLength(0);
+
+    store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
+
+    const beginExamLens = lensPath(["payload", "adjusted", "start_time"]);
+    const pastDate = moment().add(-10, "days").unix() * 1000;
+    const message = set(beginExamLens, pastDate, sameResourceMessage);
+    processMessage(message, store);
 
     expect(store.getState().board.notifications).toHaveLength(0);
   });
