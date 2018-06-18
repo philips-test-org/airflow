@@ -63,7 +63,7 @@ describe("APM messages coming from airflow", () => {
     expect(store.getState().board.notifications).toHaveLength(0);
   });
 
-  it("does add a notification when the message is for an order that doesn't take place today", () => {
+  it("does add a notification when the message is for an order that does take place on the current day", () => {
     expect(store.getState().board.notifications).toHaveLength(0);
 
     // Update the redux state to set startDate to a pastDate.
