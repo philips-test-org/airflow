@@ -28,10 +28,10 @@ describe("APM messages coming from airflow", () => {
 
   it("adds an app notification when the message contains an order is within a selected resource", () => {
     expect(store.getState().board.notifications).toHaveLength(0);
-    
+
     store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
     processMessage(sameResourceMessage, store);
-    
+
     expect(store.getState().board.notifications).toHaveLength(1);
   });
 
@@ -65,12 +65,12 @@ describe("APM updates orders with messages from the platform", () => {
     fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource1]);
 
     expect(store.getState().board.orders).toHaveLength(0);
-    
+
     store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
     processMessage(auditSameResourceMessage, store);
 
     await flushAllPromises();
-    
+
     expect(store.getState().board.orders).toHaveLength(1);
   });
 
@@ -79,12 +79,12 @@ describe("APM updates orders with messages from the platform", () => {
     fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource3]);
 
     expect(store.getState().board.orders).toHaveLength(0);
-    
+
     store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
     processMessage(auditSameResourceMessage, store);
 
     await flushAllPromises();
-    
+
     expect(store.getState().board.orders).toHaveLength(0);
   });
 });
