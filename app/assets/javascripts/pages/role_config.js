@@ -10,7 +10,7 @@ $(function(){
     $("table.roles td").css("height", height);
 
     var fromList;
-      $(".access-container").each(function(accessContainer){
+    $(".access-container").each(function(_i, accessContainer){
         var id = $(accessContainer).attr("id");
         $(accessContainer).find(".connected-sortable").sortable({
             connectWith: "#" + id + " .connected-sortable",
