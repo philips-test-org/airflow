@@ -1,7 +1,9 @@
 //@flow
 
 import * as R from "ramda";
+import moment from "moment";
 import amqpListener from "./amqp-listener-dist";
+import {getOrderStartTime} from "./selectors";
 
 import {
   adjustOrderSucceeded,
@@ -114,7 +116,10 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
   );
 
   if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
-    if (employee_id != currentUser && orderIsInSelectedResources(payload, state)) {
+    const examstart = getOrderStartTime(payload);
+    const isToday = examstart == null || moment(examstart).startOf('day').unix()*1000 == state.board.startDate;
+
+    if (employee_id != currentUser && orderIsInSelectedResources(payload, state) && isToday) {
       const events = payload.events;
       const event = events.sort(function (x, y) {
         return new Date(y.updated_at) - new Date(x.updated_at);
