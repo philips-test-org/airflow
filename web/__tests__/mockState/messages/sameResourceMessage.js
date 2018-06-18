@@ -1,4 +1,6 @@
-const differentResourceMessage = {
+import moment from "moment";
+
+const sameResourceMessage = {
   routing_key: "airflow.location_update.791.769889.",
   payload: {
     visit_id: null,
@@ -63,7 +65,7 @@ const differentResourceMessage = {
         cancelled: null,
         begin_reg: null,
         begin_exam_event: null,
-        begin_exam: 1527002895000,
+        begin_exam: moment(),
         appointment_duration: null,
         appointment: 1527002895000,
       },
@@ -223,7 +225,7 @@ const differentResourceMessage = {
     appointment: 1527002895000,
     adjusted: {
       stop_time: 1527013908000,
-      start_time: 1527012018000,
+      start_time: moment(),
       resource_id: "1",
       onhold: true,
     },
@@ -231,4 +233,4 @@ const differentResourceMessage = {
   exchange: "web-application-messages",
 };
 
-export default differentResourceMessage;
+export default sameResourceMessage;
