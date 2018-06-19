@@ -1,7 +1,6 @@
 import Calendar from "../../app/components/Calendar";
 import BaseNotecard from "../../app/components/Notecard/BaseNotecard";
 import OrderModal from "../../app/components/OrderModal";
-import ViewControls from "../../app/components/ViewControls"
 import fetchMock from "fetch-mock";
 import moment from "moment";
 
@@ -136,17 +135,15 @@ describe("<Calendar> card", () => {
       updated_at: "2017-11-09T14:00:37-05:00",
     });
     fetchMock.get("glob:/persons/*", []);
-    
-    const airflow = mountAirflow("calendar").airflow;
+
+    const airflow = mountAirflow("calendar", {board: {startDate: moment("2018-05-16T04:00:00.000Z")}}).airflow;
     await flushAllPromises();
     airflow.update();
 
     const calendar = airflow.find(Calendar);
-    airflow.find(ViewControls).instance().selectDate(moment("2018-05-16T04:00:00.000Z"));
-    await flushAllPromises();
 
     calendar.find(BaseNotecard).forEach(card => {
-      expect(card.prop("style").height).toEqual("162623px");
+      expect(card.prop("style").height).toEqual("500px");
     });
   });
 });

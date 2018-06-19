@@ -1,5 +1,6 @@
 /* global React setImmediate */
 import {mount} from "enzyme";
+import {mergeDeepRight} from "ramda";
 import storeFunc from "../app/lib/store";
 import Airflow from "../app/components/Airflow";
 
@@ -16,8 +17,8 @@ export function flushAllPromises() {
   return new Promise(resolve => setImmediate(resolve));
 }
 
-export function mountAirflow(type) {
-  const props = {
+export function mountAirflow(type, startingProps = {}) {
+  const props = mergeDeepRight({
     board: {
       type,
       images: {spinner: "http://spinnerUrl"},
@@ -27,7 +28,7 @@ export function mountAirflow(type) {
       ssoUrl: "http://ssoUrl",
       hydrated: false,
     },
-  };
+  }, startingProps);
   const store = storeFunc(props);
 
   return {
