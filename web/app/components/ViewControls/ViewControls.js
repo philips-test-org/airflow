@@ -112,7 +112,7 @@ class ViewControls extends PureComponent<Props, State> {
     const {viewType} = this.props;
     if (viewType === "kiosk") {return null}
     return (
-      <div className="input-group pull-left col-xs-2 form-group-sm margin-left-sm">
+      <div className="input-group pull-left col-xs-4 form-group-sm margin-left-sm hidden-xs">
         <input type="text" className="form-control" id="search-field" ref={this.searchInput} placeholder="Search" onChange={this.onChangeFilter} />
         <div className="input-group-addon clickable" onClick={this.clearSearch}><i className="fa fa-times"></i></div>
       </div>
