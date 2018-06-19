@@ -6,6 +6,8 @@ version: 2
 jobs:
   test:
     <<: *defaults
+    environment:
+      TZ: "/usr/share/zoneinfo/America/New_York"
 
     steps:
       - checkout
