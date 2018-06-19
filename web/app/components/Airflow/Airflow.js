@@ -267,7 +267,7 @@ class Airflow extends Component<Props, State> {
         <table id="time-headings" style={{left: HOURBAR_WIDTH - translateX}}>
           <tbody>
             <tr className="heading">
-              {R.map(this.renderHeading, R.keys(this.props.selectedResources))}
+              {R.keys(this.props.selectedResources).map(this.renderHeading)}
             </tr>
           </tbody>
         </table>
@@ -275,10 +275,13 @@ class Airflow extends Component<Props, State> {
     );
   }
 
-  renderHeading = (resourceId: number) => {
+  renderHeading = (resourceId: number, index: number) => {
     const resourceName = this.props.selectedResources[resourceId];
     const widthMultiplier = this.props.widthMultipliers[resourceId] || 1;
-    const style = {minWidth: (COL_WIDTH * widthMultiplier) + (widthMultiplier > 1 ? 0 : 1)};
+    const minWidth = (COL_WIDTH * widthMultiplier)
+      - (index === 0 ? 1 : 0)
+      + (widthMultiplier > 1 ? 0 : 1);
+    const style = {minWidth};
     return (
       <td key={`${resourceId}-heading`} style={style}>
         <h1 className="header-spacer">{resourceName}</h1>

@@ -20,6 +20,25 @@ $PPCA-READY-RGBA: rgba(122, 243, 210, 0.8);
 $body-top: 50px;
 $border-color: #ddd;
 
+// Navbar
+.navbar-nav > li > a {
+  padding: 15px 13px;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #fff;
+  .icon-bar {
+    background-color: #0f204b;
+  }
+}
+@media (min-width: 768px) {
+  #navbar {
+    float: right;
+  }
+}
+
 #navbar-img {
   margin-left: 1px;
   padding: 14px 10px;
@@ -110,6 +129,7 @@ $card-color: #fff;
   line-height: 33px;
   vertical-align: middle;
   border-bottom: unquote($border-unit) solid $grid-color;
+  z-index: 107;
 }
 
 .clickable {
@@ -135,6 +155,7 @@ $card-color: #fff;
     height: unquote($hour-unit);
     width: 50px;
     border-bottom: unquote($border-unit) solid $grid-color;
+    border-right: unquote($border-unit) solid $grid-color;
     padding-right: 5px;
   }
 
@@ -154,7 +175,6 @@ $card-color: #fff;
     .relative-column {
       position: relative;
       width: unquote($col-unit);
-      border-left: unquote($border-unit) solid $grid-color;
       border-right: unquote($border-unit) solid $grid-color;
     }
 
@@ -203,7 +223,7 @@ $card-color: #fff;
     position: fixed;
     left: 0px;
     top: 100px;
-    width: 51px;
+    width: 50px;
     border-bottom: 1px solid $grid-color;
     border-right: 1px solid $grid-color;
     height: 49px;
