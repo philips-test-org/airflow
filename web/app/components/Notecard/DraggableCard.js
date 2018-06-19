@@ -116,7 +116,14 @@ class DraggableCard extends Component<Props> {
     if (seconds < 0) {
       return 30;
     } else {
-      return Math.round(seconds * PIXELS_PER_SECOND);
+      // Check to see if the card is going to try to go further than 12pm
+      // Take the difference between the end of the day and the order start for the seconds til midnight.
+      const endDayDiff = moment.duration(moment(startDate).endOf("day").diff(moment(getOrderStartTime(order)))).as("seconds");
+      const secondsCheck = R.min(
+        seconds,
+        endDayDiff,
+      );
+      return Math.round(secondsCheck * PIXELS_PER_SECOND);
     }
   }
 
