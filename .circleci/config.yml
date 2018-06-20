@@ -28,9 +28,11 @@ jobs:
   build:
     <<: *defaults
     environment:
-      - PATH: "/usr/local/rvm/gems/jruby-1.7.16.2/bin:/usr/local/rvm/gems/jruby-1.7.16.2@global/bin:/usr/local/rvm/rubies/jruby-1.7.16.2/bin:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      - GEM_HOME: "/usr/local/rvm/gems/jruby-1.7.16.2"
-      - GEM_PATH: "/usr/local/rvm/gems/jruby-1.7.16.2:/usr/local/rvm/gems/jruby-1.7.16.2@global"
+      - PATH: "/usr/local/rvm/gems/jruby-1.7.26/bin:/usr/local/rvm/gems/jruby-1.7.26@global/bin:/usr/local/rvm/rubies/jruby-1.7.26/bin:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - GEM_HOME: "/usr/local/rvm/gems/jruby-1.7.26"
+      - GEM_PATH: "/usr/local/rvm/gems/jruby-1.7.26:/usr/local/rvm/gems/jruby-1.7.26@global"
+      - CACHE_VERSION: "v1"
+
 
     steps:
       - checkout
