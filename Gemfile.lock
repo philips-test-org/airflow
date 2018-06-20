@@ -166,7 +166,7 @@ DEPENDENCIES
   activerecord-jdbc-adapter (~> 1.3.8)
   activerecord-jdbcpostgresql-adapter
   autoprefixer-rails (= 6.0.3)
-  bootstrap-sass (>= 3.3.7)
+  bootstrap-sass
   font-awesome-sass (~> 4.7.0)
   harbinger-rails-extensions (~> 1.1.0)!
   jquery-rails
