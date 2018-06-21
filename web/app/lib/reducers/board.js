@@ -15,6 +15,7 @@ import {getOrderResourceId} from "../selectors";
 
 const {
   ADJUST_ORDER_SUCCEEDED,
+  PREADJUST_ORDER,
   FETCH_EXAMS_SUCCEEDED,
   FETCH_EXAM_SUCCEEDED,
   DISPATCH_NOTIFICATION,
@@ -63,6 +64,7 @@ function board(state: Object = initialState, action: Object) {
 
   switch (action.type) {
     case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
+    case PREADJUST_ORDER: return preAdjustOrder(state, action);
     case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
     case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
     case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
@@ -102,6 +104,14 @@ function adjustOrder(state, {orderId, payload}) {
     R.over(eventLens, R.prepend(payload)),
     R.over(adjustedLens, R.mergeDeepLeft(payload.new_state)),
   )(state);
+}
+
+function preAdjustOrder(state, {orderId, payload}) {
+  const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
+  const adjustedLens = R.compose(orderLens, R.lensProp("adjusted"));
+  const order = R.view(orderLens, state);
+  if (R.isNil(order)) return state;
+  return R.over(adjustedLens, R.mergeDeepLeft(payload.new_state), state);
 }
 
 function upsertOrders(state, {payload}) {

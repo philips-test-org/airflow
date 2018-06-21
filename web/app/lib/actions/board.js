@@ -21,6 +21,7 @@ const BoardActions = {
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
   ADJUST_ORDER: "ADJUST_ORDER",
+  PREADJUST_ORDER: "PREADJUST_ORDER",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
   REPLACE_ORDER: "REPLACE_ORDER",
   // UI
@@ -130,7 +131,7 @@ const adjustOrderSucceeded = (orderId: number, originatingId: string | number, p
 
 const preAdjustOrder = (orderId: number, payload: Object) => {
   return {
-    type: BoardActions.ADJUST_ORDER_SUCCEEDED,
+    type: BoardActions.PREADJUST_ORDER,
     payload,
     orderId,
   }
