@@ -1,0 +1,45 @@
+INFO    2018-06-13 12:58:43,538 [main]  - Current Page Title is :Acceptable Usage Policy
+ERROR   2018-06-13 12:59:24,151 [main]  - Error came while waiting for element to appear : Airflow Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@class='app']/a/h3[contains(text(),'Airflow')]/../..
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-13 12:59:24,157 [main]  - CurrentDate used for concating the sceenshot: 130618125924
+ERROR   2018-06-13 12:59:24,164 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-13 12:59:24,173 [main]  - CurrentDate used for concating the sceenshot: 130618125924
+ERROR   2018-06-13 12:59:24,505 [main]  - Path or File not found: ./screenshots/Check:All_schedules_per_day_are_are_same_in_overVeiw_and_Calender130618125924.jpg
+INFO    2018-06-13 12:59:55,486 [main]  - Current Page Title is :Acceptable Usage Policy
+INFO    2018-06-13 13:00:04,594 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-13 13:00:04,608 [main]  - CurrentDate used for concating the sceenshot: 130618130004
+ERROR   2018-06-13 13:00:04,608 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-13 13:00:04,615 [main]  - CurrentDate used for concating the sceenshot: 130618130004
+ERROR   2018-06-13 13:00:05,636 [main]  - Path or File not found: ./screenshots/Check:All_schedules_per_day_are_are_same_in_overVeiw_and_Calender130618130004.jpg
+INFO    2018-06-13 13:00:28,037 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-13 13:00:36,430 [main]  - Current Page Title is :Philips
+INFO    2018-06-13 13:00:36,430 [main]  - CurrentDate used for concating the sceenshot: 130618130036
+INFO    2018-06-13 13:00:37,534 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-13 13:00:37,697 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-13 13:00:44,730 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-13 13:00:44,796 [main]  - PASS :Clicked on : 'Overview'
+INFO    2018-06-13 13:00:44,796 [main]  - CurrentDate used for concating the sceenshot: 130618130044
+INFO    2018-06-13 13:01:01,024 [main]  - Number of exam cards are 103
+INFO    2018-06-13 13:01:01,221 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-13 13:01:01,221 [main]  - CurrentDate used for concating the sceenshot: 130618130101
+INFO    2018-06-13 13:01:01,608 [main]  - Number of exam cards are 103
+INFO    2018-06-13 14:57:49,086 [main]  - Current Page Title is :cloud.analytical.info
+ERROR   2018-06-13 14:58:29,688 [main]  - Error came while waiting for element to appear : Airflow Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@class='app']/a/h3[contains(text(),'Airflow')]/../..
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-13 14:58:29,698 [main]  - CurrentDate used for concating the sceenshot: 130618145829
+ERROR   2018-06-13 14:58:29,698 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-13 14:58:29,713 [main]  - CurrentDate used for concating the sceenshot: 130618145829
+ERROR   2018-06-13 14:58:30,042 [main]  - Path or File not found: ./screenshots/Check:All_schedules_per_day_are_are_same_in_overVeiw_and_Calender130618145829.jpg
+INFO    2018-06-13 15:00:24,110 [main]  - Current Page Title is :cloud.analytical.info
+ERROR   2018-06-13 15:01:04,718 [main]  - Error came while waiting for element to appear : Airflow Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@class='app']/a/h3[contains(text(),'Airflow')]/../..
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-13 15:01:04,744 [main]  - CurrentDate used for concating the sceenshot: 130618150104
+ERROR   2018-06-13 15:01:04,744 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-13 15:01:04,759 [main]  - CurrentDate used for concating the sceenshot: 130618150104
+ERROR   2018-06-13 15:01:05,090 [main]  - Path or File not found: ./screenshots/Check:All_schedules_per_day_are_are_same_in_overVeiw_and_Calender130618150104.jpg

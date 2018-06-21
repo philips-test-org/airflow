@@ -1,0 +1,137 @@
+INFO    2018-06-05 11:36:41,393 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:38:04,334 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-05 11:38:04,522 [main]  - CurrentDate used for concating the sceenshot: 050618113804
+ERROR   2018-06-05 11:38:04,522 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 11:38:17,132 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:38:23,744 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-05 11:38:23,912 [main]  - CurrentDate used for concating the sceenshot: 050618113823
+ERROR   2018-06-05 11:38:23,920 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-05 11:38:32,066 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:38:38,382 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-05 11:38:38,538 [main]  - CurrentDate used for concating the sceenshot: 050618113838
+ERROR   2018-06-05 11:38:38,538 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-05 11:51:46,997 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:51:55,608 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-05 11:51:55,792 [main]  - CurrentDate used for concating the sceenshot: 050618115155
+ERROR   2018-06-05 11:51:55,796 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 11:52:04,808 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:52:12,350 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-05 11:52:12,524 [main]  - CurrentDate used for concating the sceenshot: 050618115212
+ERROR   2018-06-05 11:52:12,524 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-05 11:52:21,723 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:52:29,381 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-05 11:52:29,563 [main]  - CurrentDate used for concating the sceenshot: 050618115229
+ERROR   2018-06-05 11:52:29,563 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-05 11:53:38,130 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:53:45,737 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 11:53:45,922 [main]  - CurrentDate used for concating the sceenshot: 050618115345
+ERROR   2018-06-05 11:53:45,922 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 11:53:53,630 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:54:00,240 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 11:54:00,403 [main]  - CurrentDate used for concating the sceenshot: 050618115400
+ERROR   2018-06-05 11:54:00,403 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-05 11:54:08,643 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 11:54:15,412 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 11:54:15,596 [main]  - CurrentDate used for concating the sceenshot: 050618115415
+ERROR   2018-06-05 11:54:15,596 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+ERROR   2018-06-05 11:54:16,463 [main]  - Path or File not found: ./screenshots/Check:All_schedules_per_day_are_are_same_in_overVeiw_and_Calender050618115415.jpg
+ERROR   2018-06-05 11:55:04,261 [main]  - Error came while waiting for element to appear : cmeenan Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@class='app']/a/h3[contains(text(),'cmeenan')]/../..
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-05 11:55:04,270 [main]  - CurrentDate used for concating the sceenshot: 050618115504
+ERROR   2018-06-05 11:55:04,270 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-05 12:03:16,689 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 12:03:25,888 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 12:03:26,052 [main]  - CurrentDate used for concating the sceenshot: 050618120326
+ERROR   2018-06-05 12:03:26,052 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 12:05:04,454 [main]  - PASS :Clicked on : 'Airflow'
+ERROR   2018-06-05 12:05:12,096 [main]  - Path or File not found: ./screenshots/Airflow Page:http://cloud.analytical.info:8088/openam/UI/Login?goto=http%3A%2F%2Fcloud.analytical.info%2Fairflow%2Fmain
+INFO    2018-06-05 12:05:12,281 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 12:05:12,440 [main]  - CurrentDate used for concating the sceenshot: 050618120512
+ERROR   2018-06-05 12:05:12,440 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 12:06:23,679 [main]  - PASS :Clicked on : 'Airflow'
+ERROR   2018-06-05 12:06:31,731 [main]  - Path or File not found: ./screenshots/Airflow Page:Philips
+INFO    2018-06-05 12:06:31,918 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 12:06:32,084 [main]  - CurrentDate used for concating the sceenshot: 050618120632
+ERROR   2018-06-05 12:06:32,084 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 12:11:40,684 [main]  - PASS :Clicked on : 'Airflow'
+ERROR   2018-06-05 12:11:47,740 [main]  - Path or File not found: ./screenshots/Airflow Page:Philips
+INFO    2018-06-05 12:11:47,959 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 12:11:48,128 [main]  - CurrentDate used for concating the sceenshot: 050618121148
+ERROR   2018-06-05 12:11:48,128 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 12:12:25,346 [main]  - PASS :Clicked on : 'Airflow'
+ERROR   2018-06-05 12:12:31,853 [main]  - Path or File not found: ./screenshots/Airflow Page:
+INFO    2018-06-05 12:12:32,063 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 12:12:32,244 [main]  - CurrentDate used for concating the sceenshot: 050618121232
+ERROR   2018-06-05 12:12:32,244 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 12:13:21,782 [main]  - PASS :Clicked on : 'Airflow'
+ERROR   2018-06-05 12:13:28,758 [main]  - Path or File not found: ./screenshots/Airflow Page:
+INFO    2018-06-05 12:13:28,997 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-05 12:13:29,204 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-05 12:13:29,469 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-05 12:14:10,094 [main]  - Error came while waiting for element to appear : Admin Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@id='navbar-collapse']/ul/li/a[contains(text(),'Admin')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-05 12:14:10,105 [main]  - CurrentDate used for concating the sceenshot: 050618121410
+ERROR   2018-06-05 12:14:10,105 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 12:14:47,548 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 12:14:54,342 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-05 12:14:54,530 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-05 12:15:00,143 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-05 12:15:40,720 [main]  - Error came while waiting for element to appear : Admin Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@id='navbar-collapse']/ul/li/a[contains(text(),'Admin')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-05 12:15:40,730 [main]  - CurrentDate used for concating the sceenshot: 050618121540
+ERROR   2018-06-05 12:15:40,730 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-05 12:23:00,800 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 12:23:07,036 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-05 12:23:07,246 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-05 12:23:21,501 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-05 12:23:21,628 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-05 12:23:26,295 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-05 12:48:24,042 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 12:48:24,071 [main]  - CurrentDate used for concating the sceenshot: 050618124824
+INFO    2018-06-05 12:48:39,603 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-05 12:48:39,810 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-05 12:48:45,188 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-05 12:48:45,308 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-05 12:48:45,308 [main]  - CurrentDate used for concating the sceenshot: 050618124845
+INFO    2018-06-05 12:48:45,824 [main]  - CurrentDate used for concating the sceenshot: 050618124845
+INFO    2018-06-05 12:48:49,173 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-05 12:48:49,173 [main]  - CurrentDate used for concating the sceenshot: 050618124849
+INFO    2018-06-05 14:10:32,410 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 14:10:32,465 [main]  - CurrentDate used for concating the sceenshot: 050618141032
+INFO    2018-06-05 14:10:37,314 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-05 14:10:37,475 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-05 14:10:41,063 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-05 14:16:36,385 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 14:16:36,400 [main]  - CurrentDate used for concating the sceenshot: 050618141636
+INFO    2018-06-05 14:16:51,632 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-05 14:16:51,804 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-05 14:16:55,641 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-05 14:16:55,787 [main]  - PASS :Clicked on : 'Legend'
+INFO    2018-06-05 14:16:55,788 [main]  - CurrentDate used for concating the sceenshot: 050618141655
+INFO    2018-06-05 14:16:56,502 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-05 14:16:56,503 [main]  - CurrentDate used for concating the sceenshot: 050618141656
+INFO    2018-06-05 14:16:56,895 [main]  - CurrentDate used for concating the sceenshot: 050618141656
+INFO    2018-06-05 14:17:00,222 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-05 14:17:00,222 [main]  - CurrentDate used for concating the sceenshot: 050618141700
+INFO    2018-06-05 14:33:04,837 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-05 14:33:04,848 [main]  - CurrentDate used for concating the sceenshot: 050618143304
+INFO    2018-06-05 14:33:09,850 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-05 14:33:10,004 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-05 14:33:13,061 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-05 14:33:13,153 [main]  - PASS :Clicked on : 'Legend'
+INFO    2018-06-05 14:33:13,153 [main]  - CurrentDate used for concating the sceenshot: 050618143313
+INFO    2018-06-05 14:33:13,639 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-05 14:33:13,639 [main]  - CurrentDate used for concating the sceenshot: 050618143313
+INFO    2018-06-05 14:33:13,953 [main]  - CurrentDate used for concating the sceenshot: 050618143313
+INFO    2018-06-05 14:33:27,765 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-05 14:33:27,766 [main]  - CurrentDate used for concating the sceenshot: 050618143327
+INFO    2018-06-05 14:33:30,695 [main]  - PASS :Clicked on : 'Kiosk'
+INFO    2018-06-05 14:33:30,696 [main]  - CurrentDate used for concating the sceenshot: 050618143330
+INFO    2018-06-05 14:33:31,132 [main]  - PASS :Clicked on : 'group-name'
+INFO    2018-06-05 14:33:31,132 [main]  - CurrentDate used for concating the sceenshot: 050618143331

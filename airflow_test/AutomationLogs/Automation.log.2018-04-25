@@ -1,0 +1,143 @@
+INFO    2018-04-25 11:35:37,598 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:35:39,007 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:35:39,251 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:35:41,665 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:35:44,764 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:35:44,931 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:35:45,171 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:35:46,070 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:35:46,317 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 11:35:46,589 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:35:46,813 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:35:46,979 [main]  - PASS: Drill Down functionality is working
+INFO    2018-04-25 11:38:15,921 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:38:17,439 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:38:17,765 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:38:20,414 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:38:23,235 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:38:23,393 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:38:23,645 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:38:24,640 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:38:24,911 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 11:38:25,227 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:38:25,507 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:38:25,659 [main]  - PASS: Drill Down functionality for filter Site is working
+INFO    2018-04-25 11:41:42,125 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:41:43,648 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:41:43,919 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:41:46,193 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:41:49,094 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:41:49,287 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:41:49,499 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:41:50,312 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:41:50,505 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:41:50,695 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:41:51,010 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 11:43:16,002 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:43:17,336 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:43:17,555 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:43:19,749 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:43:22,535 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:43:22,734 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:43:22,962 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:43:23,895 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:43:24,077 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:43:24,245 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:43:24,489 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 11:46:48,306 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:46:49,671 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:46:49,925 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:46:52,277 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:46:55,235 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:46:55,425 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:46:55,669 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:46:56,579 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:46:56,770 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:46:56,958 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:46:57,219 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 11:46:57,271 [main]  - CurrentDate used for concating the sceenshot: 250418114657
+ERROR   2018-04-25 11:46:57,271 [main]  - The Scenario is failed: Drill down functionality
+INFO    2018-04-25 11:48:29,323 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:48:30,881 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:48:31,163 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:48:33,583 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:48:36,610 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:48:36,806 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:48:37,086 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:48:37,912 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:48:38,101 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:48:38,312 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:48:38,629 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 11:48:40,739 [main]  - CurrentDate used for concating the sceenshot: 250418114840
+ERROR   2018-04-25 11:48:40,739 [main]  - The Scenario is failed: Drill down functionality
+INFO    2018-04-25 11:49:54,057 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:49:55,521 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:49:55,801 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:49:58,589 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:50:01,550 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:50:01,881 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:50:02,381 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:50:03,120 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:50:03,332 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:50:03,581 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:50:03,919 [main]  - PASS :Clicked on : 'Site'
+ERROR   2018-04-25 11:50:05,960 [main]  - FAIL: Drill Down message is not being displayed
+INFO    2018-04-25 11:53:02,610 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:53:04,061 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:53:04,331 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:53:06,975 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:53:10,175 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:53:10,374 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:53:10,642 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:53:11,555 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:53:11,827 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:53:11,994 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 11:53:12,354 [main]  - PASS :Clicked on : 'Site'
+ERROR   2018-04-25 11:53:14,489 [main]  - FAIL: Drill Down message is not being displayed
+INFO    2018-04-25 11:55:14,789 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 11:55:16,302 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 11:55:16,629 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 11:55:19,262 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 11:55:22,170 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 11:55:22,361 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 11:55:22,789 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 11:55:24,109 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 11:55:24,438 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 11:55:24,834 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 11:55:25,143 [main]  - PASS :Clicked on : 'Technologist'
+ERROR   2018-04-25 11:55:25,229 [main]  - FAIL: Drill Down message is not being displayed
+INFO    2018-04-25 12:29:07,326 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 12:29:08,688 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 12:29:09,016 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 12:29:11,743 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 12:29:14,966 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 12:29:15,124 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 12:29:15,364 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 12:29:16,407 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 12:29:16,578 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 12:29:16,751 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 12:29:16,987 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 12:29:18,278 [main]  - PASS: Drill Down functionality for filter Site is working
+INFO    2018-04-25 12:31:47,419 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 12:31:48,808 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 12:31:49,038 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 12:31:51,442 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 12:31:54,083 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 12:31:54,245 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 12:31:54,445 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 12:31:55,445 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 12:31:55,646 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 12:31:55,844 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 12:31:56,060 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 12:36:21,330 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-25 12:36:22,798 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-25 12:36:23,224 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-25 12:36:25,650 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-25 12:36:28,812 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-25 12:36:28,978 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-04-25 12:36:29,258 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-25 12:36:30,389 [main]  - PASS : Site Grouping is Working
+INFO    2018-04-25 12:36:30,632 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-04-25 12:36:30,818 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-04-25 12:36:31,039 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-04-25 12:36:32,241 [main]  - PASS: Drill Down functionality for filter Site is working

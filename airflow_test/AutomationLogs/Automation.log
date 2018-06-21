@@ -1,0 +1,12 @@
+INFO    2018-06-21 12:02:42,899 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-21 12:02:42,916 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-21 12:02:49,655 [main]  - Current Page Title is :Philips
+INFO    2018-06-21 12:02:49,748 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-21 12:02:49,852 [main]  - PASS :Inputted attending1 text into Username
+INFO    2018-06-21 12:02:49,950 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-21 12:02:50,021 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-21 12:02:56,996 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-21 12:02:57,092 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-21 12:02:57,468 [main]  - Waiting for 10 seconds
+INFO    2018-06-21 12:03:07,477 [main]  - Waited for 10 seconds
+INFO    2018-06-21 12:03:09,614 [main]  - PASS :DragnDrop on 'Drag N Drop'

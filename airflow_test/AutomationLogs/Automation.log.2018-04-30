@@ -1,0 +1,134 @@
+INFO    2018-04-30 10:51:17,970 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-30 10:51:19,245 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-30 10:51:19,414 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-30 10:51:26,543 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-30 10:51:34,489 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-30 10:51:34,654 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-04-30 10:51:34,856 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-30 10:51:39,286 [main]  - PASS : Modality Grouping is Working
+INFO    2018-04-30 10:51:41,392 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 10:51:43,428 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-04-30 10:51:45,663 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 10:51:50,732 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 10:51:52,686 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 10:51:54,721 [main]  - PASS: KPI XYZ is saved
+INFO    2018-04-30 10:51:54,803 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 10:51:58,034 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 10:52:00,211 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-04-30 10:52:02,348 [main]  - PASS :Clicked on : 'confirm save'
+ERROR   2018-04-30 10:52:34,481 [main]  - Error came while waiting for element to appear : close button Timed out after 30 seconds waiting for visibility of element located by By.xpath: //button[text()='Close']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: driver.version: unknown
+INFO    2018-04-30 10:52:34,488 [main]  - CurrentDate used for concating the sceenshot: 300418105234
+ERROR   2018-04-30 10:52:34,488 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-04-30 10:54:28,343 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-30 10:54:29,580 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-30 10:54:29,778 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-30 10:54:37,684 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-30 10:54:45,574 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-30 10:54:45,739 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-04-30 10:54:45,911 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-30 10:54:50,299 [main]  - PASS : Modality Grouping is Working
+INFO    2018-04-30 10:54:52,399 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 10:54:54,434 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-04-30 10:54:56,682 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 10:55:01,752 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 10:55:03,627 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 10:55:05,661 [main]  - PASS: KPI XYZ is saved
+INFO    2018-04-30 10:55:05,723 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 10:55:08,966 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 10:55:11,124 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-04-30 10:55:13,243 [main]  - PASS :Clicked on : 'confirm save'
+INFO    2018-04-30 10:55:17,323 [main]  - PASS :Clicked on : 'KPI filter'
+INFO    2018-04-30 10:55:19,356 [main]  - PASS: KPI Copy of XYZ is saved
+INFO    2018-04-30 10:55:19,415 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:01:38,093 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-30 11:01:39,335 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-30 11:01:39,557 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-30 11:01:46,800 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-30 11:01:54,716 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-30 11:01:54,888 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-04-30 11:01:55,093 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-30 11:01:58,986 [main]  - PASS : Modality Grouping is Working
+INFO    2018-04-30 11:02:01,140 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 11:02:03,177 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-04-30 11:02:05,408 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 11:02:10,520 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 11:02:12,415 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:02:14,460 [main]  - PASS: KPI XYZ is saved
+INFO    2018-04-30 11:02:14,523 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:02:16,667 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-04-30 11:02:18,811 [main]  - PASS :Clicked on : 'confirm save'
+ERROR   2018-04-30 11:02:38,227 [main]  - Error came while waiting for element to appear : close button chrome not reachable
+  (Session info: chrome=65.0.3325.181)
+  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 4.02 seconds
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91), userDataDir=C:\Users\320008~1\AppData\Local\Temp\scoped_dir490624_15010}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=65.0.3325.181, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 6d68a2671c524b75a15b2cfaec30e27c
+INFO    2018-04-30 11:02:38,234 [main]  - CurrentDate used for concating the sceenshot: 300418110238
+ERROR   2018-04-30 11:02:38,234 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-04-30 11:10:02,344 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-30 11:10:03,580 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-30 11:10:03,773 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-30 11:10:11,017 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-30 11:10:18,963 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-30 11:10:19,140 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-04-30 11:10:19,334 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-30 11:10:23,677 [main]  - PASS : Modality Grouping is Working
+INFO    2018-04-30 11:10:25,800 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 11:10:27,837 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-04-30 11:10:30,059 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 11:10:35,138 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 11:10:37,122 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:10:39,155 [main]  - PASS: KPI XYZ is saved
+INFO    2018-04-30 11:10:39,236 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:10:42,472 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 11:10:44,627 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-04-30 11:10:46,736 [main]  - PASS :Clicked on : 'confirm save'
+INFO    2018-04-30 11:10:50,869 [main]  - PASS :Clicked on : 'KPI filter'
+INFO    2018-04-30 11:10:52,904 [main]  - PASS: KPI Copy of XYZ is saved
+INFO    2018-04-30 11:10:52,961 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:39:29,500 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-30 11:39:30,775 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-30 11:39:30,933 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-30 11:39:37,839 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-30 11:39:45,686 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-30 11:39:45,884 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-04-30 11:39:46,112 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-30 11:39:50,108 [main]  - PASS : Modality Grouping is Working
+INFO    2018-04-30 11:39:52,223 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 11:39:54,264 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-04-30 11:39:56,506 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 11:40:01,603 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-04-30 11:40:03,543 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:40:05,581 [main]  - PASS: KPI XYZ is saved
+INFO    2018-04-30 11:40:05,666 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:40:09,052 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-04-30 11:40:11,306 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-04-30 11:40:13,490 [main]  - PASS :Clicked on : 'confirm save'
+INFO    2018-04-30 11:40:17,949 [main]  - PASS :Clicked on : 'KPI filter'
+INFO    2018-04-30 11:40:19,989 [main]  - PASS: KPI Copy of XYZ is saved
+INFO    2018-04-30 11:40:20,053 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-04-30 11:40:22,134 [main]  - PASS :Clicked on : 'kpi heading'
+INFO    2018-04-30 11:40:31,221 [main]  - PASS :Clicked on : 'XYZ'
+INFO    2018-04-30 11:40:33,352 [main]  - PASS :Clicked on : 'export button'
+INFO    2018-04-30 11:40:43,361 [main]  - FILE IS PRESENT : PASS
+INFO    2018-04-30 15:46:42,776 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-30 15:46:44,054 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-30 15:46:44,261 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-30 15:46:52,374 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-30 15:47:00,573 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-30 15:47:00,740 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-04-30 15:47:00,931 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-04-30 15:47:05,444 [main]  - PASS : Modality Grouping is Working
+INFO    2018-04-30 15:47:13,639 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-04-30 15:47:13,853 [main]  - PASS :Clicked on : 'Smart Filter'
+INFO    2018-04-30 15:47:15,006 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-04-30 15:47:16,143 [main]  - PASS :Clicked on : 'CT'
+INFO    2018-04-30 15:47:17,328 [main]  - PASS :Clicked on : 'CR'
+INFO    2018-04-30 15:47:19,456 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-04-30 15:47:23,997 [main]  - PASS: Modality Filter is Working

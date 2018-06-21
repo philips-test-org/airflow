@@ -1,0 +1,226 @@
+INFO    2018-06-19 11:56:25,943 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:30645: Software caused connection abort: recv failed
+INFO    2018-06-19 11:56:25,954 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:30645
+INFO    2018-06-19 11:57:46,647 [main]  - CurrentDate used for concating the sceenshot: 190618115746
+ERROR   2018-06-19 11:57:46,648 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 11:57:46,711 [main]  - CurrentDate used for concating the sceenshot: 190618115746
+ERROR   2018-06-19 11:57:46,711 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-19 11:57:46,774 [main]  - CurrentDate used for concating the sceenshot: 190618115746
+ERROR   2018-06-19 11:57:46,774 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-19 11:57:46,829 [main]  - CurrentDate used for concating the sceenshot: 190618115746
+ERROR   2018-06-19 11:57:46,829 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-19 11:58:32,302 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:57069: Software caused connection abort: recv failed
+INFO    2018-06-19 11:58:32,316 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:57069
+INFO    2018-06-19 12:53:05,383 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:21660: Software caused connection abort: recv failed
+INFO    2018-06-19 12:53:05,385 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:21660
+INFO    2018-06-19 12:53:41,782 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:8172: Software caused connection abort: recv failed
+INFO    2018-06-19 12:53:41,797 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:8172
+INFO    2018-06-19 14:23:29,771 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:58183: Software caused connection abort: recv failed
+INFO    2018-06-19 14:23:29,779 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:58183
+INFO    2018-06-19 14:25:12,650 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:12153: Software caused connection abort: recv failed
+INFO    2018-06-19 14:25:12,665 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:12153
+INFO    2018-06-19 14:25:21,768 [main]  - CurrentDate used for concating the sceenshot: 190618142521
+ERROR   2018-06-19 14:25:21,768 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:25:21,814 [main]  - CurrentDate used for concating the sceenshot: 190618142521
+ERROR   2018-06-19 14:25:21,814 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-19 14:25:21,845 [main]  - CurrentDate used for concating the sceenshot: 190618142521
+ERROR   2018-06-19 14:25:21,845 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-19 14:25:21,876 [main]  - CurrentDate used for concating the sceenshot: 190618142521
+ERROR   2018-06-19 14:25:21,876 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-19 14:25:39,910 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:39853: Software caused connection abort: recv failed
+INFO    2018-06-19 14:25:39,925 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:39853
+INFO    2018-06-19 14:25:50,079 [main]  - CurrentDate used for concating the sceenshot: 190618142550
+ERROR   2018-06-19 14:25:50,079 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:25:50,127 [main]  - CurrentDate used for concating the sceenshot: 190618142550
+ERROR   2018-06-19 14:25:50,127 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-19 14:25:50,189 [main]  - CurrentDate used for concating the sceenshot: 190618142550
+ERROR   2018-06-19 14:25:50,189 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-19 14:25:50,236 [main]  - CurrentDate used for concating the sceenshot: 190618142550
+ERROR   2018-06-19 14:25:50,236 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-19 14:25:54,645 [main]  - CurrentDate used for concating the sceenshot: 190618142554
+ERROR   2018-06-19 14:25:54,645 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:25:54,712 [main]  - CurrentDate used for concating the sceenshot: 190618142554
+ERROR   2018-06-19 14:25:54,712 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-19 14:25:54,806 [main]  - CurrentDate used for concating the sceenshot: 190618142554
+ERROR   2018-06-19 14:25:54,806 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-19 14:25:54,837 [main]  - CurrentDate used for concating the sceenshot: 190618142554
+ERROR   2018-06-19 14:25:54,837 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-19 14:26:16,478 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:26128: Software caused connection abort: recv failed
+INFO    2018-06-19 14:26:16,493 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:26128
+INFO    2018-06-19 14:26:48,305 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:34236: Software caused connection abort: recv failed
+INFO    2018-06-19 14:26:48,318 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:34236
+INFO    2018-06-19 14:28:56,208 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:28:56,217 [main]  - CurrentDate used for concating the sceenshot: 190618142856
+ERROR   2018-06-19 14:28:56,217 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:29:55,584 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:29:55,591 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:29:55,606 [main]  - CurrentDate used for concating the sceenshot: 190618142955
+ERROR   2018-06-19 14:29:55,606 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:31:34,415 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:31:34,464 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:31:41,142 [main]  - Current Page Title is :Philips
+INFO    2018-06-19 14:31:41,252 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-19 14:31:41,322 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-19 14:31:41,434 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-19 14:31:41,509 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-19 14:31:48,159 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-19 14:31:48,227 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-19 14:31:56,766 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-19 14:31:57,218 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-19 14:31:57,298 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-19 14:31:57,362 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-19 14:31:57,417 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-19 14:32:00,238 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-19 14:32:03,837 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-19 14:32:04,250 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-19 14:32:04,365 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-19 14:35:47,390 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:57563: Software caused connection abort: recv failed
+INFO    2018-06-19 14:35:47,403 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:57563
+INFO    2018-06-19 14:37:42,716 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:32792: Software caused connection abort: recv failed
+INFO    2018-06-19 14:37:42,729 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:32792
+INFO    2018-06-19 14:37:43,970 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:37:43,990 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:37:44,259 [main]  - Current Page Title is :PerformanceBridge
+ERROR   2018-06-19 14:38:15,573 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-19 14:38:15,601 [main]  - CurrentDate used for concating the sceenshot: 190618143815
+ERROR   2018-06-19 14:38:15,601 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:41:55,478 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:8078: Software caused connection abort: recv failed
+INFO    2018-06-19 14:41:55,493 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:8078
+INFO    2018-06-19 14:41:56,889 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:41:56,910 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:42:02,663 [main]  - Current Page Title is :Philips
+INFO    2018-06-19 14:42:03,369 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-19 14:42:03,904 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-19 14:42:04,510 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-19 14:42:04,900 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-19 14:42:05,258 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-19 14:42:12,470 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-19 14:42:12,975 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-19 14:42:17,575 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-19 14:42:18,224 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-19 14:42:18,568 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-19 14:42:18,977 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-19 14:42:23,855 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-19 14:42:24,172 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-19 14:42:28,515 [main]  - PASS :Clicked on : 'grupuName'
+ERROR   2018-06-19 14:42:59,925 [main]  - FAIL: Error came while waiting for element to appear : grupuName Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[text()='New Group']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-19 14:42:59,941 [main]  - CurrentDate used for concating the sceenshot: 190618144259
+ERROR   2018-06-19 14:42:59,941 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:44:09,665 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:38067: Software caused connection abort: recv failed
+INFO    2018-06-19 14:44:09,679 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:38067
+INFO    2018-06-19 14:44:11,004 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:44:11,022 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:44:17,120 [main]  - Current Page Title is :Philips
+INFO    2018-06-19 14:45:24,386 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:37717: Software caused connection abort: recv failed
+INFO    2018-06-19 14:45:24,401 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:37717
+INFO    2018-06-19 14:45:25,654 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:45:25,675 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:45:25,955 [main]  - Current Page Title is :PerformanceBridge
+ERROR   2018-06-19 14:46:07,011 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-19 14:46:07,020 [main]  - CurrentDate used for concating the sceenshot: 190618144607
+ERROR   2018-06-19 14:46:07,020 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:51:11,898 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:64395: Software caused connection abort: recv failed
+INFO    2018-06-19 14:51:11,902 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:64395
+INFO    2018-06-19 14:51:13,289 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:51:13,308 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:51:18,397 [main]  - Current Page Title is :Philips
+INFO    2018-06-19 14:51:19,206 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-19 14:51:19,721 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-19 14:51:20,303 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-19 14:51:20,724 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-19 14:51:21,040 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-19 14:51:24,830 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-19 14:51:25,487 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-19 14:51:30,054 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-19 14:51:30,756 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-19 14:51:31,076 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-19 14:51:31,389 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-19 14:51:34,997 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-19 14:51:35,304 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-19 14:51:40,021 [main]  - PASS :Clicked on : 'grupuName'
+ERROR   2018-06-19 14:52:20,735 [main]  - FAIL: Error came while waiting for element to appear : grupuName Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[text()='New Group']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-19 14:52:20,751 [main]  - CurrentDate used for concating the sceenshot: 190618145220
+ERROR   2018-06-19 14:52:20,751 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:52:40,636 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:51808: Software caused connection abort: recv failed
+INFO    2018-06-19 14:52:40,647 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:51808
+INFO    2018-06-19 14:52:42,007 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:52:42,027 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:52:47,282 [main]  - Current Page Title is :Philips
+INFO    2018-06-19 14:52:48,100 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-19 14:52:48,547 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-19 14:52:49,115 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-19 14:52:49,544 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-19 14:52:49,872 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-19 14:52:53,633 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-19 14:52:54,299 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-19 14:52:58,260 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-19 14:52:58,935 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-19 14:52:59,232 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-19 14:52:59,560 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-19 14:53:02,894 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-19 14:53:03,207 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-19 14:53:08,310 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-19 14:53:08,881 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-19 14:54:55,526 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 14:54:55,537 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 14:55:01,855 [main]  - Current Page Title is :Philips
+INFO    2018-06-19 14:55:01,957 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-19 14:55:02,046 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-19 14:55:02,157 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-19 14:55:02,232 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-19 14:55:08,534 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-19 14:55:08,604 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-19 14:55:13,903 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-19 14:55:14,353 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-19 14:55:14,438 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-19 14:55:14,503 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-19 14:55:14,565 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-19 14:55:18,202 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-19 14:55:21,810 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-19 14:55:22,211 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-19 14:55:22,310 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-19 14:56:44,610 [main]  - CurrentDate used for concating the sceenshot: 190618145644
+ERROR   2018-06-19 14:56:44,610 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:57:21,048 [main]  - CurrentDate used for concating the sceenshot: 190618145721
+ERROR   2018-06-19 14:57:21,048 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 14:58:31,846 [main]  - CurrentDate used for concating the sceenshot: 190618145831
+ERROR   2018-06-19 14:58:31,846 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 15:00:43,509 [main]  - CurrentDate used for concating the sceenshot: 190618150043
+ERROR   2018-06-19 15:00:43,509 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 15:01:21,021 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:11415: Software caused connection abort: recv failed
+INFO    2018-06-19 15:01:21,032 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:11415
+INFO    2018-06-19 15:03:43,915 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:23718: Software caused connection abort: recv failed
+INFO    2018-06-19 15:03:43,930 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:23718
+INFO    2018-06-19 15:03:45,288 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-19 15:03:45,308 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-19 15:03:51,565 [main]  - Current Page Title is :Philips
+INFO    2018-06-19 15:03:52,379 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-19 15:03:52,926 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-19 15:03:53,506 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-19 15:03:53,895 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-19 15:03:54,231 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-19 15:07:49,102 [main]  - CurrentDate used for concating the sceenshot: 190618150749
+ERROR   2018-06-19 15:07:49,103 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 15:16:41,879 [main]  - CurrentDate used for concating the sceenshot: 190618151641
+ERROR   2018-06-19 15:16:41,879 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 15:22:14,406 [main]  - CurrentDate used for concating the sceenshot: 190618152214
+ERROR   2018-06-19 15:22:14,406 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 16:48:58,275 [main]  - CurrentDate used for concating the sceenshot: 190618164858
+ERROR   2018-06-19 16:48:58,277 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-19 16:49:46,029 [main]  - CurrentDate used for concating the sceenshot: 190618164946
+ERROR   2018-06-19 16:49:46,029 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-19 16:50:33,914 [main]  - CurrentDate used for concating the sceenshot: 190618165033
+ERROR   2018-06-19 16:50:33,914 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-19 16:51:21,703 [main]  - CurrentDate used for concating the sceenshot: 190618165121
+ERROR   2018-06-19 16:51:21,703 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device

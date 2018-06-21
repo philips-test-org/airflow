@@ -1,0 +1,268 @@
+INFO    2018-06-08 10:36:04,803 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 10:36:10,494 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 10:36:10,494 [main]  - CurrentDate used for concating the sceenshot: 080618103610
+INFO    2018-06-08 10:36:11,575 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-08 10:36:11,675 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 10:36:17,204 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 10:36:17,204 [main]  - CurrentDate used for concating the sceenshot: 080618103617
+INFO    2018-06-08 10:36:18,396 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 10:36:18,582 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 10:36:18,730 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 10:37:24,744 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 10:37:29,020 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 10:37:29,020 [main]  - CurrentDate used for concating the sceenshot: 080618103729
+INFO    2018-06-08 10:37:30,173 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-08 10:37:30,296 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 10:37:34,431 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 10:37:34,431 [main]  - CurrentDate used for concating the sceenshot: 080618103734
+INFO    2018-06-08 10:37:35,624 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-08 10:37:35,815 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 10:37:51,554 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 15:05:38,567 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:05:42,506 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:05:42,507 [main]  - CurrentDate used for concating the sceenshot: 080618150542
+INFO    2018-06-08 15:05:43,517 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-08 15:05:43,606 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:05:47,454 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:05:47,455 [main]  - CurrentDate used for concating the sceenshot: 080618150547
+INFO    2018-06-08 15:05:48,586 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-08 15:05:48,758 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:05:53,005 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-08 15:06:33,564 [main]  - Error came while waiting for element to appear : kiosk Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'kiosk')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 15:06:33,614 [main]  - CurrentDate used for concating the sceenshot: 080618150633
+ERROR   2018-06-08 15:06:33,614 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:06:33,630 [main]  - CurrentDate used for concating the sceenshot: 080618150633
+INFO    2018-06-08 15:07:34,974 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:07:49,280 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:07:49,281 [main]  - CurrentDate used for concating the sceenshot: 080618150749
+INFO    2018-06-08 15:07:50,393 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-08 15:07:50,557 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:07:55,190 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-08 15:08:18,358 [main]  - Error came while waiting for element to appear : kiosk null
+INFO    2018-06-08 15:08:18,365 [main]  - CurrentDate used for concating the sceenshot: 080618150818
+ERROR   2018-06-08 15:08:18,365 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:09:05,898 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:09:13,056 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:09:13,056 [main]  - CurrentDate used for concating the sceenshot: 080618150913
+INFO    2018-06-08 15:09:14,175 [main]  - PASS :Inputted 'Aiuser' text into Username
+INFO    2018-06-08 15:09:14,337 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:09:15,597 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-08 15:09:56,195 [main]  - Error came while waiting for element to appear : kiosk Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'kiosk')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 15:09:56,199 [main]  - CurrentDate used for concating the sceenshot: 080618150956
+ERROR   2018-06-08 15:09:56,199 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:09:56,215 [main]  - CurrentDate used for concating the sceenshot: 080618150956
+INFO    2018-06-08 15:10:10,792 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:10:17,886 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:10:17,886 [main]  - CurrentDate used for concating the sceenshot: 080618151017
+INFO    2018-06-08 15:10:18,971 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 15:10:19,135 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:10:25,715 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 15:48:59,311 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:49:06,903 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:49:06,904 [main]  - CurrentDate used for concating the sceenshot: 080618154906
+INFO    2018-06-08 15:49:08,029 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 15:49:08,176 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:49:15,706 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-08 15:49:56,247 [main]  - Error came while waiting for element to appear : kiosk Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'kiosk')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 15:49:56,262 [main]  - CurrentDate used for concating the sceenshot: 080618154956
+ERROR   2018-06-08 15:49:56,262 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:49:56,277 [main]  - CurrentDate used for concating the sceenshot: 080618154956
+INFO    2018-06-08 15:50:49,211 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:50:56,271 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:50:56,272 [main]  - CurrentDate used for concating the sceenshot: 080618155056
+INFO    2018-06-08 15:50:57,388 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 15:50:57,550 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:51:05,501 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-08 15:51:46,093 [main]  - Error came while waiting for element to appear : kiosk Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'kiosk')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 15:51:46,097 [main]  - CurrentDate used for concating the sceenshot: 080618155146
+ERROR   2018-06-08 15:51:46,097 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:51:46,113 [main]  - CurrentDate used for concating the sceenshot: 080618155146
+INFO    2018-06-08 15:52:22,927 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:52:30,235 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:52:30,236 [main]  - CurrentDate used for concating the sceenshot: 080618155230
+INFO    2018-06-08 15:52:31,330 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 15:52:31,484 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:52:38,865 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-08 15:53:19,470 [main]  - Error came while waiting for element to appear : kiosk Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'kiosk')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 15:53:19,484 [main]  - CurrentDate used for concating the sceenshot: 080618155319
+ERROR   2018-06-08 15:53:19,484 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:53:19,516 [main]  - CurrentDate used for concating the sceenshot: 080618155319
+INFO    2018-06-08 15:54:44,133 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:54:51,352 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:54:51,353 [main]  - CurrentDate used for concating the sceenshot: 080618155451
+INFO    2018-06-08 15:54:52,409 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 15:54:52,581 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:54:59,450 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-08 15:55:29,613 [main]  - Error came while waiting for element to appear : examcard Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@class='left-tab,]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 15:55:29,616 [main]  - CurrentDate used for concating the sceenshot: 080618155529
+ERROR   2018-06-08 15:55:29,616 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:55:29,632 [main]  - CurrentDate used for concating the sceenshot: 080618155529
+INFO    2018-06-08 15:56:14,529 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 15:56:21,677 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 15:56:21,677 [main]  - CurrentDate used for concating the sceenshot: 080618155621
+INFO    2018-06-08 15:56:22,792 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 15:56:22,963 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 15:56:29,551 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 15:56:43,249 [main]  - CurrentDate used for concating the sceenshot: 080618155643
+ERROR   2018-06-08 15:56:43,250 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 15:56:43,259 [main]  - CurrentDate used for concating the sceenshot: 080618155643
+INFO    2018-06-08 16:00:10,066 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:00:10,075 [main]  - CurrentDate used for concating the sceenshot: 080618160010
+ERROR   2018-06-08 16:00:10,075 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 16:00:10,090 [main]  - CurrentDate used for concating the sceenshot: 080618160010
+INFO    2018-06-08 16:00:35,552 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:00:35,563 [main]  - CurrentDate used for concating the sceenshot: 080618160035
+ERROR   2018-06-08 16:00:35,563 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 16:00:35,586 [main]  - CurrentDate used for concating the sceenshot: 080618160035
+INFO    2018-06-08 16:01:16,267 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:01:16,276 [main]  - CurrentDate used for concating the sceenshot: 080618160116
+ERROR   2018-06-08 16:01:16,276 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 16:01:16,291 [main]  - CurrentDate used for concating the sceenshot: 080618160116
+INFO    2018-06-08 16:02:59,156 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:03:08,782 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 16:03:08,782 [main]  - CurrentDate used for concating the sceenshot: 080618160308
+INFO    2018-06-08 16:03:09,888 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 16:03:10,055 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 16:03:21,656 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 16:03:35,717 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 16:19:20,506 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:19:27,933 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 16:19:27,933 [main]  - CurrentDate used for concating the sceenshot: 080618161927
+INFO    2018-06-08 16:19:29,018 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 16:19:29,191 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 16:19:35,532 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 16:19:47,816 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 16:19:47,816 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:19:48,414 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:19:48,414 [main]  - kioskNumber is Number:
+ERROR   2018-06-08 16:20:29,020 [main]  - Error came while waiting for element to appear : kiosk Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'kiosk')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 16:20:29,031 [main]  - CurrentDate used for concating the sceenshot: 080618162029
+ERROR   2018-06-08 16:20:29,031 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 16:20:29,047 [main]  - CurrentDate used for concating the sceenshot: 080618162029
+INFO    2018-06-08 16:21:20,531 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:21:27,544 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 16:21:27,545 [main]  - CurrentDate used for concating the sceenshot: 080618162127
+INFO    2018-06-08 16:21:28,620 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 16:21:28,775 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 16:21:35,975 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 16:21:49,832 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 16:21:49,832 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:21:50,428 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:21:50,428 [main]  - kioskNumber is 5161
+INFO    2018-06-08 16:32:08,821 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:32:15,040 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 16:32:15,040 [main]  - CurrentDate used for concating the sceenshot: 080618163215
+INFO    2018-06-08 16:32:16,123 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 16:32:16,297 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 16:32:23,645 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 16:32:36,193 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 16:32:36,193 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:32:36,802 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:32:36,802 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:32:36,856 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:32:36,856 [main]  - kioskNumber is 5161
+INFO    2018-06-08 16:41:39,238 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:41:45,992 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 16:41:45,993 [main]  - CurrentDate used for concating the sceenshot: 080618164145
+INFO    2018-06-08 16:41:47,157 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 16:41:47,331 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 16:41:56,458 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 16:42:10,236 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 16:42:10,236 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:42:10,831 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:42:10,831 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:42:10,897 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:42:10,898 [main]  - kioskNumber is 5161
+INFO    2018-06-08 16:42:11,005 [main]  - PASS :Clicked on : 'examcardClose'
+ERROR   2018-06-08 16:42:51,562 [main]  - Error came while waiting for element to appear : kiosk Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'kiosk')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-08 16:42:51,569 [main]  - CurrentDate used for concating the sceenshot: 080618164251
+ERROR   2018-06-08 16:42:51,569 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 16:42:51,575 [main]  - CurrentDate used for concating the sceenshot: 080618164251
+INFO    2018-06-08 16:44:08,673 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 16:44:15,169 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 16:44:15,169 [main]  - CurrentDate used for concating the sceenshot: 080618164415
+INFO    2018-06-08 16:44:16,341 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 16:44:16,513 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 16:44:23,700 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 16:44:36,572 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 16:44:36,572 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:44:37,174 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:44:37,183 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 16:44:37,228 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 16:44:37,228 [main]  - kioskNumber is 5161
+INFO    2018-06-08 16:44:37,316 [main]  - PASS :Clicked on : 'examcardClose'
+INFO    2018-06-08 16:44:37,414 [main]  - CurrentDate used for concating the sceenshot: 080618164437
+ERROR   2018-06-08 16:44:37,414 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 16:44:37,420 [main]  - CurrentDate used for concating the sceenshot: 080618164437
+INFO    2018-06-08 17:07:12,625 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 17:07:19,612 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 17:07:19,612 [main]  - CurrentDate used for concating the sceenshot: 080618170719
+INFO    2018-06-08 17:07:20,715 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 17:07:20,890 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 17:07:27,842 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 17:07:41,756 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 17:07:41,756 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 17:07:42,357 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 17:07:42,357 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 17:07:42,406 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 17:07:42,406 [main]  - kioskNumber is 5161
+INFO    2018-06-08 17:07:42,493 [main]  - PASS :Clicked on : 'examcardClose'
+INFO    2018-06-08 17:07:42,590 [main]  - CurrentDate used for concating the sceenshot: 080618170742
+ERROR   2018-06-08 17:07:42,590 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-08 17:07:42,602 [main]  - CurrentDate used for concating the sceenshot: 080618170742
+INFO    2018-06-08 17:08:09,316 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 17:08:15,849 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 17:08:15,849 [main]  - CurrentDate used for concating the sceenshot: 080618170815
+INFO    2018-06-08 17:08:16,971 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 17:08:17,133 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 17:08:24,154 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 17:08:38,779 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 17:08:38,779 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 17:08:39,386 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 17:08:39,386 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 17:08:39,434 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 17:08:39,434 [main]  - kioskNumber is 5161
+INFO    2018-06-08 17:08:39,539 [main]  - PASS :Clicked on : 'examcardClose'
+INFO    2018-06-08 17:08:44,993 [main]  - PASS :Clicked on : 'Kiosk'
+INFO    2018-06-08 17:08:44,993 [main]  - CurrentDate used for concating the sceenshot: 080618170844
+INFO    2018-06-08 17:08:56,134 [main]  - only Number is diplayed
+INFO    2018-06-08 17:11:24,980 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-08 17:11:31,565 [main]  - Current Page Title is :Philips
+INFO    2018-06-08 17:11:31,566 [main]  - CurrentDate used for concating the sceenshot: 080618171131
+INFO    2018-06-08 17:11:32,659 [main]  - PASS :Inputted 'cmeenan' text into Username
+INFO    2018-06-08 17:11:32,826 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-08 17:11:39,989 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-08 17:11:54,004 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-08 17:11:54,004 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 17:11:54,605 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 17:11:54,605 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-08 17:11:54,662 [main]  - Pass : retrieved 'Kiosk Number: 5161' from : kioskNumber
+INFO    2018-06-08 17:11:54,663 [main]  - kioskNumber is 5161
+INFO    2018-06-08 17:11:54,751 [main]  - PASS :Clicked on : 'examcardClose'
+INFO    2018-06-08 17:11:58,088 [main]  - PASS :Clicked on : 'Kiosk'
+INFO    2018-06-08 17:11:58,088 [main]  - CurrentDate used for concating the sceenshot: 080618171158
+INFO    2018-06-08 17:12:08,869 [main]  - only Number is diplayed
