@@ -30,7 +30,7 @@ describe("<Overview>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on name", async () => {
@@ -44,7 +44,7 @@ describe("<Overview>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(4);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on rad exam accession", async () => {
@@ -58,7 +58,7 @@ describe("<Overview>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on rad exam precedure description", async () => {
@@ -72,7 +72,7 @@ describe("<Overview>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on precedure code", async () => {
@@ -86,7 +86,7 @@ describe("<Overview>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on precedure code", async () => {
@@ -100,6 +100,6 @@ describe("<Overview>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 });

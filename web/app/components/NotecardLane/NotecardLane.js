@@ -186,7 +186,9 @@ class NotecardLane extends Component<Props, State> {
 
     return (
       R.map((order) => {
-        const isFiltered = R.contains(order.id, this.props.filteredOrderIds);
+        const isFiltered = order.merged ?
+          R.any((order) => R.contains(order.id, this.props.filteredOrderIds), order.orders) :
+          R.contains(order.id, this.props.filteredOrderIds);
         const overlapShift = R.find(R.propEq("id", order.id), overlaps);
         const offset = !R.isNil(overlapShift) ? {left: COL_WIDTH * overlapShift.offset} : {};
 

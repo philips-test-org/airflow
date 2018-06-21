@@ -35,7 +35,7 @@ describe("<Calendar>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on name", async () => {
@@ -49,7 +49,7 @@ describe("<Calendar>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(4);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on rad exam accession", async () => {
@@ -63,7 +63,7 @@ describe("<Calendar>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on rad exam precedure description", async () => {
@@ -77,7 +77,7 @@ describe("<Calendar>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on precedure code", async () => {
@@ -91,7 +91,7 @@ describe("<Calendar>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("filters cards based on precedure code", async () => {
@@ -105,7 +105,7 @@ describe("<Calendar>", () => {
     const filteredCardsCount = airflow.find(BaseNotecard).reduce((acc, notecard) => (
       notecard.prop("isFiltered") ? acc + 1 : acc
     ), 0);
-    expect(filteredCardsCount).toEqual(3);
+    expect(filteredCardsCount).toEqual(5);
   });
 
   it("closes the modal when clicking off the modal", async () => {

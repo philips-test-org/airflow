@@ -62,20 +62,27 @@ class NotecardRow extends Component<Props> {
     );
   }
 
-  renderCard = (order: Order) => (
-    <BaseNotecard
-      key={order.id}
-      comments={getOrderComments(order)}
-      isFiltered={R.contains(order.id, this.props.filteredOrderIds)}
-      isFocused={this.props.focusedOrderId === order.id}
-      openModal={this.props.openModal}
-      order={order}
-      resourceId={this.props.resourceId}
-      scrollToY={this.scrollToY}
-      startDate={this.props.startDate}
-      type="overview"
-    />
-  )
+  renderCard = (order: Order) => {
+    const isFiltered = order.merged ?
+      R.any((order) => R.contains(order.id, this.props.filteredOrderIds), order.orders) :
+      R.contains(order.id, this.props.filteredOrderIds);
+
+    return (
+      <BaseNotecard
+        key={order.id}
+        comments={getOrderComments(order)}
+
+        isFiltered={isFiltered}
+        isFocused={this.props.focusedOrderId === order.id}
+        openModal={this.props.openModal}
+        order={order}
+        resourceId={this.props.resourceId}
+        scrollToY={this.scrollToY}
+        startDate={this.props.startDate}
+        type="overview"
+      />
+    );
+  }
 
   getHeaderPosition() {
     let headerPosition = 0;
