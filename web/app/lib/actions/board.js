@@ -21,6 +21,7 @@ const BoardActions = {
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
   ADJUST_ORDER: "ADJUST_ORDER",
+  PREADJUST_ORDER: "PREADJUST_ORDER",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
   REPLACE_ORDER: "REPLACE_ORDER",
   // UI
@@ -125,6 +126,14 @@ const adjustOrderSucceeded = (orderId: number, originatingId: string | number, p
     orderId,
     originatingId,
     payload,
+  }
+}
+
+const preAdjustOrder = (orderId: number, payload: Object) => {
+  return {
+    type: BoardActions.PREADJUST_ORDER,
+    payload,
+    orderId,
   }
 }
 
@@ -241,6 +250,7 @@ export {
   fetchPersonExams,
   fetchPersonExamsSucceeded,
   adjustOrder,
+  preAdjustOrder,
   adjustOrderSucceeded,
   showOrderModal,
   closeOrderModal,

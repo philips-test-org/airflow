@@ -14,6 +14,7 @@ import {
 import {
   BoardActions,
   adjustOrder,
+  preAdjustOrder,
   adjustOrderSucceeded,
   fetchExams,
   fetchExamsSucceeded,
@@ -59,6 +60,7 @@ export {
   // BOARD
   BoardActions,
   adjustOrder,
+  preAdjustOrder,
   adjustOrderSucceeded,
   fetchExams,
   fetchExamsSucceeded,

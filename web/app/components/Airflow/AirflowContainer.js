@@ -14,7 +14,7 @@ import {
   hasComments,
   mapSelectedResources,
   ordersByResource,
-  unadjustedOrderStopTime,
+  orderStopTime,
 } from "../../lib";
 
 import {
@@ -29,6 +29,7 @@ import {
   showOrderModal,
   closeOrderModal,
   markNotificationDisplayed,
+  preAdjustOrder,
   redirectToSSO,
   showLoading,
   updateBrowserHistory,
@@ -79,9 +80,14 @@ const mapDispatchToProps = (dispatch) => {
       const {order_id} = event;
       if (typeof order_id == "string") {
         const ids = R.compose(R.map(parseInt), R.split("-"))(order_id);
+        // Generate a list of events, one/order in a merged card.
         const events = R.map((id) => Object.assign({}, event, {order_id: id}), ids);
+        // Preadjust all the orders for a merged card.
+        R.forEach((id) => {dispatch(preAdjustOrder(id, event))}, ids);
+        // Adjust all orders for merged card.
         dispatch(adjustOrder(events, originatingId));
       } else {
+        dispatch(preAdjustOrder(order_id, event));
         dispatch(adjustOrder(event, originatingId));
       }
     },
@@ -197,7 +203,7 @@ const innerMerge = (vals, startDate) => {
     acc.startTime = acc.startTime == null ?
       getOrderStartTime(order) :
       R.min(acc.startTime, getOrderStartTime(order))
-    acc.stopTime = R.max(acc.stopTime, unadjustedOrderStopTime(startDate, order))
+    acc.stopTime = R.max(acc.stopTime, orderStopTime(startDate, order))
     acc.groupIdentity = acc.groupIdentity || order.groupIdentity;
 
     if (!acc.cardStatus) {

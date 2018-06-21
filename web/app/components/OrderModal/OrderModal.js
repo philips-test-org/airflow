@@ -41,6 +41,7 @@ type Props = {
 type State = {
   order: Order,
   showMoreImages: boolean,
+  adjusted: Object,
 }
 
 class OrderModal extends Component<Props, State> {
@@ -49,15 +50,20 @@ class OrderModal extends Component<Props, State> {
 
     const order = props.order.merged ? props.order.orders[0] : props.order;
 
+    // Tracking adjustments in state so that the toggle persists while the request
+    // is in flight. Otherwise, on a slow connection, the toggle can bounce back
+    // and forth as the response updates redux and trickles down into the component.
     this.state = {
       order,
       showMoreImages: false,
+      adjusted: order.adjusted,
     };
   }
 
   static getDerivedStateFromProps({order: nextOrder}: Props) {
     const order = nextOrder.merged ? nextOrder.orders[0] : nextOrder;
-    return {order};
+    const adjusted = order.adjusted;
+    return {order, adjusted};
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -124,7 +130,8 @@ class OrderModal extends Component<Props, State> {
   }
 
   renderStatusToggles() {
-    const {order: {adjusted}} = this.props;
+    //const {order: {adjusted}} = this.props;
+    const {adjusted} = this.state;
     // Flipping and partially applying so that the parameter name
     // is the unapplied argument.
     const checkStatus = (param) => R.propEq(param, true, adjusted);
@@ -210,6 +217,8 @@ class OrderModal extends Component<Props, State> {
     const {currentUser} = this.props;
     const id = this.id();
     this.props.adjustOrder(wrapEvent(id, currentUser.id, eventType, null, newState), id);
+    const updatedAdjusted = R.merge(this.state.adjusted, newState)
+    this.setState({adjusted: updatedAdjusted});
   }
 
   handleNewComment = (comment: string) => {
