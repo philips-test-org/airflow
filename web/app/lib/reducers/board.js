@@ -13,6 +13,8 @@ import {
 
 import {getOrderResourceId} from "../selectors";
 
+import type {Order} from "../../types";
+
 const {
   ADJUST_ORDER_SUCCEEDED,
   PREADJUST_ORDER,
@@ -94,23 +96,24 @@ function closeOrderModal(state, _action) {
   return R.merge(state, {showModal: false, focusedOrder: undefined});
 }
 
+const makeOrderLens = (orders: Array<Order>, id: number) => (
+  R.lensPath(["orders", R.findIndex(R.propEq("id", id), orders)])
+);
+
 function adjustOrder(state, {orderId, payload}) {
-  const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
+  // Update the "adjusted" and "events" keys or an order.
+  const orderLens = makeOrderLens(state.orders, orderId);
   const eventLens = R.compose(orderLens, R.lensProp("events"));
-  const adjustedLens = R.compose(orderLens, R.lensProp("adjusted"));
   const order = R.view(orderLens, state);
   if (R.isNil(order)) return state;
-  return R.compose(
-    R.over(eventLens, R.prepend(payload)),
-    R.over(adjustedLens, R.mergeDeepLeft(payload.new_state)),
-  )(state);
+  const adjustedState = preAdjustOrder(state, {orderId, payload});
+  return R.over(eventLens, R.prepend(payload), adjustedState);
 }
 
 function preAdjustOrder(state, {orderId, payload}) {
-  const orderLens = R.lensPath(["orders", R.findIndex(R.propEq("id", orderId), state.orders)]);
+  // Update the "adjusted" key of an order.
+  const orderLens = makeOrderLens(state.orders, orderId);
   const adjustedLens = R.compose(orderLens, R.lensProp("adjusted"));
-  const order = R.view(orderLens, state);
-  if (R.isNil(order)) return state;
   return R.over(adjustedLens, R.mergeDeepLeft(payload.new_state), state);
 }
 
