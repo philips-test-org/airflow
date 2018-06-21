@@ -42,6 +42,7 @@
     "react-toggle": "^4.0.2",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1",
     "url-search-params-polyfill": "^4.0.0",
     "uuid": "^3.2.1",
     "whatwg-fetch": "^2.0.4",

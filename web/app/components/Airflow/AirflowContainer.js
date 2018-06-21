@@ -1,5 +1,6 @@
 // @flow
 import {connect} from "react-redux";
+import {createSelector} from "reselect";
 import * as R from "ramda";
 import moment from "moment";
 
@@ -47,9 +48,42 @@ import type {
   ViewType,
 } from "../../types";
 
-const mapStateToProps = ({board, user}: Object) => {
-  const orderGroups = R.groupBy(R.prop("groupIdentity"), board.orders);
-  const mergedByGroup = mergeGroupedOrders(orderGroups, board.startDate);
+// Memoized selectors to avoid frequent recomputation of state.
+const getOrders = (state) => state.board.orders;
+const getStartDate = (state) => state.board.startDate;
+const getSelectedResourceGroup = (state) => state.board.selectedResources;
+
+
+const getGroupedOrders = createSelector(
+  [getOrders],
+  (orders) => R.groupBy(R.prop("groupIdentity"), orders),
+)
+
+const getMergedOrders = createSelector(
+  [getGroupedOrders, getStartDate],
+  (orders, startDate) => mergeGroupedOrders(orders, startDate),
+)
+
+const getOrdersByResource = createSelector(
+  [getOrders],
+  (orders) => ordersByResource(orders),
+)
+
+const getMergedOrdersByResource = createSelector(
+  [getMergedOrders],
+  (orders) => ordersByResource(orders),
+)
+
+const getMappedSelectedResourceGroup = createSelector(
+  [getSelectedResourceGroup],
+  (resourceGroup) => mapSelectedResources(resourceGroup),
+)
+
+// Props mapping
+const mapStateToProps = (state: Object) => {
+  const {board, user} = state;
+  const orderGroups = getGroupedOrders(state);
+  const mergedByGroup = getMergedOrders(state);
   return {
     avatarMap: user.avatars,
     boardWidth: board.width,
@@ -60,12 +94,12 @@ const mapStateToProps = ({board, user}: Object) => {
     loading: board.loading,
     notifications: board.notifications,
     orderGroups,
-    orders: ordersByResource(board.orders),
-    ordersMergedByGroup: ordersByResource(mergedByGroup),
+    orders: getOrdersByResource(state),
+    ordersMergedByGroup: getMergedOrdersByResource(state),
     ordersLoaded: !R.isEmpty(board.orders),
     resources: board.resources,
     selectedResourceGroup: board.selectedResourceGroup,
-    selectedResources: mapSelectedResources(board.selectedResources),
+    selectedResources: getMappedSelectedResourceGroup(state),
     showModal: board.showModal,
     ssoUrl: user.ssoUrl,
     startDate: board.startDate,
@@ -147,7 +181,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 function mergeGroupedOrders(groupIdentities, startDate) {
-  // TODO: add check for changes and don't run if no change
   const valsOrMerge = (vals) => {
     //if (vals.length > 1) debugger;
     return vals.length == 1 ? R.assoc("merged", false, vals[0]) : [innerMerge(vals, startDate)]
