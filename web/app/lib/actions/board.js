@@ -128,6 +128,14 @@ const adjustOrderSucceeded = (orderId: number, originatingId: string | number, p
   }
 }
 
+const preAdjustOrder = (orderId: number, payload: Object) => {
+  return {
+    type: BoardActions.ADJUST_ORDER_SUCCEEDED,
+    payload,
+    orderId,
+  }
+}
+
 const replaceOrder = (orderId: number, payload: Object) => {
   return {
     type: BoardActions.REPLACE_ORDER,
@@ -241,6 +249,7 @@ export {
   fetchPersonExams,
   fetchPersonExamsSucceeded,
   adjustOrder,
+  preAdjustOrder,
   adjustOrderSucceeded,
   showOrderModal,
   closeOrderModal,

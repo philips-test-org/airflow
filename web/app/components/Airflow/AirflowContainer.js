@@ -29,6 +29,7 @@ import {
   showOrderModal,
   closeOrderModal,
   markNotificationDisplayed,
+  preAdjustOrder,
   redirectToSSO,
   showLoading,
   updateBrowserHistory,
@@ -79,9 +80,14 @@ const mapDispatchToProps = (dispatch) => {
       const {order_id} = event;
       if (typeof order_id == "string") {
         const ids = R.compose(R.map(parseInt), R.split("-"))(order_id);
+        // Generate a list of events, one/order in a merged card.
         const events = R.map((id) => Object.assign({}, event, {order_id: id}), ids);
+        // Preadjust all the orders for a merged card.
+        R.forEach((id) => {dispatch(preAdjustOrder(id, event))}, ids);
+        // Adjust all orders for merged card.
         dispatch(adjustOrder(events, originatingId));
       } else {
+        dispatch(preAdjustOrder(order_id, event));
         dispatch(adjustOrder(event, originatingId));
       }
     },
