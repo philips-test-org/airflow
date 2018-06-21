@@ -14,7 +14,7 @@ import {
   hasComments,
   mapSelectedResources,
   ordersByResource,
-  unadjustedOrderStopTime,
+  orderStopTime,
 } from "../../lib";
 
 import {
@@ -203,7 +203,7 @@ const innerMerge = (vals, startDate) => {
     acc.startTime = acc.startTime == null ?
       getOrderStartTime(order) :
       R.min(acc.startTime, getOrderStartTime(order))
-    acc.stopTime = R.max(acc.stopTime, unadjustedOrderStopTime(startDate, order))
+    acc.stopTime = R.max(acc.stopTime, orderStopTime(startDate, order))
     acc.groupIdentity = acc.groupIdentity || order.groupIdentity;
 
     if (!acc.cardStatus) {
