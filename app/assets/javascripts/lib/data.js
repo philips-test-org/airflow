@@ -387,15 +387,18 @@ application.data = {
 	return application.data.orderHeightToStartTime(height,order) + duration;
     },
 
-    resource: function(order) {
-	if (order.adjusted != undefined && order.adjusted.resource_id != undefined) {
-	    return application.data.findResource(order.adjusted.resource_id);
-	} else if (order.rad_exam != undefined) {
-	    return application.data.findResource(order.rad_exam.resource_id);
-	} else {
-	    return order.resource;
-	}
-    },
+  resource: function(order) {
+    if (order.adjusted != undefined && order.adjusted.resource_id != undefined) {
+      return application.data.findResource(order.adjusted.resource_id);
+    } else if (order.rad_exam != undefined) {
+      return application.data.findResource(order.rad_exam.resource_id);
+    } else if (order.resource){
+      return order.resource;
+    } else if (order.resource_id) {
+      return application.data.findResource(order.resource_id);
+    }
+    return undefined;
+  },
 
     examThenOrder: function(order,path) {
 	if (order.rad_exam != undefined) {

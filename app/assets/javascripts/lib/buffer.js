@@ -115,7 +115,7 @@ application.auditBuffer = application.buffer.create(function(buffer) {
 
   $.each(orders,function(id,message) {
     var order = message.attrs;
-    if (application.data.findOrder(order.id) || (application.data.findOrder(order.id) == undefined) ||
+    if (application.data.findOrder(order.id) ||
         (application.data.resource(order) && (application.data.orderStartTime(order) == null || moment(application.data.orderStartTime(order)).startOf('day').unix()*1000 == application.data.startDate))) {
       getOrderInfo("orders",id);
     }
@@ -130,6 +130,4 @@ application.auditBuffer = application.buffer.create(function(buffer) {
       getOrderInfo("rad_exams",id);
     }
   });
-
-
 });
