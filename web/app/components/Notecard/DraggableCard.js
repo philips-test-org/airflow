@@ -129,9 +129,9 @@ class DraggableCard extends Component<Props> {
 
   orderTop() {
     const startTime = moment(getOrderStartTime(this.props.order));
-    const hoursToSeconds = startTime.hour() * 60 * 60;
-    const minutesToSeconds = startTime.minute() * 60;
-    const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, startTime.seconds()]);
+    const totalSeconds = moment.duration(
+      moment(startTime).diff(moment(startTime).startOf("day"))
+    ).as("seconds");
     return Math.round(totalSeconds * PIXELS_PER_SECOND);
   }
 }

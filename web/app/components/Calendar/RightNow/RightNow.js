@@ -1,7 +1,6 @@
 // @flow
 
 import React, {PureComponent} from "react";
-import * as R from "ramda";
 import moment from "moment";
 
 import {
@@ -19,10 +18,6 @@ type State = {
 
 // Update every 10 seconds
 const UPDATE_INTERVAL = 10000;
-
-// Offsetting the height of the bar based on the
-// height of the <th> elements of resource names.
-const HEADER_OFFSET = 49;
 
 class RightNow extends PureComponent<Props, State> {
   interval: IntervalID;
@@ -82,10 +77,10 @@ class RightNow extends PureComponent<Props, State> {
 
   getHeight() {
     const now = this.state.time;
-    const hoursToSeconds = now.hour() * 60 * 60;
-    const minutesToSeconds = now.minute() * 60;
-    const totalSeconds = R.sum([hoursToSeconds, minutesToSeconds, now.seconds()]);
-    return Math.round((PIXELS_PER_SECOND * totalSeconds) + HEADER_OFFSET);
+    const totalSeconds = moment.duration(
+      moment(now).diff(moment(now).startOf("day"))
+    ).as("seconds");
+    return Math.round((PIXELS_PER_SECOND * totalSeconds));
   }
 
   displayWidth() {
