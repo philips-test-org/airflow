@@ -1,4 +1,9 @@
 
+## v1.1.3 released 2018-06-19
+
+* **bugfix:** all order messages sending requests to server
+* **bugfix:** check new orders for relevant resource
+
 ## v1.1.2 released 2018-06-05
 
 * **bugfix:** "On Hold" status no longer takes priority over "Cancelled" status
