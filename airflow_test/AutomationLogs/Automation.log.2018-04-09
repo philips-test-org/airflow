@@ -1,0 +1,100 @@
+INFO    2018-04-09 11:26:56,774 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 11:26:58,107 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 11:26:58,327 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 11:27:11,434 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 11:27:25,824 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 11:27:25,824 [main]  - Waiting for 2 seconds
+INFO    2018-04-09 11:27:28,075 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:27:38,767 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:27:49,364 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:27:59,838 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:28:10,239 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:28:20,783 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:28:31,271 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:28:41,742 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:28:52,156 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:29:02,594 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:29:13,078 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:29:23,475 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:29:33,968 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:29:44,367 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:29:54,898 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:30:05,526 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:30:16,088 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:30:26,645 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:30:37,157 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:30:47,575 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:32:35,918 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 11:32:37,223 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 11:32:37,417 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 11:32:50,590 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 11:33:04,762 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 11:33:04,762 [main]  - Waiting for 2 seconds
+INFO    2018-04-09 11:33:06,975 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:33:18,008 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:33:28,572 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:33:39,129 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:33:49,611 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:33:59,920 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:34:10,739 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:34:21,214 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:34:23,476 [main]  - CurrentDate used for concating the sceenshot: 090418113423
+ERROR   2018-04-09 11:34:23,478 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-09 11:36:04,335 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 11:36:05,618 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 11:36:05,800 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 11:36:19,023 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 11:36:33,344 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 11:36:33,344 [main]  - Waiting for 2 seconds
+INFO    2018-04-09 11:36:35,541 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:36:46,346 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:36:56,865 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:37:07,463 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:37:18,010 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:37:28,711 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:37:39,273 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:37:49,985 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-09 11:37:52,990 [main]  - CurrentDate used for concating the sceenshot: 090418113752
+ERROR   2018-04-09 11:37:52,990 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-09 12:03:29,657 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 12:03:30,922 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 12:03:31,102 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 12:03:44,802 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 12:03:59,384 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 12:03:59,537 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-09 12:03:59,619 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-09 12:05:28,392 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 12:05:29,664 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 12:05:29,843 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 12:05:42,495 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 12:05:56,489 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 12:05:56,677 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-09 12:05:56,804 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-09 12:06:41,315 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 12:06:42,570 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 12:06:42,759 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 12:06:55,432 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 12:07:08,527 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 12:07:18,266 [main]  - CurrentDate used for concating the sceenshot: 090418120718
+ERROR   2018-04-09 12:07:18,267 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-09 12:07:35,316 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 12:07:36,585 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 12:07:36,752 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 12:07:49,476 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 12:08:03,524 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 12:08:03,734 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-09 12:09:28,758 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 12:09:29,993 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 12:09:30,187 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 12:09:42,617 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 12:09:55,538 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 12:10:20,870 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-09 12:10:20,870 [main]  - Waiting for 2 seconds
+INFO    2018-04-09 12:12:07,957 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-09 12:12:09,216 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-09 12:12:09,400 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-09 12:12:22,847 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-09 12:12:37,172 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-09 12:12:37,208 [main]  - Waiting for 5 seconds
+INFO    2018-04-09 12:12:42,392 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-09 12:12:42,393 [main]  - Waiting for 5 seconds

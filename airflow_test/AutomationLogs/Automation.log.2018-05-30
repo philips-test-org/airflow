@@ -1,0 +1,56 @@
+INFO    2018-05-30 15:03:16,035 [main]  - CurrentDate used for concating the sceenshot: 300518150316
+ERROR   2018-05-30 15:03:16,036 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:03:16,052 [main]  - CurrentDate used for concating the sceenshot: 300518150316
+ERROR   2018-05-30 15:03:16,052 [main]  - The Scenario is failed: Adding, editing, deleting columns and jumping to Quality
+INFO    2018-05-30 15:03:16,052 [main]  - CurrentDate used for concating the sceenshot: 300518150316
+ERROR   2018-05-30 15:03:16,052 [main]  - The Scenario is failed: Verify the Drill down functionality
+INFO    2018-05-30 15:03:16,067 [main]  - CurrentDate used for concating the sceenshot: 300518150316
+ERROR   2018-05-30 15:03:16,067 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-05-30 15:08:28,395 [main]  - CurrentDate used for concating the sceenshot: 300518150828
+ERROR   2018-05-30 15:08:28,397 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:08:28,554 [main]  - CurrentDate used for concating the sceenshot: 300518150828
+ERROR   2018-05-30 15:08:28,554 [main]  - The Scenario is failed: Adding, editing, deleting columns and jumping to Quality
+INFO    2018-05-30 15:08:28,561 [main]  - CurrentDate used for concating the sceenshot: 300518150828
+ERROR   2018-05-30 15:08:28,561 [main]  - The Scenario is failed: Verify the Drill down functionality
+INFO    2018-05-30 15:08:28,567 [main]  - CurrentDate used for concating the sceenshot: 300518150828
+ERROR   2018-05-30 15:08:28,567 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-05-30 15:08:59,134 [main]  - CurrentDate used for concating the sceenshot: 300518150859
+ERROR   2018-05-30 15:08:59,134 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:08:59,274 [main]  - CurrentDate used for concating the sceenshot: 300518150859
+ERROR   2018-05-30 15:08:59,274 [main]  - The Scenario is failed: Adding, editing, deleting columns and jumping to Quality
+INFO    2018-05-30 15:08:59,290 [main]  - CurrentDate used for concating the sceenshot: 300518150859
+ERROR   2018-05-30 15:08:59,290 [main]  - The Scenario is failed: Verify the Drill down functionality
+INFO    2018-05-30 15:08:59,290 [main]  - CurrentDate used for concating the sceenshot: 300518150859
+ERROR   2018-05-30 15:08:59,290 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-05-30 15:09:11,156 [main]  - CurrentDate used for concating the sceenshot: 300518150911
+ERROR   2018-05-30 15:09:11,156 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:10:17,080 [main]  - CurrentDate used for concating the sceenshot: 300518151017
+ERROR   2018-05-30 15:10:17,080 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:13:26,969 [main]  - CurrentDate used for concating the sceenshot: 300518151326
+ERROR   2018-05-30 15:13:26,969 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:14:13,449 [main]  - CurrentDate used for concating the sceenshot: 300518151413
+ERROR   2018-05-30 15:14:13,449 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:14:21,010 [main]  - CurrentDate used for concating the sceenshot: 300518151421
+ERROR   2018-05-30 15:14:21,010 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+ERROR   2018-05-30 15:15:59,950 [main]  - Error came while waiting for element to appear : Productivity Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@class='app']/a/h3[contains(text(),'Productivity')]/../..
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-05-30 15:15:59,967 [main]  - CurrentDate used for concating the sceenshot: 300518151559
+ERROR   2018-05-30 15:15:59,967 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:16:09,676 [main]  - CurrentDate used for concating the sceenshot: 300518151609
+ERROR   2018-05-30 15:16:09,676 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:17:03,844 [main]  - CurrentDate used for concating the sceenshot: 300518151703
+ERROR   2018-05-30 15:17:03,844 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:18:32,409 [main]  - CurrentDate used for concating the sceenshot: 300518151832
+ERROR   2018-05-30 15:18:32,409 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:21:41,805 [main]  - CurrentDate used for concating the sceenshot: 300518152141
+ERROR   2018-05-30 15:21:41,805 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+INFO    2018-05-30 15:22:31,720 [main]  - CurrentDate used for concating the sceenshot: 300518152231
+ERROR   2018-05-30 15:22:31,720 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature
+ERROR   2018-05-30 15:25:10,605 [main]  - Error came while waiting for element to appear : Reset Button Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[@id='reset-button']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-05-30 15:25:10,614 [main]  - CurrentDate used for concating the sceenshot: 300518152510
+ERROR   2018-05-30 15:25:10,614 [main]  - The Scenario is failed: Verify Filters, Groupings and Autopreview feature

@@ -1,0 +1,538 @@
+INFO    2018-05-04 10:05:17,764 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:05:19,340 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:05:19,683 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:05:27,589 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:05:39,777 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:05:39,866 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 10:05:40,002 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 10:05:46,990 [main]  - PASS :'Modality' Grouping has been applied
+INFO    2018-05-04 10:05:48,430 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 10:05:49,704 [main]  - PASS :Clicked on : 'CT SubFilter'
+INFO    2018-05-04 10:05:50,922 [main]  - PASS :Clicked on : 'CR SubFilter'
+INFO    2018-05-04 10:05:53,179 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 10:05:57,848 [main]  - PASS :'Modality' Filter has been applied
+INFO    2018-05-04 10:05:58,150 [main]  - PASS :Clicked on : 'Turn Off Autopreview'
+INFO    2018-05-04 10:05:58,150 [main]  - PASS :AutoPreview is Off
+INFO    2018-05-04 10:05:58,334 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 10:06:03,433 [main]  - PASS :'Ordering Provider' Grouping has not been applied since AutoPreview is Off
+INFO    2018-05-04 10:06:03,599 [main]  - PASS :Clicked on : 'Apply Button'
+INFO    2018-05-04 10:06:08,111 [main]  - PASS :'Ordering Provider' Grouping has been applied
+INFO    2018-05-04 10:06:08,351 [main]  - PASS :Clicked on : 'Turn On Autopreview'
+INFO    2018-05-04 10:06:08,351 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 10:06:13,491 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:06:14,963 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:06:15,210 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:06:22,780 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:06:34,958 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:06:35,121 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 10:06:42,087 [main]  - PASS :Clicked on : 'Add New Metric'
+INFO    2018-05-04 10:06:42,899 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 10:06:43,055 [main]  - PASS :Clicked on : 'Order to Complete'
+INFO    2018-05-04 10:06:43,223 [main]  - PASS :Clicked on : 'Add Metric Confirmation'
+INFO    2018-05-04 10:06:44,314 [main]  - PASS :'Order to Complete' Column is added
+INFO    2018-05-04 10:06:49,927 [main]  - PASS :Clicked on : 'Show Volume in Quality'
+INFO    2018-05-04 10:06:52,231 [main]  - PASS :Clicked on : 'Performance Warning Pop Up'
+INFO    2018-05-04 10:06:57,078 [main]  - PASS :'Volume' Metric is displayed in Quality
+INFO    2018-05-04 10:07:03,008 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-04 10:07:07,227 [main]  - PASS :Clicked on 'Edit Column'
+INFO    2018-05-04 10:07:08,010 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 10:07:08,154 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-04 10:07:08,402 [main]  - PASS :Clicked on : 'Save Metric'
+INFO    2018-05-04 10:07:09,464 [main]  - PASS :'Volume' Column is edited to 'Utilization'
+INFO    2018-05-04 10:07:09,603 [main]  - PASS :Clicked on 'Delete Column'
+INFO    2018-05-04 10:07:29,661 [main]  - PASS :'Utilization' Column is deleted
+INFO    2018-05-04 10:07:34,755 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:07:36,141 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:07:36,433 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:07:44,242 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:07:56,495 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:07:56,669 [main]  - PASS :Clicked on : 'Resource Grouping'
+INFO    2018-05-04 10:08:03,769 [main]  - PASS :Clicked on : 'Drill Down on 'VHC MR-1''
+INFO    2018-05-04 10:08:03,970 [main]  - PASS :Clicked on : 'Drill Down on 'Technologist''
+INFO    2018-05-04 10:08:05,190 [main]  - PASS :Clicked on : 'Resource Filter'
+INFO    2018-05-04 10:08:06,376 [main]  - PASS :Drill Down message for filter 'Resource' is displayed
+INFO    2018-05-04 10:08:11,720 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:08:13,253 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:08:13,502 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:08:21,418 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:08:33,380 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:08:33,581 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 10:08:40,791 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 10:08:42,865 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 10:08:45,324 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 10:08:47,554 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 10:08:49,538 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:08:51,647 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 10:08:51,751 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 10:08:53,854 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:08:56,130 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 10:08:58,443 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 10:09:20,525 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 10:09:20,718 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 10:09:21,034 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 10:09:23,222 [main]  - PASS :Clicked on : 'Save As Button'
+INFO    2018-05-04 10:09:25,447 [main]  - PASS :Clicked on : 'Confirm Save'
+INFO    2018-05-04 10:09:29,735 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:09:31,841 [main]  - PASS :KPI 'Copy of test' is saved
+INFO    2018-05-04 10:09:31,925 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 10:09:34,113 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:09:43,660 [main]  - PASS :Clicked on : 'test'
+INFO    2018-05-04 10:09:45,903 [main]  - PASS :Clicked on : 'Export Button'
+INFO    2018-05-04 10:09:50,916 [main]  - PASS: File is exported to local system
+INFO    2018-05-04 10:09:53,157 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:09:55,366 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 10:09:57,564 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 10:10:19,618 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 10:10:19,838 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 10:12:47,508 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:12:48,986 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:12:49,258 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:12:56,922 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:13:09,520 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:13:09,607 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 10:13:09,743 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 10:13:16,569 [main]  - PASS :'Modality' Grouping has been applied
+INFO    2018-05-04 10:13:17,851 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 10:13:19,209 [main]  - PASS :Clicked on : 'CT SubFilter'
+INFO    2018-05-04 10:13:20,445 [main]  - PASS :Clicked on : 'CR SubFilter'
+INFO    2018-05-04 10:13:22,658 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 10:13:26,946 [main]  - PASS :'Modality' Filter has been applied
+INFO    2018-05-04 10:13:27,156 [main]  - PASS :Clicked on : 'Turn Off Autopreview'
+INFO    2018-05-04 10:13:27,156 [main]  - PASS :AutoPreview is Off
+INFO    2018-05-04 10:13:27,292 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 10:13:32,406 [main]  - PASS :'Ordering Provider' Grouping has not been applied since AutoPreview is Off
+INFO    2018-05-04 10:13:32,568 [main]  - PASS :Clicked on : 'Apply Button'
+INFO    2018-05-04 10:13:37,378 [main]  - PASS :'Ordering Provider' Grouping has been applied
+INFO    2018-05-04 10:13:37,657 [main]  - PASS :Clicked on : 'Turn On Autopreview'
+INFO    2018-05-04 10:13:37,657 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 10:13:43,130 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:13:44,564 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:13:44,808 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:13:52,280 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:14:04,681 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:14:04,850 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 10:14:12,170 [main]  - PASS :Clicked on : 'Add New Metric'
+INFO    2018-05-04 10:14:13,021 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 10:14:13,157 [main]  - PASS :Clicked on : 'Order to Complete'
+INFO    2018-05-04 10:14:13,347 [main]  - PASS :Clicked on : 'Add Metric Confirmation'
+INFO    2018-05-04 10:14:14,424 [main]  - PASS :'Order to Complete' Column is added
+INFO    2018-05-04 10:14:20,341 [main]  - PASS :Clicked on : 'Show Volume in Quality'
+INFO    2018-05-04 10:14:22,618 [main]  - PASS :Clicked on : 'Performance Warning Pop Up'
+INFO    2018-05-04 10:14:27,214 [main]  - PASS :'Volume' Metric is displayed in Quality
+INFO    2018-05-04 10:14:33,204 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-04 10:14:37,828 [main]  - PASS :Clicked on 'Edit Column'
+INFO    2018-05-04 10:14:38,622 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 10:14:38,766 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-04 10:14:38,922 [main]  - PASS :Clicked on : 'Save Metric'
+INFO    2018-05-04 10:14:40,010 [main]  - PASS :'Volume' Column is edited to 'Utilization'
+INFO    2018-05-04 10:14:40,160 [main]  - PASS :Clicked on 'Delete Column'
+INFO    2018-05-04 10:15:00,242 [main]  - PASS :'Utilization' Column is deleted
+INFO    2018-05-04 10:15:05,475 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:15:06,857 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:15:07,190 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:15:14,668 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:15:26,714 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:15:26,873 [main]  - PASS :Clicked on : 'Resource Grouping'
+INFO    2018-05-04 10:15:33,887 [main]  - PASS :Clicked on : 'Drill Down on 'VHC MR-1''
+INFO    2018-05-04 10:15:34,071 [main]  - PASS :Clicked on : 'Drill Down on 'Technologist''
+INFO    2018-05-04 10:15:35,282 [main]  - PASS :Clicked on : 'Resource Filter'
+INFO    2018-05-04 10:15:36,456 [main]  - PASS :Drill Down message for filter 'Resource' is displayed
+INFO    2018-05-04 10:15:41,917 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 10:15:43,361 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 10:15:43,695 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 10:15:51,723 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 10:16:03,980 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 10:16:08,382 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 10:16:08,547 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 10:16:15,724 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 10:16:17,820 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 10:16:20,169 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 10:16:22,390 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 10:16:24,412 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:16:26,498 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 10:16:26,607 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 10:16:28,821 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:16:31,031 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 10:16:33,218 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 10:16:55,276 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 10:16:55,544 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 10:16:55,900 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 10:16:58,099 [main]  - PASS :Clicked on : 'Save As Button'
+INFO    2018-05-04 10:17:00,324 [main]  - PASS :Clicked on : 'Confirm Save'
+INFO    2018-05-04 10:17:04,606 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:17:06,727 [main]  - PASS :KPI 'Copy of test' is saved
+INFO    2018-05-04 10:17:06,859 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 10:17:09,062 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:17:19,241 [main]  - PASS :Clicked on : 'test'
+INFO    2018-05-04 10:17:21,564 [main]  - PASS :Clicked on : 'Export Button'
+INFO    2018-05-04 10:17:26,578 [main]  - PASS: File is exported to local system
+INFO    2018-05-04 10:17:28,792 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 10:17:31,072 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 10:17:33,324 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 10:17:55,399 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 10:17:55,630 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 12:31:54,442 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 12:31:55,707 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 12:31:55,856 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 12:32:03,319 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 12:32:14,975 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 12:32:15,044 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 12:32:15,152 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 12:32:21,968 [main]  - PASS :'Modality' Grouping has been applied
+INFO    2018-05-04 12:32:23,185 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 12:32:24,358 [main]  - PASS :Clicked on : 'CT SubFilter'
+INFO    2018-05-04 12:32:25,530 [main]  - PASS :Clicked on : 'CR SubFilter'
+INFO    2018-05-04 12:32:27,725 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 12:32:31,750 [main]  - PASS :'Modality' Filter has been applied
+INFO    2018-05-04 12:32:31,889 [main]  - PASS :Clicked on : 'Turn Off Autopreview'
+INFO    2018-05-04 12:32:31,890 [main]  - PASS :AutoPreview is Off
+INFO    2018-05-04 12:32:31,998 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 12:32:37,052 [main]  - PASS :'Ordering Provider' Grouping has not been applied since AutoPreview is Off
+INFO    2018-05-04 12:32:37,184 [main]  - PASS :Clicked on : 'Apply Button'
+INFO    2018-05-04 12:32:41,560 [main]  - PASS :'Ordering Provider' Grouping has been applied
+INFO    2018-05-04 12:32:41,659 [main]  - PASS :Clicked on : 'Turn On Autopreview'
+INFO    2018-05-04 12:32:41,660 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 12:32:47,712 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 12:32:48,934 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 12:32:49,105 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 12:32:56,846 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 12:33:08,427 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 12:33:08,557 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 12:33:15,289 [main]  - PASS :Clicked on : 'Add New Metric'
+INFO    2018-05-04 12:33:16,005 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 12:33:16,111 [main]  - PASS :Clicked on : 'Order to Complete'
+INFO    2018-05-04 12:33:16,270 [main]  - PASS :Clicked on : 'Add Metric Confirmation'
+INFO    2018-05-04 12:33:17,372 [main]  - PASS :'Order to Complete' Column is added
+INFO    2018-05-04 12:33:22,742 [main]  - PASS :Clicked on : 'Show Volume in Quality'
+INFO    2018-05-04 12:33:24,921 [main]  - PASS :Clicked on : 'Performance Warning Pop Up'
+INFO    2018-05-04 12:33:29,294 [main]  - PASS :'Volume' Metric is displayed in Quality
+INFO    2018-05-04 12:33:34,821 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-04 12:33:39,055 [main]  - PASS :Clicked on 'Edit Column'
+INFO    2018-05-04 12:33:39,761 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 12:33:39,874 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-04 12:33:40,018 [main]  - PASS :Clicked on : 'Save Metric'
+INFO    2018-05-04 12:33:41,086 [main]  - PASS :'Volume' Column is edited to 'Utilization'
+INFO    2018-05-04 12:33:41,179 [main]  - PASS :Clicked on 'Delete Column'
+INFO    2018-05-04 12:34:01,202 [main]  - PASS :'Utilization' Column is deleted
+INFO    2018-05-04 12:34:07,243 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 12:34:08,480 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 12:34:08,642 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 12:34:16,676 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 12:34:28,157 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 12:34:28,276 [main]  - PASS :Clicked on : 'Resource Grouping'
+INFO    2018-05-04 12:34:35,205 [main]  - PASS :Clicked on : 'Drill Down on 'VHC MR-1''
+INFO    2018-05-04 12:34:35,333 [main]  - PASS :Clicked on : 'Drill Down on 'Technologist''
+INFO    2018-05-04 12:34:36,491 [main]  - PASS :Clicked on : 'Resource Filter'
+INFO    2018-05-04 12:34:37,612 [main]  - PASS :Drill Down message for filter 'Resource' is displayed
+INFO    2018-05-04 12:34:43,534 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 12:34:44,772 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 12:34:44,931 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 12:34:52,828 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 12:35:04,262 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 12:35:08,479 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 12:35:08,560 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 12:35:15,683 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 12:35:17,740 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 12:35:19,990 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 12:35:22,114 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 12:35:24,201 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 12:35:26,239 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 12:35:26,331 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+ERROR   2018-05-04 12:35:32,492 [main]  - Error came while waiting for element to appear : View Saved KPIs chrome not reachable
+  (Session info: chrome=66.0.3359.139)
+  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 4.05 seconds
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91), userDataDir=C:\Users\320008~1\AppData\Local\Temp\scoped_dir15860_23547}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=66.0.3359.139, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 4ffb4f2a249b22d7f060194c8a3a2ecf
+INFO    2018-05-04 12:35:32,504 [main]  - CurrentDate used for concating the sceenshot: 040518123532
+ERROR   2018-05-04 12:35:32,504 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-05-04 15:23:12,383 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 15:23:13,740 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 15:23:13,973 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 15:23:22,203 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 15:23:34,371 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 15:23:38,639 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 15:23:38,866 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 15:23:41,103 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 15:23:43,144 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 15:23:45,522 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 15:23:47,714 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 15:23:49,949 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:23:52,062 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 15:23:52,273 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:23:54,400 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:23:56,641 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 15:23:58,837 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 15:24:00,955 [main]  - CurrentDate used for concating the sceenshot: 040518152400
+ERROR   2018-05-04 15:24:00,956 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-05-04 15:25:13,803 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 15:25:15,237 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 15:25:15,443 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 15:25:24,065 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 15:25:36,242 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 15:25:40,784 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 15:25:40,929 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 15:25:43,105 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 15:25:45,202 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 15:25:47,618 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 15:25:49,821 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 15:25:51,887 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:25:53,958 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 15:25:54,124 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:25:56,328 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:25:58,626 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 15:26:00,832 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 15:26:22,862 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 15:26:23,080 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:26:23,380 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 15:26:25,591 [main]  - PASS :Clicked on : 'Save As Button'
+INFO    2018-05-04 15:26:27,755 [main]  - PASS :Clicked on : 'Confirm Save'
+INFO    2018-05-04 15:26:32,003 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:26:34,082 [main]  - PASS :KPI 'Copy of test' is saved
+INFO    2018-05-04 15:26:34,224 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:26:36,436 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:26:45,951 [main]  - PASS :Clicked on : 'test'
+INFO    2018-05-04 15:26:48,213 [main]  - PASS :Clicked on : 'Export Button'
+INFO    2018-05-04 15:26:53,239 [main]  - CurrentDate used for concating the sceenshot: 040518152653
+ERROR   2018-05-04 15:26:53,239 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-05-04 15:29:33,390 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 15:29:34,749 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 15:29:34,965 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 15:29:43,391 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 15:29:56,393 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 15:30:00,828 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 15:30:01,020 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 15:30:03,264 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 15:30:05,379 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 15:30:08,000 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 15:30:10,196 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 15:30:12,405 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:30:14,519 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 15:30:14,661 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:30:16,811 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:30:19,094 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 15:30:21,273 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 15:30:43,353 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 15:30:43,622 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:30:43,950 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 15:30:46,140 [main]  - PASS :Clicked on : 'Save As Button'
+INFO    2018-05-04 15:30:48,374 [main]  - PASS :Clicked on : 'Confirm Save'
+INFO    2018-05-04 15:30:52,720 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:30:54,807 [main]  - PASS :KPI 'Copy of test' is saved
+INFO    2018-05-04 15:30:54,981 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:30:57,177 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:31:07,486 [main]  - PASS :Clicked on : 'test'
+INFO    2018-05-04 15:31:09,759 [main]  - PASS :Clicked on : 'Export Button'
+INFO    2018-05-04 15:31:14,932 [main]  - CurrentDate used for concating the sceenshot: 040518153114
+ERROR   2018-05-04 15:31:14,933 [main]  - The Scenario is failed: Verify the Control Interface functionality
+INFO    2018-05-04 15:37:49,476 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 15:37:50,923 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 15:37:51,274 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 15:37:59,470 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 15:38:11,817 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 15:38:15,943 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 15:38:16,144 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 15:38:18,370 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 15:38:20,447 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 15:38:22,880 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 15:38:24,982 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 15:38:27,138 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:38:29,226 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 15:38:29,432 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:38:31,586 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:38:33,799 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 15:38:36,049 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 15:38:58,133 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 15:38:58,349 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:38:58,749 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 15:39:00,958 [main]  - PASS :Clicked on : 'Save As Button'
+INFO    2018-05-04 15:39:03,178 [main]  - PASS :Clicked on : 'Confirm Save'
+INFO    2018-05-04 15:39:07,431 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:39:09,522 [main]  - PASS :KPI 'Copy of test' is saved
+INFO    2018-05-04 15:39:09,680 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 15:39:11,899 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:39:21,289 [main]  - PASS :Clicked on : 'test'
+INFO    2018-05-04 15:39:23,617 [main]  - PASS :Clicked on : 'Export Button'
+INFO    2018-05-04 15:39:28,758 [main]  - PASS: File is exported to local system
+INFO    2018-05-04 15:39:31,015 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 15:39:33,250 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 15:39:35,491 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 15:39:57,567 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 15:39:57,939 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 16:31:22,615 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 16:31:24,047 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 16:31:24,269 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 16:31:32,440 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 16:31:44,135 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 16:31:44,228 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 16:31:44,388 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 16:31:51,169 [main]  - PASS :'Modality' Grouping has been applied
+INFO    2018-05-04 16:31:52,531 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 16:31:53,793 [main]  - PASS :Clicked on : 'CT SubFilter'
+INFO    2018-05-04 16:31:55,142 [main]  - PASS :Clicked on : 'CR SubFilter'
+INFO    2018-05-04 16:31:57,302 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 16:32:01,719 [main]  - PASS :'Modality' Filter has been applied
+INFO    2018-05-04 16:32:02,034 [main]  - PASS :Clicked on : 'Turn Off Autopreview'
+INFO    2018-05-04 16:32:02,034 [main]  - PASS :AutoPreview is Off
+INFO    2018-05-04 16:32:02,162 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 16:32:02,230 [main]  - PASS :'Ordering Provider' Grouping has not been applied since AutoPreview is Off
+INFO    2018-05-04 16:32:02,430 [main]  - PASS :Clicked on : 'Apply Button'
+INFO    2018-05-04 16:32:06,859 [main]  - PASS :'Ordering Provider' Grouping has been applied
+INFO    2018-05-04 16:32:07,042 [main]  - PASS :Clicked on : 'Turn On Autopreview'
+INFO    2018-05-04 16:32:07,042 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 16:32:13,446 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 16:32:14,952 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 16:32:15,362 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 16:32:23,277 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 16:32:35,212 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 16:32:35,371 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 16:32:42,281 [main]  - PASS :Clicked on : 'Add New Metric'
+INFO    2018-05-04 16:32:43,034 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 16:32:43,210 [main]  - PASS :Clicked on : 'Order to Complete'
+INFO    2018-05-04 16:32:43,534 [main]  - PASS :Clicked on : 'Add Metric Confirmation'
+INFO    2018-05-04 16:32:44,588 [main]  - PASS :'Order to Complete' Column is added
+INFO    2018-05-04 16:32:50,303 [main]  - PASS :Clicked on : 'Show Volume in Quality'
+INFO    2018-05-04 16:32:52,550 [main]  - PASS :Clicked on : 'Performance Warning Pop Up'
+INFO    2018-05-04 16:32:57,554 [main]  - PASS :'Volume' Metric is displayed in Quality
+INFO    2018-05-04 16:33:03,428 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-04 16:33:07,632 [main]  - PASS :Clicked on 'Edit Column'
+INFO    2018-05-04 16:33:08,468 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 16:33:08,604 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-04 16:33:08,816 [main]  - PASS :Clicked on : 'Save Metric'
+INFO    2018-05-04 16:33:09,906 [main]  - PASS :'Volume' Column is edited to 'Utilization'
+INFO    2018-05-04 16:33:10,085 [main]  - PASS :Clicked on 'Delete Column'
+INFO    2018-05-04 16:33:30,113 [main]  - PASS :'Utilization' Column is deleted
+INFO    2018-05-04 16:33:36,440 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 16:33:37,710 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 16:33:37,919 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 16:33:45,295 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 16:33:57,074 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 16:33:57,231 [main]  - PASS :Clicked on : 'Resource Grouping'
+INFO    2018-05-04 16:34:04,320 [main]  - PASS :Clicked on : 'Drill Down on 'VHC MR-1''
+INFO    2018-05-04 16:34:04,506 [main]  - PASS :Clicked on : 'Drill Down on 'Technologist''
+INFO    2018-05-04 16:34:05,739 [main]  - PASS :Clicked on : 'Resource Filter'
+INFO    2018-05-04 16:34:07,062 [main]  - PASS :Drill Down message for filter 'Resource' is displayed
+INFO    2018-05-04 16:34:13,629 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 16:34:14,957 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 16:34:15,205 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 16:34:23,247 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 16:34:34,994 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 16:34:39,165 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 16:34:39,297 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 16:34:41,540 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 16:34:43,634 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 16:34:46,009 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 16:34:48,204 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 16:34:50,286 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 16:34:52,402 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 16:34:52,639 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 16:34:54,833 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 16:34:57,060 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 16:34:59,245 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 16:35:21,276 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 16:35:21,460 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 16:35:21,720 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 16:35:23,931 [main]  - PASS :Clicked on : 'Save As Button'
+INFO    2018-05-04 16:35:26,179 [main]  - PASS :Clicked on : 'Confirm Save'
+INFO    2018-05-04 16:35:30,519 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 16:35:32,634 [main]  - PASS :KPI 'Copy of test' is saved
+INFO    2018-05-04 16:35:32,818 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 16:35:35,016 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 16:35:44,153 [main]  - PASS :Clicked on : 'test'
+INFO    2018-05-04 16:35:46,369 [main]  - PASS :Clicked on : 'Export Button'
+INFO    2018-05-04 16:35:51,499 [main]  - PASS: File is exported to local system
+INFO    2018-05-04 16:35:53,695 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 16:35:55,927 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 16:35:58,107 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 16:36:20,181 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 16:36:20,414 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 17:10:36,692 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 17:10:46,013 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 17:10:46,182 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 17:11:02,284 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 17:11:13,892 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 17:11:13,950 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 17:11:14,037 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 17:11:20,784 [main]  - PASS :'Modality' Grouping has been applied
+INFO    2018-05-04 17:11:21,983 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 17:11:23,149 [main]  - PASS :Clicked on : 'CT SubFilter'
+INFO    2018-05-04 17:11:24,310 [main]  - PASS :Clicked on : 'CR SubFilter'
+INFO    2018-05-04 17:11:26,447 [main]  - PASS :Clicked on : 'Modality Filter'
+INFO    2018-05-04 17:11:30,465 [main]  - PASS :'Modality' Filter has been applied
+INFO    2018-05-04 17:11:30,590 [main]  - PASS :Clicked on : 'Turn Off Autopreview'
+INFO    2018-05-04 17:11:30,590 [main]  - PASS :AutoPreview is Off
+INFO    2018-05-04 17:11:30,696 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 17:11:30,751 [main]  - PASS :'Ordering Provider' Grouping has not been applied since AutoPreview is Off
+INFO    2018-05-04 17:11:30,909 [main]  - PASS :Clicked on : 'Apply Button'
+INFO    2018-05-04 17:11:35,425 [main]  - PASS :'Ordering Provider' Grouping has been applied
+INFO    2018-05-04 17:11:35,522 [main]  - PASS :Clicked on : 'Turn On Autopreview'
+INFO    2018-05-04 17:11:35,522 [main]  - PASS :AutoPreview is ON
+INFO    2018-05-04 17:11:53,265 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 17:11:57,718 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 17:11:57,885 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 17:12:06,927 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 17:12:18,888 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 17:12:19,007 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-04 17:12:25,819 [main]  - PASS :Clicked on : 'Add New Metric'
+INFO    2018-05-04 17:12:26,471 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 17:12:26,563 [main]  - PASS :Clicked on : 'Order to Complete'
+INFO    2018-05-04 17:12:26,762 [main]  - PASS :Clicked on : 'Add Metric Confirmation'
+INFO    2018-05-04 17:12:27,801 [main]  - PASS :'Order to Complete' Column is added
+INFO    2018-05-04 17:12:33,576 [main]  - PASS :Clicked on : 'Show Volume in Quality'
+INFO    2018-05-04 17:12:35,773 [main]  - PASS :Clicked on : 'Performance Warning Pop Up'
+INFO    2018-05-04 17:12:40,837 [main]  - PASS :'Volume' Metric is displayed in Quality
+INFO    2018-05-04 17:12:47,301 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-04 17:12:51,599 [main]  - PASS :Clicked on 'Edit Column'
+INFO    2018-05-04 17:12:52,288 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-04 17:12:52,402 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-04 17:12:52,528 [main]  - PASS :Clicked on : 'Save Metric'
+INFO    2018-05-04 17:12:53,583 [main]  - PASS :'Volume' Column is edited to 'Utilization'
+INFO    2018-05-04 17:12:53,710 [main]  - PASS :Clicked on 'Delete Column'
+INFO    2018-05-04 17:13:13,756 [main]  - PASS :'Utilization' Column is deleted
+INFO    2018-05-04 17:13:32,501 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 17:13:33,818 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 17:13:33,992 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 17:13:43,263 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 17:13:55,160 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 17:13:55,280 [main]  - PASS :Clicked on : 'Resource Grouping'
+INFO    2018-05-04 17:14:02,267 [main]  - PASS :Clicked on : 'Drill Down on 'VHC MR-1''
+INFO    2018-05-04 17:14:02,409 [main]  - PASS :Clicked on : 'Drill Down on 'Technologist''
+INFO    2018-05-04 17:14:03,579 [main]  - PASS :Clicked on : 'Resource Filter'
+INFO    2018-05-04 17:14:04,717 [main]  - PASS :Drill Down message for filter 'Resource' is displayed
+INFO    2018-05-04 17:14:23,306 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-04 17:14:24,552 [main]  - PASS :Inputted 'aiuser' text into Username
+INFO    2018-05-04 17:14:24,736 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-05-04 17:14:34,506 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-04 17:14:46,553 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-04 17:14:50,609 [main]  - PASS :Grouping has been reset to 'Site'
+INFO    2018-05-04 17:14:50,686 [main]  - PASS :Clicked on : 'Ordering Provider Grouping'
+INFO    2018-05-04 17:14:52,825 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-04 17:14:54,883 [main]  - PASS :Error message displayed when trying to save KPI without entering name
+INFO    2018-05-04 17:14:57,110 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 17:14:59,210 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-04 17:15:01,270 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 17:15:03,335 [main]  - PASS: KPI test is saved
+INFO    2018-05-04 17:15:03,396 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 17:15:05,490 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 17:15:07,640 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 17:15:09,758 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 17:15:31,788 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 17:15:31,939 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 17:15:32,210 [main]  - PASS :Inputted 'test' text into KPI Name
+INFO    2018-05-04 17:15:34,341 [main]  - PASS :Clicked on : 'Save As Button'
+INFO    2018-05-04 17:15:36,509 [main]  - PASS :Clicked on : 'Confirm Save'
+INFO    2018-05-04 17:15:40,638 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 17:15:42,692 [main]  - PASS :KPI 'Copy of test' is saved
+INFO    2018-05-04 17:15:42,753 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'
+INFO    2018-05-04 17:15:44,840 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 17:15:54,635 [main]  - PASS :Clicked on : 'test'
+INFO    2018-05-04 17:15:56,796 [main]  - PASS :Clicked on : 'Export Button'
+INFO    2018-05-04 17:16:01,866 [main]  - PASS: File is exported to local system
+INFO    2018-05-04 17:16:04,009 [main]  - PASS :Clicked on : 'View Saved KPIs'
+INFO    2018-05-04 17:16:06,168 [main]  - PASS :Clicked on : 'Delete Button'
+INFO    2018-05-04 17:16:08,298 [main]  - PASS :Clicked on : 'Delete Confirmation Button'
+INFO    2018-05-04 17:16:30,344 [main]  - PASS :KPI 'test' has been deleted
+INFO    2018-05-04 17:16:30,481 [main]  - PASS :Clicked on : 'View Saved KPIs - Close'

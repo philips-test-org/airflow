@@ -1,0 +1,162 @@
+INFO    2018-04-16 12:23:33,265 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 12:23:34,556 [main]  - PASS :Inputted itstaffuser text into Username
+INFO    2018-04-16 12:23:34,738 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 12:23:48,693 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 12:24:02,937 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-16 12:24:02,971 [main]  - Waiting for 5 seconds
+INFO    2018-04-16 12:24:08,138 [main]  - PASS :Clicked on : 'Autopreview'
+INFO    2018-04-16 12:24:08,138 [main]  - Waiting for 5 seconds
+INFO    2018-04-16 12:25:53,528 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 12:25:54,807 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 12:25:54,985 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 12:25:57,610 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 12:26:00,682 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-16 12:26:00,856 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:04,598 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:08,147 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:11,904 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:15,329 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:19,167 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:22,706 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:26,290 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:29,893 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:33,430 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:36,871 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:40,332 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:43,759 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:47,435 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:50,902 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:54,345 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 12:26:57,801 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-16 16:05:41,258 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:05:42,590 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:05:42,819 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:05:45,816 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:05:46,060 [main]  - CurrentDate used for concating the sceenshot: 160418160546
+ERROR   2018-04-16 16:05:46,060 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:06:10,530 [main]  - CurrentDate used for concating the sceenshot: 160418160610
+ERROR   2018-04-16 16:06:10,530 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:07:03,964 [main]  - CurrentDate used for concating the sceenshot: 160418160703
+ERROR   2018-04-16 16:07:03,964 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:47:12,710 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:47:14,115 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:47:14,460 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:47:17,592 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:47:17,908 [main]  - CurrentDate used for concating the sceenshot: 160418164717
+ERROR   2018-04-16 16:47:17,908 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:48:56,811 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:48:58,172 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:48:58,386 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:49:01,479 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:49:01,791 [main]  - CurrentDate used for concating the sceenshot: 160418164901
+ERROR   2018-04-16 16:49:01,791 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:52:56,548 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:52:58,014 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:52:58,330 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:53:01,308 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:53:01,672 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-04-16 16:53:01,824 [main]  - CurrentDate used for concating the sceenshot: 160418165301
+ERROR   2018-04-16 16:53:01,824 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:54:28,162 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:54:29,563 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:54:29,851 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:54:33,314 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:54:33,658 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-04-16 16:54:33,842 [main]  - CurrentDate used for concating the sceenshot: 160418165433
+ERROR   2018-04-16 16:54:33,842 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:56:36,126 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:56:37,650 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:56:37,869 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:56:41,376 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:56:41,762 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-04-16 16:56:41,958 [main]  - CurrentDate used for concating the sceenshot: 160418165641
+ERROR   2018-04-16 16:56:41,962 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:58:23,113 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:58:24,541 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:58:24,823 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:58:27,862 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:58:28,244 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-04-16 16:58:28,408 [main]  - CurrentDate used for concating the sceenshot: 160418165828
+ERROR   2018-04-16 16:58:28,408 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 16:59:27,553 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 16:59:28,988 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 16:59:29,222 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 16:59:32,090 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 16:59:32,467 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-04-16 16:59:32,607 [main]  - CurrentDate used for concating the sceenshot: 160418165932
+ERROR   2018-04-16 16:59:32,607 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 17:01:50,138 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 17:01:51,567 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 17:01:51,789 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 17:01:54,803 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 17:01:55,181 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-04-16 17:01:55,349 [main]  - CurrentDate used for concating the sceenshot: 160418170155
+ERROR   2018-04-16 17:01:55,353 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 17:16:58,439 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 17:16:59,937 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 17:17:00,179 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 17:17:02,638 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 17:17:05,110 [main]  - PASS :Clicked on : 'reset button'
+ERROR   2018-04-16 17:17:35,293 [main]  - Error came while waiting for element to appear :  Timed out after 30 seconds waiting for visibility of element located by By.xpath: //h4[@class='panel-title'][contains(text(),'Modality')
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: driver.version: unknown
+INFO    2018-04-16 17:17:35,303 [main]  - CurrentDate used for concating the sceenshot: 160418171735
+ERROR   2018-04-16 17:17:35,318 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 17:18:37,274 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 17:18:38,750 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 17:18:38,993 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 17:18:41,260 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 17:18:44,204 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-16 17:18:44,436 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:18:45,557 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:18:45,804 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:18:55,725 [main]  - PASS :Clicked on : ''
+ERROR   2018-04-16 17:19:36,450 [main]  - Error came while waiting for element to appear :  Timed out after 30 seconds waiting for visibility of element located by By.xpath: //h4[@class='panel-title'][contains(text(),'Patient Location')]/../../div[2]/div/div/div/div[@class='results margin-top-sm']/table/tbody/tr/td/div[text()='North2']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: driver.version: unknown
+INFO    2018-04-16 17:19:36,474 [main]  - CurrentDate used for concating the sceenshot: 160418171936
+ERROR   2018-04-16 17:19:36,474 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 17:20:45,637 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 17:20:47,073 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 17:20:47,373 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 17:20:49,694 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 17:20:52,436 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-16 17:20:52,681 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:20:53,685 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:20:53,877 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:20:56,580 [main]  - PASS :Clicked on : ''
+ERROR   2018-04-16 17:21:20,345 [main]  - Error came while waiting for element to appear :  null
+INFO    2018-04-16 17:21:20,367 [main]  - CurrentDate used for concating the sceenshot: 160418172120
+ERROR   2018-04-16 17:21:20,367 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 17:24:42,780 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 17:24:44,294 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 17:24:44,577 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 17:24:46,902 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 17:24:49,637 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-16 17:24:49,854 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-04-16 17:24:50,658 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:24:50,862 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:24:54,033 [main]  - PASS :Clicked on : 'Patient Location'
+ERROR   2018-04-16 17:25:34,710 [main]  - Error came while waiting for element to appear :  Timed out after 30 seconds waiting for visibility of element located by By.xpath: //h4[@class='panel-title'][contains(text(),'Patient Location')]/../../div[2]/div/div/div/div[@class='results margin-top-sm']/table/tbody/tr/td/div[text()='North2']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: driver.version: unknown
+INFO    2018-04-16 17:25:34,733 [main]  - CurrentDate used for concating the sceenshot: 160418172534
+ERROR   2018-04-16 17:25:34,733 [main]  - The Scenario is failed: Verifying Productivity app workflow
+INFO    2018-04-16 17:26:40,197 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-16 17:26:41,546 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-16 17:26:41,813 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-16 17:26:44,238 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-16 17:26:46,755 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-16 17:26:46,979 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-04-16 17:26:47,694 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:26:47,946 [main]  - PASS :Clicked on : ''
+INFO    2018-04-16 17:26:57,534 [main]  - PASS :Clicked on : 'Patient Location'
+ERROR   2018-04-16 17:27:38,147 [main]  - Error came while waiting for element to appear :  Timed out after 30 seconds waiting for visibility of element located by By.xpath: //h4[@class='panel-title'][contains(text(),'Patient Location')]/../../div[2]/div/div/div/div[@class='results margin-top-sm']/table/tbody/tr/td/div[text()='North2']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: driver.version: unknown
+INFO    2018-04-16 17:27:38,165 [main]  - CurrentDate used for concating the sceenshot: 160418172738
+ERROR   2018-04-16 17:27:38,165 [main]  - The Scenario is failed: Verifying Productivity app workflow

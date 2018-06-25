@@ -1,0 +1,713 @@
+INFO    2018-06-15 09:15:31,348 [main]  - Current Page Title is :Acceptable Usage Policy
+ERROR   2018-06-15 09:20:59,626 [main]  - Error came while waiting for element to appear : Airflow timeout
+  (Session info: chrome=67.0.3396.87)
+  (Driver info: chromedriver=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91),platform=Windows NT 10.0.14393 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 328.21 seconds
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.36.540470 (e522d04694c7ebea4ba8821272dbef4f9b818c91), userDataDir=C:\Users\310281~1\AppData\Local\Temp\scoped_dir13764_4302}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=67.0.3396.87, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 932e0a6ff8543001a8746caaa6ef0630
+INFO    2018-06-15 09:20:59,673 [main]  - CurrentDate used for concating the sceenshot: 150618092059
+ERROR   2018-06-15 09:20:59,673 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 09:29:17,578 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 09:29:23,986 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 09:29:23,989 [main]  - CurrentDate used for concating the sceenshot: 150618092923
+INFO    2018-06-15 09:29:25,196 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 09:29:25,402 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 09:29:32,068 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 09:29:32,302 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 09:29:32,302 [main]  - CurrentDate used for concating the sceenshot: 150618092932
+INFO    2018-06-15 09:36:53,607 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 09:36:59,614 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 09:36:59,614 [main]  - CurrentDate used for concating the sceenshot: 150618093659
+INFO    2018-06-15 09:37:00,844 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 09:37:01,010 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 09:37:07,199 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 09:37:07,306 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 09:37:07,306 [main]  - CurrentDate used for concating the sceenshot: 150618093707
+INFO    2018-06-15 09:37:27,759 [main]  - CurrentDate used for concating the sceenshot: 150618093727
+ERROR   2018-06-15 09:37:27,759 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 09:37:27,772 [main]  - CurrentDate used for concating the sceenshot: 150618093727
+INFO    2018-06-15 09:37:54,682 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 09:38:01,643 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 09:38:01,645 [main]  - CurrentDate used for concating the sceenshot: 150618093801
+INFO    2018-06-15 09:38:02,802 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 09:38:02,975 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 09:38:08,928 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 09:38:09,017 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 09:38:09,017 [main]  - CurrentDate used for concating the sceenshot: 150618093809
+INFO    2018-06-15 09:38:29,472 [main]  - CurrentDate used for concating the sceenshot: 150618093829
+ERROR   2018-06-15 09:38:29,473 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 09:38:29,481 [main]  - CurrentDate used for concating the sceenshot: 150618093829
+INFO    2018-06-15 09:45:48,725 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 09:46:01,252 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 09:46:01,256 [main]  - CurrentDate used for concating the sceenshot: 150618094601
+INFO    2018-06-15 09:46:02,456 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 09:46:02,660 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 09:46:09,706 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 09:46:09,813 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 09:46:09,813 [main]  - CurrentDate used for concating the sceenshot: 150618094609
+INFO    2018-06-15 09:48:05,937 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 09:48:12,560 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 09:48:12,563 [main]  - CurrentDate used for concating the sceenshot: 150618094812
+INFO    2018-06-15 09:48:13,785 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 09:48:13,979 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 09:48:20,634 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 09:48:20,732 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 09:48:20,736 [main]  - CurrentDate used for concating the sceenshot: 150618094820
+INFO    2018-06-15 10:17:20,428 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:17:27,478 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:17:27,482 [main]  - CurrentDate used for concating the sceenshot: 150618101727
+INFO    2018-06-15 10:17:28,699 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:17:28,921 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:17:35,404 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:17:35,550 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:17:35,550 [main]  - CurrentDate used for concating the sceenshot: 150618101735
+INFO    2018-06-15 10:25:00,584 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:25:07,205 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:25:07,209 [main]  - CurrentDate used for concating the sceenshot: 150618102507
+INFO    2018-06-15 10:25:08,429 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:25:08,727 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:25:16,755 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:25:16,911 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:25:16,911 [main]  - CurrentDate used for concating the sceenshot: 150618102516
+INFO    2018-06-15 10:36:28,157 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:36:34,613 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:36:34,613 [main]  - CurrentDate used for concating the sceenshot: 150618103634
+INFO    2018-06-15 10:36:35,740 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:36:35,919 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:36:42,475 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:36:42,555 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:36:42,555 [main]  - CurrentDate used for concating the sceenshot: 150618103642
+INFO    2018-06-15 10:38:18,371 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:38:24,577 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:38:24,578 [main]  - CurrentDate used for concating the sceenshot: 150618103824
+INFO    2018-06-15 10:38:25,691 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:38:25,843 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:38:31,852 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:38:31,936 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:38:31,937 [main]  - CurrentDate used for concating the sceenshot: 150618103831
+INFO    2018-06-15 10:44:03,480 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:44:10,018 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:44:10,018 [main]  - CurrentDate used for concating the sceenshot: 150618104410
+INFO    2018-06-15 10:44:11,148 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:44:11,323 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:44:17,553 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:44:17,633 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:44:17,633 [main]  - CurrentDate used for concating the sceenshot: 150618104417
+INFO    2018-06-15 10:47:17,981 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:47:24,365 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:47:24,365 [main]  - CurrentDate used for concating the sceenshot: 150618104724
+INFO    2018-06-15 10:47:25,458 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:47:25,625 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:47:32,135 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:47:32,212 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:47:32,213 [main]  - CurrentDate used for concating the sceenshot: 150618104732
+INFO    2018-06-15 10:47:47,459 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 10:47:47,479 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 10:47:47,490 [main]  - (810, 1994)
+INFO    2018-06-15 10:47:47,497 [main]  - (810, 1842)
+INFO    2018-06-15 10:47:47,747 [main]  - PASS :DragnDrop on 'DragNDrop'
+INFO    2018-06-15 10:51:29,855 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:51:36,538 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:51:36,538 [main]  - CurrentDate used for concating the sceenshot: 150618105136
+INFO    2018-06-15 10:51:37,639 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:51:37,815 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:51:43,914 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:51:43,993 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:51:43,994 [main]  - CurrentDate used for concating the sceenshot: 150618105143
+INFO    2018-06-15 10:51:58,514 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 10:51:58,530 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 10:51:58,541 [main]  - (810, 2007)
+INFO    2018-06-15 10:51:58,549 [main]  - (810, 1895)
+INFO    2018-06-15 10:51:58,769 [main]  - PASS :DragnDrop on 'DragNDrop'
+INFO    2018-06-15 10:54:24,643 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 10:54:31,762 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 10:54:31,762 [main]  - CurrentDate used for concating the sceenshot: 150618105431
+INFO    2018-06-15 10:54:32,889 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 10:54:33,082 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 10:54:39,194 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 10:54:39,273 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 10:54:39,274 [main]  - CurrentDate used for concating the sceenshot: 150618105439
+INFO    2018-06-15 10:54:54,115 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 10:54:54,131 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 10:54:54,140 [main]  - (810, 2006)
+INFO    2018-06-15 10:54:54,147 [main]  - (810, 1894)
+INFO    2018-06-15 10:54:54,384 [main]  - PASS :DragnDrop on 'DragNDrop'
+INFO    2018-06-15 11:02:08,017 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 11:02:14,616 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 11:02:14,617 [main]  - CurrentDate used for concating the sceenshot: 150618110214
+INFO    2018-06-15 11:02:15,711 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 11:02:15,878 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 11:02:21,893 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 11:02:21,972 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 11:02:21,972 [main]  - CurrentDate used for concating the sceenshot: 150618110221
+INFO    2018-06-15 11:02:37,255 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 11:02:37,274 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 11:02:37,283 [main]  - (810, 2023)
+INFO    2018-06-15 11:02:37,291 [main]  - (810, 1859)
+INFO    2018-06-15 11:02:37,488 [main]  - PASS :DragnDrop on 'DragNDrop'
+INFO    2018-06-15 11:04:35,045 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 11:04:41,526 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 11:04:41,527 [main]  - CurrentDate used for concating the sceenshot: 150618110441
+INFO    2018-06-15 11:04:42,667 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 11:04:42,846 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 11:04:48,922 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 11:04:49,003 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 11:04:49,003 [main]  - CurrentDate used for concating the sceenshot: 150618110449
+INFO    2018-06-15 11:05:04,237 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 11:05:04,253 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 11:05:04,263 [main]  - (810, 2009)
+INFO    2018-06-15 11:05:04,270 [main]  - (810, 1801)
+INFO    2018-06-15 11:05:04,492 [main]  - PASS :DragnDrop on 'DragNDrop'
+INFO    2018-06-15 11:18:04,686 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 11:18:11,499 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 11:18:11,500 [main]  - CurrentDate used for concating the sceenshot: 150618111811
+INFO    2018-06-15 11:18:12,576 [main]  - PASS :Inputted 'attending1' text into Username
+INFO    2018-06-15 11:18:12,713 [main]  - PASS :Inputted 'radiology' text into Password
+INFO    2018-06-15 11:18:19,062 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 11:18:19,139 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 11:18:19,139 [main]  - CurrentDate used for concating the sceenshot: 150618111819
+INFO    2018-06-15 11:18:33,960 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 11:18:33,976 [main]  - Waiting ends ... Web element loaded on the page
+INFO    2018-06-15 11:18:33,986 [main]  - (810, 799)
+INFO    2018-06-15 11:18:33,993 [main]  - (810, 1850)
+INFO    2018-06-15 11:18:34,219 [main]  - PASS :DragnDrop on 'DragNDrop'
+INFO    2018-06-15 12:34:26,368 [main]  - CurrentDate used for concating the sceenshot: 150618123426
+ERROR   2018-06-15 12:34:26,369 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 12:34:26,383 [main]  - CurrentDate used for concating the sceenshot: 150618123426
+ERROR   2018-06-15 12:34:26,383 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 12:34:26,396 [main]  - CurrentDate used for concating the sceenshot: 150618123426
+ERROR   2018-06-15 12:34:26,396 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 12:34:26,411 [main]  - CurrentDate used for concating the sceenshot: 150618123426
+ERROR   2018-06-15 12:34:26,411 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 12:34:58,426 [main]  - CurrentDate used for concating the sceenshot: 150618123458
+ERROR   2018-06-15 12:34:58,428 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 12:34:59,474 [main]  - CurrentDate used for concating the sceenshot: 150618123459
+ERROR   2018-06-15 12:34:59,474 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 12:35:00,529 [main]  - CurrentDate used for concating the sceenshot: 150618123500
+ERROR   2018-06-15 12:35:00,529 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 12:35:01,569 [main]  - CurrentDate used for concating the sceenshot: 150618123501
+ERROR   2018-06-15 12:35:01,569 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 12:36:35,519 [main]  - CurrentDate used for concating the sceenshot: 150618123635
+ERROR   2018-06-15 12:36:35,520 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 12:36:36,583 [main]  - CurrentDate used for concating the sceenshot: 150618123636
+ERROR   2018-06-15 12:36:36,583 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 12:36:37,626 [main]  - CurrentDate used for concating the sceenshot: 150618123637
+ERROR   2018-06-15 12:36:37,626 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 12:36:38,164 [main]  - CurrentDate used for concating the sceenshot: 150618123638
+ERROR   2018-06-15 12:36:38,164 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 12:37:15,407 [main]  - CurrentDate used for concating the sceenshot: 150618123715
+ERROR   2018-06-15 12:37:15,408 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 12:37:16,458 [main]  - CurrentDate used for concating the sceenshot: 150618123716
+ERROR   2018-06-15 12:37:16,458 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 12:37:17,502 [main]  - CurrentDate used for concating the sceenshot: 150618123717
+ERROR   2018-06-15 12:37:17,502 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 12:37:18,556 [main]  - CurrentDate used for concating the sceenshot: 150618123718
+ERROR   2018-06-15 12:37:18,562 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 12:39:14,628 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:36117: Software caused connection abort: recv failed
+INFO    2018-06-15 12:39:14,629 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:36117
+ERROR   2018-06-15 12:42:00,650 [main]  - Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 12:42:00,662 [main]  - CurrentDate used for concating the sceenshot: 150618124200
+ERROR   2018-06-15 12:42:00,662 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 12:42:00,712 [main]  - CurrentDate used for concating the sceenshot: 150618124200
+INFO    2018-06-15 12:42:06,090 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:52618: Software caused connection abort: recv failed
+INFO    2018-06-15 12:42:06,091 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:52618
+INFO    2018-06-15 12:42:18,507 [main]  - CurrentDate used for concating the sceenshot: 150618124218
+ERROR   2018-06-15 12:42:18,507 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 12:42:21,270 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:60097: Software caused connection abort: recv failed
+INFO    2018-06-15 12:42:21,270 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:60097
+INFO    2018-06-15 12:42:40,230 [main]  - CurrentDate used for concating the sceenshot: 150618124240
+ERROR   2018-06-15 12:42:40,230 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 12:42:42,991 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:62374: Software caused connection abort: recv failed
+INFO    2018-06-15 12:42:42,991 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:62374
+INFO    2018-06-15 12:47:53,047 [main]  - CurrentDate used for concating the sceenshot: 150618124753
+ERROR   2018-06-15 12:47:53,048 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 12:48:03,402 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:6260: Software caused connection abort: recv failed
+INFO    2018-06-15 12:48:03,403 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:6260
+INFO    2018-06-15 12:58:47,288 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:57265: Software caused connection abort: recv failed
+INFO    2018-06-15 12:58:47,290 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:57265
+INFO    2018-06-15 12:59:11,947 [main]  - CurrentDate used for concating the sceenshot: 150618125911
+ERROR   2018-06-15 12:59:11,947 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 12:59:14,712 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:45629: Software caused connection abort: recv failed
+INFO    2018-06-15 12:59:14,712 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:45629
+ERROR   2018-06-15 12:59:42,079 [main]  - Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 12:59:42,094 [main]  - CurrentDate used for concating the sceenshot: 150618125942
+ERROR   2018-06-15 12:59:42,095 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 12:59:42,131 [main]  - CurrentDate used for concating the sceenshot: 150618125942
+ERROR   2018-06-15 12:59:42,131 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 12:59:42,166 [main]  - CurrentDate used for concating the sceenshot: 150618125942
+ERROR   2018-06-15 12:59:42,166 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 12:59:42,187 [main]  - CurrentDate used for concating the sceenshot: 150618125942
+ERROR   2018-06-15 12:59:42,187 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 12:59:53,051 [main]  - CurrentDate used for concating the sceenshot: 150618125953
+ERROR   2018-06-15 12:59:53,051 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 12:59:55,803 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:43873: Software caused connection abort: recv failed
+INFO    2018-06-15 12:59:55,804 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:43873
+INFO    2018-06-15 13:00:51,070 [main]  - CurrentDate used for concating the sceenshot: 150618130051
+ERROR   2018-06-15 13:00:51,070 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 13:00:53,838 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:63828: Software caused connection abort: recv failed
+INFO    2018-06-15 13:00:53,839 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:63828
+INFO    2018-06-15 13:01:12,157 [main]  - CurrentDate used for concating the sceenshot: 150618130112
+ERROR   2018-06-15 13:01:12,157 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 13:01:24,809 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:15793: Software caused connection abort: recv failed
+INFO    2018-06-15 13:01:24,810 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:15793
+INFO    2018-06-15 14:12:05,923 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:15476: Software caused connection abort: recv failed
+INFO    2018-06-15 14:12:05,925 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:15476
+INFO    2018-06-15 14:12:06,632 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:12:09,633 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:17:28,252 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:13793: Software caused connection abort: recv failed
+INFO    2018-06-15 14:17:28,253 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:13793
+INFO    2018-06-15 14:17:28,961 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:17:31,963 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:18:02,421 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:17367: Software caused connection abort: recv failed
+INFO    2018-06-15 14:18:02,422 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:17367
+INFO    2018-06-15 14:18:02,932 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:18:05,932 [main]  - Waited for 3 seconds
+ERROR   2018-06-15 14:18:07,903 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 14:18:07,930 [main]  - CurrentDate used for concating the sceenshot: 150618141807
+ERROR   2018-06-15 14:18:07,930 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:18:11,086 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:57905: Software caused connection abort: recv failed
+INFO    2018-06-15 14:18:11,086 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:57905
+INFO    2018-06-15 14:18:11,766 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:18:14,767 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:18:16,848 [main]  - CurrentDate used for concating the sceenshot: 150618141816
+ERROR   2018-06-15 14:18:16,850 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:18:16,902 [main]  - CurrentDate used for concating the sceenshot: 150618141816
+ERROR   2018-06-15 14:18:16,902 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 14:18:16,922 [main]  - CurrentDate used for concating the sceenshot: 150618141816
+ERROR   2018-06-15 14:18:16,922 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+ERROR   2018-06-15 14:33:48,446 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 14:33:48,457 [main]  - CurrentDate used for concating the sceenshot: 150618143348
+ERROR   2018-06-15 14:33:48,457 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:33:48,492 [main]  - CurrentDate used for concating the sceenshot: 150618143348
+ERROR   2018-06-15 14:33:48,492 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:33:48,511 [main]  - CurrentDate used for concating the sceenshot: 150618143348
+ERROR   2018-06-15 14:33:48,511 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 14:33:48,546 [main]  - CurrentDate used for concating the sceenshot: 150618143348
+ERROR   2018-06-15 14:33:48,546 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 14:34:32,354 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:34:35,356 [main]  - Waited for 3 seconds
+ERROR   2018-06-15 14:34:38,751 [main]  - FAIL: Error came while waiting for element to appear : Username null
+INFO    2018-06-15 14:34:38,769 [main]  - CurrentDate used for concating the sceenshot: 150618143438
+ERROR   2018-06-15 14:34:38,769 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:34:46,843 [main]  - CurrentDate used for concating the sceenshot: 150618143446
+ERROR   2018-06-15 14:34:46,843 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:35:16,177 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:35:19,180 [main]  - Waited for 3 seconds
+ERROR   2018-06-15 14:35:51,453 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 14:35:51,465 [main]  - CurrentDate used for concating the sceenshot: 150618143551
+ERROR   2018-06-15 14:35:51,465 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:35:56,281 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:35:59,282 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:35:59,323 [main]  - Current Page Title is :Error report
+ERROR   2018-06-15 14:36:01,319 [main]  - FAIL: Error came while waiting for element to appear : Airflow null
+INFO    2018-06-15 14:36:01,335 [main]  - CurrentDate used for concating the sceenshot: 150618143601
+ERROR   2018-06-15 14:36:01,335 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:36:01,361 [main]  - CurrentDate used for concating the sceenshot: 150618143601
+ERROR   2018-06-15 14:36:01,361 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 14:36:01,388 [main]  - CurrentDate used for concating the sceenshot: 150618143601
+ERROR   2018-06-15 14:36:01,390 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 14:36:56,957 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:36:59,958 [main]  - Waited for 3 seconds
+ERROR   2018-06-15 14:37:32,715 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 14:37:32,723 [main]  - CurrentDate used for concating the sceenshot: 150618143732
+ERROR   2018-06-15 14:37:32,723 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:37:37,984 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:37:40,985 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:37:41,020 [main]  - Current Page Title is :Error report
+INFO    2018-06-15 14:38:41,843 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:38:44,846 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:39:53,801 [main]  - Waiting for 3 seconds
+ERROR   2018-06-15 14:39:56,227 [main]  - FAIL: Error came while waiting for element to appear : Username null
+INFO    2018-06-15 14:39:56,241 [main]  - CurrentDate used for concating the sceenshot: 150618143956
+ERROR   2018-06-15 14:39:56,241 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:39:56,264 [main]  - CurrentDate used for concating the sceenshot: 150618143956
+ERROR   2018-06-15 14:39:56,264 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:39:56,286 [main]  - CurrentDate used for concating the sceenshot: 150618143956
+ERROR   2018-06-15 14:39:56,286 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 14:39:56,335 [main]  - CurrentDate used for concating the sceenshot: 150618143956
+ERROR   2018-06-15 14:39:56,335 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 14:39:56,802 [main]  - Waited for 3 seconds
+ERROR   2018-06-15 14:40:37,586 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 14:40:37,595 [main]  - CurrentDate used for concating the sceenshot: 150618144037
+ERROR   2018-06-15 14:40:37,595 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:40:42,403 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:40:45,405 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:40:47,891 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:40:47,901 [main]  - CurrentDate used for concating the sceenshot: 150618144047
+ERROR   2018-06-15 14:40:47,902 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:40:57,634 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:41:00,644 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:41:04,759 [main]  - CurrentDate used for concating the sceenshot: 150618144104
+ERROR   2018-06-15 14:41:04,759 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 14:41:27,843 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:41:30,851 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:41:33,232 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:41:33,247 [main]  - CurrentDate used for concating the sceenshot: 150618144133
+ERROR   2018-06-15 14:41:33,247 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:41:38,002 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:41:41,015 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:41:42,914 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:41:42,915 [main]  - CurrentDate used for concating the sceenshot: 150618144142
+ERROR   2018-06-15 14:41:42,915 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:41:52,686 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:41:55,686 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:41:59,827 [main]  - CurrentDate used for concating the sceenshot: 150618144159
+ERROR   2018-06-15 14:41:59,827 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 14:43:31,517 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:43:34,524 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:43:36,934 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:43:36,941 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-15 14:43:36,948 [main]  - CurrentDate used for concating the sceenshot: 150618144336
+ERROR   2018-06-15 14:43:36,948 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 14:43:41,565 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:43:44,571 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:44:18,807 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:44:21,820 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:44:24,369 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:44:24,377 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-15 14:44:24,408 [main]  - CurrentDate used for concating the sceenshot: 150618144424
+ERROR   2018-06-15 14:44:24,408 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:47:28,120 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:47:31,130 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:47:33,664 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:47:33,672 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-15 14:47:33,704 [main]  - CurrentDate used for concating the sceenshot: 150618144733
+ERROR   2018-06-15 14:47:33,704 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:48:29,650 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:48:32,663 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:48:35,176 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:48:35,184 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-15 14:48:35,199 [main]  - CurrentDate used for concating the sceenshot: 150618144835
+ERROR   2018-06-15 14:48:35,199 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:50:32,773 [main]  - Waiting for 3 seconds
+INFO    2018-06-15 14:50:35,794 [main]  - Waited for 3 seconds
+INFO    2018-06-15 14:50:38,252 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:50:38,254 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-15 14:50:38,270 [main]  - CurrentDate used for concating the sceenshot: 150618145038
+ERROR   2018-06-15 14:50:38,270 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:53:53,648 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:53:53,654 [main]  - Current Page Title is :PerformanceBridge
+INFO    2018-06-15 14:53:53,669 [main]  - CurrentDate used for concating the sceenshot: 150618145353
+ERROR   2018-06-15 14:53:53,669 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 14:55:14,041 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 14:55:14,049 [main]  - CurrentDate used for concating the sceenshot: 150618145514
+ERROR   2018-06-15 14:55:14,049 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:04:53,526 [main]  - CurrentDate used for concating the sceenshot: 150618150453
+ERROR   2018-06-15 15:04:53,526 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:06:45,157 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:06:45,166 [main]  - CurrentDate used for concating the sceenshot: 150618150645
+ERROR   2018-06-15 15:06:45,166 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:09:29,395 [main]  - CurrentDate used for concating the sceenshot: 150618150929
+ERROR   2018-06-15 15:09:29,396 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+ERROR   2018-06-15 15:12:00,303 [main]  - FAIL: Error came while waiting for element to appear : Username Timed out after 30 seconds waiting for visibility of element located by By.id: IDToken1
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 15:12:00,314 [main]  - CurrentDate used for concating the sceenshot: 150618151200
+ERROR   2018-06-15 15:12:00,314 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:13:04,877 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:13:04,885 [main]  - CurrentDate used for concating the sceenshot: 150618151304
+ERROR   2018-06-15 15:13:04,885 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:18:25,705 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:18:25,717 [main]  - CurrentDate used for concating the sceenshot: 150618151825
+ERROR   2018-06-15 15:18:25,717 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:18:39,479 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:18:39,491 [main]  - CurrentDate used for concating the sceenshot: 150618151839
+ERROR   2018-06-15 15:18:39,491 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:21:06,579 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:21:06,593 [main]  - CurrentDate used for concating the sceenshot: 150618152106
+ERROR   2018-06-15 15:21:06,593 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:27:42,249 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:27:42,264 [main]  - CurrentDate used for concating the sceenshot: 150618152742
+ERROR   2018-06-15 15:27:42,264 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:29:15,459 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:29:15,469 [main]  - CurrentDate used for concating the sceenshot: 150618152915
+ERROR   2018-06-15 15:29:15,469 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:29:55,172 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:29:55,173 [main]  - Waiting for 20 seconds
+INFO    2018-06-15 15:30:15,180 [main]  - Waited for 20 seconds
+INFO    2018-06-15 15:30:16,237 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 15:30:16,337 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 15:30:16,408 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 15:30:16,494 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 15:30:16,570 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 15:30:23,193 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 15:30:40,596 [main]  - CurrentDate used for concating the sceenshot: 150618153040
+ERROR   2018-06-15 15:30:40,596 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 15:34:18,933 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:34:18,935 [main]  - Waiting for 20 seconds
+INFO    2018-06-15 15:37:33,820 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:37:33,822 [main]  - Waiting for 20 seconds
+INFO    2018-06-15 15:37:53,822 [main]  - Waited for 20 seconds
+INFO    2018-06-15 15:37:53,847 [main]  - CurrentDate used for concating the sceenshot: 150618153753
+ERROR   2018-06-15 15:37:53,847 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 15:38:31,815 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:38:31,983 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:38:31,983 [main]  - Waiting for 20 seconds
+INFO    2018-06-15 15:38:51,985 [main]  - Waited for 20 seconds
+INFO    2018-06-15 15:38:53,050 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 15:38:53,141 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 15:38:53,216 [main]  - PASS :Inputted attending1 text into Username
+INFO    2018-06-15 15:38:53,291 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 15:38:53,355 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 15:38:59,522 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 15:38:59,654 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 15:39:10,105 [main]  - CurrentDate used for concating the sceenshot: 150618153910
+ERROR   2018-06-15 15:39:10,105 [main]  - The Scenario is failed: Drag and Drop between Timelines and Device
+INFO    2018-06-15 15:39:54,882 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:39:54,884 [main]  - Waiting for 20 seconds
+INFO    2018-06-15 15:40:14,884 [main]  - Waited for 20 seconds
+INFO    2018-06-15 15:40:15,939 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 15:40:16,037 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 15:40:16,111 [main]  - PASS :Inputted Aiuser text into Username
+INFO    2018-06-15 15:40:16,188 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 15:40:16,259 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 15:40:16,878 [main]  - PASS :Clicked on : 'Login Button'
+ERROR   2018-06-15 15:40:48,014 [main]  - FAIL: Error came while waiting for element to appear : Admin Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[contains(text(),'Admin')]
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 15:40:48,023 [main]  - CurrentDate used for concating the sceenshot: 150618154048
+ERROR   2018-06-15 15:40:48,023 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 15:41:12,645 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:41:19,020 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 15:41:19,108 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 15:41:19,176 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 15:41:19,256 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 15:41:19,333 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 15:41:25,690 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 15:41:25,807 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-15 15:41:30,436 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-15 15:41:30,854 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-15 15:41:30,949 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-15 15:41:31,018 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-15 15:41:33,872 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-15 15:41:36,567 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-15 15:41:40,160 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 15:41:40,569 [main]  - PASS :Clicked on : 'grupuName'
+ERROR   2018-06-15 15:42:11,680 [main]  - FAIL: Error came while waiting for element to appear : grupuName Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[text()='New Group']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 15:42:11,689 [main]  - CurrentDate used for concating the sceenshot: 150618154211
+ERROR   2018-06-15 15:42:11,689 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 15:42:49,200 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:42:55,510 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 15:42:55,605 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 15:42:55,676 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 15:42:55,758 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 15:42:55,833 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 15:43:01,885 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 15:43:01,993 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-15 15:43:08,541 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-15 15:43:08,975 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-15 15:43:09,064 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-15 15:43:09,127 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-15 15:43:09,194 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-15 15:43:12,632 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-15 15:43:18,807 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 15:43:19,225 [main]  - PASS :Clicked on : 'grupuName'
+ERROR   2018-06-15 15:43:50,342 [main]  - FAIL: Error came while waiting for element to appear : grupuName Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[text()='New Group']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 15:43:50,349 [main]  - CurrentDate used for concating the sceenshot: 150618154350
+ERROR   2018-06-15 15:43:50,349 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 15:45:03,032 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:45:09,326 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 15:45:09,420 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 15:45:09,489 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 15:45:09,573 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 15:45:09,649 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 15:45:15,849 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 15:45:15,958 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-15 15:45:20,266 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-15 15:45:20,674 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-15 15:45:20,764 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-15 15:45:20,824 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-15 15:45:20,906 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-15 15:45:24,104 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-15 15:45:28,685 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 15:45:29,090 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-15 15:45:29,192 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-15 15:47:03,644 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 15:47:09,887 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 15:47:09,980 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 15:47:10,052 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 15:47:10,137 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 15:47:10,212 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 15:47:16,217 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 15:47:16,332 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-15 15:47:22,950 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-15 15:47:23,383 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-15 15:47:23,456 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-15 15:47:23,515 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-15 15:47:23,574 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-15 15:47:27,260 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-15 15:47:31,516 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 15:47:31,980 [main]  - PASS :Clicked on : 'grupuName'
+ERROR   2018-06-15 15:48:03,171 [main]  - FAIL: Error came while waiting for element to appear : grupuName Timed out after 30 seconds waiting for visibility of element located by By.xpath: //a[text()='New Group']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_144'
+Driver info: driver.version: unknown
+INFO    2018-06-15 15:48:03,177 [main]  - CurrentDate used for concating the sceenshot: 150618154803
+ERROR   2018-06-15 15:48:03,177 [main]  - The Scenario is failed: Create New Group
+INFO    2018-06-15 16:12:43,312 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:12:49,656 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:12:49,757 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:12:49,826 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:12:49,914 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:12:49,982 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:12:56,005 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:13:12,009 [main]  - CurrentDate used for concating the sceenshot: 150618161312
+ERROR   2018-06-15 16:13:12,010 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 16:13:59,953 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:14:06,790 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:14:06,885 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:14:06,955 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:14:07,039 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:14:07,113 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:14:13,550 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:14:29,499 [main]  - CurrentDate used for concating the sceenshot: 150618161429
+ERROR   2018-06-15 16:14:29,499 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 16:15:05,923 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:15:12,276 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:15:12,371 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:15:12,442 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:15:12,527 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:15:12,600 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:15:18,658 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:15:34,285 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-15 16:15:34,285 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-15 16:15:34,888 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-15 16:15:34,937 [main]  - kioskNumber is 5250
+INFO    2018-06-15 16:15:34,997 [main]  - PASS :Clicked on : 'examcardClose'
+INFO    2018-06-15 16:15:35,105 [main]  - CurrentDate used for concating the sceenshot: 150618161535
+ERROR   2018-06-15 16:15:35,106 [main]  - The Scenario is failed: Kiosk  Verify Only Order/token numbers, no asscn/mrn is displayed
+INFO    2018-06-15 16:16:02,360 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:16:09,240 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:16:09,334 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:16:09,408 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:16:09,493 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:16:09,565 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:16:15,805 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:16:31,428 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-15 16:16:31,428 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-15 16:16:32,024 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-15 16:16:32,076 [main]  - kioskNumber is 5250
+INFO    2018-06-15 16:16:32,132 [main]  - PASS :Clicked on : 'examcardClose'
+INFO    2018-06-15 16:16:37,929 [main]  - PASS :Clicked on : 'Kiosk'
+INFO    2018-06-15 16:16:49,527 [main]  - only Number is diplayed
+INFO    2018-06-15 16:17:43,115 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:17:49,809 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:17:49,899 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:17:49,972 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:17:50,055 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:17:50,130 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:17:56,002 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:17:56,063 [main]  - PASS :Clicked on : 'Overview'
+INFO    2018-06-15 16:18:06,472 [main]  - Number of exam cards are 0
+INFO    2018-06-15 16:18:06,542 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 16:18:12,142 [main]  - Number of exam cards are 99
+INFO    2018-06-15 16:18:12,186 [main]  - CurrentDate used for concating the sceenshot: 150618161812
+ERROR   2018-06-15 16:18:12,187 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+ERROR   2018-06-15 16:18:12,630 [main]  - Path or File not found: ./screenshots/Check:All_schedules_per_day_are_are_same_in_overVeiw_and_Calender150618161812.jpg
+INFO    2018-06-15 16:18:34,557 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:18:41,166 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:18:41,257 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:18:41,330 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:18:41,412 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:18:41,488 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:18:47,319 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:18:47,392 [main]  - PASS :Clicked on : 'Overview'
+INFO    2018-06-15 16:18:57,775 [main]  - Number of exam cards are 0
+INFO    2018-06-15 16:18:57,844 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 16:19:02,874 [main]  - Number of exam cards are 99
+INFO    2018-06-15 16:19:02,919 [main]  - CurrentDate used for concating the sceenshot: 150618161902
+ERROR   2018-06-15 16:19:02,919 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+ERROR   2018-06-15 16:19:03,373 [main]  - Path or File not found: ./screenshots/Check:All_schedules_per_day_are_are_same_in_overVeiw_and_Calender150618161902.jpg
+INFO    2018-06-15 16:21:40,665 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:21:47,412 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:21:47,500 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:21:47,560 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:21:47,642 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:21:47,721 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:21:53,866 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:21:53,933 [main]  - PASS :Clicked on : 'Overview'
+INFO    2018-06-15 16:22:09,975 [main]  - Number of exam cards are 99
+INFO    2018-06-15 16:22:10,157 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 16:22:10,552 [main]  - Number of exam cards are 99
+INFO    2018-06-15 16:24:19,469 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:24:26,332 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:24:26,429 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:24:26,509 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:24:26,597 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:24:26,672 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:24:33,093 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:24:33,164 [main]  - PASS :Clicked on : 'Admin'
+INFO    2018-06-15 16:24:37,882 [main]  - PASS :Clicked on : 'Resource Groups'
+INFO    2018-06-15 16:24:38,325 [main]  - PASS :Cleared : 'createNewGroup'
+INFO    2018-06-15 16:24:38,408 [main]  - PASS :Inputted New Group text into createNewGroup
+INFO    2018-06-15 16:24:38,468 [main]  - PASS :Clicked on : 'createNewGroupPlus'
+INFO    2018-06-15 16:24:38,528 [main]  - PASS :Clicked on : 'New Group'
+INFO    2018-06-15 16:24:41,761 [main]  - PASS :Clicked on : 'VHO-CT CT-2'
+INFO    2018-06-15 16:24:45,759 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 16:24:46,174 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-15 16:24:46,276 [main]  - PASS :Clicked on : 'grupuName'
+INFO    2018-06-15 16:26:06,122 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:26:13,185 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:26:13,282 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:26:13,352 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:26:13,438 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:26:13,514 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:26:20,051 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:26:36,200 [main]  - PASS :Clicked on : 'examcard'
+INFO    2018-06-15 16:26:36,200 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-15 16:26:36,790 [main]  - Retrieving Text from : kioskNumber
+INFO    2018-06-15 16:26:36,839 [main]  - kioskNumber is 5250
+INFO    2018-06-15 16:26:36,898 [main]  - PASS :Clicked on : 'examcardClose'
+INFO    2018-06-15 16:26:42,776 [main]  - PASS :Clicked on : 'Kiosk'
+INFO    2018-06-15 16:26:54,386 [main]  - only Number is diplayed
+INFO    2018-06-15 16:27:20,299 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 16:27:27,295 [main]  - Current Page Title is :Philips
+INFO    2018-06-15 16:27:27,414 [main]  - PASS :Cleared : 'Username'
+INFO    2018-06-15 16:27:27,487 [main]  - PASS :Inputted cmeenan text into Username
+INFO    2018-06-15 16:27:27,570 [main]  - PASS :Cleared : 'Password'
+INFO    2018-06-15 16:27:27,641 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-06-15 16:27:33,969 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-06-15 16:27:34,035 [main]  - PASS :Clicked on : 'Overview'
+INFO    2018-06-15 16:27:49,870 [main]  - Number of exam cards are 99
+INFO    2018-06-15 16:27:50,053 [main]  - PASS :Clicked on : 'Calendar'
+INFO    2018-06-15 16:27:50,470 [main]  - Number of exam cards are 99
+INFO    2018-06-15 17:37:17,260 [main]  - CurrentDate used for concating the sceenshot: 150618173717
+ERROR   2018-06-15 17:37:17,261 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 17:37:41,383 [main]  - CurrentDate used for concating the sceenshot: 150618173741
+ERROR   2018-06-15 17:37:41,384 [main]  - The Scenario is failed: Check:All schedules per day are are same in overVeiw and Calender
+INFO    2018-06-15 17:39:02,390 [Forwarding newSession on session null to remote]  - I/O exception (java.net.SocketException) caught when processing request to {}->http://localhost:13900: Software caused connection abort: recv failed
+INFO    2018-06-15 17:39:02,391 [Forwarding newSession on session null to remote]  - Retrying request to {}->http://localhost:13900
+INFO    2018-06-15 17:45:21,093 [main]  - PASS :Clicked on : 'Airflow'
+INFO    2018-06-15 17:45:26,168 [main]  - Current Page Title is :Philips

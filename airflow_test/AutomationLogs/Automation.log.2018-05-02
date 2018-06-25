@@ -1,0 +1,323 @@
+INFO    2018-05-02 14:40:43,777 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 14:40:45,217 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 14:40:45,568 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 14:40:53,274 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 14:41:04,951 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 14:41:05,112 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 14:41:05,316 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 14:41:10,062 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 14:41:18,488 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 14:41:20,028 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 14:41:21,303 [main]  - PASS :Clicked on : 'CT'
+INFO    2018-05-02 14:41:22,510 [main]  - PASS :Clicked on : 'CR'
+INFO    2018-05-02 14:41:24,747 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 14:41:29,355 [main]  - PASS: Modality Filter is Working
+INFO    2018-05-02 14:41:34,415 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 14:41:35,809 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 14:41:36,117 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 14:41:43,622 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 14:41:55,542 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 14:41:55,718 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 14:41:55,946 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 14:42:00,707 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 14:42:00,887 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-05-02 14:42:01,620 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 14:42:01,816 [main]  - PASS :Clicked on : 'Volume'
+INFO    2018-05-02 14:42:02,058 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-05-02 14:42:03,164 [main]  - PASS: Volume Column is added
+INFO    2018-05-02 14:42:03,415 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-05-02 14:42:04,211 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 14:42:04,381 [main]  - PASS :Clicked on : 'metric choice'
+INFO    2018-05-02 14:42:04,543 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-05-02 14:42:05,632 [main]  - PASS: Volume Column is edited to Utilization
+INFO    2018-05-02 14:42:25,907 [main]  - PASS: Utilization Column is deleted
+INFO    2018-05-02 14:42:31,219 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 14:42:32,555 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 14:42:32,765 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 14:42:40,269 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 14:42:52,336 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 14:42:52,487 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-05-02 14:42:52,703 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 14:42:57,111 [main]  - PASS : Site Grouping is Working
+INFO    2018-05-02 14:42:57,376 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-05-02 14:42:57,544 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-05-02 14:42:57,740 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-05-02 14:42:58,961 [main]  - PASS: Drill Down functionality for filter Site is working
+INFO    2018-05-02 14:43:04,211 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 14:43:05,670 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 14:43:05,942 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 14:43:14,162 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 14:43:25,982 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 14:43:26,182 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 14:43:26,438 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 14:43:30,835 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 14:43:33,064 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-05-02 14:43:35,169 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-05-02 14:43:37,487 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-05-02 14:43:42,595 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-05-02 14:43:44,781 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 14:43:46,853 [main]  - PASS: KPI XYZ is saved
+INFO    2018-05-02 14:43:46,976 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 14:43:50,262 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-05-02 14:43:52,495 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-05-02 14:43:54,711 [main]  - PASS :Clicked on : 'confirm save'
+INFO    2018-05-02 14:43:59,033 [main]  - PASS :Clicked on : 'KPI filter'
+INFO    2018-05-02 14:44:01,103 [main]  - PASS: KPI Copy of XYZ is saved
+INFO    2018-05-02 14:44:01,195 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 14:44:03,343 [main]  - PASS :Clicked on : 'kpi heading'
+INFO    2018-05-02 14:44:12,630 [main]  - PASS :Clicked on : 'XYZ'
+INFO    2018-05-02 14:44:14,966 [main]  - PASS :Clicked on : 'export button'
+INFO    2018-05-02 14:44:24,980 [main]  - FILE IS PRESENT : PASS
+INFO    2018-05-02 15:57:14,808 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 15:57:16,140 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 15:57:16,321 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 15:57:23,495 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 15:57:34,794 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 15:57:34,922 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 15:57:35,094 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 15:57:39,625 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 15:57:39,738 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-05-02 15:57:40,438 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 15:57:40,559 [main]  - PASS :Clicked on : 'Volume'
+INFO    2018-05-02 15:57:40,691 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-05-02 15:57:41,774 [main]  - PASS: Volume Column is added
+INFO    2018-05-02 15:57:47,077 [main]  - PASS :Clicked on : 'Volume Show in Quality'
+INFO    2018-05-02 15:57:49,269 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-05-02 15:57:53,648 [main]  - PASS: Volume is displayed in Quality
+INFO    2018-05-02 15:57:59,501 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-02 15:58:04,250 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 15:58:04,359 [main]  - PASS :Clicked on : 'Utilization'
+ERROR   2018-05-02 15:58:45,013 [main]  - Error came while waiting for element to appear : add metric confirmed Timed out after 30 seconds waiting for visibility of element located by By.xpath: //div[@class='modal-footer']/button[text()='Add Metric']
+Build info: version: '2.28.0', revision: '18309', time: '2012-12-11 15:53:30'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '9.0.1'
+Driver info: driver.version: unknown
+INFO    2018-05-02 15:58:45,036 [main]  - CurrentDate used for concating the sceenshot: 020518155845
+ERROR   2018-05-02 15:58:45,036 [main]  - The Scenario is failed: Adding, editing, deleting columns and jumping to Quality
+INFO    2018-05-02 16:04:41,245 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:04:42,531 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:04:42,711 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:04:50,126 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:05:01,647 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:05:01,780 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 16:05:01,987 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:05:06,476 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 16:05:06,587 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-05-02 16:05:07,306 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 16:05:07,437 [main]  - PASS :Clicked on : 'Volume'
+INFO    2018-05-02 16:05:07,572 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-05-02 16:05:08,633 [main]  - PASS: Volume Column is added
+INFO    2018-05-02 16:05:13,833 [main]  - PASS :Clicked on : 'Volume Show in Quality'
+INFO    2018-05-02 16:05:16,025 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-05-02 16:05:20,646 [main]  - PASS: Volume Metric is displayed in Quality
+INFO    2018-05-02 16:05:26,437 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-02 16:05:31,216 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 16:05:31,319 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-02 16:05:31,451 [main]  - PASS :Clicked on : 'edit metric confirmed'
+INFO    2018-05-02 16:05:32,526 [main]  - PASS: Volume Column is edited to Utilization
+ERROR   2018-05-02 16:05:32,640 [main]  - FAIL: Failure in deleting column Utilization
+INFO    2018-05-02 16:21:48,028 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:21:49,329 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:21:49,498 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:21:56,817 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:22:08,209 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:22:08,332 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 16:22:08,478 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:22:13,128 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 16:22:21,256 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 16:22:22,534 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 16:22:23,776 [main]  - PASS :Clicked on : 'CT'
+INFO    2018-05-02 16:22:24,965 [main]  - PASS :Clicked on : 'CR'
+INFO    2018-05-02 16:22:27,191 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 16:22:31,597 [main]  - PASS: Modality Filter is Working
+INFO    2018-05-02 16:22:36,353 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:22:37,630 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:22:37,809 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:22:44,986 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:22:56,580 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:22:56,704 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 16:22:56,902 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:23:01,411 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 16:23:01,526 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-05-02 16:23:02,281 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 16:23:02,389 [main]  - PASS :Clicked on : 'Volume'
+INFO    2018-05-02 16:23:02,545 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-05-02 16:23:03,619 [main]  - PASS: Volume Column is added
+INFO    2018-05-02 16:23:08,934 [main]  - PASS :Clicked on : 'Volume Show in Quality'
+INFO    2018-05-02 16:23:11,143 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-05-02 16:23:16,267 [main]  - PASS: Volume Metric is displayed in Quality
+INFO    2018-05-02 16:23:21,884 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-02 16:23:26,821 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 16:23:26,933 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-02 16:23:27,070 [main]  - PASS :Clicked on : 'edit metric confirmed'
+INFO    2018-05-02 16:23:28,126 [main]  - PASS: Volume Column is edited to Utilization
+ERROR   2018-05-02 16:23:28,250 [main]  - FAIL: Failure in deleting column Utilization
+INFO    2018-05-02 16:23:33,135 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:23:34,425 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:23:34,617 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:23:41,613 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:23:53,022 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:23:53,142 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-05-02 16:23:53,290 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:23:57,886 [main]  - PASS : Site Grouping is Working
+INFO    2018-05-02 16:23:58,009 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-05-02 16:23:58,136 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-05-02 16:23:58,288 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-05-02 16:23:59,410 [main]  - PASS: Drill Down functionality for filter Site is working
+INFO    2018-05-02 16:24:04,367 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:24:05,686 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:24:05,867 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:24:13,487 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:24:24,915 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:24:25,045 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 16:24:25,197 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:24:29,709 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 16:24:31,871 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-05-02 16:24:33,963 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-05-02 16:24:36,213 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-05-02 16:24:41,323 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-05-02 16:24:43,425 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 16:24:45,520 [main]  - PASS: KPI XYZ is saved
+INFO    2018-05-02 16:24:45,609 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 16:24:48,895 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-05-02 16:24:51,061 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-05-02 16:24:53,243 [main]  - PASS :Clicked on : 'confirm save'
+INFO    2018-05-02 16:24:57,383 [main]  - PASS :Clicked on : 'KPI filter'
+INFO    2018-05-02 16:24:59,439 [main]  - PASS: KPI Copy of XYZ is saved
+INFO    2018-05-02 16:24:59,593 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 16:25:01,758 [main]  - PASS :Clicked on : 'kpi heading'
+INFO    2018-05-02 16:25:10,629 [main]  - PASS :Clicked on : 'XYZ'
+INFO    2018-05-02 16:25:12,790 [main]  - PASS :Clicked on : 'export button'
+INFO    2018-05-02 16:25:22,791 [main]  - FILE IS PRESENT : PASS
+INFO    2018-05-02 16:47:08,401 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:47:09,937 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:47:10,205 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:47:17,898 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:47:30,134 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:47:30,305 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 16:47:30,489 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:47:35,263 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 16:47:44,296 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 16:47:45,722 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 16:47:47,163 [main]  - PASS :Clicked on : 'CT'
+INFO    2018-05-02 16:47:48,378 [main]  - PASS :Clicked on : 'CR'
+INFO    2018-05-02 16:47:50,598 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 16:47:55,041 [main]  - PASS: Modality Filter is Working
+INFO    2018-05-02 16:48:00,436 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:48:01,941 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:48:02,248 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:48:09,963 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:48:22,325 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:48:22,488 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 16:48:22,736 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:48:27,519 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 16:48:27,868 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-05-02 16:48:28,738 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 16:48:28,892 [main]  - PASS :Clicked on : 'Volume'
+INFO    2018-05-02 16:48:29,092 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-05-02 16:48:30,149 [main]  - PASS: Volume Column is added
+INFO    2018-05-02 16:48:36,229 [main]  - PASS :Clicked on : 'Volume Show in Quality'
+INFO    2018-05-02 16:48:38,455 [main]  - PASS :Clicked on : 'Performance Alert'
+INFO    2018-05-02 16:48:43,340 [main]  - PASS: Volume Metric is displayed in Quality
+INFO    2018-05-02 16:48:49,502 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-02 16:48:54,786 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-05-02 16:48:54,936 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-02 16:48:55,136 [main]  - PASS :Clicked on : 'edit metric confirmed'
+INFO    2018-05-02 16:48:56,231 [main]  - PASS: Volume Column is edited to Utilization
+ERROR   2018-05-02 16:48:56,486 [main]  - FAIL: Failure in deleting column Utilization
+INFO    2018-05-02 16:49:01,707 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:49:03,151 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:49:03,509 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:49:10,897 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:49:22,764 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:49:22,919 [main]  - PASS :Clicked on : 'Site Clicked'
+INFO    2018-05-02 16:49:23,183 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:49:27,904 [main]  - PASS : Site Grouping is Working
+INFO    2018-05-02 16:49:28,068 [main]  - PASS :Clicked on : 'VHC'
+INFO    2018-05-02 16:49:28,232 [main]  - PASS :Clicked on : 'Technologist'
+INFO    2018-05-02 16:49:28,514 [main]  - PASS :Clicked on : 'Site'
+INFO    2018-05-02 16:49:29,784 [main]  - PASS: Drill Down functionality for filter Site is working
+INFO    2018-05-02 16:49:35,085 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 16:49:36,514 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 16:49:36,718 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 16:49:44,895 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 16:49:57,077 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-05-02 16:49:57,238 [main]  - PASS :Clicked on : 'Modality Clicked'
+INFO    2018-05-02 16:49:57,419 [main]  - PASS :Clicked on : 'Apply'
+INFO    2018-05-02 16:50:02,135 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 16:50:04,361 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-05-02 16:50:06,487 [main]  - PASS: KPI cannot be saved before entering name
+INFO    2018-05-02 16:50:08,962 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-05-02 16:50:14,147 [main]  - PASS :Clicked on : 'save button'
+INFO    2018-05-02 16:50:16,264 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 16:50:18,352 [main]  - PASS: KPI XYZ is saved
+INFO    2018-05-02 16:50:18,546 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 16:50:21,908 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-05-02 16:50:24,094 [main]  - PASS :Clicked on : 'save as button'
+INFO    2018-05-02 16:50:26,290 [main]  - PASS :Clicked on : 'confirm save'
+INFO    2018-05-02 16:50:30,604 [main]  - PASS :Clicked on : 'KPI filter'
+INFO    2018-05-02 16:50:32,705 [main]  - PASS: KPI Copy of XYZ is saved
+INFO    2018-05-02 16:50:32,930 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 16:50:35,145 [main]  - PASS :Clicked on : 'kpi heading'
+INFO    2018-05-02 16:50:44,923 [main]  - PASS :Clicked on : 'XYZ'
+INFO    2018-05-02 16:50:47,173 [main]  - PASS :Clicked on : 'export button'
+INFO    2018-05-02 16:50:57,187 [main]  - PASS: File is exported to local system
+INFO    2018-05-02 18:23:56,836 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 18:23:58,157 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 18:23:58,338 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 18:24:05,494 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 18:24:16,874 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 18:24:17,012 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-02 18:24:23,770 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 18:24:32,020 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 18:24:33,245 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 18:24:34,422 [main]  - PASS :Clicked on : 'CT'
+INFO    2018-05-02 18:24:35,628 [main]  - PASS :Clicked on : 'CR'
+INFO    2018-05-02 18:24:37,852 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-05-02 18:24:42,242 [main]  - PASS: Modality Filter is Working
+INFO    2018-05-02 18:24:47,111 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 18:24:48,411 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 18:24:48,614 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 18:24:55,656 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 18:25:06,961 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 18:25:07,083 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-02 18:25:13,987 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 18:25:14,112 [main]  - PASS :Clicked on : 'Add New Metric'
+INFO    2018-05-02 18:25:14,824 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-02 18:25:14,939 [main]  - PASS :Clicked on : 'Order to Complete'
+INFO    2018-05-02 18:25:15,083 [main]  - PASS :Clicked on : 'Add Metric Confirmation'
+INFO    2018-05-02 18:25:16,161 [main]  - PASS: Order to Complete Column is added
+INFO    2018-05-02 18:25:21,515 [main]  - PASS :Clicked on : 'Show Volume in Quality'
+INFO    2018-05-02 18:25:23,728 [main]  - PASS :Clicked on : 'Performance Warning Pop Up'
+INFO    2018-05-02 18:25:28,881 [main]  - PASS: Volume Metric is displayed in Quality
+INFO    2018-05-02 18:25:34,374 [main]  - PASS :Clicked on : 'Back to Productivity'
+INFO    2018-05-02 18:25:39,134 [main]  - PASS :Clicked on : 'Select Metric Dropdown'
+INFO    2018-05-02 18:25:39,257 [main]  - PASS :Clicked on : 'Utilization'
+INFO    2018-05-02 18:25:39,402 [main]  - PASS :Clicked on : 'Save Metric'
+INFO    2018-05-02 18:25:40,479 [main]  - PASS: Volume Column is edited to Utilization
+INFO    2018-05-02 18:25:40,574 [main]  - Clicked on Delete Column
+ERROR   2018-05-02 18:25:41,592 [main]  - FAIL: Failure in deleting column Utilization
+INFO    2018-05-02 18:25:46,409 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 18:25:47,684 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 18:25:47,858 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 18:25:55,150 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 18:26:06,437 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 18:26:06,550 [main]  - PASS :Clicked on : 'Site Grouping'
+INFO    2018-05-02 18:26:10,469 [main]  - PASS : Site Grouping is Working
+INFO    2018-05-02 18:26:10,599 [main]  - PASS :Clicked on : 'Drill Down on VHC'
+INFO    2018-05-02 18:26:10,737 [main]  - PASS :Clicked on : 'Drill Down on Technologist'
+INFO    2018-05-02 18:26:10,907 [main]  - PASS :Clicked on : 'Site Filter'
+INFO    2018-05-02 18:26:12,054 [main]  - PASS: Drill Down message for filter Site is displayed
+INFO    2018-05-02 18:26:17,236 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-05-02 18:26:18,588 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-05-02 18:26:18,770 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-05-02 18:26:26,196 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-05-02 18:26:37,521 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-05-02 18:26:37,659 [main]  - PASS :Clicked on : 'Modality Grouping'
+INFO    2018-05-02 18:26:44,532 [main]  - PASS : Modality Grouping is Working
+INFO    2018-05-02 18:26:44,639 [main]  - PASS :Clicked on : 'Save Button'
+INFO    2018-05-02 18:26:44,680 [main]  - PASS: Error message displayed when trying to save KPI without entering name
+INFO    2018-05-02 18:26:44,881 [main]  - PASS :Inputted XYZ text into KPI Name
+INFO    2018-05-02 18:26:44,976 [main]  - PASS :Clicked on : 'Save button'
+INFO    2018-05-02 18:26:46,966 [main]  - PASS :Clicked on : 'KPI heading'
+INFO    2018-05-02 18:26:47,025 [main]  - CurrentDate used for concating the sceenshot: 020518182647
+ERROR   2018-05-02 18:26:47,025 [main]  - The Scenario is failed: Verify the Control Interface functionality

@@ -1,0 +1,86 @@
+INFO    2018-04-18 14:26:51,779 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-18 14:26:53,756 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-18 14:26:53,946 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-18 14:27:00,341 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-18 14:27:04,059 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-18 14:27:07,698 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-04-18 14:27:08,444 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-04-18 14:27:08,548 [main]  - PASS :Clicked on : 'metric choice'
+INFO    2018-04-18 14:27:08,711 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-04-18 14:27:08,711 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 15:01:49,310 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-18 15:01:50,915 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-18 15:01:51,094 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-18 15:01:55,627 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-18 15:02:01,065 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-18 15:02:03,555 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-04-18 15:02:04,314 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-04-18 15:02:04,426 [main]  - PASS :Clicked on : 'metric choice'
+INFO    2018-04-18 15:02:04,615 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-04-18 15:02:04,616 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 15:02:05,859 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-04-18 15:02:06,546 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-04-18 15:02:06,664 [main]  - PASS :Clicked on : 'metric choice'
+INFO    2018-04-18 15:02:06,809 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-04-18 15:02:06,809 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 15:08:41,214 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-18 15:08:42,491 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-18 15:08:42,681 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-18 15:08:49,086 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-18 15:08:54,928 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-18 15:08:57,186 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-04-18 15:08:57,869 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-04-18 15:08:57,985 [main]  - PASS :Clicked on : 'metric choice'
+INFO    2018-04-18 15:08:58,149 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-04-18 15:08:58,149 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 15:08:59,393 [main]  - PASS :Clicked on : 'add new metric'
+INFO    2018-04-18 15:09:00,110 [main]  - PASS :Clicked on : 'select metric dropdown'
+INFO    2018-04-18 15:09:00,238 [main]  - PASS :Clicked on : 'metric choice'
+INFO    2018-04-18 15:09:00,395 [main]  - PASS :Clicked on : 'add metric confirmed'
+INFO    2018-04-18 15:09:00,395 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 16:26:14,067 [main]  - PASS :Clicked on : 'Productivity'
+INFO    2018-04-18 16:26:17,835 [main]  - PASS :Inputted aiuser text into Username
+INFO    2018-04-18 16:26:18,019 [main]  - PASS :Inputted radiology text into Password
+INFO    2018-04-18 16:26:27,923 [main]  - PASS :Clicked on : 'Login Button'
+INFO    2018-04-18 16:26:34,164 [main]  - PASS :Clicked on : 'reset button'
+INFO    2018-04-18 16:26:34,377 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:26:39,412 [main]  - PASS : Day of Month Grouping Working
+INFO    2018-04-18 16:26:39,538 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:26:45,310 [main]  - PASS : Day of Week Grouping Working
+INFO    2018-04-18 16:26:45,423 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:26:50,134 [main]  - PASS : Hour of Day Grouping Working
+INFO    2018-04-18 16:26:50,252 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:26:55,051 [main]  - PASS : Month of Year Grouping Working
+INFO    2018-04-18 16:26:55,141 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:00,209 [main]  - PASS : Priority Grouping Working
+INFO    2018-04-18 16:27:00,324 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:04,975 [main]  - PASS : Modality Grouping Working
+INFO    2018-04-18 16:27:05,093 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:09,429 [main]  - PASS : Ordering Provider Grouping Working
+INFO    2018-04-18 16:27:09,524 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:14,500 [main]  - PASS : Patient Type Grouping Working
+INFO    2018-04-18 16:27:14,606 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:20,499 [main]  - PASS : Procedure Grouping Working
+INFO    2018-04-18 16:27:20,615 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:27,800 [main]  - PASS : Radiologist Grouping Working
+INFO    2018-04-18 16:27:27,892 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:34,462 [main]  - PASS : Radiologist Specialty Grouping Working
+INFO    2018-04-18 16:27:34,580 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:40,636 [main]  - PASS : Resident Grouping Working
+INFO    2018-04-18 16:27:40,721 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:45,925 [main]  - PASS : Resource Grouping Working
+INFO    2018-04-18 16:27:46,014 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:27:52,692 [main]  - PASS : Site Grouping Working
+INFO    2018-04-18 16:27:52,806 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:28:01,521 [main]  - PASS : Patient Class Grouping Working
+INFO    2018-04-18 16:28:01,639 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:28:06,255 [main]  - PASS : Patient Location Grouping Working
+INFO    2018-04-18 16:28:06,353 [main]  - PASS :Clicked on : 'DropDown'
+INFO    2018-04-18 16:28:09,922 [main]  - PASS : Technologist Grouping Working
+INFO    2018-04-18 16:28:09,962 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 16:28:14,093 [main]  - PASS :Clicked on : 'Reset Button'
+INFO    2018-04-18 16:28:14,158 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 16:28:15,315 [main]  - PASS :Clicked on : 'Modality'
+INFO    2018-04-18 16:28:15,316 [main]  - Waiting for 1 seconds
+INFO    2018-04-18 16:28:28,042 [main]  - CurrentDate used for concating the sceenshot: 180418162828
+ERROR   2018-04-18 16:28:28,046 [main]  - The Scenario is failed: Verifying Productivity app workflow
