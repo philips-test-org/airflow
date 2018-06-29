@@ -8,6 +8,6 @@
 <% if ENV["RAILS_ENV"] != "production" && ENV["HOT"] == "true" %>
   <script src="http://localhost:3000/assets/app.bundle.js"></script>
 <% else %>
-  <script src="/airflow/assets/packs/vendors.bundle.js"></script>
-  <script src="/airflow/assets/packs/app.bundle.js"></script>
+  <script src="<%= root_path %>assets/packs/vendors.bundle.js"></script>
+  <script src="<%= root_path %>assets/packs/app.bundle.js"></script>
 <% end %>
