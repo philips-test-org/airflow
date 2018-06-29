@@ -121,7 +121,7 @@ function preAdjustOrder(state, {orderId, payload}) {
 function addEvent(state, {orderId, payload}) {
   const orderLens = makeOrderLens(state.orders, orderId);
   const eventLens = R.compose(orderLens, R.lensProp("events"));
-  return R.over(eventLens, R.prepend(payload), state);
+  return R.over(eventLens, R.append(payload), state);
 }
 
 function upsertOrders(state, {payload}) {
