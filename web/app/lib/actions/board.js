@@ -22,6 +22,7 @@ const BoardActions = {
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
   ADJUST_ORDER: "ADJUST_ORDER",
   PREADJUST_ORDER: "PREADJUST_ORDER",
+  ADD_EVENT: "ADD_EVENT",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
   REPLACE_ORDER: "REPLACE_ORDER",
   // UI
@@ -134,6 +135,14 @@ const preAdjustOrder = (orderId: number, payload: Object) => {
     type: BoardActions.PREADJUST_ORDER,
     payload,
     orderId,
+  }
+}
+
+const addEvent = (orderId: number, payload: Object) => {
+  return {
+    type: BoardActions.ADD_EVENT,
+    orderId,
+    payload,
   }
 }
 
@@ -250,6 +259,7 @@ export {
   fetchPersonExams,
   fetchPersonExamsSucceeded,
   adjustOrder,
+  addEvent,
   preAdjustOrder,
   adjustOrderSucceeded,
   showOrderModal,

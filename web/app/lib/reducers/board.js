@@ -18,6 +18,7 @@ import type {Order} from "../../types";
 const {
   ADJUST_ORDER_SUCCEEDED,
   PREADJUST_ORDER,
+  ADD_EVENT,
   FETCH_EXAMS_SUCCEEDED,
   FETCH_EXAM_SUCCEEDED,
   DISPATCH_NOTIFICATION,
@@ -67,6 +68,7 @@ function board(state: Object = initialState, action: Object) {
   switch (action.type) {
     case ADJUST_ORDER_SUCCEEDED: return adjustOrder(state, action);
     case PREADJUST_ORDER: return preAdjustOrder(state, action);
+    case ADD_EVENT: return addEvent(state, action);
     case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
     case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
     case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
@@ -103,11 +105,10 @@ const makeOrderLens = (orders: Array<Order>, id: number) => (
 function adjustOrder(state, {orderId, payload}) {
   // Update the "adjusted" and "events" keys or an order.
   const orderLens = makeOrderLens(state.orders, orderId);
-  const eventLens = R.compose(orderLens, R.lensProp("events"));
   const order = R.view(orderLens, state);
   if (R.isNil(order)) return state;
   const adjustedState = preAdjustOrder(state, {orderId, payload});
-  return R.over(eventLens, R.prepend(payload), adjustedState);
+  return addEvent(adjustedState, {orderId, payload});
 }
 
 function preAdjustOrder(state, {orderId, payload}) {
@@ -115,6 +116,12 @@ function preAdjustOrder(state, {orderId, payload}) {
   const orderLens = makeOrderLens(state.orders, orderId);
   const adjustedLens = R.compose(orderLens, R.lensProp("adjusted"));
   return R.over(adjustedLens, R.mergeDeepLeft(payload.new_state), state);
+}
+
+function addEvent(state, {orderId, payload}) {
+  const orderLens = makeOrderLens(state.orders, orderId);
+  const eventLens = R.compose(orderLens, R.lensProp("events"));
+  return R.over(eventLens, R.prepend(payload), state);
 }
 
 function upsertOrders(state, {payload}) {

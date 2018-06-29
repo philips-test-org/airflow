@@ -14,6 +14,7 @@ import Api from "../api";
 
 import {
   BoardActions,
+  addEvent,
   fetchExamsSucceeded,
   fetchExamSucceeded,
   fetchPersonExamsSucceeded,
@@ -112,10 +113,13 @@ function* fetchInitialApp(action): Saga<void> {
 
 function* adjustOrder(action): Saga<void> {
   try {
+    let payload;
     if (R.type(action.event) == "Array") {
-      yield all(R.map(event => call(Api.createEvent, event), action.event));
+      payload = yield all(R.map(event => call(Api.createEvent, event), action.event));
+      yield all(R.map(result => put(addEvent(result.order_id, result)), payload));
     } else {
-      yield call(Api.createEvent, action.event);
+      payload = yield call(Api.createEvent, action.event);
+      yield put(addEvent(payload.order_id, payload));
     }
   } catch (e) {
     yield call(requestFailed(e));
