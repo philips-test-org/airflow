@@ -100,12 +100,21 @@ describe("APM updates orders with messages from the platform", () => {
 
   it("updates/adds an order when the message contains an order is within a selected resource", async () => {
     fetchMock.restore();
-    fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource1]);
+    fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource1, singleExamResource3]);
 
     expect(store.getState().board.orders).toHaveLength(0);
 
     store.dispatch(updateSelectedResourceGroup(resources, selectedResourceGroup));
-    processMessage(auditSameResourceMessage, store);
+
+    const pastDate = moment().add(-10, "days");
+    // Modify the order start time to equal pastDate.
+    const beginExamLens = lensPath(["payload", "pre_and_post", "pre", "rad_exam", "rad_exam_time", "begin_exam"]);
+    const message = set(beginExamLens, pastDate, auditSameResourceMessage);
+
+    // Update the redux state to set startDate to a pastDate.
+    store.dispatch(updateDate(pastDate));
+    expect(store.getState().board.startDate).toEqual(pastDate);
+    processMessage(message, store);
 
     await flushAllPromises();
 
@@ -114,7 +123,7 @@ describe("APM updates orders with messages from the platform", () => {
 
   it("does not update/add an order when the message does not contain an order is within a selected resource", async () => {
     fetchMock.restore();
-    fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource3]);
+    fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource1, singleExamResource3]);
 
     expect(store.getState().board.orders).toHaveLength(0);
 
