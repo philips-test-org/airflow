@@ -115,11 +115,14 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
     R.contains(parseInt(getOrderResourceId(order)), R.pluck("id", selectedResources))
   );
 
-  if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
-    const examstart = getOrderStartTime(payload);
-    const isToday = examstart == null || moment(examstart).startOf("day").unix()*1000 == state.board.startDate;
+  const isToday = (order) => {
+    const examstart = getOrderStartTime(order);
+    return examstart == null ||
+      moment(examstart).startOf("day").unix()*1000 == state.board.startDate;
+  };
 
-    if (employee_id != currentUser && orderIsInSelectedResources(payload, state) && isToday) {
+  if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
+    if (employee_id != currentUser && orderIsInSelectedResources(payload, state) && isToday(payload)) {
       const events = payload.events;
       const event = events.sort(function (x, y) {
         return new Date(y.updated_at) - new Date(x.updated_at);
@@ -129,7 +132,16 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
       store.dispatch(adjustOrderSucceeded(payload.id, payload.id, event));
     }
   } else if (exchange === "audit") {
-    store.dispatch(fetchExam(payload.affected_row_id, table));
+    const resourceIds = R.pluck("id", R.path(["board", "selectedResources"], state));
+    const {pre, post} = R.prop("pre_and_post", payload);
+    const preExists = !R.isNil(pre);
+    const postExists = !R.isNil(post);
+    const inResources = (preExists && R.contains(R.prop("resource_id", pre), resourceIds)) ||
+                        (postExists && R.contains(R.prop("resource_id", post), resourceIds));
+    const today = (preExists && isToday(pre)) || (postExists && isToday(post));
+    if (inResources && today) {
+      store.dispatch(fetchExam(payload.affected_row_id, table));
+    }
   }
 }
 
