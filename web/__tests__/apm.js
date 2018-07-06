@@ -29,6 +29,9 @@ describe("APM messages coming from airflow", () => {
       "Group": [
         {id: 1},
       ],
+      "NotAGroup": [
+        {id: 0},
+      ],
     };
     selectedResourceGroup = "Group";
   });
@@ -123,9 +126,9 @@ describe("APM updates orders with messages from the platform", () => {
     expect(store.getState().board.orders).toHaveLength(1);
   });
 
-  it("does not update/add an order when the message does not contain an order is within a selected resource", async () => {
+  it("does not update/add an order when the message does not contain an order that is within a selected resource", async () => {
     fetchMock.restore();
-    fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource1, singleExamResource3]);
+    fetchMock.get("/exams/769879?table=rad_exams", [singleExamResource3]);
 
     expect(store.getState().board.orders).toHaveLength(0);
 

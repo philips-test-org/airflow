@@ -8,6 +8,10 @@ import {
 } from "./selectors";
 
 import {
+  examStartTime,
+} from "./data";
+
+import {
   BufferActions,
   fetchExam,
   bufferMessage,
@@ -73,13 +77,16 @@ function flushBuffer(store, _action) {
     }
   }, radExams, misc);
 
+  // Exams that don't have a buffered order message.
+  var unmergedExams = [];
   // Merge rad exams into orders.
   const mergedOrders = R.reduce((acc, exam) => {
     const {parentTable, parentId, attrs} = exam;
-    if (parentTable === "orders") {
-      const lens = R.lensPath([parentId, "attrs"]);
+    const lens = R.lensPath([parentId, "attrs"]);
+    if (parentTable === "orders" && R.view(lens, acc)) {
       return R.over(lens, R.merge({"rad_exam": attrs}), acc);
     } else {
+      unmergedExams = R.append(exam, unmergedExams);
       return acc;
     }
   }, orders, R.values(mergedExams));
@@ -100,13 +107,13 @@ function flushBuffer(store, _action) {
     if (inResources && today) {
       store.dispatch(fetchExam(attrs.id, "rad_exams"));
     }
-  }, R.values(mergedExams));
+  }, unmergedExams);
 
   store.dispatch(resetBuffer());
 }
 
 function isToday(startEpoch, order) {
-  const examstart = getOrderStartTime(order);
+  const examstart = R.has("rad_exam", order) ? getOrderStartTime(order) : examStartTime(order);
   return examstart == null || epochTime(examstart) == startEpoch;
 }
 
