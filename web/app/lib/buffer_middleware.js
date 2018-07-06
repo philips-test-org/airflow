@@ -46,7 +46,7 @@ const processPayload = (store, action) => {
   }
 
   store.dispatch(bufferMessage(table, {
-    id: attrs.id,
+    id: payload.affected_row_id,
     employeeId,
     parentTable,
     parentId,
@@ -59,9 +59,10 @@ function flushBuffer(store, _action) {
   const state = store.getState();
   const {orders, radExams, misc} = state.buffer;
   const {startDate, selectedResources} = state.board;
-
+  const startEpoch = epochTime(startDate);
   const resourceIds = R.pluck("id", selectedResources);
 
+  // Merge rad exam associated messages into rad exams.
   const mergedExams = R.reduce((acc, message) => {
     const {parentTable, parentId, attrs, table} = message;
     const lens = R.lensPath([parentId, "attrs"]);
@@ -72,6 +73,7 @@ function flushBuffer(store, _action) {
     }
   }, radExams, misc);
 
+  // Merge rad exams into orders.
   const mergedOrders = R.reduce((acc, exam) => {
     const {parentTable, parentId, attrs} = exam;
     if (parentTable === "orders") {
@@ -82,17 +84,19 @@ function flushBuffer(store, _action) {
     }
   }, orders, R.values(mergedExams));
 
+  // Fetch each order that is for current day and selected resource group.
   R.forEach(({attrs, table}) => {
     const inResources = R.contains(R.path(["rad_exam", "resource_id"], attrs), resourceIds);
-    const today = isToday(startDate, attrs);
+    const today = isToday(startEpoch, attrs);
     if (inResources && today) {
       store.dispatch(fetchExam(attrs.id, table));
     }
   }, R.values(mergedOrders));
 
+  // Fetch each rad exam that is for current day and selected resource group.
   R.forEach(({attrs}) => {
     const inResources = R.contains(R.prop("resource_id", attrs), resourceIds);
-    const today = isToday(startDate, attrs);
+    const today = isToday(startEpoch, attrs);
     if (inResources && today) {
       store.dispatch(fetchExam(attrs.id, "rad_exams"));
     }
@@ -101,9 +105,13 @@ function flushBuffer(store, _action) {
   store.dispatch(resetBuffer());
 }
 
-function isToday(startDate, order) {
+function isToday(startEpoch, order) {
   const examstart = getOrderStartTime(order);
-  return examstart == null || moment(examstart).startOf("day").unix()*1000 == startDate;
+  return examstart == null || epochTime(examstart) == startEpoch;
+}
+
+function epochTime(time) {
+  return moment(time).startOf("day").unix() * 1000;
 }
 
 export default buffer;
