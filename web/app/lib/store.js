@@ -3,6 +3,7 @@ import {createStore, applyMiddleware, compose} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
 import apmConnector from "./apm_middleware";
+import buffer from "./buffer_middleware";
 
 import rootSaga from "./sagas";
 
@@ -15,6 +16,7 @@ const store = (initState: Object = {}) => {
   let s = createStore(rootReducer, initState, compFun(
     applyMiddleware(
       apmConnector,
+      buffer,
       sagaMiddleware
     )
   ));

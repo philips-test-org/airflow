@@ -133,7 +133,7 @@ function* updateHistory(action): Saga<void> {
 
 export default function* boardSaga(): Saga<void> {
   yield takeLatest(FETCH_EXAMS, fetchExams)
-  yield takeLatest(FETCH_EXAM, fetchExam)
+  yield takeEvery(FETCH_EXAM, fetchExam)
   yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
   yield takeLatest(FETCH_PERSON_EXAMS, fetchPersonExams)
   yield takeLatest(FETCH_INITIAL_APP, fetchInitialApp)

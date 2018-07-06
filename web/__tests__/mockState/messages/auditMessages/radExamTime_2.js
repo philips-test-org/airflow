@@ -1,0 +1,31 @@
+export default {
+  "routing_key": "rad_exam_times.insert.799888",
+  "payload": {
+    "table_name": "rad_exam_times",
+    "pre_and_post": {
+      "pre": {
+        "updated_at": "2018-07-05 18:21:59Z",
+        "sign_in": "2018-07-10 00:23:00Z",
+        "schedule_event": "2018-07-03 01:21:49Z",
+        "reschedule_event": null,
+        "rad_exam_id": 799888,
+        "pacs_read_time": null,
+        "order_arrival": "2018-07-03 01:21:00Z",
+        "id": 799888,
+        "end_exam_event": null,
+        "end_exam": null,
+        "check_in": null,
+        "cancelled": null,
+        "begin_reg": null,
+        "begin_exam_event": null,
+        "begin_exam": "2018-07-10 00:38:00Z",
+        "appointment_duration": null,
+        "appointment": "2018-07-10 00:27:00Z",
+      },
+    },
+    "operation": "insert",
+    "data_manager_message_log_id": 4559141,
+    "affected_row_id": 799888,
+  },
+  "exchange": "audit",
+}

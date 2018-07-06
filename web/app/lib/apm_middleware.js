@@ -3,18 +3,30 @@
 import * as R from "ramda";
 import moment from "moment";
 import amqpListener from "./amqp-listener-dist";
-import {getOrderStartTime} from "./selectors";
 
 import {
   adjustOrderSucceeded,
+  bufferEnqueue,
   dispatchNotification,
-  fetchExam,
+  flushBuffer,
 } from "./actions";
 
-import {getOrderResourceId} from "./selectors";
+import {
+  getOrderResourceId,
+  getOrderStartTime,
+} from "./selectors";
+
+const FLUSH_TIMEOUT = 2 * 1000;
 
 const apmConnector = (store: Object) => (next: Function) => (action: Object) => {
   if (action.type !== "CONNECT_APM") return next(action);
+  // Sets up the interval flushing for the audit message buffer.
+  setInterval(() => {
+    const {orders, radExams, misc} = store.getState().buffer;
+    if (!R.all(R.isEmpty, [orders, radExams, misc])) {
+      store.dispatch(flushBuffer());
+    }
+  }, FLUSH_TIMEOUT);
   connectToAPM(store);
 }
 
@@ -106,7 +118,7 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
 
   const tokens = routing_key.split(".");
   const table = tokens[0];
-  const employee_id = tokens[2];
+  const affected_id = tokens[2];
 
   const state = store.getState();
   const currentUser = R.path(["user", "currentUser", "id"], state);
@@ -122,7 +134,7 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
   };
 
   if (exchange === "web-application-messages" && amqp.matchRoutingKey("airflow.#", routing_key)) {
-    if (employee_id != currentUser && orderIsInSelectedResources(payload, state) && isToday(payload)) {
+    if (affected_id != currentUser && orderIsInSelectedResources(payload, state) && isToday(payload)) {
       const events = payload.events;
       const event = events.sort(function (x, y) {
         return new Date(y.updated_at) - new Date(x.updated_at);
@@ -132,16 +144,7 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
       store.dispatch(adjustOrderSucceeded(payload.id, payload.id, event));
     }
   } else if (exchange === "audit") {
-    const resourceIds = R.pluck("id", R.path(["board", "selectedResources"], state));
-    const {pre, post} = R.prop("pre_and_post", payload);
-    const preExists = !R.isNil(pre);
-    const postExists = !R.isNil(post);
-    const inResources = (preExists && R.contains(R.prop("resource_id", pre), resourceIds)) ||
-                        (postExists && R.contains(R.prop("resource_id", post), resourceIds));
-    const today = (preExists && isToday(pre)) || (postExists && isToday(post));
-    if (inResources && today) {
-      store.dispatch(fetchExam(payload.affected_row_id, table));
-    }
+    store.dispatch(bufferEnqueue(table, affected_id, payload));
   }
 }
 

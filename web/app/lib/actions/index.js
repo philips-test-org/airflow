@@ -41,6 +41,15 @@ import {
   updateWidthMultiplier,
 } from "./board";
 
+// BUFFER
+import {
+  BufferActions,
+  bufferEnqueue,
+  flushBuffer,
+  bufferMessage,
+  resetBuffer,
+} from "./buffer";
+
 //USER
 import {
   UserActions,
@@ -86,6 +95,12 @@ export {
   dispatchNotification,
   markNotificationDisplayed,
   updateWidthMultiplier,
+  // BUFFER
+  BufferActions,
+  bufferEnqueue,
+  flushBuffer,
+  bufferMessage,
+  resetBuffer,
   // USER
   UserActions,
   fetchAvatar,
