@@ -47,7 +47,7 @@ public class AirflowSteps extends Airflow  {
 	@Given("^user verifies that record is added in \"([^\"]*)\"$")
 	public void user_verifies_that_is_added_in(String Resource) throws Throwable {
 		sleep(20);
-		refreshPage();
+		//refreshPage();
 		verifyExamCardCount();
 		verifyMRNOnExamCard();
 	}
