@@ -8,11 +8,11 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		format   = {"pretty","html:target/cucumber", "json:target/cucumber.json","rerun:target/rerun_featureName.txt"},
-		features = {"src/test/resources/com.philips.airflow.sanity.feature"},								
+		features = {"src/test/resources/sanity/"},								
 		strict = true,
 	    monochrome = true,
 	    
-        glue = {"com.philips.airflow.sanity.stepdefs","com.philips.airflow.sanity.utils"},
+        glue = {"com.philips.rs.performancebridge.test.stepdefs","com.philips.rs.performancebridge.test.utils"},
         		tags = {"@airflow"}
         
 		)
