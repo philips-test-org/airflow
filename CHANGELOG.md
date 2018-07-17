@@ -10,7 +10,7 @@
 * **improvement:** overlapping cards displayed side by side
 * **improvement:** Overview page wraps instead of scrolling horizontally
 * **improvement:** updated icon for anesthesia
-* **bugfix:** events on merged cards are saved to both orders prevent event loss if cards are no longer merged
+* **bugfix:** events on merged cards are saved to both orders to prevent event loss if cards are no longer merged
 * **bugfix:** event tabs show all events after new event added
 * **bugfix:** rounding notes update for all users viewing card
 
