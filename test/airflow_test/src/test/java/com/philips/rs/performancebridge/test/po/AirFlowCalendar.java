@@ -9,7 +9,7 @@ import com.philips.rs.performancebridge.test.utils.UITestUtils;
 
 public class AirFlowCalendar extends UITestUtils {
 	public static int totalExamCards;
-	public By groupNameDropDown = By.xpath("//button[@class='btn btn-default btn-sm dropdown-toggle']");
+	public By groupNameDropDown = By.xpath("//div[@id='resource-group-buttons']/button[@class='btn btn-default btn-sm dropdown-toggle']");
 	public By examcard = By.xpath("//div[@class='left-tab']");
 	public static String kioskNumberText = "";
 	
