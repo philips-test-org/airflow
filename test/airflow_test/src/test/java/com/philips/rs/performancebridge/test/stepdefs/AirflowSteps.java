@@ -46,9 +46,7 @@ public class AirflowSteps extends Airflow  {
 	 */
 	@Given("^user verifies that record is added in \"([^\"]*)\"$")
 	public void user_verifies_that_is_added_in(String Resource) throws Throwable {
-		//sleep(5);
-		By spinner=By.xpath("//img[@src='/airflow/assets/ajax-loader-f4c4723838ebbad7aaa793555d43d4a9f442db0f6d64ef851855cac082d3adc5.gif']");
-		refreshPage();
+		//refreshPage();
 		elementInVisibilitymethod(spinner);
 		verifyExamCardCount();
 		verifyMRNOnExamCard();

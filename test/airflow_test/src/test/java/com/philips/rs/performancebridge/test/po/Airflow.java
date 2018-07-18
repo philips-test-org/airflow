@@ -38,6 +38,7 @@ public class Airflow extends UITestUtils {
 	public static final By leftStripeColorLegendInExamCard = By.xpath("//div[@class='left-stripe']");
 	public static final By closeTheExamCardPopUp = By.xpath("//button[@class='close']");
 	public static final By commentBoxWithinExamCard = By.xpath("//div[@class='content']/textarea[@name='comments']");
+	public static final By spinner=By.xpath("//img[@src='/airflow/assets/ajax-loader-f4c4723838ebbad7aaa793555d43d4a9f442db0f6d64ef851855cac082d3adc5.gif']");
 
 	private int preIngestedCountOfExamCardsInResource;
 
