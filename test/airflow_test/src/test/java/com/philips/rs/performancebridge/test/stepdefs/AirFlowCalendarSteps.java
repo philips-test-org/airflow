@@ -39,15 +39,6 @@ public class AirFlowCalendarSteps extends AirFlowCalendar {
 		clickOnMenuTab(tabName);
 	}
 
-//	@Then("^user clicks on \"([^\"]*)\"$")
-//	public void user_clicks_on(String Element) throws Throwable {
-//		if (Element.equals(Element)) {
-//			clickLink(By.xpath("//span[@class='group-name']"), Element);
-//		} else {
-//			clickLink(By.id("legend-button"), Element);
-//		}
-//	}
-
 	// @Then("^Drag and Drops exam card \"([^\"]*)\" between Device \"([^\"]*)\"
 	// to \"([^\"]*)\"$")
 	// public void drag_and_Drops_exam_card_between_Device_to(String arg1,

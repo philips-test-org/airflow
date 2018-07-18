@@ -39,7 +39,7 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
     Examples: 
       | Exam Status | Resource      | Procedure             | Color  |
       | begin       | VHC Main CT-1 | CT PELVIS W/O & W/DYE | voilet |
-      | completed   | VHC Main CT-1 | CT PELVIS W/O & W/DYE | blue   |
+    #  | completed   | VHC Main CT-1 | CT PELVIS W/O & W/DYE | blue   |
 
   #The below scenario requires the data to be ingested before hand. The Scenario 'Admin ingested data and verifies the ingestion in Real Time' takes care that.
   @tag
