@@ -42,9 +42,9 @@ public class Ingestion extends UITestUtils {
 	}
 
 	public void selectProcedure(String procedure) throws InterruptedException {
-		clickLink_JavaScript(procedureDropDownInVHS, "Procedure Dropdown");
+		clickLink(procedureDropDownInVHS, "Procedure Dropdown");
 		clearAndInput(procedureSearchFieldInVHS, "Procedure search Field", procedure);
-		clickLink_JavaScript(ProcedureSelectForVHSCreateExam(procedure), procedure);
+		clickLink(ProcedureSelectForVHSCreateExam(procedure), procedure);
 	}
 
 	public void searchIngestedAccNum(String acc_num) throws InterruptedException {
