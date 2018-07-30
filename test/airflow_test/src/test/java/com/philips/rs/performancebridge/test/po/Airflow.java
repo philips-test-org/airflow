@@ -199,7 +199,11 @@ public class Airflow {
 	 * The below method searches for the MRN number for a particular resource.
 	 * It verifies that the newly ingested record in airflow shows the MRN number of the ingested record
 	 */
-	public boolean verifyMRNOnExamCard(String resourceID, String mrn) {
+	public boolean verifyExamCardNotVisible(String resourceID, String mrn) {
+		return UITestUtils.elementInVisibilitymethod(getSearchForMRNNumberInExamCardLocator(resourceID, mrn));
+	}
+	
+	public boolean verifyMrnExamCardDispalyed(String resourceID, String mrn) {
 		return UITestUtils.verifyIsElementDisplayed(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
 				"Verified that ingested record is available in Exam Card for particular resource");
 	}

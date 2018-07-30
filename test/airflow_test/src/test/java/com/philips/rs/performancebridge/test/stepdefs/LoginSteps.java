@@ -49,7 +49,6 @@ public class LoginSteps {
 
 	@Then("user logs in as \"(.*)\"")
 	public void userLogsIn(String userName) throws Throwable {
-		UITestUtils.switchWindow(Apps.LOGIN.toString());
 		loginPage.login(userName);
 	}
 
@@ -60,7 +59,7 @@ public class LoginSteps {
 
 	@Then("^user logs out of the application$")
 	public void user_logs_out_of_the_application() throws InterruptedException {
-		Thread.sleep(3000);
+//		Thread.sleep(3000);
 		logoutPage.appLogout();
 	}
 

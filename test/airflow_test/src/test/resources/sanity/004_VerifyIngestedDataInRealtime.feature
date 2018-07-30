@@ -3,7 +3,7 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
 
   #The below scenarios requires to be run one after the other because of dependencies on creation of group and data ingestion respectively.
   @sanity
-  Scenario Outline: 004_VerifyReschedulingExamsInCalender
+  Scenario Outline: 004_VerifyIngestedDataInRealtime
     Given user launch App
     Given user clicks on "Airflow" App
     Then user logs in as "aiuser"

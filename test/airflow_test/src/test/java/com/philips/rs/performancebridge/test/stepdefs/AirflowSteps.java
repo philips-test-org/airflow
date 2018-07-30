@@ -57,7 +57,7 @@ public class AirflowSteps {
 		airflow.verifySpinnerIsInvisible();
 		int postIngestionExamCount = airflow.examCardCountForTheResource(pom.getValue("resourceId"));
 		Comparator.check(preIngestionExamsCount + 1, postIngestionExamCount);
-		Comparator.check(true, airflow.verifyMRNOnExamCard(pom.getValue("resourceId"), pom.getValue("mrn")));
+		Comparator.check(true, airflow.verifyMrnExamCardDispalyed(pom.getValue("resourceId"), pom.getValue("mrn")));
 	}
 
 
@@ -96,7 +96,7 @@ public class AirflowSteps {
 	 */
 	@Then("^in \"([^\"]*)\", choose exam card$")
 	public void in_choose_exam_card(String Resources) throws Throwable {
-		airflow.verifyMRNOnExamCard(pom.getValue("resourceId"), pom.getValue("mrn"));
+		airflow.verifyMrnExamCardDispalyed(pom.getValue("resourceId"), pom.getValue("mrn"));
 	}
 
 
@@ -156,7 +156,7 @@ public class AirflowSteps {
 	
 	@Then("^user verifies procedure and accession number is not diplayed on the examcards$")
 	public void user_verifies_procedure_and_accession_number_is_not_diplayed_on_the_examcards() throws Throwable {
-		Assert.assertTrue(airflow.verifyMRNOnExamCard(pom.getValue("resourceId"), pom.getValue("mrn")));
+		Assert.assertTrue(airflow.verifyExamCardNotVisible(pom.getValue("resourceId"), pom.getValue("mrn")));
 	}
 
 }

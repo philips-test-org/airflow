@@ -28,9 +28,8 @@ public class AirflowKioskSteps{
 	@Then("^user verifies order number is diplayed on the examcards$")
 	public void user_verifies_order_number_is_diplayed_on_the_examcards() throws Throwable {
 		String  kioskNumberText = pom.getValue("kioskNumber");
-		log.info(kioskNumberText);
 		Assert.assertTrue(airflowKiosk.verifySearchKioskNumberInKioskTab(kioskNumberText));
-		log.info("only Number is diplayed");
+		log.info(kioskNumberText + " kioskNumber Number is diplayed");
 	}
 
 	@Given("^gets the token number from exam card$")

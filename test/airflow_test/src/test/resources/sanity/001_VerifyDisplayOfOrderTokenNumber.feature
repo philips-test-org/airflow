@@ -41,7 +41,7 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
     #Then user logs in as "aiuser"
     #Then user selects "New Group" from Resource Group filter
     #Then in "<Resource>", choose exam card
-    And user selects the exam card
+    #And user selects the exam card
     And gets the token number from exam card
     And user clicks on "Kiosk" tab
     Then user selects "New Group" from Resource Group filter
