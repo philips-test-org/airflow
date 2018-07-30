@@ -1,28 +1,41 @@
 package com.philips.rs.performancebridge.test.stepdefs;
 
+import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 import com.philips.rs.performancebridge.test.po.AirflowAdmin;
+import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class AirflowAdminSteps extends AirflowAdmin {
+public class AirflowAdminSteps {
+	
+	private PageObjectManager pom;
+	private AirflowAdmin airflowAdmin;
+
+	public AirflowAdminSteps(PageObjectManager pageObjectManager) {
+		this.pom = pageObjectManager;
+		airflowAdmin = pageObjectManager.getAirflowAdminPage();
+	}
 
 	@Then("^user selects \"([^\"]*)\"$")
 	public void user_selects(String subTabName) throws Throwable {
-		clickOnSubMenOfMenuTab(subTabName);
+		airflowAdmin.clickOnSubMenOfMenuTab(subTabName);
 	} 
 	
 	@Then("^Creates \"([^\"]*)\" with Resource \"([^\"]*)\"$")
 	public void creates_with_Resource(String originalGroupName, String Resource) throws Throwable {
-	    randomGroupName = originalGroupName + randomNumberGenerator(1,999999); 
-		clearAndInput(createNewGroup, "createNewGroup", randomGroupName);
-	    clickLink(createNewGroupPlus,"createNewGroupPlus");
-	    clickLink(groupName(randomGroupName), randomGroupName);
-	    clickLink(resourceName(Resource), Resource);
+		
+		String randomGroupName = originalGroupName + UITestUtils.randomNumberGenerator(1,999999);
+		pom.setValue("groupName", randomGroupName);
+		airflowAdmin.enterGroupName(randomGroupName);
+		airflowAdmin.clickCreateNewGroupPlus();
+		airflowAdmin.clickGroupName(randomGroupName);
+		airflowAdmin.clickOnResourceName(Resource);
 	}
 	
-	@When("^user selects a Category \"([^\"]*)\"$")
+	//*************************************
+	/*@When("^user selects a Category \"([^\"]*)\"$")
 	public void user_selects_a_Category(String catName) throws Throwable {
 		selectTheCategory(catName);
 	}
@@ -49,5 +62,5 @@ public class AirflowAdminSteps extends AirflowAdmin {
 	public void verify_that_user_message_is_displayed_indicating(String msg) throws Throwable {
 		checkResultMessage(msg);
 	}
-
+*/
 }
