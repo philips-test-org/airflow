@@ -1,0 +1,30 @@
+export default {
+  "routing_key": "rad_exam_personnel.insert.799888",
+  "payload": {
+    "table_name": "rad_exam_personnel",
+    "pre_and_post": {
+      "pre": {
+        "updated_at": "2018-07-05 18:21:59Z",
+        "technologist_id": null,
+        "signin_id": null,
+        "scheduler_id": null,
+        "rad_exam_id": 799888,
+        "performing_id": null,
+        "ordering_id": null,
+        "id": 799888,
+        "end_exam_id": null,
+        "checkin_id": null,
+        "begin_exam_id": null,
+        "authorizing_id": null,
+        "attending_id": null,
+        "assisting_tech3_id": null,
+        "assisting_tech2_id": null,
+        "assisting_tech1_id": null,
+      },
+    },
+    "operation": "insert",
+    "data_manager_message_log_id": 4559141,
+    "affected_row_id": 799888,
+  },
+  "exchange": "audit",
+}

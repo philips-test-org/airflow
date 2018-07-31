@@ -1,4 +1,19 @@
 
+## v1.2.0 released 2018-07-17
+
+* **new:** added PPCA Ready toggle
+* **new:** added Ordering Physician to card
+* **new:** print view for Calendar
+* **new:** search/filter cards
+* **improvement:** added merged indicator to merged cards
+* **improvement:** launch patient images
+* **improvement:** overlapping cards displayed side by side
+* **improvement:** Overview page wraps instead of scrolling horizontally
+* **improvement:** updated icon for anesthesia
+* **bugfix:** events on merged cards are saved to both orders to prevent event loss if cards are no longer merged
+* **bugfix:** event tabs show all events after new event added
+* **bugfix:** rounding notes update for all users viewing card
+
 ## v1.1.3 released 2018-06-19
 
 * **bugfix:** all order messages sending requests to server
