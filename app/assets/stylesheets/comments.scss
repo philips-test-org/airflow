@@ -4,7 +4,6 @@
   margin-bottom: 10px;
   position: relative;
   min-height: 40px;
-  line-height: 40px;
 
   .avatar {
     position: absolute;
@@ -38,7 +37,8 @@
 
     .heading {
       background-color: #f2f8fa;
-      color: #767676;
+      color: #333;
+      font-weight: 500;
       padding: 8px 10px;
       border: 1px solid #bfccd1;
       border-bottom: 0;
@@ -46,7 +46,8 @@
       border-top-left-radius: 5px;
     }
 
-    .heading:before {
+    .heading:before,
+    .panel-heading:before {
       content: " ";
       position: absolute;
       top: 11px;
@@ -68,7 +69,6 @@
       border-top: 0;
       border: 1px solid #bfccd1;
       padding: 10px;
-      white-space: pre-line;
     }
   }
 
@@ -137,34 +137,9 @@ $recognition-color: #3c763d;
   .body .content { border-color: $recognition-border; }
 }
 
-form .comment {
-  .body:before { border-right-color: #ddd; }
-  .body {
-    .heading:before { border-right-color: #eee; }
-    .heading {
-      background-color: #eee;
-      border-color: #ddd;
-    }
-    .content {
-      border-color: #ddd;
-      border-bottom-right-radius: 0px;
-      border-bottom-left-radius: 0px;
-      border-bottom: 0;
-      textarea {
-        height: 100px;
-      }
-    }
-
-    .footer {
-      background-color: #eee;
-      border-color: #ddd;
-      border-bottom-right-radius: 5px;
-      border-bottom-left-radius: 5px;
-      border-width: 1px;
-      border-style: solid;
-      padding: 10px;
-    }
-  }
+form .comment .body {
+  textarea { height: 100px; }
+  .panel-heading:before { border-right-color: #f6f5f6; }
 }
 
 .comment-interface {

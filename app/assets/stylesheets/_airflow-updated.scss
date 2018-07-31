@@ -1,0 +1,75 @@
+/*
+  Styling added since React update
+*/
+
+// Legend
+.open > #legend { display: block; }
+#legend {
+  min-width: 180px;
+  top: 30px;
+
+  .arrow { left: 36px; }
+}
+
+// Override SingleDatePicker
+.SingleDatePickerInput { height: 30px; }
+.DateInput.DateInput__small {
+  vertical-align: top;
+  height: 28px;
+}
+.DateInput_input.DateInput_input.DateInput_input__small {
+  font-size: 12px;
+  color: #333;
+  vertical-align: top;
+  padding: 5px 10px 3px;
+}
+
+.modal-subhead {
+  margin-top: 10px;
+  h5 { margin-top: 0; }
+  // Exam Image Links for PACS
+  .pacs-dropdown {
+    ul {
+      max-width: 215px;
+      max-height: 600px;
+      overflow-y: auto;
+      a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+// Calendar Cards
+.ghost-card {
+  background: #ccc;
+  width: 100%;
+  position: absolute;
+  left: 0;
+
+  > div {
+    position: relative;
+    height: 100%;
+
+    .start-time, .stop-time {
+      position: absolute;
+      z-index: 102;
+      background: #fff;
+      padding: 2px 5px;
+    }
+    .start-time {
+      top: -24px;
+      border-radius: 5px 5px 0 0;
+      box-shadow: 0px -0.5px 3px rgba(50, 50, 50, 0.2)
+    }
+    .stop-time {
+      bottom: -34px;
+      border-radius: 0 0 5px 5px;
+      box-shadow: 0px 0.5px 3px rgba(50, 50, 50, 0.2)
+    }
+  }
+}
+
+// Page Alerts (flash)
+.alerts { margin-top: 15px; }

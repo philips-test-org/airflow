@@ -17,6 +17,12 @@ ASSETS="clean" RAILS_ENV=production jruby -S bundle exec rake assets:clean
 echo "Warblizer: Precompiling Assets (this takes a while)"
 ASSETS="precompile" RAILS_RELATIVE_URL_ROOT="/$APPNAME" RAILS_ENV=production jruby -J-XX:MaxPermSize=256m -S bundle exec rake assets:precompile
 
+echo "Warblizer: Getting React/JS dependencies"
+yarn install
+
+echo "Warblizer: Building javascript bundle"
+yarn build
+
 echo "Warblizer: Building War File"
 WARRING="warbilizing" RAILS_ENV=production jruby -S bundle exec warble war
 

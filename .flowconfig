@@ -1,0 +1,12 @@
+[ignore]
+.*/jruby/.*/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
