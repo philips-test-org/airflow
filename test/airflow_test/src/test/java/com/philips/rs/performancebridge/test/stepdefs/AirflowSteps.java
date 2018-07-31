@@ -1,7 +1,6 @@
 package com.philips.rs.performancebridge.test.stepdefs;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
@@ -43,7 +42,6 @@ public class AirflowSteps {
 	public void user_count_number_of_exams_for(String resourceName) throws Throwable {
 		airflow.verifySpinnerIsInvisible();
 		preIngestionExamsCount = airflow.examCardCountForTheResource(pom.getValue("resourceId")); 
-//		getExamCardCountPreIngestion();      
 	}
 
 	/**
@@ -52,7 +50,6 @@ public class AirflowSteps {
 	 */
 	@Given("^user verifies that record is added in \"([^\"]*)\"$")
 	public void user_verifies_that_is_added_in(String Resource) throws Throwable {
-		// refreshPage();
 		UITestUtils.refreshPage();
 		airflow.verifySpinnerIsInvisible();
 		int postIngestionExamCount = airflow.examCardCountForTheResource(pom.getValue("resourceId"));
@@ -144,13 +141,12 @@ public class AirflowSteps {
 	 * The method picks the hex value of the background color and verifies that the value matches the hex code of intended color
 	 */
 	@Then("^user verifies the On Hold status is displayed with \"([^\"]*)\" background color$")
-	public void user_verifies_the_On_Hold_status_is_displayed_with_background_color(String checkHexValueForColor) throws Throwable {
-//		String valueForColor = getHexValueOfColor(checkHexValueForColor);
-//		Assert.assertEquals(getHexValueForGivenWebElement(leftStripeColorLegendInExamCard), valueForColor);
+	public void user_verifies_the_On_Hold_status_is_displayed_with_background_color(String checkHexValueForColor)
+			throws Throwable {
 		String resourceId = pom.getValue("resourceId");
 		String mrn = pom.getValue("mrn");
 		String valueForColor = UITestUtils.getHexValueOfColor(checkHexValueForColor);
-		boolean verifyColor = airflow.verifyMRNNumberExamCardLeftPanelBackgroupColor(valueForColor,resourceId,mrn);
+		boolean verifyColor = airflow.verifyMRNNumberExamCardLeftPanelBackgroupColor(valueForColor, resourceId, mrn);
 		Comparator.check(true, verifyColor);
 	}
 	

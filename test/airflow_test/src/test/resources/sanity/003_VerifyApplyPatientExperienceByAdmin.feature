@@ -20,34 +20,10 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
     Then user finds the ID for "<Resource>"
     And user logs out of the application
     Given user clicks on "Virtual Hospital" App
-    
-    #And user creates a startup exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
-    #Given user clicks on "Airflow" App
-    #Then user selects "New Group" from Resource Group filter
-    #And user count number of exams for "<Resource>"
-    Then user switches to "Virtual Hospital" app
     And user creates a exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
-    
-    #Then user switches to "Airflow" app
-    
     Given user clicks on "Airflow" App
-    #Then user selects "New Group" from Resource Group filter
-    #And user count number of exams for "<Resource>"
-    
-    #And user verifies that record is added in "<Resource>"
-    #And user selects the exam card
-    #And verify the left stripe color legend of exam card is "<Color>"
-    #Then close the exam card
-    #And user logs out of the application
-    
-    
     #The below scenario requires the data to be ingested before hand. The Scenario 'Admin ingested data and verifies the ingestion in Real Time' takes care that.
-    #@tag
     #Scenario Outline: Admin applies patient experience level settings on an exam card
-    
-    #Given user clicks on "Airflow" App
-    #Then user logs in as "aiuser"
-    #
     Then user selects "New Group" from Resource Group filter
     Then in "<Resource>", choose exam card
     And user selects the exam card

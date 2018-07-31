@@ -18,29 +18,10 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
     Given user clicks on "Service Tools" App
     Then user logs in as "aiuser"
     Then user finds the ID for "<Resource>"
-    #Given user clicks on "Virtual Hospital" App
-    
-    #And user creates a startup exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
-    #Given user clicks on "Airflow" App
-    #Then user selects "New Group" from Resource Group filter
-    #And user count number of exams for "<Resource>"
-    #Then user switches to "Virtual Hospital" app
     Given user clicks on "Virtual Hospital" App
     And user creates a exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
-    #Then user switches to "Airflow" app
     Given user clicks on "Airflow" App
-    
-    #And user verifies that record is added in "<Resource>"
-    #And user selects the exam card
-    #And verify the left stripe color legend of exam card is "<Color>"
-    #Then close the exam card
-    #And user logs out of the application
-    
     #Scenario: Check:All schedules per day are same in overVeiw and Calender
-    
-    #Given user clicks on "Airflow" App
-    #Then user logs in as "aiuser"
-    
     Then user selects "New Group" from Resource Group filter
     And user clicks on "Overview" tab
     Then user selects "New Group" from Resource Group filter

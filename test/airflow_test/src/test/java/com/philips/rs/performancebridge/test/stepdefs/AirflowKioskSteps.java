@@ -3,7 +3,6 @@ package com.philips.rs.performancebridge.test.stepdefs;
 import org.junit.Assert;
 
 import com.philips.rs.performancebridge.test.po.Airflow;
-import com.philips.rs.performancebridge.test.po.AirflowAdmin;
 import com.philips.rs.performancebridge.test.po.AirflowKiosk;
 import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
@@ -24,7 +23,6 @@ public class AirflowKioskSteps{
 		airflow = pageObjectManager.getAirflowPage();
 	}
 
-//**************************************************
 	@Then("^user verifies order number is diplayed on the examcards$")
 	public void user_verifies_order_number_is_diplayed_on_the_examcards() throws Throwable {
 		String  kioskNumberText = pom.getValue("kioskNumber");

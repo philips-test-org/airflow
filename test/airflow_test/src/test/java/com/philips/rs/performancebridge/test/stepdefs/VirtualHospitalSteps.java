@@ -1,7 +1,5 @@
 package com.philips.rs.performancebridge.test.stepdefs;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import com.philips.rs.performancebridge.test.common.po.VhisExamDetail;
 import com.philips.rs.performancebridge.test.common.po.VhisExamList;
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
@@ -27,7 +25,6 @@ public class VirtualHospitalSteps {
 
 		vhisExamList.selectSite(site);
 		vhisExamList.selectStatus(examStatus);
-//		vhisExamList.selectAccessionInRecentSearch(accessionNumber);
 		vhisExamList.clickSubmit();
 
 	}
@@ -39,7 +36,6 @@ public class VirtualHospitalSteps {
 
 		vhisExamList.selectSite(site);
 		vhisExamList.selectStatus(examStatus);
-//		vhisExamList.selectAccessionInRecentSearch(accessionNumber);
 		vhisExamList.inputExistingAccession(pom.getValue("accessionNumber"));
 		vhisExamList.clickSubmit();
 
@@ -72,10 +68,7 @@ public class VirtualHospitalSteps {
 	public void userselectsExamsDetails(String modality, String accessionNumber, String procedure, String radiologist1,
 			String radiologist2, String impression, String reportbody) throws Throwable {
 
-//		String timestamp = new SimpleDateFormat("mmss").format(new Date());
 		pom.setValue("accessionNumber", vhisExamDetail.getAccession());
-//		vhisExamDetail.enterAccessionNumber(accessionNumber + timestamp);
-//		;
 		vhisExamDetail.selectModality(modality);
 		vhisExamDetail.selectProcedure(procedure);
 		vhisExamDetail.selectRadiologist1(radiologist1);

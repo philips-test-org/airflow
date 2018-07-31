@@ -4,7 +4,6 @@ import com.philips.rs.performancebridge.test.common.config.ApplicationProperties
 import com.philips.rs.performancebridge.test.common.config.ApplicationProperties.ApplicationProperty;
 import com.philips.rs.performancebridge.test.common.po.Login;
 import com.philips.rs.performancebridge.test.common.po.Logout;
-import com.philips.rs.performancebridge.test.common.utils.Apps;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
@@ -12,8 +11,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 public class LoginSteps {
-	
-
 
 	private Login loginPage;
 	private Logout logoutPage;
@@ -23,28 +20,21 @@ public class LoginSteps {
 		logoutPage = pageObjectManager.getLogout();
 	}
 
-
 	@Given("^user launch App$")
 	public void user_launch_App() throws Throwable {
 
 		UITestUtils.launchPBPApplication(ApplicationProperties.getString(ApplicationProperty.APP_URL));
-		// Reporter.featureStepResult("Progress App clicked and a new window
-		// opened with login page of Progress", "Success");
 	}
-	
+
 	@Then("^user switches to \"([^\"]*)\" app$")
 	public void user_switches_to_app(String appName) throws Throwable {
 		UITestUtils.switchWindow(appName);
 	}
-	
-	
+
 	@Given("^user clicks on \"([^\"]*)\" App$")
 	public void user_clicks_on_App(String appName) throws Throwable {
 
 		loginPage.clickOnApp(appName);
-
-		// Reporter.featureStepResult("Progress App clicked and a new window
-		// opened with login page of Progress", "Success");
 	}
 
 	@Then("user logs in as \"(.*)\"")
@@ -59,13 +49,7 @@ public class LoginSteps {
 
 	@Then("^user logs out of the application$")
 	public void user_logs_out_of_the_application() throws InterruptedException {
-//		Thread.sleep(3000);
 		logoutPage.appLogout();
 	}
-
-/*	@Then("^user logs out$")
-	public void user_logs_out() throws Throwable {
-		vhisLogoutPage.appLogout();
-	}*/
 
 }

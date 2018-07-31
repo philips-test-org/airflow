@@ -1,4 +1,5 @@
 package com.philips.rs.performancebridge.test.po;
+
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,155 +11,116 @@ import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 
 public class Airflow {
-	
+
 	protected WebDriver driver;
 
 	public Airflow(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	private final String spinner = "//img[@src='/airflow/assets/ajax-loader-f4c4723838ebbad7aaa793555d43d4a9f442db0f6d64ef851855cac082d3adc5.gif']";
 	private final String closeTheExamCardPopUpXpath = "//button[@class='close']";
 
-	
 	@FindBy(xpath = "//a[text()='Resource']")
 	private WebElement selectCatFromLeftPaneOfST;
 
-//	public static final By selectCatFromLeftPaneOfST = By.xpath("//a[text()='Resource']");
-//	public static final By clickOnSearchInResourcesInST = By.xpath(
-//			"//a[text()='Resource']/../../../..//div[@id='query-window']//div[@data='Resource']//input[@value='Search']");
-	
 	@FindBy(xpath = "//a[text()='Resource']/../../../..//div[@id='query-window']//div[@data='Resource']//input[@value='Search']")
 	private WebElement clickOnSearchInResourcesInST;
-	
-//	public static final By categoryName = By.xpath("//select[@name='category']");
-	
+
 	@FindBy(xpath = "//select[@name='category']")
 	private WebElement categoryName;
-	
-	
-//	public static final By leftStripeColorLegendInExamCard = By.xpath("//div[@class='left-stripe']");
-	
+
 	@FindBy(xpath = "//div[@class='left-stripe']")
 	private WebElement leftStripeColorLegendInExamCard;
-	
-	
-//	public static final By closeTheExamCardPopUp = By.xpath("//button[@class='close']");
-	
+
 	@FindBy(xpath = closeTheExamCardPopUpXpath)
 	private WebElement closeTheExamCardPopUpWebElement;
-	
-	
-//	public static final By commentBoxWithinExamCard = By.xpath("//div[@class='content']/textarea[@name='comments']");
-	
+
 	@FindBy(xpath = "//div[@class='content']/textarea[@name='comments']")
 	private WebElement commentBoxWithinExamCard;
-	
-//	public static final By spinner=By.xpath("//img[@src='/airflow/assets/ajax-loader-f4c4723838ebbad7aaa793555d43d4a9f442db0f6d64ef851855cac082d3adc5.gif']");
-		
+
 	private String getSearchForMRNNumberInExamCardXpath(String resourceID, String mrn) {
 		return "//td[@data-resource-id='" + resourceID + "']//div[@class='mrn'][text()='" + mrn + "']";
 	}
-	
+
 	private String getMRNNumberExamCardLeftPanelXpath(String resourceID, String mrn) {
-		return "//td[@data-resource-id='" + resourceID + "']/div[descendant::div[@class='mrn'][text()='" + mrn  + "']]/div[@class='left-tab']";
+		return "//td[@data-resource-id='" + resourceID + "']/div[descendant::div[@class='mrn'][text()='" + mrn
+				+ "']]/div[@class='left-tab']";
 	}
-	
+
 	private String getFindIDOfSelectedResourceXpath(String resourcename) {
 		return "//td[@sort='.resource']//label[text()='" + resourcename + "']/../../..//td//label";
 	}
-	
+
 	private String getResourceExamCardCountXpath(String resourceID) {
 		return "//td[@data-resource-id='" + resourceID + "']//div[@class='mrn']";
 	}
-	
-/*	private String getToggleSwitchToChangeStateXpath(String patientExperienceEvents, String patientexperienceEventstatus) {
-		return "//input[@name='" + patientExperienceEvents + "']/../div/label[text()='"
-				+ patientexperienceEventstatus + "']";
-	}
-	
-	private String getStateIndicatorIconXpath(String iconOnExamCard) {
-		return "//div[@class='status-indicator '" + iconOnExamCard + "']";
-	}*/
-	
-	private String getPatientExperienceStateXpath (String labelForState) {
+
+	private String getPatientExperienceStateXpath(String labelForState) {
 		return "//label[text()='" + labelForState + "']/../div[1]";
 	}
-	
+
 	private String getToSearchIconsOnTheExamCardXpath(String toVerifyStatusIconsOnExamCard, String mrn) {
 		return "//div[@class='mrn'][text()='" + mrn
 				+ "']/../../div[@class='footer']//div//div[@class='status-indicator " + toVerifyStatusIconsOnExamCard
 				+ "']";
 	}
-	
+
 	/*
 	 * RETURN Locator or WebElement
 	 */
-	
-/*	private WebElement getToSearchIconsOnTheExamCardWebElement(String toVerifyStatusIconsOnExamCard, String mrn) {
-		return UITestUtils.getWebElementByXpath(getToSearchIconsOnTheExamCardXpath(toVerifyStatusIconsOnExamCard, mrn));
-	}*/
-	
+
 	private WebElement getMRNNumberExamCardLeftPanelWebElement(String resourceID, String mrn) {
 		return UITestUtils.getWebElementByXpath(getMRNNumberExamCardLeftPanelXpath(resourceID, mrn));
 	}
-	
+
 	private By getToSearchIconsOnTheExamCardLocator(String toVerifyStatusIconsOnExamCard, String mrn) {
 		return UITestUtils.getLocatorByXpath(getToSearchIconsOnTheExamCardXpath(toVerifyStatusIconsOnExamCard, mrn));
 	}
-	
+
 	private By getCloseTheExamCardPopUpLocator() {
 		return UITestUtils.getLocatorByXpath(closeTheExamCardPopUpXpath);
 	}
+
 	private WebElement getPatientExperienceStateWebElement(String labelForState) {
 		return UITestUtils.getWebElementByXpath(getPatientExperienceStateXpath(labelForState));
 	}
-	
-	
+
 	private WebElement getSearchForMRNNumberInExamCardWebElement(String resourceID, String mrn) {
 		return UITestUtils.getWebElementByXpath(getSearchForMRNNumberInExamCardXpath(resourceID, mrn));
 	}
-	
+
 	private By getSearchForMRNNumberInExamCardLocator(String resourceID, String mrn) {
 		return UITestUtils.getLocatorByXpath(getSearchForMRNNumberInExamCardXpath(resourceID, mrn));
 	}
-	
 
 	private WebElement getFindIDOfSelectedResourceWebElement(String resourcename) {
 		return UITestUtils.getWebElementByXpath(getFindIDOfSelectedResourceXpath(resourcename));
 	}
-	
-//	private WebElement getResourceExamCardCountWebElement(String resourceID) {
-//		return UITestUtils.getWebElementByXpath(getResourceExamCardCountXpath(resourceID));
-//	}
-//	
+
 	private By getResourceExamCardCountLocator(String resourceID) {
 		return UITestUtils.getLocatorByXpath(getResourceExamCardCountXpath(resourceID));
 	}
-	
+
 	private By getSpinnerLocator() {
 		return UITestUtils.getLocatorByXpath(spinner);
 	}
-	
-/*	private WebElement getToggleSwitchToChangeStateWebElement(String patientExperienceEvents, String patientexperienceEventstatus) {
-		return UITestUtils.getWebElementByXpath(getToggleSwitchToChangeStateXpath(patientExperienceEvents, patientexperienceEventstatus));
-	}
-	
-	private WebElement getStateIndicatorIconWebElement(String iconOnExamCard) {
-		return UITestUtils.getWebElementByXpath(getStateIndicatorIconXpath(iconOnExamCard));
-	}*/
-	// ---------------------------------------------------- Methods -----------------------------------------------//
+
+	// ---------------------------------------------------- Methods
+	// -----------------------------------------------//
 
 	/**
-	 * The below method clicks on the category 'Resource' in Service Tools which is displayed in the left panel
+	 * The below method clicks on the category 'Resource' in Service Tools which
+	 * is displayed in the left panel
 	 */
 	public void leftPanelElementsFOrServiceTool() throws InterruptedException {
 		UITestUtils.clickLink(selectCatFromLeftPaneOfST, "resource");
 	}
 
 	/**
-	 * In service Tools, to view the data for a chosen category, user needs to click on search
+	 * In service Tools, to view the data for a chosen category, user needs to
+	 * click on search
 	 */
 	public void clickOnSearchInResource() throws Throwable {
 		UITestUtils.clickLink(clickOnSearchInResourcesInST, "search");
@@ -167,13 +129,6 @@ public class Airflow {
 	public String getIDForResource(String resource) {
 		return UITestUtils.retrieveText(getFindIDOfSelectedResourceWebElement(resource), resource);
 	}
-
-	/**
-	 * Getting the count of exam cards before ingesting data for particular resource
-	 */
-	/*public void getExamCardCountPreIngestion() {
-		preIngestedCountOfExamCardsInResource = examCardCountForTheResource();
-	}*/
 
 	/**
 	 * Get the current count of exam cards for particular resource
@@ -185,48 +140,42 @@ public class Airflow {
 	}
 
 	/**
-	 * Getting the count of exam cards after ingesting data for particular resource
-	 */
-	/*public boolean verifyExamCardCount(String resourceID) {
-		int postIngestExamCount = examCardCountForTheResource(resourceID);
-		log.info("The count of exam cards before ingesting data: " + preIngestedCountOfExamCardsInResource);
-		log.info("The count of exam cards after ingesting data: " + examCardCountForTheResource());
-		Assert.assertTrue(verifyExamCount == preIngestedCountOfExamCardsInResource + 1);
-		log.info("Pass : Data is ingested for particular resource");
-	}*/
-
-	/**
 	 * The below method searches for the MRN number for a particular resource.
-	 * It verifies that the newly ingested record in airflow shows the MRN number of the ingested record
+	 * It verifies that the newly ingested record in airflow shows the MRN
+	 * number of the ingested record
 	 */
 	public boolean verifyExamCardNotVisible(String resourceID, String mrn) {
 		return UITestUtils.elementInVisibilitymethod(getSearchForMRNNumberInExamCardLocator(resourceID, mrn));
 	}
-	
+
 	public boolean verifyMrnExamCardDispalyed(String resourceID, String mrn) {
 		return UITestUtils.verifyIsElementDisplayed(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
 				"Verified that ingested record is available in Exam Card for particular resource");
 	}
-	
+
 	public void selectMRNOnExamCard(String resourceID, String mrn) {
 		UITestUtils.clickLink_JavaScript(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
 				"selects Exam for particular resource" + resourceID);
 	}
 
 	/**
-	 * The below method is getting the hex value for the color code picked up from the left stripe and compares that hex value for the intended color
+	 * The below method is getting the hex value for the color code picked up
+	 * from the left stripe and compares that hex value for the intended color
 	 */
 	public boolean verifyExamCardPopupLeftStripColorLegend(String colorLegend) {
-		String hex = Color.fromString(UITestUtils.retrieveCssAttributeValue(leftStripeColorLegendInExamCard,"background-color","")).asHex();
+		String hex = Color
+				.fromString(
+						UITestUtils.retrieveCssAttributeValue(leftStripeColorLegendInExamCard, "background-color", ""))
+				.asHex();
 		return Comparator.match(colorLegend, hex, "LeftStripColor");
-	
+
 	}
-	
-	
-	public boolean verifyMRNNumberExamCardLeftPanelBackgroupColor(String colorLegend,String resourceID, String mrn) {
-		String hex = Color.fromString(UITestUtils.retrieveCssAttributeValue(getMRNNumberExamCardLeftPanelWebElement(resourceID,mrn),"background-color","")).asHex();
+
+	public boolean verifyMRNNumberExamCardLeftPanelBackgroupColor(String colorLegend, String resourceID, String mrn) {
+		String hex = Color.fromString(UITestUtils.retrieveCssAttributeValue(
+				getMRNNumberExamCardLeftPanelWebElement(resourceID, mrn), "background-color", "")).asHex();
 		return Comparator.match(colorLegend, hex, "LeftStripColor");
-	
+
 	}
 
 	/**
@@ -245,39 +194,33 @@ public class Airflow {
 	}
 
 	/**
-	 * 
-	 */
-//	public void changeThePatientExperienceStatus(String patExpEvents, String patExpEventstatus)
-//			throws InterruptedException {
-//		clickLink(toggleSwitchToChangeState(patExpEvents, patExpEventstatus),
-//				"Change the status of patient experience event " + patExpEvents);
-//	}
-
-	/**
-	 *  The below method adds the comments in the comments section of the exam card information modal pop up
+	 * The below method adds the comments in the comments section of the exam
+	 * card information modal pop up
 	 */
 	public void addCommentsinExamCard(String comment) throws InterruptedException {
-		UITestUtils.clearAndInput(commentBoxWithinExamCard, "Adding comments in the exam card",
-				comment);
+		UITestUtils.clearAndInput(commentBoxWithinExamCard, "Adding comments in the exam card", comment);
 	}
 
 	/**
-	 * The below method verifies the icons for representing the status of the exam card
+	 * The below method verifies the icons for representing the status of the
+	 * exam card
 	 */
 	public boolean statusIndicatorOnExamCard(String verifyIconsOnExamCard, String mrn) throws InterruptedException {
-		int  SearchIconsCount = driver.findElements(getToSearchIconsOnTheExamCardLocator(verifyIconsOnExamCard, mrn)).size();
-		return Comparator.notMatch(SearchIconsCount,0, "SearchIconsCount");
+		boolean SearchIconsCount = driver.findElements(getToSearchIconsOnTheExamCardLocator(verifyIconsOnExamCard, mrn)).isEmpty();
+		return Comparator.match(SearchIconsCount, true, "No search Icons Count on ExamCard");
 	}
-	
-	public boolean verifySpinnerIsInvisible(){
+
+	public boolean verifySpinnerIsInvisible() {
 		return UITestUtils.elementInVisibilitymethod(getSpinnerLocator());
 	}
-	
-	public String getPatientExperienceState(String patientExperienceEvents){
-		return UITestUtils.retrieveAttributeValue(getPatientExperienceStateWebElement(patientExperienceEvents), "class", "picking up the class");
+
+	public String getPatientExperienceState(String patientExperienceEvents) {
+		return UITestUtils.retrieveAttributeValue(getPatientExperienceStateWebElement(patientExperienceEvents), "class",
+				"picking up the class");
 	}
-	
-	public void clickOnPatientExperienceStateEvent(String patientExperienceEvents){
-		UITestUtils.clickLink(getPatientExperienceStateWebElement(patientExperienceEvents), patientExperienceEvents + " event");
+
+	public void clickOnPatientExperienceStateEvent(String patientExperienceEvents) {
+		UITestUtils.clickLink(getPatientExperienceStateWebElement(patientExperienceEvents),
+				patientExperienceEvents + " event");
 	}
 }

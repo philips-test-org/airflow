@@ -1,9 +1,6 @@
 package com.philips.rs.performancebridge.test.po;
 
 import java.util.List;
-
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,9 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 public class AirflowCalendar {
-	
+
 	protected WebDriver driver;
 
 	public AirflowCalendar(WebDriver driver) {
@@ -25,53 +23,45 @@ public class AirflowCalendar {
 
 	@FindBy(xpath = "//div[@id='resource-group-buttons']/button[@class='btn btn-default btn-sm dropdown-toggle']")
 	private WebElement groupNameDropDown;
-	
-//	public By groupNameDropDown = By.xpath("//div[@id='resource-group-buttons']/button[@class='btn btn-default btn-sm dropdown-toggle']");
-	
-//	public By examcard = By.xpath("//div[@class='left-tab']");
-	
+
 	@FindBy(xpath = "//div[@class='left-tab']")
 	private WebElement examcard;
-	
+
 	@FindBys(@FindBy(xpath = "//div[@class='left-tab']"))
 	private List<WebElement> examcards;
-	
+
 	private String getResourceXpath(String resource) {
 		return "//h1[text()='" + resource + "']";
 	}
-	
+
 	private String getGroupNameXpath(String groupName) {
 		return "//a[text()='" + groupName + "']";
 	}
-	
-	private WebElement getResourceWebElement(String resource) {
-		return UITestUtils.getWebElementByXpath(getResourceXpath(resource));
-	}
-	
-	private WebElement getGroupNameWebElement(String groupName) {
-		return UITestUtils.getWebElementByXpath(getGroupNameXpath(groupName));
-	}
-	
-	/*public List getxamCardsCount(By element) {
-		return driver.findElements(element);
-	}
-	
-	public List examCardsCount(By element) {
-		return driver.findElements(element);
-	}
-*/
+
 	private String getTabElementXPath(String tabName) {
 		return "//a[contains(text(),'" + tabName + "')]";
 	}
-	
+
+	/*
+	 * RETURN WebElement/Locators
+	 */
+
+	private WebElement getResourceWebElement(String resource) {
+		return UITestUtils.getWebElementByXpath(getResourceXpath(resource));
+	}
+
+	private WebElement getGroupNameWebElement(String groupName) {
+		return UITestUtils.getWebElementByXpath(getGroupNameXpath(groupName));
+	}
+
 	private WebElement getTabWebElement(String tabName) {
 		return UITestUtils.getWebElementByXpath(getTabElementXPath(tabName));
 	}
-	
+
 	/*
-	 * METHODS 
+	 * METHODS
 	 */
-	
+
 	public void clickOnTab(String tabName) throws Exception {
 		UITestUtils.clickLink(getTabWebElement(tabName), tabName);
 	}
@@ -84,13 +74,18 @@ public class AirflowCalendar {
 	 * The below method is comparing the count of exam cards in Calendar and
 	 * Overview tab.
 	 */
-	public void getCountForExamCardsFromOverviewAndCalendar() throws Exception {
+	public int getCountForExamCardsFromOverview() throws Exception {
 		UITestUtils.waitForElementToLoad(examcard, "examcard");
 		int totalExamCards = examcards.size();
-		log.info("Number of exam cards are " + totalExamCards);
-		clickOnMenuTab("Calendar");
-		log.info("Number of exam cards are " + examcards.size());
-		Assert.assertEquals(totalExamCards, examcards.size());
+		log.info("Number of exam cards on overview " + totalExamCards);
+		return totalExamCards;
+	}
+	
+	public int getCountForExamCardsFromCalendar() throws Exception {
+		UITestUtils.waitForElementToLoad(examcard, "examcard");
+		int totalExamCards = examcards.size();
+		log.info("Number of exam cards on Calendar " + examcards.size());
+		return totalExamCards;
 	}
 
 	/**
@@ -99,13 +94,12 @@ public class AirflowCalendar {
 	 */
 	public void selectResource(String groupName) throws InterruptedException {
 		UITestUtils.clickLink_JavaScript(groupNameDropDown, "Clicked on group name drop down");
-		UITestUtils.clickLink(getGroupNameWebElement(groupName), "Selected the resource group from drop down");	
+		UITestUtils.clickLink(getGroupNameWebElement(groupName), "Selected the resource group from drop down");
 	}
-	
-	public void verifyResource(String resource) throws InterruptedException {
+
+	public boolean verifyResource(String resource) throws InterruptedException {
 		UITestUtils.waitForElementToLoad(getResourceWebElement(resource), resource);
-		Assert.assertEquals(true, UITestUtils.verifyIsElementDisplayed(getResourceWebElement(resource), resource));
+		return UITestUtils.verifyIsElementDisplayed(getResourceWebElement(resource), resource);
 	}
-	
-	
+
 }
