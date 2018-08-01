@@ -4,4 +4,5 @@ Warbler::Config.new do |config|
   config.webxml.jruby.min.runtimes = 10
   config.webxml.jruby.max.runtimes = 10
   config.includes = FileList["init.rb"]
+  config.webinf_files += FileList["jboss-deployment-structure.xml"]
 end
