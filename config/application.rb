@@ -1,9 +1,3 @@
-# Load the SDK when in development mode
-# The SDK is a shared library when in production
-if ENV['DEV_MODE'] == "on" then
-  require File.join(File.dirname(__FILE__),'..','sdk','harbinger-sdk-standalone.jar')
-end
-
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
@@ -30,7 +24,3 @@ module Airflow
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
-
-# As this never leaves the GF pooling environment make sure this always runs
-#pool_class = ActiveRecord::Bogacs::FalsePool
-#ActiveRecord::ConnectionAdapters::ConnectionHandler.connection_pool_class = pool_class
