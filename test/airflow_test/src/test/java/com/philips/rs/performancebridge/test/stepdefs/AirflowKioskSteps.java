@@ -4,6 +4,7 @@ import org.junit.Assert;
 
 import com.philips.rs.performancebridge.test.po.Airflow;
 import com.philips.rs.performancebridge.test.po.AirflowKiosk;
+import com.philips.rs.performancebridge.test.utils.ContextDTO;
 import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
 import cucumber.api.java.en.Given;
@@ -16,16 +17,19 @@ public class AirflowKioskSteps{
 	private PageObjectManager pom;
 	private AirflowKiosk airflowKiosk;
 	private Airflow airflow;
+	private ContextDTO contextDTO;
 
-	public AirflowKioskSteps(PageObjectManager pageObjectManager) {
+
+	public AirflowKioskSteps(PageObjectManager pageObjectManager,ContextDTO contextDTO) {
 		this.pom = pageObjectManager;
+		this.contextDTO = contextDTO;
 		airflowKiosk = pageObjectManager.getAirflowKioskPage();
 		airflow = pageObjectManager.getAirflowPage();
 	}
 
 	@Then("^user verifies order number is diplayed on the examcards$")
 	public void user_verifies_order_number_is_diplayed_on_the_examcards() throws Throwable {
-		String  kioskNumberText = pom.getValue("kioskNumber");
+		String  kioskNumberText = contextDTO.getKioskNumber();
 		Assert.assertTrue(airflowKiosk.verifySearchKioskNumberInKioskTab(kioskNumberText));
 		log.info(kioskNumberText + " kioskNumber Number is diplayed");
 	}
@@ -33,7 +37,8 @@ public class AirflowKioskSteps{
 	@Given("^gets the token number from exam card$")
 	public void gets_the_token_number_from_exam_card() throws Throwable {
 		String kioskNumberText = airflowKiosk.getKioskNumber();
-		pom.setValue("kioskNumber", kioskNumberText);
+//		pom.setValue("kioskNumber", kioskNumberText);
+		contextDTO.setKioskNumber(kioskNumberText);
 		airflow.closeTheExamCard();
 	}
 

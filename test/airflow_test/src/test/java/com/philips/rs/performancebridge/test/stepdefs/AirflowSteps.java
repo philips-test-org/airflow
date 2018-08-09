@@ -5,6 +5,7 @@ import org.junit.Assert;
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 import com.philips.rs.performancebridge.test.po.Airflow;
+import com.philips.rs.performancebridge.test.utils.ContextDTO;
 import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
 import cucumber.api.java.en.Given;
@@ -16,9 +17,12 @@ public class AirflowSteps {
 	private PageObjectManager pom;
 	private Airflow airflow;
 	private int preIngestionExamsCount;
+	private ContextDTO contextDTO;
 
-	public AirflowSteps(PageObjectManager pageObjectManager) {
+
+	public AirflowSteps(PageObjectManager pageObjectManager,ContextDTO contextDTO) {
 		this.pom = pageObjectManager;
+		this.contextDTO = contextDTO;
 		airflow = pageObjectManager.getAirflowPage();
 	}
 
@@ -31,7 +35,10 @@ public class AirflowSteps {
 	public void user_finds_the_ID_for(String selectResourceInST) throws Throwable {
 		airflow.leftPanelElementsFOrServiceTool();
 		airflow.clickOnSearchInResource();
-		pom.setValue("resourceId", airflow.getIDForResource(selectResourceInST));
+//		pom.setValue("resourceId", airflow.getIDForResource(selectResourceInST));
+		String resourceId = airflow.getIDForResource(selectResourceInST);
+		contextDTO.setResourceId(resourceId);
+
 	}
 
 
@@ -41,7 +48,7 @@ public class AirflowSteps {
 	@Then("^user count number of exams for \"([^\"]*)\"$")
 	public void user_count_number_of_exams_for(String resourceName) throws Throwable {
 		airflow.verifySpinnerIsInvisible();
-		preIngestionExamsCount = airflow.examCardCountForTheResource(pom.getValue("resourceId")); 
+		preIngestionExamsCount = airflow.examCardCountForTheResource(contextDTO.getResourceId()); 
 	}
 
 	/**
@@ -52,9 +59,9 @@ public class AirflowSteps {
 	public void user_verifies_that_is_added_in(String Resource) throws Throwable {
 		UITestUtils.refreshPage();
 		airflow.verifySpinnerIsInvisible();
-		int postIngestionExamCount = airflow.examCardCountForTheResource(pom.getValue("resourceId"));
+		int postIngestionExamCount = airflow.examCardCountForTheResource(contextDTO.getResourceId());
 		Comparator.check(preIngestionExamsCount + 1, postIngestionExamCount);
-		Comparator.check(true, airflow.verifyMrnExamCardDispalyed(pom.getValue("resourceId"), pom.getValue("mrn")));
+		Comparator.check(true, airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(),contextDTO.getMrn()));
 	}
 
 
@@ -63,7 +70,7 @@ public class AirflowSteps {
 	 */
 	@Given("^user selects the exam card$")
 	public void user_selects_the_exam_card() throws Throwable {
-		airflow.selectMRNOnExamCard(pom.getValue("resourceId"), pom.getValue("mrn"));
+		airflow.selectMRNOnExamCard(contextDTO.getResourceId(),contextDTO.getMrn());
 //		clickLink_JavaScript(searchForMRNNumberInExamCard(), "Exam Card is selected");	
 	}
 
@@ -93,7 +100,7 @@ public class AirflowSteps {
 	 */
 	@Then("^in \"([^\"]*)\", choose exam card$")
 	public void in_choose_exam_card(String Resources) throws Throwable {
-		airflow.verifyMrnExamCardDispalyed(pom.getValue("resourceId"), pom.getValue("mrn"));
+		airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(),contextDTO.getMrn());
 	}
 
 
@@ -132,7 +139,7 @@ public class AirflowSteps {
 	 */
 	@Then("^user verifies the \"([^\"]*)\" icon is displayed on exam card$")
 	public void user_verifies_the_icon_is_displayed_on_exam_card(String statusIconsOnExamCard) throws Throwable {
-		Assert.assertTrue(airflow.statusIndicatorOnExamCard(statusIconsOnExamCard,pom.getValue("mrn")));
+		Assert.assertTrue(airflow.statusIndicatorOnExamCard(statusIconsOnExamCard,contextDTO.getMrn()));
 	}
 
 
@@ -143,8 +150,8 @@ public class AirflowSteps {
 	@Then("^user verifies the On Hold status is displayed with \"([^\"]*)\" background color$")
 	public void user_verifies_the_On_Hold_status_is_displayed_with_background_color(String checkHexValueForColor)
 			throws Throwable {
-		String resourceId = pom.getValue("resourceId");
-		String mrn = pom.getValue("mrn");
+		String resourceId = contextDTO.getResourceId();
+		String mrn = contextDTO.getMrn();
 		String valueForColor = UITestUtils.getHexValueOfColor(checkHexValueForColor);
 		boolean verifyColor = airflow.verifyMRNNumberExamCardLeftPanelBackgroupColor(valueForColor, resourceId, mrn);
 		Comparator.check(true, verifyColor);
@@ -152,7 +159,7 @@ public class AirflowSteps {
 	
 	@Then("^user verifies procedure and accession number is not diplayed on the examcards$")
 	public void user_verifies_procedure_and_accession_number_is_not_diplayed_on_the_examcards() throws Throwable {
-		Assert.assertTrue(airflow.verifyExamCardNotVisible(pom.getValue("resourceId"), pom.getValue("mrn")));
+		Assert.assertTrue(airflow.verifyExamCardNotVisible(contextDTO.getResourceId(),contextDTO.getMrn()));
 	}
 
 }

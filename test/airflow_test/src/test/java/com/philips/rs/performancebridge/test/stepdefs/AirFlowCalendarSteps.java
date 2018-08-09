@@ -2,6 +2,7 @@ package com.philips.rs.performancebridge.test.stepdefs;
 
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.po.AirflowCalendar;
+import com.philips.rs.performancebridge.test.utils.ContextDTO;
 import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
 import cucumber.api.java.en.Given;
@@ -12,16 +13,19 @@ public class AirFlowCalendarSteps {
 	
 	private PageObjectManager pom;
 	private AirflowCalendar airflowCalendar;
+	private ContextDTO contextDTO;
 
-	public AirFlowCalendarSteps(PageObjectManager pageObjectManager) {
+	public AirFlowCalendarSteps(PageObjectManager pageObjectManager,ContextDTO contextDTO) {
 		this.pom = pageObjectManager;
+		this.contextDTO = contextDTO;
 		airflowCalendar = pageObjectManager.getAirflowCalendarPage();
 	}
 
 
 	@Then("^Verify the New Group with Resource \"([^\"]*)\" is displayed$")
 	public void verify_the_with_Resource_is_displayed(String resource) throws Throwable {
-		String groupName = pom.getValue("groupName");
+		String groupName = contextDTO.getGroupName(); 
+//		String groupName = pom.getValue("groupName");
 		airflowCalendar.selectResource(groupName);
 		Comparator.check(true, airflowCalendar.verifyResource(resource));
 	}
@@ -47,7 +51,8 @@ public class AirFlowCalendarSteps {
 
 	@Then("^user selects \"([^\"]*)\" from Resource Group filter$")
 	public void user_selects_from_Resource_Group_filter(String GroupName) throws Throwable {
-		String groupName = pom.getValue("groupName");
+//		String groupName = pom.getValue("groupName");
+		String groupName = contextDTO.getGroupName(); 
 		airflowCalendar.selectResource(groupName);
 	}
 	
