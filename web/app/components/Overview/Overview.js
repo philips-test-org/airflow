@@ -4,6 +4,8 @@ import * as R from "ramda";
 
 import NotecardRow from "./NotecardRow";
 
+import {getOrderStartTime} from "../../lib/selectors";
+
 import type {Order} from "../../types";
 
 type Props = {
@@ -35,7 +37,7 @@ class Overview extends PureComponent<Props> {
   }
 
   renderRow = (resourceId: string) => {
-    const orders = this.props.ordersMergedByGroup[resourceId] || [];
+    const orders = R.sortBy(getOrderStartTime, this.props.ordersMergedByGroup[resourceId] || []);
     const resourceName = this.props.selectedResources[resourceId];
     return (
       <NotecardRow
