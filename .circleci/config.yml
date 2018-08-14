@@ -36,6 +36,7 @@ jobs:
 
     steps:
       - checkout
+      - run: git tag -l | xargs git tag -d && git fetch --tags
         #get the latest full tag. if just tagged, this will miss and the previous tag cache (next line) will catch
       - run: git describe --abbrev=0 --tags > LATEST_TAG.txt
         #get the previous full tag (the ^ gets us past the current full tag)

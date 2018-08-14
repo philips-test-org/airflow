@@ -95,7 +95,7 @@ class ViewControls extends PureComponent<Props, State> {
             <span className="color icon"><i className="fa fa-handshake-o"></i></span><span className="name">Consent</span>
           </div>
           <div className="status">
-            <span className="color icon"><i className="fa fa-thumbs-up"></i></span><span className="name">PPCA Ready</span>
+            <span className="color icon"><i className="fa fa-thumbs-up"></i></span><span className="name">PPCA Arrival</span>
           </div>
           <div className="status">
             <span className="color icon"><i className="fa fa-file-text"></i></span><span className="name">Paperwork</span>
