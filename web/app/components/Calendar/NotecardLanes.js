@@ -4,6 +4,10 @@ import * as R from "ramda";
 
 import NotecardLane from "../NotecardLane";
 
+import {
+  sortedSelectedResourceIds,
+} from "../../lib/utility"
+
 import type {
   Order,
   ViewType,
@@ -53,7 +57,7 @@ class NotecardLanes extends Component<Props> {
   }
 
   render() {
-    return R.map(this.renderLane, R.keys(this.props.selectedResources));
+    return R.map(this.renderLane, sortedSelectedResourceIds(this.props.selectedResources));
   }
 }
 

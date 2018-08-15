@@ -26,6 +26,10 @@ import {
   throttle,
 } from "../../lib";
 
+import {
+  sortedSelectedResourceIds,
+} from "../../lib/utility"
+
 import type {
   Images,
   Notification,
@@ -267,7 +271,7 @@ class Airflow extends Component<Props, State> {
         <table id="time-headings" style={{left: HOURBAR_WIDTH - translateX}}>
           <tbody>
             <tr className="heading">
-              {R.keys(this.props.selectedResources).map(this.renderHeading)}
+              {sortedSelectedResourceIds(this.props.selectedResources).map(this.renderHeading)}
             </tr>
           </tbody>
         </table>
