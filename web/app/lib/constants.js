@@ -60,8 +60,15 @@ export const STATUS_CHECKS: Array<StatusCheck> = [
     },
   },
   {
-    name: "Started",
+    name: "PPCA Ready",
     order: 3,
+    color: "#7AF3D2",
+    card_class: "ppca_ready",
+    check: (order: Order) => (order.adjusted.ppca_ready == true),
+  },
+  {
+    name: "Started",
+    order: 4,
     color: "#631d76",
     check: (order: Order) => {
       let hasExam = order.rad_exam != undefined;
@@ -72,7 +79,7 @@ export const STATUS_CHECKS: Array<StatusCheck> = [
   },
   {
     name: "Completed",
-    order: 4,
+    order: 5,
     color: "#005a8b",
     card_class: "completed",
     check: (order: Order) => {
@@ -80,13 +87,6 @@ export const STATUS_CHECKS: Array<StatusCheck> = [
       let hasEndTime = !R.isNil(R.path(["rad_exam", "rad_exam_time", "end_exam"], order));
       return hasExam && hasEndTime;
     },
-  },
-  {
-    name: "PPCA Ready",
-    order: 5,
-    color: "#7AF3D2",
-    card_class: "ppca_ready",
-    check: (order: Order) => (order.adjusted.ppca_ready == true),
   },
   {
     name: "On Hold",
