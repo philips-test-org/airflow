@@ -11,7 +11,13 @@ class AvatarsController < ApplicationController
       matches = employee.demographicHash["photo"].match(/\Adata:(.*);base64,(.*)\z/m)
       send_data Base64.decode64(matches[2]), type: matches[1], disposition: 'inline'
     else
-      send_file "#{Rails.root}/public/placeholder.png", type: "image/png", disposition: "inline"
+      if Rails.env.production?
+        basename = File.basename(ActionController::Base.helpers.asset_path("placeholder.png"))
+        placeholder = Rails.root.join("public", "assets", basename)
+      else
+        placeholder = Rails.root.join("app", "assets", "images", "placeholder.png")
+      end
+      send_file placeholder, type: "image/png", disposition: "inline"
     end
   end
 end
