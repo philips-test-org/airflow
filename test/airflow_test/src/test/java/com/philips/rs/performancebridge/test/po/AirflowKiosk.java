@@ -1,28 +1,54 @@
 package com.philips.rs.performancebridge.test.po;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
+import lombok.extern.slf4j.Slf4j;
 
-import com.philips.rs.performancebridge.test.utils.UITestUtils;
+@Slf4j
+public class AirflowKiosk {
 
-public class AirflowKiosk extends UITestUtils {
-	
-	public static String kioskNumberText = "";
-	public static By kioskNumber = By.xpath("//div[@class='modal-header']//h5");
-	public By searchKioskNumberInKioskTab(String kioskNumber) {
-		return By.xpath("//div[text()='" + kioskNumber + "']");
+	protected WebDriver driver;
+
+	public AirflowKiosk(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
-	public void getKioskNumber() throws InterruptedException {
-		kioskNumberText = retrievedKioskNumber();
-		logger.info("kioskNumber is " + kioskNumberText);
-		clickLink(Airflow.closeTheExamCardPopUp, "Close the exam card");
-		sleep(5);
+
+	@FindBy(xpath = "//div[@class='modal-header']//h5")
+	private WebElement kioskNumber;
+
+	private String getSearchKioskNumberInKioskTabXpath(String kioskNumber) {
+		return "//div[text()='" + kioskNumber + "']";
 	}
-	public String retrievedKioskNumber() {
-		String[] kioskNumber1 = retrieveText(kioskNumber, "kioskNumber").split(" ");
+
+	/*
+	 * RETURN WebElement/Locators
+	 */
+
+	private WebElement getSearchKioskNumberInKioskTabWebElement(String kioskNumber) {
+		return UITestUtils.getWebElementByXpath(getSearchKioskNumberInKioskTabXpath(kioskNumber));
+	}
+
+	public boolean verifySearchKioskNumberInKioskTab(String kioskNumber) {
+		return UITestUtils.isElementDisplayed(getSearchKioskNumberInKioskTabWebElement(kioskNumber));
+	}
+
+	/*
+	 * METHODS
+	 */
+
+	public String getKioskNumber() throws InterruptedException {
+		String kioskNumberText = retrievedKioskNumber();
+		log.info("kioskNumber is " + kioskNumberText);
+		return kioskNumberText;
+	}
+
+	private String retrievedKioskNumber() {
+		String[] kioskNumber1 = UITestUtils.retrieveText(kioskNumber, "kioskNumber").split(" ");
 		return kioskNumber1[kioskNumber1.length - 1];
 	}
-	
-	
-	
-	
+
 }

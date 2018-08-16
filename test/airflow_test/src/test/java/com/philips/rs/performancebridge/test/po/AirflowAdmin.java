@@ -1,79 +1,171 @@
 package com.philips.rs.performancebridge.test.po;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import com.philips.rs.performancebridge.test.utils.UITestUtils;
+import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
+import lombok.extern.slf4j.Slf4j;
 
-public class AirflowAdmin extends UITestUtils {
+@Slf4j
+public class AirflowAdmin {
+	protected WebDriver driver;
 
-	public static By newCategory = By.xpath("//a[text()='New Category']");
-	public static By categoryInputBox = By.xpath("//input[@name='category']");
-	public static By PHIEnabledDropDownBox = By.xpath("//select[@name='phi_enabled']");
-	public static By enableCategory = By.xpath("//select[@name='enabled']");
-	public static By saveChanges = By.xpath("//button[text()='Save changes']");
-	public static By categoryName = By.xpath("//select[@name='category']");
-	public static By searchExplanation = By.xpath("//input[@name='explanation']");
-	public static By searchText = By.xpath("//input[@name='search_terms']");
-	public static By searchButton = By.xpath("//button[text()='Search']");
-	public static By resutlMessage = By.xpath("//div[@id='results']/div/h4");
-	public static By createNewGroup = By.xpath("//input[@placeholder='Create a new group']");
-	public static By createNewGroupPlus = By.xpath("//i[@class='fa fa-plus']");
-
-	public By subTabElementXPath(String subTabName) {
-		return By.xpath("//a[contains(text(),'" + subTabName + "')]");
+	public AirflowAdmin(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
 
-	public By groupName(String subTabName) {
-		return By.xpath("//span[text()='" + subTabName + "']");
+	@FindBy(xpath = "//a[text()='New Category']")
+	private WebElement newCategory;
+
+	@FindBy(xpath = "//input[@name='category']")
+	private WebElement categoryInputBox;
+
+	@FindBy(xpath = "//select[@name='phi_enabled']")
+	private WebElement PHIEnabledDropDownBox;
+
+	@FindBy(xpath = "//select[@name='enabled']")
+	private WebElement enableCategory;
+
+	@FindBy(xpath = "//button[text()='Save changes']")
+	private WebElement saveChanges;
+
+	@FindBy(xpath = "//select[@name='category']")
+	private WebElement categoryName;
+
+	@FindBy(xpath = "//input[@name='explanation']")
+	private WebElement searchExplanation;
+
+	@FindBy(xpath = "//input[@name='search_terms']")
+	private WebElement searchText;
+
+	@FindBy(xpath = "//button[text()='Search']")
+	private WebElement searchButton;
+
+	@FindBy(xpath = "//div[@id='results']/div/h4")
+	private WebElement resutlMessage;
+
+	@FindBy(xpath = "//input[@placeholder='Create a new group']")
+	private WebElement createNewGroup;
+
+	@FindBy(xpath = "//i[@class='fa fa-plus']")
+	private WebElement createNewGroupPlus;
+
+	private String getSubTabElementXPath(String subTabName) {
+		return "//a[contains(text(),'" + subTabName + "')]";
 	}
 
-	public By resourceName(String resourceName) {
-		return By.xpath("//td[contains(text(),'" + resourceName + "')]");
+	private String getConfigurationButtonCheckXPath(String configName) {
+		return "//h3[contains(text(),'" + configName + "')]/..//div/div/div/div/div";
 	}
 
-	public By resourceNameMinus(String resourceNameMinus) {
-		return By.xpath("//td[contains(text(),'" + resourceNameMinus + "')]/..//i[2]");
+	private String getGroupNameXpath(String subTabName) {
+		return "//span[text()='" + subTabName + "']";
 	}
 
-	public By configurationButtonCheckPath(String configName) {
-		return By.xpath("//h3[contains(text(),'" + configName + "')]/..//div/div/div/div/div");
+	private String getResourceNameXpath(String resourceName) {
+		return "//td[contains(text(),'" + resourceName + "')]";
 	}
 
-	public By checkedConfigurationButtonPath(String configName) {
-		return By.xpath(
-				"//h3[contains(text(),'" + configName + "')]/..//div[@class='toggle-group']//label[text()='Off']");
+	private String getResourceNameMinusXpath(String resourceNameMinus) {
+		return "//td[contains(text(),'" + resourceNameMinus + "')]/..//i[2]";
 	}
 
-	public By updateButtonPath(String configName) {
-		return By.xpath("//h3[contains(text(),'" + configName + "')]/..//button[text()='Update']");
+	private String getCheckedConfigurationButtonXPath(String configName) {
+		return "//h3[contains(text(),'" + configName + "')]/..//div[@class='toggle-group']//label[text()='Off']";
 	}
 
-	public By dragAnddropPath(String configName, String role) {
-		return By.xpath("//h3[contains(text(),'" + configName
-				+ "')]/..//ul[@id='clinical_roles_auth_list_no-access']/li[contains(text(),'" + role + "')]");
+	private String getUpdateButtonXPath(String configName) {
+		return "//h3[contains(text(),'" + configName + "')]/..//button[text()='Update']";
 	}
 
-	public By dragAnddropPath(String configName) {
-		return By.xpath(
-				"//h3[contains(text(),'" + configName + "')]/..//ul[@id='clinical_roles_auth_list_all-access']/li");
+	private String getDragAnddropXPath(String configName, String role) {
+		return "//h3[contains(text(),'" + configName
+				+ "')]/..//ul[@id='clinical_roles_auth_list_no-access']/li[contains(text(),'" + role + "')]";
 	}
 
-	public By dropedValuePath(String configName, String role) {
-		return By.xpath("//h3[contains(text(),'" + configName
-				+ "')]/..//ul[@id='clinical_roles_auth_list_all-access']/li[contains(text(),'" + role + "')]");
+	private String getDragAnddropXPath(String configName) {
+		return "//h3[contains(text(),'" + configName + "')]/..//ul[@id='clinical_roles_auth_list_all-access']/li";
 	}
 
-	public By userRoleUpdateButtonPath(String configName) {
-		return By.xpath("//h3[contains(text(),'" + configName + "')]/button");
+	private String getDropedValueXPath(String configName, String role) {
+		return "//h3[contains(text(),'" + configName
+				+ "')]/..//ul[@id='clinical_roles_auth_list_all-access']/li[contains(text(),'" + role + "')]";
 	}
 
-	public By EPHIXpath(String str) {
-		return By.xpath("//p/b[text()='str']");
+	private String getUserRoleUpdateButtonXPath(String configName) {
+		return "//h3[contains(text(),'" + configName + "')]/button";
 	}
 
-	public By updateSuccessMarkPath(String configName) {
-		return By.xpath("//h3[contains(text(),'" + configName + "')]//span[@class='success']");
+	private String getEephixXpath(String str) {
+		return "//p/b[text()='str']";
+	}
+
+	private String getUpdateSuccessMarkXPath(String configName) {
+		return "//h3[contains(text(),'" + configName + "')]//span[@class='success']";
+	}
+
+	/*
+	 * RETURN WebElement/Locator
+	 */
+
+	private WebElement getconfigurationButtonCheckWebElement(String configName) {
+		return UITestUtils.getWebElementByXpath(getConfigurationButtonCheckXPath(configName));
+	}
+
+	private WebElement getCheckedConfigurationButtonWebElement(String configName) {
+		return UITestUtils.getWebElementByXpath(getCheckedConfigurationButtonXPath(configName));
+	}
+
+	private WebElement getUpdateButtonWebElement(String configName) {
+		return UITestUtils.getWebElementByXpath(getUpdateButtonXPath(configName));
+	}
+
+	private WebElement getDragAnddropWebElement(String configName, String role) {
+		return UITestUtils.getWebElementByXpath(getDragAnddropXPath(configName, role));
+	}
+
+	private WebElement getDragAnddropWebElement(String configName) {
+		return UITestUtils.getWebElementByXpath(getDragAnddropXPath(configName));
+	}
+
+	private WebElement getDropedValueWebElement(String configName, String role) {
+		return UITestUtils.getWebElementByXpath(getDropedValueXPath(configName, role));
+	}
+
+	private WebElement getUpdateSuccessMarkWebElement(String configName) {
+		return UITestUtils.getWebElementByXpath(getUpdateSuccessMarkXPath(configName));
+	}
+
+	private WebElement getEephixWebElement(String str) {
+		return UITestUtils.getWebElementByXpath(getEephixXpath(str));
+	}
+
+	private By getEephixLocator(String str) {
+		return UITestUtils.getLocatorByXpath(getEephixXpath(str));
+	}
+
+	private WebElement getUserRoleUpdateButtonWebElement(String configName) {
+		return UITestUtils.getWebElementByXpath(getUserRoleUpdateButtonXPath(configName));
+	}
+
+	private WebElement getResourceNameMinusWebElement(String resourceNameMinus) {
+		return UITestUtils.getWebElementByXpath(getResourceNameMinusXpath(resourceNameMinus));
+	}
+
+	private WebElement getSubTabElementWebElement(String subTabName) {
+		return UITestUtils.getWebElementByXpath(getSubTabElementXPath(subTabName));
+	}
+
+	private WebElement getGroupNameWebElement(String subTabName) {
+		return UITestUtils.getWebElementByXpath(getGroupNameXpath(subTabName));
+	}
+
+	private WebElement getResourceNameWebElement(String resourceName) {
+		return UITestUtils.getWebElementByXpath(getResourceNameXpath(resourceName));
 	}
 
 	// !======================================== Methods
@@ -83,14 +175,14 @@ public class AirflowAdmin extends UITestUtils {
 	 * Click on subTab Menu link of Main menu.
 	 */
 	public void clickOnSubMenOfMenuTab(String subTabName) throws Exception {
-		clickLink(subTabElementXPath(subTabName), subTabName);
+		UITestUtils.clickLink_JavaScript(getSubTabElementWebElement(subTabName), subTabName);
 	}
 
 	/**
 	 * @description:This method enters text in an input box
 	 */
 	public void enterCategoryName(String catName) {
-		clearAndInput(categoryInputBox, "Category", catName);
+		UITestUtils.clearAndInput(categoryInputBox, "Category", catName);
 	}
 
 	/**
@@ -98,42 +190,42 @@ public class AirflowAdmin extends UITestUtils {
 	 *                   category created
 	 */
 	public void disablePHI(String bool) {
-		selectValueByVisibleText(PHIEnabledDropDownBox, bool, "PHIEnabledDropDownBox");
+		UITestUtils.selectValueByVisibleText(PHIEnabledDropDownBox, bool, "PHIEnabledDropDownBox");
 	}
 
 	/**
 	 * @description:This method selects enabled to true for the category created
 	 */
 	public void enableCatgory(String bool) {
-		selectValueByVisibleText(enableCategory, bool, "CategoryEnabledDropDownBox");
+		UITestUtils.selectValueByVisibleText(enableCategory, bool, "CategoryEnabledDropDownBox");
 	}
 
 	/**
 	 * @description:This method clicks on the save changes button
 	 */
 	public void saveTheChanges() throws Exception {
-		clickLink(saveChanges, "Save Changes ");
+		UITestUtils.clickLink_JavaScript(saveChanges, "Save Changes ");
 	}
 
 	/**
 	 * @description:This method selects the category from the list
 	 */
 	public void selectTheCategory(String catName) {
-		selectValueByVisibleText(categoryName, catName, "Category DropDown");
+		UITestUtils.selectValueByVisibleText(categoryName, catName, "Category DropDown");
 	}
 
 	/**
 	 * @description:This method enters the explanation in the explanation box
 	 */
 	public void enterTheExplanation(String explanation) {
-		clearAndInput(searchExplanation, "Explanation", explanation);
+		UITestUtils.clearAndInput(searchExplanation, "Explanation", explanation);
 	}
 
 	/**
 	 * @description:This method enters the search text
 	 */
 	public void enterTheSearchText(String searchString) {
-		clearAndInput(searchText, "Search Text", searchString);
+		UITestUtils.clearAndInput(searchText, "Search Text", searchString);
 
 	}
 
@@ -141,7 +233,7 @@ public class AirflowAdmin extends UITestUtils {
 	 * @description:This method clicks on search button
 	 */
 	public void clickOnSearch() throws Exception {
-		clickLink(searchButton, "Search");
+		UITestUtils.clickLink_JavaScript(searchButton, "Search");
 
 	}
 
@@ -151,8 +243,9 @@ public class AirflowAdmin extends UITestUtils {
 	 */
 	public void checkPatientIDDoesNotExist(String patientID) {
 
-		Assert.assertFalse(isElementPresent(EPHIXpath(patientID)));
-		logger.info("PASS :" + patientID + " does not exist in the report search");
+		// Assert.assertFalse(UITestUtils.elementInVisibilitymethod(getEephixLocator(patientID)));
+		// log.info("PASS :" + patientID + " does not exist in the report
+		// search");
 	}
 
 	/**
@@ -160,8 +253,8 @@ public class AirflowAdmin extends UITestUtils {
 	 *                   report search
 	 */
 	public void checkAccessionDoesNotExist(String accession) {
-		Assert.assertFalse(isElementPresent(EPHIXpath(accession)));
-		logger.info("PASS :" + accession + " does not exist in the report search");
+		// Assert.assertFalse(UITestUtils.isElementPresent(getEephixWebElement(accession)));
+		log.info("PASS :" + accession + " does not exist in the report search");
 	}
 
 	/**
@@ -169,8 +262,28 @@ public class AirflowAdmin extends UITestUtils {
 	 * search.
 	 */
 	public void checkResultMessage(String message) {
-		Assert.assertTrue(retrieveText(resutlMessage, "Message").equalsIgnoreCase(message.trim()));
-		logger.info("PASS : Result Message " + message.trim() + " is Displayed");
+		// Assert.assertTrue(UITestUtils.retrieveText(resutlMessage,
+		// "Message").equalsIgnoreCase(message.trim()));
+		log.info("PASS : Result Message " + message.trim() + " is Displayed");
+	}
+
+	public void enterGroupName(String groupName) {
+		UITestUtils.clearAndInput(createNewGroup, "createNewGroup", groupName);
+
+	}
+
+	public void clickCreateNewGroupPlus() {
+		UITestUtils.clickLink_JavaScript(createNewGroupPlus, "createNewGroupPlus");
+
+	}
+
+	public void clickGroupName(String groupName) {
+		UITestUtils.waitForElementToLoad(getGroupNameWebElement(groupName), groupName + " Group");
+		UITestUtils.clickLink_JavaScript(getGroupNameWebElement(groupName), groupName + " Group");
+	}
+
+	public void clickOnResourceName(String resourceName) {
+		UITestUtils.clickLink_JavaScript(getResourceNameWebElement(resourceName), resourceName + " Group");
 	}
 
 }

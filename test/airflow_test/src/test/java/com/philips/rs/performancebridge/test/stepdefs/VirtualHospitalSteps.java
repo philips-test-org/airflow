@@ -1,0 +1,117 @@
+package com.philips.rs.performancebridge.test.stepdefs;
+
+import com.philips.rs.performancebridge.test.common.po.VhisExamDetail;
+import com.philips.rs.performancebridge.test.common.po.VhisExamList;
+import com.philips.rs.performancebridge.test.common.utils.Comparator;
+import com.philips.rs.performancebridge.test.utils.ContextDTO;
+import com.philips.rs.performancebridge.test.utils.PageObjectManager;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+
+public class VirtualHospitalSteps {
+
+	private PageObjectManager pom;
+	private VhisExamList vhisExamList;
+	private VhisExamDetail vhisExamDetail;
+	private ContextDTO contextDTO;
+
+
+	public VirtualHospitalSteps(PageObjectManager pageObjectManager,ContextDTO contextDTO) {
+		this.pom = pageObjectManager;
+		this.contextDTO = contextDTO;
+		vhisExamList = pageObjectManager.getVhisExamList();
+		vhisExamDetail = pageObjectManager.getVhisExamDetail();
+	}
+
+	@Then("^user selects site as \"([^\"]*)\" and exam status as \"([^\"]*)\" and clicks on Submit button$")
+	public void user_selects_site_as_and_exam_status_as_and_clicks_on1(String site, String examStatus) throws Throwable {
+
+		vhisExamList.selectSite(site);
+		vhisExamList.selectStatus(examStatus);
+		vhisExamList.clickSubmit();
+
+	}
+	
+	
+	@Then("^user selects site as \"([^\"]*)\" and exam status as \"([^\"]*)\" and selects existing '(.*)' and clicks on Submit button$")
+	public void user_selects_site_as_and_exam_status_as_and_clicks_on(String site, String examStatus,
+			String accessionNumber) throws Throwable {
+
+		vhisExamList.selectSite(site);
+		vhisExamList.selectStatus(examStatus);
+//		vhisExamList.inputExistingAccession(pom.getValue("accessionNumber"));
+		vhisExamList.inputExistingAccession(contextDTO.getAccessionNumber());
+
+		vhisExamList.clickSubmit();
+
+	}
+
+	@Then("^verify creating a new \"([^\"]*)\" exam page appears$")
+	public void creating_a_new_prelim_exam_page_appears(String examtype) throws Throwable {
+
+		Comparator.check(examtype, vhisExamDetail.getStatusOnHeader());
+	}
+
+	@Then("^user selects the '(.*)','(.*)','(.*)' and  clicks submit in VHIS$")
+	public void user_clicks_submit_in_VHIS(String radiologist1,String modality,String procedure) throws Throwable {
+		
+		String accessionNumber = vhisExamDetail.getAccession();
+//		pom.setValue("accessionNumber",vhisExamDetail.getAccession());
+		contextDTO.setAccessionNumber(accessionNumber);
+		vhisExamDetail.selectRadiologist1(radiologist1);
+		vhisExamDetail.selectProcedure(procedure);
+		vhisExamDetail.selectModality(modality);
+		vhisExamDetail.clickSubmit();
+
+	}
+
+	@Then("^'(.*)'(?: with \"([^\"]*)\")? should appear in the Recent Exams$")
+	public void accession_number_should_appear_in_the(String accessionNumber, String examtype) throws Throwable {
+
+		vhisExamList.verifyExamDetailsInRecentExams(contextDTO.getAccessionNumber(), examtype);
+	}
+
+	@Then("^user selects the '(.*)' and '(.*)','(.*)','(.*)','(.*)','(.*)','(.*)', and clicks submit in VHIS$")
+	public void userselectsExamsDetails(String modality, String accessionNumber, String procedure, String radiologist1,
+			String radiologist2, String impression, String reportbody) throws Throwable {
+
+		String accessionNumber1 = vhisExamDetail.getAccession();
+//		pom.setValue("accessionNumber",vhisExamDetail.getAccession());
+		contextDTO.setAccessionNumber(accessionNumber1);
+		vhisExamDetail.selectModality(modality);
+		vhisExamDetail.selectProcedure(procedure);
+		vhisExamDetail.selectRadiologist1(radiologist1);
+		vhisExamDetail.selectRadiologist2(radiologist2);
+		vhisExamDetail.enterReportImpression(impression);
+		vhisExamDetail.enterReportBody(reportbody);
+		vhisExamDetail.clickSubmit();
+
+	}
+	
+	@Given("^user creates a exam with \"([^\"]*)\" resource, \"([^\"]*)\" status and \"([^\"]*)\" procedure in VHIS$")
+	public void user_selects_the_and_Accession_Number_and_submit_in_VHIS(String resource, String examstatus, String procedure) throws Throwable {
+		vhisExamList.selectStatus(examstatus);
+		vhisExamList.clickSubmit();
+		vhisExamDetail.selectResourceFromDropDown(resource);
+		contextDTO.setAccessionNumber(vhisExamDetail.getAccession());
+		contextDTO.setMrn(vhisExamDetail.getMRNOnHeader());
+		vhisExamDetail.selectProcedure(procedure);
+		vhisExamDetail.clickSubmit();
+		
+	}
+	
+	/*
+	 * This method is to make sure atleast one exma is created as part of startup data
+	 */
+	
+	@Given("^user creates a startup exam with \"([^\"]*)\" resource, \"([^\"]*)\" status and \"([^\"]*)\" procedure in VHIS$")
+	public void user_selects_the_and_Accession_Number_and_create_startup_exam_in_VHIS(String resource, String examstatus, String procedure) throws Throwable {
+		vhisExamList.selectStatus(examstatus);
+		vhisExamList.clickSubmit();
+		vhisExamDetail.selectResourceFromDropDown(resource);
+		vhisExamDetail.selectProcedure(procedure);
+		vhisExamDetail.clickSubmit();
+		
+	}
+}

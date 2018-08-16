@@ -1,184 +1,226 @@
 package com.philips.rs.performancebridge.test.po;
 
-/**
- *  public By selectResource(String selectResourcesFromDropDown) {
-		 return By.xpath("//select[@id='exam_resource']/option[text()='"+selectResourcesFromDropDown+"']");
-	 }
-	 	
-	 public By selectProcedureElement(String procedureName) {
-		 System.out.println("XPATH : " + "//select[@id='procedure_code']/option[text()='"+procedureName+"']");
-		 return By.xpath("//select[@id='procedure_code']");
-	 }
-	 
-	 
-	 public By resource(String resource )
-	{
-		return By.xpath("//h1[text()='"+resource+"']");
-	}
-	
-	public static final By selectProcedureButton = By.xpath("//button[@data-id='procedure_code']");
-	public By grupuNameDropDown= By.xpath("//button[@class='btn btn-default btn-sm dropdown-toggle']");
- */
-//comment
 import java.util.List;
-
-import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import com.philips.rs.performancebridge.test.common.utils.Comparator;
+import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 
-import com.philips.rs.performancebridge.test.utils.UITestUtils;
+public class Airflow {
 
-public class Airflow extends UITestUtils {
-	public static String resourceID;
-	public static final By selectCatFromLeftPaneOfST = By.xpath("//a[text()='Resource']");
-	public static final By clickOnSearchInResourcesInST = By.xpath(
-			"//a[text()='Resource']/../../../..//div[@id='query-window']//div[@data='Resource']//input[@value='Search']");
-	public static final By categoryName = By.xpath("//select[@name='category']");
-	public static final By leftStripeColorLegendInExamCard = By.xpath("//div[@class='left-stripe']");
-	public static final By closeTheExamCardPopUp = By.xpath("//button[@class='close']");
-	public static final By commentBoxWithinExamCard = By.xpath("//div[@class='content']/textarea[@name='comments']");
-	public static final By spinner=By.xpath("//img[@src='/airflow/assets/ajax-loader-f4c4723838ebbad7aaa793555d43d4a9f442db0f6d64ef851855cac082d3adc5.gif']");
+	protected WebDriver driver;
 
-	private int preIngestedCountOfExamCardsInResource;
-
-	public static final By searchForMRNNumberInExamCard() {
-		return By.xpath("//td[@data-resource-id='" + resourceID + "']//div[@class='mrn'][text()='"
-				+ Ingestion.newlyCreatedMrnNumber + "']");
+	public Airflow(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
 
-	public By findIDOfSelectedResource(String resourcename) {
-		return By.xpath("//td[@sort='.resource']//label[text()='" + resourcename + "']/../../..//td//label");
+	private final String spinner = "//img[@src='/airflow/assets/ajax-loader-f4c4723838ebbad7aaa793555d43d4a9f442db0f6d64ef851855cac082d3adc5.gif']";
+	private final String closeTheExamCardPopUpXpath = "//button[@class='close']";
+
+	@FindBy(xpath = "//a[text()='Resource']")
+	private WebElement selectCatFromLeftPaneOfST;
+
+	@FindBy(xpath = "//a[text()='Resource']/../../../..//div[@id='query-window']//div[@data='Resource']//input[@value='Search']")
+	private WebElement clickOnSearchInResourcesInST;
+
+	@FindBy(xpath = "//select[@name='category']")
+	private WebElement categoryName;
+
+	@FindBy(xpath = "//div[@class='left-stripe']")
+	private WebElement leftStripeColorLegendInExamCard;
+
+	@FindBy(xpath = closeTheExamCardPopUpXpath)
+	private WebElement closeTheExamCardPopUpWebElement;
+
+	@FindBy(xpath = "//div[@class='content']/textarea[@name='comments']")
+	private WebElement commentBoxWithinExamCard;
+
+	private String getSearchForMRNNumberInExamCardXpath(String resourceID, String mrn) {
+		return "//td[@data-resource-id='" + resourceID + "']//div[@class='mrn'][text()='" + mrn + "']";
 	}
 
-	public By resourceExamCardCount() {
-		return By.xpath("//td[@data-resource-id='" + resourceID + "']//div[@class='mrn']");
+	private String getMRNNumberExamCardLeftPanelXpath(String resourceID, String mrn) {
+		return "//td[@data-resource-id='" + resourceID + "']/div[descendant::div[@class='mrn'][text()='" + mrn
+				+ "']]/div[@class='left-tab']";
 	}
 
-	public By toggleSwitchToChangeState(String patientExperienceEvents, String PatientexperienceEventstatus) {
-		return By.xpath("//input[@name='" + patientExperienceEvents + "']/../div/label[text()='"
-				+ PatientexperienceEventstatus + "']");
+	private String getFindIDOfSelectedResourceXpath(String resourcename) {
+		return "//td[@sort='.resource']//label[text()='" + resourcename + "']/../../..//td//label";
 	}
 
-	public By stateIndicatorIcon(String iconOnExamCard) {
-		return By.xpath("//div[@class='status-indicator '" + iconOnExamCard + "']");
+	private String getResourceExamCardCountXpath(String resourceID) {
+		return "//td[@data-resource-id='" + resourceID + "']//div[@class='mrn']";
 	}
 
-	public By patientExperienceState(String labelForState) {
-		return By.xpath("//label[text()='" + labelForState + "']/../div[1]");
+	private String getPatientExperienceStateXpath(String labelForState) {
+		return "//label[text()='" + labelForState + "']/../div[1]";
 	}
 
-	public By toSearchIconsOnTheExamCard(String toVerifyStatusIconsOnExamCard) {
-		return By.xpath("//div[@class='mrn'][text()='" + Ingestion.newlyCreatedMrnNumber
+	private String getToSearchIconsOnTheExamCardXpath(String toVerifyStatusIconsOnExamCard, String mrn) {
+		return "//div[@class='mrn'][text()='" + mrn
 				+ "']/../../div[@class='footer']//div//div[@class='status-indicator " + toVerifyStatusIconsOnExamCard
-				+ "']");
+				+ "']";
 	}
-	
-	
 
-	// ---------------------------------------------------- Methods -----------------------------------------------//
+	/*
+	 * RETURN Locator or WebElement
+	 */
+
+	private WebElement getMRNNumberExamCardLeftPanelWebElement(String resourceID, String mrn) {
+		return UITestUtils.getWebElementByXpath(getMRNNumberExamCardLeftPanelXpath(resourceID, mrn));
+	}
+
+	private By getToSearchIconsOnTheExamCardLocator(String toVerifyStatusIconsOnExamCard, String mrn) {
+		return UITestUtils.getLocatorByXpath(getToSearchIconsOnTheExamCardXpath(toVerifyStatusIconsOnExamCard, mrn));
+	}
+
+	private By getCloseTheExamCardPopUpLocator() {
+		return UITestUtils.getLocatorByXpath(closeTheExamCardPopUpXpath);
+	}
+
+	private WebElement getPatientExperienceStateWebElement(String labelForState) {
+		return UITestUtils.getWebElementByXpath(getPatientExperienceStateXpath(labelForState));
+	}
+
+	private WebElement getSearchForMRNNumberInExamCardWebElement(String resourceID, String mrn) {
+		return UITestUtils.getWebElementByXpath(getSearchForMRNNumberInExamCardXpath(resourceID, mrn));
+	}
+
+	private By getSearchForMRNNumberInExamCardLocator(String resourceID, String mrn) {
+		return UITestUtils.getLocatorByXpath(getSearchForMRNNumberInExamCardXpath(resourceID, mrn));
+	}
+
+	private WebElement getFindIDOfSelectedResourceWebElement(String resourcename) {
+		return UITestUtils.getWebElementByXpath(getFindIDOfSelectedResourceXpath(resourcename));
+	}
+
+	private By getResourceExamCardCountLocator(String resourceID) {
+		return UITestUtils.getLocatorByXpath(getResourceExamCardCountXpath(resourceID));
+	}
+
+	private By getSpinnerLocator() {
+		return UITestUtils.getLocatorByXpath(spinner);
+	}
+
+	// ---------------------------------------------------- Methods
+	// -----------------------------------------------//
 
 	/**
-	 * The below method clicks on the category 'Resource' in Service Tools which is displayed in the left panel
+	 * The below method clicks on the category 'Resource' in Service Tools which
+	 * is displayed in the left panel
 	 */
 	public void leftPanelElementsFOrServiceTool() throws InterruptedException {
-		clickLink(selectCatFromLeftPaneOfST, "resource");
+		UITestUtils.clickLink(selectCatFromLeftPaneOfST, "resource");
 	}
 
 	/**
-	 * In service Tools, to view the data for a chosen category, user needs to click on search
+	 * In service Tools, to view the data for a chosen category, user needs to
+	 * click on search
 	 */
 	public void clickOnSearchInResource() throws Throwable {
-		clickLink(clickOnSearchInResourcesInST, "search");
+		UITestUtils.clickLink(clickOnSearchInResourcesInST, "search");
 	}
 
-	public void getIDForResource(String resource) {
-		resourceID = retrieveText(findIDOfSelectedResource(resource), resource);
-	}
-
-	/**
-	 * Getting the count of exam cards before ingesting data for particular resource
-	 */
-	public void getExamCardCountPreIngestion() {
-		preIngestedCountOfExamCardsInResource = examCardCountForTheResource();
+	public String getIDForResource(String resource) {
+		return UITestUtils.retrieveText(getFindIDOfSelectedResourceWebElement(resource), resource);
 	}
 
 	/**
 	 * Get the current count of exam cards for particular resource
 	 */
-	public int examCardCountForTheResource() {
-		List<WebElement> resourceExamCardList = driver.findElements(resourceExamCardCount());
+	public int examCardCountForTheResource(String resourceID) {
+		UITestUtils.waitForElementToLoad(getResourceExamCardCountLocator(resourceID), "Resource Exams List");
+		List<WebElement> resourceExamCardList = driver.findElements(getResourceExamCardCountLocator(resourceID));
 		return resourceExamCardList.size();
 	}
 
 	/**
-	 * Getting the count of exam cards after ingesting data for particular resource
+	 * The below method searches for the MRN number for a particular resource.
+	 * It verifies that the newly ingested record in airflow shows the MRN
+	 * number of the ingested record
 	 */
-	public void verifyExamCardCount() {
-		int verifyExamCount = examCardCountForTheResource();
-		logger.info("The count of exam cards before ingesting data: " + preIngestedCountOfExamCardsInResource);
-		logger.info("The count of exam cards after ingesting data: " + examCardCountForTheResource());
-		Assert.assertTrue(verifyExamCount == preIngestedCountOfExamCardsInResource + 1);
-		logger.info("Pass : Data is ingested for particular resource");
+	public boolean verifyExamCardNotVisible(String resourceID, String mrn) {
+		return UITestUtils.elementInVisibilitymethod(getSearchForMRNNumberInExamCardLocator(resourceID, mrn));
 	}
 
-	/**
-	 * The below method searches for the MRN number for a particular resource.
-	 * It verifies that the newly ingested record in airflow shows the MRN number of the ingested record
-	 */
-	public void verifyMRNOnExamCard() {
-		waitForElementToLoad(searchForMRNNumberInExamCard(),
+	public boolean verifyMrnExamCardDispalyed(String resourceID, String mrn) {
+		return UITestUtils.verifyIsElementDisplayed(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
 				"Verified that ingested record is available in Exam Card for particular resource");
 	}
 
+	public void selectMRNOnExamCard(String resourceID, String mrn) {
+		UITestUtils.clickLink_JavaScript(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
+				"selects Exam for particular resource" + resourceID);
+	}
+
 	/**
-	 * The below method is getting the hex value for the color code picked up from the left stripe and compares that hex value for the intended color
+	 * The below method is getting the hex value for the color code picked up
+	 * from the left stripe and compares that hex value for the intended color
 	 */
-	public void checkForColorLegend(String colorLegend) {
-		waitForElementToLoad(leftStripeColorLegendInExamCard, "Waiting for Exam Card to load");
+	public boolean verifyExamCardPopupLeftStripColorLegend(String colorLegend) {
 		String hex = Color
-				.fromString(driver.findElement(leftStripeColorLegendInExamCard).getCssValue("background-color"))
+				.fromString(
+						UITestUtils.retrieveCssAttributeValue(leftStripeColorLegendInExamCard, "background-color", ""))
 				.asHex();
-		Assert.assertTrue(hex.equals(colorLegend));
+		return Comparator.match(colorLegend, hex, "LeftStripColor");
+
+	}
+
+	public boolean verifyMRNNumberExamCardLeftPanelBackgroupColor(String colorLegend, String resourceID, String mrn) {
+		String hex = Color.fromString(UITestUtils.retrieveCssAttributeValue(
+				getMRNNumberExamCardLeftPanelWebElement(resourceID, mrn), "background-color", "")).asHex();
+		return Comparator.match(colorLegend, hex, "LeftStripColor");
+
 	}
 
 	/**
 	 * The method closes the modal pop up for exam card information
 	 */
 	public void closeTheExamCard() throws InterruptedException {
-		clickLink(closeTheExamCardPopUp, "Close the exam card");
-		sleep(5);
+		UITestUtils.clickLink(closeTheExamCardPopUpWebElement, "Close the exam card");
+		UITestUtils.WaitForElementToBeInVisible(getCloseTheExamCardPopUpLocator(), "Exam Card Popup");
 	}
 
 	/**
 	 * Selecting the drop down for resource categories
 	 */
 	public void selectTheCategory(String catName) {
-		selectValueByVisibleText(categoryName, catName, "Category DropDown");
+		UITestUtils.selectValueByVisibleText(categoryName, catName, "Category DropDown");
 	}
 
 	/**
-	 * 
+	 * The below method adds the comments in the comments section of the exam
+	 * card information modal pop up
 	 */
-//	public void changeThePatientExperienceStatus(String patExpEvents, String patExpEventstatus)
-//			throws InterruptedException {
-//		clickLink(toggleSwitchToChangeState(patExpEvents, patExpEventstatus),
-//				"Change the status of patient experience event " + patExpEvents);
-//	}
-
-	/**
-	 *  The below method adds the comments in the comments section of the exam card information modal pop up
-	 */
-	public void addCommentsinExamCard() throws InterruptedException {
-		clearAndInput(commentBoxWithinExamCard, "Adding comments in the exam card",
-				"The patient is prepared for the scan and the paperwork is completed. Room not ready, patient scan is on hold");
+	public void addCommentsinExamCard(String comment) throws InterruptedException {
+		UITestUtils.clearAndInput(commentBoxWithinExamCard, "Adding comments in the exam card", comment);
 	}
 
 	/**
-	 * The below method verifies the icons for representing the status of the exam card
+	 * The below method verifies the icons for representing the status of the
+	 * exam card
 	 */
-	public void statusIndicatorOnExamCard(String verifyIconsOnExamCard) throws InterruptedException {
-		Assert.assertTrue(driver.findElements(toSearchIconsOnTheExamCard(verifyIconsOnExamCard)).size() != 0);
+	public boolean statusIndicatorOnExamCard(String verifyIconsOnExamCard, String mrn) throws InterruptedException {
+		boolean SearchIconsCount = driver.findElements(getToSearchIconsOnTheExamCardLocator(verifyIconsOnExamCard, mrn)).isEmpty();
+		return Comparator.match(SearchIconsCount, true, "No search Icons Count on ExamCard");
 	}
 
+	public boolean verifySpinnerIsInvisible() {
+		return UITestUtils.elementInVisibilitymethod(getSpinnerLocator());
+	}
+
+	public String getPatientExperienceState(String patientExperienceEvents) {
+		return UITestUtils.retrieveAttributeValue(getPatientExperienceStateWebElement(patientExperienceEvents), "class",
+				"picking up the class");
+	}
+
+	public void clickOnPatientExperienceStateEvent(String patientExperienceEvents) {
+		UITestUtils.clickLink(getPatientExperienceStateWebElement(patientExperienceEvents),
+				patientExperienceEvents + " event");
+	}
 }

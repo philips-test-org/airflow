@@ -1,8 +1,8 @@
-@airflow
+#@airflow
 Feature: AirFlow app to create new group, Real Time data inflow, display of ingested data, legends verification
 
   #The below scenarios requires to be run one after the other because of dependencies on creation of group and data ingestion respectively.
-  @sanity
+  #@sanity
   Scenario: Create New Group
     Given user clicks on "Airflow" App
     Then user logs in as "aiuser"
@@ -15,7 +15,7 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
     And user closes the browser
 
   #The below scenario is depeneded on the 'Create New Group' scenario
-  @tag
+  #@tag
   Scenario Outline: Admin ingested data and verifies the ingestion in Real Time
     Given user clicks on "Service Tools" App
     Then user logs in as "aiuser"
@@ -42,7 +42,7 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
       | completed   | VHC Main CT-1 | CT PELVIS W/O & W/DYE | blue   |
 
   #The below scenario requires the data to be ingested before hand. The Scenario 'Admin ingested data and verifies the ingestion in Real Time' takes care that.
-  @tag
+  #@tag
   Scenario Outline: Admin applies patient experience level settings on an exam card
     Given user clicks on "Airflow" App
     Then user logs in as "aiuser"
@@ -69,7 +69,7 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
     | VHC Main CT-1 |
 
   #The below scenario requires the data to be ingested for particular resource
-  @sanity
+  #@sanity
   Scenario Outline: Kiosk Verify Only Order/token numbers, no asscn/mrn is displayed
     Given user clicks on "Airflow" App
     Then user logs in as "aiuser"
@@ -88,7 +88,7 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
       | Resource      |
       | VHC Main CT-1 |
 
-  @sanity
+  #@sanity
   Scenario: Check:All schedules per day are are same in overVeiw and Calender
     Given user clicks on "Airflow" App
     Then user logs in as "aiuser"

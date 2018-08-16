@@ -4,25 +4,43 @@ import org.junit.Assert;
 
 import com.philips.rs.performancebridge.test.po.Airflow;
 import com.philips.rs.performancebridge.test.po.AirflowKiosk;
+import com.philips.rs.performancebridge.test.utils.ContextDTO;
+import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import lombok.extern.slf4j.Slf4j;
 
-public class AirflowKioskSteps extends AirflowKiosk {
+@Slf4j
+public class AirflowKioskSteps{
 	
-	//static String procedure = "";
-	//static String accessinNumber = "";
+	private PageObjectManager pom;
+	private AirflowKiosk airflowKiosk;
+	private Airflow airflow;
+	private ContextDTO contextDTO;
+
+
+	public AirflowKioskSteps(PageObjectManager pageObjectManager,ContextDTO contextDTO) {
+		this.pom = pageObjectManager;
+		this.contextDTO = contextDTO;
+		airflowKiosk = pageObjectManager.getAirflowKioskPage();
+		airflow = pageObjectManager.getAirflowPage();
+	}
 
 	@Then("^user verifies order number is diplayed on the examcards$")
 	public void user_verifies_order_number_is_diplayed_on_the_examcards() throws Throwable {
-		logger.info(kioskNumberText);
-		Assert.assertTrue(isElementDisplayed(searchKioskNumberInKioskTab(kioskNumberText), kioskNumberText));
-		logger.info("only Number is diplayed");
+		String  kioskNumberText = contextDTO.getKioskNumber();
+		Assert.assertTrue(airflowKiosk.verifySearchKioskNumberInKioskTab(kioskNumberText));
+		log.info(kioskNumberText + " kioskNumber Number is diplayed");
 	}
 
-	@Then("^user verifies procedure and accession number is not diplayed on the examcards$")
-	public void user_verifies_procedure_and_accession_number_is_not_diplayed_on_the_examcards() throws Throwable {
-		Assert.assertFalse(isElementDisplayed(Airflow.searchForMRNNumberInExamCard(),
-				"The MRN number is not shown in the exam card in Kiosk"));
+	@Given("^gets the token number from exam card$")
+	public void gets_the_token_number_from_exam_card() throws Throwable {
+		String kioskNumberText = airflowKiosk.getKioskNumber();
+//		pom.setValue("kioskNumber", kioskNumberText);
+		contextDTO.setKioskNumber(kioskNumberText);
+		airflow.closeTheExamCard();
 	}
+
 
 }
