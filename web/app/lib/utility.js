@@ -97,6 +97,13 @@ const throttle = (func: Function, limit: number) => {
   }
 }
 
+function sortedSelectedResourceIds(selectedResources: Object) {
+  return R.keys(selectedResources).sort((a, b) => {
+    if (selectedResources[a] > selectedResources[b]) return 1;
+    if (selectedResources[a] < selectedResources[b]) return -1;
+    return 0;
+  })
+}
 
 export {
   avatarPath,
@@ -111,4 +118,5 @@ export {
   ordersByResource,
   printOrders,
   throttle,
+  sortedSelectedResourceIds,
 }
