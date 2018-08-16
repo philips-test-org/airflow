@@ -12,7 +12,6 @@ import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
 import Notifications from "../Notifications";
-import PrintView from "../PrintView";
 
 import {
   APP_ROOT,
@@ -25,6 +24,10 @@ import {
   printOrders,
   throttle,
 } from "../../lib";
+
+import {
+  sortedSelectedResourceIds,
+} from "../../lib/utility"
 
 import type {
   Images,
@@ -129,7 +132,9 @@ class Airflow extends Component<Props, State> {
 
     key("⌘+p, ctrl+p", (event, _handler) => {
       event.preventDefault();
-      printOrders();
+      const resourceIds = R.keys(this.props.selectedResources);
+      const date = this.props.startDate;
+      printOrders(date, resourceIds, this.props.selectedResourceGroup);
     });
 
     key("esc, escape", (_event, _handler) => {
@@ -180,6 +185,7 @@ class Airflow extends Component<Props, State> {
             updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
             viewType={this.props.type}
             filterOrders={this.filterOrders}
+            selectedResources={this.props.selectedResources}
           />
         </ErrorBoundary>
         {this.props.loading
@@ -251,10 +257,6 @@ class Airflow extends Component<Props, State> {
             notifications={this.props.notifications}
             markNotificationDisplayed={this.props.markNotificationDisplayed}
           />
-          <PrintView
-            orders={this.props.orders}
-            selectedResources={this.props.selectedResources}
-          />
         </div>
       </div>
     );
@@ -267,7 +269,7 @@ class Airflow extends Component<Props, State> {
         <table id="time-headings" style={{left: HOURBAR_WIDTH - translateX}}>
           <tbody>
             <tr className="heading">
-              {R.keys(this.props.selectedResources).map(this.renderHeading)}
+              {sortedSelectedResourceIds(this.props.selectedResources).map(this.renderHeading)}
             </tr>
           </tbody>
         </table>

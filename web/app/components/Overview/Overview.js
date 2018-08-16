@@ -4,6 +4,12 @@ import * as R from "ramda";
 
 import NotecardRow from "./NotecardRow";
 
+import {getOrderStartTime} from "../../lib/selectors";
+
+import {
+  sortedSelectedResourceIds,
+} from "../../lib/utility"
+
 import type {Order} from "../../types";
 
 type Props = {
@@ -20,13 +26,14 @@ type Props = {
   boardWidth: number,
 }
 
+
 class Overview extends PureComponent<Props> {
   componentDidMount() {
     this.props.scrollToTop();
   }
 
   render() {
-    const resourceRows = R.map(this.renderRow, R.keys(this.props.selectedResources));
+    const resourceRows = R.map(this.renderRow, sortedSelectedResourceIds(this.props.selectedResources));
     return (
       <div>
         {resourceRows}
@@ -35,7 +42,7 @@ class Overview extends PureComponent<Props> {
   }
 
   renderRow = (resourceId: string) => {
-    const orders = this.props.ordersMergedByGroup[resourceId] || [];
+    const orders = R.sortBy(getOrderStartTime, this.props.ordersMergedByGroup[resourceId] || []);
     const resourceName = this.props.selectedResources[resourceId];
     return (
       <NotecardRow

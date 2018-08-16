@@ -48,9 +48,24 @@ class ExamsController < ApplicationController
     render :json => OrmConverter.orders(all,@entity_manager)
   end
 
+  def print_view
+    resource_ids = params[:resources].map(&:to_i)
+    resource_group = params[:resource_group]
+    resources = ResourceGroup.resource_group_hash(@entity_manager)[resource_group]
+    date = params[:date].blank? ? Time.now : Time.at(params[:date].to_i / 1000)
+    orders = Exam.fetch(@entity_manager, resource_ids, date)
+    log_hipaa_view(orders)
+    @resources = resource_name_map(resources)
+    @resourceOrders = OrmConverter.print_orders(orders, @entity_manager).group_by { |order| order.dig(:rad_exam, "resource_id") }
+  end
+
   private
 
   def all_resource_group_ids
     ResourceGroup.resource_group_hash(@entity_manager).map {|k,v| v.map {|x| x["id"]}}.flatten.uniq
+  end
+
+  def resource_name_map(resources)
+    resources.reduce({}) {|acc, resource| acc[resource["id"]] = resource["name"]; acc}
   end
 end
