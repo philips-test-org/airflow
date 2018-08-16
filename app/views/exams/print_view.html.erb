@@ -1,0 +1,7 @@
+<div class="print-view">
+  <div id="print-view-contents">
+    <% @resources.each do |id, name| %>
+      <%= render partial: "exam_lane", locals: {resourceName: name, orders: @resourceOrders[id] || []} %>
+    <% end %>
+  </div>
+</div>

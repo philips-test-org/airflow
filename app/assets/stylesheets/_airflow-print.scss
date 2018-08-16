@@ -1,4 +1,8 @@
 /* Printing */
+.print-view {
+  margin: 1em;
+}
+
 @media print {
     .grid-wrapper, #view-controls {
         display: none;

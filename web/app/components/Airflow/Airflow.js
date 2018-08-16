@@ -12,7 +12,6 @@ import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
 import Notifications from "../Notifications";
-import PrintView from "../PrintView";
 
 import {
   APP_ROOT,
@@ -129,7 +128,9 @@ class Airflow extends Component<Props, State> {
 
     key("⌘+p, ctrl+p", (event, _handler) => {
       event.preventDefault();
-      printOrders();
+      const resourceIds = R.keys(this.props.selectedResources);
+      const date = this.props.startDate;
+      printOrders(date, resourceIds, this.props.selectedResourceGroup);
     });
 
     key("esc, escape", (_event, _handler) => {
@@ -180,6 +181,7 @@ class Airflow extends Component<Props, State> {
             updateSelectedResourceGroup={this.props.updateSelectedResourceGroup}
             viewType={this.props.type}
             filterOrders={this.filterOrders}
+            selectedResources={this.props.selectedResources}
           />
         </ErrorBoundary>
         {this.props.loading
@@ -250,10 +252,6 @@ class Airflow extends Component<Props, State> {
           <Notifications
             notifications={this.props.notifications}
             markNotificationDisplayed={this.props.markNotificationDisplayed}
-          />
-          <PrintView
-            orders={this.props.orders}
-            selectedResources={this.props.selectedResources}
           />
         </div>
       </div>
