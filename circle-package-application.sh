@@ -11,17 +11,22 @@ GIT_COMMIT_HASH=`git log -1 --pretty=format:"%h"`
 echo "Warblizer: Creating version page"
 git describe --always > app/views/main/_version.html.erb
 
+# Warbalizing with changed files
+
 echo "Warblizer: Bundling"
-WARRING="warbilizing" RAILS_ENV=production jruby -S bundle install --path=target
+RAILS_ENV=production jruby -S bundle install --path=target
 
 echo "Warblizer: Pre Cleaning Assets"
-WARRING="warbilizing" ASSETS="clean" RAILS_ENV=production jruby -J-XX:MaxPermSize=256m -J-Xmx4096m -S bundle exec rake assets:clean
+ASSETS="clean" RAILS_ENV=production jruby -S bundle exec rake assets:clean
 
 echo "Warblizer: Precompiling Assets (this takes a while)"
-ASSETS="precompile" RAILS_RELATIVE_URL_ROOT="/$APPNAME" RAILS_ENV=production jruby -J-XX:MaxPermSize=256m -J-Xmx4096m -S bundle exec rake assets:precompile
+JRUBY_OPTS="-J-Xmx1024m" ASSETS="precompile" RAILS_RELATIVE_URL_ROOT="/$APPNAME" RAILS_ENV=production jruby -S bundle exec rake assets:precompile
 
 echo "Warblizer: Building War File"
-WARRING="warbilizing" RAILS_ENV=production jruby -S bundle exec warble war
+WARRING="warbilizing" RAILS_ENV=production jruby -S bundle exec warble compiled war
+
+echo "Warblizer: Post Cleaning Assets"
+ASSETS="clean" RAILS_ENV=production jruby -S bundle exec rake assets:clean
 
 echo "Warblizer: Changing permissions and war file name"
 chmod +r "$APPNAME.war"
