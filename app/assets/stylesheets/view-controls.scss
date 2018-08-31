@@ -1,0 +1,30 @@
+@import "hre-p-colors";
+
+.SingleDatePickerInput.SingleDatePickerInput {
+  /* Same border as btn-default*/
+  border: 1px solid #ccc;
+  line-height: 31px;
+}
+
+.SingleDatePicker_picker.SingleDatePicker_picker {
+  z-index: 200;
+}
+
+.DateInput_input.DateInput_input {
+  font-weight: 400;
+  padding-top: 6px;
+  padding-bottom: 4.5px;
+}
+
+.DateInput_input__focused.DateInput_input__focused {
+  border-bottom: 2px solid $dark-blue;
+}
+.DateInput_fang.DateInput_fang {
+  z-index: 200;
+}
+.CalendarDay__selected.CalendarDay__selected {
+  background: $dark-blue;
+}
+.DayPickerKeyboardShortcuts_show__bottomRight.DayPickerKeyboardShortcuts_show__bottomRight {
+  border-right: 33px solid $dark-blue;
+}

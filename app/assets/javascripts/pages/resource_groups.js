@@ -12,33 +12,34 @@ $(document).ready(function() {
     var data = $.parseJSON($("#initial-resource-groups").text());
 
     $("#group-form").submit(function(e) {
-	e.preventDefault();
-	var name = $(this).find("input").val().replace(/^\s*|\s*$/,"");
-	if (name == "") {
-	    $(this).find(".errors").html(application.templates.formError("Resource group cannot be blank"));
-	} else {
-	    $(this).find(".errors").html("");
-	    $.ajax($.harbingerjs.core.url("/resource_groups/create"),
-		   {method: 'post',
-		    data: {name: name},
-		    beforeSend: function() {
-			$("#group-form input").prop("disabled",true);
-			$("#group-form button").prop("disabled",true);
-		    },
-		    error: function() {
-			if (console != undefined) { console.log(arguments); }
-			$("#group-form input").prop("disabled",false);
-			$("#group-form button").prop("disabled",false);
-			application.notification.flash({type: 'alert', message: "Failed to created new resource group"});
-		    },
-		    success: function(resource_group) {
-			$("#group-form input").prop("disabled",false);
-			$("#group-form input").val("");
-			$("#group-form button").prop("disabled",false);
-			data.push(resource_group);
-			$("#resource-groups").html(application.templates.resourceGroups(data));
-		    }});
-	}
+		e.preventDefault();
+		var name = $(this).find("input").val().replace(/^\s*|\s*$/,"");
+		if (name == "") {
+			$(this).find(".errors").html(application.templates.formError("Resource group cannot be blank"));
+		} else {
+			$(this).find(".errors").html("");
+			$.ajax($.harbingerjs.core.url("/resource_groups/create"), {
+				method: 'post',
+				dataType: "json",
+				data: {name: name},
+				beforeSend: function() {
+				$("#group-form input").prop("disabled",true);
+				$("#group-form button").prop("disabled",true);
+				},
+				error: function() {
+				if (console != undefined) { console.log(arguments); }
+				$("#group-form input").prop("disabled",false);
+				$("#group-form button").prop("disabled",false);
+				application.notification.flash({type: 'alert', message: "Failed to created new resource group"});
+				},
+				success: function(resource_group) {
+				$("#group-form input").prop("disabled",false);
+				$("#group-form input").val("");
+				$("#group-form button").prop("disabled",false);
+				data.push(resource_group);
+				$("#resource-groups").html(application.templates.resourceGroups(data));
+			}});
+		}
     });
 
     $("#resource-form ul li a").on("click",function(e) {
@@ -73,22 +74,23 @@ $(document).ready(function() {
     });
 
     $("#resource-form").submit(function(e) {
-	e.preventDefault();
-	var data = {
-	    search: $(this).find("input[name='search']").val(),
-	    modality_id: $(this).find("button").data("id"),
-	    resource_group_id: $(this).find("input[name='resource_group_id']").val()
-	}
-	$.ajax($.harbingerjs.core.url("/resource_groups/search"),
-	       {data: data,
-		beforeSend: function() {
-		    $("#right-col").show();
-		    $("#resources").html(application.templates.loading());
-		},
-		success: function(associations) {
-		    $("#resources").html(application.templates.resourceTable(associations));
+		e.preventDefault();
+		var data = {
+			search: $(this).find("input[name='search']").val(),
+			modality_id: $(this).find("button").data("id"),
+			resource_group_id: $(this).find("input[name='resource_group_id']").val()
 		}
-	       });
+		$.ajax($.harbingerjs.core.url("/resource_groups/search"), {
+			data: data,
+			dataType: "json",
+			beforeSend: function() {
+				$("#right-col").show();
+				$("#resources").html(application.templates.loading());
+			},
+			success: function(associations) {
+				$("#resources").html(application.templates.resourceTable(associations));
+			}
+		});
     });
 
     $("#resource-groups").html(application.templates.resourceGroups(data));

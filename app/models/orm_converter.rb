@@ -1,56 +1,30 @@
 module OrmConverter
+  require 'json'
 
-
-  # def self.exam_with_comment(employee,comment)
-  #   {employee_id: employee.getId,
-  #    employee: {name: employee.name},
-  #    created_at: Time.now.to_i*1000,
-  #    comment: comment}
-  # end
-
-  def self.test_exams
-    params = {:resource_ids => [26]}
-    date = Time.parse("2012-02-28")
-    q = Java::HarbingerSdkData::RadExam.createQuery(@entity_manager)
-    q.where([q.in(".resourceId",params[:resource_ids]),
-             # q.equal(".resource.modality.modality","CT"),
-             q.or([
-                    q.notEqual(".currentStatus.universalEventType.eventType","cancelled"),
-                    q.isNull(".currentStatus.universalEventTypeId")]),
-             q.or([q.between(".radExamTime.appointment",
-                             date.beginning_of_day,
-                             date.end_of_day),
-                   q.between(".radExamTime.beginExam",
-                             date.beginning_of_day,
-                             date.end_of_day)])
-            ])
-    q.order(".accession asc")
-  end
-
-  def self.test()
-    params = {:resource_ids => ResourceGroup.first.resource_group_mappings.collect(&:resource_id)}
-    date = Time.parse("2015-11-27")
-    q = Java::HarbingerSdkData::Order.createQuery(@entity_manager)
-    q.join(".currentStatus.universalEventType")
-    q.where([q.or([q.in(".resourceId",params[:resource_ids]),
-                   q.in(".radExams.resourceId",params[:resource_ids])]),
-             q.and([q.or([q.notEqual(".currentStatus.universalEventType.eventType","cancelled"),
-                          q.isNull(".currentStatus.universalEventTypeId")
-                         ]),
-                    q.or([q.notEqual(".radExams.currentStatus.universalEventType.eventType","cancelled"),
-                          q.isNull(".radExams.currentStatus.universalEventTypeId")])]),
-             q.or([q.between(".radExams.radExamTime.appointment",
-                             date.beginning_of_day,
-                             date.end_of_day),
-                   q.between(".radExams.radExamTime.beginExam",
-                             date.beginning_of_day,
-                             date.end_of_day),
-                   q.between(".appointment",date.beginning_of_day,date.end_of_day)])
-            ])
-    q.order(".orderNumber asc")
-    q.criteria.distinct(true)
-    orders = q.list.to_a
-    self.orders(orders,nil)
+  def self.print_orders(orders, em)
+    tree = {
+      :master_order => {},
+      :resource => {:modality => {}},
+      :procedure => {},
+      :patient_mrn => {:patient => {}},
+      :rad_exams => {
+        :rad_exam_time => {},
+        :rad_exam_personnel => {:ordering => {}},
+        :procedure => {},
+        :resource => {},
+      }
+    }
+    orders.inject([]) do |list,order|
+      hash = get_data(tree,order,{})
+      hash.merge!(ExamAdjustment.info_for(order,em))
+      if hash[:rad_exams] and hash[:rad_exams].size > 0
+        hash[:rad_exam] = hash[:rad_exams].sort {|a,b| a["accession"] <=> b["accession"] }[0]
+        hash[:rad_exams].each {|re| re.delete("accession") } #rad_exam accession deleted because of shared hash memory
+      end
+      hash.delete("order_number")
+      list << hash
+      list
+    end
   end
 
   def self.orders(orders,em)
@@ -108,43 +82,26 @@ module OrmConverter
     end
   end
 
-  # def self.limited_exams(exams,em)
-  #   tree = {
-  #     :rad_exam_time => {},
-  #     :resource => {:modality => {}},
-  #     :procedure => {},
-  #     :current_status => {:universal_event_type => {}}
-  #   }
-  #   exams.inject([]) do |list,exam|
-  #     hash = get_data(tree,exam,{})
-  #     hash.merge!(ExamAdjustment.info_for(exam,em))
-  #     hash.delete("accession")
-  #     hash["events"] = []
-  #     list << hash
-  #     list
-  #   end
-  # end
-
-  # def self.exams(exams,em)
-  #   tree = {
-  #     :rad_exam_time => {},
-  #     :rad_exam_personnel => {},
-  #     :rad_exam_detail => {},
-  #     :procedure => {},
-  #     :patient_mrn => {:patient => {}},
-  #     :resource => {:modality => {}},
-  #     :site_class => {:patient_type => {}},
-  #     :current_status => {:universal_event_type => {}},
-  #     :site_sublocation => {:site_location => {}},
-  #     :order => {}
-  #   }
-  #   exams.inject([]) do |list,exam|
-  #     hash = get_data(tree,exam,{})
-  #     hash.merge!(ExamAdjustment.info_for(exam,em))
-  #     list << hash
-  #     list
-  #   end
-  # end
+  def self.rad_exams(exams, em)
+    tree = {
+      :rad_exam_time => {},
+      :rad_exam_personnel => {:ordering => {}},
+      :rad_exam_detail => {},
+      :procedure => {},
+      :patient_mrn => {:patient => {}},
+      :resource => {:modality => {}},
+      :site_class => {:patient_type => {}},
+      :current_status => {:universal_event_type => {}},
+      :site_sublocation => {:site_location => {}},
+    }
+    exams.inject([]) do |list, rad_exam|
+      hash = get_data(tree, rad_exam, {})
+      hash[:image_viewer] = JSON.parse(rad_exam.imageViewer)
+      hash[:integration_json] = JSON.parse(rad_exam.integrationJson)
+      list << hash
+      list
+    end
+  end
 
   def self.resource(resource)
     sub_objects = {:modality => {},
