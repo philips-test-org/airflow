@@ -7,10 +7,37 @@ $dark-alert-red: #A40008;
 $very-dark-alert-red: #750006;
 $alert-text-color: #fff;
 $complete-green: #279A2F;
+$card-footer-bg-color: #f7f7f7;
+$card-footer-font-color: #616161;
+
+$ON-HOLD-HEX: #F3F37A;
+$ON-HOLD-RGBA: rgba(245, 245, 43, 0.8);
+
+$PPCA-READY-HEX: #C4F3E6;
+$PPCA-READY-RGBA: rgba(122, 243, 210, 0.8);
 
 // - Layout
 $body-top: 50px;
 $border-color: #ddd;
+
+// Navbar
+.navbar-nav > li > a {
+  padding: 15px 13px;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #fff;
+  .icon-bar {
+    background-color: #0f204b;
+  }
+}
+@media (min-width: 768px) {
+  #navbar {
+    float: right;
+  }
+}
 
 #navbar-img {
   margin-left: 1px;
@@ -102,6 +129,11 @@ $card-color: #fff;
   line-height: 33px;
   vertical-align: middle;
   border-bottom: unquote($border-unit) solid $grid-color;
+  z-index: 107;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 .vertical-timeline {
@@ -117,33 +149,13 @@ $card-color: #fff;
     z-index: 104;
   }
 
-  #white-spacer {
-    position: fixed;
-    left: 0px;
-    top: 111px;
-    width: 51px;
-    border-bottom: unquote($border-unit) solid $grid-color;
-    border-right: unquote($border-unit) solid $grid-color;
-    height: 33px;
-    background-color: #fff;
-    z-index: 106;
-  }
-
-  #vertical-time-headings {
-    position: absolute;
-    left: 0;
-    background-color: #fff;
-    z-index: 106;
-    border-right: unquote($border-unit) solid $grid-color;
-  }
-
-
   .hour {
     text-align: right;
     vertical-align: top;
     height: unquote($hour-unit);
     width: 50px;
     border-bottom: unquote($border-unit) solid $grid-color;
+    border-right: unquote($border-unit) solid $grid-color;
     padding-right: 5px;
   }
 
@@ -153,35 +165,71 @@ $card-color: #fff;
 
   #time-grid {
     position: absolute;
-    left: 50px;
+
+    .fixed-column {
+      background-color: #FFFFFF;
+      z-index: 106;
+      width: 50px;
+    }
+
+    .relative-column {
+      position: relative;
+      width: unquote($col-unit);
+      border-right: unquote($border-unit) solid $grid-color;
+    }
+
+    th {
+      background-color: #FFFFFF;
+      font-size: 20px; font-weight: normal; margin: 5px;
+      height: 2em;
+      text-align: center;
+      z-index: 108;
+    }
 
     tbody {
 
       td {
         position: relative;
         vertical-align: top;
-        border-right: unquote($border-unit) solid $grid-color;
-      }
-      td:first-child {
-        border-left: unquote($border-unit) solid $grid-color;
+        &:last-child {
+          border-right: unquote($border-unit) solid $grid-color;
+        }
       }
 
+      .markers {
+        left: 50px;
+      }
 
       td .markers .row-marker {
-        width: unquote($col-unit);
-        height: unquote($half-unit);
         border-bottom: unquote($border-unit) solid $grid-color;
+        height: unquote($half-unit);
+        width: 100%;
+        min-width: unquote($col-unit);
       }
-      td .hour:first-child, td .markers .row-marker:first-child {
-        /*border-top: unquote($border-unit) solid $grid-color !important;*/
-      }
+
       td .markers .row-marker:nth-child(2n-1) {
         border-bottom: unquote($border-unit) dashed $grid-color !important;
       }
-
     }
   }
 
+  #board-headings {
+    position: fixed;
+    left: 0;
+    top: 100px;
+    z-index: 105;
+  }
+  #white-spacer {
+    position: fixed;
+    left: 0px;
+    top: 100px;
+    width: 50px;
+    border-bottom: 1px solid $grid-color;
+    border-right: 1px solid $grid-color;
+    height: 49px;
+    background-color: #fff;
+    z-index: 106;
+  }
   #time-headings {
     position: absolute;
     left: 50px;
@@ -189,45 +237,36 @@ $card-color: #fff;
 
     tr.heading td {
       text-align: center;
-      border-right: unquote($border-unit) solid $grid-color;
-      border-bottom: unquote($border-unit) solid $grid-color;
+      border-right: 1px solid $grid-color;
+      border-bottom: 1px solid $grid-color;
+      height: 48px;
 
       h1 {
-        font-size: 20px; font-weight: normal; margin: 5px;
-        width: 240px;
+        font-size: 20px;
+        font-weight: normal;
+        margin: 5px;
+        padding: 0.5em 0 0.5em 0;
+        margin: 0;
       }
     }
-  }
-
-
-  #board-headings {
-    position: fixed;
-    left: 0;
-    top: 111px;
-    z-index: 105;
-    /*background-color: #fff;*/
-    border-bottom: 1px solid #eee;
-
-
   }
 
   #board {
     position: absolute;
     left: 0;
     right: 0;
-    top: 145px;
+    top: 149px;
     bottom: 0;
     overflow-y: auto;
-    overflow-x: auto;
-    /*padding: 5px;*/
-
+  }
+  .overview #board {
+    top: 100px;
   }
 
   .notecard.scaled {
     position: absolute;
     z-index: 101;
-    left: unquote($card-left-unit);
-    /*top: 100px;*/
+    margin-left: unquote($card-left-unit);
   }
   .notecard.scaled:hover {
     z-index: 102;
@@ -247,43 +286,44 @@ Overview
   bottom: 0;
   overflow-y: auto;
   overflow-x: auto;
-  /*padding: 5px;*/
-
 }
 
-.resource-row:first-child {
-  /*border-top: unquote($border-unit) solid $grid-color;*/
-}
-
-.resource-row:nth-child(2n) {
+.resource-row:nth-child(2n) .cards {
   background-color: #fafafa;
 }
 
 .resource-row {
+  overflow: hidden;
   border-bottom: unquote($border-unit) solid $grid-color;
   position: relative;
-  padding: 5px 0 5px 50px;
-  height: 140px;
-  white-space: nowrap;
+  padding: 0 0 0 43px;
 
-  h1 {
-    position: absolute;
-    left: -48px;
-    top: 47px;
-    width: 138px;
-    z-index: 102;
-    padding: 13px 0;
-    margin: 0;
-    border-bottom: unquote($border-unit) solid $grid-color;
-    background-color: #fff;
-    text-align: center;
-    font-size: 16px;
-    font-weight: normal;
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  .row-label{
+    h1 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 102;
+      padding: 12px;
+      margin: 0;
+      background-color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-weight: normal;
+      white-space: nowrap;
+      -ms-writing-mode: tb-lr;
+      writing-mode: vertical-lr;
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      // Do not use the ms-transform because it doesn't work the same in IE9
+      // -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+    }
+  }
+  .cards {
+    border-left: unquote($border-unit) solid $grid-color;
+    padding: 5px 5px 0 5px;
+    min-height: 150px;
   }
 }
 
@@ -349,18 +389,27 @@ Shared Styles
     position: absolute;
     right: 5px;
     top: 2px;
+    > * {
+      padding: 0px 2.5px;
+    }
   }
 
   .heading {
     padding: 5px 10px;
     margin: 0;
     font-weight: bold;
+
+    .patient-name {
+      margin-right: 2em;
+    }
+
     .patient-type {
       display: inline;
       font-weight: bold;
       float: left;
       margin-right: 3px;
     }
+
     .patient-type:after {
       content: " -";
     }
@@ -379,23 +428,19 @@ Shared Styles
   }
 
   .footer {
-    .right {
-      position: absolute;
-      bottom: 0px;
-      right: 4px;
-    }
-    .left {
-      position: absolute;
-      bottom: 0px;
-      left: 18px;
-    }
-    padding: 0px 10px 5px;
-    text-align: right;
-    color: #757575;
+    padding: 0px 10px;
+    background-color: $card-footer-bg-color !important;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 12px);
+    box-shadow: 0px -0.5px 3px rgba(50, 50, 50, 0.2);
+    color: $card-footer-font-color;
+
     .status-indicator {
-      color: #53a790;
-      background-color: #fff;
       display: inline;
+      padding-left: 0.25em;
+      padding-right: 0.25em;
     }
   }
 
@@ -412,6 +457,8 @@ Shared Styles
   .kiosk-number {
     font-size: 36px;
     margin-left: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
   }
   .kiosk-number.bottom {
     position: absolute;
@@ -423,17 +470,19 @@ Shared Styles
 }
 
 .notecard.highlight {
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 25px rgba(245, 245, 43, 0.8);
-  background-color: #f5f52b !important;
-  .left-pane { background-color: #f5f52b !important; }
-  .status-indicator { background-color: #f5f52b !important; }
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 25px $ON-HOLD-RGBA;
+  background-color: $ON-HOLD-HEX !important;
+  .left-pane { background-color: $ON-HOLD-HEX !important; }
+}
+
+.notecard.ppca_ready {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 25px $PPCA-READY-RGBA;
+    background-color: $PPCA-READY-HEX !important;
+    .left-pane { background-color: $PPCA-READY-HEX !important; }
 }
 
 .notecard.completed {
   background-color: #ddd !important;
-  .footer .status-indicator {
-    background-color: #ddd !important;
-  }
 }
 
 .notecard.bad-duration {
@@ -480,6 +529,9 @@ Shared Styles
     padding-left: 14px;
   }
   h5.no-margin { margin-top: 0; margin-bottom: 0; }
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #order-modal .modal-content {
@@ -497,15 +549,30 @@ Shared Styles
 
 .status-toggles {
   float: right;
-  margin-right: 10px;
+  margin-right: 1em;
 
   .status-toggle {
-    display: inline;
+    display: inline-block;
+    margin-right: 1em;
     i { margin-right: 5px; }
   }
 
   .status-toggle.complete { color: #ccc; }
   .status-toggle.incomplete { color: #ccc; }
+}
+
+.wrapped-toggle {
+  > span {
+    margin-right: 0.25em;
+  }
+  > .react-toggle { vertical-align: middle; }
+}
+
+#exam-demographics {
+  th {
+    max-width: 35%;
+    width: 35%;
+  }
 }
 
 .ui-droppable-hover {
@@ -695,6 +762,10 @@ table.roles{
       height: 20px;
       float: left;
       margin-right: 10px;
+
+      &.icon {
+        color: #53a790;
+      }
     }
     .name {
       line-height: 20px;
@@ -707,4 +778,9 @@ table.roles{
       line-height: 23px;
     }
   }
+}
+
+.grid-wrapper {
+  height: 100%;
+  width: 100%;
 }

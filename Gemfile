@@ -1,6 +1,6 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.10'
 gem 'jquery-rails'
 gem 'jruby-jars', '=9.1.5.0'
 gem "activerecord-jdbc-adapter", "~> 1.3.8", platform: :jruby
@@ -11,14 +11,11 @@ gem 'autoprefixer-rails','6.0.3'
 
 # Assets
 gem 'sass-rails', '~> 5.0'
-gem "font-awesome-sass", "=4.3.2.1"
+gem 'font-awesome-sass','~>4.7.0'
 gem 'bootstrap-sass'
 gem 'uglifier', '=2.7.1'
 gem 'therubyrhino'
 gem 'harbinger-rails-extensions', '2.0.0', source: 'http://gem.analytical.info:9292'
-
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 
 group :development, :test do
   gem "pry"

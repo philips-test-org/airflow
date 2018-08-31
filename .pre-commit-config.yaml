@@ -1,0 +1,12 @@
+- repo: local
+  hooks:
+    - id: js-lint
+      name: 'javascript: eslint'
+      entry: yarn lint
+      language: system
+      files: \.js
+    - id: js-flow
+      name: 'javascript: flow'
+      entry: yarn flow
+      language: system
+      files: \.js

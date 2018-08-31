@@ -1,12 +1,20 @@
 class ResourceGroupsController < ApplicationController
   before_filter :get_entity_manager
-  before_filter :general_authentication
+  before_filter :general_authentication, except: [:index, :selected]
   after_filter :log_usage_data
   after_filter :close_entity_manager
 
 
   def index
     @resource_groups = ResourceGroup.all
+    respond_to do |format|
+      format.html {
+        general_authentication
+      }
+      format.json {
+        render json: ResourceGroup.resource_group_hash(@entity_manager).to_json
+      }
+    end
   end
 
   def search
@@ -27,7 +35,7 @@ class ResourceGroupsController < ApplicationController
       selected_list = []
     end
 
-    render :json => (selected_list + search_list)
+    render :json => (selected_list + search_list).to_json
   end
 
   def create
@@ -39,6 +47,17 @@ class ResourceGroupsController < ApplicationController
     rg = ResourceGroup.find(params[:id])
     rg.destroy if rg
     render :text => "ok"
+  end
+
+  def selected
+    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
+    # Reset resource group if the group doesn't exist
+    if session[:resource_group] and @groupings[session[:resource_group]] == nil
+      session[:resource_group] = nil
+    end
+
+    selected = session[:resource_group] || @groupings.keys.first
+    render json: {resource: selected}
   end
 
   def associate

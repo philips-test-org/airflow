@@ -22,6 +22,13 @@ ASSETS="clean" RAILS_ENV=production jruby -S bundle exec rake assets:clean
 echo "Warblizer: Precompiling Assets (this takes a while)"
 JRUBY_OPTS="-J-Xmx1024m" ASSETS="precompile" RAILS_RELATIVE_URL_ROOT="/$APPNAME" RAILS_ENV=production jruby -S bundle exec rake assets:precompile
 
+echo "Warblizer: Getting React/JS dependencies"
+yarn install
+
+echo "Warblizer: Building javascript bundle"
+yarn build
+
+
 echo "Warblizer: Building War File"
 WARRING="warbilizing" RAILS_ENV=production jruby -S bundle exec warble compiled war
 

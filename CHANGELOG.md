@@ -1,7 +1,35 @@
-## v1.1.2 released 2018-05-17
+## v1.2.1 released 2018-08-16
 
-* **bugfix:** fixed "On Hold" status taking priority over "Cancelled" status
-* **bugfix:** fixed cards not updating when an exam message is received for an existing order
+* **bugfix:** fix app crash on orders without rad exams
+* **bugfix:** fix printing in IE
+* **bugfix:** fix card ordering in "Overview"
+* **bugfix:** fix placeholder images for avatars
+* **bugfix:** move "PPCA Ready" status between "Arrived" and "Started"
+
+## v1.2.0 released 2018-07-17
+
+* **new:** added PPCA Ready toggle
+* **new:** added Ordering Physician to card
+* **new:** print view for Calendar
+* **new:** search/filter cards
+* **improvement:** added merged indicator to merged cards
+* **improvement:** launch patient images
+* **improvement:** overlapping cards displayed side by side
+* **improvement:** Overview page wraps instead of scrolling horizontally
+* **improvement:** updated icon for anesthesia
+* **bugfix:** events on merged cards are saved to both orders to prevent event loss if cards are no longer merged
+* **bugfix:** event tabs show all events after new event added
+* **bugfix:** rounding notes update for all users viewing card
+
+## v1.1.3 released 2018-06-19
+
+* **bugfix:** all order messages sending requests to server
+* **bugfix:** check new orders for relevant resource
+
+## v1.1.2 released 2018-06-05
+
+* **bugfix:** "On Hold" status no longer takes priority over "Cancelled" status
+* **bugfix:** cards now consistently update when an exam message is received for an existing order
 
 ## v1.1.1 released 2018-04-09
 
