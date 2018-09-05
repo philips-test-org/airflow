@@ -19,6 +19,11 @@ public class AirflowKiosk {
 
 	@FindBy(xpath = "//div[@class='modal-header']//h5")
 	private WebElement kioskNumber;
+	
+	@FindBy(xpath = "//li[@class='active']/a[@name='kiosk']")
+	private WebElement activeKioskTab;
+	
+	
 
 	private String getSearchKioskNumberInKioskTabXpath(String kioskNumber) {
 		return "//div[text()='" + kioskNumber + "']";
@@ -45,6 +50,12 @@ public class AirflowKiosk {
 		log.info("kioskNumber is " + kioskNumberText);
 		return kioskNumberText;
 	}
+	
+	
+	public boolean verifyKioskTabIsActive() throws InterruptedException {
+		return UITestUtils.isElementDisplayed(activeKioskTab);
+	}
+
 
 	private String retrievedKioskNumber() {
 		String[] kioskNumber1 = UITestUtils.retrieveText(kioskNumber, "kioskNumber").split(" ");

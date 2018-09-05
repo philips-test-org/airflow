@@ -1,25 +1,27 @@
-@airflow @Browser
-Feature: AirFlow app to create new group, Real Time data inflow, display of ingested data, legends verification
+@airflow @Browser @50311
+Feature: 51104_VerifyNearRealTimeUpdatesCancelledExam
+ To verify that calendar view shows the near real time update of following Events Ordered,Patient Arrived,Exam start ,Exam complete and Exam Cancelled.
+ To verify that the legend is updated in Overview tab
+ To verify that the legend is updated in Kiosk tab
 
-  #The below scenarios requires to be run one after the other because of dependencies on creation of group and data ingestion respectively.
-  @sanity
-  Scenario Outline: 004_VerifyIngestedDataInRealtime
+  @Regression @51104 
+  Scenario Outline: 51104_VerifyNearRealTimeUpdatesCancelledExam
     Given user launch App
     Given user clicks on "Airflow" App
-    Then user logs in as "aiuser"
+    Then user login as "aiuser"
     And user clicks on "Admin" tab
     Then user selects "Resource Groups"
-    And Creates "New Group" with Resource "VHC Main CT-1"
+    And creates "New Group"
+    #Then Apply the "CT" modality filter
+    Then add Resources "VHC Main CT-1" and "VHC Main CT-2" into the group
     And user clicks on "Calendar" tab
-    And Verify the New Group with Resource "VHC Main CT-1" is displayed
-    And user logs out of the application
-    #The below scenario is depeneded on the 'Create New Group' scenario
-    #  Scenario Outline: Admin ingested data and verifies the ingestion in Real Time
+    And Verify the New Group with Resource "VHC Main CT-1" and "VHC Main CT-2" is displayed
+    #And user logs out of the application
     Given user clicks on "Service Tools" App
-    Then user logs in as "aiuser"
+    Then user login as "aiuser"
     Then user finds the ID for "<Resource>"
-    Given user clicks on "Virtual Hospital" App
-    And user creates a startup exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
+    #Given user clicks on "Virtual Hospital" App
+    #And user creates a startup exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
     Given user clicks on "Airflow" App
     Then user selects "New Group" from Resource Group filter
     And user count number of exams for "<Resource>"

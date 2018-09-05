@@ -1,6 +1,9 @@
 package com.philips.rs.performancebridge.test.po;
 
+
 import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,6 +45,7 @@ public class AirflowCalendar {
 		return "//a[contains(text(),'" + tabName + "')]";
 	}
 
+
 	/*
 	 * RETURN WebElement/Locators
 	 */
@@ -53,10 +57,15 @@ public class AirflowCalendar {
 	private WebElement getGroupNameWebElement(String groupName) {
 		return UITestUtils.getWebElementByXpath(getGroupNameXpath(groupName));
 	}
+	
+	private By getGroupNamelocator(String groupName) {
+		return UITestUtils.getLocatorByXpath(getGroupNameXpath(groupName));
+	}
 
 	private WebElement getTabWebElement(String tabName) {
 		return UITestUtils.getWebElementByXpath(getTabElementXPath(tabName));
 	}
+
 
 	/*
 	 * METHODS
@@ -88,12 +97,16 @@ public class AirflowCalendar {
 		return totalExamCards;
 	}
 
+	public void clickOnResourceGroupDropDown() {
+		UITestUtils.clickLink_JavaScript(groupNameDropDown, "Clicked on group name drop down");
+	}
+	
 	/**
 	 * The below method selects the created resource group from the Group
 	 * selector drop down
 	 */
 	public void selectResource(String groupName) throws InterruptedException {
-		UITestUtils.clickLink_JavaScript(groupNameDropDown, "Clicked on group name drop down");
+		clickOnResourceGroupDropDown();
 		UITestUtils.clickLink(getGroupNameWebElement(groupName), "Selected the resource group from drop down");
 	}
 
@@ -101,5 +114,11 @@ public class AirflowCalendar {
 		UITestUtils.waitForElementToLoad(getResourceWebElement(resource), resource);
 		return UITestUtils.verifyIsElementDisplayed(getResourceWebElement(resource), resource);
 	}
+
+	public boolean verifyResourceGroupIsDisplayedInList(String groupName) throws InterruptedException {
+		return UITestUtils.elementInVisibilitymethod(getGroupNamelocator(groupName));
+		
+	}
+	
 
 }

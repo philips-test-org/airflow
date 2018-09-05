@@ -3,12 +3,12 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<groupId>Airflow_Automation</groupId>
-	<artifactId>Airflow_Automation</artifactId>
+	<groupId>airFlowAutomation</groupId>
+	<artifactId>airFlowAutomation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>Sweep Test Automation</name>
+	<name>AirFlow Test Automation</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -31,7 +31,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<browser />
 		<threads />
-		<tags>@sanity</tags>
+		<tags />
 		<remoteDriver />
 		<seleniumGridUrl />
 		<!-- <cucumberOutputDirectory>${project.build.directory}/cucumber</cucumberOutputDirectory> -->
@@ -274,7 +274,7 @@
 									</outputDirectory>
 									<!-- The directory, which must be in the root of the runtime classpath, 
 										containing your feature files. -->
-									<featuresDirectory>src/test/resources/sanity</featuresDirectory>
+									<featuresDirectory>src/test/resources</featuresDirectory>
 									<!-- Directory where the cucumber report files shall be written -->
 									<cucumberOutputDir>${cucumberOutputDirectory}</cucumberOutputDir>
 									<!-- List of cucumber plugins. When none are provided the json formatter 
@@ -371,7 +371,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<projectName>PB Airflow App</projectName>
+							<projectName>RS Airflow App</projectName>
 							<outputDirectory>${project.build.directory}/site/cucumber-reports</outputDirectory>
 							<cucumberOutput>${cucumberOutputDirectory}</cucumberOutput>
 							<!-- <cucumberOutput>${cucumberOutputDirectory}/site/cucumber-reports</cucumberOutput> 

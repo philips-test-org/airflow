@@ -8,12 +8,11 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		format   = {"pretty","html:target/cucumber", "json:target/cucumber.json","rerun:target/rerun_featureName.txt"},
-		features = {"src/test/resources/sanity/001_VerifyDisplayOfOrderTokenNumber.feature"},								
+		features = {"src/test/resources/functional/50315_siteConfig_PageAccess.feature"},								
 		strict = true,
 	    monochrome = true,
-//	    		dryRun = true,
         glue = {"com.philips.rs.performancebridge.test.stepdefs","com.philips.rs.performancebridge.test.common.hooks"},
-		tags = {"@sanity"}
+		tags = {"@Sanity"}
 		
         
 		)

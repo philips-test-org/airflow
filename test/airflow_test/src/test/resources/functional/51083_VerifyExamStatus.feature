@@ -1,29 +1,24 @@
-@airflow @Browser
-Feature: AirFlow app to create new group, Real Time data inflow, display of ingested data, legends verification
+@airflow @Browser @50317
+Feature: 51083_VerifyExamStatus
+  To verify that the icons on the cards in the calendar view are displayed that represent steps completed in the patient experience including: On Hold, Anesthesia, Consent, PPCA Ready (“Pre-Procedure Care area” Ready), Paperwork completed, and Ready for Room
+  To verify that the user is able to change the state of the following  in exam card information  pop-up : On Hold, Anesthesia, Consent, PPCA Ready (“Pre-Procedure Care area” Ready), Paperwork completed, and Ready for Room
+  To verify that the respective icons for state change is displayed in the calendar view
 
-  #The below scenarios requires to be run one after the other because of dependencies on creation of group and data ingestion respectively.
-  @sanity
-  Scenario Outline: 003_VerifyApplyPatientExperienceByAdmin
+  @Sanity @Regression @51083
+  Scenario Outline: 51083_VerifyExamStatus
     Given user launch App
     Given user clicks on "Airflow" App
-    Then user logs in as "aiuser"
+    Then user login as "aiuser"
     And user clicks on "Admin" tab
     Then user selects "Resource Groups"
-    And Creates "New Group" with Resource "VHC Main CT-1"
+    And creates "New Group"
+    Then add Resources "VHC Main CT-1" and "VHC Main CT-2" into the group
     And user clicks on "Calendar" tab
-    And Verify the New Group with Resource "VHC Main CT-1" is displayed
-    And user logs out of the application
-    #The below scenario is depeneded on the 'Create New Group' scenario
-    #  Scenario Outline: Admin ingested data and verifies the ingestion in Real Time
     Given user clicks on "Service Tools" App
-    Then user logs in as "aiuser"
     Then user finds the ID for "<Resource>"
-    And user logs out of the application
     Given user clicks on "Virtual Hospital" App
     And user creates a exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
-    Given user clicks on "Airflow" App
-    #The below scenario requires the data to be ingested before hand. The Scenario 'Admin ingested data and verifies the ingestion in Real Time' takes care that.
-    #Scenario Outline: Admin applies patient experience level settings on an exam card
+    Then user switches to "Airflow" app
     Then user selects "New Group" from Resource Group filter
     Then in "<Resource>", choose exam card
     And user selects the exam card
@@ -41,6 +36,6 @@ Feature: AirFlow app to create new group, Real Time data inflow, display of inge
     Then user verifies the On Hold status is displayed with "yellow" background color
     And user logs out of the application
 
-       Examples: 
+    Examples: 
       | Exam Status | Resource      | Procedure             | Color  |
       | begin       | VHC Main CT-1 | CT PELVIS W/O & W/DYE | voilet |

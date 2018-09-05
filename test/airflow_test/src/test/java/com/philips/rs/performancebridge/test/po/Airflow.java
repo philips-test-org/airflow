@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
+import static com.philips.rs.performancebridge.test.common.config.Constants.WAIT_LONG_SECONDS;
 
 public class Airflow {
 
@@ -39,6 +40,14 @@ public class Airflow {
 
 	@FindBy(xpath = "//div[@class='content']/textarea[@name='comments']")
 	private WebElement commentBoxWithinExamCard;
+	
+	@FindBy(xpath = "//h1[text()='Unauthorized']/../p[text()='You are not in the required user roles to view this page.']")
+	private WebElement unauthorizedUserTitle;
+	
+	// This element is to verify the Home page is displayed
+	@FindBy(xpath = "//div[(@id='workspace') and ( @class='vertical-timeline')]")
+	private WebElement hompageWorkSpace;
+	
 
 	private String getSearchForMRNNumberInExamCardXpath(String resourceID, String mrn) {
 		return "//td[@data-resource-id='" + resourceID + "']//div[@class='mrn'][text()='" + mrn + "']";
@@ -96,7 +105,7 @@ public class Airflow {
 	}
 
 	private WebElement getFindIDOfSelectedResourceWebElement(String resourcename) {
-		return UITestUtils.getWebElementByXpath(getFindIDOfSelectedResourceXpath(resourcename));
+		return UITestUtils.getWebElementByXpath(getFindIDOfSelectedResourceXpath(resourcename), WAIT_LONG_SECONDS);
 	}
 
 	private By getResourceExamCardCountLocator(String resourceID) {
@@ -134,7 +143,7 @@ public class Airflow {
 	 * Get the current count of exam cards for particular resource
 	 */
 	public int examCardCountForTheResource(String resourceID) {
-		UITestUtils.waitForElementToLoad(getResourceExamCardCountLocator(resourceID), "Resource Exams List");
+		UITestUtils.waitForPresenceOfAllElementsLocated(getResourceExamCardCountLocator(resourceID), "Resource Exams List");
 		List<WebElement> resourceExamCardList = driver.findElements(getResourceExamCardCountLocator(resourceID));
 		return resourceExamCardList.size();
 	}
@@ -149,6 +158,9 @@ public class Airflow {
 	}
 
 	public boolean verifyMrnExamCardDispalyed(String resourceID, String mrn) {
+		UITestUtils.sleep(10);
+		System.out.println("Resource ID : " + resourceID);
+		System.out.println("MRN : " + mrn);
 		return UITestUtils.verifyIsElementDisplayed(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
 				"Verified that ingested record is available in Exam Card for particular resource");
 	}
@@ -206,7 +218,7 @@ public class Airflow {
 	 * exam card
 	 */
 	public boolean statusIndicatorOnExamCard(String verifyIconsOnExamCard, String mrn) throws InterruptedException {
-		boolean SearchIconsCount = driver.findElements(getToSearchIconsOnTheExamCardLocator(verifyIconsOnExamCard, mrn)).isEmpty();
+		boolean SearchIconsCount = !driver.findElements(getToSearchIconsOnTheExamCardLocator(verifyIconsOnExamCard, mrn)).isEmpty();
 		return Comparator.match(SearchIconsCount, true, "No search Icons Count on ExamCard");
 	}
 
@@ -222,5 +234,15 @@ public class Airflow {
 	public void clickOnPatientExperienceStateEvent(String patientExperienceEvents) {
 		UITestUtils.clickLink(getPatientExperienceStateWebElement(patientExperienceEvents),
 				patientExperienceEvents + " event");
+	}
+
+	public boolean verifyUnauthorizedUserTitleDisplayed() {
+		return UITestUtils.verifyIsElementDisplayed(unauthorizedUserTitle, "unauthorized User Page Title");
+
+	}
+	
+	public boolean verifyhomePageWorkspaceDisplayed() {
+		return UITestUtils.verifyIsElementDisplayed(hompageWorkSpace, "Airflow homepage displayed");
+
 	}
 }

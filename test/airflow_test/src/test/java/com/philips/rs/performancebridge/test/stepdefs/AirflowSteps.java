@@ -1,7 +1,5 @@
 package com.philips.rs.performancebridge.test.stepdefs;
 
-import org.junit.Assert;
-
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 import com.philips.rs.performancebridge.test.po.Airflow;
@@ -14,19 +12,15 @@ import cucumber.api.java.en.Then;
 public class AirflowSteps {
 
 	
-	private PageObjectManager pom;
 	private Airflow airflow;
 	private int preIngestionExamsCount;
 	private ContextDTO contextDTO;
 
-
-	public AirflowSteps(PageObjectManager pageObjectManager,ContextDTO contextDTO) {
-		this.pom = pageObjectManager;
-		this.contextDTO = contextDTO;
+	public AirflowSteps(PageObjectManager pageObjectManager, ContextDTO contextDTO) {
 		airflow = pageObjectManager.getAirflowPage();
+		this.contextDTO = contextDTO;
 	}
 
-	
 	
 	/**
 	 * The below method is designed to pick up the resource ID for chosen resource from Service Tools
@@ -35,10 +29,7 @@ public class AirflowSteps {
 	public void user_finds_the_ID_for(String selectResourceInST) throws Throwable {
 		airflow.leftPanelElementsFOrServiceTool();
 		airflow.clickOnSearchInResource();
-//		pom.setValue("resourceId", airflow.getIDForResource(selectResourceInST));
-		String resourceId = airflow.getIDForResource(selectResourceInST);
-		contextDTO.setResourceId(resourceId);
-
+		contextDTO.setResourceId(airflow.getIDForResource(selectResourceInST));
 	}
 
 
@@ -59,9 +50,12 @@ public class AirflowSteps {
 	public void user_verifies_that_is_added_in(String Resource) throws Throwable {
 		UITestUtils.refreshPage();
 		airflow.verifySpinnerIsInvisible();
+		
+		System.out.println(airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(), contextDTO.getMrn()));
+		
 		int postIngestionExamCount = airflow.examCardCountForTheResource(contextDTO.getResourceId());
 		Comparator.check(preIngestionExamsCount + 1, postIngestionExamCount);
-		Comparator.check(true, airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(),contextDTO.getMrn()));
+		Comparator.check(true, airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(), contextDTO.getMrn()));
 	}
 
 
@@ -70,7 +64,7 @@ public class AirflowSteps {
 	 */
 	@Given("^user selects the exam card$")
 	public void user_selects_the_exam_card() throws Throwable {
-		airflow.selectMRNOnExamCard(contextDTO.getResourceId(),contextDTO.getMrn());
+		airflow.selectMRNOnExamCard(contextDTO.getResourceId(), contextDTO.getMrn());
 //		clickLink_JavaScript(searchForMRNNumberInExamCard(), "Exam Card is selected");	
 	}
 
@@ -92,6 +86,7 @@ public class AirflowSteps {
 	@Then("^close the exam card$")
 	public void close_the_exam_card() throws Throwable {
 		airflow.closeTheExamCard();
+		Thread.sleep(5000);
 	}
 
 
@@ -100,7 +95,9 @@ public class AirflowSteps {
 	 */
 	@Then("^in \"([^\"]*)\", choose exam card$")
 	public void in_choose_exam_card(String Resources) throws Throwable {
-		airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(),contextDTO.getMrn());
+		UITestUtils.refreshPage();
+		airflow.verifySpinnerIsInvisible();
+		airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(), contextDTO.getMrn());
 	}
 
 
@@ -121,7 +118,7 @@ public class AirflowSteps {
 		if (status.contains("off"))
 		{
 			airflow.clickOnPatientExperienceStateEvent(patientExperienceEvents);
-		}		 
+		}
 	}
 
 
@@ -139,7 +136,8 @@ public class AirflowSteps {
 	 */
 	@Then("^user verifies the \"([^\"]*)\" icon is displayed on exam card$")
 	public void user_verifies_the_icon_is_displayed_on_exam_card(String statusIconsOnExamCard) throws Throwable {
-		Assert.assertTrue(airflow.statusIndicatorOnExamCard(statusIconsOnExamCard,contextDTO.getMrn()));
+		airflow.verifySpinnerIsInvisible();
+		Comparator.check("Verify " + statusIconsOnExamCard + " icon is displayed on exam card", true, airflow.statusIndicatorOnExamCard(statusIconsOnExamCard,contextDTO.getMrn()));
 	}
 
 
@@ -159,8 +157,19 @@ public class AirflowSteps {
 	
 	@Then("^user verifies procedure and accession number is not diplayed on the examcards$")
 	public void user_verifies_procedure_and_accession_number_is_not_diplayed_on_the_examcards() throws Throwable {
-		Assert.assertTrue(airflow.verifyExamCardNotVisible(contextDTO.getResourceId(),contextDTO.getMrn()));
+		Comparator.check("verifies " + contextDTO.getMrn() + " mrn is not diplayed on the examcards", true,airflow.verifyExamCardNotVisible(contextDTO.getResourceId(), contextDTO.getMrn()));
 	}
-
+	
+	
+	@Then("^user is unauthorized access message should display$")
+	public void user_unauthorized_To_access() throws Throwable {
+		Comparator.check("user unauthorized access page dispalyed", true, airflow.verifyUnauthorizedUserTitleDisplayed());
+	}
+	
+	@Then("^Airflow home page should display$")
+	public void airflow_Home_Page() throws Throwable {
+		Comparator.check("user unauthorized access page dispalyed",true,  airflow.verifyhomePageWorkspaceDisplayed());
+	}
+	
 }
 
