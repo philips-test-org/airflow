@@ -13,5 +13,5 @@ cp airflow.war.VERSION /tmp/airflow.war
 cd db_scripts
 ./install.sh
 ./create-glassfish-jdbc.sh
-gf_app_deploy.sh /tmp/airflow.war
+wf_app_deploy.sh /tmp/airflow.war
 ```
