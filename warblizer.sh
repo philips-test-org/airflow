@@ -5,6 +5,7 @@ APPNAME=`cat config/application.name`
 # Standard file changes
 echo "Warblizer: Creating version page"
 git describe --always > app/views/main/_version.html.erb
+date +"%Y" > app/views/main/_copyright_year.html.erb
 
 # Warbalizing with changed files
 
@@ -35,3 +36,4 @@ mv -v "$APPNAME.war" "$APPNAME.war.`git describe --always`"
 
 # Resetting standard files
 git checkout app/views/main/_version.html.erb
+git checkout app/views/main/_copyright_year.html.erb
