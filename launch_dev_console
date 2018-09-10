@@ -1,1 +1,1 @@
-DEV_MODE="on" JRUBY_OPTS="-J-XX:MaxPermSize=256m" rails console
+CLASSPATH="$CLASSPATH:./jndi-config.clj" DEV_MODE="on" JRUBY_OPTS="-J-Dharbinger.sso.url=http://ai-opename-server:8088/openam" rails console
