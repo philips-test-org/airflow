@@ -4,7 +4,7 @@ set -e
 CWD=`pwd`
 APPNAME=`cat config/application.name`
 VERSION=`git describe --always`
-WARFILE="$APPNAME.war.$VERSION"
+WARFILE="$APPNAME.war"
 PACKAGEDIR="$APPNAME-$VERSION"
 GIT_COMMIT_HASH=`git log -1 --pretty=format:"%h"`
 
