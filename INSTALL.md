@@ -16,5 +16,5 @@ cd /servers/tmp/airflow-VERSION/db_scripts
 exit #leave support container
 cd airflow-VERSION/db_scripts
 ./create-datasources.sh
-cp airflow.war /servers/wildfly/deployments/airflow.war
+cp ../airflow.war /servers/wildfly/deployments/airflow.war
 ```
