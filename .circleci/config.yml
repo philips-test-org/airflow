@@ -6,8 +6,6 @@ version: 2
 jobs:
   test:
     <<: *defaults
-    environment:
-      TZ: "/usr/share/zoneinfo/America/New_York"
 
     steps:
       - checkout
@@ -20,7 +18,7 @@ jobs:
           command: yarn lint
       - run:
           name: Run jest tests
-          command: yarn test
+          command: TZ='America/New_York' yarn test
       - run:
           name: Run flow typechecks
           command: yarn flow
