@@ -37,7 +37,6 @@ ASSETS="clean" RAILS_ENV=production jruby -S bundle exec rake assets:clean
 
 echo "Warblizer: Changing permissions and war file name"
 chmod +r "$APPNAME.war"
-mv -v "$APPNAME.war" "$APPNAME.war.`git describe --always`"
 
 mkdir -v $PACKAGEDIR
 cp -Rv db_scripts $PACKAGEDIR
