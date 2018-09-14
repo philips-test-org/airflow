@@ -10,6 +10,7 @@ GIT_COMMIT_HASH=`git log -1 --pretty=format:"%h"`
 
 echo "Warblizer: Creating version page"
 git describe --always > app/views/main/_version.html.erb
+date +"%Y" > app/views/main/_copyright_year.html.erb
 
 # Warbalizing with changed files
 
@@ -42,6 +43,8 @@ mkdir -v $PACKAGEDIR
 cp -Rv db_scripts $PACKAGEDIR
 cp -v CHANGELOG.md $PACKAGEDIR
 cp -v INSTALL.md $PACKAGEDIR
+cp -v config/application.name $PACKAGEDIR
+echo $VERSION > $PACKAGEDIR/version
 cp -v $WARFILE $PACKAGEDIR
 zip -rq "$PACKAGEDIR-$GIT_COMMIT_HASH.zip" $PACKAGEDIR
 rm -rf $PACKAGEDIR

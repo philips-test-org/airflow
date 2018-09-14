@@ -1,9 +1,8 @@
 #!/bin/bash
 
-SERVER_FQDN=<PLATFORM_FQDN>
 JDBC_RESOURCE=/jdbc/airflow
 JDBC_POOL=airflowPOOL
-DB_HOST=$SERVER_FQDN
+DB_HOST=dockerhost
 DB=harbinger
 DB_USER=airflow
 DB_PASSWORD=2893ourj8923urjl
