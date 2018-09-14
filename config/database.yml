@@ -1,6 +1,9 @@
 development:
   adapter: postgresql
-  jndi: jdbc/airflow
+  host: localhost
+  username: airflow
+  password: 2893ourj8923urjl
+  database: harbinger
 
 production:
   adapter: postgresql

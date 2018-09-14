@@ -1,11 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
-      <div class="page-header">
-        <h1>About</h1>
-      </div>
-
-      Deployed Version: <%= render :partial => "version" %><br />
+      <%= render partial: "hre_about.html.erb", locals: { app_name: "Airflow", app_version: render(partial: "version"), has_dark_theme: @has_dark_theme, copyright_year: render(partial: "copyright_year") } %>
     </div>
   </div>
 </div>

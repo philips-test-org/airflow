@@ -1,13 +1,11 @@
 defaults: &defaults
   docker:
-      - image: tpoulsen/react:latest
+      - image: ctoland/circleci-build-wf:latest
 
 version: 2
 jobs:
   test:
     <<: *defaults
-    environment:
-      TZ: "/usr/share/zoneinfo/America/New_York"
 
     steps:
       - checkout
@@ -20,7 +18,7 @@ jobs:
           command: yarn lint
       - run:
           name: Run jest tests
-          command: yarn test
+          command: TZ='America/New_York' yarn test
       - run:
           name: Run flow typechecks
           command: yarn flow
@@ -28,9 +26,9 @@ jobs:
   build:
     <<: *defaults
     environment:
-      - PATH: "/usr/local/rvm/gems/jruby-1.7.26/bin:/usr/local/rvm/gems/jruby-1.7.26@global/bin:/usr/local/rvm/rubies/jruby-1.7.26/bin:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      - GEM_HOME: "/usr/local/rvm/gems/jruby-1.7.26"
-      - GEM_PATH: "/usr/local/rvm/gems/jruby-1.7.26:/usr/local/rvm/gems/jruby-1.7.26@global"
+      - PATH: "/usr/local/rvm/gems/jruby-9.1.5.0/bin:/usr/local/rvm/gems/jruby-9.1.5.0@global/bin:/usr/local/rvm/rubies/jruby-9.1.5.0/bin:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - GEM_HOME: "/usr/local/rvm/gems/jruby-9.1.5.0"
+      - GEM_PATH: "/usr/local/rvm/gems/jruby-9.1.5.0:/usr/local/rvm/gems/jruby-9.1.5.0@global"
       - CACHE_VERSION: "v1"
 
 
