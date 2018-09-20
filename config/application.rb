@@ -24,3 +24,6 @@ module Airflow
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+pool_class = ActiveRecord::Bogacs::FalsePool
+ActiveRecord::ConnectionAdapters::ConnectionHandler.connection_pool_class = pool_class

@@ -5,7 +5,7 @@ gem 'jquery-rails'
 gem 'jruby-jars', '=9.1.5.0'
 gem "activerecord-jdbc-adapter", "~> 1.3.8", platform: :jruby
 gem "activerecord-jdbcpostgresql-adapter", platform: :jruby
-gem 'activerecord-bogacs', :require => 'active_record/bogacs'
+gem 'activerecord-bogacs', '=0.3.0', :require => 'active_record/bogacs'
 gem 'warbler','=2.0.4'
 gem 'autoprefixer-rails','6.0.3'
 
