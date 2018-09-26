@@ -56,10 +56,29 @@ class ExamsController < ApplicationController
     orders = Exam.fetch(@entity_manager, resource_ids, date)
     log_hipaa_view(orders)
     @resources = resource_name_map(resources)
-    @resourceOrders = OrmConverter.print_orders(orders, @entity_manager).group_by { |order| order.dig(:rad_exam, "resource_id") }
+    @resourceOrders = OrmConverter.print_orders(orders, @entity_manager).group_by { |order| resource_id(order) }
   end
 
   private
+
+  def resource_id(order)
+    # Use resource id from adjustment if it's there
+    examAdjustment = ExamAdjustment.find_by(order_id: order["id"])
+    if examAdjustment
+      resource_id = examAdjustment.adjusted_attributes["resource_id"]
+      if resource_id.present?
+        return resource_id
+      end
+    end
+
+    # Use resource id from rad exam if it's there
+    resource_id = order.dig(:rad_exam, "resource_id")
+    if resource_id.present?
+      return resource_id
+    end
+
+    order["resource_id"]
+  end
 
   def all_resource_group_ids
     ResourceGroup.resource_group_hash(@entity_manager).map {|k,v| v.map {|x| x["id"]}}.flatten.uniq
