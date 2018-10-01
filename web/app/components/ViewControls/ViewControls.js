@@ -90,7 +90,7 @@ class ViewControls extends PureComponent<Props, State> {
         <div className="popover-content">
           {R.map(this.renderStatus, STATUS_CHECKS)}
           <div className="status">
-            <span className="color icon"><i className="anesthesia">GA</i></span><span className="name">Anesthesia</span>
+            <span className="color icon"><i className="anesthesia">A</i></span><span className="name">Anesthesia</span>
           </div>
           <div className="status">
             <span className="color icon"><i className="fa fa-handshake-o"></i></span><span className="name">Consent</span>
