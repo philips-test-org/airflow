@@ -2,7 +2,7 @@
 
 JDBC_RESOURCE=/jdbc/airflow
 JDBC_POOL=airflowPOOL
-DB_HOST=dockerhost
+DB_HOST=philips-rs-postgresql
 DB=harbinger
 DB_USER=airflow
 DB_PASSWORD=2893ourj8923urjl
