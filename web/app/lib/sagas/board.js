@@ -9,6 +9,7 @@ import {
   put,
   takeEvery,
   takeLatest,
+  select,
 } from "redux-saga/lib/effects";
 import Api from "../api";
 
@@ -18,6 +19,7 @@ import {
   fetchExamsSucceeded,
   fetchExamSucceeded,
   fetchPersonExamsSucceeded,
+  fetchPersonEvents,
   fetchPersonEventsSucceeded,
   requestFailed,
   showLoading,
@@ -84,8 +86,9 @@ function* fetchPersonExams(action): Saga<void> {
   }
 }
 
-function* fetchPersonEvents(action): Saga<void> {
+function* fetchPersonEventsSaga(action): Saga<void> {
   try {
+    yield put(fetchPersonEventsSucceeded(null));
     const payload = yield call(Api.fetchPersonEvents, action.mrnId);
     yield put(fetchPersonEventsSucceeded(payload));
   } catch (e) {
@@ -133,6 +136,11 @@ function* adjustOrder(action): Saga<void> {
       payload = yield call(Api.createEvent, action.event);
       yield put(addEvent(payload.order_id, payload));
     }
+
+    // Refetch the patient history for this order's patient
+    const orders = yield select((state) => state.board.orders);
+    const order = orders.find((o) => o.id === payload.order_id);
+    yield put(fetchPersonEvents(order.patient_mrn_id));
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)
@@ -148,7 +156,7 @@ export default function* boardSaga(): Saga<void> {
   yield takeEvery(FETCH_EXAM, fetchExam)
   yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
   yield takeLatest(FETCH_PERSON_EXAMS, fetchPersonExams)
-  yield takeLatest(FETCH_PERSON_EVENTS, fetchPersonEvents)
+  yield takeLatest(FETCH_PERSON_EVENTS, fetchPersonEventsSaga)
   yield takeLatest(FETCH_INITIAL_APP, fetchInitialApp)
   yield takeEvery(ADJUST_ORDER, adjustOrder)
   yield takeEvery(UPDATE_BROWSER_HISTORY, updateHistory)
