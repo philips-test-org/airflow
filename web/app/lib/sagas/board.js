@@ -18,6 +18,7 @@ import {
   fetchExamsSucceeded,
   fetchExamSucceeded,
   fetchPersonExamsSucceeded,
+  fetchPersonEventsSucceeded,
   requestFailed,
   showLoading,
   hideLoading,
@@ -33,6 +34,7 @@ const {
   FETCH_EXAMS,
   FETCH_EXAM,
   FETCH_PERSON_EXAMS,
+  FETCH_PERSON_EVENTS,
   FETCH_KIOSK_EXAMS,
   FETCH_INITIAL_APP,
   UPDATE_BROWSER_HISTORY,
@@ -76,6 +78,16 @@ function* fetchPersonExams(action): Saga<void> {
   try {
     const payload = yield call(Api.fetchPersonExams, action.personId);
     yield put(fetchPersonExamsSucceeded(action.personId, payload));
+  } catch (e) {
+    yield call(requestFailed(e));
+    console.log("error", e)
+  }
+}
+
+function* fetchPersonEvents(action): Saga<void> {
+  try {
+    const payload = yield call(Api.fetchPersonEvents, action.mrnId);
+    yield put(fetchPersonEventsSucceeded(payload));
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)
@@ -136,6 +148,7 @@ export default function* boardSaga(): Saga<void> {
   yield takeEvery(FETCH_EXAM, fetchExam)
   yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
   yield takeLatest(FETCH_PERSON_EXAMS, fetchPersonExams)
+  yield takeLatest(FETCH_PERSON_EVENTS, fetchPersonEvents)
   yield takeLatest(FETCH_INITIAL_APP, fetchInitialApp)
   yield takeEvery(ADJUST_ORDER, adjustOrder)
   yield takeEvery(UPDATE_BROWSER_HISTORY, updateHistory)

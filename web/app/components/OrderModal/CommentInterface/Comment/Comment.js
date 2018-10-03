@@ -17,6 +17,9 @@ type Props = {
   comments: string,
   created_at: string,
   hideAvatar: boolean,
+  showOrderNumber: boolean,
+  orderNumber: string,
+  orderNumbers: Array<string>,
 }
 
 class Comment extends PureComponent<Props> {
@@ -35,9 +38,28 @@ class Comment extends PureComponent<Props> {
         <div className="body">
           <div className="heading">
             <strong>{employee.name}</strong> commented on <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
+            {this.props.showOrderNumber && this.renderOrderNumber()}
           </div>
           <div className="content">{comments}</div>
         </div>
+      </div>
+    );
+  }
+
+  renderOrderNumber() {
+    const {orderNumber, orderNumbers} = this.props;
+    let num;
+    if (orderNumbers) {
+      num = orderNumbers.join(", ");
+    } else if (orderNumber) {
+      num = orderNumber;
+    } else {
+      return null;
+    }
+
+    return (
+      <div className="order-number">
+        <strong>Order:</strong> {num}
       </div>
     );
   }

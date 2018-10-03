@@ -17,6 +17,8 @@ const BoardActions = {
   FETCH_KIOSK_EXAMS: "FETCH_KIOSK_EXAMS",
   FETCH_PERSON_EXAMS: "FETCH_PERSON_EXAMS",
   FETCH_PERSON_EXAMS_SUCCEEDED: "FETCH_PERSON_EXAMS_SUCCEEDED",
+  FETCH_PERSON_EVENTS: "FETCH_PERSON_EVENTS",
+  FETCH_PERSON_EVENTS_SUCCEEDED: "FETCH_PERSON_EVENTS_SUCCEEDED",
   // ORDER MODAL
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
@@ -94,6 +96,20 @@ const fetchPersonExamsSucceeded = (personId: number, payload: Array<RadExam>) =>
   return {
     type: BoardActions.FETCH_PERSON_EXAMS_SUCCEEDED,
     personId,
+    payload,
+  }
+}
+
+const fetchPersonEvents = (mrnId: number) => {
+  return {
+    type: BoardActions.FETCH_PERSON_EVENTS,
+    mrnId,
+  }
+}
+
+const fetchPersonEventsSucceeded = (payload: Array<Event>) => {
+  return {
+    type: BoardActions.FETCH_PERSON_EVENTS_SUCCEEDED,
     payload,
   }
 }
@@ -258,6 +274,8 @@ export {
   fetchKioskExams,
   fetchPersonExams,
   fetchPersonExamsSucceeded,
+  fetchPersonEvents,
+  fetchPersonEventsSucceeded,
   adjustOrder,
   addEvent,
   preAdjustOrder,

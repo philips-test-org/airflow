@@ -24,6 +24,7 @@ const {
   DISPATCH_NOTIFICATION,
   MARK_NOTIFICATION_DISPLAYED,
   FETCH_PERSON_EXAMS_SUCCEEDED,
+  FETCH_PERSON_EVENTS_SUCCEEDED,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
@@ -54,6 +55,7 @@ const initialState = {
   width: 0,
   widthMultipliers: {},
   examsByPerson: {},
+  personEvents: null,
 }
 
 function board(state: Object = initialState, action: Object) {
@@ -72,6 +74,7 @@ function board(state: Object = initialState, action: Object) {
     case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
     case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
     case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
+    case FETCH_PERSON_EVENTS_SUCCEEDED: return updatePersonEvents(state, action);
     case SHOW_ORDER_MODAL: return showOrderModal(state, action);
     case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
     case SHOW_LOADING: return showLoading(state);
@@ -170,6 +173,12 @@ function updateExams(state, {personId, payload}) {
 
   return R.merge(state, {
     examsByPerson: R.merge(state.examsByPerson, {[personId]: sortedExams}),
+  });
+}
+
+function updatePersonEvents(state, {payload}) {
+  return R.merge(state, {
+    personEvents: payload,
   });
 }
 

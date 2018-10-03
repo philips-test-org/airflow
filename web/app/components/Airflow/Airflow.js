@@ -30,6 +30,7 @@ import {
 } from "../../lib/utility"
 
 import type {
+  Event,
   Images,
   Notification,
   Order,
@@ -53,6 +54,7 @@ type Props = {
   fetchInitialApp: (type: ViewType, date?: number) => void,
   fetchKioskExams: (selectedResourceGroup: string, resourceIds: Array<number>, date?: number) => void,
   fetchPersonExams: (personId: number) => void,
+  fetchPersonEvents: (mrnId: number) => void,
   focusedOrder: Order,
   images: Images,
   loading: boolean,
@@ -62,6 +64,7 @@ type Props = {
   orderGroups: {[string]: Array<Order>},
   orders: {[string]: Array<Order>},
   ordersLoaded: boolean,
+  personEvents?: Array<Event>,
   redirectToSSO: (ssoUrl: string, destination: ViewType) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
@@ -306,8 +309,10 @@ class Airflow extends Component<Props, State> {
         currentUser={this.props.currentUser}
         exams={exams}
         fetchAvatar={this.props.fetchAvatar}
+        fetchPersonEvents={this.props.fetchPersonEvents}
         order={this.props.focusedOrder}
         orderGroup={this.orderGroup(this.props.focusedOrder)}
+        personEvents={this.props.personEvents}
         resourceMap={this.props.selectedResources}
         startDate={this.props.startDate}
       />

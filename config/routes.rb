@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'print-view' => "exams#print_view"
   get 'exam_info' => "exams#show"
   get 'persons/:id/exams' => "persons#exams"
+  get 'persons/:id/events' => "persons#events"
   get "avatar/:id", to: 'avatars#show', as: "avatar"
   get 'about' => "main#about"
   get 'help' => "main#help"
