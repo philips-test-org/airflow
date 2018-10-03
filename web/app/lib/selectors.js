@@ -57,11 +57,12 @@ function getOrderStartTime(order: Order | MergedOrder) {
 
   }
 }
-
-const getOrderingPhysician = (order: Order | MergedOrder) => R.defaultTo(
-  "unknown",
-  R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order),
-);
+const getOrderingPhysician = (order: Order | MergedOrder) => {
+  return R.defaultTo(
+    R.path(["ordering_provider", "name"], order), 
+    R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order)
+  )
+};
 
 const getPatientName = (order: Order | MergedOrder) => (
   order.merged ?

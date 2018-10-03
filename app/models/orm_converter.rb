@@ -55,7 +55,8 @@ module OrmConverter
         :site_class => {:patient_type => {}},
         :current_status => {:universal_event_type => {}},
         :site_sublocation => {:site_location => {}},
-      }
+      },
+      :ordering_provider => {}
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
