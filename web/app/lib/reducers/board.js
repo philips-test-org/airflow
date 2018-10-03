@@ -28,7 +28,6 @@ const {
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
   HIDE_LOADING,
-  FETCH_RESOURCES_SUCCEEDED,
   REPLACE_ORDER,
   UPDATE_DATE,
   UPDATE_VIEW_TYPE,
@@ -45,7 +44,7 @@ const initialState = {
   orders: [],
   resources: {},
   notifications: [],
-  selectedResourceGroup: "All",
+  selectedResourceGroup: "",
   selectedResources: [],
   startDate: computeStartDate(),
   type: "calendar",
@@ -76,7 +75,6 @@ function board(state: Object = initialState, action: Object) {
     case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
     case SHOW_LOADING: return showLoading(state);
     case HIDE_LOADING: return hideLoading(state);
-    case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
     case REPLACE_ORDER: return replaceOrder(state, action);
     case UPDATE_DATE: return updateDate(state, action);
     case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
@@ -179,14 +177,6 @@ function showLoading(state) {
 
 function hideLoading(state) {
   return R.merge(state, {loading: false});
-}
-
-function updateResources(state, {resources, selectedResourceGroup}) {
-  return R.merge(state, {
-    resources,
-    selectedResourceGroup,
-    selectedResources: resources[selectedResourceGroup],
-  });
 }
 
 function updateDate(state, {date}) {

@@ -1,6 +1,8 @@
 <div id="workspace" class="vertical-timeline"
      data-spinnerurl="<%= image_path "ajax-loader.gif" %>"
      data-ssourl="<%= java.lang.System.getProperty("harbinger.sso.url") rescue "" %>"
+     data-resourceGroups="<%= @resourceGroups %>"
+     data-selectedResourceGroup="<%= @selected %>"
 >
 </div>
 

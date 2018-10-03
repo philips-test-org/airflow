@@ -35,7 +35,6 @@ const BoardActions = {
   UPDATE_SELECTED_RESOURCE_GROUP: "UPDATE_SELECTED_RESOURCE_GROUP",
   // Resources
   FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
-  FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
   // NOTIFICATIONS
   DISPATCH_NOTIFICATION: "DISPATCH_NOTIFICATION",
   MARK_NOTIFICATION_DISPLAYED: "MARK_NOTIFICATION_DISPLAYED",
@@ -208,14 +207,6 @@ const fetchInitialApp = (viewType: ViewType, date: number = moment().unix()) => 
   }
 }
 
-const fetchResourcesSucceeded = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
-  return {
-    type: BoardActions.FETCH_RESOURCES_SUCCEEDED,
-    resources,
-    selectedResourceGroup,
-  }
-}
-
 const updateSelectedResourceGroup = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
   return {
     type: BoardActions.UPDATE_SELECTED_RESOURCE_GROUP,
@@ -267,7 +258,6 @@ export {
   showLoading,
   hideLoading,
   fetchInitialApp,
-  fetchResourcesSucceeded,
   replaceOrder,
   updateDate,
   updateViewType,
