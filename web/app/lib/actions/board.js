@@ -107,7 +107,7 @@ const fetchPersonEvents = (mrnId: number) => {
   }
 }
 
-const fetchPersonEventsSucceeded = (payload: Array<Event>) => {
+const fetchPersonEventsSucceeded = (payload: ?Array<Event>) => {
   return {
     type: BoardActions.FETCH_PERSON_EVENTS_SUCCEEDED,
     payload,
