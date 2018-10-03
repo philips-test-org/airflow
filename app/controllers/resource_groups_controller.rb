@@ -11,9 +11,6 @@ class ResourceGroupsController < ApplicationController
       format.html {
         general_authentication
       }
-      format.json {
-        render json: ResourceGroup.resource_group_hash(@entity_manager).to_json
-      }
     end
   end
 
@@ -47,17 +44,6 @@ class ResourceGroupsController < ApplicationController
     rg = ResourceGroup.find(params[:id])
     rg.destroy if rg
     render :text => "ok"
-  end
-
-  def selected
-    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
-    # Reset resource group if the group doesn't exist
-    if session[:resource_group] and @groupings[session[:resource_group]] == nil
-      session[:resource_group] = nil
-    end
-
-    selected = session[:resource_group] || @groupings.keys.first
-    render json: {resource: selected}
   end
 
   def associate

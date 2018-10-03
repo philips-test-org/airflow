@@ -15,8 +15,6 @@ const ENDPOINTS = {
   personExams: (personId) => `${APP_ROOT}/persons/${personId}/exams`,
   avatar: (userId) => `${APP_ROOT}/avatar/${userId}`,
   events: `${APP_ROOT}/events`,
-  resourceGroups: `${APP_ROOT}/resource_groups`,
-  selectedResourceGroup: `${APP_ROOT}/resource_groups/selected`,
   currentEmployee: `${APP_ROOT}/employees/current`,
 }
 
@@ -40,14 +38,6 @@ const fetchAvatar = (userId: number) => (
   GET(ENDPOINTS.avatar(userId), {})
 );
 
-const fetchResourceGroups = () => (
-  GET(ENDPOINTS.resourceGroups)
-);
-
-const fetchSelectedResourceGroup = () => (
-  GET(ENDPOINTS.selectedResourceGroup)
-);
-
 const fetchCurrentEmployee = () => (
   GET(ENDPOINTS.currentEmployee)
 );
@@ -64,8 +54,6 @@ const Api = {
   fetchExam,
   fetchKioskExams,
   fetchPersonExams,
-  fetchResourceGroups,
-  fetchSelectedResourceGroup,
   fetchCurrentEmployee,
 }
 
