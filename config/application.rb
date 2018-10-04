@@ -1,3 +1,9 @@
+# Load the SDK when in development mode
+# The SDK is a shared library when in production
+if ENV['DEV_MODE'] == "on" then
+  require File.join(File.dirname(__FILE__),'..','sdk','harbinger-sdk-standalone.jar')
+end
+
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
