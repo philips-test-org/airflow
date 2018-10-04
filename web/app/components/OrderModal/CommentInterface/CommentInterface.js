@@ -59,7 +59,7 @@ class CommentInterface extends Component<Props> {
           </li>
           <li role="presentation" className="event-list-nav">
             <a href="#patient-events-list" aria-controls="patient-events-list" role="tab" data-toggle="tab">
-              Patient History
+              Audit History
             </a>
           </li>
         </ul>
