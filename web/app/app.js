@@ -36,10 +36,15 @@ if ($(target).length > 0) {
   const spinnerUrl = $(target).data("spinnerurl");
   const ssoUrl = $(target).data("ssourl");
   const view = $(".active .view-changer").data("viewType");
+  const resources = $(target).data("resourcegroups");
+  const selectedResourceGroup = $(target).data("selectedresourcegroup");
   const props = {
     board: {
       type: view,
       images: {spinner: spinnerUrl},
+      resources,
+      selectedResourceGroup,
+      selectedResources: resources[selectedResourceGroup],
     },
     user: {
       ssoUrl,
