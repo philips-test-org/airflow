@@ -23,7 +23,9 @@ module ExamHelper
   end
 
   def orderingPhysician(order)
-    checkExamThenOrder(order, [:rad_exam_personnel, :ordering, "name"])
+    ordering = order.dig(:ordering_provider, "name")
+    exam = order.dig(:rad_exam, :rad_exam_personnel, :ordering, "name")
+    exam.nil? ? ordering : exam
   end
 
   def start_time(order)

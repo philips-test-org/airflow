@@ -12,7 +12,8 @@ module OrmConverter
         :rad_exam_personnel => {:ordering => {}},
         :procedure => {},
         :resource => {},
-      }
+      },
+      :ordering_provider => {}
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
