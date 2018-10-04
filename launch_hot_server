@@ -1,1 +1,1 @@
-DEV_MODE="on" JRUBY_OPTS="-J-Xmx4096m -J-XX:MaxPermSize=512m -J-Dharbinger.sso.url=http://sparkqa2.analytical.info:8088/openam" HOT=true rails server -p 3001
+CLASSPATH="$CLASSPATH:./jndi-config.clj" DEV_MODE="on" JRUBY_OPTS="-J-Dharbinger.sso.url=http://sparkqa2.analytical.info:8088/openam" HOT=true rails server -p 3001

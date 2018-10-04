@@ -16,21 +16,11 @@ module OrmConverter
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
-      examAdjustment = ExamAdjustment.where(order_id: order.getId).first
-      if examAdjustment
-        start_time = examAdjustment.adjusted_attributes["start_time"]
-        if start_time
-          hash[:start_date] = start_time
-        end
-        resource_id = examAdjustment.adjusted_attributes["resource_id"]
-        if resource_id
-          hash[:rad_exams][0]["resource_id"] = resource_id
-        end
-      end
       if hash[:rad_exams] and hash[:rad_exams].size > 0
         hash[:rad_exam] = hash[:rad_exams].sort {|a,b| a["accession"] <=> b["accession"] }[0]
         hash[:rad_exams].each {|re| re.delete("accession") } #rad_exam accession deleted because of shared hash memory
       end
+
       hash.delete("order_number")
       list << hash
       list
