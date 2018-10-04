@@ -3,6 +3,7 @@ import {mount} from "enzyme";
 import {mergeDeepRight} from "ramda";
 import storeFunc from "../app/lib/store";
 import Airflow from "../app/components/Airflow";
+import resources from "./mockState/resources";
 
 /* Async function that will finish execution after all promises have been finished
  * Usage:
@@ -23,6 +24,9 @@ export function mountAirflow(type, startingProps = {}) {
       type,
       images: {spinner: "http://spinnerUrl"},
       hydrated: false,
+      resources,
+      selectedResourceGroup: "My group",
+      selectedResources: resources["My group"],
     },
     user: {
       ssoUrl: "http://ssoUrl",

@@ -1,1 +1,1 @@
-CLASSPATH="$CLASSPATH:./jndi-config.clj" DEV_MODE="on" JRUBY_OPTS="-J-Dharbinger.sso.url=http://ai-openam-server.com:8088/openam" rails server
+CLASSPATH="$CLASSPATH:./jndi-config.clj" DEV_MODE="on" JRUBY_OPTS="-J-Dharbinger.sso.url=http://sparkqa2.analytical.info:8088/openam" rails server
