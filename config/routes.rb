@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   get 'resource_groups' => 'resource_groups#index'
   get 'resource_groups/search' => 'resource_groups#search'
-  get 'resource_groups/selected' => 'resource_groups#selected'
   post 'resource_groups/create' => 'resource_groups#create'
   post 'resource_groups/delete' => 'resource_groups#delete'
   post 'resource_groups/associate' => 'resource_groups#associate'
