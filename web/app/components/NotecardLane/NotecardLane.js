@@ -54,11 +54,17 @@ const laneTarget = {
     return {
       targetResourceId: props.resourceId,
       movementDelta: movementOffset,
+      scrollTopStart: monitor.getItem().scrollTopStart,
     }
   },
   hover(props, monitor, component) {
+    const scrollTopStart = monitor.getItem().scrollTopStart;
+    const element = document.getElementById("board");
+
+    const currnetScrollTop = element ? element.scrollTop : 0;
+
     const movementDelta = monitor.getDifferenceFromInitialOffset();
-    const newTop = R.max(0, monitor.getItem().orderTop + movementDelta.y);
+    const newTop = R.max(0, monitor.getItem().orderTop + movementDelta.y - (scrollTopStart - currnetScrollTop));
     const orderHeight = monitor.getItem().orderHeight;
 
     component.setGhost(newTop, orderHeight);
@@ -183,7 +189,7 @@ class NotecardLane extends Component<Props, State> {
     const Component = this.props.type == "kiosk" ? ScaledCard(KioskNotecard) : DraggableNotecard;
     const {overlappingCards} = this.state;
     const overlaps = R.chain(({offset, cards}) => R.map(({id}) =>  ({offset, id}), cards), overlappingCards);
-
+    
     return (
       R.map((order) => {
         const isFiltered = order.merged ?
