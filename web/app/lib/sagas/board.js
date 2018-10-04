@@ -137,7 +137,8 @@ function* adjustOrder(action): Saga<void> {
 
     // Refetch the patient history for this order's patient
     const orders = yield select((state) => state.board.orders);
-    const order = orders.find((o) => o.id === payload.order_id);
+    const orderId = Array.isArray(payload) ? payload[0].order_id : payload.order_id;
+    const order = orders.find((o) => o.id === orderId);
     yield put(fetchPersonEvents(order.patient_mrn_id));
   } catch (e) {
     yield call(requestFailed(e));
