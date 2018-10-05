@@ -33,6 +33,7 @@ type Props = {
   ordersMergedByGroup: {[number]: Array<Order>},
   ordersLoaded: boolean,
   orderGroups: {[string]: Array<Order>},
+  removeOrders: (orderIds: Array<number>) => void,
   resources: {[string]: Array<Resource>},
   updateWidthMultiplier: (resourceID: number, widthMultiplier: number) => void,
   scrollToCoordinates: (x: number, y: number) => void,
@@ -91,6 +92,7 @@ class Calendar extends Component<Props> {
                 filteredOrderIds={this.props.filteredOrderIds}
                 focusedOrderId={this.props.focusedOrderId}
                 updateWidthMultiplier={this.props.updateWidthMultiplier}
+                removeOrders={this.props.removeOrders}
                 scrollToCoordinates={this.scrollToCoordinates}
                 selectedResources={this.props.selectedResources}
                 startDate={this.props.startDate}

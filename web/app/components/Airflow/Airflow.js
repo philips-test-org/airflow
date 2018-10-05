@@ -66,6 +66,7 @@ type Props = {
   ordersLoaded: boolean,
   personEvents?: Array<Event>,
   redirectToSSO: (ssoUrl: string, destination: ViewType) => void,
+  removeOrders: (orderIds: Array<number>) => void,
   resources: {[string]: Array<Resource>},
   selectedResourceGroup: string,
   selectedResources: {[number]: string},
