@@ -27,6 +27,7 @@ type Props = {
   offsetStyle: Object,
   order: Order,
   openModal: (Order) => void,
+  removeOrders: (orderIds: Array<number>) => void,
   startDate: number,
   type: "calendar" | "overview" | "kiosk",
   connectDragSource: Function,

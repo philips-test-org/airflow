@@ -27,6 +27,7 @@ type Props = {
   openModal: (Order) => void,
   movedOrder: Order,
   movementOffset: {x: number, y: number},
+  removeOrders: (orderIds: Array<number>) => void,
   resourceId: number,
   updateWidthMultiplier: (resourceId: number, widthMultiplier: number) => void,
   scrollToCoordinates: (x: number, y: number) => void,
@@ -207,6 +208,7 @@ class NotecardLane extends Component<Props, State> {
             openModal={this.props.openModal}
             offsetStyle={offset}
             order={order}
+            removeOrders={this.props.removeOrders}
             resourceId={this.props.resourceId}
             scrollToY={this.scrollToY}
             startDate={this.props.startDate}

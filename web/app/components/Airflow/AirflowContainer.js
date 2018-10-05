@@ -33,6 +33,7 @@ import {
   markNotificationDisplayed,
   preAdjustOrder,
   redirectToSSO,
+  removeOrders,
   showLoading,
   updateBrowserHistory,
   updateDate,
@@ -164,6 +165,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(showLoading());
       dispatch(redirectToSSO(ssoUrl, viewType));
     },
+    removeOrders: (orderIds: Array<number>) => {
+      dispatch(removeOrders(orderIds));
+    },
     updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => {
       dispatch(updateBrowserHistory(state, title, path));
     },
@@ -247,7 +251,7 @@ const innerMerge = (vals, startDate) => {
     if (!acc.cardStatus) {
       acc.cardStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"});
     } else {
-      let orderStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"})
+      let orderStatus = cardStatuses(order, ["name", "color", "card_class", "order"], {color: "#ddd"})
       R.maxBy(R.prop("order"), [acc.orderStatus, orderStatus])
     }
     return acc;

@@ -490,6 +490,21 @@ Shared Styles
   border-style: dashed;
 }
 
+.left-tab i.hide-card {
+  color: #fff;
+  font-size: 12px;
+  position: relative;
+  top: -4px;
+  left: -1px;
+  display: none;
+  &:hover {
+    color: #dcdcdc;
+  }
+}
+.notecard:hover .left-tab i.hide-card {
+  display: block;
+}
+
 .left-tab i.late {
   color: $alert-red;
 }

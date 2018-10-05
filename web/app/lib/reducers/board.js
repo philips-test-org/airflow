@@ -29,6 +29,7 @@ const {
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
   HIDE_LOADING,
+  REMOVE_ORDERS,
   REPLACE_ORDER,
   UPDATE_DATE,
   UPDATE_VIEW_TYPE,
@@ -78,6 +79,7 @@ function board(state: Object = initialState, action: Object) {
     case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
     case SHOW_LOADING: return showLoading(state);
     case HIDE_LOADING: return hideLoading(state);
+    case REMOVE_ORDERS: return removeOrders(state, action);
     case REPLACE_ORDER: return replaceOrder(state, action);
     case UPDATE_DATE: return updateDate(state, action);
     case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
@@ -153,6 +155,12 @@ function replaceOrder(state, {orderId, payload}) {
   const orders = R.set(orderLens, orderWithGroup, state.orders);
   return R.merge(state, {
     orders,
+  });
+}
+
+function removeOrders(state, {orderIds}) {
+  return R.merge(state, {
+    orders: state.orders.filter((order) => !orderIds.includes(order.id)),
   });
 }
 
