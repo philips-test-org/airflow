@@ -26,6 +26,7 @@ const BoardActions = {
   PREADJUST_ORDER: "PREADJUST_ORDER",
   ADD_EVENT: "ADD_EVENT",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
+  REMOVE_ORDERS: "REMOVE_ORDERS",
   REPLACE_ORDER: "REPLACE_ORDER",
   // UI
   SHOW_LOADING: "SHOW_LOADING",
@@ -161,6 +162,13 @@ const addEvent = (orderId: number, payload: Object) => {
   }
 }
 
+const removeOrders = (orderIds: Array<number>) => {
+  return {
+    type: BoardActions.REMOVE_ORDERS,
+    orderIds,
+  }
+}
+
 const replaceOrder = (orderId: number, payload: Object) => {
   return {
     type: BoardActions.REPLACE_ORDER,
@@ -276,6 +284,7 @@ export {
   showLoading,
   hideLoading,
   fetchInitialApp,
+  removeOrders,
   replaceOrder,
   updateDate,
   updateViewType,

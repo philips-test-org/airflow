@@ -264,7 +264,7 @@ export type MergedOrder = {|
   events: Array<Event>,
   groupIdentity: string,
   hasComments: boolean,
-  id: string,
+  id: number,
   merged: boolean,
   orders: Array<Order>,
   patientMrn: string,
