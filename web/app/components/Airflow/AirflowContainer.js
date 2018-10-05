@@ -25,6 +25,7 @@ import {
   fetchExams,
   fetchKioskExams,
   fetchPersonExams,
+  fetchPersonEvents,
   fetchInitialApp,
   fetchCurrentEmployee,
   showOrderModal,
@@ -105,6 +106,7 @@ const mapStateToProps = (state: Object) => {
     startDate: board.startDate,
     type: board.type,
     widthMultipliers: board.widthMultipliers,
+    personEvents: board.personEvents,
   };
 };
 
@@ -139,6 +141,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchPersonExams: (personId: number) => {
       dispatch(fetchPersonExams(personId));
+    },
+    fetchPersonEvents: (mrnId: number) => {
+      dispatch(fetchPersonEvents(mrnId));
     },
     fetchInitialApp: (type: ViewType, date: number) => {
       dispatch(fetchInitialApp(type, date));

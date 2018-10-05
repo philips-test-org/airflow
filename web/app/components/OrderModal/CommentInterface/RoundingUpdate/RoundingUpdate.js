@@ -23,6 +23,9 @@ type Props = {
   lastUpdate: Event,
   hideAvatar: boolean,
   hideDiff: boolean,
+  showOrderNumber: boolean,
+  orderNumber: string,
+  orderNumbers: Array<string>,
 }
 
 type State = {
@@ -61,6 +64,7 @@ class RoundingUpdate extends Component<Props, State> {
                 <Button text="Diff" className={`btn-xs btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
               </span>
             }
+            {this.props.showOrderNumber && this.renderOrderNumber()}
           </div>
           <div className="content">{this.state.showDiff ? this.renderDiff() : comments}</div>
         </div>
@@ -87,6 +91,24 @@ class RoundingUpdate extends Component<Props, State> {
 
   toggleDiff = () => {
     this.setState({showDiff: !this.state.showDiff});
+  }
+
+  renderOrderNumber() {
+    const {orderNumber, orderNumbers} = this.props;
+    let num;
+    if (orderNumbers) {
+      num = orderNumbers.join(", ");
+    } else if (orderNumber) {
+      num = orderNumber;
+    } else {
+      return null;
+    }
+
+    return (
+      <div className="order-number">
+        <strong>Order:</strong> {num}
+      </div>
+    );
   }
 }
 

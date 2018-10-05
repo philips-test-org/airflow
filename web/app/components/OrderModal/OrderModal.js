@@ -18,6 +18,7 @@ import ExamImageLink from "./ExamImageLink";
 import ExamDemographics from "./ExamDemographics";
 
 import type {
+  Event,
   ImageViewer,
   IntegrationJson,
   Order,
@@ -32,8 +33,10 @@ type Props = {
   currentUser: User,
   exams: Array<RadExam>,
   fetchAvatar: (userId: number) => void,
+  fetchPersonEvents: (mrnId: number) => void,
   order: Order,
   orderGroup: Array<Order>,
+  personEvents: Array<Event>,
   resourceMap: {[string]: string},
   startDate: number,
 }
@@ -64,6 +67,10 @@ class OrderModal extends Component<Props, State> {
     const order = nextOrder.merged ? nextOrder.orders[0] : nextOrder;
     const adjusted = order.adjusted;
     return {order, adjusted};
+  }
+
+  componentDidMount() {
+    this.props.fetchPersonEvents(this.state.order.patient_mrn_id)
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -109,6 +116,7 @@ class OrderModal extends Component<Props, State> {
                     events={events.reverse()}
                     fetchAvatar={this.props.fetchAvatar}
                     handleNewComment={this.handleNewComment}
+                    personEvents={this.props.personEvents}
                     resourceMap={this.props.resourceMap}
                     user={this.props.currentUser}
                   />
