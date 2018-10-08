@@ -252,7 +252,7 @@ const innerMerge = (vals, startDate) => {
       acc.cardStatus = cardStatuses(order, ["name", "color", "card_class", "order"], {color: "#ddd"});
     } else {
       let orderStatus = cardStatuses(order, ["name", "color", "card_class", "order"], {color: "#ddd"})
-      R.maxBy(R.prop("order"), [acc.orderStatus, orderStatus])
+      acc.cardStatus = R.maxBy(R.prop("order"), acc.cardStatus, orderStatus)
     }
     return acc;
   }, orderAcc, vals)
