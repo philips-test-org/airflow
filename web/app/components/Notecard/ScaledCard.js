@@ -45,8 +45,7 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
 
     orderHeight(): number {
       const {order, startDate} = this.props;
-      const durationSeconds = maybeMsToSeconds(orderDuration(startDate, order)) || 0;
-      const seconds = Math.abs(durationSeconds);
+      const seconds = maybeMsToSeconds(orderDuration(startDate, order)) || 0;
       // Default for bad data
       if (seconds < 0) {
         return 30;
