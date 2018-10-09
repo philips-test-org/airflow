@@ -9,12 +9,7 @@ class MainController < ApplicationController
     @employee = Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
     @groupings = ResourceGroup.resource_group_hash(@entity_manager)
     @resourceGroups = ResourceGroup.resource_group_hash(@entity_manager).to_json
-    # Reset resource group if the group doesn't exist
-    if session[:resource_group] and @groupings[session[:resource_group]] == nil
-      session[:resource_group] = nil
-    end
-
-    @selected = session[:resource_group] || @groupings.keys.first
+    @selected = selected_resources_group(@groupings)
   end
 
   def about
