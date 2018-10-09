@@ -95,20 +95,21 @@ class BaseNotecard extends PureComponent<Props> {
   renderAllProcedures() {
     const {order} = this.props;
     if (order.merged) {
-      return R.map((o) => this.renderProcedure(o.procedure, o.orderedBy), order.procedures);
+      const mapIndexed = R.addIndex(R.map)
+      return mapIndexed((o, i) => this.renderProcedure(o.procedure, o.orderedBy, i), order.procedures);
     } else {
       const procedure = getProcedure(order);
       const orderedBy = getOrderingPhysician(order);
       if (typeof procedure == "string") {
-        return this.renderProcedure(procedure, orderedBy);
+        return this.renderProcedure(procedure, orderedBy, 1);
       }
     }
     return null;
   }
 
-  renderProcedure(procedure: string, orderedBy: string) {
+  renderProcedure(procedure: string, orderedBy: string, index: number) {
     return (
-      <Fragment key={`procedure-${procedure}-${orderedBy}`}>
+      <Fragment key={`procedure-${procedure}-${orderedBy}-${index}`}>
         <div className="procedure">{procedure}</div>
         <div className="patient-location">{this.examLocation()}</div>
         <div className="ordering-physician">Ordered by: {orderedBy}</div>
