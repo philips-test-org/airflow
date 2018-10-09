@@ -44,6 +44,15 @@ class ApplicationController < ActionController::Base
     valid_token_test = Java::harbinger.sdk.SSO.valid_token(token_cookie)
   end
 
+  def selected_resources_group(groupings)
+    # Reset resource group if the group doesn't exist
+    if session[:resource_group] and groupings[session[:resource_group]] == nil
+      session[:resource_group] = nil
+    end
+
+    session[:resource_group] || groupings.keys.first
+  end
+
 
   def get_employee
     @employee ||= Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
