@@ -5,7 +5,7 @@ import fetchMock from "fetch-mock";
 import moment from "moment";
 
 import afterMidnightExams from "../mockState/afterMidnightExams";
-import resources from "../mockState/resources";
+import noDurationExams from "../mockState/noDurationExams";
 import {flushAllPromises, mountAirflow} from "../helpers";
 
 describe("<Calendar>", () => {
@@ -124,8 +124,6 @@ describe("<Calendar> card", () => {
     // Couldn't figure out how to change the exams fetch without redoing them all
     fetchMock.restore();
     fetchMock.get("glob:/exams*", afterMidnightExams, {overwriteRoutes: false});
-    fetchMock.get("/resource_groups?", resources);
-    fetchMock.get("/resource_groups/selected?", {"resource": "My group"});
     fetchMock.get("/employees/current?", {
       active: true,
       fte: 1,
@@ -144,6 +142,31 @@ describe("<Calendar> card", () => {
 
     calendar.find(BaseNotecard).forEach(card => {
       expect(card.prop("style").height).toEqual("500px");
+    });
+  });
+
+  it("has card height of 30 seconds if no duration given in orders that are merged", async () => {
+    // Couldn't figure out how to change the exams fetch without redoing them all
+    fetchMock.restore();
+    fetchMock.get("glob:/exams*", noDurationExams, {overwriteRoutes: false});
+    fetchMock.get("/employees/current?", {
+      active: true,
+      fte: 1,
+      id: 21,
+      name :"Some Person",
+      person_id: 21,
+      updated_at: "2017-11-09T14:00:37-05:00",
+    });
+    fetchMock.get("glob:/persons/*", []);
+
+    const airflow = mountAirflow("calendar", {board: {startDate: moment("2018-05-16T04:00:00.000Z")}}).airflow;
+    await flushAllPromises();
+    airflow.update();
+
+    const calendar = airflow.find(Calendar);
+
+    calendar.find(BaseNotecard).forEach(card => {
+      expect(card.prop("style").height).toEqual("30px");
     });
   });
 });
