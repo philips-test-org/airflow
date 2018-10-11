@@ -43,6 +43,12 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
+  begin
+    #expect secure-cookie-flag in the config folder
+    config.force_ssl = File.read(File.join(Rails.root.join, 'config', 'secure-cookie-flag')).strip == "true"
+  rescue Errno::ENOENT
+    puts "Could not find secure-cookie-flag. Default is false."
+  end
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
