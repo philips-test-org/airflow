@@ -1,3 +1,10 @@
+## v1.2.1 released 2018-08-16
+
+* **bugfix:** fix app crash on orders without rad exams
+* **bugfix:** fix printing in IE
+* **bugfix:** fix card ordering in "Overview"
+* **bugfix:** fix placeholder images for avatars
+* **bugfix:** move "PPCA Ready" status between "Arrived" and "Started"
 
 ## v1.2.0 released 2018-07-17
 

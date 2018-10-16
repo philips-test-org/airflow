@@ -46,24 +46,24 @@ class ExamDemographics extends Component<Props, State> {
         {this.renderOrderNavTabs()}
         <table className="table table-bordered table-striped">
           <tbody>
-            {this.renderDemographicsTableRow("Accession", order.rad_exam.accession)}
+            {this.renderDemographicsTableRow("Accession", R.path(["rad_exam", "accession"], order))}
             {this.renderDemographicsTableRow("Order Number", order.order_number)}
-            {this.renderDemographicsTableRow("Patient MRN", order.patient_mrn.mrn)}
-            {this.renderDemographicsTableRow("Patient DOB", order.patient_mrn.patient.birthdate)}
+            {this.renderDemographicsTableRow("Patient MRN", R.path(["patient_mrn", "mrn"], order))}
+            {this.renderDemographicsTableRow("Patient DOB", R.path(["patient_mrn", "patient", "birthdate"], order))}
             {this.renderDemographicsTableRow("Patient Location", this.patientLocation())}
             {this.renderDemographicsTableRow("Patient Type", getPatientType(order))}
             {this.renderDemographicsTableRow("Patient Class", this.siteClassName())}
             {this.renderDemographicsTableRow("Resource", this.resourceName())}
             {this.renderDemographicsTableRow("Procedure", getProcedure(order))}
             {this.renderDemographicsTableRow("Default Procedure Duration", this.defaultProcedureDuration())}
-            {this.renderDemographicsTableRow("Sign In", formatTimestamp(order.rad_exam.rad_exam_time.sign_in))}
-            {this.renderDemographicsTableRow("Check In", formatTimestamp(order.rad_exam.rad_exam_time.check_in))}
+            {this.renderDemographicsTableRow("Sign In", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "sign_in"], order)))}
+            {this.renderDemographicsTableRow("Check In", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "check_in"], order)))}
             {this.renderDemographicsTableRow("Appointment", formatTimestamp(getAppointmentTime(order)))}
             {this.renderDemographicsTableRow("Appointment Duration", this.formatDuration(order.appointment_duration))}
             {this.renderDemographicsTableRow("Current Duration", this.formatDuration(maybeMsToSeconds(orderDuration(this.props.startDate, order))))}
-            {this.renderDemographicsTableRow("Begin Exam", formatTimestamp(order.rad_exam.rad_exam_time.begin_exam))}
-            {this.renderDemographicsTableRow("End Exam", formatTimestamp(order.rad_exam.rad_exam_time.end_exam))}
-            {this.renderDemographicsTableRow("Ordering Physician", order.rad_exam.rad_exam_personnel.ordering.name)}
+            {this.renderDemographicsTableRow("Begin Exam", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "begin_exam"], order)))}
+            {this.renderDemographicsTableRow("End Exam", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "end_exam"], order)))}
+            {this.renderDemographicsTableRow("Ordering Physician", R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order))}
           </tbody>
         </table>
       </div>

@@ -1,0 +1,18 @@
+<div class="print-order" style={{pageBreakInside: "avoid", marginBottom: "1em"}}>
+  <h3 class="patient-name"><%= name(order) %></h3>
+  <div>
+    <div>
+      <strong>Procedure: </strong>
+      <span class="procedure"><%= procedure(order) %></span>
+    </div>
+    <div>
+      <strong>Ordering Physician: </strong>
+      <span><%= orderingPhysician(order) %></span>
+    </div>
+    <div>
+      <strong>Rounding: </strong>
+      <span><%= rounding(order) %></span>
+    </div>
+  </div>
+  <hr />
+</div>

@@ -78,18 +78,10 @@ function isIE(): (?number) {
   return (myNav.indexOf("msie") !== -1) ? parseInt(myNav.split("msie")[1]) : null;
 }
 
-function printOrders() {
-  var content = document.getElementById("print-view-contents");
-  // Iframe
-  var frame: any = document.getElementById("print-view-frame");
-  if (content && frame) {
-    const pri = frame.contentWindow;
-    pri.document.open();
-    pri.document.write(content.innerHTML);
-    pri.document.close();
-    pri.focus();
-    pri.print();
-  }
+function printOrders(date: string | number, resourceIds: Array<number>, resourceGroup: string) {
+  const resources = R.join("&resources[]=", resourceIds);
+  const win = window.open(`${APP_ROOT}/print-view?date=${date}&resources[]=${resources}&resource_group=${encodeURIComponent(resourceGroup)}`, "_blank");
+  win.focus();
 }
 
 const throttle = (func: Function, limit: number) => {
@@ -105,6 +97,13 @@ const throttle = (func: Function, limit: number) => {
   }
 }
 
+function sortedSelectedResourceIds(selectedResources: Object) {
+  return R.keys(selectedResources).sort((a, b) => {
+    if (selectedResources[a] > selectedResources[b]) return 1;
+    if (selectedResources[a] < selectedResources[b]) return -1;
+    return 0;
+  })
+}
 
 export {
   avatarPath,
@@ -119,4 +118,5 @@ export {
   ordersByResource,
   printOrders,
   throttle,
+  sortedSelectedResourceIds,
 }
