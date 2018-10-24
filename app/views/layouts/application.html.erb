@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Airflow</title>
+  <title><%= APPLICATION_NAME %></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= yield(:stylesheet_includes) %>
   <%= csrf_meta_tags %>
@@ -43,7 +43,7 @@
         <div class="navbar-brand" id="product-line">
           <a href="/">Performance<strong>Bridge</strong></a>
         </div>
-        <a class="navbar-brand" id="app-name" href="<%= url_for :controller => :main, :action => :index %>">| Airflow</a>
+        <a class="navbar-brand" id="app-name" href="<%= url_for :controller => :main, :action => :index %>">| <%= APPLICATION_NAME %></a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">

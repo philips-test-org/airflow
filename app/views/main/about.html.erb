@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
-      <%= render partial: "hre_about.html.erb", locals: { app_name: "Airflow", app_version: render(partial: "version"), has_dark_theme: @has_dark_theme, copyright_year: render(partial: "copyright_year") } %>
+      <%= render partial: "hre_about.html.erb", locals: { app_name: APPLICATION_NAME, app_version: render(partial: "version"), has_dark_theme: @has_dark_theme, copyright_year: render(partial: "copyright_year") } %>
     </div>
   </div>
 </div>
