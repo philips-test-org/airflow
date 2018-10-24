@@ -16,5 +16,6 @@ cd /servers/tmp/patient-flow-VERSION/db_scripts
 exit #leave support container
 cd patient-flow-VERSION/db_scripts
 ./create-datasources.sh
-cp ../patient-flow.war /servers/wildfly/deployments/patient-flow.war
+pb_run wf_app_deploy.sh /servers/wildfly/deployments/patient-flow.war
+
 ```
