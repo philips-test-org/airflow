@@ -8,13 +8,13 @@
 
 ```bash
 cd /servers/tmp
-unzip airflow-VERSION.zip
+unzip patient-flow-VERSION.zip
 /servers/harbinger/management/pb_support_console.sh
 #within the container:
-cd /servers/tmp/airflow-VERSION/db_scripts
+cd /servers/tmp/patient-flow-VERSION/db_scripts
 ./install.sh
 exit #leave support container
-cd airflow-VERSION/db_scripts
+cd patient-flow-VERSION/db_scripts
 ./create-datasources.sh
-cp ../airflow.war /servers/wildfly/deployments/airflow.war
+cp ../patient-flow.war /servers/wildfly/deployments/patient-flow.war
 ```
