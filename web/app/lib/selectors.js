@@ -36,13 +36,16 @@ function getOrderResourceId(order: Order) {
 }
 
 function getOrderResource(resources: Array<Resource>, order: Order) {
-  return R.compose(
-    R.defaultTo(order.resource),
-    R.find((resource) =>
-      resource.id === R.path(["adjusted", "resource_id"], order) ||
-      resource.id === R.path(["rad_exam", "resource_id"], order)
-    )
-  )(resources)
+  const adjustedPath = R.path(["adjusted", "resource_id"]);
+  const unadjustedPath = R.path(["rad_exam", "resource_id"]);
+
+  const findAdjustedResource = R.find(R.propEq("id", adjustedPath(order)));
+  const findUnadjustedResource = R.find(R.propEq("id", unadjustedPath(order)));
+
+  return R.defaultTo(
+    order.resource,
+    R.defaultTo(findUnadjustedResource(resources), findAdjustedResource(resources))
+  );
 }
 
 function getOrderStartTime(order: Order | MergedOrder) {
