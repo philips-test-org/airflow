@@ -51,8 +51,8 @@ module OrmConverter
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
-      hash.merge!(ExamAdjustment.info_for(order,em))
       hash[:rad_exam] = hash[:rad_exams].sort {|a,b| a["accession"] <=> b["accession"] }[0]
+      hash.merge!(ExamAdjustment.info_for(hash, em))
       list << hash
       list
     end
