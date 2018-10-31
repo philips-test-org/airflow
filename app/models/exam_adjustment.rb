@@ -2,11 +2,11 @@ class ExamAdjustment < ActiveRecord::Base
   self.table_name = "airflow_exam_adjustments"
   has_many :exam_events, :foreign_key => "exam_adjustment_id", :dependent => :destroy
 
-  def self.info_for(order, em)
-    adj = self.where(order_id: order["id"]).first
+  def self.info_for(order_hash, em)
+    adj = self.where(order_id: order_hash["id"]).first
     if adj
       adjusted_start = Time.at(adj.adjusted_attributes["start_time"] / 1000).to_date
-      ost = order.dig(:rad_exam, :rad_exam_time, "begin_exam") || order.dig(:rad_exam, :rad_exam_time, "appointment")
+      ost = order_hash.dig(:rad_exam, :rad_exam_time, "begin_exam") || order_hash.dig(:rad_exam, :rad_exam_time, "appointment")
       original_start = Time.at(ost / 1000).to_date
 
       # Only use adjusted attributes if the adjusted start time's date is the same as the original
