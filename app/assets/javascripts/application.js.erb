@@ -7,3 +7,10 @@
 //= require harbinger-js/integration.js
 //= require lib/handlebars-v4.0.4.js
 //= require lib/templates.js
+
+// Toggle mobile nav
+$(document).ready(function() {
+  $(".navbar-header button").click(function() {
+    $("#navbar").toggleClass("in");
+  });
+});
