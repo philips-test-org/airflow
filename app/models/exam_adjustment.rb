@@ -5,7 +5,7 @@ class ExamAdjustment < ActiveRecord::Base
   def self.info_for(order_hash, em)
     adj = self.where(order_id: order_hash["id"]).first
     if adj
-      adjusted_start = Time.at(adj.adjusted_attributes["start_time"] / 1000).to_date
+      adjusted_start = adj.adjusted_attributes["start_time"] ? Time.at(adj.adjusted_attributes["start_time"] / 1000).to_date : nil
       ost = order_hash.dig(:rad_exam, :rad_exam_time, "begin_exam") || order_hash.dig(:rad_exam, :rad_exam_time, "appointment")
       original_start = Time.at(ost / 1000).to_date
 
