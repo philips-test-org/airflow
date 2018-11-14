@@ -113,7 +113,7 @@ class OrderModal extends Component<Props, State> {
                   </div>
                   <CommentInterface
                     avatar={userAvatar}
-                    events={events.reverse()}
+                    events={events}
                     fetchAvatar={this.props.fetchAvatar}
                     handleNewComment={this.handleNewComment}
                     personEvents={this.props.personEvents}
