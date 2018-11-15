@@ -10,7 +10,7 @@ import {
   getScheduledDuration,
 } from "./selectors";
 
-import {cardStatuses} from "../lib";
+import {cardStatuses} from "../lib/utility";
 
 import type {
   MergedOrder,
