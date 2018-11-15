@@ -10,6 +10,8 @@ import {
   getScheduledDuration,
 } from "./selectors";
 
+import {cardStatuses} from "../lib";
+
 import type {
   MergedOrder,
   Order,
@@ -28,7 +30,9 @@ function examStartTime(exam: RadExam) {
 }
 
 function groupIdentity(resources: Array<Resource>, startDate: number, order: Order) {
-  return order.patient_mrn_id + getOrderResource(resources, order).id + unadjustedOrderStartTime(order);
+  const resourceId = getOrderResource(resources, order).id;
+  const cancelled = cardStatuses(order, ["name"], {}).name === "Cancelled" ? "Cancelled" : "";
+  return order.patient_mrn_id + resourceId + unadjustedOrderStartTime(order) + cancelled;
 }
 
 function hasComments(order: Order): boolean {
