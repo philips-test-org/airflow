@@ -10,7 +10,9 @@ class ExamAdjustment < ActiveRecord::Base
       original_start = Time.at(ost / 1000).to_date
 
       # Only use adjusted attributes if the adjusted start time's date is the same as the original
-      if adjusted_start == original_start
+      if adjusted_start.present? && adjusted_start != original_start
+        adjusted_attrs = adj.adjusted_attributes.except("start_time", "stop_time", "resource_id")
+      else
         adjusted_attrs = adj.adjusted_attributes
       end
       events = adj.exam_events
