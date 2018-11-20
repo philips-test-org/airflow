@@ -38,6 +38,6 @@ module ExamHelper
       end
     end
 
-    Exam.start_start(order_hash)
+    Exam.start_time(order_hash)
   end
 end
