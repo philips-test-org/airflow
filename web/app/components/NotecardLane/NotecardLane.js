@@ -190,7 +190,7 @@ class NotecardLane extends Component<Props, State> {
     const Component = this.props.type == "kiosk" ? ScaledCard(KioskNotecard) : DraggableNotecard;
     const {overlappingCards} = this.state;
     const overlaps = R.chain(({offset, cards}) => R.map(({id}) =>  ({offset, id}), cards), overlappingCards);
-    
+
     return (
       R.map((order) => {
         const isFiltered = order.merged ?
