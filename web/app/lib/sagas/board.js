@@ -9,6 +9,7 @@ import {
   put,
   takeEvery,
   takeLatest,
+  select,
 } from "redux-saga/lib/effects";
 import Api from "../api";
 
@@ -18,10 +19,10 @@ import {
   fetchExamsSucceeded,
   fetchExamSucceeded,
   fetchPersonExamsSucceeded,
+  fetchPersonEventsSucceeded,
   requestFailed,
   showLoading,
   hideLoading,
-  fetchResourcesSucceeded,
 } from "../actions";
 
 import type {Saga} from "redux-saga";
@@ -33,6 +34,7 @@ const {
   FETCH_EXAMS,
   FETCH_EXAM,
   FETCH_PERSON_EXAMS,
+  FETCH_PERSON_EVENTS,
   FETCH_KIOSK_EXAMS,
   FETCH_INITIAL_APP,
   UPDATE_BROWSER_HISTORY,
@@ -82,14 +84,26 @@ function* fetchPersonExams(action): Saga<void> {
   }
 }
 
+function* fetchPersonEventsSaga(action): Saga<void> {
+  try {
+    yield put(fetchPersonEventsSucceeded(null));
+    const payload = yield call(Api.fetchPersonEvents, action.mrnId);
+    yield put(fetchPersonEventsSucceeded(payload));
+  } catch (e) {
+    yield call(requestFailed(e));
+    console.log("error", e)
+  }
+}
+
 function* fetchInitialApp(action): Saga<void> {
   try {
     yield put(showLoading());
     var exams;
-    const [resourceGroups, {resource}] = yield all([
-      call(Api.fetchResourceGroups),
-      call(Api.fetchSelectedResourceGroup),
-    ]);
+    const getResourceGroups = (state) =>  state.board.resources;
+    const getResource = (state) => state.board.selectedResourceGroup;
+    const resourceGroups = yield select(getResourceGroups);
+    const resource = yield select(getResource);
+
     if (R.length(R.keys(resourceGroups)) > 0) {
       const resourceIds = R.keys(mapSelectedResources(resourceGroups[resource]));
 
@@ -101,8 +115,6 @@ function* fetchInitialApp(action): Saga<void> {
     } else {
       exams = [];
     }
-
-    yield put(fetchResourcesSucceeded(resourceGroups, resource));
     yield put(fetchExamsSucceeded(exams));
   } catch (e) {
     yield call(requestFailed(e));
@@ -136,6 +148,7 @@ export default function* boardSaga(): Saga<void> {
   yield takeEvery(FETCH_EXAM, fetchExam)
   yield takeLatest(FETCH_KIOSK_EXAMS, fetchKioskExams)
   yield takeLatest(FETCH_PERSON_EXAMS, fetchPersonExams)
+  yield takeLatest(FETCH_PERSON_EVENTS, fetchPersonEventsSaga)
   yield takeLatest(FETCH_INITIAL_APP, fetchInitialApp)
   yield takeEvery(ADJUST_ORDER, adjustOrder)
   yield takeEvery(UPDATE_BROWSER_HISTORY, updateHistory)

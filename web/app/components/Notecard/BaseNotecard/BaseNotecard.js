@@ -23,6 +23,7 @@ type Props = {
   isFocused: boolean,
   openModal: (order: Order | MergedOrder) => void,
   order: Order | MergedOrder,
+  removeOrders: (orderIds: Array<number>) => void,
   scrollToY: (y: number) => void,
   startDate: number,
   style: Object,
@@ -43,7 +44,7 @@ class BaseNotecard extends PureComponent<Props> {
     const {order, comments, style} = this.props;
     const hasComments = !(R.isNil(comments)) && !(R.isEmpty(comments));
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
-    const {color, card_class} = this.cardStatus();
+    const {name: statusName, color, card_class} = this.cardStatus();
     const cardClass = `notecard ${this.cardClass(card_class)}`;
     return (
       <div
@@ -53,7 +54,9 @@ class BaseNotecard extends PureComponent<Props> {
         onClick={this.openModal}
         ref={el => this.card = el}
       >
-        <div className="left-tab" style={{backgroundColor: color}} />
+        <div className="left-tab" style={{backgroundColor: color}}>
+          {statusName === "Cancelled" && <i className="fa fa-times hide-card" onClick={this.removeOrder} />}
+        </div>
 
         <div className="right-tab">
           <div className="events">
@@ -92,20 +95,21 @@ class BaseNotecard extends PureComponent<Props> {
   renderAllProcedures() {
     const {order} = this.props;
     if (order.merged) {
-      return R.map((o) => this.renderProcedure(o.procedure, o.orderedBy), order.procedures);
+      const mapIndexed = R.addIndex(R.map)
+      return mapIndexed((o, i) => this.renderProcedure(o.procedure, o.orderedBy, i), order.procedures);
     } else {
       const procedure = getProcedure(order);
       const orderedBy = getOrderingPhysician(order);
       if (typeof procedure == "string") {
-        return this.renderProcedure(procedure, orderedBy);
+        return this.renderProcedure(procedure, orderedBy, 1);
       }
     }
     return null;
   }
 
-  renderProcedure(procedure: string, orderedBy: string) {
+  renderProcedure(procedure: string, orderedBy: string, index: number) {
     return (
-      <Fragment key={`procedure-${procedure}-${orderedBy}`}>
+      <Fragment key={`procedure-${procedure}-${orderedBy}-${index}`}>
         <div className="procedure">{procedure}</div>
         <div className="patient-location">{this.examLocation()}</div>
         <div className="ordering-physician">Ordered by: {orderedBy}</div>
@@ -143,7 +147,7 @@ class BaseNotecard extends PureComponent<Props> {
   cardStatus() {
     const {order} = this.props;
     return R.has("cardStatus", order) ? R.prop("cardStatus", order) :
-      cardStatuses(order, ["color", "card_class"], {color: "#ddd"});
+      cardStatuses(order, ["name", "color", "card_class"], {color: "#ddd"});
   }
 
   examLocation() {
@@ -159,6 +163,14 @@ class BaseNotecard extends PureComponent<Props> {
   negativeDuration() {
     // TODO FIXME
     return false;
+  }
+
+  removeOrder = () => {
+    const orderIds: Array<number> = this.props.order.merged
+      ? R.pluck("id", this.props.order.orders)
+      : [this.props.order.id]
+
+    this.props.removeOrders(orderIds)
   }
 }
 

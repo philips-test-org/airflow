@@ -20,6 +20,9 @@ type Props = {
   events: Array<Object>,
   fetchAvatar: (userId: number) => void,
   handleNewComment: (comment: string) => void,
+  onOpenAuditHistory: () => void,
+  onCloseAuditHistory: () => void,
+  personEvents: Array<AnnotatedEvent>,
   resourceMap: {[number]: string},
   user: User,
 }
@@ -41,19 +44,24 @@ class CommentInterface extends Component<Props> {
         <CommentForm userId={this.props.user.id} handleSubmit={this.props.handleNewComment} />
         <hr />
         <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
-          <li role="presentation" className="event-list-nav active">
+          <li role="presentation" className="event-list-nav active" onClick={this.props.onCloseAuditHistory}>
             <a href="#comment-list" aria-controls="comment-list" role="tab" data-toggle="tab">
               Comments
             </a>
           </li>
-          <li role="presentation" className="event-list-nav">
+          <li role="presentation" className="event-list-nav" onClick={this.props.onCloseAuditHistory}>
             <a href="#event-list" aria-controls="event-list" role="tab" data-toggle="tab">
               Events
             </a>
           </li>
-          <li role="presentation" className="event-list-nav">
+          <li role="presentation" className="event-list-nav" onClick={this.props.onCloseAuditHistory}>
             <a href="#combined-events-list" aria-controls="combined-events-list" role="tab" data-toggle="tab">
               All
+            </a>
+          </li>
+          <li role="presentation" className="event-list-nav" onClick={this.props.onOpenAuditHistory}>
+            <a href="#patient-events-list" aria-controls="patient-events-list" role="tab" data-toggle="tab">
+              Audit History
             </a>
           </li>
         </ul>
@@ -79,7 +87,13 @@ class CommentInterface extends Component<Props> {
           {this.renderEvents(R.propOr([], "event", groupedEvents))}
         </div>
         <div role="tabpanel" className="event-list-pane tab-pane" id="combined-events-list">
-          {this.renderMixedEvents(events)}
+          {this.renderMixedEvents(events, false, false)}
+        </div>
+        <div role="tabpanel" className="event-list-pane tab-pane" id="patient-events-list">
+          {this.props.personEvents
+            ? this.renderMixedEvents(this.deduplicateEvents(this.props.personEvents), true, true)
+            : <i className="fa fa-spinner fa-spin" />
+          }
         </div>
       </div>
     )
@@ -88,7 +102,7 @@ class CommentInterface extends Component<Props> {
   renderEvents(events) {
     return R.map((event) => {
       if (event.event_type === "rounding-update") {
-        return this.renderRoundingUpdate(event);
+        return this.renderRoundingUpdate(event, false, false);
       }
       return <Event key={event.id} resourceMap={this.props.resourceMap} {...event} />
     }, events);
@@ -100,7 +114,7 @@ class CommentInterface extends Component<Props> {
     ), comments);
   }
 
-  renderRoundingUpdate(event: EventT) {
+  renderRoundingUpdate(event: EventT, hideDiff: boolean, showOrderNumber: boolean) {
     const {events: undupedEvents} = this.props;
     const events = this.deduplicateEvents(undupedEvents);
     const thisIndex = R.findIndex(R.propEq("id", event.id), events) + 1;
@@ -109,17 +123,17 @@ class CommentInterface extends Component<Props> {
       R.drop(thisIndex),
       R.filter(R.propEq("event_type", "rounding-update"))
     )(events)
-    return <RoundingUpdate key={event.id} lastUpdate={previousUpdate} {...event} />
+    return <RoundingUpdate key={event.id} lastUpdate={previousUpdate} {...event} hideDiff={hideDiff} showOrderNumber={showOrderNumber} />
   }
 
-  renderMixedEvents(events: Array<DedupedEvent>) {
+  renderMixedEvents(events: Array<DedupedEvent>, hideRoundingDiff: boolean, showOrderNumber: boolean) {
     return R.map((event) => {
       if (event.event_type === "rounding-update") {
-        return this.renderRoundingUpdate(event);
+        return this.renderRoundingUpdate(event, hideRoundingDiff, showOrderNumber);
       }
 
       const Component = event.event_type === "comment" ? Comment : Event;
-      return <Component key={event.id} resourceMap={this.props.resourceMap} {...event} />
+      return <Component key={event.id} resourceMap={this.props.resourceMap} {...event} showOrderNumber={showOrderNumber} />
     }, events);
   }
 

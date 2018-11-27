@@ -25,6 +25,7 @@ import {
   fetchExams,
   fetchKioskExams,
   fetchPersonExams,
+  fetchPersonEvents,
   fetchInitialApp,
   fetchCurrentEmployee,
   showOrderModal,
@@ -32,6 +33,7 @@ import {
   markNotificationDisplayed,
   preAdjustOrder,
   redirectToSSO,
+  removeOrders,
   showLoading,
   updateBrowserHistory,
   updateDate,
@@ -105,6 +107,7 @@ const mapStateToProps = (state: Object) => {
     startDate: board.startDate,
     type: board.type,
     widthMultipliers: board.widthMultipliers,
+    personEvents: board.personEvents,
   };
 };
 
@@ -140,6 +143,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchPersonExams: (personId: number) => {
       dispatch(fetchPersonExams(personId));
     },
+    fetchPersonEvents: (mrnId: number) => {
+      dispatch(fetchPersonEvents(mrnId));
+    },
     fetchInitialApp: (type: ViewType, date: number) => {
       dispatch(fetchInitialApp(type, date));
     },
@@ -158,6 +164,9 @@ const mapDispatchToProps = (dispatch) => {
     redirectToSSO: (ssoUrl: string, viewType: ViewType) => {
       dispatch(showLoading());
       dispatch(redirectToSSO(ssoUrl, viewType));
+    },
+    removeOrders: (orderIds: Array<number>) => {
+      dispatch(removeOrders(orderIds));
     },
     updateBrowserHistory: (state: {viewType: ViewType}, title: string, path: string) => {
       dispatch(updateBrowserHistory(state, title, path));
@@ -240,10 +249,10 @@ const innerMerge = (vals, startDate) => {
     acc.groupIdentity = acc.groupIdentity || order.groupIdentity;
 
     if (!acc.cardStatus) {
-      acc.cardStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"});
+      acc.cardStatus = cardStatuses(order, ["name", "color", "card_class", "order"], {color: "#ddd"});
     } else {
-      let orderStatus = cardStatuses(order, ["color", "card_class", "order"], {color: "#ddd"})
-      R.maxBy(R.prop("order"), [acc.orderStatus, orderStatus])
+      let orderStatus = cardStatuses(order, ["name", "color", "card_class", "order"], {color: "#ddd"})
+      acc.cardStatus = R.maxBy(R.prop("order"), acc.cardStatus, orderStatus)
     }
     return acc;
   }, orderAcc, vals)

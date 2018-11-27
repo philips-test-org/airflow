@@ -14,6 +14,7 @@ const defaultProps = {
   currentUser: {},
   exams: R.pluck("rad_exam", mergedOrder.orders),
   fetchAvatar: () => {},
+  fetchPersonEvents: () => {},
   order: mergedOrder,
   orderGroup: mergedOrder.orders,
   resourceMap: {},

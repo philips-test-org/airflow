@@ -7,6 +7,7 @@ import {
   checkExamThenOrder,
   formatTimestamp,
   getAppointmentTime,
+  getOrderingPhysician,
   getPatientType,
   getProcedure,
   maybeMsToSeconds,
@@ -63,7 +64,7 @@ class ExamDemographics extends Component<Props, State> {
             {this.renderDemographicsTableRow("Current Duration", this.formatDuration(maybeMsToSeconds(orderDuration(this.props.startDate, order))))}
             {this.renderDemographicsTableRow("Begin Exam", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "begin_exam"], order)))}
             {this.renderDemographicsTableRow("End Exam", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "end_exam"], order)))}
-            {this.renderDemographicsTableRow("Ordering Physician", R.path(["rad_exam", "rad_exam_personnel", "ordering", "name"], order))}
+            {this.renderDemographicsTableRow("Ordering Physician", getOrderingPhysician(order))}
           </tbody>
         </table>
       </div>

@@ -17,6 +17,8 @@ const BoardActions = {
   FETCH_KIOSK_EXAMS: "FETCH_KIOSK_EXAMS",
   FETCH_PERSON_EXAMS: "FETCH_PERSON_EXAMS",
   FETCH_PERSON_EXAMS_SUCCEEDED: "FETCH_PERSON_EXAMS_SUCCEEDED",
+  FETCH_PERSON_EVENTS: "FETCH_PERSON_EVENTS",
+  FETCH_PERSON_EVENTS_SUCCEEDED: "FETCH_PERSON_EVENTS_SUCCEEDED",
   // ORDER MODAL
   SHOW_ORDER_MODAL: "SHOW_ORDER_MODAL",
   CLOSE_ORDER_MODAL: "CLOSE_ORDER_MODAL",
@@ -24,6 +26,7 @@ const BoardActions = {
   PREADJUST_ORDER: "PREADJUST_ORDER",
   ADD_EVENT: "ADD_EVENT",
   ADJUST_ORDER_SUCCEEDED: "ADJUST_ORDER_SUCCEEDED",
+  REMOVE_ORDERS: "REMOVE_ORDERS",
   REPLACE_ORDER: "REPLACE_ORDER",
   // UI
   SHOW_LOADING: "SHOW_LOADING",
@@ -35,7 +38,6 @@ const BoardActions = {
   UPDATE_SELECTED_RESOURCE_GROUP: "UPDATE_SELECTED_RESOURCE_GROUP",
   // Resources
   FETCH_INITIAL_APP: "FETCH_INITIAL_APP",
-  FETCH_RESOURCES_SUCCEEDED: "FETCH_RESOURCES_SUCCEEDED",
   // NOTIFICATIONS
   DISPATCH_NOTIFICATION: "DISPATCH_NOTIFICATION",
   MARK_NOTIFICATION_DISPLAYED: "MARK_NOTIFICATION_DISPLAYED",
@@ -98,6 +100,20 @@ const fetchPersonExamsSucceeded = (personId: number, payload: Array<RadExam>) =>
   }
 }
 
+const fetchPersonEvents = (mrnId: number) => {
+  return {
+    type: BoardActions.FETCH_PERSON_EVENTS,
+    mrnId,
+  }
+}
+
+const fetchPersonEventsSucceeded = (payload: ?Array<Event>) => {
+  return {
+    type: BoardActions.FETCH_PERSON_EVENTS_SUCCEEDED,
+    payload,
+  }
+}
+
 // ORDER MODAL
 
 const showOrderModal = (id: string | number) => {
@@ -143,6 +159,13 @@ const addEvent = (orderId: number, payload: Object) => {
     type: BoardActions.ADD_EVENT,
     orderId,
     payload,
+  }
+}
+
+const removeOrders = (orderIds: Array<number>) => {
+  return {
+    type: BoardActions.REMOVE_ORDERS,
+    orderIds,
   }
 }
 
@@ -208,14 +231,6 @@ const fetchInitialApp = (viewType: ViewType, date: number = moment().unix()) => 
   }
 }
 
-const fetchResourcesSucceeded = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
-  return {
-    type: BoardActions.FETCH_RESOURCES_SUCCEEDED,
-    resources,
-    selectedResourceGroup,
-  }
-}
-
 const updateSelectedResourceGroup = (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => {
   return {
     type: BoardActions.UPDATE_SELECTED_RESOURCE_GROUP,
@@ -258,6 +273,8 @@ export {
   fetchKioskExams,
   fetchPersonExams,
   fetchPersonExamsSucceeded,
+  fetchPersonEvents,
+  fetchPersonEventsSucceeded,
   adjustOrder,
   addEvent,
   preAdjustOrder,
@@ -267,7 +284,7 @@ export {
   showLoading,
   hideLoading,
   fetchInitialApp,
-  fetchResourcesSucceeded,
+  removeOrders,
   replaceOrder,
   updateDate,
   updateViewType,

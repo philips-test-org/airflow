@@ -12,15 +12,16 @@ module OrmConverter
         :rad_exam_personnel => {:ordering => {}},
         :procedure => {},
         :resource => {},
-      }
+      },
+      :ordering_provider => {}
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
-      hash.merge!(ExamAdjustment.info_for(order,em))
       if hash[:rad_exams] and hash[:rad_exams].size > 0
         hash[:rad_exam] = hash[:rad_exams].sort {|a,b| a["accession"] <=> b["accession"] }[0]
         hash[:rad_exams].each {|re| re.delete("accession") } #rad_exam accession deleted because of shared hash memory
       end
+
       hash.delete("order_number")
       list << hash
       list
@@ -45,12 +46,13 @@ module OrmConverter
         :site_class => {:patient_type => {}},
         :current_status => {:universal_event_type => {}},
         :site_sublocation => {:site_location => {}},
-      }
+      },
+      :ordering_provider => {}
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
-      hash.merge!(ExamAdjustment.info_for(order,em))
       hash[:rad_exam] = hash[:rad_exams].sort {|a,b| a["accession"] <=> b["accession"] }[0]
+      hash.merge!(ExamAdjustment.info_for(hash, em))
       list << hash
       list
     end
@@ -71,11 +73,11 @@ module OrmConverter
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
-      hash.merge!(ExamAdjustment.info_for(order,em))
       if hash[:rad_exams] and hash[:rad_exams].size > 0
         hash[:rad_exam] = hash[:rad_exams].sort {|a,b| a["accession"] <=> b["accession"] }[0]
         hash[:rad_exams].each {|re| re.delete("accession") } #rad_exam accession deleted because of shared hash memory
       end
+      hash.merge!(ExamAdjustment.info_for(hash,em))
       hash.delete("order_number")
       list << hash
       list

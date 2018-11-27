@@ -69,7 +69,7 @@ export default [
         pacs_read_time: null,
         check_in: null,
         id: 769716,
-        end_exam: 1526464800000,
+        end_exam: 2526464800000,
         reschedule_event: null,
         cancelled: null,
         updated_at: 1525190027000,

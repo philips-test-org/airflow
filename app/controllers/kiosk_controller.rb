@@ -6,7 +6,9 @@ class KioskController < ApplicationController
 
   def index
     session[:resource_group] = params[:resource_group]
-    @groupings = ResourceGroup.resource_group_hash(@entity_manager)
+    groupings = ResourceGroup.resource_group_hash(@entity_manager)
+    @resourceGroups = groupings.to_json
+    @selected = selected_resources_group(groupings)
   end
 
   def exams

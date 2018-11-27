@@ -23,6 +23,21 @@ module ExamHelper
   end
 
   def orderingPhysician(order)
-    checkExamThenOrder(order, [:rad_exam_personnel, :ordering, "name"])
+    ordering = order.dig(:ordering_provider, "name")
+    exam = order.dig(:rad_exam, :rad_exam_personnel, :ordering, "name")
+    exam.nil? ? ordering : exam
+  end
+
+  def start_time(order_hash)
+    # Use adjusted time if its there
+    examAdjustment = ExamAdjustment.find_by(order_id: order_hash["id"])
+    if examAdjustment
+      start_time = examAdjustment.adjusted_attributes["start_time"]
+      if start_time.present?
+        return start_time
+      end
+    end
+
+    Exam.start_time(order_hash)
   end
 end

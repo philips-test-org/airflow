@@ -26,4 +26,21 @@ class Exam
     patient = Java::HarbingerSdkData::Patient.withId(person_id, em)
     patient.radExams
   end
+
+  def self.start_time(order_hash)
+    # Check if order has an exam
+    if order_hash[:rad_exam]
+      begin_exam = order_hash.dig(:rad_exam, :rad_exam_time, "begin_exam")
+      if begin_exam
+        # Use exam begin_exam if its there
+        return begin_exam
+      else
+        # Otherwise use appointment time
+        return order_hash.dig(:rad_exam, :rad_exam_time, "appointment")
+      end
+    end
+
+    # Last resort use order appointment
+    order_hash["appointment"]
+  end
 end

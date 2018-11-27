@@ -8,7 +8,6 @@ import "whatwg-fetch";
 import fetchMock from "fetch-mock";
 
 import calendarExams from "./mockState/calendarExams";
-import resources from "./mockState/resources";
 
 global.React = React;
 global.harbingerjsApmHost = "localhost";
@@ -18,8 +17,6 @@ global.harbingerjsRelativeRoot = "/";
 enzyme.configure({adapter: new Adapter()});
 
 fetchMock.get("glob:/exams*", calendarExams);
-fetchMock.get("/resource_groups?", resources);
-fetchMock.get("/resource_groups/selected?", {"resource": "My group"});
 fetchMock.get("/employees/current?", {
   active: true,
   fte: 1,

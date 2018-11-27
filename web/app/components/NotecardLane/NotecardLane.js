@@ -27,6 +27,7 @@ type Props = {
   openModal: (Order) => void,
   movedOrder: Order,
   movementOffset: {x: number, y: number},
+  removeOrders: (orderIds: Array<number>) => void,
   resourceId: number,
   updateWidthMultiplier: (resourceId: number, widthMultiplier: number) => void,
   scrollToCoordinates: (x: number, y: number) => void,
@@ -54,11 +55,17 @@ const laneTarget = {
     return {
       targetResourceId: props.resourceId,
       movementDelta: movementOffset,
+      scrollTopStart: monitor.getItem().scrollTopStart,
     }
   },
   hover(props, monitor, component) {
+    const scrollTopStart = monitor.getItem().scrollTopStart;
+    const element = document.getElementById("board");
+
+    const currnetScrollTop = element ? element.scrollTop : 0;
+
     const movementDelta = monitor.getDifferenceFromInitialOffset();
-    const newTop = R.max(0, monitor.getItem().orderTop + movementDelta.y);
+    const newTop = R.max(0, monitor.getItem().orderTop + movementDelta.y - (scrollTopStart - currnetScrollTop));
     const orderHeight = monitor.getItem().orderHeight;
 
     component.setGhost(newTop, orderHeight);
@@ -201,6 +208,7 @@ class NotecardLane extends Component<Props, State> {
             openModal={this.props.openModal}
             offsetStyle={offset}
             order={order}
+            removeOrders={this.props.removeOrders}
             resourceId={this.props.resourceId}
             scrollToY={this.scrollToY}
             startDate={this.props.startDate}

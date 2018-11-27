@@ -24,11 +24,12 @@ const {
   DISPATCH_NOTIFICATION,
   MARK_NOTIFICATION_DISPLAYED,
   FETCH_PERSON_EXAMS_SUCCEEDED,
+  FETCH_PERSON_EVENTS_SUCCEEDED,
   SHOW_ORDER_MODAL,
   CLOSE_ORDER_MODAL,
   SHOW_LOADING,
   HIDE_LOADING,
-  FETCH_RESOURCES_SUCCEEDED,
+  REMOVE_ORDERS,
   REPLACE_ORDER,
   UPDATE_DATE,
   UPDATE_VIEW_TYPE,
@@ -45,7 +46,7 @@ const initialState = {
   orders: [],
   resources: {},
   notifications: [],
-  selectedResourceGroup: "All",
+  selectedResourceGroup: "",
   selectedResources: [],
   startDate: computeStartDate(),
   type: "calendar",
@@ -54,6 +55,7 @@ const initialState = {
   width: 0,
   widthMultipliers: {},
   examsByPerson: {},
+  personEvents: null,
 }
 
 function board(state: Object = initialState, action: Object) {
@@ -72,11 +74,12 @@ function board(state: Object = initialState, action: Object) {
     case FETCH_EXAMS_SUCCEEDED: return updateOrders(state, action);
     case FETCH_EXAM_SUCCEEDED: return upsertOrders(state, action);
     case FETCH_PERSON_EXAMS_SUCCEEDED: return updateExams(state, action);
+    case FETCH_PERSON_EVENTS_SUCCEEDED: return updatePersonEvents(state, action);
     case SHOW_ORDER_MODAL: return showOrderModal(state, action);
     case CLOSE_ORDER_MODAL: return closeOrderModal(state, action);
     case SHOW_LOADING: return showLoading(state);
     case HIDE_LOADING: return hideLoading(state);
-    case FETCH_RESOURCES_SUCCEEDED: return updateResources(state, action);
+    case REMOVE_ORDERS: return removeOrders(state, action);
     case REPLACE_ORDER: return replaceOrder(state, action);
     case UPDATE_DATE: return updateDate(state, action);
     case UPDATE_SELECTED_RESOURCE_GROUP: return updateSelectedResourceGroup(state, action);
@@ -121,7 +124,7 @@ function preAdjustOrder(state, {orderId, payload}) {
 function addEvent(state, {orderId, payload}) {
   const orderLens = makeOrderLens(state.orders, orderId);
   const eventLens = R.compose(orderLens, R.lensProp("events"));
-  return R.over(eventLens, R.append(payload), state);
+  return R.over(eventLens, R.prepend(payload), state);
 }
 
 function upsertOrders(state, {payload}) {
@@ -155,6 +158,12 @@ function replaceOrder(state, {orderId, payload}) {
   });
 }
 
+function removeOrders(state, {orderIds}) {
+  return R.merge(state, {
+    orders: state.orders.filter((order) => !orderIds.includes(order.id)),
+  });
+}
+
 function updateOrders(state, {payload}) {
   const payloadWithIdent = R.map(
     (order) => associateGroupIdentity(state.selectedResources, state.startDate, order),
@@ -173,20 +182,18 @@ function updateExams(state, {personId, payload}) {
   });
 }
 
+function updatePersonEvents(state, {payload}) {
+  return R.merge(state, {
+    personEvents: payload,
+  });
+}
+
 function showLoading(state) {
   return R.merge(state, {loading: true});
 }
 
 function hideLoading(state) {
   return R.merge(state, {loading: false});
-}
-
-function updateResources(state, {resources, selectedResourceGroup}) {
-  return R.merge(state, {
-    resources,
-    selectedResourceGroup,
-    selectedResources: resources[selectedResourceGroup],
-  });
 }
 
 function updateDate(state, {date}) {
