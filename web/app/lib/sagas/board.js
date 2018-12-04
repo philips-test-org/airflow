@@ -19,7 +19,6 @@ import {
   fetchExamsSucceeded,
   fetchExamSucceeded,
   fetchPersonExamsSucceeded,
-  fetchPersonEvents,
   fetchPersonEventsSucceeded,
   requestFailed,
   showLoading,
@@ -104,7 +103,7 @@ function* fetchInitialApp(action): Saga<void> {
     const getResource = (state) => state.board.selectedResourceGroup;
     const resourceGroups = yield select(getResourceGroups);
     const resource = yield select(getResource);
-    
+
     if (R.length(R.keys(resourceGroups)) > 0) {
       const resourceIds = R.keys(mapSelectedResources(resourceGroups[resource]));
 
@@ -134,12 +133,6 @@ function* adjustOrder(action): Saga<void> {
       payload = yield call(Api.createEvent, action.event);
       yield put(addEvent(payload.order_id, payload));
     }
-
-    // Refetch the patient history for this order's patient
-    const orders = yield select((state) => state.board.orders);
-    const orderId = Array.isArray(payload) ? payload[0].order_id : payload.order_id;
-    const order = orders.find((o) => o.id === orderId);
-    yield put(fetchPersonEvents(order.patient_mrn_id));
   } catch (e) {
     yield call(requestFailed(e));
     console.log("error", e)

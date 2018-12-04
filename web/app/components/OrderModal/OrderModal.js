@@ -45,6 +45,7 @@ type State = {
   order: Order,
   showMoreImages: boolean,
   adjusted: Object,
+  auditHistoryOpen: boolean,
 }
 
 class OrderModal extends Component<Props, State> {
@@ -60,17 +61,21 @@ class OrderModal extends Component<Props, State> {
       order,
       showMoreImages: false,
       adjusted: order.adjusted,
+      auditHistoryOpen: false,
     };
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    // Refetch audit history if the user is looking at it and order changed
+    if (prevProps.order !== this.props.order && this.state.auditHistoryOpen) {
+      this.props.fetchPersonEvents(this.state.order.patient_mrn_id)
+    }
   }
 
   static getDerivedStateFromProps({order: nextOrder}: Props) {
     const order = nextOrder.merged ? nextOrder.orders[0] : nextOrder;
     const adjusted = order.adjusted;
     return {order, adjusted};
-  }
-
-  componentDidMount() {
-    this.props.fetchPersonEvents(this.state.order.patient_mrn_id)
   }
 
   shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -113,9 +118,11 @@ class OrderModal extends Component<Props, State> {
                   </div>
                   <CommentInterface
                     avatar={userAvatar}
-                    events={events.reverse()}
+                    events={events}
                     fetchAvatar={this.props.fetchAvatar}
                     handleNewComment={this.handleNewComment}
+                    onOpenAuditHistory={this.onOpenAuditHistory}
+                    onCloseAuditHistory={this.onCloseAuditHistory}
                     personEvents={this.props.personEvents}
                     resourceMap={this.props.resourceMap}
                     user={this.props.currentUser}
@@ -127,6 +134,15 @@ class OrderModal extends Component<Props, State> {
         </div>
       </div>
     );
+  }
+
+  onOpenAuditHistory = () => {
+    this.props.fetchPersonEvents(this.state.order.patient_mrn_id)
+    this.setState({auditHistoryOpen: true});
+  }
+
+  onCloseAuditHistory = () => {
+    this.setState({auditHistoryOpen: false});
   }
 
   assocEventsWithOrderNumber() {

@@ -28,9 +28,9 @@ module ExamHelper
     exam.nil? ? ordering : exam
   end
 
-  def start_time(order)
+  def start_time(order_hash)
     # Use adjusted time if its there
-    examAdjustment = ExamAdjustment.find_by(order_id: order["id"])
+    examAdjustment = ExamAdjustment.find_by(order_id: order_hash["id"])
     if examAdjustment
       start_time = examAdjustment.adjusted_attributes["start_time"]
       if start_time.present?
@@ -38,17 +38,6 @@ module ExamHelper
       end
     end
 
-    if order[:rad_exam]
-      begin_exam = order.dig(:rad_exam, :rad_exam_time, "begin_exam")
-      if begin_exam
-        # Use rad exam time if its there
-        return begin_exam
-      else
-        # Otherwise use appointment time
-        return order.dig(:rad_exam, :rad_exam_time, "appointment")
-      end
-    end
-    
-    order["appointment"]
+    Exam.start_time(order_hash)
   end
 end
