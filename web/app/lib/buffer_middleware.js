@@ -71,7 +71,7 @@ function flushBuffer(store, _action) {
     const {parentTable, parentId, attrs, table} = message;
     const lens = R.lensPath([parentId, "attrs"]);
     if (parentTable === "rad_exam") {
-      return R.over(lens, R.merge({[table]: attrs}), acc);
+      return R.over(lens, R.mergeRight({[table]: attrs}), acc);
     } else {
       return acc;
     }
@@ -84,7 +84,7 @@ function flushBuffer(store, _action) {
     const {parentTable, parentId, attrs} = exam;
     const lens = R.lensPath([parentId, "attrs"]);
     if (parentTable === "orders" && R.view(lens, acc)) {
-      return R.over(lens, R.merge({"rad_exam": attrs}), acc);
+      return R.over(lens, R.mergeRight({"rad_exam": attrs}), acc);
     } else {
       unmergedExams = R.append(exam, unmergedExams);
       return acc;
