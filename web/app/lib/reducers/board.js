@@ -129,7 +129,7 @@ function addEvent(state, {orderId, payload}) {
 
 function upsertOrders(state, {payload}) {
   const orderIsInSelectedResources = (order, {selectedResources}) => (
-    R.contains(getOrderResourceId(order), R.pluck("id", selectedResources))
+    R.includes(getOrderResourceId(order), R.pluck("id", selectedResources))
   );
 
   const updatedOrders = R.reduce((acc, order) => {

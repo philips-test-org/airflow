@@ -93,7 +93,7 @@ function flushBuffer(store, _action) {
 
   // Fetch each order that is for current day and selected resource group.
   R.forEach(({attrs, table}) => {
-    const inResources = R.contains(R.path(["rad_exam", "resource_id"], attrs), resourceIds);
+    const inResources = R.includes(R.path(["rad_exam", "resource_id"], attrs), resourceIds);
     const today = isToday(startEpoch, attrs);
     if (inResources && today) {
       store.dispatch(fetchExam(attrs.id, table));
@@ -102,7 +102,7 @@ function flushBuffer(store, _action) {
 
   // Fetch each rad exam that is for current day and selected resource group.
   R.forEach(({attrs}) => {
-    const inResources = R.contains(R.prop("resource_id", attrs), resourceIds);
+    const inResources = R.includes(R.prop("resource_id", attrs), resourceIds);
     const today = isToday(startEpoch, attrs);
     if (inResources && today) {
       store.dispatch(fetchExam(attrs.id, "rad_exams"));

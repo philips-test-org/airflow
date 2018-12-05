@@ -194,8 +194,8 @@ class NotecardLane extends Component<Props, State> {
     return (
       R.map((order) => {
         const isFiltered = order.merged ?
-          R.any((order) => R.contains(order.id, this.props.filteredOrderIds), order.orders) :
-          R.contains(order.id, this.props.filteredOrderIds);
+          R.any((order) => R.includes(order.id, this.props.filteredOrderIds), order.orders) :
+          R.includes(order.id, this.props.filteredOrderIds);
         const overlapShift = R.find(R.propEq("id", order.id), overlaps);
         const offset = !R.isNil(overlapShift) ? {left: COL_WIDTH * overlapShift.offset} : {};
 
@@ -277,9 +277,9 @@ class NotecardLane extends Component<Props, State> {
 
     // Check if the first value in the pair to is already overlapping other orders.
     const overlappingIds = R.pluck("id", lastOverlap.overlapping);
-    const multi = R.any((id) => R.contains(id, [x.id, y.id]), overlappingIds);
+    const multi = R.any((id) => R.includes(id, [x.id, y.id]), overlappingIds);
     if (multi) {
-      const overlapper = R.find(({id}) => R.not(R.contains(id, overlappingIds)), [x, y]);
+      const overlapper = R.find(({id}) => R.not(R.includes(id, overlappingIds)), [x, y]);
       if (overlapper) {
         let obj = {overlapping: R.append(overlapper, lastOverlap.overlapping)};
         // Return a new list of overlap objects with the multi overlap object updated at the head.
