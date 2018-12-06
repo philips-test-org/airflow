@@ -94,11 +94,11 @@ function board(state: Object = initialState, action: Object) {
 }
 
 function showOrderModal(state, {id}) {
-  return R.merge(state, {showModal: true, focusedOrder: id});
+  return R.mergeRight(state, {showModal: true, focusedOrder: id});
 }
 
 function closeOrderModal(state, _action) {
-  return R.merge(state, {showModal: false, focusedOrder: undefined});
+  return R.mergeRight(state, {showModal: false, focusedOrder: undefined});
 }
 
 const makeOrderLens = (orders: Array<Order>, id: number) => (
@@ -129,7 +129,7 @@ function addEvent(state, {orderId, payload}) {
 
 function upsertOrders(state, {payload}) {
   const orderIsInSelectedResources = (order, {selectedResources}) => (
-    R.contains(getOrderResourceId(order), R.pluck("id", selectedResources))
+    R.includes(getOrderResourceId(order), R.pluck("id", selectedResources))
   );
 
   const updatedOrders = R.reduce((acc, order) => {
@@ -143,7 +143,7 @@ function upsertOrders(state, {payload}) {
 
   }, state.orders, payload);
 
-  return R.merge(state, {
+  return R.mergeRight(state, {
     orders: updatedOrders,
   });
 }
@@ -153,13 +153,13 @@ function replaceOrder(state, {orderId, payload}) {
   const orderWithGroup = associateGroupIdentity(state.selectedResources, state.startDate, payload);
 
   const orders = R.set(orderLens, orderWithGroup, state.orders);
-  return R.merge(state, {
+  return R.mergeRight(state, {
     orders,
   });
 }
 
 function removeOrders(state, {orderIds}) {
-  return R.merge(state, {
+  return R.mergeRight(state, {
     orders: state.orders.filter((order) => !orderIds.includes(order.id)),
   });
 }
@@ -169,7 +169,7 @@ function updateOrders(state, {payload}) {
     (order) => associateGroupIdentity(state.selectedResources, state.startDate, order),
     payload
   );
-  return R.merge(state, {
+  return R.mergeRight(state, {
     orders: payloadWithIdent,
   });
 }
@@ -177,45 +177,45 @@ function updateOrders(state, {payload}) {
 function updateExams(state, {personId, payload}) {
   const sortedExams = R.reverse(R.sortBy(R.path(["rad_exam_time", "end_exam"]), payload));
 
-  return R.merge(state, {
-    examsByPerson: R.merge(state.examsByPerson, {[personId]: sortedExams}),
+  return R.mergeRight(state, {
+    examsByPerson: R.mergeRight(state.examsByPerson, {[personId]: sortedExams}),
   });
 }
 
 function updatePersonEvents(state, {payload}) {
-  return R.merge(state, {
+  return R.mergeRight(state, {
     personEvents: payload,
   });
 }
 
 function showLoading(state) {
-  return R.merge(state, {loading: true});
+  return R.mergeRight(state, {loading: true});
 }
 
 function hideLoading(state) {
-  return R.merge(state, {loading: false});
+  return R.mergeRight(state, {loading: false});
 }
 
 function updateDate(state, {date}) {
   // Set to the start of the day. By default, react-dates does this already.
-  return R.merge(state, {
+  return R.mergeRight(state, {
     startDate: date.startOf("day"),
   });
 }
 
 function updateSelectedResourceGroup(state, {resources, selectedResourceGroup}) {
-  return R.merge(state, {
+  return R.mergeRight(state, {
     selectedResourceGroup,
     selectedResources: resources[selectedResourceGroup],
   });
 }
 
 function updateViewType(state, {updatedView}) {
-  return R.merge(state, {type: updatedView});
+  return R.mergeRight(state, {type: updatedView});
 }
 
 function updateWidth(state, {updatedWidth}) {
-  return R.merge(state, {width: updatedWidth});
+  return R.mergeRight(state, {width: updatedWidth});
 }
 
 function computeStartDate(selectedDate = moment().unix()) {
@@ -226,7 +226,7 @@ function dispatchNotification(state, action) {
   const mergeFn = (notificationList) => {
     const newNotifications = R.prepend(R.omit(["type"], action), notificationList);
     const uniqueNotifications = R.uniqBy(R.path(["event", "id"]), newNotifications);
-    return R.merge(state, {notifications: uniqueNotifications});
+    return R.mergeRight(state, {notifications: uniqueNotifications});
   };
 
   if (R.path(["event", "id"], action) == "connected-apm") {
@@ -250,8 +250,8 @@ function markNotificationDisplayed(state, {id}) {
 }
 
 function updateWidthMultiplier(state, {resourceId, widthMultiplier}) {
-  const widthMultipliers = R.merge(state.widthMultipliers, {[resourceId]: widthMultiplier});
-  return R.merge(state, {widthMultipliers});
+  const widthMultipliers = R.mergeRight(state.widthMultipliers, {[resourceId]: widthMultiplier});
+  return R.mergeRight(state, {widthMultipliers});
 }
 
 const associateGroupIdentity = (selectedResources, startDate, payload) => R.assoc(

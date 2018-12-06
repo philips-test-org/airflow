@@ -28,7 +28,7 @@ function ScaledCard(WrappedComponent: ComponentType<any>) {
     render() {
       const orderHeight = this.orderHeight();
       const orderTop = this.orderTop();
-      const cardStyle = R.merge({
+      const cardStyle = R.mergeRight({
         height: `${orderHeight}px`,
         maxHeight: `${orderHeight}px`,
         top: `${orderTop}px`,

@@ -241,7 +241,7 @@ class OrderModal extends Component<Props, State> {
     const {currentUser} = this.props;
     const id = this.id();
     this.props.adjustOrder(wrapEvent(id, currentUser.id, eventType, null, newState), id);
-    const updatedAdjusted = R.merge(this.state.adjusted, newState)
+    const updatedAdjusted = R.mergeRight(this.state.adjusted, newState)
     this.setState({adjusted: updatedAdjusted});
   }
 

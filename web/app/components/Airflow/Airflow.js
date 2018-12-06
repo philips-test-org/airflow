@@ -129,7 +129,7 @@ class Airflow extends Component<Props, State> {
       this.props.updateViewType(viewType);
       this.updateActiveLink(viewType);
 
-      if (R.contains("kiosk", [viewType, this.props.type])) {
+      if (R.includes("kiosk", [viewType, this.props.type])) {
         this.fetchExams(viewType);
       }
     };
@@ -160,7 +160,7 @@ class Airflow extends Component<Props, State> {
         } else {
           this.props.fetchCurrentEmployee();
         }
-      } else if (R.contains("kiosk", [oldType, newType])) {
+      } else if (R.includes("kiosk", [oldType, newType])) {
         // Refetch exams only if switching from kiosk to something else, or vise versa
         // and the currentUser is set.
         this.fetchExams(newType);
