@@ -17,6 +17,7 @@ module OrmConverter
     }
     orders.inject([]) do |list,order|
       hash = get_data(tree,order,{})
+      hash.merge!(ExamAdjustment.info_for(hash,em))
       if hash[:rad_exams] and hash[:rad_exams].size > 0
         hash[:rad_exam] = hash[:rad_exams].sort {|a,b| a["accession"] <=> b["accession"] }[0]
         hash[:rad_exams].each {|re| re.delete("accession") } #rad_exam accession deleted because of shared hash memory
