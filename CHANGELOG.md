@@ -1,3 +1,9 @@
+## v1.3.0 released 2018-12-06
+
+* **improvement:** support for WildFly app server deployment
+* **improvement:** updated branding (favicon, about page)
+* **bugfix:** fix rounding notes in print view
+
 ## v1.2.2 released 2018-08-20
 
 * **improvement** added Audit Log to card modal (Lists all events/comments for that patient. Addresses issue with not seeing comments on cancelled exams)
