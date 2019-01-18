@@ -4,13 +4,13 @@ import sys,traceback,os,datetime,pprint,imp,argparse,logging,json
 
 #import tqdm
 utils = imp.load_source('utils', '/servers/harbinger/harbinger/general-et/utils.py')
-TABLE_NAME = 'airflow_site_configurations'
+TABLE_NAME = 'airflow_site_config'
 NEW_NAME = 'patient-flow'
-ADMIN_URL = 'https://docs.analytical.info/app-manuals/%s/admin-manual.pdf', NEW_NAME
-USER_URL = 'https://docs.analytical.info/app-manuals/%s/user-manual.pdf', NEW_NAME
+ADMIN_URL = 'https://docs.analytical.info/app-manuals/%s/admin-manual.pdf' % NEW_NAME
+USER_URL = 'https://docs.analytical.info/app-manuals/%s/user-manual.pdf' % NEW_NAME
 
 def main(h,opts):
-    site_config_sql = ''' select * from %s order by id desc limit 1''', TABLE_NAME
+    site_config_sql = ''' select * from %s order by id desc limit 1''' % TABLE_NAME
     h.hcurs.execute(site_config_sql)
     site_config = h.hcurs.fetchone()
     site_config = dict(site_config.items())
@@ -30,6 +30,7 @@ def main(h,opts):
         changed = True
 
     if changed == True:
+	site_config.pop('id', None)
         site_config['created_at'] = NOW
         site_config['configuration_time'] = NOW
         site_config['updated_at'] = NOW
@@ -62,6 +63,6 @@ if __name__ == '__main__':
         logging.critical(traceback.format_exc())
         print 'CRITICAL ERROR: %s' % e
         sys.exit(1)
-    finally:
-        h.close()
+
+    h.close()
     sys.exit(0)
