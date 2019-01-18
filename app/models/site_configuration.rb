@@ -5,8 +5,8 @@ class SiteConfiguration < ActiveRecord::Base
   APP_MANUALS = []
   DEFAULTS = {
     :clinical_roles_auth_list => ["director", "technologist", "radiologist", "ai-staff", "it-staff", "supervisor", "executive"],
-    :admin_manual => "https://docs.analytical.info/app-manuals/airflow/admin-manual.pdf",
-    :user_manual => "https://docs.analytical.info/app-manuals/airflow/user-manual.pdf"
+    :admin_manual => "https://docs.analytical.info/app-manuals/#{APPLICATION_MACHINE_NAME}/admin-manual.pdf",
+    :user_manual => "https://docs.analytical.info/app-manuals/#{APPLICATION_MACHINE_NAME}/user-manual.pdf"
   }
 
   def self.all_available_keys
