@@ -34,6 +34,7 @@ def main(h,opts):
         site_config['created_at'] = NOW
         site_config['configuration_time'] = NOW
         site_config['updated_at'] = NOW
+        site_config['username'] = 'platform-upgrade'
         site_config['configuration_json'] = json.dumps(parsed)
 
         try:

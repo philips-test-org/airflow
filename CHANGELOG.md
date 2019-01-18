@@ -4,6 +4,16 @@
 * **improvement:** updated branding (favicon, about page)
 * **bugfix:** fix rounding notes in print view
 
+### Service Notes
+
+> **Warning**: This must be done after undeploying the old application and before deploying the new application
+> **Warning**: Run in support console with zip extracted under /servers/tmp
+> **Warning**: Make sure airflow user is in site.config.json
+
+```bash
+/servers/tmp/patient-flow-v1.3.0-rc23/db_scripts/migrations/manuals-name-change.py
+```
+
 ## v1.2.2 released 2018-08-20
 
 * **improvement** added Audit Log to card modal (Lists all events/comments for that patient. Addresses issue with not seeing comments on cancelled exams)
