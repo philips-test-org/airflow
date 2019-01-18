@@ -11,7 +11,7 @@
 > **Warning**: Make sure airflow user is in site.config.json
 
 ```bash
-/servers/tmp/patient-flow-v1.3.0-rc23/db_scripts/migrations/manuals-name-change.py
+/servers/tmp/patient-flow-v1.3.0/db_scripts/migrations/manuals-name-change.py
 ```
 
 ## v1.2.2 released 2018-08-20
