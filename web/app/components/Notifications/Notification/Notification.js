@@ -30,8 +30,8 @@ class Notification extends PureComponent<Props> {
 
   render() {
     const {event} = this.props;
-    const event_type = R.contains(event.event_type, ["info", "alert"]) ? event.event_type :
-      R.contains(event.event_type, ["comment", "rounding-update"]) ? "info" : "event";
+    const event_type = R.includes(event.event_type, ["info", "alert"]) ? event.event_type :
+      R.includes(event.event_type, ["comment", "rounding-update"]) ? "info" : "event";
     return (
       <div id={`notification-${this.props.event.id}`} className={`notification ${event_type}`}>
         {this.renderNotification()}

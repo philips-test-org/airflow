@@ -20,6 +20,8 @@ type Props = {
   events: Array<Object>,
   fetchAvatar: (userId: number) => void,
   handleNewComment: (comment: string) => void,
+  onOpenAuditHistory: () => void,
+  onCloseAuditHistory: () => void,
   personEvents: Array<AnnotatedEvent>,
   resourceMap: {[number]: string},
   user: User,
@@ -42,22 +44,22 @@ class CommentInterface extends Component<Props> {
         <CommentForm userId={this.props.user.id} handleSubmit={this.props.handleNewComment} />
         <hr />
         <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
-          <li role="presentation" className="event-list-nav active">
+          <li role="presentation" className="event-list-nav active" onClick={this.props.onCloseAuditHistory}>
             <a href="#comment-list" aria-controls="comment-list" role="tab" data-toggle="tab">
               Comments
             </a>
           </li>
-          <li role="presentation" className="event-list-nav">
+          <li role="presentation" className="event-list-nav" onClick={this.props.onCloseAuditHistory}>
             <a href="#event-list" aria-controls="event-list" role="tab" data-toggle="tab">
               Events
             </a>
           </li>
-          <li role="presentation" className="event-list-nav">
+          <li role="presentation" className="event-list-nav" onClick={this.props.onCloseAuditHistory}>
             <a href="#combined-events-list" aria-controls="combined-events-list" role="tab" data-toggle="tab">
               All
             </a>
           </li>
-          <li role="presentation" className="event-list-nav">
+          <li role="presentation" className="event-list-nav" onClick={this.props.onOpenAuditHistory}>
             <a href="#patient-events-list" aria-controls="patient-events-list" role="tab" data-toggle="tab">
               Audit History
             </a>
@@ -145,7 +147,7 @@ class CommentInterface extends Component<Props> {
       let nextEvent = events[j];
       let mergedEvent: DedupedEvent = Object.assign({}, event, {orderNumbers: [event.orderNumber], merged: false});
       while (this.sameEvent(event, nextEvent)) {
-        let updatedOrderNumbers = R.contains(nextEvent.orderNumber, mergedEvent.orderNumbers) ?
+        let updatedOrderNumbers = R.includes(nextEvent.orderNumber, mergedEvent.orderNumbers) ?
           mergedEvent.orderNumbers :
           R.append(nextEvent.orderNumber, mergedEvent.orderNumbers);
         mergedEvent = Object.assign({}, mergedEvent, {

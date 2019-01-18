@@ -1,3 +1,22 @@
+## v1.3.0 released 2018-12-06
+
+* **improvement:** support for WildFly app server deployment
+* **improvement:** updated branding (favicon, about page)
+* **bugfix:** fix rounding notes in print view
+
+## v1.2.2 released 2018-08-20
+
+* **improvement** added Audit Log to card modal (Lists all events/comments for that patient. Addresses issue with not seeing comments on cancelled exams)
+* **improvement** added "x" button to cancelled cards to dismiss from the view
+* **bugfix** cancelled cards no longer merge with non-cancelled cards
+* **bugfix** resource groups are once again loaded before the app is rendered, so that the user can choose a different resource group before exams are done fetching
+* **bugfix** fixed ordering provider to show even when there is no exam (order is used)
+* **bugfix** fixed it so that adjusted date is used for ordering and grouping on the print screen
+* **bugfix** ignore adjusted date and resource change if the order's date was changed to not match the adjusted date
+* **bugfix** fix hamburger menu icon to ensure it opens the mobile menu
+* **bugfix** fixed comments to be ordered latest to earliest and appear at the top of the list when added
+* **bugfix** fixed issue where dragging a card past the viewport (above or below) would not drop the card at the time where it was intended to drop
+
 ## v1.2.1 released 2018-08-16
 
 * **bugfix:** fix app crash on orders without rad exams

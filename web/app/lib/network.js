@@ -17,7 +17,7 @@ export const GET = (url: string, params: Object = {}) => {
     credentials: "include",
   }).then((response) => {
     if (response.ok) {
-      if (R.contains("application/json", response.headers.get("content-type"))) {
+      if (R.includes("application/json", response.headers.get("content-type"))) {
         return checkAuthenticated(response.json());
       } else {
         try {
@@ -43,7 +43,7 @@ export const POST = (url: string, params: Object = {}) => {
     body: JSON.stringify(params),
   }).then((response) => {
     if (response.ok) {
-      if (R.contains("application/json", response.headers.get("content-type"))) {
+      if (R.includes("application/json", response.headers.get("content-type"))) {
         return checkAuthenticated(response.json());
       } else {
         try {

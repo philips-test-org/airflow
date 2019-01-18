@@ -71,7 +71,7 @@ function flushBuffer(store, _action) {
     const {parentTable, parentId, attrs, table} = message;
     const lens = R.lensPath([parentId, "attrs"]);
     if (parentTable === "rad_exam") {
-      return R.over(lens, R.merge({[table]: attrs}), acc);
+      return R.over(lens, R.mergeRight({[table]: attrs}), acc);
     } else {
       return acc;
     }
@@ -84,7 +84,7 @@ function flushBuffer(store, _action) {
     const {parentTable, parentId, attrs} = exam;
     const lens = R.lensPath([parentId, "attrs"]);
     if (parentTable === "orders" && R.view(lens, acc)) {
-      return R.over(lens, R.merge({"rad_exam": attrs}), acc);
+      return R.over(lens, R.mergeRight({"rad_exam": attrs}), acc);
     } else {
       unmergedExams = R.append(exam, unmergedExams);
       return acc;
@@ -93,7 +93,7 @@ function flushBuffer(store, _action) {
 
   // Fetch each order that is for current day and selected resource group.
   R.forEach(({attrs, table}) => {
-    const inResources = R.contains(R.path(["rad_exam", "resource_id"], attrs), resourceIds);
+    const inResources = R.includes(R.path(["rad_exam", "resource_id"], attrs), resourceIds);
     const today = isToday(startEpoch, attrs);
     if (inResources && today) {
       store.dispatch(fetchExam(attrs.id, table));
@@ -102,7 +102,7 @@ function flushBuffer(store, _action) {
 
   // Fetch each rad exam that is for current day and selected resource group.
   R.forEach(({attrs}) => {
-    const inResources = R.contains(R.prop("resource_id", attrs), resourceIds);
+    const inResources = R.includes(R.prop("resource_id", attrs), resourceIds);
     const today = isToday(startEpoch, attrs);
     if (inResources && today) {
       store.dispatch(fetchExam(attrs.id, "rad_exams"));

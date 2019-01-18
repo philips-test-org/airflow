@@ -5,12 +5,14 @@ class ExamAdjustment < ActiveRecord::Base
   def self.info_for(order_hash, em)
     adj = self.where(order_id: order_hash["id"]).first
     if adj
-      adjusted_start = Time.at(adj.adjusted_attributes["start_time"] / 1000).to_date
-      ost = order_hash.dig(:rad_exam, :rad_exam_time, "begin_exam") || order_hash.dig(:rad_exam, :rad_exam_time, "appointment")
+      adjusted_start = adj.adjusted_attributes["start_time"] ? Time.at(adj.adjusted_attributes["start_time"] / 1000).to_date : nil
+      ost = Exam.start_time(order_hash)
       original_start = Time.at(ost / 1000).to_date
 
       # Only use adjusted attributes if the adjusted start time's date is the same as the original
-      if adjusted_start == original_start
+      if adjusted_start.present? && adjusted_start != original_start
+        adjusted_attrs = adj.adjusted_attributes.except("start_time", "stop_time", "resource_id")
+      else
         adjusted_attrs = adj.adjusted_attributes
       end
       events = adj.exam_events
