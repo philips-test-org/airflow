@@ -37,7 +37,7 @@ function updateAvatarMap(state, {userId, payload}) {
 }
 
 function updateCurrentUser(state, {payload}) {
-  return R.merge(state, {currentUser: payload});
+  return R.mergeRight(state, {currentUser: payload});
 }
 
 export default user;

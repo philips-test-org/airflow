@@ -124,7 +124,7 @@ export function processMessage(msg: Object, store: Object, amqp: Object = new am
   const currentUser = R.path(["user", "currentUser", "id"], state);
 
   const orderIsInSelectedResources = (order, {board: {selectedResources}}) => (
-    R.contains(parseInt(getOrderResourceId(order)), R.pluck("id", selectedResources))
+    R.includes(parseInt(getOrderResourceId(order)), R.pluck("id", selectedResources))
   );
 
   const isToday = (order) => {

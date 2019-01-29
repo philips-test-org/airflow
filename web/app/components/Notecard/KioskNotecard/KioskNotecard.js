@@ -28,7 +28,7 @@ class KioskNotecard extends PureComponent<Props> {
   render() {
     const {order, orderHeight} = this.props;
     const cardId = `${this.props.type === "overview" ? "fixed" : "scaled"}-card-${order.id}`;
-    const style = R.merge(this.props.style, {lineHeight: `${orderHeight}px`});
+    const style = R.mergeRight(this.props.style, {lineHeight: `${orderHeight}px`});
     const tabStyle = {backgroundColor: this.cardColor()};
 
     return (
