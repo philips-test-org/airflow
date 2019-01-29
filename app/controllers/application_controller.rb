@@ -33,11 +33,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin_authentication
+    auth_wrapper(SiteConfiguration.get_clinical_roles_for_key("admin_roles_auth_list")) {|roles| authenticate_and_authorize(roles) }
+  end
+
   def check_session_username
     return if valid_token?
     session.delete(:username)
   end
-  
+
   def valid_token?
     token_cookie_name = get_cookie_name_for_token
     token_cookie = get_token_cookie(token_cookie_name)
@@ -64,7 +68,7 @@ class ApplicationController < ActionController::Base
 
   def check_for_resource_groups
     return if !session[:username] || ResourceGroup.any?
-    
+
     redirect_to resource_groups_url, alert: "You must add at least one resource group"
   end
 
@@ -90,6 +94,16 @@ class ApplicationController < ActionController::Base
                                options[:domain],
                                options[:table_name],
                                options[:table_ids])
+    end
+  end
+
+  private
+
+  def auth_wrapper(role_list=[])
+    if role_list.empty?
+      redirect_to :unauthorized
+    else
+      yield role_list
     end
   end
 end
