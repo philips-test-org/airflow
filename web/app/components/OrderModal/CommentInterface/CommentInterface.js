@@ -147,7 +147,7 @@ class CommentInterface extends Component<Props> {
       let nextEvent = events[j];
       let mergedEvent: DedupedEvent = Object.assign({}, event, {orderNumbers: [event.orderNumber], merged: false});
       while (this.sameEvent(event, nextEvent)) {
-        let updatedOrderNumbers = R.contains(nextEvent.orderNumber, mergedEvent.orderNumbers) ?
+        let updatedOrderNumbers = R.includes(nextEvent.orderNumber, mergedEvent.orderNumbers) ?
           mergedEvent.orderNumbers :
           R.append(nextEvent.orderNumber, mergedEvent.orderNumbers);
         mergedEvent = Object.assign({}, mergedEvent, {

@@ -9,7 +9,7 @@ import {
 import {eventGen} from "../generators";
 
 const notificationTransform = (notification) =>
-  R.omit(["type"], R.merge({event_type: notification.type}, notification))
+  R.omit(["type"], R.mergeRight({event_type: notification.type}, notification))
 
 describe("board reducer", () => {
   let initState;

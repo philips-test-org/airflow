@@ -64,8 +64,8 @@ class NotecardRow extends Component<Props> {
 
   renderCard = (order: Order) => {
     const isFiltered = order.merged ?
-      R.any((order) => R.contains(order.id, this.props.filteredOrderIds), order.orders) :
-      R.contains(order.id, this.props.filteredOrderIds);
+      R.any((order) => R.includes(order.id, this.props.filteredOrderIds), order.orders) :
+      R.includes(order.id, this.props.filteredOrderIds);
 
     return (
       <BaseNotecard
