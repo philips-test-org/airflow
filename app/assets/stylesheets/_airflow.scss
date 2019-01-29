@@ -370,7 +370,6 @@ Shared Styles
     float: left;
     color: #fff;
     padding: 5px 2px;
-    /*display: table-cell;*/
   }
 
   .left-tab.release {	background-color: $release-color; }
@@ -379,10 +378,9 @@ Shared Styles
   .left-tab.task {	background-color: $task-color; }
 
   .right-tab {
-    margin-left: 20px;
+    margin-left: 10px;
     word-break: break-all;
     word-wrap: break-word;
-    display: table-cell;
   }
 
   .events {
@@ -414,9 +412,6 @@ Shared Styles
       content: " -";
     }
 
-  }
-
-  .heading .tags .tag {
   }
 
   .body {
@@ -592,9 +587,6 @@ Shared Styles
 
 .ui-droppable-hover {
   background-color: #eee;
-}
-
-.ui-draggable-dragging {
 }
 
 /* Notifications */
