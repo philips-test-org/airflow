@@ -85,7 +85,7 @@ class BaseNotecard extends PureComponent<Props> {
     const formattedName = formatName(patientName);
     return (
       <div className="heading">
-        <div className="patient-name">{formattedName}</div>
+        <div>{formattedName}</div>
         <div className="patient-type">{patientType}</div>
         <div className="mrn">{patientMrn}</div>
       </div>

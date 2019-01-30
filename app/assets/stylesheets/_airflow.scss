@@ -370,7 +370,6 @@ Shared Styles
     float: left;
     color: #fff;
     padding: 5px 2px;
-    /*display: table-cell;*/
   }
 
   .left-tab.release {	background-color: $release-color; }
@@ -379,10 +378,9 @@ Shared Styles
   .left-tab.task {	background-color: $task-color; }
 
   .right-tab {
-    margin-left: 20px;
+    margin-left: 10px;
     word-break: break-all;
     word-wrap: break-word;
-    display: table-cell;
   }
 
   .events {
@@ -414,9 +412,6 @@ Shared Styles
       content: " -";
     }
 
-  }
-
-  .heading .tags .tag {
   }
 
   .body {
@@ -594,9 +589,6 @@ Shared Styles
   background-color: #eee;
 }
 
-.ui-draggable-dragging {
-}
-
 /* Notifications */
 
 #notifications {
@@ -740,7 +732,7 @@ table.roles{
 
 #resource-table tbody {
   tr:hover { background-color: #e0e0e0; }
-  tr:hover td i.fa-plus-circle { display: initial; }
+  tr:hover td i.fa-plus-circle { display: inline; }
   tr {
     cursor: pointer;
     td {
@@ -760,7 +752,7 @@ table.roles{
         display: none;
       }
       i.fa-minus-circle {
-        display: initial;
+        display: inline;
         margin-left: -25px;
         margin-right: 13px;
       }

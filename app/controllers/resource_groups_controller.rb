@@ -1,17 +1,13 @@
 class ResourceGroupsController < ApplicationController
   before_filter :get_entity_manager
-  before_filter :general_authentication, except: [:index, :selected]
+  before_filter :admin_authentication
+  before_filter :get_employee
   after_filter :log_usage_data
   after_filter :close_entity_manager
 
 
   def index
     @resource_groups = ResourceGroup.all
-    respond_to do |format|
-      format.html {
-        general_authentication
-      }
-    end
   end
 
   def search
