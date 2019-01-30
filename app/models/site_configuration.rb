@@ -1,11 +1,12 @@
 class SiteConfiguration < ActiveRecord::Base
   self.table_name = "airflow_site_config"
-  ROLES_LISTS = ["clinical_roles_auth_list", "admin_roles_auth_list"]
+  ROLES_LISTS = ["clinical_roles_auth_list", "manager_roles_auth_list"]
   OTHER_CONFIG_VARS = []
   APP_MANUALS = []
   DEFAULTS = {
     :clinical_roles_auth_list => ["director", "technologist", "radiologist", "ai-staff", "it-staff", "supervisor", "executive"],
-    :admin_roles_auth_list => ["ai-staff", "it-staff"],
+    # managers can see the admin dropdown in header menu but cannot access site configuration
+    :manager_roles_auth_list => ["ai-staff", "it-staff"],
     :admin_manual => "https://docs.analytical.info/app-manuals/#{APPLICATION_MACHINE_NAME}/admin-manual.pdf",
     :user_manual => "https://docs.analytical.info/app-manuals/#{APPLICATION_MACHINE_NAME}/user-manual.pdf"
   }

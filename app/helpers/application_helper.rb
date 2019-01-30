@@ -7,9 +7,9 @@ module ApplicationHelper
     content_tag(:li, link_to(title, url_opts, :name => title.downcase.gsub(" ","-").gsub("/","")), :class => active)
   end
 
-  def is_admin?(employee)
+  def is_manager?(employee)
     return false if employee.nil?
-    employee.authorizedForAny(SiteConfiguration.get_clinical_roles_for_key("admin_roles_auth_list"))
+    employee.authorizedForAny(SiteConfiguration.get_clinical_roles_for_key("manager_roles_auth_list"))
   end
 
   def global_view_link(title, view_type, url_opts, matching_url_ops = {})
