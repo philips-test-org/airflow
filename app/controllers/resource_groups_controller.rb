@@ -1,6 +1,6 @@
 class ResourceGroupsController < ApplicationController
   before_filter :get_entity_manager
-  before_filter :admin_authentication
+  before_filter :mananger_authentication
   before_filter :get_employee
   after_filter :log_usage_data
   after_filter :close_entity_manager

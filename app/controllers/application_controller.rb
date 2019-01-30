@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def admin_authentication
-    auth_wrapper(SiteConfiguration.get_clinical_roles_for_key("admin_roles_auth_list")) {|roles| authenticate_and_authorize(roles) }
+  def mananger_authentication
+    auth_wrapper(SiteConfiguration.get_clinical_roles_for_key("manager_roles_auth_list")) {|roles| authenticate_and_authorize(roles) }
   end
 
   def check_session_username

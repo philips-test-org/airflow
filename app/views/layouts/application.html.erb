@@ -53,14 +53,16 @@
           <% end %>
           <%= global_view_link("Kiosk","kiosk", {controller: :kiosk, action: :index}) %>
           <% unless session[:username].blank? %>
-            <% if is_admin?(@employee)%>
+            <% if is_manager?(@employee)%>
               <li class="dropdown">
                 <a href="#" id="global-button-admin" role="button"
                   class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown">Admin <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <%= global_navigation_link "Resource Groups", :controller => :resource_groups, :action => :index %>
                   <li><%= link_to "Admin Manual", SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
-                  <%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %>
+                  <% authorized(["support-staff","ai-staff", "it-staff"]) do %>
+                    <%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %>
+                  <% end %>
                 </ul>
               </li>
             <% end %>
