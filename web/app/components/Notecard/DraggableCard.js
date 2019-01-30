@@ -52,14 +52,12 @@ const notecardSource = {
       const {targetResourceId, movementDelta} = result;
       const changedLanes = targetResourceId !== props.resourceId;
       const changedTime = Math.abs(movementDelta.y) > 5; // 5 pixels is arbitrary.
-
+      
       // Prevent firing off events if card moved and was dropped back in same place.
       if (changedLanes || changedTime) {
         const element = document.getElementById("board");
-
         const currentScrollTop = element ? element.scrollTop : 0;
         const newTop = R.max(0, component.orderTop() + movementDelta.y - (result.scrollTopStart - currentScrollTop));
-
         const newStart = component.orderHeightToStartTime(newTop);
         const newStop = component.orderHeightToStopTime(newTop);
         const newState = {
