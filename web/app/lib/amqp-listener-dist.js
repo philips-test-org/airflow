@@ -2738,7 +2738,8 @@ var DEFAULT_CONNECT_CALLBACKS = {
     if (ApmConfig.port == "") {
       ApmConfig.port = defaultApmConfig.port;
     }
-    _this.APM_URL = "ws://" + ApmConfig.host + ":" + ApmConfig.port + "/socket";
+    var prefix = location.protocol.match(/^https/) ? "wss" : "ws"
+    _this.APM_URL = prefix + "://" + ApmConfig.host + ":" + ApmConfig.port + "/socket";
   };
 
   this.connectToChannel = function (callbacks) {
