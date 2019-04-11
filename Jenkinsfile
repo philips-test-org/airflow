@@ -215,5 +215,14 @@ pipeline {
                 '''
             }
         }
+
+        stage('Sonar-Scan') {
+            steps {
+                sh '''
+                    cd ${WORKSPACE}
+                    /opt/sonar-scanner-3.3.0.1492-linux/bin/sonar-repo-setup airflow 82c933c824739c94ac836c42c0a6460c79766f0d
+                '''
+            }
+        }
     }
 }
