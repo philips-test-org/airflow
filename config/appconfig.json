@@ -1,0 +1,11 @@
+[
+  {
+    "display_name": "Patient Flow",
+    "description": "Patient Flow",
+    "icon_source": "images/DLS_PbasPatientFlow.svg",
+    "category_name": "Workflow",
+    "manufacturer_name": "Philips",
+    "in_progress": false,
+    "application_path": "/patient-flow"
+  }
+]
