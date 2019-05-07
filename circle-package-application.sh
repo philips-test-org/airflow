@@ -40,10 +40,13 @@ echo "Warblizer: Changing permissions and war file name"
 chmod +r "$APPNAME.war"
 
 mkdir -v $PACKAGEDIR
+mkdir -v $PACKAGEDIR/images
 cp -Rv db_scripts $PACKAGEDIR
 cp -v CHANGELOG.md $PACKAGEDIR
 cp -v INSTALL.md $PACKAGEDIR
 cp -v config/application.name $PACKAGEDIR
+cp -v config/appconfig.json $PACKAGEDIR
+cp -v app/assets/images/DLS_PbasPatientFlow.svg $PACKAGEDIR/images
 echo $VERSION > $PACKAGEDIR/version
 cp -v $WARFILE $PACKAGEDIR
 zip -rq "$PACKAGEDIR-$GIT_COMMIT_HASH.zip" $PACKAGEDIR
