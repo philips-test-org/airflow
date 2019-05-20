@@ -3,7 +3,7 @@
     "display_name": "Patient Flow",
     "description": "Patient Flow",
     "icon_source": "images/DLS_PbasPatientFlow.svg",
-    "version": __VERSION_HERE__,
+    "version": VERSION_HERE,
     "category_name": "Workflow",
     "manufacturer_name": "Philips",
     "in_progress": false,
