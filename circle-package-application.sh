@@ -46,7 +46,7 @@ cp -v CHANGELOG.md $PACKAGEDIR
 cp -v INSTALL.md $PACKAGEDIR
 cp -v config/application.name $PACKAGEDIR
 cp -v config/appconfig.json $PACKAGEDIR
-sed -i 's/__VERSION_HERE__/$VERSION/g' $PACKAGEDIR/appconfig.json
+sed -i s/__VERSION_HERE__/$VERSION/g $PACKAGEDIR/appconfig.json
 cp -v app/assets/images/DLS_PbasPatientFlow.svg $PACKAGEDIR/images
 echo $VERSION > $PACKAGEDIR/version
 cp -v $WARFILE $PACKAGEDIR
