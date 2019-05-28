@@ -9,7 +9,7 @@
 ```bash
 cd /servers/tmp
 unzip patient-flow-VERSION.zip
-/servers/harbinger/management/pb_support_console.sh
+pb_support_console.sh
 #within the container:
 cd /servers/tmp/patient-flow-VERSION/db_scripts
 ./install.sh
