@@ -10,7 +10,7 @@ import cucumber.api.java.en.Then;
 
 public class AirflowAdminSteps {
 	
-	private PageObjectManager pom;
+	//private PageObjectManager pom;
 	private AirflowAdmin airflowAdmin;
 	private Airflow Airflow;
 	private ContextDTO contextDTO;
@@ -19,7 +19,7 @@ public class AirflowAdminSteps {
 
 	public AirflowAdminSteps(PageObjectManager pageObjectManager, ContextDTO contextDTO) {
 		this.contextDTO = contextDTO;
-		this.pom = pageObjectManager;
+	//	this.pom = pageObjectManager;
 		airflowAdmin = pageObjectManager.getAirflowAdminPage();
 		Airflow = pageObjectManager.getAirflowPage();
 	}
@@ -49,6 +49,7 @@ public class AirflowAdminSteps {
 	public void add_Resources_and_into_the_group(String resource1, String resource2) throws Throwable {
 		Airflow.verifySpinnerIsInvisible();
 		airflowAdmin.clickOnResourceName(resource1);
+		
 		airflowAdmin.clickOnResourceName(resource2);
 	}
 	

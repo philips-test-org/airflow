@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
-import static com.philips.rs.performancebridge.test.common.config.Constants.WAIT_LONG_SECONDS;
 
 public class Airflow {
 
@@ -38,7 +37,7 @@ public class Airflow {
 	@FindBy(xpath = closeTheExamCardPopUpXpath)
 	private WebElement closeTheExamCardPopUpWebElement;
 
-	@FindBy(xpath = "//div[@class='content']/textarea[@name='comments']")
+	@FindBy(xpath = "//div[@class='comment']//textarea[@name='comments']")
 	private WebElement commentBoxWithinExamCard;
 	
 	@FindBy(xpath = "//h1[text()='Unauthorized']/../p[text()='You are not in the required user roles to view this page.']")
@@ -48,40 +47,72 @@ public class Airflow {
 	@FindBy(xpath = "//div[(@id='workspace') and ( @class='vertical-timeline')]")
 	private WebElement hompageWorkSpace;
 	
-
-	private String getSearchForMRNNumberInExamCardXpath(String resourceID, String mrn) {
-		return "//td[@data-resource-id='" + resourceID + "']//div[@class='mrn'][text()='" + mrn + "']";
+	private String getSearchForMRNNumberInExamCardXpath(String resource, String mrn) {
+		return "//table[@id='time-grid']//td[count(//table[@id='time-headings']//tr/td/h1[text()='" + resource + "']/../preceding-sibling::td)+2]//div[@class='mrn'][text()='" + mrn + "']";
 	}
 
-	private String getMRNNumberExamCardLeftPanelXpath(String resourceID, String mrn) {
-		return "//td[@data-resource-id='" + resourceID + "']/div[descendant::div[@class='mrn'][text()='" + mrn
-				+ "']]/div[@class='left-tab']";
+	private String getOrderingPysicianNameInExamCard(String resource, String mrn, String orderingPhysician) {
+		return "//table[@id='time-grid']//td[count(//table[@id='time-headings']//tr/td/h1[text()='"+resource+"']/../preceding-sibling::td)+2]//div[@class='mrn'][text()='"+mrn+"']/../../../..//div[@class='ordering-physician'][text()='"+orderingPhysician+"']";
+	}
+	
+	private String OrderingNameIsUnknown (String mrn) {
+		return "//div[@class='mrn'][text()='"+mrn+"']/../../../..//div[@class='ordering-physician'][text()='unknown']";
+	}
+	
+	private String getMRNNumberExamCardLeftPanelXpath(String resource, String mrn) {
+		return "//table[@id='time-grid']//td[count(//table[@id='time-headings']//tr/td/h1[text()='" + resource + "']/../preceding-sibling::td)+2]//div[@class='mrn'][text()='" + mrn + "']/../../../div[@class='left-tab']";
 	}
 
-	private String getFindIDOfSelectedResourceXpath(String resourcename) {
-		return "//td[@sort='.resource']//label[text()='" + resourcename + "']/../../..//td//label";
-	}
-
-	private String getResourceExamCardCountXpath(String resourceID) {
-		return "//td[@data-resource-id='" + resourceID + "']//div[@class='mrn']";
+	private String getResourceExamCardCountXpath(String resource) {
+		return "//table[@id='time-grid']//td[count(//table[@id='time-headings']//tr/td/h1[text()='" + resource + "']/../preceding-sibling::td)+2]//div[@class='mrn']";
 	}
 
 	private String getPatientExperienceStateXpath(String labelForState) {
-		return "//label[text()='" + labelForState + "']/../div[1]";
+		return "//span[text()='" + labelForState + "']/..//div[@class='react-toggle']";
 	}
 
 	private String getToSearchIconsOnTheExamCardXpath(String toVerifyStatusIconsOnExamCard, String mrn) {
-		return "//div[@class='mrn'][text()='" + mrn
-				+ "']/../../div[@class='footer']//div//div[@class='status-indicator " + toVerifyStatusIconsOnExamCard
-				+ "']";
+		return "//div[@class='mrn'][text()='" + mrn + "']/../../div[@class='footer']//div//div[@class='status-indicator " + toVerifyStatusIconsOnExamCard + "']";
+	}
+	
+	private String accessionNumberInExamCard(String accessionNumber) {
+		return "//th[text()='Accession']/following-sibling::td[text()='"+accessionNumber+"']";
 	}
 
+	private String procedurepickedFromExamCard (String procedure) {
+		return "//th[text()='Procedure']/following-sibling::td[text()='"+procedure+"']";
+	}
+	
+	private String resourcePickedFromExamCard(String resource) {
+		return "//th[text()='Resource']/following-sibling::td[text()='"+resource+"']";		
+	}
+	
+	private String orderingPhysicianPickedFromExamCard(String orderingPhysician) {
+		return "//th[text()='Ordering Physician']/following-sibling::td[text()='"+orderingPhysician+"']";
+	}
+	
+	private String MRNNumberPickedFromExamCard(String MRNNumber) {
+		return "//th[text()='Patient MRN']/following-sibling::td[text()='"+MRNNumber+"']";
+	}
+	
+	private String appointmentTimePickedFromExamCard(String appointmentTime) {
+		return "//th[text()='Appointment']/following-sibling::td[text()='"+appointmentTime+"']";
+	}
+	
+	private String beginExamTimePickedFromExamCard(String beginTime) {
+		return "//th[text()='Begin Exam']/following-sibling::td[text()='"+beginTime+"']";
+	}
+	
+	private String examEndTimePickedFromExamCard(String examEndTime) {
+		return "//th[text()='End Exam']/following-sibling::td[text()='"+examEndTime+"']";
+	}
+	
 	/*
 	 * RETURN Locator or WebElement
 	 */
 
-	private WebElement getMRNNumberExamCardLeftPanelWebElement(String resourceID, String mrn) {
-		return UITestUtils.getWebElementByXpath(getMRNNumberExamCardLeftPanelXpath(resourceID, mrn));
+	private WebElement getMRNNumberExamCardLeftPanelWebElement(String resource, String mrn) {
+		return UITestUtils.getWebElementByXpath(getMRNNumberExamCardLeftPanelXpath(resource, mrn));
 	}
 
 	private By getToSearchIconsOnTheExamCardLocator(String toVerifyStatusIconsOnExamCard, String mrn) {
@@ -96,28 +127,64 @@ public class Airflow {
 		return UITestUtils.getWebElementByXpath(getPatientExperienceStateXpath(labelForState));
 	}
 
-	private WebElement getSearchForMRNNumberInExamCardWebElement(String resourceID, String mrn) {
-		return UITestUtils.getWebElementByXpath(getSearchForMRNNumberInExamCardXpath(resourceID, mrn));
+	private WebElement getSearchForMRNNumberInExamCardWebElement(String resource, String mrn) {
+		return UITestUtils.getWebElementByXpath(getSearchForMRNNumberInExamCardXpath(resource, mrn));
 	}
 
-	private By getSearchForMRNNumberInExamCardLocator(String resourceID, String mrn) {
-		return UITestUtils.getLocatorByXpath(getSearchForMRNNumberInExamCardXpath(resourceID, mrn));
+	private By getOrderingPysicianNameInExamCardWebElement(String resource, String mrn, String orderingPhysician) {
+		return UITestUtils.getLocatorByXpath(getOrderingPysicianNameInExamCard(resource, mrn, orderingPhysician));
+	}
+	
+	private By orderingPhysicianNameIsUnknown(String mrn) {
+		return UITestUtils.getLocatorByXpath(OrderingNameIsUnknown(mrn));
+	}
+	
+	
+	private By getSearchForMRNNumberInExamCardLocator(String resource, String mrn) {
+		return UITestUtils.getLocatorByXpath(getSearchForMRNNumberInExamCardXpath(resource, mrn));
 	}
 
-	private WebElement getFindIDOfSelectedResourceWebElement(String resourcename) {
-		return UITestUtils.getWebElementByXpath(getFindIDOfSelectedResourceXpath(resourcename), WAIT_LONG_SECONDS);
-	}
-
-	private By getResourceExamCardCountLocator(String resourceID) {
-		return UITestUtils.getLocatorByXpath(getResourceExamCardCountXpath(resourceID));
+	private By getResourceExamCardCountLocator(String resource) {
+		return UITestUtils.getLocatorByXpath(getResourceExamCardCountXpath(resource));
 	}
 
 	private By getSpinnerLocator() {
 		return UITestUtils.getLocatorByXpath(spinner);
 	}
+	
+	private WebElement accessionNumberOnExamCard(String accessionNumber) {
+		return UITestUtils.getWebElementByXpath(accessionNumberInExamCard(accessionNumber));
+	}
+	
+	private WebElement procedureOnExamCard(String procedure) {
+		return UITestUtils.getWebElementByXpath(procedurepickedFromExamCard(procedure));
+	}
+	
+	private WebElement resourceOnExamCard(String resource) {
+		return UITestUtils.getWebElementByXpath(resourcePickedFromExamCard(resource));
+	}
+	
+	private WebElement patientMRNOnExamCard(String MRNNumber) {
+		return UITestUtils.getWebElementByXpath(MRNNumberPickedFromExamCard(MRNNumber));
+	}
+	
+	private WebElement orderingPhysicianNameOnexamCard(String orderingPhysician) {
+		return UITestUtils.getWebElementByXpath(orderingPhysicianPickedFromExamCard(orderingPhysician));
+	}
+	
+	private WebElement appointmentTimeOnExamCard(String appointmentTime) {
+		return UITestUtils.getWebElementByXpath(appointmentTimePickedFromExamCard(appointmentTime));
+	}
+	
+	private WebElement beginExamTimeOnExamCard(String beginTime) {
+		return UITestUtils.getWebElementByXpath(beginExamTimePickedFromExamCard(beginTime));
+	}
+	
+	private WebElement examEndTimeOnExamCard(String examEndTime) {
+		return UITestUtils.getWebElementByXpath(examEndTimePickedFromExamCard(examEndTime));
+	}
 
-	// ---------------------------------------------------- Methods
-	// -----------------------------------------------//
+	// --------------------------------------------- Methods -----------------------------------------------//
 
 	/**
 	 * The below method clicks on the category 'Resource' in Service Tools which
@@ -135,16 +202,14 @@ public class Airflow {
 		UITestUtils.clickLink(clickOnSearchInResourcesInST, "search");
 	}
 
-	public String getIDForResource(String resource) {
-		return UITestUtils.retrieveText(getFindIDOfSelectedResourceWebElement(resource), resource);
-	}
-
 	/**
 	 * Get the current count of exam cards for particular resource
 	 */
-	public int examCardCountForTheResource(String resourceID) {
-		UITestUtils.waitForPresenceOfAllElementsLocated(getResourceExamCardCountLocator(resourceID), "Resource Exams List");
-		List<WebElement> resourceExamCardList = driver.findElements(getResourceExamCardCountLocator(resourceID));
+	public int examCardCountForTheResource(String resource) {
+//		UITestUtils.refreshPage();
+//		UITestUtils.waitForPageLoad();
+		verifySpinnerIsInvisible();	
+		List<WebElement> resourceExamCardList = driver.findElements(getResourceExamCardCountLocator(resource));
 		return resourceExamCardList.size();
 	}
 
@@ -153,21 +218,18 @@ public class Airflow {
 	 * It verifies that the newly ingested record in airflow shows the MRN
 	 * number of the ingested record
 	 */
-	public boolean verifyExamCardNotVisible(String resourceID, String mrn) {
-		return UITestUtils.elementInVisibilitymethod(getSearchForMRNNumberInExamCardLocator(resourceID, mrn));
+	public boolean verifyExamCardNotVisible(String resource, String mrn) {
+		return UITestUtils.elementInVisibilitymethod(getSearchForMRNNumberInExamCardLocator(resource, mrn));
 	}
 
-	public boolean verifyMrnExamCardDispalyed(String resourceID, String mrn) {
+	public boolean verifyMrnExamCardDispalyed(String resource, String mrn) {
 		UITestUtils.sleep(10);
-		System.out.println("Resource ID : " + resourceID);
-		System.out.println("MRN : " + mrn);
-		return UITestUtils.verifyIsElementDisplayed(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
+		return UITestUtils.verifyIsElementDisplayed(getSearchForMRNNumberInExamCardWebElement(resource, mrn),
 				"Verified that ingested record is available in Exam Card for particular resource");
 	}
 
-	public void selectMRNOnExamCard(String resourceID, String mrn) {
-		UITestUtils.clickLink_JavaScript(getSearchForMRNNumberInExamCardWebElement(resourceID, mrn),
-				"selects Exam for particular resource" + resourceID);
+	public void selectMRNOnExamCard(String resource, String mrn) {
+		UITestUtils.clickLink_JavaScript(getSearchForMRNNumberInExamCardWebElement(resource, mrn),"selects Exam for particular resource" + resource);
 	}
 
 	/**
@@ -175,17 +237,13 @@ public class Airflow {
 	 * from the left stripe and compares that hex value for the intended color
 	 */
 	public boolean verifyExamCardPopupLeftStripColorLegend(String colorLegend) {
-		String hex = Color
-				.fromString(
-						UITestUtils.retrieveCssAttributeValue(leftStripeColorLegendInExamCard, "background-color", ""))
-				.asHex();
+		String hex = Color.fromString(UITestUtils.retrieveCssAttributeValue(leftStripeColorLegendInExamCard, "background-color", "")).asHex();
 		return Comparator.match(colorLegend, hex, "LeftStripColor");
 
 	}
 
-	public boolean verifyMRNNumberExamCardLeftPanelBackgroupColor(String colorLegend, String resourceID, String mrn) {
-		String hex = Color.fromString(UITestUtils.retrieveCssAttributeValue(
-				getMRNNumberExamCardLeftPanelWebElement(resourceID, mrn), "background-color", "")).asHex();
+	public boolean verifyMRNNumberExamCardLeftPanelBackgroupColor(String colorLegend, String resource, String mrn) {
+		String hex = Color.fromString(UITestUtils.retrieveCssAttributeValue(getMRNNumberExamCardLeftPanelWebElement(resource, mrn), "background-color", "")).asHex();
 		return Comparator.match(colorLegend, hex, "LeftStripColor");
 
 	}
@@ -232,17 +290,54 @@ public class Airflow {
 	}
 
 	public void clickOnPatientExperienceStateEvent(String patientExperienceEvents) {
-		UITestUtils.clickLink(getPatientExperienceStateWebElement(patientExperienceEvents),
-				patientExperienceEvents + " event");
+		UITestUtils.clickLink(getPatientExperienceStateWebElement(patientExperienceEvents),patientExperienceEvents + " event");
 	}
 
 	public boolean verifyUnauthorizedUserTitleDisplayed() {
 		return UITestUtils.verifyIsElementDisplayed(unauthorizedUserTitle, "unauthorized User Page Title");
-
 	}
 	
 	public boolean verifyhomePageWorkspaceDisplayed() {
 		return UITestUtils.verifyIsElementDisplayed(hompageWorkSpace, "Airflow homepage displayed");
-
+	}
+	
+	public boolean verifyAccessionNumberOnExamCard(String accessionNumber) {
+		return UITestUtils.verifyIsElementDisplayed(accessionNumberOnExamCard(accessionNumber), "Accession number shown on Exam Card");
+	}
+	
+	public boolean verifyMRNOnExamCard(String MRNNumber) {
+		return UITestUtils.verifyIsElementDisplayed(patientMRNOnExamCard(MRNNumber), "MRN number shown on Exam Card");
+	}
+	
+	public boolean verifyOrderingPhysician(String orderingPhysician) {
+		return UITestUtils.verifyIsElementDisplayed(orderingPhysicianNameOnexamCard(orderingPhysician), "Ordering physician shown on Exam Card");
+	}
+	
+	public boolean verifyProcedure(String procedure) {
+		return UITestUtils.verifyIsElementDisplayed(procedureOnExamCard(procedure), "Verified that procedure shown is correct");
+	}
+	
+	public boolean verifyResource(String resource) {
+		return UITestUtils.verifyIsElementDisplayed(resourceOnExamCard(resource), "Resource shown on Exam Card");
+	}
+	
+	public boolean verifyAppointmentTime(String appointmentTime) {
+		return UITestUtils.verifyIsElementDisplayed(appointmentTimeOnExamCard(appointmentTime), "Appointment Time shown on Exam Card");
+	}
+	
+	public boolean verifyBeginTime(String beginExamTime) {
+		return UITestUtils.verifyIsElementDisplayed(beginExamTimeOnExamCard(beginExamTime), "Begin Time shown on Exam Card");
+	}
+	
+	public boolean verifyExamEndTime(String examEndTime) {
+		return UITestUtils.verifyIsElementDisplayed(examEndTimeOnExamCard(examEndTime), "Exam End Time shown on Exam Card");
+	}
+	
+	public boolean verifyOrderingPhysicianNameOnExamCardbody(String resource, String mrn, String orderingPhysician) {
+		return UITestUtils.isElementPresent(getOrderingPysicianNameInExamCardWebElement(resource, mrn, orderingPhysician), "Ordering Physician is shown on exam card body");
+	}
+	
+	public boolean verifyOrderingNameDisplayedIsUnknown(String mrn) {
+		return UITestUtils.isElementPresent(orderingPhysicianNameIsUnknown(mrn), "Ordering Physician name displayed is unknown");
 	}
 }

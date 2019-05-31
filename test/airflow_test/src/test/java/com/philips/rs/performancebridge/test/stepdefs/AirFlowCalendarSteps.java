@@ -12,14 +12,12 @@ import cucumber.api.java.en.Then;
 public class AirFlowCalendarSteps {
 
 	
-	private PageObjectManager pom;
 	private AirflowCalendar airflowCalendar;
 	private Airflow Airflow;
 	private ContextDTO contextDTO;
 
 	public AirFlowCalendarSteps(PageObjectManager pageObjectManager, ContextDTO contextDTO) {
 		this.contextDTO = contextDTO;
-		this.pom = pageObjectManager;
 		airflowCalendar = pageObjectManager.getAirflowCalendarPage();
 		Airflow = pageObjectManager.getAirflowPage();
 	}
@@ -30,8 +28,8 @@ public class AirFlowCalendarSteps {
 		String groupName = contextDTO.getGroupName();
 		airflowCalendar.selectResource(groupName);
 		Airflow.verifySpinnerIsInvisible();
-		Comparator.check(true, airflowCalendar.verifyResource(resource1));
-		Comparator.check(true, airflowCalendar.verifyResource(resource2));
+		Comparator.check("The selected "+resource1+" is present in group", true, airflowCalendar.verifyResource(resource1));
+		Comparator.check("The selected "+resource2+" is present in group" ,true, airflowCalendar.verifyResource(resource2));
 	}
 	
 	@Given("^user clicks on \"([^\"]*)\" tab$")
@@ -49,7 +47,7 @@ public class AirFlowCalendarSteps {
 		int examsCountOnOverview = airflowCalendar.getCountForExamCardsFromOverview();
 		airflowCalendar.clickOnMenuTab("Calendar");
 		int examsCountOnCalendar = airflowCalendar.getCountForExamCardsFromCalendar();
-		Comparator.check(examsCountOnOverview, examsCountOnCalendar);
+		Comparator.check("Number of exam cards are same in Calendar and Overview tab", examsCountOnOverview, examsCountOnCalendar);
 	}
 
 	@Then("^user selects \"([^\"]*)\" from Resource Group filter$")
@@ -63,5 +61,15 @@ public class AirFlowCalendarSteps {
 		String groupName = contextDTO.getGroupName();
 		airflowCalendar.clickOnResourceGroupDropDown();
 		Comparator.check("Verify groupname" + groupName + " is not available", true, airflowCalendar.verifyResourceGroupIsDisplayedInList(groupName));
+	}
+	
+	@Then("^verify that ordering physicians name is displayed on the exam card$")
+	public void verify_that_ordering_physicians_name_is_displayed_on_the_exam_card() throws Throwable {
+	    Airflow.verifyOrderingPhysicianNameOnExamCardbody(contextDTO.getResource(), contextDTO.getMrn(), contextDTO.getOrderingPhysician());
+	}
+	
+	@Then("^verify that ordering physicians name is displayed as unknown on the exam card$")
+	public void verify_that_ordering_physicians_name_is_displayed_as_unknown_on_the_exam_card() throws Throwable {
+	    Airflow.verifyOrderingNameDisplayedIsUnknown(contextDTO.getMrn());
 	}
 }

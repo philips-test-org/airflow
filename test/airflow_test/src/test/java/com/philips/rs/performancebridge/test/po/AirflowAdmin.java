@@ -1,20 +1,15 @@
 package com.philips.rs.performancebridge.test.po;
 
-import java.sql.Driver;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import static com.philips.rs.performancebridge.test.common.config.Constants.WAIT_LONG_SECONDS;
 
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class AirflowAdmin {
 	protected WebDriver driver;
 
@@ -93,7 +88,7 @@ public class AirflowAdmin {
 	}
 
 	private String getResourceNameXpath(String resourceName) {
-		return "//td[contains(text(),'" + resourceName + "')]";
+		return "//td[text()='" + resourceName + "']";
 	}
 	
 //	private String getResourceNameMinusXpath(String resourceNameMinus) {
