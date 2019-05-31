@@ -11,7 +11,6 @@ import cucumber.api.java.en.Then;
 
 public class VirtualHospitalSteps {
 
-	private PageObjectManager pom;
 	private VhisExamList vhisExamList;
 	private VhisExamDetail vhisExamDetail;
 	private ContextDTO contextDTO;
@@ -19,7 +18,6 @@ public class VirtualHospitalSteps {
 
 	public VirtualHospitalSteps(PageObjectManager pageObjectManager, ContextDTO contextDTO) {
 		this.contextDTO = contextDTO;
-		this.pom = pageObjectManager;
 		vhisExamList = pageObjectManager.getVhisExamList();
 		vhisExamDetail = pageObjectManager.getVhisExamDetail();
 	}
@@ -95,7 +93,6 @@ public class VirtualHospitalSteps {
 	/*
 	 * This method is to make sure atleast one exam is created as part of startup data
 	 */
-	
 	@Given("^user creates a startup exam with \"([^\"]*)\" resource, \"([^\"]*)\" status and \"([^\"]*)\" procedure in VHIS$")
 	public void user_selects_the_and_Accession_Number_and_create_startup_exam_in_VHIS(String resource, String examstatus, String procedure) throws Throwable {
 		vhisExamList.selectStatus(examstatus);
@@ -104,4 +101,46 @@ public class VirtualHospitalSteps {
 		vhisExamDetail.selectProcedure(procedure);
 		vhisExamDetail.clickSubmit();
 	}
+	
+	@Given("^user creates exam with \"([^\"]*)\" resource, \"([^\"]*)\" status, ordering Physician$")
+	public void user_creates_exam_with_resource_status_ordering_Physician(String resource, String examstatus) throws Throwable {
+		vhisExamList.selectStatus(examstatus);
+		vhisExamList.clickSubmit();
+		vhisExamDetail.selectResourceFromDropDown(resource);
+		contextDTO.setAccessionNumber(vhisExamDetail.getAccession());
+		contextDTO.setMrn(vhisExamDetail.getMRNOnHeader());
+		contextDTO.setOrderingPhysician(vhisExamDetail.getOrderingPhysician());
+		contextDTO.setResource(resource);
+	}
+	
+	@Given("^selects \"([^\"]*)\" procedure for appointment time in VHIS$")
+	public void selects_procedure_for_appointment_time_in_VHIS(String procedure) throws Throwable {
+		vhisExamDetail.selectProcedure(procedure);
+		contextDTO.setAppointmentTime(vhisExamDetail.getAppointmentTime());
+		vhisExamDetail.clickSubmit();
+	}
+	
+	@Given("^selects \"([^\"]*)\" procedure for appointment time and begin time in VHIS$")
+	public void selects_procedure_for_appointment_time_and_begin_time_in_VHIS(String procedure) throws Throwable {
+		vhisExamDetail.selectProcedure(procedure);
+		contextDTO.setAppointmentTime(vhisExamDetail.getAppointmentTime());
+		contextDTO.setBeginTime(vhisExamDetail.getBeginTime());;
+		vhisExamDetail.clickSubmit();
+	}
+	
+	@Given("^selects \"([^\"]*)\" procedure for appointment time, begin time and exam end time in VHIS$")
+	public void selects_procedure_for_appointment_time_begin_time_and_exam_end_time_in_VHIS(String procedure) throws Throwable {
+		vhisExamDetail.selectProcedure(procedure);
+		contextDTO.setAppointmentTime(vhisExamDetail.getAppointmentTime());
+		contextDTO.setBeginTime(vhisExamDetail.getBeginTime());;
+		contextDTO.setExamEndTime(vhisExamDetail.getEndExamTime());
+		vhisExamDetail.clickSubmit();
+	}
+
+	@Given("^select the ordering physician name as blank$")
+	public void select_the_ordering_physician_name_as_blank() throws Throwable {
+	    vhisExamDetail.selectOrderingPysicianNameBlank();
+	}
+
 }
+

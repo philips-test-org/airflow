@@ -107,12 +107,17 @@ public class AirflowCalendar {
 	 */
 	public void selectResource(String groupName) throws InterruptedException {
 		clickOnResourceGroupDropDown();
-		UITestUtils.clickLink(getGroupNameWebElement(groupName), "Selected the resource group from drop down");
+		UITestUtils.sleep(2);
+		UITestUtils.clickLink_JavaScript(getGroupNameWebElement(groupName), "Selected the resource group from drop down");
 	}
 
 	public boolean verifyResource(String resource) throws InterruptedException {
-		UITestUtils.waitForElementToLoad(getResourceWebElement(resource), resource);
-		return UITestUtils.verifyIsElementDisplayed(getResourceWebElement(resource), resource);
+		
+//		UITestUtils.scrollIntoViewElement(getResourceWebElement(resource), resource);
+//		return UITestUtils.isElementPresent(UITestUtils.getLocatorByXpath(getResourceXpath(resource)),resource);
+		UITestUtils.waitForElementToLoad(UITestUtils.getWebElementByXpath(getResourceXpath(resource)), resource);
+		return UITestUtils.isElementDisplayed(UITestUtils.getLocatorByXpath(getResourceXpath(resource)));
+	
 	}
 
 	public boolean verifyResourceGroupIsDisplayedInList(String groupName) throws InterruptedException {

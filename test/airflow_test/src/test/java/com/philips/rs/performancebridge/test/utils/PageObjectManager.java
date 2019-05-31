@@ -10,6 +10,7 @@ import com.philips.rs.performancebridge.test.po.AirflowAdmin;
 import com.philips.rs.performancebridge.test.po.AirflowAdminSiteConfig;
 import com.philips.rs.performancebridge.test.po.AirflowCalendar;
 import com.philips.rs.performancebridge.test.po.AirflowKiosk;
+import com.philips.rs.performancebridge.test.po.AirflowOverview;
 
 public class PageObjectManager extends PageObjectManagerBase  {
 
@@ -19,6 +20,7 @@ public class PageObjectManager extends PageObjectManagerBase  {
 	private AirflowCalendar airflowCalendar;
 	private AirflowKiosk airflowKiosk;
 	private AirflowAdminSiteConfig airflowAdminSiteConfig;
+	private AirflowOverview airflowOverview;
 
 	
 
@@ -46,4 +48,7 @@ public class PageObjectManager extends PageObjectManagerBase  {
 		return (airflowAdminSiteConfig == null) ? airflowAdminSiteConfig = new AirflowAdminSiteConfig(driver) : airflowAdminSiteConfig;
 	}
 	
+	public AirflowOverview getAirflowOverviewPage() {
+		return (airflowOverview == null) ? airflowOverview = new AirflowOverview(driver) : airflowOverview;
+	}
 }

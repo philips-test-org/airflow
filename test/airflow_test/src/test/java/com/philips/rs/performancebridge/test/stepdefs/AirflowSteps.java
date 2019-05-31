@@ -11,7 +11,6 @@ import cucumber.api.java.en.Then;
 
 public class AirflowSteps {
 
-	
 	private Airflow airflow;
 	private int preIngestionExamsCount;
 	private ContextDTO contextDTO;
@@ -21,25 +20,13 @@ public class AirflowSteps {
 		this.contextDTO = contextDTO;
 	}
 
-	
-	/**
-	 * The below method is designed to pick up the resource ID for chosen resource from Service Tools
-	 */	
-	@Then("^user finds the ID for \"([^\"]*)\"$")
-	public void user_finds_the_ID_for(String selectResourceInST) throws Throwable {
-		airflow.leftPanelElementsFOrServiceTool();
-		airflow.clickOnSearchInResource();
-		contextDTO.setResourceId(airflow.getIDForResource(selectResourceInST));
-	}
-
-
 	/**
 	 * The below method counts the number of exam cards in the chosen resource
 	 */
 	@Then("^user count number of exams for \"([^\"]*)\"$")
 	public void user_count_number_of_exams_for(String resourceName) throws Throwable {
 		airflow.verifySpinnerIsInvisible();
-		preIngestionExamsCount = airflow.examCardCountForTheResource(contextDTO.getResourceId()); 
+		preIngestionExamsCount = airflow.examCardCountForTheResource(resourceName);
 	}
 
 	/**
@@ -48,14 +35,11 @@ public class AirflowSteps {
 	 */
 	@Given("^user verifies that record is added in \"([^\"]*)\"$")
 	public void user_verifies_that_is_added_in(String Resource) throws Throwable {
-		UITestUtils.refreshPage();
-		airflow.verifySpinnerIsInvisible();
-		
-		System.out.println(airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(), contextDTO.getMrn()));
-		
-		int postIngestionExamCount = airflow.examCardCountForTheResource(contextDTO.getResourceId());
-		Comparator.check(preIngestionExamsCount + 1, postIngestionExamCount);
-		Comparator.check(true, airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(), contextDTO.getMrn()));
+	//	UITestUtils.refreshPage();
+		airflow.verifySpinnerIsInvisible();	
+		int postIngestionExamCount = airflow.examCardCountForTheResource(Resource);
+		Comparator.check("Verified that the count of exam cards is incremented by 1", preIngestionExamsCount + 1, postIngestionExamCount);
+		Comparator.check("Verified that incremented exam card is same as the ingested record", true,  airflow.verifyMrnExamCardDispalyed(Resource, contextDTO.getMrn()));
 	}
 
 
@@ -64,8 +48,7 @@ public class AirflowSteps {
 	 */
 	@Given("^user selects the exam card$")
 	public void user_selects_the_exam_card() throws Throwable {
-		airflow.selectMRNOnExamCard(contextDTO.getResourceId(), contextDTO.getMrn());
-//		clickLink_JavaScript(searchForMRNNumberInExamCard(), "Exam Card is selected");	
+		airflow.selectMRNOnExamCard(contextDTO.getResource(), contextDTO.getMrn());
 	}
 
 
@@ -95,9 +78,9 @@ public class AirflowSteps {
 	 */
 	@Then("^in \"([^\"]*)\", choose exam card$")
 	public void in_choose_exam_card(String Resources) throws Throwable {
-		UITestUtils.refreshPage();
+		//UITestUtils.refreshPage();
 		airflow.verifySpinnerIsInvisible();
-		airflow.verifyMrnExamCardDispalyed(contextDTO.getResourceId(), contextDTO.getMrn());
+		airflow.verifyMrnExamCardDispalyed(Resources, contextDTO.getMrn());
 	}
 
 
@@ -112,13 +95,9 @@ public class AirflowSteps {
 	 * The below method selects the check box for all the patient experience metrics such as anesthesia, On hold, paperwork, consent and ppca ready.
 	 * The method is designed to identify the current state of the check boxes and then switch the status if the status if OFF.
 	 */
-	@Then("^user selects \"([^\"]*)\" as \"([^\"]*)\"$")
-	public void user_selects_as(String patientExperienceEvents, String PatientexperienceEventstatus) throws InterruptedException {
-		String status = airflow.getPatientExperienceState(patientExperienceEvents);
-		if (status.contains("off"))
-		{
+	@Then("^user selects exam status \"([^\"]*)\"$")
+	public void user_selects_exam_status(String patientExperienceEvents) throws Throwable {
 			airflow.clickOnPatientExperienceStateEvent(patientExperienceEvents);
-		}
 	}
 
 
@@ -148,16 +127,16 @@ public class AirflowSteps {
 	@Then("^user verifies the On Hold status is displayed with \"([^\"]*)\" background color$")
 	public void user_verifies_the_On_Hold_status_is_displayed_with_background_color(String checkHexValueForColor)
 			throws Throwable {
-		String resourceId = contextDTO.getResourceId();
+		String resource = contextDTO.getResource();
 		String mrn = contextDTO.getMrn();
 		String valueForColor = UITestUtils.getHexValueOfColor(checkHexValueForColor);
-		boolean verifyColor = airflow.verifyMRNNumberExamCardLeftPanelBackgroupColor(valueForColor, resourceId, mrn);
+		boolean verifyColor = airflow.verifyMRNNumberExamCardLeftPanelBackgroupColor(valueForColor, resource, mrn);
 		Comparator.check(true, verifyColor);
 	}
 	
 	@Then("^user verifies procedure and accession number is not diplayed on the examcards$")
 	public void user_verifies_procedure_and_accession_number_is_not_diplayed_on_the_examcards() throws Throwable {
-		Comparator.check("verifies " + contextDTO.getMrn() + " mrn is not diplayed on the examcards", true,airflow.verifyExamCardNotVisible(contextDTO.getResourceId(), contextDTO.getMrn()));
+		Comparator.check("verifies " + contextDTO.getMrn() + " mrn is not diplayed on the examcards", true,airflow.verifyExamCardNotVisible(contextDTO.getResource(), contextDTO.getMrn()));
 	}
 	
 	
@@ -171,5 +150,31 @@ public class AirflowSteps {
 		Comparator.check("user unauthorized access page dispalyed",true,  airflow.verifyhomePageWorkspaceDisplayed());
 	}
 	
+	@Then("^verify that exam card has \"([^\"]*)\", \"([^\"]*)\", ordering physician$")
+	public void verify_that_exam_card_has_ordering_physician(String procedure, String resource) throws Throwable {
+		Comparator.check("Verified that MRN number displayed is correct", true, airflow.verifyMRNOnExamCard(contextDTO.getMrn()));
+		Comparator.check("Verified that accession number displayed is correct", true, airflow.verifyAccessionNumberOnExamCard(contextDTO.getAccessionNumber()));
+		Comparator.check("Verified that procedure displayed is correct", true, airflow.verifyProcedure(procedure));
+		Comparator.check("Verified that resource displayed is correct", true, airflow.verifyResource(resource));
+		Comparator.check("Verified that ordering physician displayed is correct", true, airflow.verifyOrderingPhysician(contextDTO.getOrderingPhysician()));
+	}
+		
+	@Then("^data in time field as ingested for appointment$")
+	public void data_in_time_field_as_ingested_for_appointment() throws Throwable {
+		Comparator.check("Verified that appointment time displayed is correct", true, airflow.verifyAppointmentTime(contextDTO.getAppointmentTime()));
+	}
+	
+	@Then("^data in time field as ingested for appointment and begin exam$")
+	public void data_in_time_field_as_ingested_for_appointment_and_begin_exam() throws Throwable {
+		Comparator.check("Verified that appointment time displayed is correct", true, airflow.verifyAppointmentTime(contextDTO.getAppointmentTime()));
+		Comparator.check("Verified that begin time displayed is correct", true, airflow.verifyBeginTime(contextDTO.getBeginTime()));
+}
+	
+	@Then("^data in time field as ingested for appointment, begin exam and end exam$")
+	public void data_in_time_field_as_ingested_for_appointment_begin_exam_and_end_exam() throws Throwable {
+		Comparator.check("Verified that appointment time displayed is correct", true, airflow.verifyAppointmentTime(contextDTO.getAppointmentTime()));
+		Comparator.check("Verified that begin time displayed is correct", true, airflow.verifyBeginTime(contextDTO.getBeginTime()));
+		Comparator.check("Verified that exam end time displayed is correct", true, airflow.verifyExamEndTime(contextDTO.getExamEndTime()));
+	}
 }
 

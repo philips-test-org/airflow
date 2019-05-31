@@ -1,28 +1,28 @@
-@Airflow @Browser @50315
+@patientflow @Browser @50315 @System
 Feature: 51107_VerifySiteConfig_PageAccess
   To verify that users with access roles under 'User roles with access' section can access the airflow application. 
   To verify that the users with access roles under 'User roles without access' section are not unauthorized to use airflow app
 
-  @Regression @51107 @Nonparallel
+   @51107 @Nonparallel
   Scenario: 51107_VerifySiteConfig_PageAccess
-    Given user launch App
-    Given user clicks on "Airflow" App
+    Given user logins to the portal app as "aiuser"
+    Given user clicks on "Patient Flow" App
     Then user login as "aiuser"
     And user clicks on "Admin" tab
     Then user selects "Site Configuration"
     When user is configured without role "attending"
     Then user logs out of the application
-    Given user clicks on "Airflow" App
-    Then user login as "Airflow_attending"
+    Given user opens "Patient Flow" App
+    Then user login as "attending4"
     Then user is unauthorized access message should display
     Then user logs out of the application
-    Given user clicks on "Airflow" App
+    Given user opens "Patient Flow" App
     Then user login as "aiuser"
     And user clicks on "Admin" tab
     Then user selects "Site Configuration"
     When user is configured role with "attending"
     Then user logs out of the application
-    Given user clicks on "Airflow" App
-    Then user login as "Airflow_attending"
+    Given user opens "Patient Flow" App
+    Then user login as "attending4"
     Then Airflow home page should display
     Then user logs out of the application
