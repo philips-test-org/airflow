@@ -181,7 +181,7 @@ pipeline {
                 '''
             }
         }
-/*
+
         stage('Sonar-Scan') {
             steps {
                 sh '''
@@ -190,7 +190,6 @@ pipeline {
                 '''
             }
         }
-        */
         
         stage('Sanity') {
             steps {
