@@ -142,7 +142,7 @@ pipeline {
                     env.result = res
                     if ( env.result  == 'true') {
                     sh '''
-                        #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@btc5x338.code1.emi.philips.com:/home/bridgeadm/
+                        #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@${STAGING_URL}:/home/bridgeadm/
                         cd ${WORKSPACE}
                         APPNAME=`cat ${WORKSPACE}/config/application.name`
                         VAR=`ls patient-flow*.zip`
@@ -152,7 +152,7 @@ pipeline {
                     }
                     if ( env.result  == 'false') {
                     sh '''
-                        #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@btc5x338.code1.emi.philips.com:/home/bridgeadm/
+                        #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@${STAGING_URL}:/home/bridgeadm/
                         cd ${WORKSPACE}
                         APPNAME=`cat ${WORKSPACE}/config/application.name`
                         VAR=`ls patient-flow*.zip`
@@ -172,7 +172,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@btc5x338.code1.emi.philips.com:/home/bridgeadm/
+                    #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@${STAGING_URL}:/home/bridgeadm/
                     cd ${WORKSPACE}
                     APPNAME=`cat ${WORKSPACE}/config/application.name`
                     VAR=`ls patient-flow*.zip`
