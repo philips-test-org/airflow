@@ -28,5 +28,5 @@ Feature: 92177_VerifySchedulesInOverviewAndClalender
     And user logs out of the application
 
     Examples: 
-      | Exam Status | Resource1       | Resource2      | Procedure     | Color  |
-      | begin       | My Favorite CT1 | My Favorite CT | Chest W & W/O | voilet |
+      | Exam Status | Resource1   | Resource2   | Procedure | Color  |
+      | begin       | VHO-CT CT-1 | VHO-CT CT-2 | Lower GI  | voilet |
