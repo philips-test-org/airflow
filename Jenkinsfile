@@ -9,7 +9,6 @@ pipeline {
     environment {
         JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
         PATH="/opt/jruby/bin/:$PATH"
-		REPO_URL="ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow" 
     }
 
     parameters {
@@ -27,7 +26,7 @@ pipeline {
             steps {
                 step([$class: 'WsCleanup'])
                 sh '''
-                    git clone $REPO_URL ${WORKSPACE}
+                    git clone ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow ${WORKSPACE}
                     cd ${WORKSPACE}
                     git config --unset-all remote.origin.fetch;
                     git config --add remote.origin.fetch +refs/pull/*/merge:refs/remotes/origin/pr/*
@@ -48,7 +47,7 @@ pipeline {
             steps {
                 step([$class: 'WsCleanup'])
                 sh '''
-                    git clone $REPO_URL ${WORKSPACE}
+                    git clone ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow ${WORKSPACE}
                     cd ${WORKSPACE}
                     git show --oneline -s
                     git config --unset-all remote.origin.fetch;
@@ -72,6 +71,11 @@ pipeline {
                     sed -i 's#^VERSION=`git describe --always`$#VERSION=$( basename -- `git describe --always` )#' circle-package-application.sh
                     bash -l circle-package-application.sh
                 '''
+                script {
+                    def artifact = sh(script: 'cd ${WORKSPACE} && ls patient-flow-*.zip', returnStdout: true).trim()
+                    env.artifact = artifact
+                    sh 'cp -rf ${WORKSPACE}/${artifact} /sftp'
+					}
             }
         }
 
@@ -97,14 +101,16 @@ pipeline {
                 script {
                     def res = sh( script: "cd ${workspace} && git describe --always | grep -E -- '-rc[0-9]+'" , returnStatus: true) == 0
                     env.result = res
-                    deploy_path = "RS_Dev/philips/rs/pbas/patient-flow/"
+                    deploy_path = "/philips/rs/pbas/patient-flow/"
+                    if ( env.COMMIT_ID != '' ) {
+                         deploy_path = "RS_Dev"+"${deploy_path}"
+                    }
                     if ( env.result  == 'true' && env.COMMIT_ID == '' ) {
-                        def deploy_path = sh(script: "eval echo ${deploy_path} | sed -e 's/RS_Dev/RS_QATest/g'", returnStdout: true)
+                         deploy_path = "RS_QATest"+"${deploy_path}"
                     }
                     if ( env.result  == 'false' && env.COMMIT_ID == '' ) {
-                        def deploy_path = sh(script: "eval echo ${deploy_path} | sed -e 's/RS_Dev/RS_Release/g'", returnStdout: true)
+                         deploy_path = "RS_Release"+"${deploy_path}"
                     }
-
                     withEnv(['no_proxy="${ARTIFACT_HOST}"']) {
                         def server = Artifactory.newServer url: "${ARTIFACT_URL}", credentialsId: '310209258'
                         server.bypassProxy = "true"
@@ -119,6 +125,17 @@ pipeline {
             }
 		}
 
+		stage('Deploy-sftp'){
+            when {
+                expression {
+                    return env.COMMIT_ID == '';
+                }
+            }
+            steps {
+                build job: 'sftp', parameters: [[$class: 'StringParameterValue', name: 'ARTIFACT', value: artifact],[$class: 'BooleanParameterValue', name: 'RCTAG', value: env.result]]
+            }
+        }
+		
         stage('Checkout-Deploy') {
             steps {
                 sh '''
