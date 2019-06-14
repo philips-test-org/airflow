@@ -102,14 +102,15 @@ pipeline {
                 script {
                     def res = sh( script: "cd ${workspace} && git describe --always | grep -E -- '-rc[0-9]+'" , returnStatus: true) == 0
                     env.result = res
-					if ( env.COMMIT_ID != '' ) {
-                         deploy_path = "RS_Dev/philips/rs/pbas/patient-flow/"
+                    deploy_path = "/philips/rs/pbas/patient-flow/"
+                    if ( env.COMMIT_ID != '' ) {
+                         deploy_path = "RS_Dev"+"${deploy_path}"
                     }
                     if ( env.result  == 'true' && env.COMMIT_ID == '' ) {
-                         deploy_path = "RS_QATest/philips/rs/pbas/patient-flow/"
+                         deploy_path = "RS_QATest"+"${deploy_path}"
                     }
                     if ( env.result  == 'false' && env.COMMIT_ID == '' ) {
-                         deploy_path = "RS_Release/philips/rs/pbas/patient-flow/"
+                         deploy_path = "RS_Release"+"${deploy_path}"
                     }
                     withEnv(['no_proxy="${ARTIFACT_HOST}"']) {
                         def server = Artifactory.newServer url: "${ARTIFACT_URL}", credentialsId: '310209258'
