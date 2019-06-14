@@ -9,7 +9,6 @@ pipeline {
     environment {
         JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
         PATH="/opt/jruby/bin/:$PATH"
-		REPO_URL="ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow" 
     }
 
     parameters {
@@ -27,7 +26,7 @@ pipeline {
             steps {
                 step([$class: 'WsCleanup'])
                 sh '''
-                    git clone $REPO_URL ${WORKSPACE}
+                    git clone ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow ${WORKSPACE}
                     cd ${WORKSPACE}
                     git config --unset-all remote.origin.fetch;
                     git config --add remote.origin.fetch +refs/pull/*/merge:refs/remotes/origin/pr/*
@@ -48,7 +47,7 @@ pipeline {
             steps {
                 step([$class: 'WsCleanup'])
                 sh '''
-                    git clone $REPO_URL ${WORKSPACE}
+                    git clone ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow ${WORKSPACE}
                     cd ${WORKSPACE}
                     git show --oneline -s
                     git config --unset-all remote.origin.fetch;
