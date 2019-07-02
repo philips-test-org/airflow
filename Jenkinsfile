@@ -217,11 +217,10 @@ pipeline {
                     echo buildUrl.toString() + " finished with " + status.toString()
                 }
 				
-				step([$class: 'WsCleanup'])
-                sh '''
-                echo "Undeploying application"
-                ssh bridgeadm@${STAGING_URL} 'cd /servers/wildfly/deployments/ && if [ -f "patient-flow.war" ]; then echo "File present. Deleting file."; rm patient-flow.war; else echo "File not present"; fi'
-                '''
+            sh '''
+            echo "Undeploying application"
+            ssh bridgeadm@${STAGING_URL} 'cd /servers/wildfly/deployments/ && if [ -f "patient-flow.war" ]; then rm patient-flow.war; fi'
+            '''
             }
         }
     }
