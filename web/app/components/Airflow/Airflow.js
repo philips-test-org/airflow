@@ -335,7 +335,9 @@ class Airflow extends Component<Props, State> {
   }
 
   updateScrollPosition = (event: SyntheticUIEvent<>) => {
-    const t = R.pathOr(null, ["target", "firstChild"], event);
+    //prevents gridPosition from updating when card modal is opened.
+    if(this.props.showModal) return;
+    const t = R.pathOr(null, ["currentTarget", "firstChild"], event);
     const bounding = t.getBoundingClientRect();
     const position = {x: bounding.left, y: bounding.top};
     this.setState({gridPosition: position});
