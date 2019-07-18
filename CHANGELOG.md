@@ -1,4 +1,4 @@
-## v1.3.0 released 2018-12-06
+## v1.3.0 built 2018-12-06
 
 * **improvement:** support for WildFly app server deployment
 * **improvement:** updated branding (favicon, about page)
@@ -14,7 +14,7 @@
 /servers/tmp/patient-flow-v1.3.0/db_scripts/migrations/manuals-name-change.py
 ```
 
-## v1.2.2 released 2018-08-20
+## v1.2.2 built 2018-08-20
 
 * **improvement** added Audit Log to card modal (Lists all events/comments for that patient. Addresses issue with not seeing comments on cancelled exams)
 * **improvement** added "x" button to cancelled cards to dismiss from the view
@@ -27,7 +27,7 @@
 * **bugfix** fixed comments to be ordered latest to earliest and appear at the top of the list when added
 * **bugfix** fixed issue where dragging a card past the viewport (above or below) would not drop the card at the time where it was intended to drop
 
-## v1.2.1 released 2018-08-16
+## v1.2.1 built 2018-08-16
 
 * **bugfix:** fix app crash on orders without rad exams
 * **bugfix:** fix printing in IE
@@ -35,7 +35,7 @@
 * **bugfix:** fix placeholder images for avatars
 * **bugfix:** move "PPCA Ready" status between "Arrived" and "Started"
 
-## v1.2.0 released 2018-07-17
+## v1.2.0 built 2018-07-17
 
 * **new:** added PPCA Ready toggle
 * **new:** added Ordering Physician to card
@@ -50,24 +50,24 @@
 * **bugfix:** event tabs show all events after new event added
 * **bugfix:** rounding notes update for all users viewing card
 
-## v1.1.3 released 2018-06-19
+## v1.1.3 built 2018-06-19
 
 * **bugfix:** all order messages sending requests to server
 * **bugfix:** check new orders for relevant resource
 
-## v1.1.2 released 2018-06-05
+## v1.1.2 built 2018-06-05
 
 * **bugfix:** "On Hold" status no longer takes priority over "Cancelled" status
 * **bugfix:** cards now consistently update when an exam message is received for an existing order
 
-## v1.1.1 released 2018-04-09
+## v1.1.1 built 2018-04-09
 
 * **improvement:** updated APM client for APM v1.0.2
 * **improvement:** updated notifications to exclude avatars to reduce load
 * **bugfix:** user and admin manual URL configuration secured
 * **bugfix:** removed redundant step from install script
 
-## v1.1.0 released 2018-02-05
+## v1.1.0 built 2018-02-05
 
 * **new:** real-time data now uses new platform messaging service for improved performance and reliability
 * **new:** added PPCA toggle
@@ -77,13 +77,13 @@
 * **bugfix:** comments now respect new line characters
 * **bugfix:** corrected display/calculation of report difference measurement
 
-## v1.0.1 released 2017-09-01
+## v1.0.1 built 2017-09-01
 
 * **improvement:** added visual indicators for additional demographics and exams with invalid duration
 * **bugfix:** empty appointment durations now behave correctly
 * **bugfix:** resolved double comment/status entry
 * **bugfix:** moving a card sets the exam duration properly
 
-## v1.0.0 released 2017-08-24
+## v1.0.0 built 2017-08-24
 
 **new:** initial release
