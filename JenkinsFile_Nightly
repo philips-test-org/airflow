@@ -83,11 +83,6 @@ pipeline {
         }
 
         stage('Deployment') {
-            when {
-                expression {
-                    return env.COMMIT_ID != '';
-                }
-            }
             steps {
                 sh '''
                     #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@${STAGING_URL}:/home/bridgeadm/
