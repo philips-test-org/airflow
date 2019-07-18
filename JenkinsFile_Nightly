@@ -1,0 +1,129 @@
+pipeline {
+
+    agent {
+        node {
+            label 'pb/jenkins-build-wf:1.0.0'
+        }
+    }
+
+    environment {
+        JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+        PATH="/opt/jruby/bin/:$PATH"
+    }
+
+    parameters {
+        string(name: 'BRANCH', defaultValue: 'dev', description: '')
+    }
+
+    stages {
+
+        stage('Cloning-Checkout') {
+            steps {
+                step([$class: 'WsCleanup'])
+                sh '''
+                    git clone -b ${BRANCH} ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow ${WORKSPACE}
+                    cd ${WORKSPACE}
+                    git show --oneline -s
+                    git config --unset-all remote.origin.fetch;
+                    git config --add remote.origin.fetch +refs/pull/*/merge:refs/remotes/origin/pr/*
+                    git fetch --all
+                    git checkout ${COMMIT_ID}
+                '''
+            }
+        }
+
+        stage('Build-Archive') {
+            steps {
+                sh '''
+                    cd ${WORKSPACE}
+                    sed -i 's#git://#http://#g' Gemfile
+                    sed -i 's#^VERSION=`git describe --always`$#VERSION=$( cut -d '-' -f 1-2 <<< `git describe --always` )#' circle-package-application.sh
+					sed -i 's/$PACKAGEDIR-$GIT_COMMIT_HASH/$PACKAGEDIR-$BUILD_NUMBER-$GIT_COMMIT_HASH/g' circle-package-application.sh 
+                    bash -l circle-package-application.sh
+                '''
+            }
+        }
+
+        stage('Sonar-Scan') {
+            steps {
+                sh '''
+                    cd ${WORKSPACE}
+                    /opt/sonar-scanner-3.3.0.1492-linux/bin/sonar-repo-setup airflow 82c933c824739c94ac836c42c0a6460c79766f0d
+                '''
+            }
+        }
+
+        stage('Deploy-Artifact'){
+            steps {
+                script {
+                    deploy_path = "RS_QATest/philips/rs/pbas/nightly/"
+                    withEnv(['no_proxy="${ARTIFACT_HOST}"']) {
+                        def server = Artifactory.newServer url: "${ARTIFACT_URL}", credentialsId: '310209258'
+                        server.bypassProxy = "true"
+                        def uploadSpec = """{
+                        "files": [
+                            { "pattern": "patient-flow-*.zip", "target": "${deploy_path}" }
+                            ]
+                        }"""
+                        def buildInfo1 = server.upload spec: uploadSpec
+                    }
+                }
+            }
+		}
+			
+        stage('Checkout-Deploy') {
+            steps {
+                sh '''
+                    echo "Checked out deployment scripts from dev-tools"
+                    #cd ${WORKSPACE}
+                    #git clone -b dev -n ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/dev-tools --depth 1 ${WORKSPACE}/scripts
+                    #cd ${WORKSPACE}/scripts ; git checkout HEAD build/scripts
+                '''
+            }
+        }
+
+        stage('Deployment') {
+            when {
+                expression {
+                    return env.COMMIT_ID != '';
+                }
+            }
+            steps {
+                sh '''
+                    #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@${STAGING_URL}:/home/bridgeadm/
+                    cd ${WORKSPACE}
+                    APPNAME=`cat ${WORKSPACE}/config/application.name`
+                    VAR=`ls patient-flow*.zip`
+                    export URL="${ARTIFACT_URL}/RS_QATest/philips/rs/pbas/nightly/$VAR"
+                    ssh bridgeadm@${STAGING_URL} bash /home/bridgeadm/deploy.sh TAG_NAME BUILD_TYPE $URL
+                    echo $URL > url.txt
+                '''
+            }
+        }
+       
+        stage('Sanity') {
+            steps {
+                 script {
+                    def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
+                    def status = handle.getBuildStatus()
+                    def buildUrl = handle.getBuildUrl()
+                    echo buildUrl.toString() + " finished with " + status.toString()
+                }
+				
+            sh '''
+            echo "Undeploying application"
+            ssh bridgeadm@${STAGING_URL} 'cd /servers/wildfly/deployments/ && if [ -f "patient-flow.war" ]; then rm patient-flow.war; fi'
+            '''
+            }
+        }
+
+        stage('Blackduck-Scan') {
+            steps {
+                script {
+                def URL = readFile "${env.WORKSPACE}/url.txt"
+				build job: 'BLACKDUCK_SCAN', parameters: [string(name: 'BD_URL', value: URL )]
+                }
+            }
+        }
+    }
+}
