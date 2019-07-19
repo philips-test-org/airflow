@@ -48,8 +48,8 @@ public class LoginSteps {
 			loginPage.login(userName);
 		}
 		
-		Comparator.check(Apps.PATIENT_FLOW.toString() + " home page is displayed", true,
-				loginPage.appHeaderNameDisplayed(Apps.PATIENT_FLOW.toString()));
+		Comparator.check("Performance bridge home page is displayed", true,
+				loginPage.appHeaderNameDisplayed());
 
 	}
 
