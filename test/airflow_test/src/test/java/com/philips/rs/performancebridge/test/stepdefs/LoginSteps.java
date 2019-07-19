@@ -4,6 +4,7 @@ import com.philips.rs.performancebridge.test.common.config.ApplicationProperties
 import com.philips.rs.performancebridge.test.common.config.ApplicationProperties.ApplicationProperty;
 import com.philips.rs.performancebridge.test.common.po.Login;
 import com.philips.rs.performancebridge.test.common.po.Logout;
+import com.philips.rs.performancebridge.test.common.utils.Apps;
 import com.philips.rs.performancebridge.test.common.utils.Comparator;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 import com.philips.rs.performancebridge.test.utils.ContextDTO;
@@ -46,6 +47,10 @@ public class LoginSteps {
 		if (loginPage.verifyUserFieldDisplayed()) {
 			loginPage.login(userName);
 		}
+		
+		Comparator.check(Apps.PATIENT_FLOW.toString() + " home page is displayed", true,
+				loginPage.appHeaderNameDisplayed(Apps.PATIENT_FLOW.toString()));
+
 	}
 
 	@Then("^user closes the browser$")
