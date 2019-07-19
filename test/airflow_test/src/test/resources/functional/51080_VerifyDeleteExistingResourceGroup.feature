@@ -11,9 +11,9 @@ Feature: 51080_VerifyDeleteExistingResourceGroup
     And user clicks on "Admin" tab
     Then user selects "Resource Groups"
     And creates "<Group_Name>"
-    Then add Resources "My Favorite CT" and "My Favorite CT1" into the group
+    Then add Resources "VHO-CT CT-3" and "VHO-CT CT-2" into the group
     And user clicks on "Calendar" tab
-    And Verify the New Group with Resource "My Favorite CT" and "My Favorite CT1" is displayed
+    And Verify the New Group with Resource "VHO-CT CT-3" and "VHO-CT CT-2" is displayed
     And user clicks on "Admin" tab
     Then user selects "Resource Groups"
     Then user deletes the "<Group_Name>"
@@ -23,3 +23,4 @@ Feature: 51080_VerifyDeleteExistingResourceGroup
     Examples: 
       | Group_Name |
       | New Group  |
+ 

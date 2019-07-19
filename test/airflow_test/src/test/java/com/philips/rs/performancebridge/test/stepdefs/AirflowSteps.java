@@ -8,7 +8,9 @@ import com.philips.rs.performancebridge.test.utils.PageObjectManager;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class AirflowSteps {
 
 	private Airflow airflow;
@@ -26,7 +28,8 @@ public class AirflowSteps {
 	@Then("^user count number of exams for \"([^\"]*)\"$")
 	public void user_count_number_of_exams_for(String resourceName) throws Throwable {
 		airflow.verifySpinnerIsInvisible();
-		preIngestionExamsCount = airflow.examCardCountForTheResource(resourceName);
+		contextDTO.setExamCardCount(airflow.examCardCountForTheResource(resourceName));
+		log.info("the count is "+contextDTO.getExamCardCount());
 	}
 
 	/**
@@ -38,7 +41,7 @@ public class AirflowSteps {
 	//	UITestUtils.refreshPage();
 		airflow.verifySpinnerIsInvisible();	
 		int postIngestionExamCount = airflow.examCardCountForTheResource(Resource);
-		Comparator.check("Verified that the count of exam cards is incremented by 1", preIngestionExamsCount + 1, postIngestionExamCount);
+		Comparator.check("Verified that the count of exam cards is incremented by 1", contextDTO.getExamCardCount() + 1, postIngestionExamCount);
 		Comparator.check("Verified that incremented exam card is same as the ingested record", true,  airflow.verifyMrnExamCardDispalyed(Resource, contextDTO.getMrn()));
 	}
 

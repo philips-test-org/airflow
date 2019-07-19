@@ -16,6 +16,7 @@ public class ContextDTO {
 	private String beginTime;
 	private String examEndTime;
 	private String userName;
+	private int examCardCount;
 
 	public String getUserName() {
 		return userName;
@@ -102,5 +103,15 @@ public class ContextDTO {
 		Date date = (Date) dateFormat.parse(timeFrame);
 		String dateString = new SimpleDateFormat("MMMM d'th' yyyy, HH:mm").format(date);
 		return dateString;
+	}
+	
+	public void setExamCardCount(int count)
+	{
+		this.examCardCount=count;
+	}
+	
+	public int getExamCardCount()
+	{
+		return examCardCount;
 	}
 }
