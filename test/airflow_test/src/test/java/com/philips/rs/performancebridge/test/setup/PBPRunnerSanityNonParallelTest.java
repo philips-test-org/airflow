@@ -8,14 +8,15 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		format   = {"pretty","html:target/cucumber", "json:target/cucumber.json","rerun:target/rerun_featureName.txt"},
-		features = {"src/test/resources/sanity/002_VerifySchedulesInOverviewAndClalender.feature"},								
+		features = {"src/test/resources/sanity/92177_VerifySchedulesInOverviewAndClalender.feature"},								
 		strict = true,
 	    monochrome = true,
         glue = {"com.philips.rs.performancebridge.test.stepdefs","com.philips.rs.performancebridge.test.common.hooks"},
-		tags = {"@SANITY"}
+		tags = {"@System"}
 		
         
 		)
 public class PBPRunnerSanityNonParallelTest {
 
 }
+

@@ -1,5 +1,6 @@
 package com.philips.rs.performancebridge.test.po;
 
+import java.awt.AWTException;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -204,11 +205,13 @@ public class Airflow {
 
 	/**
 	 * Get the current count of exam cards for particular resource
+	 * @throws Exception 
 	 */
-	public int examCardCountForTheResource(String resource) {
+	public int examCardCountForTheResource(String resource) throws Exception {
 //		UITestUtils.refreshPage();
 //		UITestUtils.waitForPageLoad();
 		verifySpinnerIsInvisible();	
+		UITestUtils.zoomOut();
 		List<WebElement> resourceExamCardList = driver.findElements(getResourceExamCardCountLocator(resource));
 		return resourceExamCardList.size();
 	}
@@ -280,8 +283,8 @@ public class Airflow {
 		return Comparator.match(SearchIconsCount, true, "No search Icons Count on ExamCard");
 	}
 
-	public boolean verifySpinnerIsInvisible() {
-		return UITestUtils.elementInVisibilitymethod(getSpinnerLocator());
+	public void verifySpinnerIsInvisible() {
+	 UITestUtils.WaitForElementToBeInVisible(getSpinnerLocator(),"spinner");
 	}
 
 	public String getPatientExperienceState(String patientExperienceEvents) {

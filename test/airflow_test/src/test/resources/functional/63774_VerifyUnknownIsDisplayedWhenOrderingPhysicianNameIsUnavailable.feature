@@ -1,9 +1,9 @@
 @patientflow @Browser @52667 @50320 @System
-Feature: 52667_VerifyOrderingPhysicianName
+Feature: 63774_VerifyUnknownIsDisplayedWhenOrderingPhysiciansNameIsUnavailable
   To verify that ordering physician's name is displayed as unknown in case the name is not available for an exam.
 
-   @63774
-  Scenario Outline: 63774_VerifyUnknownIsDisplayedWhenOrderingPhysician'sNameIsUnavailable
+  @63774
+  Scenario Outline: 63774_VerifyUnknownIsDisplayedWhenOrderingPhysiciansNameIsUnavailable
     Given user logins to the portal app as "aiuser"
     Given user clicks on "Patient Flow" App
     Then user login as "aiuser"
@@ -18,7 +18,7 @@ Feature: 52667_VerifyOrderingPhysicianName
     Given user clicks on "Virtual Hospital" App
     And user creates exam with "<Resource1>" resource, "<Exam_Event>" status, ordering Physician
     And select the ordering physician name as blank
-    And selects "Chest W & W/O" procedure for appointment time in VHIS
+    And selects "Lower GI" procedure for appointment time in VHIS
     Then user switches to "Patient Flow" app
     Then user selects "New Group" from Resource Group filter
     And user verifies that record is added in "<Resource1>"
@@ -26,5 +26,5 @@ Feature: 52667_VerifyOrderingPhysicianName
     And user logs out of the application
 
     Examples: 
-      | Resource1      | Resource2       | Exam_Event |
-      | My Favorite CT | My Favorite CT1 | scheduled  |
+      | Resource1   | Resource2   | Exam_Event |
+      | VHO-CT CT-3 | VHO-CT CT-2 | scheduled  |

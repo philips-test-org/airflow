@@ -1,10 +1,10 @@
 @patientflow @Browser @50311 @System
 Feature: 51104_VerifyNearRealTimeUpdatesCancelledExam
- To verify that calendar view shows the near real time update of following Events Ordered,Patient Arrived,Exam start ,Exam complete and Exam Cancelled.
- To verify that the legend is updated in Overview tab
- To verify that the legend is updated in Kiosk tab
+  To verify that calendar view shows the near real time update of following Events Ordered,Patient Arrived,Exam start ,Exam complete and Exam Cancelled.
+  To verify that the legend is updated in Overview tab
+  To verify that the legend is updated in Kiosk tab
 
-   @51104 
+  @51104
   Scenario Outline: 51104_VerifyNearRealTimeUpdatesCancelledExam
     Given user logins to the portal app as "aiuser"
     Given user clicks on "Patient Flow" App
@@ -13,9 +13,9 @@ Feature: 51104_VerifyNearRealTimeUpdatesCancelledExam
     Then user selects "Resource Groups"
     And creates "New Group"
     #Then Apply the "CT" modality filter
-    Then add Resources "My Favorite CT" and "My Favorite CT1" into the group
+    Then add Resources "VHO-CT CT-3" and "VHO-CT CT-2" into the group
     And user clicks on "Calendar" tab
-    And Verify the New Group with Resource "My Favorite CT" and "My Favorite CT1" is displayed
+    And Verify the New Group with Resource "VHO-CT CT-3" and "VHO-CT CT-2" is displayed
     #And user logs out of the application
     #Given user clicks on "Service Tools" App
     #Then user login as "aiuser"
@@ -35,5 +35,5 @@ Feature: 51104_VerifyNearRealTimeUpdatesCancelledExam
     And user logs out of the application
 
     Examples: 
-      | Exam Status | Resource      | Procedure             | Color  |
-      | begin       | My Favorite CT | CT PELVIS W/O & W/DYE | voilet |
+      | Exam Status | Resource    | Procedure | Color  |
+      | begin       | VHO-CT CT-3 | Lower GI  | voilet |

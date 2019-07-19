@@ -5,7 +5,7 @@ Feature: 51098_VerifyNearRealTimeUpdates
   To verify that the legend is updated in Kiosk tab
 
   #The below scenarios requires to be run one after the other because of dependencies on creation of group and data ingestion respectively.
-   @Regression @51098
+  @Regression @51098
   Scenario Outline: 51098_VerifyNearRealTimeUpdates
     Given user logins to the portal app as "aiuser"
     Given user clicks on "Patient Flow" App
@@ -13,9 +13,9 @@ Feature: 51098_VerifyNearRealTimeUpdates
     And user clicks on "Admin" tab
     Then user selects "Resource Groups"
     And creates "New Group"
-    Then add Resources "My Favorite CT" and "My Favorite CT1" into the group
+    Then add Resources "VHO-CT CT-3" and "VHO-CT CT-2" into the group
     And user clicks on "Calendar" tab
-    And Verify the New Group with Resource "My Favorite CT" and "My Favorite CT1" is displayed
+    And Verify the New Group with Resource "VHO-CT CT-3" and "VHO-CT CT-2" is displayed
     Given user clicks on "Virtual Hospital" App
     And user creates a startup exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
     Given user clicks on "Patient Flow" App
@@ -35,6 +35,5 @@ Feature: 51098_VerifyNearRealTimeUpdates
     And user logs out of the application
 
     Examples: 
-      | Exam Status | Resource      | Procedure             | Color  |
-      | begin       | My Favorite CT | Chest W & W/O | violet |
-      
+      | Exam Status | Resource    | Procedure | Color  |
+      | begin       | VHO-CT CT-3 | Lower GI  | violet |

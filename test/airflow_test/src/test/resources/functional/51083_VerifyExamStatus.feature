@@ -4,7 +4,7 @@ Feature: 51083_VerifyExamStatus
   To verify that the user is able to change the state of the following  in exam card information  pop-up : On Hold, Anesthesia, Consent, PPCA Arrival, PPCA Ready (“Pre-Procedure Care area” Ready), Paperwork completed, and Ready for Room
   To verify that the respective icons for state change is displayed in the calendar view
 
-   @Regression @51083
+  @Regression @51083
   Scenario Outline: 51083_VerifyExamStatus
     Given user logins to the portal app as "aiuser"
     Given user clicks on "Patient Flow" App
@@ -12,7 +12,7 @@ Feature: 51083_VerifyExamStatus
     And user clicks on "Admin" tab
     Then user selects "Resource Groups"
     And creates "New Group"
-    Then add Resources "My Favorite CT" and "My Favorite CT1" into the group
+    Then add Resources "VHO-CT CT-3" and "VHO-CT CT-2" into the group
     And user clicks on "Calendar" tab
     Given user clicks on "Virtual Hospital" App
     And user creates a exam with "<Resource>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
@@ -36,5 +36,5 @@ Feature: 51083_VerifyExamStatus
     And user logs out of the application
 
     Examples: 
-      | Exam Status | Resource      | Procedure             | Color  |
-      | begin       | My Favorite CT | Chest W & W/O | voilet |
+      | Exam Status | Resource    | Procedure | Color  |
+      | begin       | VHO-CT CT-3 | Lower GI  | voilet |

@@ -12,7 +12,7 @@ Feature: 51078_VerifyCreateResourceGroups
     Then user selects "Resource Groups"
     And creates "New Group"
     Then Apply the "CT" modality filter
-    Then add Resources "My Favorite CT" and "My Favorite CT1" into the group
+    Then add Resources "VHO-CT CT-3" and "VHO-CT CT-2" into the group
     And user clicks on "Calendar" tab
-    And Verify the New Group with Resource "My Favorite CT" and "My Favorite CT1" is displayed
+    And Verify the New Group with Resource "VHO-CT CT-3" and "VHO-CT CT-2" is displayed
     And user logs out of the application

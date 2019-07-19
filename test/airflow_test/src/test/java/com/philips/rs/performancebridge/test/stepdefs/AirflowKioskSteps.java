@@ -48,7 +48,7 @@ public class AirflowKioskSteps{
 	
 	@Then("^kiosk tab should display$")
 	public void kiosk_tab_should_display() throws Throwable {
-		UITestUtils.switchWindow(Apps.AIR_FLOW.toString());
+		UITestUtils.switchWindow(Apps.PATIENT_FLOW.toString());
 		Comparator.check("Verify kiosk page is displayed", true, airflowKiosk.verifyKioskTabIsActive());
 	}
 

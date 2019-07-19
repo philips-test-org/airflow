@@ -4,12 +4,14 @@ package com.philips.rs.performancebridge.test.po;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
+import com.philips.rs.performancebridge.test.common.config.ApplicationProperties.ApplicationProperty;
 import com.philips.rs.performancebridge.test.common.utils.UITestUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -113,10 +115,12 @@ public class AirflowCalendar {
 
 	public boolean verifyResource(String resource) throws InterruptedException {
 		
-//		UITestUtils.scrollIntoViewElement(getResourceWebElement(resource), resource);
+		UITestUtils.sleep(5);
+		UITestUtils.scrollIntoViewElement(getResourceWebElement(resource), resource);
 //		return UITestUtils.isElementPresent(UITestUtils.getLocatorByXpath(getResourceXpath(resource)),resource);
-		UITestUtils.waitForElementToLoad(UITestUtils.getWebElementByXpath(getResourceXpath(resource)), resource);
-		return UITestUtils.isElementDisplayed(UITestUtils.getLocatorByXpath(getResourceXpath(resource)));
+		//UITestUtils.waitForElementToLoad(UITestUtils.getWebElementByXpath(getResourceXpath(resource)), resource);
+		
+		return UITestUtils.isElementDisplayed(UITestUtils.getWebElementByXpath(getResourceXpath(resource)));
 	
 	}
 
@@ -125,5 +129,4 @@ public class AirflowCalendar {
 		
 	}
 	
-
 }
