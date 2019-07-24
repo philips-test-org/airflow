@@ -73,7 +73,6 @@ class NotecardRow extends Component<Props> {
         key={order.id}
         comments={getOrderComments(order)}
         removeOrders={this.props.removeOrders}
-        cardColors={this.props.cardColors}
         isFiltered={isFiltered}
         isFocused={this.props.focusedOrderId === order.id}
         openModal={this.props.openModal}
