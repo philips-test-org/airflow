@@ -1,3 +1,7 @@
+## v1.3.1 built 2019-25-07
+
+* **bugfix:** fixed 'X' not showing/working for cancelled exams on overview
+
 ## v1.3.0 built 2018-12-06
 
 * **improvement:** support for WildFly app server deployment
