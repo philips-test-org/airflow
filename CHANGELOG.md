@@ -1,6 +1,7 @@
 ## v1.3.1 built 2019-25-07
 
 * **bugfix:** fixed 'X' not showing/working for cancelled exams on overview
+* **bugfix:** fixed shifting calendar table when card model is open and user scrolls
 
 ## v1.3.0 built 2018-12-06
 
