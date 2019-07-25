@@ -16,6 +16,7 @@ type Props = {
   label: string,
   orders: Array<Order>,
   openModal: (Order) => void,
+  removeOrders: (orderIds: Array<number>) => void,
   resourceId: string,
   scrollToCoordinates: (x: number, y: number) => void,
   startDate: number,
@@ -71,7 +72,7 @@ class NotecardRow extends Component<Props> {
       <BaseNotecard
         key={order.id}
         comments={getOrderComments(order)}
-
+        removeOrders={this.props.removeOrders}
         isFiltered={isFiltered}
         isFocused={this.props.focusedOrderId === order.id}
         openModal={this.props.openModal}

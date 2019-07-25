@@ -19,6 +19,7 @@ type Props = {
   openModal: (Order) => void,
   orders: {[string]: Array<Order>},
   ordersMergedByGroup: {[string]: Array<Order>},
+  removeOrders: (orderIds: Array<number>) => void,
   scrollToCoordinates: (x: number, y: number) => void,
   scrollToTop: () => void,
   selectedResources: {[string]: string},
@@ -53,6 +54,7 @@ class Overview extends PureComponent<Props> {
         label={resourceName}
         openModal={this.props.openModal}
         orders={orders}
+        removeOrders={this.props.removeOrders}
         resourceId={resourceId}
         scrollToCoordinates={this.props.scrollToCoordinates}
         startDate={this.props.startDate}

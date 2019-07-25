@@ -496,6 +496,13 @@ Shared Styles
     color: #dcdcdc;
   }
 }
+
+.hide-card {
+  color: white;
+  float: right;
+  margin: 3px;
+}
+
 .notecard:hover .left-tab i.hide-card {
   display: block;
 }
