@@ -104,11 +104,6 @@ pipeline {
                     def buildUrl = handle.getBuildUrl()
                     echo buildUrl.toString() + " finished with " + status.toString()
                 }
-				
-            sh '''
-            echo "Undeploying application"
-            ssh bridgeadm@${STAGING_URL} 'cd /servers/wildfly/deployments/ && if [ -f "patient-flow.war" ]; then rm patient-flow.war; fi'
-            '''
             }
         }
 
