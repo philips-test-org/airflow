@@ -211,16 +211,11 @@ pipeline {
         stage('Sanity') {
             steps {
                  script {
-                    def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: true, shouldNotFailBuild: false )
+                    def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
                     def status = handle.getBuildStatus()
                     def buildUrl = handle.getBuildUrl()
                     echo buildUrl.toString() + " finished with " + status.toString()
                 }
-				
-            sh '''
-            echo "Undeploying application"
-            ssh bridgeadm@${STAGING_URL} 'cd /servers/wildfly/deployments/ && if [ -f "patient-flow.war" ]; then rm patient-flow.war; fi'
-            '''
             }
         }
     }
