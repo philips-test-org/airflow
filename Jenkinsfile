@@ -75,11 +75,11 @@ pipeline {
                 }
             }
             steps {
-	    	 script {
+                script {
                     def artifact = sh(script: 'cd ${WORKSPACE} && ls patient-flow-*.zip', returnStdout: true).trim()
                     env.artifact = artifact
                     sh 'cp -rf ${WORKSPACE}/${artifact} /sftp'
-                 }
+                }
             }
         }
 
