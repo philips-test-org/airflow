@@ -58,41 +58,28 @@ pipeline {
             }
         }
 
-        stage('Build-Archive-WithTag') {
+        stage('Build-Archive') {
+            steps {
+                sh '''
+                    cd ${WORKSPACE}
+                    sed -i 's#git://#http://#g' Gemfile
+                    bash -l jenkins-package-application.sh
+                '''
+	    }
+	}
+
+        stage('Archive-TagBased-Build') {
             when {
                 expression {
                     return env.COMMIT_ID == '';
                 }
             }
             steps {
-                sh '''
-                    cd ${WORKSPACE}
-                    sed -i 's#git://#http://#g' Gemfile
-                    sed -i 's#^VERSION=`git describe --always`$#VERSION=$( basename -- `git describe --always` )#' circle-package-application.sh
-                    bash -l circle-package-application.sh
-                '''
                 script {
                     def artifact = sh(script: 'cd ${WORKSPACE} && ls patient-flow-*.zip', returnStdout: true).trim()
                     env.artifact = artifact
                     sh 'cp -rf ${WORKSPACE}/${artifact} /sftp'
-					}
-            }
-        }
-
-        stage('Build-Archive-WithCommitId') {
-            when {
-                expression {
-                    return env.COMMIT_ID != '';
                 }
-            }
-            steps {
-                sh '''
-                    cd ${WORKSPACE}
-                    sed -i 's#git://#http://#g' Gemfile
-                    sed -i 's#^VERSION=`git describe --always`$#VERSION=$( cut -d '-' -f 1-2 <<< `git describe --always` )#' circle-package-application.sh
-					sed -i 's/$PACKAGEDIR-$GIT_COMMIT_HASH/$PACKAGEDIR-$BUILD_NUMBER-$GIT_COMMIT_HASH/g' circle-package-application.sh 
-                    bash -l circle-package-application.sh
-                '''
             }
         }
 
