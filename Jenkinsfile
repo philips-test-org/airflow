@@ -25,8 +25,8 @@ pipeline {
             }
             steps {
                 step([$class: 'WsCleanup'])
-                checkout([$class: 'GitSCM', branches: [[name: '${COMMIT_ID}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false, timeout: 120]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f1dfefd8-b508-4065-b25c-617aaf490d9c', url: 'ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow']]])
                 sh '''
+                    git clone ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow ${WORKSPACE}
                     cd ${WORKSPACE}
                     git config --unset-all remote.origin.fetch;
                     git config --add remote.origin.fetch +refs/pull/*/merge:refs/remotes/origin/pr/*
@@ -46,8 +46,8 @@ pipeline {
             }
             steps {
                 step([$class: 'WsCleanup'])
-                checkout([$class: 'GitSCM', branches: [[name: '${COMMIT_ID}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'CloneOption', depth: 0, noTags: true, reference: '', shallow: false, timeout: 120]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f1dfefd8-b508-4065-b25c-617aaf490d9c', url: 'ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow']]])
                 sh '''
+                    git clone ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/airflow ${WORKSPACE}
                     cd ${WORKSPACE}
                     git show --oneline -s
                     git config --unset-all remote.origin.fetch;
