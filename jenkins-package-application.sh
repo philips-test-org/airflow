@@ -3,7 +3,7 @@ set -e
 
 if [ "$COMMIT_ID" == '' ]
   then
-        VERSION=$(git describe --always | rev | cut -d "-" -f 3- | rev)
+        VERSION=$(git describe)
   else
         VERSION=$(git describe --always | rev | cut -d "-" -f 2- | rev)
 fi
