@@ -68,7 +68,7 @@ pipeline {
 	    }
 	}
 
-        stage('UploadTo-sftp-TagBased') {
+        stage('UploadTo-sftp-TagBasedOnly') {
             when {
                 expression {
                     return env.COMMIT_ID == '';
