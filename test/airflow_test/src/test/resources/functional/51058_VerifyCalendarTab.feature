@@ -5,7 +5,7 @@ Feature: 51058_VerifyCalendarTab
   To verify exam card information module pop up
   To verify that the legend is displayed for various events
 
-  @Regression @51058
+   @51058
   Scenario Outline: 51058_VerifyCalendarTab
     Given user logins to the portal app as "aiuser"
     Given user clicks on "Patient Flow" App

@@ -88,6 +88,7 @@ public class VirtualHospitalSteps {
 		contextDTO.setMrn(vhisExamDetail.getMRNOnHeader());
 		vhisExamDetail.selectProcedure(procedure);
 		vhisExamDetail.clickSubmit();	
+		contextDTO.setResource(resource);
 	}
 	
 	/*
@@ -100,6 +101,7 @@ public class VirtualHospitalSteps {
 		vhisExamDetail.selectResourceFromDropDown(resource);
 		vhisExamDetail.selectProcedure(procedure);
 		vhisExamDetail.clickSubmit();
+		contextDTO.setResource(resource);
 	}
 	
 	@Given("^user creates exam with \"([^\"]*)\" resource, \"([^\"]*)\" status, ordering Physician$")

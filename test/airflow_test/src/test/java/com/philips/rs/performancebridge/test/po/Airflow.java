@@ -208,10 +208,10 @@ public class Airflow {
 	 * @throws Exception 
 	 */
 	public int examCardCountForTheResource(String resource) throws Exception {
-//		UITestUtils.refreshPage();
+		UITestUtils.refreshPage();
 //		UITestUtils.waitForPageLoad();
 		verifySpinnerIsInvisible();	
-		UITestUtils.zoomOut();
+//		UITestUtils.zoomOut();
 		List<WebElement> resourceExamCardList = driver.findElements(getResourceExamCardCountLocator(resource));
 		return resourceExamCardList.size();
 	}

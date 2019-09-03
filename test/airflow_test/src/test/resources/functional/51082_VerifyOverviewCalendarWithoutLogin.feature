@@ -2,7 +2,7 @@
 Feature: 51082_VerifyOverviewCalendarWithoutLogin
 To verify that user cannot access Overview/calendar in airflow without logging in.
 
-  @51082  @Parallel
+  @51082  @Parallel @Regression
   Scenario: 51082_VerifyOverviewCalendarWithoutLogin
     Given user logins to the portal app as "aiuser"
     When user navigate to url "Patient Flow/calendar"

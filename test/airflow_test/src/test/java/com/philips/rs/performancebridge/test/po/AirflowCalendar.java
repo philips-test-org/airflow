@@ -109,7 +109,7 @@ public class AirflowCalendar {
 	 */
 	public void selectResource(String groupName) throws InterruptedException {
 		clickOnResourceGroupDropDown();
-		UITestUtils.sleep(2);
+		UITestUtils.sleep(4);
 		UITestUtils.clickLink_JavaScript(getGroupNameWebElement(groupName), "Selected the resource group from drop down");
 	}
 
