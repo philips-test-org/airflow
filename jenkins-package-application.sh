@@ -1,16 +1,10 @@
 #!/bin/bash
 set -e
 
-if [ "$COMMIT_ID" == '' ]
-  then
-        VERSION=$(git describe --always)
-  else
-        VERSION=$(git describe --always | rev | cut -d "-" -f 2- | rev)
-fi
-
 CWD=`pwd`
 APPNAME=`cat config/application.name`
 WARFILE="$APPNAME.war"
+VERSION=$( git describe --always | cut -f1,2,3 -d- )
 GIT_COMMIT_HASH=`git log -1 --pretty=format:"%h"`
 
 echo "Warblizer: Creating version page"
