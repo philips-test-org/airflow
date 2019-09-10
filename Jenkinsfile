@@ -30,7 +30,7 @@ pipeline {
                     cd ${WORKSPACE}
                     git config --unset-all remote.origin.fetch;
                     git config --add remote.origin.fetch +refs/pull/*/merge:refs/remotes/origin/pr/*
-                    git fetch --all
+                    git fetch --all --tags
                     TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
                     git checkout $TAG
                     git show --oneline -s
