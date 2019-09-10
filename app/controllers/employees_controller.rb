@@ -3,6 +3,7 @@ class EmployeesController < ApplicationController
 
   def current
     @employee ||= Java::HarbingerSdkData::Employee.withUserName(session[:username],@entity_manager)
-    render json: @employee.to_json
+    emp_data = JSON.parse(@employee.to_json).merge({"language" => employee_locale})
+    render json: emp_data
   end
 end

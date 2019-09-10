@@ -2,6 +2,7 @@
 
 import React, {Component} from "react";
 import * as R from "ramda";
+import {withTranslation} from "react-i18next";
 
 import {
   avatarPath,
@@ -15,6 +16,7 @@ import type {
 type ExtraProps = {
   resourceMap: {[string]: string},
   hideAvatar: boolean,
+  t:(label: string) =>string
 };
 
 type Props = DedupedEvent & ExtraProps;
@@ -27,6 +29,7 @@ const EVENT_LABELS = {
   ppca_ready: "PPCA Ready",
   paperwork: "Paperwork",
   location_update: "Location",
+  t:(label: string) =>string
 }
 
 const EVENT_STATES = {
@@ -83,7 +86,7 @@ class Event extends Component<Props> {
     const eventLabel = EVENT_LABELS[event_type];
     const faClass = FA_CLASS[event_type];
     return (
-      <strong><i className={faClass}></i> {eventLabel} </strong>
+      <strong><i className={faClass}></i> {this.props.t(`LABEL_${eventLabel.toUpperCase().replace(/\s/g, '')}`)} </strong>
     )
   }
 
@@ -94,7 +97,7 @@ class Event extends Component<Props> {
       const eventState = EVENT_STATES[eventBool][event_type];
       const eventClass = new_state[event_type] ? "label-primary" : "label-default";
       return (
-        <span className={`label ${eventClass}`}>{eventState}</span>
+        <span className={`label ${eventClass}`}>{this.props.t(`LABEL_${eventState.toUpperCase().replace(/\s/g, '')}`)}</span>
       )
     }
     return null;
@@ -106,7 +109,7 @@ class Event extends Component<Props> {
     if (event_type !== "location_update") {
       return (
         <div className="body">
-          <strong>{name}</strong> marked {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
+          <strong>{name}</strong> {this.props.t('LABEL_MARKED')} {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
         </div>
       )
     } else if (event_type === "location_update") {
@@ -140,7 +143,7 @@ class Event extends Component<Props> {
 
     return (
       <div className="event-footer">
-        <strong>Order:</strong> {num}
+        <strong>{this.props.t('LABEL_ORDER')}:</strong> {num}
       </div>
     );
   }
@@ -148,4 +151,4 @@ class Event extends Component<Props> {
 
 Event.defaultProps = {hideAvatar: false};
 
-export default Event;
+export default withTranslation()(Event);

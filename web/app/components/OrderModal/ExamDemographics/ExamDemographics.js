@@ -2,6 +2,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 import moment from "moment";
+import {withTranslation} from "react-i18next";
 
 import {
   checkExamThenOrder,
@@ -22,6 +23,7 @@ type Props = {
   order: Order,
   orderGroup: Array<Order>,
   startDate: number,
+  t:(label: string) =>string
 }
 
 type State = {
@@ -47,24 +49,24 @@ class ExamDemographics extends Component<Props, State> {
         {this.renderOrderNavTabs()}
         <table className="table table-bordered table-striped">
           <tbody>
-            {this.renderDemographicsTableRow("Accession", R.path(["rad_exam", "accession"], order))}
-            {this.renderDemographicsTableRow("Order Number", order.order_number)}
-            {this.renderDemographicsTableRow("Patient MRN", R.path(["patient_mrn", "mrn"], order))}
-            {this.renderDemographicsTableRow("Patient DOB", R.path(["patient_mrn", "patient", "birthdate"], order))}
-            {this.renderDemographicsTableRow("Patient Location", this.patientLocation())}
-            {this.renderDemographicsTableRow("Patient Type", getPatientType(order))}
-            {this.renderDemographicsTableRow("Patient Class", this.siteClassName())}
-            {this.renderDemographicsTableRow("Resource", this.resourceName())}
-            {this.renderDemographicsTableRow("Procedure", getProcedure(order))}
-            {this.renderDemographicsTableRow("Default Procedure Duration", this.defaultProcedureDuration())}
-            {this.renderDemographicsTableRow("Sign In", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "sign_in"], order)))}
-            {this.renderDemographicsTableRow("Check In", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "check_in"], order)))}
-            {this.renderDemographicsTableRow("Appointment", formatTimestamp(getAppointmentTime(order)))}
-            {this.renderDemographicsTableRow("Appointment Duration", this.formatDuration(order.appointment_duration))}
-            {this.renderDemographicsTableRow("Current Duration", this.formatDuration(maybeMsToSeconds(orderDuration(this.props.startDate, order))))}
-            {this.renderDemographicsTableRow("Begin Exam", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "begin_exam"], order)))}
-            {this.renderDemographicsTableRow("End Exam", formatTimestamp(R.path(["rad_exam", "rad_exam_time", "end_exam"], order)))}
-            {this.renderDemographicsTableRow("Ordering Physician", getOrderingPhysician(order))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_ACCESSION'), R.path(["rad_exam", "accession"], order))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_ORDERNUMBER'), order.order_number)}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_PATIENTMRN'), R.path(["patient_mrn", "mrn"], order))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_PATIENTDOB'), R.path(["patient_mrn", "patient", "birthdate"], order))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_PATIENTLOCATION'), this.patientLocation())}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_PATIENTTYPE'), getPatientType(order))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_PATIENTCLASS'), this.siteClassName())}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_RESOURCE'), this.resourceName())}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_PROCEDURE'), getProcedure(order))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_DEFAULTPROCEDUREDURATION'), this.defaultProcedureDuration())}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_SIGNIN'), formatTimestamp(R.path(["rad_exam", "rad_exam_time", "sign_in"], order)))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_CHECKIN'), formatTimestamp(R.path(["rad_exam", "rad_exam_time", "check_in"], order)))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_APPOINTMENT'), formatTimestamp(getAppointmentTime(order)))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_APPOINTMENTDURATION'), this.formatDuration(order.appointment_duration))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_CURRENTDURATION'), this.formatDuration(maybeMsToSeconds(orderDuration(this.props.startDate, order))))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_BEGINEXAM'), formatTimestamp(R.path(["rad_exam", "rad_exam_time", "begin_exam"], order)))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_ENDEXAM'), formatTimestamp(R.path(["rad_exam", "rad_exam_time", "end_exam"], order)))}
+            {this.renderDemographicsTableRow(this.props.t('LABEL_ORDERINGPHYSICIAN'), getOrderingPhysician(order))}
           </tbody>
         </table>
       </div>
@@ -176,4 +178,4 @@ class ExamDemographics extends Component<Props, State> {
 
 }
 
-export default ExamDemographics;
+export default withTranslation()(ExamDemographics);

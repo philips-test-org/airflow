@@ -8,6 +8,7 @@ import Event from "./Event";
 import Comment from "./Comment";
 import RoundingUpdate from "./RoundingUpdate";
 import CommentForm from "./CommentForm";
+import {withTranslation} from "react-i18next";
 
 import type {
   DedupedEvent,
@@ -25,6 +26,7 @@ type Props = {
   personEvents: Array<AnnotatedEvent>,
   resourceMap: {[number]: string},
   user: User,
+  t:(label: string) =>string
 }
 
 type AnnotatedEvent = {|
@@ -46,22 +48,22 @@ class CommentInterface extends Component<Props> {
         <ul className="nav nav-tabs nav-bottom-margin" role="tablist">
           <li role="presentation" className="event-list-nav active" onClick={this.props.onCloseAuditHistory}>
             <a href="#comment-list" aria-controls="comment-list" role="tab" data-toggle="tab">
-              Comments
+              {this.props.t('LABEL_COMMENTS')}
             </a>
           </li>
           <li role="presentation" className="event-list-nav" onClick={this.props.onCloseAuditHistory}>
             <a href="#event-list" aria-controls="event-list" role="tab" data-toggle="tab">
-              Events
+             {this.props.t('LABEL_EVENTS')}
             </a>
           </li>
           <li role="presentation" className="event-list-nav" onClick={this.props.onCloseAuditHistory}>
             <a href="#combined-events-list" aria-controls="combined-events-list" role="tab" data-toggle="tab">
-              All
+             {this.props.t('LABEL_ALL')}
             </a>
           </li>
           <li role="presentation" className="event-list-nav" onClick={this.props.onOpenAuditHistory}>
             <a href="#patient-events-list" aria-controls="patient-events-list" role="tab" data-toggle="tab">
-              Audit History
+             {this.props.t('LABEL_AUDIT_HISTORY')}
             </a>
           </li>
         </ul>
@@ -179,4 +181,4 @@ class CommentInterface extends Component<Props> {
   }
 }
 
-export default CommentInterface;
+export default withTranslation()(CommentInterface);

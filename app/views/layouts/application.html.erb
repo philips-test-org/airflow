@@ -27,6 +27,10 @@
   <link rel="manifest" href="<%= asset_path("ai-favicon-manifest.json.erb") %>">
   <link rel="mask-icon" href="<%= asset_path("safari-pinned-tab.svg") %>" color="#ffffff">
   <meta name="theme-color" content="#ffffff">
+  <script type="text/javascript">
+    I18n.defaultLocale="<%= I18n.default_locale %>";
+    I18n.locale="<%= I18n.locale %>";
+  </script>
 </head>
 <body>
 
@@ -48,20 +52,20 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <% if params[:action].to_sym != :kiosk %>
-            <%= global_view_link("Calendar","calendar", {controller: :main, action: :index, :view => "calendar"}) %>
-            <%= global_view_link("Overview","overview", {controller: :main, action: :index, :view => "overview"}) %>
+            <%= global_view_link(t('LABEL_CALENDAR'),"calendar", {controller: :main, action: :index, :view => "calendar"}) %>
+            <%= global_view_link(t('LABEL_OVERVIEW'),"overview", {controller: :main, action: :index, :view => "overview"}) %>
           <% end %>
-          <%= global_view_link("Kiosk","kiosk", {controller: :kiosk, action: :index}) %>
+          <%= global_view_link(t('LABEL_KIOSK'),"kiosk", {controller: :kiosk, action: :index}) %>
           <% unless session[:username].blank? %>
             <% if is_manager?(@employee)%>
               <li class="dropdown">
                 <a href="#" id="global-button-admin" role="button"
                   class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown">Admin <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <%= global_navigation_link "Resource Groups", :controller => :resource_groups, :action => :index %>
-                  <li><%= link_to "Admin Manual", SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
+                  <%= global_navigation_link t('LABEL_RESOURCEGROUPS'), :controller => :resource_groups, :action => :index %>
+                  <li><%= link_to t('LABEL_ADMINMANUAL'), SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
                   <% authorized(["support-staff","ai-staff", "it-staff"]) do %>
-                    <%= global_navigation_link "Site Configuration", :controller => :admin, :action => :site_configuration %>
+                    <%= global_navigation_link t('LABEL_SITECONFIGURATION'), :controller => :admin, :action => :site_configuration %>
                   <% end %>
                 </ul>
               </li>
@@ -70,12 +74,12 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle <%= "active" if params["controller"] == "main" and ["about", "help"].include? params["action"] %>" data-toggle="dropdown">Help <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><%= link_to "User Manual", SiteConfiguration.get_value("user_manual"), target: "_blank" %></li>
-              <%= global_navigation_link "About", :controller => :main,  :action => :about %>
+              <li><%= link_to t('LABEL_USERMANUAL'), SiteConfiguration.get_value("user_manual"), target: "_blank" %></li>
+              <%= global_navigation_link t('LABEL_ABOUT'), :controller => :main,  :action => :about %>
             </ul>
           </li>
           <% if session[:username] %>
-            <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>">Logout</a></li>
+            <li><a href="<%= Java::HarbingerSdk::SSO.logoutUrl() %>"><%=t('LABEL_LOGOUT')%></a></li>
           <% else %>
             <li><%= link_to "Login", root_path %></li>
           <% end %>

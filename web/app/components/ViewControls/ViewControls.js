@@ -7,7 +7,7 @@ import moment from "moment";
 import SingleDatePicker from "react-dates/lib/components/SingleDatePicker";
 
 import ResourceItem from "./ResourceItem";
-
+import {withTranslation} from "react-i18next";
 import {
   STATUS_CHECKS,
   printOrders,
@@ -28,6 +28,7 @@ type Props = {
   viewType: ViewType,
   updateDate: (date: moment) => void,
   updateSelectedResourceGroup: (resources: {[string]: Array<Resource>}, selectedResourceGroup: string) => void,
+  t:(label: string) =>string
 }
 
 type State = {
@@ -70,7 +71,7 @@ class ViewControls extends PureComponent<Props, State> {
     return (
       <div id="view-controls">
         <div className="btn-group pull-left">
-          <button className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" id="legend-button">Legend <span className="caret"></span></button>
+          <button className="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" id="legend-button">{this.props.t('LABEL_LEGEND')}<span className="caret"></span></button>
           {this.renderLegend()}
         </div>
         {this.renderSearchFilter()}
@@ -86,23 +87,23 @@ class ViewControls extends PureComponent<Props, State> {
     return (
       <div id="legend" aria-labelledby="legend-button" className="popover bottom">
         <div className="arrow"></div>
-        <h3 className="popover-title">Legend</h3>
-        <div className="popover-content">
-          {R.map(this.renderStatus, STATUS_CHECKS)}
+        <h3 className="popover-title">{this.props.t('LABEL_LEGEND')}</h3>
+        <div className="popover-content" style = {{width: "max-content"}} >
+          {R.map(this.renderStatus.bind(this), STATUS_CHECKS)}
           <div className="status">
-            <span className="color icon"><i className="anesthesia">A</i></span><span className="name">Anesthesia</span>
+            <span className="color icon"><i className="anesthesia">A</i></span><span className="name">{this.props.t('LABEL_ANESTHESIA')}</span>
           </div>
           <div className="status">
-            <span className="color icon"><i className="fa fa-handshake-o"></i></span><span className="name">Consent</span>
+            <span className="color icon"><i className="fa fa-handshake-o"></i></span><span className="name">{this.props.t('LABEL_CONSENT')}</span>
           </div>
           <div className="status">
-            <span className="color icon"><i className="fa fa-thumbs-up"></i></span><span className="name">PPCA Arrival</span>
+            <span className="color icon"><i className="fa fa-thumbs-up"></i></span><span className="name">{this.props.t('LABEL_PPCAARRIVAL')}</span>
           </div>
           <div className="status">
-            <span className="color icon"><i className="fa fa-file-text"></i></span><span className="name">Paperwork</span>
+            <span className="color icon"><i className="fa fa-file-text"></i></span><span className="name">{this.props.t('LABEL_PAPERWORK')}</span>
           </div>
           <div className="status">
-            <span className="color"><i className="fa fa-paperclip"></i></span><span className="name">Comment(s)</span>
+            <span className="color"><i className="fa fa-paperclip"></i></span><span className="name">{this.props.t('LABEL_COMMENT')}</span>
           </div>
         </div>
       </div>
@@ -114,7 +115,7 @@ class ViewControls extends PureComponent<Props, State> {
     if (viewType === "kiosk") {return null}
     return (
       <div className="input-group pull-left col-xs-4 form-group-sm margin-left-sm hidden-xs">
-        <input type="text" className="form-control" id="search-field" ref={this.searchInput} placeholder="Search" onChange={this.onChangeFilter} />
+        <input type="text" className="form-control" id="search-field" ref={this.searchInput} placeholder={this.props.t('LABEL_SEARCH')} onChange={this.onChangeFilter} />
         <div className="input-group-addon clickable" onClick={this.clearSearch}><i className="fa fa-times"></i></div>
       </div>
     );
@@ -123,7 +124,7 @@ class ViewControls extends PureComponent<Props, State> {
   renderStatus(status: Object) {
     return (
       <div key={`status-${status.order}`} className="status">
-        <span className="color" style={{backgroundColor: status.color}}></span><span className="name">{status.name}</span>
+        <span className="color" style={{backgroundColor: status.color}}></span><span className="name">{this.props.t(`LABEL_${status.name.toUpperCase().replace(/\s/g, '')}`)}</span>
       </div>
     )
   }
@@ -198,6 +199,7 @@ class ViewControls extends PureComponent<Props, State> {
   }
 
   selectDate = (date: moment) => {
+    console.log(date, date.format("DD MMMM YYYY"));
     this.props.updateDate(date);
     this.fetchExams(this.props.selectedResourceGroup, {date});
   }
@@ -219,4 +221,4 @@ class ViewControls extends PureComponent<Props, State> {
   }
 }
 
-export default ViewControls;
+export default withTranslation()(ViewControls);

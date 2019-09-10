@@ -3,7 +3,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6">
-      <h2>Manage Resource Groups</h2>
+      <h2><%= t('LABEL_MANAGE_RESUORCES') %></h2>
       <form id="group-form" class="margin-bottom-sm">
 	<div class="input-group">
 	  <input class="form-control" type="text" name="group" placeholder="Create a new group" />
@@ -17,15 +17,15 @@
       <div id="resource-groups"></div>
     </div>
     <div class="col-md-6" id="right-col" style="display: none;">
-      <h2>Associate Resources</h2>
+      <h2><%= t('LABEL_ASSOCIATE_RESOURCES') %></h2>
       <form id="resource-form" class="margin-bottom-sm">
 	<input type="hidden" name="resource_group_id" value="" />
 	<div class="input-group">
 	  <div class="input-group-btn">
 	    <button type="button" id="modality-filter-button" style="margin-right: -2px;" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="filter-name">Any Modality</span> <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a href="#" data-value="">Any Modality</a></li>
-	      <% Java::HarbingerSdkData::Modality.allWithLimit(100,@entity_manager).each do |m| %>
+              <li><a href="#" data-value=""><%= t('LABEL_ANYMODALITY') %></a></li>
+        <% Java::HarbingerSdkData::Modality.allWithLimit(100,@entity_manager).each do |m| %>
               <li><a href="#" data-id="<%= m.getId %>"><%= m.modality %></a></li>
 	      <% end %>
             </ul>
@@ -50,7 +50,7 @@
   {{#each this}}
   {{> resourceGroup}}
   {{else}}
-  <div class="well">You have no resource groups. Use the form above to create one.</div>
+  <div class="well"><%= t('MESSAGE_NO_RESOURCE_GROUPS') %></div>
   {{/each}}
 </script>
 
@@ -66,10 +66,10 @@
   <table id="resource-table" class="table table-striped">
     <thead>
       <tr>
-	<th>Resource</th>
-	<th>Name</th>
-	<th>Modality</th>
-	<th>Site</th>
+  <th><%= t('LABEL_RESOURCE') %></th>
+  <th><%= t('LABEL_NAME') %></th>
+  <th><%= t('LABEL_MODALITY') %></th>
+  <th><%= t('LABEL_SITE') %></th>
       </tr>
     </thead>
     <tbody>

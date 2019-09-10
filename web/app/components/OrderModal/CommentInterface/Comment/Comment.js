@@ -2,6 +2,7 @@
 
 import React, {PureComponent} from "react";
 import * as R from "ramda";
+import {withTranslation} from "react-i18next";
 
 import {
   avatarPath,
@@ -20,6 +21,7 @@ type Props = {
   showOrderNumber: boolean,
   orderNumber: string,
   orderNumbers: Array<string>,
+  t:(label: string) =>string
 }
 
 class Comment extends PureComponent<Props> {
@@ -37,7 +39,7 @@ class Comment extends PureComponent<Props> {
         }
         <div className="body">
           <div className="heading">
-            <strong>{employee.name}</strong> commented on <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
+            <strong>{employee.name}</strong> {this.props.t('LABEL_COMMENTEDON')} <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
             {this.props.showOrderNumber && this.renderOrderNumber()}
           </div>
           <div className="content">{comments}</div>
@@ -59,7 +61,7 @@ class Comment extends PureComponent<Props> {
 
     return (
       <div className="order-number">
-        <strong>Order:</strong> {num}
+        <strong>{this.props.t('LABEL_ORDER')}:</strong> {num}
       </div>
     );
   }
@@ -67,4 +69,4 @@ class Comment extends PureComponent<Props> {
 
 Comment.defaultProps = {hideAvatar: false}
 
-export default Comment;
+export default withTranslation()(Comment);
