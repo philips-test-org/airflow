@@ -53,11 +53,14 @@ class SiteConfiguration < ActiveRecord::Base
   def get_value(key)
     value = JSON.parse(configuration_json)[key]
 
-    if value.blank? && DEFAULTS.include?(key.to_sym)
+    if value.blank? && APP_MANUALS.include?(key)
       value = DEFAULTS[key.to_sym]
     end
-
-    value
+    if key == "admin_manual" || key == "user_manual"
+      config_value = JSON.parse(configuration_json)[key]
+      value = config_value.gsub(".pdf", "-#{I18n.locale.to_s}.pdf")
+    end
+    value    
   end
 
   #assure minimal permissions are in place

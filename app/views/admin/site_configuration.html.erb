@@ -2,15 +2,15 @@
 <%= content_for(:javascript_includes, javascript_include_tag("pages/role_config.js")) %>
 
 <div class="page-header col-xs-12">
-  <h1>Admin</h1>
+  <h1><%=t('LABEL_ADMIN')%></h1>
 </div>
 
 <div class="col-xs-12">
   <h4>
-    Configuration updated by: <span id="updated_by" class="text-center"><%= SiteConfiguration.get_username %></span>
+    <%=t('LABEL_CONFIG_UPDATED_BY')%>  <span id="updated_by" class="text-center"><%= SiteConfiguration.get_username %></span>
   </h4>
   <h4>
-    Configuration updated at: <span id="updated_at" class="text-center"><%= SiteConfiguration.get_configuration_time %></span>
+    <%=t('LABEL_CONFIG_UPDATED_AT')%> <span id="updated_at" class="text-center"><%= SiteConfiguration.get_configuration_time %></span>
   </h4>
 </div>
 
@@ -29,7 +29,7 @@
           <div class="left">
             <input type='text' name='<%=app_manual_key%>' class='form-control' value="<%= @site_config.get_value(app_manual_key) %>"/>
           </div>
-          <button class="btn btn-primary right update" disabled>Update</button>
+          <button class="btn btn-primary right update" disabled><%=t('LABEL_UPDATE')%></button>
         </div>
       </div>
     </div>

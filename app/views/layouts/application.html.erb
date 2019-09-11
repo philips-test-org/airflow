@@ -60,7 +60,7 @@
             <% if is_manager?(@employee)%>
               <li class="dropdown">
                 <a href="#" id="global-button-admin" role="button"
-                  class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown">Admin <span class="caret"></span></a>
+                  class="dropdown-toggle <%= "active" if params["controller"] == "admin"%>" data-toggle="dropdown"><%= t('LABEL_ADMIN') %> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <%= global_navigation_link t('LABEL_RESOURCEGROUPS'), :controller => :resource_groups, :action => :index %>
                   <li><%= link_to t('LABEL_ADMINMANUAL'), SiteConfiguration.get_value("admin_manual"), target: "_blank" %></li>
@@ -72,7 +72,8 @@
             <% end %>
           <% end %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle <%= "active" if params["controller"] == "main" and ["about", "help"].include? params["action"] %>" data-toggle="dropdown">Help <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle <%= "active" if params["controller"] == "main" and ["about", "help"].include? params["action"] %>" data-toggle="dropdown"><%= t('LABEL_HELP') %> 
+              <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><%= link_to t('LABEL_USERMANUAL'), SiteConfiguration.get_value("user_manual"), target: "_blank" %></li>
               <%= global_navigation_link t('LABEL_ABOUT'), :controller => :main,  :action => :about %>

@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   def check_for_resource_groups
     return if !session[:username] || ResourceGroup.any?
 
-    redirect_to resource_groups_url, alert: "You must add at least one resource group"
+    redirect_to resource_groups_url, alert: t('MESSAGE_ADDATLEASTONE')
   end
 
   # Takes a list of ORM objects (rad_exams, or patient_mrns, but NOT rad_exams and patient_mrns)

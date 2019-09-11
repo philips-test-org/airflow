@@ -74,6 +74,7 @@
     "LABEL_RECENT_IMAGE" : "Aktuellstes Bild anzeigen",
     "LABEL_TOGGLE_DROPDOWN" : "Dropdown umschalten",
     "LABEL_SEARCH": "Suchen",
-    "MESSAGE_FAILED_TO_RESOURCES": "Failed to created new resource group",
-    "MESSAGE_REFRESH_10SEC": "sdfsdfsfdsd"
+    "MESSAGE_FAILED_TO_RESOURCES": "Failed to created new resource group.DE",
+    "MESSAGE_CONNECTED_APM": "Connected to APM.DE",
+    "MESSAGE_REALTIME_DATA": "Receiving real-time data.DE"
 }
