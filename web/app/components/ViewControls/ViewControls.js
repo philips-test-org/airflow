@@ -199,7 +199,6 @@ class ViewControls extends PureComponent<Props, State> {
   }
 
   selectDate = (date: moment) => {
-    console.log(date, date.format("DD MMMM YYYY"));
     this.props.updateDate(date);
     this.fetchExams(this.props.selectedResourceGroup, {date});
   }
