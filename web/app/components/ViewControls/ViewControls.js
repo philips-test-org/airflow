@@ -179,7 +179,7 @@ class ViewControls extends PureComponent<Props, State> {
     if (viewType === "kiosk") {return null}
     return (
       <div className="btn-group pull-right margin-right-sm" id="print-button">
-        <button className="btn btn-default btn-sm" onClick={this.printOrders} title="Printer-friendly view">
+        <button className="btn btn-default btn-sm" onClick={this.printOrders} title={this.props.t('TITLE_PRINTER_FRIENDLY')}>
           <i className="fa fa-print" aria-hidden="true"></i>
         </button>
       </div>

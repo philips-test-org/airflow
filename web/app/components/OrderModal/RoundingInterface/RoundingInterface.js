@@ -102,12 +102,12 @@ class RoundingInterface extends PureComponent<Props, State> {
           <div className="footer">
             <div className="pull-right">
               <Button
-                text="Cancel"
+                text={this.props.t('LABEL_CANCEL')}
                 className="btn-warning edit-rounding-cancel"
                 handleClick={this.stopEditing}
               />
               <Button
-                text="Save"
+                text={this.props.t('LABEL_SAVE')}
                 className="btn-default save-rounding"
                 handleClick={this.submitRounding}
               />

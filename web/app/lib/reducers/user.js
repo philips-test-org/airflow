@@ -7,6 +7,7 @@ import {
 
 import moment from "moment";
 import i18n from "i18next";
+import "moment/min/locales.min";
 const {
   FETCH_AVATAR_SUCCEEDED,
   FETCH_CURRENT_EMPLOYEE_SUCCEEDED,
@@ -40,7 +41,7 @@ function updateAvatarMap(state, {userId, payload}) {
 
 function updateCurrentUser(state, {payload}) {
   i18n.changeLanguage(payload.language);
-  moment.locale('fr')
+  moment.locale(payload.language)
   return R.mergeRight(state, {currentUser: payload});
 }
 

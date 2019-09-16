@@ -76,5 +76,10 @@
     "LABEL_SEARCH": "Suchen",
     "MESSAGE_FAILED_TO_RESOURCES": "Failed to created new resource group.DE",
     "MESSAGE_CONNECTED_APM": "Connected to APM.DE",
-    "MESSAGE_REALTIME_DATA": "Receiving real-time data.DE"
+    "MESSAGE_REALTIME_DATA": "Receiving real-time data.DE",
+    "TITLE_PRINTER_FRIENDLY": "Druckerfreundliche Ansicht",
+    "LABEL_SAVE": "Speichern",
+    "LABEL_CANCEL": "Abbrechen",
+    "MESSAGE_MOVED_ORDER": "verschoben um zu",
+    "MESSAGE_DID_SOMETHINGAT": "tat etwas an"
 }

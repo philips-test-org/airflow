@@ -1,6 +1,7 @@
 // @flow
 import React, {Fragment, PureComponent} from "react";
 import * as R from "ramda";
+import {withTranslation} from "react-i18next";
 
 import {
   cardStatuses,
@@ -29,6 +30,7 @@ type Props = {
   style: Object,
   type: "calendar" | "overview" | "kiosk",
   updateOrderTime: (orderId: number, resourceId: number, newState: Object) => void,
+  t:(label: string) =>string
 }
 
 class BaseNotecard extends PureComponent<Props> {
@@ -112,7 +114,7 @@ class BaseNotecard extends PureComponent<Props> {
       <Fragment key={`procedure-${procedure}-${orderedBy}-${index}`}>
         <div className="procedure">{procedure}</div>
         <div className="patient-location">{this.examLocation()}</div>
-        <div className="ordering-physician">Ordered by: {orderedBy}</div>
+        <div className="ordering-physician">{this.props.t('LABEL_ORDEREDBY')}: {orderedBy}</div>
       </Fragment>
     )
   }
@@ -174,4 +176,4 @@ class BaseNotecard extends PureComponent<Props> {
   }
 }
 
-export default BaseNotecard;
+export default withTranslation()(BaseNotecard);

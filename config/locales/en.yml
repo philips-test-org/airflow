@@ -63,4 +63,5 @@ en:
   MESSAGE_FAILED_TO_DELETE: "Failed to delete resource group"
   LABEL_ADMIN: "Admin"
   LABEL_HELP: "Help"
-  LABEL_CONFIGURE: 'Configure'
+  LABEL_CONFIGURE: "Configure"
+  MESSAGE_DELETEMESSAGE: "Are you sure you want to delete this resource group?"

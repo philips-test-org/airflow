@@ -48,7 +48,7 @@ function connectToAPM(store) {
         event: {
           id: "connected-apm",
           event_type: "info",
-          message: I18n.t('MESSAGE_REALTIME_DATA'),
+          message: I18n.t('MESSAGE_CONNECTED_APM'),
           displayed: false,
         },
       }));
@@ -75,7 +75,7 @@ function connectToAPM(store) {
       event: {
         id: "connected-queues",
         event_type: "info",
-        message: I18n.t('MESSAGE_NO_REAL_MESSAGE'),
+        message: I18n.t('MESSAGE_REALTIME_DATA'),
         displayed: false,
       },
     }));

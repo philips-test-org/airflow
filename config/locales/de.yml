@@ -41,4 +41,5 @@ de:
   MESSAGE_FAILED_TO_DELETE: "Failed to delete resource groupDE"
   LABEL_ADMIN: "Admin"
   LABEL_HELP: "Hilfe"
-  LABEL_CONFIGURE: 'Konfigurieren'
+  LABEL_CONFIGURE: "Konfigurieren"
+  MESSAGE_DELETEMESSAGE: "Soll diese Ressourcen-Gruppe tatsächlich gelöscht werden?"

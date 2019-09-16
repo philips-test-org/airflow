@@ -115,13 +115,13 @@ class Event extends Component<Props> {
     } else if (event_type === "location_update") {
       return (
         <div className="body">
-          <strong>{name}</strong> moved order to <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> @ <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
+          <strong>{name}</strong> {this.props.t('MESSAGE_MOVED_ORDER')} <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> @ <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
         </div>
       )
     }
     return (
       <span className="body">
-        <strong>{name}</strong> did something at <span className="time short">{eventTime}</span>
+        <strong>{name}</strong> {this.props.t('MESSAGE_DID_SOMETHINGAT')} <span className="time short">{eventTime}</span>
       </span>
     )
   }
