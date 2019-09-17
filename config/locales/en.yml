@@ -29,7 +29,6 @@ en:
   MESSAGE_NO_RESOURCE_GROUPS: "You have no resource groups. Use the form above to create one."
   MESSAGE_FAILED_TO_RESOURCES: "Failed to created new resource group"
   MESSAGE_DELETED_RESOURCE: "Deleted resource group"
-  MESSAGE_FAILED_TO_DELETE: "Failed to delete resource group"
   MESSAGE_NO_REAL_MESSAGE: "You are no longer receiving real time updates. Please reload the page and log in again.DE"
   MESSAGE_REFRESH_10SEC: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.DE"
   MESSAGE_RECEVING_REALTIME: "Receiving real-time data.DE"
