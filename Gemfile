@@ -8,7 +8,7 @@ gem "activerecord-jdbcpostgresql-adapter", platform: :jruby
 gem 'activerecord-bogacs', '=0.3.0', :require => 'active_record/bogacs'
 gem 'warbler','=2.0.4'
 gem 'autoprefixer-rails','6.0.3'
-gem 'i18n-js', '3.0.0.rc12'
+gem 'i18n-js', '3.3.0'
 # Assets
 gem 'sass-rails', '~> 5.0'
 gem 'font-awesome-sass','~>4.7.0'
