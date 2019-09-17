@@ -7,7 +7,7 @@
     "LABEL_CONSENT": "Consent",
     "LABEL_PPCAARRIVAL": "PPCA Arrival",
     "LABEL_PAPERWORK": "Paperwork",
-    "LABEL_COMMENT": "Comment(s)",
+    "LABEL_COMMENT_1": "Comment(s)",
     "LABEL_CALENDAR": "Calendar",
     "LABEL_OVERVIEW": "Overview",
     "LABEL_KIOSK": "Kiosk",
@@ -19,6 +19,7 @@
     "LABEL_SEARCHBYRESOURCE": "Search by resource",
     "LABEL_KIOSKNUMBER": "Kiosk Number",
     "LABEL_ONHOLD": "On Hold",
+    "LABEL_CANCELLED": "Cancelled",
     "LABEL_ADDCOMMENTORDER": "Add comment to the order",
     "LABEL_ROUNDING": "Rounding",
     "LABEL_EVENTS": "Events",
@@ -59,7 +60,6 @@
     "LABEL_ORDERNUMBER": "Order Number",
     "LABEL_ACCESSION": "Accession",
     "LABEL_PATIENTMRN": "Patient MRN",
-    "LABEL_PATIENTDOB": "Patient DOB",
     "LABEL_PATIENTLOCATION": "Patient Location",
     "LABEL_PATIENTTYPE": "Patient Type",
     "LABEL_PATIENTCLASS": "Patient Class",
@@ -70,7 +70,6 @@
     "LABEL_APPOINTMENT": "Appointment",
     "LABEL_APPOINTMENTDURATION": "Appointment Duration",
     "LABEL_BEGINEXAM": "Begin Exam",
-    "LABEL_ENDEXAM": "End Exam",
     "LABEL_RECENT_IMAGE" : "View Most Recent Image",
     "LABEL_TOGGLE_DROPDOWN" : "Toggle Dropdown",
     "LABEL_SEARCH": "Search",
@@ -83,5 +82,9 @@
     "LABEL_SAVE": "Save",
     "LABEL_CANCEL": "Cancel",
     "MESSAGE_MOVED_ORDER": "moved order to",
-    "MESSAGE_DID_SOMETHINGAT": "did something at"
+    "MESSAGE_DID_SOMETHINGAT": "did something at",
+    "MESSAGE_TODAY": "Today",
+    "LABEL_ROOM": "Room",
+    "LABEL_BED": "Bed",
+    "LABEL_OCCURED_ON": "on"
 }

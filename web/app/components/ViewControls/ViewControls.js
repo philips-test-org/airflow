@@ -103,7 +103,7 @@ class ViewControls extends PureComponent<Props, State> {
             <span className="color icon"><i className="fa fa-file-text"></i></span><span className="name">{this.props.t('LABEL_PAPERWORK')}</span>
           </div>
           <div className="status">
-            <span className="color"><i className="fa fa-paperclip"></i></span><span className="name">{this.props.t('LABEL_COMMENT')}</span>
+            <span className="color"><i className="fa fa-paperclip"></i></span><span className="name">{this.props.t('LABEL_COMMENT_1')}</span>
           </div>
         </div>
       </div>
@@ -142,9 +142,10 @@ class ViewControls extends PureComponent<Props, State> {
           numberOfMonths={1}
           onDateChange={this.selectDate}
           onFocusChange={this.toggleDatePicker}
-          placeholder="Today"
+          placeholder={this.props.t('MESSAGE_TODAY')}
           readOnly={true}
           small={true}
+          hideKeyboardShortcutsPanel= {true}
         />
       </div>
     )

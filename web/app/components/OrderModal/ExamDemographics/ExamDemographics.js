@@ -124,7 +124,7 @@ class ExamDemographics extends Component<Props, State> {
       );
       const room = order.rad_exam.site_sublocation.room;
       const bed = order.rad_exam.site_sublocation.bed;
-      return `${name}, Room: ${room}, Bed: ${bed}`;
+      return `${name}, ${this.props.t('LABEL_ROOM')}: ${room}, ${this.props.t('LABEL_BED')}: ${bed}`;
     }
     return null;
   }
