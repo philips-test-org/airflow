@@ -48,7 +48,7 @@
     "MESSAGE_RELOAD": "Sie erhalten keine Echtzeit-Aktualisierungen mehr. Laden Sie diese Seite bitte neu und melden Sie sich erneut an.",
     "MESSAGE_REFRESH": "Sie erhalten keine Echtzeit-Aktualisierungen mehr. Um über die aktuellsten Daten verfügen zu können, aktualisieren Sie bitte diese Seite wenn diese Meldung länger als 10 Minuten angezeigt wird.",
     "MESSAGE_RECEIVINGREALTIMEDATA": "Echtzeit-Daten werden empfangen.",
-    "MESSAGE_NOROUNDINGDATA": "Es wurden keine Rundungsdaten eingegeben",
+    "MESSAGE_NOROUNDINGDATA": "Es wurden keine Rundungsdaten eingegeben.",
     "LABEL_COMPLETE": "Komplett",
     "LABEL_COMPLETED": "Abgeschlossen",
     "LABEL_ACTIVE": "Aktiv",
@@ -83,7 +83,7 @@
     "LABEL_CANCEL": "Abbrechen",
     "MESSAGE_MOVED_ORDER": "verschoben um zu",
     "MESSAGE_DID_SOMETHINGAT": "tat etwas an",
-    "MESSAGE_TODAY": "Heute",
+    "LABEL_TODAY": "Heute",
     "LABEL_ROOM": "Room",
     "LABEL_BED": "Bed",
     "LABEL_OCCURED_ON": "am"

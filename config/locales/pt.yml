@@ -27,7 +27,7 @@ pt:
   LABEL_SEARCHBYRESOURCE: "Search by resource"
   LABEL_CREATEANEWGROUP: "Create a new group"
   MESSAGE_NO_RESOURCE_GROUPS: "You have no resource groups. Use the form above to create one."
-  MESSAGE_FAILED_TO_RESOURCES: "Failed to created new resource group"
+  MESSAGE_FAILED_TO_CREATE_RESOURCE_GROUP: "Failed to created new resource group"
   MESSAGE_DELETED_RESOURCE: "Deleted resource group"
   MESSAGE_FAILED_TO_DELETE: "Failed to delete resource group"
   MESSAGE_NO_REAL_MESSAGE: "You are no longer receiving real time updates. Please reload the page and log in again.DE"

@@ -83,7 +83,7 @@
     "LABEL_CANCEL": "Cancel",
     "MESSAGE_MOVED_ORDER": "moved order to",
     "MESSAGE_DID_SOMETHINGAT": "did something at",
-    "MESSAGE_TODAY": "Today",
+    "LABEL_TODAY": "Today",
     "LABEL_ROOM": "Room",
     "LABEL_BED": "Bed"
 }

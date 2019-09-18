@@ -30,7 +30,7 @@ $(document).ready(function() {
 				if (console != undefined) { console.log(arguments); }
 				$("#group-form input").prop("disabled",false);
 				$("#group-form button").prop("disabled",false);
-				application.notification.flash({type: 'alert', message: I18n.t('MESSAGE_FAILED_TO_RESOURCES')});
+				application.notification.flash({type: 'alert', message: I18n.t('MESSAGE_FAILED_TO_CREATE_RESOURCE_GROUP')});
 				},
 				success: function(resource_group) {
 				$("#group-form input").prop("disabled",false);

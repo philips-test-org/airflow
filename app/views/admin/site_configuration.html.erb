@@ -37,5 +37,6 @@
 </div>
 
 <% SiteConfiguration.role_list_keys.each do |role_list_key| %>
-  <%= render partial: "simple_access.html.erb", locals: {title: role_list_key.humanize, key: role_list_key, defaults: SiteConfiguration.defaults[role_list_key.to_sym] }%>
+  <%= render partial: "simple_access.html.erb", locals: {title: 
+    "LABEL_#{role_list_key.upcase}", key: role_list_key, defaults: SiteConfiguration.defaults[role_list_key.to_sym] }%>
 <% end %>

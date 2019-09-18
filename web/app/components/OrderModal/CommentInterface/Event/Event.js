@@ -109,13 +109,13 @@ class Event extends Component<Props> {
     if (event_type !== "location_update") {
       return (
         <div className="body">
-          <strong>{name}</strong> {this.props.t('LABEL_MARKED')} {this.renderEventLabel()} {this.renderEventStatus()} on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
+          <strong>{name}</strong> {this.props.t('LABEL_MARKED')} {this.renderEventLabel()} {this.renderEventStatus()} {this.props.t('LABEL_OCCURED_ON')} <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
         </div>
       )
     } else if (event_type === "location_update") {
       return (
         <div className="body">
-          <strong>{name}</strong> {this.props.t('MESSAGE_MOVED_ORDER')} <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> @ <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> on <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
+          <strong>{name}</strong> {this.props.t('MESSAGE_MOVED_ORDER')} <strong>{R.prop(new_state.resource_id, resourceMap)}</strong> @ <span className="time short"><strong>{formatTimestamp(new_state.start_time)}</strong></span> {this.props.t('LABEL_OCCURED_ON')} <span className="time short">{eventTime}</span> {this.renderMergedIcon()} {this.renderOrderNumber()}
         </div>
       )
     }

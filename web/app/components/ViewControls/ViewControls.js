@@ -142,7 +142,7 @@ class ViewControls extends PureComponent<Props, State> {
           numberOfMonths={1}
           onDateChange={this.selectDate}
           onFocusChange={this.toggleDatePicker}
-          placeholder={this.props.t('MESSAGE_TODAY')}
+          placeholder={this.props.t('LABEL_TODAY')}
           readOnly={true}
           small={true}
           hideKeyboardShortcutsPanel= {true}
