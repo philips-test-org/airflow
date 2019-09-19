@@ -15,7 +15,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		var name = $(this).find("input").val().replace(/^\s*|\s*$/,"");
 		if (name == "") {
-			$(this).find(".errors").html(application.templates.formError("Resource group cannot be blank"));
+			$(this).find(".errors").html(application.templates.formError(I18n.t('MESSAGE_RESOURCECANNOTBEBLANK')));
 		} else {
 			$(this).find(".errors").html("");
 			$.ajax($.harbingerjs.core.url("/resource_groups/create"), {
@@ -30,7 +30,7 @@ $(document).ready(function() {
 				if (console != undefined) { console.log(arguments); }
 				$("#group-form input").prop("disabled",false);
 				$("#group-form button").prop("disabled",false);
-				application.notification.flash({type: 'alert', message: "Failed to created new resource group"});
+				application.notification.flash({type: 'alert', message: I18n.t('MESSAGE_FAILED_TO_CREATE_RESOURCE_GROUP')});
 				},
 				success: function(resource_group) {
 				$("#group-form input").prop("disabled",false);
@@ -50,7 +50,7 @@ $(document).ready(function() {
     $("#resource-groups").on("click",".resource-group",function(e) {
 	e.preventDefault();
 	if ($(e.target).hasClass("fa-trash")) {
-	    if (confirm("Are you sure you want to delete this resource group?")) {
+	    if (confirm(I18n.t('MESSAGE_DELETEMESSAGE'))) {
 	    var self = $(this);
 		$.ajax($.harbingerjs.core.url("/resource_groups/delete"),
 		       {method: 'post',
@@ -59,10 +59,10 @@ $(document).ready(function() {
 			    if (self.hasClass("selected")) { $("#right-col").hide(); }
 			    data = data.filter(function(group) { return group.id != self.data("id"); });
 			    self.remove();
-			    application.notification.flash({type: 'info', message: 'Deleted resource group'});
+			    application.notification.flash({type: 'info', message: I18n.t('MESSAGE_DELETED_RESOURCE')});
 			},
 			error: function() {
-			    application.notification.flash({type: 'alert', message: 'Failed to delete resource group'});
+			    application.notification.flash({type: 'alert', message: I18n.t('MESSAGE_FAILED_TO_DELETE')});
 			}});
 	    }
 	} else {

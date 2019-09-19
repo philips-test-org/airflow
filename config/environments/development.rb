@@ -38,4 +38,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # Configure I18N Middle Ware.
+  config.i18n.default_locale = :en
+  config.middleware.use I18n::JS::Middleware 
 end

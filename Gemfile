@@ -8,14 +8,14 @@ gem "activerecord-jdbcpostgresql-adapter", platform: :jruby
 gem 'activerecord-bogacs', '=0.3.0', :require => 'active_record/bogacs'
 gem 'warbler','=2.0.4'
 gem 'autoprefixer-rails','6.0.3'
-
+gem 'i18n-js', '3.3.0'
 # Assets
 gem 'sass-rails', '~> 5.0'
 gem 'font-awesome-sass','~>4.7.0'
 gem 'bootstrap-sass'
 gem 'uglifier', '=2.7.1'
 gem 'therubyrhino'
-gem 'harbinger-rails-extensions', '2.1.4', source: 'http://gem.analytical.info:9292'
+gem 'harbinger-rails-extensions', '2.3.0.pre.rc2', source: 'http://gem.analytical.info:9292'
 
 group :development, :test do
   gem "pry"

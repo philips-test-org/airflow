@@ -3,6 +3,7 @@ declare var $: any;
 
 import React, {Component, Fragment} from "react";
 import * as R from "ramda";
+import {withTranslation} from "react-i18next";
 
 import {
   cardStatuses,
@@ -39,6 +40,7 @@ type Props = {
   personEvents: Array<Event>,
   resourceMap: {[string]: string},
   startDate: number,
+  t:(label: string) =>string
 }
 
 type State = {
@@ -101,7 +103,7 @@ class OrderModal extends Component<Props, State> {
               </div>
               <h4 className="modal-title">{formatName(order.patient_mrn.patient.name)}</h4>
               <div className="clearfix modal-subhead">
-                <h5 className="left">Kiosk Number: {kioskNumber(order.id)}</h5>
+                <h5 className="left">{this.props.t('LABEL_KIOSKNUMBER')}: {kioskNumber(order.id)}</h5>
                 {this.renderImages()}
               </div>
             </div>
@@ -160,12 +162,12 @@ class OrderModal extends Component<Props, State> {
     // is the unapplied argument.
     const checkStatus = (param) => R.propEq(param, true, adjusted);
     const toggles = [
-      {label: "On Hold", name: "onhold", faClass: "fa-hand-paper-o", isActive: checkStatus("onhold")},
-      {label: "Anesthesia", name: "anesthesia", faClass: "GA", isActive: checkStatus("anesthesia")},
-      {label: "Consent", name: "consent", faClass: "fa-handshake-o", isActive: checkStatus("consent")},
-      {label: "PPCA Arrival", name: "ppca_arrival", faClass: "fa-thumbs-o-up", isActive: checkStatus("ppca_arrival")},
-      {label: "PPCA Ready", name: "ppca_ready", faClass: "fa-check-circle-o", isActive: checkStatus("ppca_ready")},
-      {label: "Paperwork", name: "paperwork", faClass: "fa-file-text", isActive: checkStatus("paperwork")},
+      {label: this.props.t('LABEL_ONHOLD'), name: "onhold", faClass: "fa-hand-paper-o", isActive: checkStatus("onhold")},
+      {label: this.props.t('LABEL_ANESTHESIA'), name: "anesthesia", faClass: "GA", isActive: checkStatus("anesthesia")},
+      {label: this.props.t('LABEL_CONSENT'), name: "consent", faClass: "fa-handshake-o", isActive: checkStatus("consent")},
+      {label: this.props.t('LABEL_PPCAARRIVAL'), name: "ppca_arrival", faClass: "fa-thumbs-o-up", isActive: checkStatus("ppca_arrival")},
+      {label: this.props.t('LABEL_PPCAREADY'), name: "ppca_ready", faClass: "fa-check-circle-o", isActive: checkStatus("ppca_ready")},
+      {label: this.props.t('LABEL_PAPERWORK'), name: "paperwork", faClass: "fa-file-text", isActive: checkStatus("paperwork")},
     ];
     return R.addIndex(R.map)((toggle, index) => (
       <StatusToggle
@@ -189,11 +191,11 @@ class OrderModal extends Component<Props, State> {
           className="btn btn-primary btn-sm"
           onClick={() => this.viewImage(firstExam.image_viewer, firstExam.integration_json)}
         >
-          View Most Recent Image
+          {this.props.t('LABEL_RECENT_IMAGE')}
         </button>
         <button type="button" className="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span className="caret"></span>
-          <span className="sr-only">Toggle Dropdown</span>
+          <span className="sr-only">{this.props.t('LABEL_TOGGLE_DROPDOWN')}</span>
         </button>
         <ul className="dropdown-menu">{this.renderExamImagesList()}</ul>
       </div>
@@ -262,4 +264,4 @@ class OrderModal extends Component<Props, State> {
   }
 }
 
-export default OrderModal;
+export default withTranslation()(OrderModal);

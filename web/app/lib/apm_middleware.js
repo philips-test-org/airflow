@@ -3,6 +3,7 @@
 import * as R from "ramda";
 import moment from "moment";
 import amqpListener from "./amqp-listener-dist";
+import I18n from 'i18next';
 
 import {
   adjustOrderSucceeded,
@@ -47,7 +48,7 @@ function connectToAPM(store) {
         event: {
           id: "connected-apm",
           event_type: "info",
-          message: "Connected to APM",
+          message: I18n.t('MESSAGE_CONNECTED_APM'),
           displayed: false,
         },
       }));
@@ -74,7 +75,7 @@ function connectToAPM(store) {
       event: {
         id: "connected-queues",
         event_type: "info",
-        message: "Receiving real-time data.",
+        message: I18n.t('MESSAGE_REALTIME_DATA'),
         displayed: false,
       },
     }));
@@ -87,7 +88,7 @@ function connectToAPM(store) {
         event: {
           id: "disconnect",
           event_type: "alert",
-          message: "You are no longer receiving real time updates. Please reload the page and log in again.",
+          message: I18n.t('MESSAGE_RELOAD'),
           displayed: false,
         },
       }));
@@ -102,7 +103,7 @@ function connectToAPM(store) {
       event: {
         id: "disconnect",
         event_type: "alert",
-        message: "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
+        message: I18n.t('MESSAGE_REFRESH'),
         displayed: false,
       },
     }));

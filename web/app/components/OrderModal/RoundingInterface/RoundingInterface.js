@@ -8,10 +8,12 @@ import {formatTimestamp} from "../../../lib";
 import Button from "../../Common/Button";
 
 import type {Event} from "../../../types";
+import {withTranslation} from "react-i18next";
 
 type Props = {
   rounding: Event,
   handleSubmit: (value: string) => void,
+  t:(label: string) =>string
 }
 
 type State = {
@@ -47,7 +49,7 @@ class RoundingInterface extends PureComponent<Props, State> {
         <div className="panel-heading">
           <div className="row">
             <div className="col-xs-9" >
-              <h5>Rounding</h5>
+              <h5>{this.props.t('LABEL_ROUNDING')}</h5>
             </div>
             <div className="col-xs-3">
               <Button
@@ -69,7 +71,7 @@ class RoundingInterface extends PureComponent<Props, State> {
   }
 
   renderRoundingValue() {
-    const roundingValue = this.state.roundingValue ? this.state.roundingValue : "No rounding data entered.";
+    const roundingValue = this.state.roundingValue ? this.state.roundingValue : this.props.t('MESSAGE_NOROUNDINGDATA');
     return (
       <div className="rounding">
         <p className="rounding-text">{roundingValue}</p>
@@ -94,18 +96,18 @@ class RoundingInterface extends PureComponent<Props, State> {
               rows="9"
               autoFocus
               ref={el => this.roundingField = el }
-              placeholder="No rounding data entered."
+              placeholder={this.props.t('MESSAGE_NOROUNDINGDATA')}
             />
           </div>
           <div className="footer">
             <div className="pull-right">
               <Button
-                text="Cancel"
+                text={this.props.t('LABEL_CANCEL')}
                 className="btn-warning edit-rounding-cancel"
                 handleClick={this.stopEditing}
               />
               <Button
-                text="Save"
+                text={this.props.t('LABEL_SAVE')}
                 className="btn-default save-rounding"
                 handleClick={this.submitRounding}
               />
@@ -123,7 +125,7 @@ class RoundingInterface extends PureComponent<Props, State> {
     const {employee, created_at} = roundingValue;
     return (
       <div className="panel-footer rounding-footer">
-        <p className="edited-by">Last edited by: {employee.name} on <span className="time short">{formatTimestamp(created_at)}</span>
+        <p className="edited-by">{this.props.t('LABEL_LASTEDITEDBY')}: {employee.name} on <span className="time short">{formatTimestamp(created_at)}</span>
         </p>
       </div>
     );
@@ -160,4 +162,4 @@ class RoundingInterface extends PureComponent<Props, State> {
   }
 }
 
-export default RoundingInterface;
+export default withTranslation()(RoundingInterface);

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_filter :check_session_username
+  before_filter :check_session_username, :set_locale
 
   def get_entity_manager
     @entity_manager ||= Java::HarbingerSdk::DataUtils.getEntityManager
@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   def check_for_resource_groups
     return if !session[:username] || ResourceGroup.any?
 
-    redirect_to resource_groups_url, alert: "You must add at least one resource group"
+    redirect_to resource_groups_url, alert: t('MESSAGE_ADDATLEASTONE')
   end
 
   # Takes a list of ORM objects (rad_exams, or patient_mrns, but NOT rad_exams and patient_mrns)
@@ -106,4 +106,20 @@ class ApplicationController < ActionController::Base
       yield role_list
     end
   end
+
+  def employee_locale
+    get_employee_locale(@entity_manager)
+  end
+
+  def set_locale
+   user_authentication = authenticate()
+   if user_authentication
+     locale = get_employee_locale(@entity_manager)
+     I18n.locale = locale_valid?(locale) ? locale : :en
+   end 
+  end 
+ 
+  def locale_valid?(locale)
+    I18n.available_locales.map(&:to_s).include?(locale)
+  end 
 end

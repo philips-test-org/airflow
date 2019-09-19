@@ -1,16 +1,16 @@
 <div id="<%=key%>" class="access-container col-xs-12" style="margin-bottom: 20px;">
   <h3>
-    Configure <%= title %>
+    <%= "#{t('LABEL_CONFIGURE')} " + t(title) %>
     <%= render partial: "admin/icons.html.erb" %>
-    <button class="update-access btn btn-primary update" data-key="<%=key%>" disabled>Update <%= title %></button>
+    <button class="update-access btn btn-primary update" data-key="<%=key%>" disabled><%=t('LABEL_UPDATE')%> <%= t(title) %></button>
   </h3>
   <% if defaults %>
-    <h5><%= "Default Roles: #{defaults.join(", ")}"%> </h5>
+    <h5><<%="#{t('LABEL_DEFAULTROLES')}: #{defaults.join(", ")}"%> </h5>
   <% end %>
   <table class="roles">
     <tr>
-      <th>User Roles Without Access</th>
-      <th>User Roles With Access</th>
+      <th><%=t('LABEL_USER_WITHOUT_ACCESS')%></th>
+      <th><%=t('LABEL_USER_WITH_ACCESS')%></th>
     </tr>
     <tr>
       <td valign="top">

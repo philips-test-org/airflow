@@ -82,4 +82,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Configure I18N Middle Ware.
+  config.i18n.default_locale = :en
+  config.middleware.use I18n::JS::Middleware
 end

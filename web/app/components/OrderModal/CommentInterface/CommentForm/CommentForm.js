@@ -6,10 +6,12 @@ import * as R from "ramda";
 import {avatarPath} from "../../../../lib";
 
 import Button from "../../../Common/Button";
+import {withTranslation} from "react-i18next";
 
 type Props = {
   userId: number,
   handleSubmit: (comment: string) => void,
+  t:(label: string) =>string
 }
 
 class CommentForm extends Component<Props> {
@@ -32,7 +34,7 @@ class CommentForm extends Component<Props> {
           </div>
           <div className="body panel panel-default">
             <div className="panel-heading">
-              <h5>Add comment to the order</h5>
+              <h5>{this.props.t('LABEL_ADDCOMMENTORDER')}</h5>
             </div>
             <div className="panel-body">
               <textarea
@@ -46,7 +48,7 @@ class CommentForm extends Component<Props> {
                 <Button
                   className="btn-default add-comment"
                   handleClick={this.handleSubmit}
-                  text="Add Comment"
+                  text={this.props.t('LABEL_ADDCOMMENT')}
                 />
               </div>
               <div style={{clear: "both"}}></div>
@@ -65,4 +67,4 @@ class CommentForm extends Component<Props> {
   }
 }
 
-export default CommentForm;
+export default withTranslation()(CommentForm);

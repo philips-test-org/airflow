@@ -12,6 +12,7 @@ import OrderModal from "../OrderModal";
 import ViewControls from "../ViewControls";
 import ErrorBoundary from "../ErrorBoundary";
 import Notifications from "../Notifications";
+import {withTranslation} from "react-i18next";
 
 import {
   APP_ROOT,
@@ -81,6 +82,7 @@ type Props = {
   updateWidth: (updatedWidth: number) => void,
   updateWidthMultiplier: (resourceId: number, widthMultiplier: number) => void,
   widthMultipliers: {[number]: number},
+  t:(label: string) =>string
 }
 
 type State = {
@@ -202,7 +204,7 @@ class Airflow extends Component<Props, State> {
   renderNoResourcesMessage() {
     return (
       <div className="container-fluid alerts">
-        <div className="alert alert-danger">At least one Resource Group must be created. Please contact your administrator to create a Resource Group.</div>
+        <div className="alert alert-danger">{this.props.t('MESSAGE_ATLEASTONERESOURCE')}</div>
       </div>
     );
   }
@@ -521,4 +523,4 @@ class Airflow extends Component<Props, State> {
   }
 }
 
-export default hot(module)(Airflow);
+export default hot(module)(withTranslation()(Airflow));

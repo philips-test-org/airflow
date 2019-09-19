@@ -2,15 +2,15 @@
   <h3 class="patient-name"><%= name(order) %></h3>
   <div>
     <div>
-      <strong>Procedure: </strong>
+      <strong><%=t('LABEL_PROCEDURE')%> </strong>
       <span class="procedure"><%= procedure(order) %></span>
     </div>
     <div>
-      <strong>Ordering Physician: </strong>
+      <strong><%=t('LABEL_ORDERINGPHYSICIAN')%> </strong>
       <span><%= orderingPhysician(order) %></span>
     </div>
     <div>
-      <strong>Rounding: </strong>
+      <strong><%=t('LABEL_ROUNDING')%> </strong>
       <span><%= rounding(order) %></span>
     </div>
   </div>

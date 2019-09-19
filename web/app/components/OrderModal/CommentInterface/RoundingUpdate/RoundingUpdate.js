@@ -3,6 +3,7 @@
 import React, {Component} from "react";
 import * as R from "ramda";
 import * as D from "diff";
+import {withTranslation} from "react-i18next";
 
 import {
   avatarPath,
@@ -26,6 +27,7 @@ type Props = {
   showOrderNumber: boolean,
   orderNumber: string,
   orderNumbers: Array<string>,
+  t:(label: string) =>string
 }
 
 type State = {
@@ -58,7 +60,7 @@ class RoundingUpdate extends Component<Props, State> {
         }
         <div className="body">
           <div className="heading clearfix">
-            <strong>{employee.name}</strong> updated rounding <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
+            <strong>{employee.name}</strong> {this.props.t('LABEL_UPDATEDROUNDING')} <span className="time short">{formatTimestamp(created_at)}</span> {R.prop("merged", this.props) ? <i className="fa fa-compress"></i> : null}
             {this.props.hideDiff ? null :
               <span className="pull-right">
                 <Button text="Diff" className={`btn-xs btn-${this.state.showDiff ? "info" : "default"}`} handleClick={this.toggleDiff} />
@@ -106,7 +108,7 @@ class RoundingUpdate extends Component<Props, State> {
 
     return (
       <div className="order-number">
-        <strong>Order:</strong> {num}
+        <strong>{this.props.t('LABEL_ORDER')}:</strong> {num}
       </div>
     );
   }
@@ -117,4 +119,4 @@ RoundingUpdate.defaultProps = {
   hideDiff: false,
 }
 
-export default RoundingUpdate;
+export default withTranslation()(RoundingUpdate);

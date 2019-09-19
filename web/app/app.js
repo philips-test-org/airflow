@@ -12,7 +12,7 @@ import {isIE} from "./lib";
 
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-
+import "./i18n";
 import Airflow from "./components/Airflow";
 
 if (process.env.NODE_ENV !== "production" && process.env.DEBUG === "true") {
