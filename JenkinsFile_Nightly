@@ -1,3 +1,5 @@
+def changesExist = false
+
 pipeline {
 
     agent {
@@ -27,24 +29,39 @@ pipeline {
                     git config --unset-all remote.origin.fetch;
                     git config --add remote.origin.fetch +refs/pull/*/merge:refs/remotes/origin/pr/*
                     git fetch --all
-                    git checkout ${COMMIT_ID}
                 '''
+                script {
+				    def NUM_COMMITS_SINCE_1D = sh(script: 'git rev-list --count ${BRANCH} --since=\"1 day ago\"', returnStdout: true).trim()
+					if ( NUM_COMMITS_SINCE_1D > "0" )  
+					{
+						changesExist = true
+					}
+					println "# of changes since last nightly build = ${NUM_COMMITS_SINCE_1D}"
+				}
             }
         }
 
         stage('Build-Archive') {
+            when {
+                expression {
+                    changesExist
+                }
+            }
             steps {
                 sh '''
                     cd ${WORKSPACE}
-                    sed -i 's#git://#http://#g' Gemfile
-                    sed -i 's#^VERSION=`git describe --always`$#VERSION=$( cut -d '-' -f 1-2 <<< `git describe --always` )#' circle-package-application.sh
-					sed -i 's/$PACKAGEDIR-$GIT_COMMIT_HASH/$PACKAGEDIR-$BUILD_NUMBER-$GIT_COMMIT_HASH/g' circle-package-application.sh 
-                    bash -l circle-package-application.sh
+                    sed -i 's#git://#http://#g' Gemfile 
+                    bash -l jenkins-package-application.sh
                 '''
             }
         }
 
         stage('Sonar-Scan') {
+            when {
+                expression {
+                    changesExist
+                }
+            }
             steps {
                 sh '''
                     cd ${WORKSPACE}
@@ -54,6 +71,11 @@ pipeline {
         }
 
         stage('Deploy-Artifact'){
+            when {
+                expression {
+                    changesExist
+                }
+            }
             steps {
                 script {
                     deploy_path = "RS_QATest/philips/rs/pbas/nightly/"
@@ -71,18 +93,12 @@ pipeline {
             }
 		}
 			
-        stage('Checkout-Deploy') {
-            steps {
-                sh '''
-                    echo "Checked out deployment scripts from dev-tools"
-                    #cd ${WORKSPACE}
-                    #git clone -b dev -n ssh://tfsemea1.ta.philips.com:22/tfs/TPC_Region13/PARAM/_git/dev-tools --depth 1 ${WORKSPACE}/scripts
-                    #cd ${WORKSPACE}/scripts ; git checkout HEAD build/scripts
-                '''
-            }
-        }
-
         stage('Deployment') {
+            when {
+                expression {
+                    changesExist
+                }
+            }
             steps {
                 sh '''
                     #scp  ${WORKSPACE}/scripts/build/scripts/*.sh bridgeadm@${STAGING_URL}:/home/bridgeadm/
@@ -97,6 +113,11 @@ pipeline {
         }
        
         stage('Sanity') {
+            when {
+                expression {
+                    changesExist
+                }
+            }
             steps {
                  script {
                     def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
@@ -108,6 +129,11 @@ pipeline {
         }
 
         stage('Blackduck-Scan') {
+            when {
+                expression {
+                    changesExist
+                }
+            }
             steps {
                 script {
                 def URL = readFile "${env.WORKSPACE}/url.txt"
