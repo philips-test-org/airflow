@@ -77,7 +77,7 @@
     "MESSAGE_DELETED_RESOURCE": "Deleted resource group",
     "MESSAGE_FAILED_TO_DELETE": "Failed to delete resource group",
     "MESSAGE_CONNECTED_APM": "Connected to APM.DE",
-    "MESSAGE_REALTIME_DATA": "Receiving real-time data.DE",
+    "MESSAGE_REALTIME_DATA": "Echtzeit-Daten werden empfangen",
     "TITLE_PRINTER_FRIENDLY": "Druckerfreundliche Ansicht",
     "LABEL_SAVE": "Speichern",
     "LABEL_CANCEL": "Abbrechen",
@@ -85,6 +85,6 @@
     "MESSAGE_DID_SOMETHINGAT": "tat etwas an",
     "LABEL_TODAY": "Heute",
     "LABEL_ROOM": "Room",
-    "LABEL_BED": "Bed",
+    "LABEL_BED": "Bett",
     "LABEL_OCCURED_ON": "am"
 }

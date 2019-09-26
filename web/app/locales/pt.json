@@ -60,7 +60,7 @@
     "LABEL_ORDERNUMBER": "Order Number",
     "LABEL_ACCESSION": "Accession",
     "LABEL_PATIENTMRN": "Patient MRN",
-    "LABEL_PATIENTLOCATION": "Patient Location",
+    "LABEL_PATIENTLOCATION": "Localização do Paciente",
     "LABEL_PATIENTTYPE": "Patient Type",
     "LABEL_PATIENTCLASS": "Patient Class",
     "LABEL_RESOURCE": "Resource",
@@ -86,4 +86,5 @@
     "LABEL_TODAY": "Today",
     "LABEL_ROOM": "Room",
     "LABEL_BED": "Bed"
+    "LABEL_OCCURED_ON": "ligado"
 }
