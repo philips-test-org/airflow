@@ -25,6 +25,7 @@ pt:
   LABEL_ORDERINGPHYSICIAN: "Médico Solicitante:"
   LABEL_ROUNDING: "Arredondamento:"
   LABEL_SEARCHBYRESOURCE: "Procurar por recurso"
+  LABEL_UNAUTHORIZED: "Não Autorizado"
   LABEL_CREATEANEWGROUP: "Criar um grupo novo"
   MESSAGE_NO_RESOURCE_GROUPS: "Não tem grupos de recursos. Utilize o formulário acima para criar um."
   MESSAGE_FAILED_TO_CREATE_RESOURCE_GROUP: "Failed to create new resource group"
@@ -42,3 +43,4 @@ pt:
   MESSAGE_DELETEMESSAGE: "Tem a certeza que deseja excluir este grupo de recursos?"
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções clínicas"
   LABEL_MANAGER_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções de gerente"
+  MESSAGE_UNAUTHORIZED: 'Não pertence às funções de utilizador requeridas para visualizar esta página."

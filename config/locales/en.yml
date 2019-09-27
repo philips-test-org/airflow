@@ -19,13 +19,14 @@
   LABEL_USER_WITHOUT_ACCESS: "User Roles Without Access"
   LABEL_USER_WITH_ACCESS: "User Roles With Access"
   LABEL_UPDATE: "Update"
-  LABEL_CONFIG_UPDATED_BY: 'Configuration updated by:'
-  LABEL_CONFIG_UPDATED_AT: 'Configuration updated at:'
+  LABEL_CONFIG_UPDATED_BY: "Configuration updated by:"
+  LABEL_CONFIG_UPDATED_AT: "Configuration updated at:"
   LABEL_PROCEDURE: "Procedure:"
   LABEL_ORDERINGPHYSICIAN: "Ordering Physician:"
   LABEL_ROUNDING: "Rounding:"
   LABEL_SEARCHBYRESOURCE: "Search by resource"
   LABEL_CREATEANEWGROUP: "Create a new group"
+  LABEL_UNAUTHORIZED: "Unauthorized"
   MESSAGE_NO_RESOURCE_GROUPS: "You have no resource groups. Use the form above to create one."
   MESSAGE_FAILED_TO_CREATE_RESOURCE_GROUP: "Failed to create new resource group"
   MESSAGE_DELETED_RESOURCE: "Deleted resource group"
@@ -42,3 +43,4 @@
   MESSAGE_DELETEMESSAGE: "Are you sure you want to delete this resource group?"
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Clinical roles auth list"
   LABEL_MANAGER_ROLES_AUTH_LIST: "Manager roles auth list"
+  MESSAGE_UNAUTHORIZED: 'You are not in the required user roles to view this page.'

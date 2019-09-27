@@ -1,5 +1,5 @@
 es:
-  LABEL_MANAGE_RESUORCES: "Administrar grupos de recursos"
+ LABEL_MANAGE_RESUORCES: "Administrar grupos de recursos"
   LABEL_ASSOCIATE_RESOURCES: "Recursos asociados"
   LABEL_ANYMODALITY: "Cualquier modalidad"
   LABEL_RESOURCE: "Recurso"
@@ -19,12 +19,13 @@ es:
   LABEL_USER_WITHOUT_ACCESS: "Roles de usuario sin acceso"
   LABEL_USER_WITH_ACCESS: "Roles de usuario con acceso completo"
   LABEL_UPDATE: "Actualizar"
-  LABEL_CONFIG_UPDATED_BY: 'Configuración actualizada por:'
-  LABEL_CONFIG_UPDATED_AT: 'Configuración actualizada en:'
+  LABEL_CONFIG_UPDATED_BY: "Configuración actualizada por:"
+  LABEL_CONFIG_UPDATED_AT: "Configuración actualizada en:"
   LABEL_PROCEDURE: "Procédure:"
   LABEL_ORDERINGPHYSICIAN: "Médico ordenante:"
   LABEL_ROUNDING: "Redondeo:"
   LABEL_SEARCHBYRESOURCE: "Buscar por recurso"
+  LABEL_UNAUTHORIZED: "No autorizado"
   LABEL_CREATEANEWGROUP: "Crear un nuevo grupo"
   MESSAGE_NO_RESOURCE_GROUPS: "No tiene grupos de recursos. Use el formulario de arriba para crear uno."
   MESSAGE_FAILED_TO_CREATE_RESOURCE_GROUP: "Failed to create new resource group"
@@ -42,3 +43,4 @@ es:
   MESSAGE_DELETEMESSAGE: "¿Está seguro de que desea eliminar este grupo de recursos?"
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Actualizar lista de autenticación de roles clínicos"
   LABEL_MANAGER_ROLES_AUTH_LIST: "Actualizar lista de autenticación de roles de administrador"
+  MESSAGE_UNAUTHORIZED: "No tiene los roles de usuario necesarios para ver esta página."
