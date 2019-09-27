@@ -41,6 +41,6 @@ it:
   LABEL_HELP: "Aiuto"
   LABEL_CONFIGURE: "Configure"
   MESSAGE_DELETEMESSAGE: "Bent u zeker dat u deze brongroep wilt verwijderen?"
-  LABEL_CLINICAL_ROLES_AUTH_LIST: "Aggiorna elenco autorizzazioni ruoli clinici"
-  LABEL_MANAGER_ROLES_AUTH_LIST: "Aggiorna elenco autorizzazioni ruoli manageriali"
+  LABEL_CLINICAL_ROLES_AUTH_LIST: "Aggiorna elenco autorizzazioni ruoli clinici."
+  LABEL_MANAGER_ROLES_AUTH_LIST: "Aggiorna elenco autorizzazioni ruoli manageriali."
   MESSAGE_UNAUTHORIZED: "Non si è nei ruoli utente richiesti per visualizzare questa pagina."

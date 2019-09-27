@@ -42,5 +42,5 @@
   LABEL_CONFIGURE: "Konfigurieren"
   MESSAGE_DELETEMESSAGE: "Soll diese Ressourcen-Gruppe tatsächlich gelöscht werden?"
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Autorisierungsliste für klinische Rollen"
-  LABEL_MANAGER_ROLES_AUTH_LIST: "Aktualisieren Sie die Authentifizierungsliste für Manager-Rollen"
+  LABEL_MANAGER_ROLES_AUTH_LIST: "Aktualisieren Sie die Authentifizierungsliste für Manager-Rollen."
   MESSAGE_UNAUTHORIZED: "Sie verfügen nicht über die zum Ansehen dieser Seite erforderlichen Benutzerrollen."

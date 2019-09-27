@@ -77,7 +77,7 @@
    "MESSAGE_DELETED_RESOURCE": "Deleted resource group",
    "MESSAGE_FAILED_TO_DELETE": "Failed to delete resource group",
    "MESSAGE_CONNECTED_APM" : "Connected to APM",
-   "MESSAGE_REALTIME_DATA": "Réception des données en temps réel",
+   "MESSAGE_REALTIME_DATA": "Réception des données en temps réel.",
    "TITLE_PRINTER_FRIENDLY": "Printer-friendly view",
    "LABEL_SAVE": "Guardar",
    "LABEL_CANCEL": "Cancelar",

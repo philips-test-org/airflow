@@ -49,7 +49,7 @@
    "MESSAGE_RELOAD":"Vous ne recevez plus les mises à jour en temps réel. Veuillez recharger la page et vous reconnectez.",
    "MESSAGE_REFRESH":"Vous ne recevez plus les mises à jour en temps réel. Pour vous assurer que vous disposez des données les plus à jour, veuillez actualiser si ce message persiste plus de 10 secondes.",
    "MESSAGE_RECEIVINGREALTIMEDATA":"Réception des données en temps réel.",
-   "MESSAGE_NOROUNDINGDATA":"Aucune donnée d'arrondi saisie",
+   "MESSAGE_NOROUNDINGDATA":"Aucune donnée d'arrondi saisie.",
    "LABEL_COMPLETE": "terminer",
    "LABEL_COMPLETED": "Completed",
    "LABEL_ACTIVE": "actif",

@@ -42,5 +42,5 @@ es:
   LABEL_CONFIGURE: "Configurar"
   MESSAGE_DELETEMESSAGE: "¿Está seguro de que desea eliminar este grupo de recursos?"
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Actualizar lista de autenticación de roles clínicos"
-  LABEL_MANAGER_ROLES_AUTH_LIST: "Actualizar lista de autenticación de roles de administrador"
+  LABEL_MANAGER_ROLES_AUTH_LIST: "Actualizar lista de autenticación de roles de administrador."
   MESSAGE_UNAUTHORIZED: "No tiene los roles de usuario necesarios para ver esta página."
