@@ -1,5 +1,5 @@
 es:
- LABEL_MANAGE_RESUORCES: "Administrar grupos de recursos"
+  LABEL_MANAGE_RESUORCES: "Administrar grupos de recursos"
   LABEL_ASSOCIATE_RESOURCES: "Recursos asociados"
   LABEL_ANYMODALITY: "Cualquier modalidad"
   LABEL_RESOURCE: "Recurso"
