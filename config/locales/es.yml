@@ -30,7 +30,7 @@ es:
   MESSAGE_NO_RESOURCE_GROUPS: "No tiene grupos de recursos. Use el formulario de arriba para crear uno."
   MESSAGE_FAILED_TO_CREATE_RESOURCE_GROUP: "Failed to create new resource group"
   MESSAGE_DELETED_RESOURCE: "Deleted resource group"
-  MESSAGE_FAILED_TO_DELETE: "Failed to delete resource group"
+  MESSAGE_FAILED_TO_DELETE: "Failed to delete resource group."
   MESSAGE_NO_REAL_MESSAGE: "Ya no está recibiendo actualizaciones en tiempo real. Vuelva a cargar la página e inicie sesión nuevamente."
   MESSAGE_REFRESH_10SEC: "Ya no está recibiendo actualizaciones en tiempo real. Para asegurarse de tener los datos más actualizados, actualice si este mensaje persiste durante más de 10 segundos"
   MESSAGE_RECEVING_REALTIME: "Recepción de datos en tiempo real"

@@ -41,7 +41,7 @@
     "LABEL_LASTEDITEDBY": "Zuletzt bearbeitet von",
     "LABEL_INACTIVE": "Inaktiv",
     "MESSAGE_NO_RESOURCE_GROUPS": "Sie haben keine Ressourcen-Gruppen Zum Anlegen verwenden Sie obiges Formular.",
-    "MESSAGE_ADDATLEASTONE": "Sie müssen mindestens eine Ressourcen-Gruppe hinzufügen",
+    "MESSAGE_ADDATLEASTONE": "Sie müssen mindestens eine Ressourcen-Gruppe hinzufügen.",
     "MESSAGE_RESOURCECANNOTBEBLANK": "Ressourcen-Gruppe darf nicht leer sein",
     "MESSAGE_DELETEMESSAGE": "Soll diese Ressourcen-Gruppe tatsächlich gelöscht werden?",
     "MESSAGE_ATLEASTONERESOURCE": "Es muss mindestens eine Ressourcen-Gruppe rstellt werden. Zum Erstellen einer Ressourcen-Gruppe kontaktieren Sie bitte Ihren Administrator.",

@@ -43,7 +43,7 @@
    "LABEL_INACTIVE":"Inattivo",
    "MESSAGE_NO_RESOURCE_GROUPS":"Non hai nessun gruppo di risorse. Usa il modulo di seguito per crearne uno.",
    "MESSAGE_ADDATLEASTONE":"Devi aggiungere almeno un gruppo di risorse",
-   "MESSAGE_RESOURCECANNOTBEBLANK":"Il gruppo di risorse non può essere vuoto",
+   "MESSAGE_RESOURCECANNOTBEBLANK":"Il gruppo di risorse non può essere vuoto.",
    "MESSAGE_DELETEMESSAGE":"Eliminare questo gruppo di risorse?",
    "MESSAGE_ATLEASTONERESOURCE":"È necessario creare almeno un gruppo di risorse. Contatta l'amministratore per creare un gruppo di risorse.",
    "MESSAGE_RELOAD":"Non ricevi più gli aggiornamenti in tempo reale. Ricarica la pagina e accedi di nuovo.",

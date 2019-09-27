@@ -36,7 +36,7 @@ pt:
   MESSAGE_RECEVING_REALTIME: "A receber dados em tempo real"
   MESSAGE_RESOURCECANNOTBEBLANK : "O grupo de recursos não pode estar em branco"
   MESSAGE_ERROR: "Ocorreu um Erro! Mensagem."
-  MESSAGE_ADDATLEASTONE: "Deve adicionar pelo menos um grupo de recursos"
+  MESSAGE_ADDATLEASTONE: "Deve adicionar pelo menos um grupo de recursos."
   LABEL_ADMIN: "Admin"
   LABEL_HELP: "Ajuda"
   LABEL_CONFIGURE: "Configurar"

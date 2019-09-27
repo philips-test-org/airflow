@@ -34,7 +34,7 @@ fr:
   MESSAGE_NO_REAL_MESSAGE: "Vous ne recevez plus les mises à jour en temps réel. Veuillez recharger la page et vous reconnectez."
   MESSAGE_REFRESH_10SEC: "Vous ne recevez plus les mises à jour en temps réel. Pour vous assurer que vous disposez des données les plus à jour, veuillez actualiser si ce message persiste plus de 10 secondes."
   MESSAGE_RECEVING_REALTIME: "Réception des données en temps réel."
-  MESSAGE_RESOURCECANNOTBEBLANK : "Le groupe de ressource ne peut pas être vide"
+  MESSAGE_RESOURCECANNOTBEBLANK : "Le groupe de ressource ne peut pas être vide."
   MESSAGE_ERROR: "Une erreur est survenue."
   MESSAGE_ADDATLEASTONE: "Vous devez ajouter au moins un groupe de ressource"
   LABEL_ADMIN: "Admin"

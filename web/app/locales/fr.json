@@ -43,7 +43,7 @@
    "LABEL_INACTIVE":"Inactif",
    "MESSAGE_NO_RESOURCE_GROUPS":"Vous n’avez pas de groupes de ressource. Utiliser le formulaire ci-dessus pour créer un.",
    "MESSAGE_ADDATLEASTONE":"Vous devez ajouter au moins un groupe de ressource",
-   "MESSAGE_RESOURCECANNOTBEBLANK":"Le groupe de ressource ne peut pas être vide",
+   "MESSAGE_RESOURCECANNOTBEBLANK":"Le groupe de ressource ne peut pas être vide.",
    "MESSAGE_DELETEMESSAGE":"Voulez-vous vraiment supprimer ce groupe de ressource?",
    "MESSAGE_ATLEASTONERESOURCE":"Au moins un Groupe de ressource doit être créé. Veuillez contacter votre administrateur pour créer un Groupe de ressource.",
    "MESSAGE_RELOAD":"Vous ne recevez plus les mises à jour en temps réel. Veuillez recharger la page et vous reconnectez.",

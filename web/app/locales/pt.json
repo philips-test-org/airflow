@@ -43,7 +43,7 @@
    "LABEL_INACTIVE":"Inativo",
    "MESSAGE_NO_RESOURCE_GROUPS":"Não tem grupos de recursos. Utilize o formulário acima para criar um.",
    "MESSAGE_ADDATLEASTONE":"Deve adicionar pelo menos um grupo de recursos",
-   "MESSAGE_RESOURCECANNOTBEBLANK":"O grupo de recursos não pode estar em branco",
+   "MESSAGE_RESOURCECANNOTBEBLANK":"O grupo de recursos não pode estar em branco.",
    "MESSAGE_DELETEMESSAGE":"Tem a certeza que deseja excluir este grupo de recursos?",
    "MESSAGE_ATLEASTONERESOURCE":"Pelo menos um grupo de recursos deve ser criado. Entre em contacto com o seu administrador para criar um Grupo de Recursos.",
    "MESSAGE_RELOAD":"Já não está a receber atualizações em tempo real. Por favor recarregue a página e inicie sessão novamente.",

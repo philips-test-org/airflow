@@ -35,7 +35,7 @@
   MESSAGE_RECEVING_REALTIME: "Receiving real-time data.DE"
   MESSAGE_RESOURCECANNOTBEBLANK : "Resource group cannot be blank"
   MESSAGE_ERROR: "An error has occurred."
-  MESSAGE_ADDATLEASTONE: "You must add at least one resource group"
+  MESSAGE_ADDATLEASTONE: "You must add at least one resource group."
   MESSAGE_FAILED_TO_DELETE: "Failed to delete resource group"
   LABEL_ADMIN: "Admin"
   LABEL_HELP: "Help"

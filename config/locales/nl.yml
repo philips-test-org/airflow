@@ -36,7 +36,7 @@ nl:
   MESSAGE_RECEVING_REALTIME: "Real-time gegevens aan het ontvangen"
   MESSAGE_RESOURCECANNOTBEBLANK : "Brongroep mag niet leeg zijn"
   MESSAGE_ERROR: "Er is een Fout Opgetreden! Boodschap."
-  MESSAGE_ADDATLEASTONE: "U moet minstens één brongroep toevoegen"
+  MESSAGE_ADDATLEASTONE: "U moet minstens één brongroep toevoegen."
   LABEL_ADMIN: "Admin"
   LABEL_HELP: "Help"
   LABEL_CONFIGURE: "Configureren"
