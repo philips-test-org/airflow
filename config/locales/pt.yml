@@ -44,3 +44,4 @@ pt:
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções clínicas."
   LABEL_MANAGER_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções de gerente."
   MESSAGE_UNAUTHORIZED: "Não pertence às funções de utilizador requeridas para visualizar esta página."
+  

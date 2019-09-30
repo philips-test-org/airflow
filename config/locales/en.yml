@@ -44,3 +44,4 @@
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Clinical roles auth list."
   LABEL_MANAGER_ROLES_AUTH_LIST: "Manager roles auth list"
   MESSAGE_UNAUTHORIZED: "You are not in the required user roles to view this page."
+  

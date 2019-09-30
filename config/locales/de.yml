@@ -44,3 +44,4 @@ de:
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Autorisierungsliste für klinische Rollen"
   LABEL_MANAGER_ROLES_AUTH_LIST: "Aktualisieren Sie die Authentifizierungsliste für Manager-Rollen."
   MESSAGE_UNAUTHORIZED: "Sie verfügen nicht über die zum Ansehen dieser Seite erforderlichen Benutzerrollen."
+  
