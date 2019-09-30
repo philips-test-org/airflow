@@ -1,5 +1,5 @@
 {
-    "LABEL_LEGEND" : "Legend",
+    "LABEL_LEGEND": "Legend",
     "LABEL_MANAGE_RESUORCES": "Manage Resource Groups",
     "LABEL_ASSOCIATE_RESOURCES": "Associate Resources",
     "LABEL_ANYMODALITY": "Any Modality",
@@ -70,13 +70,13 @@
     "LABEL_APPOINTMENT": "Appointment",
     "LABEL_APPOINTMENTDURATION": "Appointment Duration",
     "LABEL_BEGINEXAM": "Begin Exam",
-    "LABEL_RECENT_IMAGE" : "View Most Recent Image",
-    "LABEL_TOGGLE_DROPDOWN" : "Toggle Dropdown",
+    "LABEL_RECENT_IMAGE": "View Most Recent Image",
+    "LABEL_TOGGLE_DROPDOWN": "Toggle Dropdown",
     "LABEL_SEARCH": "Search",
     "MESSAGE_FAILED_TO_RESOURCES": "Failed to created new resource group",
     "MESSAGE_DELETED_RESOURCE": "Deleted resource group",
     "MESSAGE_FAILED_TO_DELETE": "Failed to delete resource group",
-    "MESSAGE_CONNECTED_APM" : "Connected to APM",
+    "MESSAGE_CONNECTED_APM": "Connected to APM",
     "MESSAGE_REALTIME_DATA": "Receiving real-time data.",
     "TITLE_PRINTER_FRIENDLY": "Printer-friendly view",
     "LABEL_SAVE": "Save",
@@ -87,4 +87,4 @@
     "LABEL_ROOM": "Room",
     "LABEL_BED": "Bed",
     "LABEL_OCCURED_ON": "on"
-}
+  }
