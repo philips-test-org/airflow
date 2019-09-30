@@ -1,5 +1,5 @@
 {
-    "LABEL_LEGEND" : "Legend",
+    "LABEL_LEGEND": "Legend",
     "LABEL_MANAGE_RESUORCES": "Manage Resource Groups",
     "LABEL_ASSOCIATE_RESOURCES": "Associate Resources",
     "LABEL_ANYMODALITY": "Any Modality",
@@ -43,7 +43,7 @@
     "LABEL_INACTIVE": "Inactive",
     "MESSAGE_NO_RESOURCE_GROUPS": "You have no resource groups. Use the form above to create one.",
     "MESSAGE_ADDATLEASTONE": "You must add at least one resource group",
-    "MESSAGE_RESOURCECANNOTBEBLANK": "Resource group cannot be blank",
+    "MESSAGE_RESOURCECANNOTBEBLANK": "Resource group cannot be blank.",
     "MESSAGE_DELETEMESSAGE": "Are you sure you want to delete this resource group?",
     "MESSAGE_ATLEASTONERESOURCE": "At least one Resource Group must be created. Please contact your administrator to create a Resource Group.",
     "MESSAGE_RELOAD": "You are no longer receiving real time updates. Please reload the page and log in again.",
@@ -70,14 +70,14 @@
     "LABEL_APPOINTMENT": "Appointment",
     "LABEL_APPOINTMENTDURATION": "Appointment Duration",
     "LABEL_BEGINEXAM": "Begin Exam",
-    "LABEL_RECENT_IMAGE" : "View Most Recent Image",
-    "LABEL_TOGGLE_DROPDOWN" : "Toggle Dropdown",
+    "LABEL_RECENT_IMAGE": "View Most Recent Image",
+    "LABEL_TOGGLE_DROPDOWN": "Toggle Dropdown",
     "LABEL_SEARCH": "Search",
     "MESSAGE_FAILED_TO_RESOURCES": "Failed to created new resource group",
     "MESSAGE_DELETED_RESOURCE": "Deleted resource group",
     "MESSAGE_FAILED_TO_DELETE": "Failed to delete resource group",
-    "MESSAGE_CONNECTED_APM" : "Connected to APM",
-    "MESSAGE_REALTIME_DATA": "Receiving real-time data",
+    "MESSAGE_CONNECTED_APM": "Connected to APM",
+    "MESSAGE_REALTIME_DATA": "Receiving real-time data.",
     "TITLE_PRINTER_FRIENDLY": "Printer-friendly view",
     "LABEL_SAVE": "Save",
     "LABEL_CANCEL": "Cancel",
@@ -87,4 +87,4 @@
     "LABEL_ROOM": "Room",
     "LABEL_BED": "Bed",
     "LABEL_OCCURED_ON": "on"
-}
+  }

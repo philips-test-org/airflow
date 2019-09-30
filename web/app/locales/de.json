@@ -1,5 +1,5 @@
 {
-    "LABEL_LEGEND" : "Legende",
+    "LABEL_LEGEND": "Legende",
     "LABEL_MANAGE_RESUORCES": "Ressourcen-Gruppen verwalten",
     "LABEL_ASSOCIATE_RESOURCES": "Ressourcen zuordnen",
     "LABEL_ANYMODALITY": "Jede Modalität",
@@ -41,7 +41,7 @@
     "LABEL_LASTEDITEDBY": "Zuletzt bearbeitet von",
     "LABEL_INACTIVE": "Inaktiv",
     "MESSAGE_NO_RESOURCE_GROUPS": "Sie haben keine Ressourcen-Gruppen Zum Anlegen verwenden Sie obiges Formular.",
-    "MESSAGE_ADDATLEASTONE": "Sie müssen mindestens eine Ressourcen-Gruppe hinzufügen",
+    "MESSAGE_ADDATLEASTONE": "Sie müssen mindestens eine Ressourcen-Gruppe hinzufügen.",
     "MESSAGE_RESOURCECANNOTBEBLANK": "Ressourcen-Gruppe darf nicht leer sein",
     "MESSAGE_DELETEMESSAGE": "Soll diese Ressourcen-Gruppe tatsächlich gelöscht werden?",
     "MESSAGE_ATLEASTONERESOURCE": "Es muss mindestens eine Ressourcen-Gruppe rstellt werden. Zum Erstellen einer Ressourcen-Gruppe kontaktieren Sie bitte Ihren Administrator.",
@@ -70,14 +70,14 @@
     "LABEL_APPOINTMENT": "Termin",
     "LABEL_APPOINTMENTDURATION": "Vorstellungsdauer",
     "LABEL_BEGINEXAM": "Untersuchung beginnen",
-    "LABEL_RECENT_IMAGE" : "Aktuellstes Bild anzeigen",
-    "LABEL_TOGGLE_DROPDOWN" : "Dropdown umschalten",
+    "LABEL_RECENT_IMAGE": "Aktuellstes Bild anzeigen",
+    "LABEL_TOGGLE_DROPDOWN": "Dropdown umschalten",
     "LABEL_SEARCH": "Suchen",
     "MESSAGE_FAILED_TO_RESOURCES": "Failed to created new resource group.DE",
     "MESSAGE_DELETED_RESOURCE": "Deleted resource group",
     "MESSAGE_FAILED_TO_DELETE": "Failed to delete resource group",
     "MESSAGE_CONNECTED_APM": "Connected to APM.DE",
-    "MESSAGE_REALTIME_DATA": "Receiving real-time data.DE",
+    "MESSAGE_REALTIME_DATA": "Echtzeit-Daten werden empfangen",
     "TITLE_PRINTER_FRIENDLY": "Druckerfreundliche Ansicht",
     "LABEL_SAVE": "Speichern",
     "LABEL_CANCEL": "Abbrechen",
@@ -85,6 +85,6 @@
     "MESSAGE_DID_SOMETHINGAT": "tat etwas an",
     "LABEL_TODAY": "Heute",
     "LABEL_ROOM": "Room",
-    "LABEL_BED": "Bed",
+    "LABEL_BED": "Bett",
     "LABEL_OCCURED_ON": "am"
-}
+  }
