@@ -31,7 +31,7 @@ pipeline {
                     git config --unset-all remote.origin.fetch;
                     git config --add remote.origin.fetch +refs/pull/*/merge:refs/remotes/origin/pr/*
                     git fetch --all --tags
-                    TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
+                    TAG=`git for-each-ref refs/tags --sort=-taggerdate --format='%(tag)' --count=1`
                     git checkout $TAG
                     git show --oneline -s
                 '''
@@ -198,7 +198,7 @@ pipeline {
         stage('Sanity') {
             steps {
                  script {
-                    def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
+                    def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}\n COMMIT_ID=${COMMIT_ID}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
                     def status = handle.getBuildStatus()
                     def buildUrl = handle.getBuildUrl()
                     echo buildUrl.toString() + " finished with " + status.toString()
