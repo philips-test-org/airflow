@@ -41,7 +41,7 @@ pt:
   LABEL_HELP: "Ajuda"
   LABEL_CONFIGURE: "Configurar"
   MESSAGE_DELETEMESSAGE: "Tem a certeza que deseja excluir este grupo de recursos?"
-  LABEL_CLINICAL_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções clínicas."
-  LABEL_MANAGER_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções de gerente."
+  LABEL_CLINICAL_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções clínicas"
+  LABEL_MANAGER_ROLES_AUTH_LIST: "Atualizar lista de autenticação de Funções de gerente"
   MESSAGE_UNAUTHORIZED: "Não pertence às funções de utilizador requeridas para visualizar esta página."
   

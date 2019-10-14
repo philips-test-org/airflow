@@ -77,7 +77,7 @@
     "MESSAGE_DELETED_RESOURCE": "Ressourcengruppe wurde gelöscht",
     "MESSAGE_FAILED_TO_DELETE": "Löschen der Ressourcengruppe ist fehlgeschlagen",
     "MESSAGE_CONNECTED_APM": "Mit APM verbunden",
-    "MESSAGE_REALTIME_DATA": "Echtzeit-Daten werden empfangen",
+    "MESSAGE_REALTIME_DATA": "Echtzeit-Daten werden empfangen.",
     "TITLE_PRINTER_FRIENDLY": "Druckerfreundliche Ansicht",
     "LABEL_SAVE": "Speichern",
     "LABEL_CANCEL": "Abbrechen",
