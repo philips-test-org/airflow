@@ -77,7 +77,7 @@
    "MESSAGE_DELETED_RESOURCE": "Brongroep verwijderd",
    "MESSAGE_FAILED_TO_DELETE": "Brongroep verwijderen mislukt",
    "MESSAGE_CONNECTED_APM": "Verbonden met APM",
-   "MESSAGE_REALTIME_DATA": "Réception des données en temps réel.",
+   "MESSAGE_REALTIME_DATA": "Realtime gegevens ontvangen.",
    "TITLE_PRINTER_FRIENDLY": "Printervriendelijke weergave",
    "LABEL_SAVE": "Opslaan",
    "LABEL_CANCEL": "Annuleren",
