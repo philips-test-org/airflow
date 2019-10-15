@@ -110,8 +110,6 @@ class Airflow extends Component<Props, State> {
   componentDidMount() {
     // Setup
     this.props.connectAPM();
-    this.kioskLink = document.querySelector(".menu-item[href='/kiosk']")
-    this.kioskLink.className = 'item menu-item active';
     // $FlowFixMe
     if (!isIE() || isIE() > 9) {
       this.setupViewChangeHandlers();
@@ -358,21 +356,21 @@ class Airflow extends Component<Props, State> {
   }
 
   setupViewChangeHandlers() {
-    this.kioskLink = document.querySelector(".menu-item[href='/kiosk']")
+    this.kioskLink = document.querySelector(".menu-item[href$='kiosk']")
     if (this.kioskLink) {
       this.kioskLink.addEventListener("click",
         (e: MouseEvent) => {this.viewClickHandler(e, "kiosk", `${APP_ROOT}/kiosk`)}
       )
     }
 
-    this.calendarLink = document.querySelector(".menu-item[href='/main/calender']")
+    this.calendarLink = document.querySelector(".menu-item[href$='calender']")
     if (this.calendarLink) {
       this.calendarLink.addEventListener("click",
         (e: MouseEvent) => {this.viewClickHandler(e, "calendar", `${APP_ROOT}/main/calendar`)}
       )
     }
 
-     this.overviewLink = document.querySelector(".menu-item[href='/main/overview']")
+     this.overviewLink = document.querySelector(".menu-item[href$='overview']")
     if (this.overviewLink) {
       this.overviewLink.addEventListener("click",
         (e: MouseEvent) => {this.viewClickHandler(e, "overview", `${APP_ROOT}/main/overview`)}
