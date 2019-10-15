@@ -19,6 +19,10 @@ class SiteConfiguration < ActiveRecord::Base
     APP_MANUALS
   end
 
+  def self.admin_user_manual(type)
+    "https://docs.analytical.info/app-manuals/patient-flow/" + type + "-manual-" + I18n.locale.to_s + ".pdf"
+  end
+
   def self.defaults
     DEFAULTS
   end

@@ -7,6 +7,10 @@
  *= require_self
 */
 
+ #app-container {
+  @import "react-styles";
+}
+
 @import "hre-p-blue";
 
 @import "bootstrap-sprockets";
@@ -55,4 +59,10 @@
   background-color: $navbar-default-bg;
 }
 
+#navbar {
+  float: none;
+}
+#app-container .NavHeader_NavHeader__2JJGf div.dropdown .menu{
+  z-index: 108;
+}
 #app-name { margin-left: -15px; font-size: 20px;  font-weight: 200;}

@@ -44,4 +44,7 @@ fr:
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Mettre à jour la liste auth des rôles cliniques."
   LABEL_MANAGER_ROLES_AUTH_LIST: "Mettre à jour la liste auth de rôles du gestionnaire."
   MESSAGE_UNAUTHORIZED: "Vous n’êtes pas dans les rôles d’utilisateur requis pour afficher cette page."
-  
+  LABEL_RESULTS: "Résultats"
+  LABEL_NO_RESULTS_FOUND: "Résultats introuvables "
+  LABEL_EXPLORE_ALL_APPS: "Explorez tous les applications "
+  LABEL_FIND_APPLICATION: "Trouver application "
