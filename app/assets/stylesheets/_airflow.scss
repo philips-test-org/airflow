@@ -168,7 +168,7 @@ $card-color: #fff;
 
     .fixed-column {
       background-color: #FFFFFF;
-      z-index:91;
+      z-index:1;
       width: 50px;
     }
 
@@ -217,7 +217,7 @@ $card-color: #fff;
     position: fixed;
     left: 0;
     top: 100px;
-    z-index: 10;
+    z-index: 1;
   }
   #white-spacer {
     position: fixed;
@@ -303,7 +303,7 @@ Overview
       position: absolute;
       left: 0;
       top: 0;
-      z-index: 92;
+      z-index: 1;
       padding: 12px;
       margin: 0;
       background-color: #fff;
