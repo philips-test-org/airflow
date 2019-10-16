@@ -129,7 +129,7 @@ $card-color: #fff;
   line-height: 33px;
   vertical-align: middle;
   border-bottom: unquote($border-unit) solid $grid-color;
-  z-index: 93;
+  z-index: 107;
 }
 
 .clickable {
@@ -146,7 +146,7 @@ $card-color: #fff;
     border-top: 1px solid $alert-red;
     border-bottom: 1px solid $alert-red;
     display: none;
-    z-index: 96;
+    z-index: 104;
   }
 
   .hour {
@@ -168,7 +168,7 @@ $card-color: #fff;
 
     .fixed-column {
       background-color: #FFFFFF;
-      z-index:91;
+      z-index: 106;
       width: 50px;
     }
 
@@ -217,7 +217,7 @@ $card-color: #fff;
     position: fixed;
     left: 0;
     top: 100px;
-    z-index: 91;
+    z-index: 105;
   }
   #white-spacer {
     position: fixed;
@@ -228,7 +228,7 @@ $card-color: #fff;
     border-right: 1px solid $grid-color;
     height: 49px;
     background-color: #fff;
-    z-index: 94;
+    z-index: 106;
   }
   #time-headings {
     position: absolute;
@@ -303,7 +303,7 @@ Overview
       position: absolute;
       left: 0;
       top: 0;
-      z-index: 92;
+      z-index: 102;
       padding: 12px;
       margin: 0;
       background-color: #fff;
