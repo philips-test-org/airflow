@@ -6,6 +6,7 @@ import React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
 import * as R from "ramda";
+import i18n from "./i18n";
 
 import store from "./lib/store";
 import {isIE} from "./lib";
@@ -14,6 +15,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import "./i18n";
 import Airflow from "./components/Airflow";
+import API from "./lib/api";
 
 if (process.env.NODE_ENV !== "production" && process.env.DEBUG === "true") {
   const {whyDidYouUpdate} = require("why-did-you-update");
@@ -32,6 +34,16 @@ if (process.env.NODE_ENV !== "production" && process.env.DEBUG === "true") {
 
 // Make sure the target element exists before attempting to render.
 const target = "#workspace";
+ 
+const renderAppContainer =(props, target)=>{
+    render (
+      <Provider store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))} >
+        <Airflow />
+      </Provider>,
+      document.querySelector(target)
+    )
+}
+
 if ($(target).length > 0) {
   const spinnerUrl = $(target).data("spinnerurl");
   const ssoUrl = $(target).data("ssourl");
@@ -55,12 +67,13 @@ if ($(target).length > 0) {
   if (!isIE() || isIE() > 9) {
     history.replaceState({viewType: props.board.type}, props.board.type, document.location.pathname);
   }
-  render (
-    <Provider store={store(R.mergeDeepLeft(props, {board: {hydrated: false}, user: {hydrated: false}}))}>
-      <Airflow />
-    </Provider>,
-    document.querySelector(target)
-  )
+ 
+  API.fetchCurrentEmployee().then((currentUser)=>{
+     i18n.changeLanguage(currentUser.language);
+     renderAppContainer(props, target);
+  }).catch((error)=>{
+      renderAppContainer(props, target);
+  });
 }
 
 $(() => {

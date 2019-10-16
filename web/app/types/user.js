@@ -7,4 +7,5 @@ export type User = {
   person_id: number,
   fte: number,
   updated_at: string,
+  language: string
 }
