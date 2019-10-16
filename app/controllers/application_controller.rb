@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
       :mainMenuItems => isAuthorized ? [
         {
           text: I18n.t('LABEL_CALENDAR'),
-          href: url_for(controller: :main, action: :index, view: :calender, only_path: true)
+          href: url_for(controller: :main, action: :index, only_path: true)
         },
         {
           text: I18n.t('LABEL_OVERVIEW'),
-          href: url_for(controller: :main, action: :index, view: :overview, only_path: true)
+          href: url_for(controller: :main, action: :index, only_path: true)
         },
         {
           text: I18n.t('LABEL_KIOSK'),
