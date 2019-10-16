@@ -2,7 +2,7 @@
   <h3>
     <%= "#{t('LABEL_CONFIGURE')} " + t(title) %>
     <%= render partial: "admin/icons.html.erb" %>
-    <button class="update-access btn btn-primary update" data-key="<%=key%>" disabled><%=t('LABEL_UPDATE')%> <%= t(title) %></button>
+    <button class="update-access btn btn-primary update" data-key="<%=key%>" disabled><%= t(title) %></button>
   </h3>
   <% if defaults %>
     <h5><<%="#{t('LABEL_DEFAULTROLES')}: #{defaults.join(", ")}"%> </h5>
