@@ -44,4 +44,7 @@
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Clinical roles auth list."
   LABEL_MANAGER_ROLES_AUTH_LIST: "Manager roles auth list"
   MESSAGE_UNAUTHORIZED: "You are not in the required user roles to view this page."
-  
+  LABEL_RESULTS: "Results"
+  LABEL_NO_RESULTS_FOUND: "No results found for "
+  LABEL_EXPLORE_ALL_APPS: "Explore all apps "
+  LABEL_FIND_APPLICATION: "Find application "

@@ -44,4 +44,7 @@ es:
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Actualizar lista de autenticación de roles clínicos"
   LABEL_MANAGER_ROLES_AUTH_LIST: "Actualizar lista de autenticación de roles de administrador."
   MESSAGE_UNAUTHORIZED: "No tiene los roles de usuario necesarios para ver esta página."
-  
+  LABEL_RESULTS: "Resultados"
+  LABEL_NO_RESULTS_FOUND: "No se han encontrado resultados "
+  LABEL_EXPLORE_ALL_APPS: "Explorar todas las aplicaciones "
+  LABEL_FIND_APPLICATION: "Encontrar solicitud"

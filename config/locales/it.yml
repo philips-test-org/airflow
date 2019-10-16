@@ -44,4 +44,7 @@ it:
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Aggiorna elenco autorizzazioni ruoli clinici."
   LABEL_MANAGER_ROLES_AUTH_LIST: "Aggiorna elenco autorizzazioni ruoli manageriali."
   MESSAGE_UNAUTHORIZED: "Non si è nei ruoli utente richiesti per visualizzare questa pagina."
-  
+  LABEL_RESULTS: "Risultati"
+  LABEL_NO_RESULTS_FOUND: "Nessun risultato trovato per "
+  LABEL_EXPLORE_ALL_APPS: "Esplora tutte le app "
+  LABEL_FIND_APPLICATION: "Trova applicazione "

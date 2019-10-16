@@ -2,10 +2,77 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_filter :check_session_username, :set_locale
+  before_filter :check_session_username, :set_locale, :get_react_props
 
   def get_entity_manager
     @entity_manager ||= Java::HarbingerSdk::DataUtils.getEntityManager
+  end
+
+  def get_react_props
+    
+    isAuthorized = authorized?(SiteConfiguration.get_clinical_roles_for_key("clinical_roles_auth_list"))
+    logoutUrl = Java::HarbingerSdk::SSO.logoutUrl()
+    isAdmin = authorized?(["support-staff","ai-staff", "it-staff"])
+    @react_props = {
+      :appName => APPLICATION_NAME,
+      :username => session[:username],
+      :appVersion => render_to_string(partial: 'main/version'),
+      :buildDate => File.mtime("app/views/main/_version.html.erb").strftime("%Y-%m-%d"),
+      :appLink => ::Rails.configuration.action_controller[:relative_url_root] || "/",
+      :allApplications => get_application_list(@entity_manager),
+      :mainMenuItems => isAuthorized ? [
+        {
+          text: I18n.t('LABEL_CALENDAR'),
+          href: url_for(controller: :main, action: :index, only_path: true)
+        },
+        {
+          text: I18n.t('LABEL_OVERVIEW'),
+          href: url_for(controller: :main, action: :index, only_path: true)
+        },
+        {
+          text: I18n.t('LABEL_KIOSK'),
+          href: url_for(controller: :kiosk, action: :index, only_path: true)
+        },
+      ] : [],
+      :helpMenuItems => isAuthorized ? [
+        {
+          text: I18n.t('LABEL_USERMANUAL'),
+          href: SiteConfiguration.admin_user_manual('user'),
+          target: "_blank"
+        }
+      ] : [],
+      :userMenuItems => [
+        { text: I18n.t('LABEL_LOGOUT'), href: logoutUrl}
+      ],
+      :phrases => {
+        about: I18n.t('LABEL_ABOUT'),
+        results: I18n.t('LABEL_RESULTS'),
+        noResults: I18n.t('LABEL_NO_RESULTS_FOUND'),
+        exploreApps: I18n.t('LABEL_EXPLORE_ALL_APPS'),
+        findApplication: I18n.t('LABEL_FIND_APPLICATION'),
+
+      }
+    }
+    if isAdmin
+      @react_props[:mainMenuItems] << {
+        text: I18n.t('LABEL_ADMIN'),
+        dropdownOptions: [
+          {
+            text: I18n.t('LABEL_RESOURCEGROUPS'),
+            href: url_for(controller: :resource_groups, action: :index, only_path: true)
+          },
+          {
+            text: I18n.t('LABEL_ADMINMANUAL'),
+            href: SiteConfiguration.admin_user_manual('admin'),
+            target: "_blank",
+          },
+          {
+            text: I18n.t('LABEL_SITECONFIGURATION'),
+            href: url_for(controller: :admin, action: :site_configuration, only_path: true),
+          }
+        ]
+        };
+    end
   end
 
   def close_entity_manager

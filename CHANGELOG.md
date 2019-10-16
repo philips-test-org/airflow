@@ -1,3 +1,7 @@
+## v1.4.0 built 2019-10-16
+* **new:** Common navigation-tab added using HRE 
+* **new:** Localization - Support for English, French, German, Spanish, Portuguese, Dutch, Italian
+
 ## v1.3.1 built 2019-07-26
 
 * **bugfix:** fixed 'X' not showing/working for cancelled exams on overview

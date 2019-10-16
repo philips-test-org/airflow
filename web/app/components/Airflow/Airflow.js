@@ -110,7 +110,6 @@ class Airflow extends Component<Props, State> {
   componentDidMount() {
     // Setup
     this.props.connectAPM();
-
     // $FlowFixMe
     if (!isIE() || isIE() > 9) {
       this.setupViewChangeHandlers();
@@ -357,21 +356,21 @@ class Airflow extends Component<Props, State> {
   }
 
   setupViewChangeHandlers() {
-    this.kioskLink = document.getElementById("kiosk-link");
+    this.kioskLink = document.querySelector(".menu-item[href$='kiosk']")
     if (this.kioskLink) {
       this.kioskLink.addEventListener("click",
         (e: MouseEvent) => {this.viewClickHandler(e, "kiosk", `${APP_ROOT}/kiosk`)}
       )
     }
 
-    this.calendarLink = document.getElementById("calendar-link");
+    this.calendarLink = document.querySelector(".menu-item[href$='calender']")
     if (this.calendarLink) {
       this.calendarLink.addEventListener("click",
         (e: MouseEvent) => {this.viewClickHandler(e, "calendar", `${APP_ROOT}/main/calendar`)}
       )
     }
 
-    this.overviewLink = document.getElementById("overview-link");
+     this.overviewLink = document.querySelector(".menu-item[href$='overview']")
     if (this.overviewLink) {
       this.overviewLink.addEventListener("click",
         (e: MouseEvent) => {this.viewClickHandler(e, "overview", `${APP_ROOT}/main/overview`)}
@@ -393,19 +392,19 @@ class Airflow extends Component<Props, State> {
     if (this.kioskLink && this.calendarLink && this.overviewLink) {
       switch (viewType) {
         case "kiosk":
-          this.kioskLink.className = "active";
-          this.calendarLink.className = "";
-          this.overviewLink.className = "";
+          this.kioskLink.className = "item menu-item active";
+          this.calendarLink.className = "item menu-item";
+          this.overviewLink.className = "item menu-item";
           break;
         case "calendar":
-          this.kioskLink.className = "";
-          this.calendarLink.className = "active";
-          this.overviewLink.className = "";
+          this.kioskLink.className = "item menu-item";
+          this.calendarLink.className = "item menu-item active";
+          this.overviewLink.className = "item menu-item";
           break;
         case "overview":
-          this.calendarLink.className = "";
-          this.kioskLink.className = "";
-          this.overviewLink.className = "active";
+          this.calendarLink.className = "item menu-item";
+          this.kioskLink.className = "item menu-item";
+          this.overviewLink.className = "item menu-item active";
           break;
       }
     }

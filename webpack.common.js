@@ -7,7 +7,7 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
   entry: {
-    app: ["whatwg-fetch", "babel-polyfill", "./web/app/app.js"],
+    app: ["whatwg-fetch", "./web/app/app.js"],
   },
   output: {
     filename: "./[name].bundle.js",
