@@ -146,7 +146,7 @@ $card-color: #fff;
     border-top: 1px solid $alert-red;
     border-bottom: 1px solid $alert-red;
     display: none;
-    z-index: 96;
+    z-index: 1;
   }
 
   .hour {
@@ -265,11 +265,11 @@ $card-color: #fff;
 
   .notecard.scaled {
     position: absolute;
-    z-index: 101;
+    z-index: 1;
     margin-left: unquote($card-left-unit);
   }
   .notecard.scaled:hover {
-    z-index: 102;
+    z-index: 1;
   }
 
 }
