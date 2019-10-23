@@ -2,7 +2,7 @@
 Feature: 51081_VerifyKioskWithoutLogin
   To verify that user can access Kiosk in airflow without logging in.
 
-  @51081 @Regression @Parallel
+  @51081 @Functional @Parallel
   Scenario: 51081_VerifyKioskWithoutLogin
     Given user logins to the portal app as "aiuser"
     When user navigate to url "Patient Flow/kiosk"

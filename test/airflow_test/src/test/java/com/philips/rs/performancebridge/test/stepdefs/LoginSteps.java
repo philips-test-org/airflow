@@ -47,9 +47,8 @@ public class LoginSteps {
 		if (loginPage.verifyUserFieldDisplayed()) {
 			loginPage.login(userName);
 		}
-//commented since the xpath for performance header is changed		
-//		Comparator.check("Performance bridge home page is displayed", true,
-//				loginPage.appHeaderNameDisplayed());
+		Comparator.check("Performance bridge home page is displayed", true,
+				loginPage.appHeaderNameDisplayed());
 
 	}
 
