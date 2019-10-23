@@ -86,7 +86,7 @@ class Event extends Component<Props> {
     const eventLabel = EVENT_LABELS[event_type];
     const faClass = FA_CLASS[event_type];
     return (
-      <strong><i className={faClass}></i> {this.props.t(`LABEL_${eventLabel.toUpperCase().replace(/\s/g, '')}`)} </strong>
+      <strong><i className={faClass}></i>{this.props.t(`LABEL_${eventLabel.toUpperCase().replace(/\s/g, '')}`)}</strong>
     )
   }
 
