@@ -31,7 +31,7 @@
    "LABEL_STARTED": "Iniciado",
    "LABEL_ORDEREDBY": "Encomendado por",
    "LABEL_AUDITHISTORY": "Histórico de Auditoria",
-   "LABEL_PATIENTDOB": "Data de nascimento do paciente",
+   "LABEL_PATIENTDOB": "Paciente DOB",
    "LABEL_DEFAULTPROCEDUREDURATION": "Duração do Procedimento Padrão",
    "LABEL_CURRENTDURATION": "Duração Atual",
    "LABEL_ENDEXAM": "Fim de Exame",
