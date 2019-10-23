@@ -3,7 +3,7 @@ Feature: 51107_VerifySiteConfigPageAccess
   To verify that users with access roles under 'User roles with access' section can access the airflow application. 
   To verify that the users with access roles under 'User roles without access' section are not unauthorized to use airflow app
 
-   @51107 @Nonparallel
+   @51107 @Nonparallel @Regression
   Scenario: 51107_VerifySiteConfigPageAccess
     Given user logins to the portal app as "aiuser"
     Given user clicks on "Patient Flow" App

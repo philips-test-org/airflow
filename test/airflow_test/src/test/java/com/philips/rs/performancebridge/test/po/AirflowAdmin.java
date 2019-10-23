@@ -276,7 +276,7 @@ public class AirflowAdmin {
 		List<WebElement> initialResourceList = removeAddedResourcesList;
 		for(int i=0;i<=initialResourceList.size()-1;i++)
 		{
-			UITestUtils.clickLink(initialResourceList.get(i), i+ "click On");
+			UITestUtils.clickLink_JavaScript(initialResourceList.get(i), i+ " to remove the selected resources");
 		}
 	}
 

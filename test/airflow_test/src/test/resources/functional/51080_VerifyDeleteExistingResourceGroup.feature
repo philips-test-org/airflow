@@ -3,7 +3,7 @@ Feature: 51080_VerifyDeleteExistingResourceGroup
   To verify that user can delete the existing resource groups
   To verify that the user cannot access the deleted group from Calendar tab
 
-   @51080
+  @51080 @Regression
   Scenario Outline: 51080_VerifyDeleteExistingResourceGroup
     Given user logins to the portal app as "aiuser"
     Given user clicks on "Patient Flow" App
@@ -19,8 +19,8 @@ Feature: 51080_VerifyDeleteExistingResourceGroup
     Then user deletes the "<Group_Name>"
     And user clicks on "Calendar" tab
     And Verify the "<Group_Name>" is not displayed
+    And user logs out of the application
 
     Examples: 
       | Group_Name |
       | New Group  |
- 

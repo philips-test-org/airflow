@@ -17,7 +17,7 @@ Feature: 92177_VerifySchedulesInOverviewAndClalender
     Given user opens "Virtual Hospital" App
     Then user login as "aiuser"
     And user creates a exam with "<Resource1>" resource, "<Exam Status>" status and "<Procedure>" procedure in VHIS
-    And user logs out of the application
+    And user logs out
     Given user opens "Patient Flow" App
     Then user login as "aiuser"
     #Scenario: Check:All schedules per day are same in overVeiw and Calender

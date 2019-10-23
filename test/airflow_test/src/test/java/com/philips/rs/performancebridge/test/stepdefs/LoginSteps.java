@@ -47,7 +47,6 @@ public class LoginSteps {
 		if (loginPage.verifyUserFieldDisplayed()) {
 			loginPage.login(userName);
 		}
-		
 		Comparator.check("Performance bridge home page is displayed", true,
 				loginPage.appHeaderNameDisplayed());
 
@@ -60,6 +59,7 @@ public class LoginSteps {
 
 	@Then("^user logs out of the application$")
 	public void user_logs_out_of_the_application() throws InterruptedException {
+		logoutPage.clickOnLogoutDropDown();
 		logoutPage.appLogout();
 	}
 
@@ -83,6 +83,11 @@ public class LoginSteps {
 	@Given("^user opens \"([^\"]*)\" App$")
 	public void user_opens_App(String appName) throws Throwable {
 		loginPage.switchToTab(appName);
+	}
+	
+	@Then("^user logs out$")
+	public void user_logs_out() throws InterruptedException {
+		logoutPage.appLogout();
 	}
 
 }

@@ -1,4 +1,4 @@
-@patientflow @Browser @50314 @System
+@patientflow @Browser @50314 @System @Regression
 Feature: 51078_VerifyCreateResourceGroups
   To verify that user can create resource grouping in airflow by filtering resources by modalities and searching by resource name.
   To verify that the user can access the created group from Calendar tab

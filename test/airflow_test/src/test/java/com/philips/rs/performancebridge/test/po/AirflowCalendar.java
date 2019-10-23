@@ -1,6 +1,5 @@
 package com.philips.rs.performancebridge.test.po;
 
-
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -44,9 +43,16 @@ public class AirflowCalendar {
 	}
 
 	private String getTabElementXPath(String tabName) {
-		return "//a[contains(text(),'" + tabName + "')]";
-	}
+		if (tabName.equalsIgnoreCase("Admin")) {
+			return "//div[contains(text(),'" + tabName + "')]";
+		}
 
+		else {
+			return "//a[contains(text(),'" + tabName + "')]";
+
+		}
+
+	}
 
 	/*
 	 * RETURN WebElement/Locators
@@ -59,7 +65,7 @@ public class AirflowCalendar {
 	private WebElement getGroupNameWebElement(String groupName) {
 		return UITestUtils.getWebElementByXpath(getGroupNameXpath(groupName));
 	}
-	
+
 	private By getGroupNamelocator(String groupName) {
 		return UITestUtils.getLocatorByXpath(getGroupNameXpath(groupName));
 	}
@@ -67,7 +73,6 @@ public class AirflowCalendar {
 	private WebElement getTabWebElement(String tabName) {
 		return UITestUtils.getWebElementByXpath(getTabElementXPath(tabName));
 	}
-
 
 	/*
 	 * METHODS
@@ -91,7 +96,7 @@ public class AirflowCalendar {
 		log.info("Number of exam cards on overview " + totalExamCards);
 		return totalExamCards;
 	}
-	
+
 	public int getCountForExamCardsFromCalendar() throws Exception {
 		UITestUtils.waitForElementToLoad(examcard, "examcard");
 		int totalExamCards = examcards.size();
@@ -102,31 +107,34 @@ public class AirflowCalendar {
 	public void clickOnResourceGroupDropDown() {
 		UITestUtils.clickLink_JavaScript(groupNameDropDown, "Clicked on group name drop down");
 	}
-	
+
 	/**
-	 * The below method selects the created resource group from the Group
-	 * selector drop down
+	 * The below method selects the created resource group from the Group selector
+	 * drop down
 	 */
 	public void selectResource(String groupName) throws InterruptedException {
 		clickOnResourceGroupDropDown();
-		UITestUtils.sleep(2);
-		UITestUtils.clickLink_JavaScript(getGroupNameWebElement(groupName), "Selected the resource group from drop down");
+		UITestUtils.sleep(4);
+		UITestUtils.clickLink_JavaScript(getGroupNameWebElement(groupName),
+				"Selected the resource group from drop down");
 	}
 
 	public boolean verifyResource(String resource) throws InterruptedException {
-		
+
 		UITestUtils.sleep(5);
 		UITestUtils.scrollIntoViewElement(getResourceWebElement(resource), resource);
-//		return UITestUtils.isElementPresent(UITestUtils.getLocatorByXpath(getResourceXpath(resource)),resource);
-		//UITestUtils.waitForElementToLoad(UITestUtils.getWebElementByXpath(getResourceXpath(resource)), resource);
-		
+		// return
+		// UITestUtils.isElementPresent(UITestUtils.getLocatorByXpath(getResourceXpath(resource)),resource);
+		// UITestUtils.waitForElementToLoad(UITestUtils.getWebElementByXpath(getResourceXpath(resource)),
+		// resource);
+
 		return UITestUtils.isElementDisplayed(UITestUtils.getWebElementByXpath(getResourceXpath(resource)));
-	
+
 	}
 
 	public boolean verifyResourceGroupIsDisplayedInList(String groupName) throws InterruptedException {
 		return UITestUtils.elementInVisibilitymethod(getGroupNamelocator(groupName));
-		
+
 	}
-	
+
 }

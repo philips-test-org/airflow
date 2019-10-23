@@ -25,5 +25,5 @@ Feature: 52667_VerifyOrderingPhysicianName
     And user logs out of the application
 
     Examples: 
-      | Resource1   | Resource2   | Exam_Event |
-      | VHO-CT CT-3 | VHO-CT CT-2 | scheduled  |
+      | Resource1       | Resource2       | Exam_Event |
+      | VHC Trauma CT-1 | VHC Trauma CT-2 | scheduled  |

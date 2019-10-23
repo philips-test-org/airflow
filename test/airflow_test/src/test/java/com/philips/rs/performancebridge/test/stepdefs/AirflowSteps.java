@@ -38,9 +38,10 @@ public class AirflowSteps {
 	 */
 	@Given("^user verifies that record is added in \"([^\"]*)\"$")
 	public void user_verifies_that_is_added_in(String Resource) throws Throwable {
-	//	UITestUtils.refreshPage();
+		UITestUtils.refreshPage();
 		airflow.verifySpinnerIsInvisible();	
 		int postIngestionExamCount = airflow.examCardCountForTheResource(Resource);
+		log.info("the post exam count is "+postIngestionExamCount);
 		Comparator.check("Verified that the count of exam cards is incremented by 1", contextDTO.getExamCardCount() + 1, postIngestionExamCount);
 		Comparator.check("Verified that incremented exam card is same as the ingested record", true,  airflow.verifyMrnExamCardDispalyed(Resource, contextDTO.getMrn()));
 	}
