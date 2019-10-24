@@ -83,8 +83,8 @@ pipeline {
                           yarn flow
                         '''
                     } catch (Exception e) {
-                                             echo "Test-Lint-Flow Stage failed, but build will continue"  
-                                          }
+                        echo "Test-Lint-Flow Stage failed, but build will continue"  
+                    }
                 }
             }
         }
