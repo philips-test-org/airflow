@@ -12,7 +12,7 @@
    "LABEL_OVERVIEW": "Overzicht",
    "LABEL_KIOSK": "Kiosk",
    "LABEL_UPDATECLINICALROLESAUTHLIST": "Update Klinische rollen auth lijst",
-   "LABEL_UPDATEMANAGERROLESAUTHLIST": "Update Manager rollen auth list",
+   "LABEL_UPDATEMANAGERROLESAUTHLIST": "Update Manager rollen auth lijst",
    "LABEL_CONFIGURECLINICALROLESAUTHLIST": "Configureer Klinische rollen auth lijst",
    "LABEL_CONFIGUREMANAGERROLESAUTHLIST": "Configureeer Manager rollen auth lijst",
    "LABEL_CREATENEWGROUP": "Creëer een nieuwe groep",

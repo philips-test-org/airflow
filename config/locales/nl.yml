@@ -42,7 +42,7 @@ nl:
   LABEL_CONFIGURE: "Configureren"
   MESSAGE_DELETEMESSAGE: "Bent u zeker dat u deze brongroep wilt verwijderen?"
   LABEL_CLINICAL_ROLES_AUTH_LIST: "Klinische rollen auth lijst"
-  LABEL_MANAGER_ROLES_AUTH_LIST: "Manager rollen auth list"
+  LABEL_MANAGER_ROLES_AUTH_LIST: "Manager rollen auth lijst"
   MESSAGE_UNAUTHORIZED: "U bent niet in de vereiste gebruikersrollen om deze pagina te bekijken."
   LABEL_RESULTS: "Resultaten"
   LABEL_NO_RESULTS_FOUND: "Geen resultaten gevonden voor "
