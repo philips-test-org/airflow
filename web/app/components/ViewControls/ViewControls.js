@@ -146,6 +146,7 @@ class ViewControls extends PureComponent<Props, State> {
           readOnly={true}
           small={true}
           hideKeyboardShortcutsPanel= {true}
+          displayFormat="MM/DD/YYYY"
         />
       </div>
     )
