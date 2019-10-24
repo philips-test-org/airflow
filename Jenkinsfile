@@ -73,6 +73,27 @@ pipeline {
 	    }
 	}
 
+        stage('Test-Lint-Flow') {
+            steps {
+                sh '''
+                script {
+                    try {
+                        sh '''
+                          cd ${WORKSPACE}
+                          yarn test 2>&1 | tee jest.log
+                          jest_summary=`egrep "^Test Suites: |^Tests:    |^Snapshots: |^Time:    " jest.log | tr '\n' '|'`
+                          echo '{"comments": [{"parentCommentId": 0,"content": "'${jest_summary}'","commentType": 1}],"status": 1}' > jest_summary.json
+                          sudo curl -u ${TFS_API} -H 'Content-Type: application/json' -d '@jest_summary.json' -X POST ${TFS_API_REPO}/airflow/pullRequests/${PR_ID}/threads?api-version=4.0
+                          yarn lint
+                          yarn flow
+                        '''
+                    } catch (Exception e) {
+                                            echo "Test-Lint-Flow Stage failed, but build will continue"  
+                                          }
+                }
+            }
+        }
+
         stage('UploadTo-sftp-TagBasedOnly') {
             when {
                 expression {
