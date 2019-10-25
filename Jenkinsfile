@@ -13,6 +13,8 @@ pipeline {
 
     parameters {
         string(name: 'COMMIT_ID', defaultValue: '', description: '')
+        string(name: 'PR_ID', defaultValue: '', description: '')
+        string(name: 'SANITY_FLAG', defaultValue: 'false', description: '')
     }
 
     stages {
@@ -67,6 +69,26 @@ pipeline {
                 '''
 	    }
 	}
+
+        stage('Test-Lint-Flow') {
+            steps {
+                script {
+                    try {
+                        sh '''
+                          cd ${WORKSPACE}
+                          yarn test 2>&1 | tee jest.log
+                          jest_summary=`egrep "^Test Suites: |^Tests:    |^Snapshots: |^Time:    " jest.log | tr '\n' '|'`
+                          echo '{"comments": [{"parentCommentId": 0,"content": " UNIT TESTS - '${jest_summary}'","commentType": 1}],"status": 1}' > jest_summary.json
+                          sudo curl -u ${TFS_API} -H 'Content-Type: application/json' -d '@jest_summary.json' -X POST ${TFS_API_REPO}/airflow/pullRequests/${PR_ID}/threads?api-version=4.0
+                          yarn lint
+                          yarn flow
+                        '''
+                    } catch (Exception e) {
+                        echo "Test-Lint-Flow Stage failed, but build will continue"  
+                    }
+                }
+            }
+        }
 
         stage('UploadTo-sftp-TagBasedOnly') {
             when {
@@ -196,6 +218,11 @@ pipeline {
         }
         
         stage('Sanity') {
+            when {
+                expression {
+                    return env.SANITY_FLAG != 'false';
+                }
+            }
             steps {
                  script {
                     def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}\n COMMIT_ID=${COMMIT_ID}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
