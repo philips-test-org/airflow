@@ -225,7 +225,7 @@ pipeline {
             }
             steps {
                  script {
-                    def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}\n COMMIT_ID=${COMMIT_ID}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
+                    def handle = triggerRemoteJob(remoteJenkinsName: "RJS", job: "AirflowSanity", parameters: "${env.SERVER_URL}\n COMMIT_ID=${COMMIT_ID}\n PR_ID=${PR_ID}", maxConn: 5, useCrumbCache: false, useJobInfoCache: false, pollInterval: 20, blockBuildUntilComplete: false, shouldNotFailBuild: true )
                     def status = handle.getBuildStatus()
                     def buildUrl = handle.getBuildUrl()
                     echo buildUrl.toString() + " finished with " + status.toString()
