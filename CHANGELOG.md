@@ -1,3 +1,6 @@
+## v1.5.1 built 2019-12-12
+* **new:** Localization - Support for Turkish
+
 ## v1.5.0 built 2019-10-16
 * **new:** Common navigation-tab added using HRE 
 * **new:** Localization - Support for English, French, German, Spanish, Portuguese, Dutch, Italian
