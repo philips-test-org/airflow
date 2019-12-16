@@ -7,6 +7,7 @@ import TranslationsFr from "./locales/fr.json"
 import TranslationsNl from "./locales/nl.json"
 import TranslationsPt from "./locales/pt.json"
 import TranslationsIt from "./locales/it.json"
+import TranslationsTr from "./locales/tr.json"
 const resources = {
   en: {
     translation: TranslationsEn
@@ -28,6 +29,9 @@ const resources = {
   },
   it:{
     translation: TranslationsIt
+  },
+  tr:{
+    translation: TranslationsTr
   }
 }
 
