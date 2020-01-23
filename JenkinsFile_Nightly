@@ -136,8 +136,12 @@ pipeline {
             }
             steps {
                 script {
-                def URL = readFile "${env.WORKSPACE}/url.txt"
-				build job: 'BLACKDUCK_SCAN', parameters: [string(name: 'BD_URL', value: URL )]
+                    def APPNAME = sh(script: 'cat ${WORKSPACE}/config/application.name', returnStdout: true).trim()
+                    env.APPNAME = APPNAME
+                    def VERSION = sh(script: 'cd ${WORKSPACE} && git describe --always | cut -f1,2,3 -d- | cut -d- -f1', returnStdout: true).trim()                    
+                    env.VERSION = VERSION
+                    def URL = readFile "${env.WORKSPACE}/url.txt"
+                    build job: 'BLACKDUCK_SCAN', parameters: [[$class: 'StringParameterValue', name: 'BD_URL', value: URL],[$class: 'StringParameterValue', name: 'COMPONENT_NAME', value: env.APPNAME],[$class: 'StringParameterValue', name: 'BUILD_VERSION', value: env.VERSION]]
                 }
             }
         }
