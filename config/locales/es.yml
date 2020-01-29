@@ -1,4 +1,4 @@
-es:
+ es:
   LABEL_MANAGE_RESUORCES: "Administrar grupos de recursos"
   LABEL_ASSOCIATE_RESOURCES: "Recursos asociados"
   LABEL_ANYMODALITY: "Cualquier modalidad"
@@ -20,7 +20,7 @@ es:
   LABEL_USER_WITH_ACCESS: "Roles de usuario con acceso completo"
   LABEL_UPDATE: "Actualizar"
   LABEL_CONFIG_UPDATED_BY: "Configuración actualizada por:"
-  LABEL_CONFIG_UPDATED_AT: "Configuración actualizada en:"
+  LABEL_CONFIG_UPDATED_AT: "Configuración actualizada:"
   LABEL_PROCEDURE: "Procédure:"
   LABEL_ORDERINGPHYSICIAN: "Médico ordenante:"
   LABEL_ROUNDING: "Redondeo:"
@@ -47,4 +47,4 @@ es:
   LABEL_RESULTS: "Resultados"
   LABEL_NO_RESULTS_FOUND: "No se han encontrado resultados "
   LABEL_EXPLORE_ALL_APPS: "Explorar todas las aplicaciones "
-  LABEL_FIND_APPLICATION: "Encontrar solicitud"
+  LABEL_FIND_APPLICATION: "Encontrar solicitud "
