@@ -23,10 +23,9 @@ const avatarPath = (userId: number) => `${APP_ROOT}/avatar/${userId}`;
 // Remove "^" from name strings and rejoin comma separated.
 const formatName = R.compose(R.join(", "), R.reject(R.isEmpty), R.split("^"));
 
-
 const formatTimestamp = (epoch: ?(string | number)) => {
   if (!epoch) {return null}
-  return moment(epoch).format("MMMM Do YYYY, HH:mm");
+  return moment(epoch).format("YYYY-MM-DD, HH:mm");
 }
 
 // Path array is an array of keys and/or array indices to follow

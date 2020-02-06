@@ -125,7 +125,7 @@ class RoundingInterface extends PureComponent<Props, State> {
     const {employee, created_at} = roundingValue;
     return (
       <div className="panel-footer rounding-footer">
-        <p className="edited-by">{this.props.t('LABEL_LASTEDITEDBY')}: {employee.name} on <span className="time short">{formatTimestamp(created_at)}</span>
+        <p className="edited-by">{this.props.t('LABEL_LASTEDITEDBY')}: {employee.name} {this.props.t('LABEL_OCCURED_ON')} <span className="time short">{formatTimestamp(created_at)}</span>
         </p>
       </div>
     );
