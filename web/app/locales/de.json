@@ -47,7 +47,6 @@
     "MESSAGE_ATLEASTONERESOURCE": "Es muss mindestens eine Ressourcen-Gruppe rstellt werden. Zum Erstellen einer Ressourcen-Gruppe kontaktieren Sie bitte Ihren Administrator.",
     "MESSAGE_RELOAD": "Sie erhalten keine Echtzeit-Aktualisierungen mehr. Laden Sie diese Seite bitte neu und melden Sie sich erneut an.",
     "MESSAGE_REFRESH": "Sie erhalten keine Echtzeit-Aktualisierungen mehr. Um über die aktuellsten Daten verfügen zu können, aktualisieren Sie bitte diese Seite wenn diese Meldung länger als 10 Minuten angezeigt wird.",
-    "MESSAGE_RECEIVINGREALTIMEDATA": "Echtzeit-Daten werden empfangen.",
     "MESSAGE_NOROUNDINGDATA": "Es wurden keine Rundungsdaten eingegeben.",
     "LABEL_COMPLETE": "Komplett",
     "LABEL_COMPLETED": "Abgeschlossen",

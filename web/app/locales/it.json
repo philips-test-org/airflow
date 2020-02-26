@@ -48,7 +48,6 @@
    "MESSAGE_ATLEASTONERESOURCE": "È necessario creare almeno un gruppo di risorse. Contatta l'amministratore per creare un gruppo di risorse.",
    "MESSAGE_RELOAD": "Non ricevi più gli aggiornamenti in tempo reale. Ricarica la pagina e accedi di nuovo.",
    "MESSAGE_REFRESH": "Non ricevi più gli aggiornamenti in tempo reale. Per essere sicuro di disporre dei dati più aggiornati, aggiorna se questo messaggio persiste per più di 10 secondi.",
-   "MESSAGE_RECEIVINGREALTIMEDATA": "Ricezione di dati in tempo reale.",
    "MESSAGE_NOROUNDINGDATA": "Nessun dato sull'arrotondamento inserito.",
    "LABEL_COMPLETE": "completo",
    "LABEL_COMPLETED": "Completati",
