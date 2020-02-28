@@ -48,7 +48,6 @@
     "MESSAGE_ATLEASTONERESOURCE": "En az bir Kaynak Grubu oluşturulmalıdır. Kaynak Grubu oluşturmak için lütfen yöneticinizle iletişime geçin.",
     "MESSAGE_RELOAD": "Artık gerçek zamanlı güncellemeleri almıyorsunuz. Lütfen sayfayı yeniden yükleyin ve tekrar oturum açın.",
     "MESSAGE_REFRESH": "Artık gerçek zamanlı güncellemeleri almıyorsunuz. En güncel verilere sahip olduğunuzdan emin olmak için bu mesaj 10 saniyeden uzun süre kalıyorsa lütfen yenileyin.",
-    "MESSAGE_RECEIVINGREALTIMEDATA": "Gerçek zamanlı veriler alınıyor.",
     "MESSAGE_NOROUNDINGDATA": "Viziteye çıkış verisi girilmedi.",
     "LABEL_COMPLETE": "Tamamla",
     "LABEL_COMPLETED": "Tamamlandı",

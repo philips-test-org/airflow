@@ -48,7 +48,6 @@
    "MESSAGE_ATLEASTONERESOURCE": "Pelo menos um grupo de recursos deve ser criado. Entre em contacto com o seu administrador para criar um Grupo de Recursos.",
    "MESSAGE_RELOAD": "Já não está a receber atualizações em tempo real. Por favor recarregue a página e inicie sessão novamente.",
    "MESSAGE_REFRESH": "Já não está a receber atualizações em tempo real. Para garantir que possui os dados mais recentes, por favor atualize se esta mensagem persistir durante mais de 10 segundos.",
-   "MESSAGE_RECEIVINGREALTIMEDATA": "A receber dados em tempo real.",
    "MESSAGE_NOROUNDINGDATA": "Nenhuns dados arredondados introduzidos.",
    "LABEL_COMPLETE": "concluído",
    "LABEL_COMPLETED": "Concluído",

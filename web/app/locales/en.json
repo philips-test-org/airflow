@@ -48,7 +48,6 @@
     "MESSAGE_ATLEASTONERESOURCE": "At least one Resource Group must be created. Please contact your administrator to create a Resource Group.",
     "MESSAGE_RELOAD": "You are no longer receiving real time updates. Please reload the page and log in again.",
     "MESSAGE_REFRESH": "You are no longer receiving real time updates. To ensure you have the most up-to-date data, please refresh if this message persists more than 10 seconds.",
-    "MESSAGE_RECEIVINGREALTIMEDATA": "Receiving real-time data.",
     "MESSAGE_NOROUNDINGDATA": "No rounding data entered.",
     "LABEL_COMPLETE": "Complete",
     "LABEL_COMPLETED": "Completed",

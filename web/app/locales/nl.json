@@ -48,7 +48,6 @@
    "MESSAGE_ATLEASTONERESOURCE": "Er moet minstens één Brongroep gecreëerd worden. Contacteer uw beheerder om een Brongroep te creëren.",
    "MESSAGE_RELOAD": "U ontvangt geen real time updates meer. Herlaad de pagina en log opnieuw in.",
    "MESSAGE_REFRESH": "U ontvangt geen real time updates meer. Om ervoor te zorgen dat u de meest up-to-date gegevens heeft, vernieuw de pagina indien deze boodschap meer dan 10 seconden zichtbaar blijft.",
-   "MESSAGE_RECEIVINGREALTIMEDATA": "Real-time gegevens aan het ontvangen.",
    "MESSAGE_NOROUNDINGDATA": "Geen ronde gegevens ingevoerd.",
    "LABEL_COMPLETE": "voltooi",
    "LABEL_COMPLETED": "Completed",
