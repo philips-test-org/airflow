@@ -17,7 +17,7 @@
   LABEL_LOGOUT: "Cerrar sesión"
   LABEL_DEFAULTROLES: "Roles por defecto"
   LABEL_USER_WITHOUT_ACCESS: "Roles de usuario sin acceso"
-  LABEL_USER_WITH_ACCESS: "Roles de usuario con acceso completo"
+  LABEL_USER_WITH_ACCESS: "Roles de usuario con acceso"
   LABEL_UPDATE: "Actualizar"
   LABEL_CONFIG_UPDATED_BY: "Configuración actualizada por:"
   LABEL_CONFIG_UPDATED_AT: "Configuración actualizada:"
